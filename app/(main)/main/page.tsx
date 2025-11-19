@@ -1,10 +1,8 @@
 "use client";
 
-import Logo from "@/components/etc/logo";
 import Image from "next/image";
-import Slider from "@/components/main/slider";
+
 import { useAuth } from "@/lib/UserContext";
-import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
