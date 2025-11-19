@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 import { useAuth } from "@/lib/UserContext";
-import Link from "next/link";
+import MainPage from "@/components/main/main";
 import { useEffect, useState } from "react";
 
 type Profile = {
@@ -50,24 +50,19 @@ export default function Main() {
 
   return (
     <div
-      className="min-h-screen bg-blue-50 flex flex-col w-full overflow-x-hidden overflow-y-auto"
+      className="min-h-screen  flex flex-col  w-[375px] overflow-x-hidden overflow-y-auto"
       style={{ paddingBottom: "calc(153px + env(safe-area-inset-bottom))" }}
     >
       {/* 메인 콘텐츠 */}
-      <div className="flex flex-col w-full">
-        {/* 환영 섹션 - 전체 너비 */}
-        <div className="w-full px-7 py-6 text-white">
-          <Image
-            src="/etc/mainLogo.png"
-            width={112}
-            height={24}
-            alt="메인 로고"
-          />
-          <div className="flex justify-between items-start pt-2">
-            <div className="flex flex-col gap-2 w-full"></div>
-          </div>
-        </div>
+      <div className="w-full px-7 py-6 text-white ">
+        <Image
+          src="/etc/mainLogo.png"
+          width={112}
+          height={24}
+          alt="메인 로고"
+        />
       </div>
+      <MainPage />
     </div>
   );
 }

@@ -113,7 +113,7 @@ export default function Onboard() {
             onClick={handleNext}
             className="w-[334px] max-h-[52px] py-3 mx-auto bg-blue-600 rounded-lg text-white font-medium  hover:bg-blue-700 transition"
           >
-            {currentSlide === slides.length - 1 ? "Continue" : "Next"}
+            Get Started
           </button>
 
           {/* <p className="text-center text-sm text-gray-500 mt-6">
