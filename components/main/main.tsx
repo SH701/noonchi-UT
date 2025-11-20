@@ -30,31 +30,30 @@ export default function MainPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className=" bg-[#F2F7FF]">
       {/* Recommended Section */}
       <div className="px-6 pt-6 pb-4">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Recommended</h2>
 
         {/* Featured Card */}
-        <div className="relative rounded-2xl overflow-hidden shadow-lg mb-6">
-          <div className="relative h-64">
-            <Image
+        <div className="relative overflow-hidden  mb-6 flex items-center justify-center">
+          <div className="relative w-[289px] h-[212px]">
+            <img
               src="/etc/interviewImage.png"
               alt="Job Interview"
-              width={300}
-              height={200}
+              className="w-full h-full"
             />
 
             <div className="absolute top-4 left-4">
-              <span className="inline-block px-3 py-1 bg-white bg-opacity-20 backdrop-blur-sm rounded-full  text-sm font-medium text-black">
+              <span className="inline-block   backdrop-blur-sm rounded-full font-medium text-white">
                 Career
               </span>
             </div>
             <div className="absolute bottom-4 left-4 right-4">
-              <h3 className="text-white text-2xl font-bold mb-1">
+              <h3 className="text-white text-xl font-semibold mb-1">
                 Job Interview
               </h3>
-              <p className="text-white text-sm opacity-90">
+              <p className="text-gray-300 text-xs ">
                 Experience real Korean interview situations
               </p>
             </div>
@@ -92,32 +91,29 @@ export default function MainPage() {
           </button>
         </div>
 
-        {/* Topic List */}
-        <div className="space-y-4">
-          {topics.map((topic) => (
-            <div
-              key={topic.id}
-              className="flex items-start gap-4 p-4 bg-white rounded-xl border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
-            >
-              <div className="flex-shrink-0 text-gray-400 font-bold text-lg">
-                {topic.id}
-              </div>
-              <div className="flex-shrink-0">
-                <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-lg text-2xl">
-                  {topic.icon}
-                </div>
-              </div>
-              <div className="flex-1 min-w-0">
-                <h4 className="text-base font-bold text-gray-900 mb-1">
-                  {topic.title}
-                </h4>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {topic.description}
-                </p>
+        {topics.map((topic) => (
+          <div
+            key={topic.id}
+            className="flex items-center gap-5 p-3 bg-white  border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
+          >
+            <div className=" text-blue-600 font-semibold text-base items-center justify-center leading-6">
+              {topic.id}
+            </div>
+            <div className="flex-shrink-0">
+              <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-lg text-2xl">
+                {topic.icon}
               </div>
             </div>
-          ))}
-        </div>
+            <div className="flex-1 min-w-0">
+              <h4 className="text-base font-semibold text-gray-900 mb-1 leading-6">
+                {topic.title}
+              </h4>
+              <p className="text-xs text-gray-600 leading-4">
+                {topic.description}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
