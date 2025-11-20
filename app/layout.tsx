@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="ko" className="h-screen w-screen">
       <body className="h-full antialiased">
         <div className="flex flex-col h-full">
-          <main className="flex-grow w-full">{children}</main>
+          <main className="flex-grow w-full ">{children}</main>
         </div>
       </body>
     </html>

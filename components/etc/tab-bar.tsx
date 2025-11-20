@@ -7,9 +7,10 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import ChatInputWrapper from "../chat/chatinputwrapper";
+
 import Image from "next/image";
 import { useState } from "react";
+import ChatTextInput from "../chat/chattextinput";
 
 export default function TabBar() {
   const pathname = usePathname();
@@ -18,10 +19,10 @@ export default function TabBar() {
     setOpen((prev) => !prev);
   };
   return (
-    <div className="fixed bottom-0 inset-x-0 flex justify-center bg-transparent ">
-      <div className="w-[381px] bg-white rounded-t-2xl shadow-[0_-4px_10px_0_rgba(0,0,0,0.08)] border border-gray-100">
+    <div className="fixed left-4 bottom-0 inset-x-0 flex justify-center bg-transparent ">
+      <div className="max-w-[375px] bg-white rounded-t-2xl shadow-[0_-4px_10px_0_rgba(0,0,0,0.08)] border border-gray-100">
         {pathname === "/main" && (
-          <div className=" px-4 mb-4 relative">
+          <div className=" px-4 relative">
             {open && (
               <Image
                 src="/etc/honorific.png"
@@ -32,7 +33,7 @@ export default function TabBar() {
                 onClick={onClick}
               />
             )}
-            <ChatInputWrapper />
+            <ChatTextInput />
           </div>
         )}
         <div className="grid grid-cols-3">
