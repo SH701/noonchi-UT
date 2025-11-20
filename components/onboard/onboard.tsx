@@ -19,12 +19,6 @@ export const settings: Settings = {
   draggable: false,
   swipe: false,
   dotsClass: "slick-dots custom-dots",
-  responsive: [
-    {
-      breakpoint: 640,
-      settings: { dots: false },
-    },
-  ],
 };
 
 export default function Onboard() {

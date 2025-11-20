@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState } from "react";
 import ComingSoon from "@/components/modal/Comingsoon";
 
-const CONTENT_PADDING = "px-4";
 const CONTENT_WIDTH_CLASS = "w-full";
 
 export default function MainPage() {
@@ -42,58 +41,72 @@ export default function MainPage() {
         "Learn how to request assitance or clarification in a polite way.",
     },
   ];
-
+  const sliders = [
+    { id: 1, img: "/etc/interviewImage.png" },
+    { id: 2, img: "/etc/interviewImage.png" },
+    { id: 3, img: "/etc/interviewImage.png" },
+  ];
   const [open, setOpen] = useState(false);
-
+  const [activeIndex, setActiveIndex] = useState(1);
   const handleClick = () => {
     setOpen(true);
   };
 
   return (
     <div className=" bg-[#F2F7FF]">
-      <div className={`flex flex-col ${CONTENT_PADDING} pt-6 pb-4`}>
+      <div className={`flex flex-col items-center  pt-6 pb-4`}>
         <h2
-          className={`text-2xl font-bold text-gray-900 mb-4 w-full text-left`}
+          className={`text-2xl font-bold text-gray-900 mb-4 w-full text-left px-5`}
         >
           Recommended
         </h2>
 
         <div
-          className={`relative overflow-hidden mb-6 flex items-center justify-center ${CONTENT_WIDTH_CLASS}`}
+          className={`relative px-5 overflow-hidden mb-6 flex items-center justify-center ${CONTENT_WIDTH_CLASS}`}
         >
-          <div className="relative w-full h-[212px] rounded-xl overflow-hidden shadow-lg">
-            <img
-              src="/etc/interviewImage.png"
-              alt="Job Interview"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute top-4 left-4">
-              <span className="inline-block backdrop-blur-sm rounded-full px-2 py-0.5 text-xs font-medium text-white">
-                Career
-              </span>
-            </div>
-            <div className="absolute bottom-4 left-4 right-4">
-              <h3 className="text-white text-xl font-semibold mb-1">
-                Job Interview
-              </h3>
-              <p className="text-gray-300 text-xs ">
-                Experience real Korean interview situations
-              </p>
-            </div>
+          <div className="flex gap-4 overflow-x-visible px-4">
+            {sliders.map((s, index) => {
+              const isActive = activeIndex === index;
+
+              return (
+                <div
+                  key={s.id}
+                  onClick={() => setActiveIndex(index)}
+                  className={`
+              relative w-[280px] h-[212px] rounded-xl overflow-hidden shadow-lg 
+              transition-all duration-300 cursor-pointer
+              ${isActive ? "scale-100 opacity-100" : "scale-95 opacity-40"}
+            `}
+                >
+                  <img src={s.img} className="w-full h-full object-cover" />
+
+                  <div className="absolute top-4 left-4 bg-black/30 px-2 py-1 rounded-md text-xs text-white">
+                    Career
+                  </div>
+
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="text-white text-xl font-semibold">
+                      Job Interview
+                    </h3>
+                    <p className="text-gray-300 text-xs">
+                      Experience real Korean interview situations
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
         <Link
           href="/main/custom"
-          className={`flex justify-center mt-3 ${CONTENT_WIDTH_CLASS}`}
+          className={`flex justify-center items-center w-[286px]  bg-blue-600 hover:bg-blue-700 text-blue-50 font-medium py-4 rounded-lg `}
         >
-          <button className="w-full h-13 bg-blue-600 hover:bg-blue-700 text-blue-50 font-medium py-4 rounded-lg ">
-            Start Chatting
-          </button>
+          Start Chatting
         </Link>
       </div>
 
-      <div className={`flex flex-col ${CONTENT_PADDING} py-4`}>
+      <div className={`flex flex-col px-5  py-4`}>
         <div
           className={`flex items-center justify-between mb-4 ${CONTENT_WIDTH_CLASS}`}
         >

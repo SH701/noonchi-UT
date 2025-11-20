@@ -54,7 +54,7 @@ export default function Main() {
       style={{ paddingBottom: "calc(153px + env(safe-area-inset-bottom))" }}
     >
       {/* 메인 콘텐츠 */}
-      <div className="w-full px-7 py-6 text-white ">
+      <div className="w-full py-6 px-7 text-white ">
         <Image
           src="/etc/mainLogo.png"
           width={112}
