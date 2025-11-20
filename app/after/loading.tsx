@@ -1,5 +1,5 @@
 "use client";
-import Logo from "@/components/etc/logo";
+
 import { useEffect, useState } from "react";
 
 export default function Page() {
@@ -18,7 +18,7 @@ export default function Page() {
       <span className="text-gray-300 text-2xl">
         Loading your Noonchi Coach{dots}
       </span>
-      <Logo className="w-[300px] h-[80px]" />
+  
     </div>
   );
 }
