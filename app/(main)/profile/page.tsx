@@ -38,8 +38,8 @@ const FACES = [
 
 function normalizeSrc(src?: string) {
   if (!src) return null;
-  if (src.startsWith("http") || src.startsWith("/")) return src; // URL or public 경로
-  return null; // face0, face1 같은 경우는 null 반환 → 별도 처리
+  if (src.startsWith("http") || src.startsWith("/")) return src; 
+  return null; 
 }
 
 export default function ProfilePage() {

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import LottieAnimation from '@/components/etc/LottieAnimation';
-import { loadLottieAnimation, LOTTIE_PATHS } from '@/lib/lottie-loader';
+import { useState, useEffect } from "react";
+import LottieAnimation from "@/components/etc/LottieAnimation";
+import { loadLottieAnimation, LOTTIE_PATHS } from "@/lib/lottie-loader";
 
 export default function First() {
   const [animationData, setAnimationData] = useState<any>(null);
@@ -16,7 +16,7 @@ export default function First() {
           setAnimationData(animation);
         }
       } catch (err) {
-        console.error('로티 로드 중 오류:', err);
+        console.error("로티 로드 중 오류:", err);
       }
     };
     loadAnimation();
@@ -35,7 +35,7 @@ export default function First() {
       <div className="w-[375px] h-[426px] flex items-center justify-center">
         <LottieAnimation
           animationData={animationData}
-          style={{ width: '375px', height: '426px' }}
+          style={{ width: "375px", height: "426px" }}
           loop={true}
           autoplay={true}
         />

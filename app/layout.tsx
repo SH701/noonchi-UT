@@ -2,6 +2,7 @@ import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Metadata } from "next";
+import QueryProvider from "@/providers/QueryProvider";
 
 export const metadata: Metadata = {
   title: "Noonchi.ai",
@@ -16,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="ko" className="h-screen w-screen">
       <body className="h-full antialiased">
-        <div className="flex flex-col h-full">
-          <main className="flex-grow w-full ">{children}</main>
-        </div>
+        <QueryProvider>
+          <div className="flex flex-col h-full">
+            <main className="flex-grow w-full ">{children}</main>
+          </div>
+        </QueryProvider>
       </body>
     </html>
   );

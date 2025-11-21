@@ -1,21 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client'
+"use client";
 
-import { HonorificResults } from './HonorificSlider'
-import MessageItem from './MessageItem'
-import { MyAI } from '@/lib/types'
+import { HonorificResults } from "./HonorificSlider";
+import MessageItem from "./MessageItem";
+import { MyAI } from "@/lib/types";
 
 type MessageListProps = {
-  messages: any[]
-  myAI: MyAI | null
-  feedbackOpenId: string | null
-  honorificResults: Record<string, Record<number, HonorificResults>>
-  sliderValues: Record<string, number>
-  handleFeedbacks: (messageId: string) => void
- handleHonorific: (messageId: string, content: string, aiRole?: string) => Promise<void>
-  setSliderValues: React.Dispatch<React.SetStateAction<Record<string, number>>>
-  messageStatuses?: Record<string, 'default' | 'error'>
-}
+  messages: any[];
+  myAI: MyAI | null;
+  feedbackOpenId: string | null;
+  honorificResults: Record<string, Record<number, HonorificResults>>;
+  sliderValues: Record<string, number>;
+  handleFeedbacks: (messageId: string) => void;
+  handleHonorific: (
+    messageId: string,
+    content: string,
+    aiRole?: string
+  ) => Promise<void>;
+  setSliderValues: React.Dispatch<React.SetStateAction<Record<string, number>>>;
+  messageStatuses?: Record<string, "default" | "error">;
+};
 
 export default function MessageList({
   messages,
@@ -31,8 +35,8 @@ export default function MessageList({
   return (
     <>
       {messages.map((m) => {
-        const isMine = m.role === 'USER'
-        const isFeedbackOpen = feedbackOpenId === m.messageId
+        const isMine = m.role === "USER";
+        const isFeedbackOpen = feedbackOpenId === m.messageId;
         return (
           <MessageItem
             key={m.messageId}
@@ -46,10 +50,10 @@ export default function MessageList({
             handleFeedbacks={handleFeedbacks}
             handleHonorific={handleHonorific}
             setSliderValues={setSliderValues}
-            messageStatus={messageStatuses[m.messageId] || 'default'}
+            messageStatus={messageStatuses[m.messageId] || "default"}
           />
-        )
+        );
       })}
     </>
-  )
+  );
 }

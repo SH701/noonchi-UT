@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/UserContext";
-import PersonaSlider, {
-  PersonaSlide,
-} from "@/components/bothistory/PersonaSlider";
+import PersonaSlider from "@/components/bothistory/PersonaSlider";
 import PersonaDetailModal from "@/components/persona/PersonaDetailModal";
 import type { Conversation } from "@/lib/types";
 import Link from "next/link";
@@ -22,8 +20,12 @@ import InProgressIcon from "@/components/bothistory/Inprogress";
 import DoneIcon from "@/components/bothistory/Done";
 import FeedbackSection from "@/components/bothistory/Feedbacksections";
 
+import {
+  useConversations,
+  useDeleteConversation,
+} from "@/hooks/useConversations";
+import { Filter, useChatHistoryStore } from "@/app/store/useChatHistorystore";
 
-type Filter = "done" | "in-progress";
 const situationOptions = {
   BOSS: [
     { value: "BOSS1", label: "Apologizing for a mistake at work." },
@@ -59,134 +61,77 @@ const getImg = (url?: string) => (typeof url === "string" ? url : "");
 export default function ChatBothistoryPage() {
   const router = useRouter();
   const { accessToken } = useAuth();
-  const [keyword, setKeyword] = useState("");
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [history, setHistory] = useState<Conversation[]>([]);
-  const [filtered, setFiltered] = useState<Conversation[]>([]);
-  const [sort, setSort] = useState<"asc" | "desc">("desc");
-  const [open, setOpen] = useState(false);
-  const [sliderItems, setSliderItems] = useState<PersonaSlide[]>([
-    { isAdd: true },
-  ]);
+
+  const {
+    keyword,
+    isSearchOpen,
+    sort,
+    selectedFilter,
+    expanded,
+    setKeyword,
+    toggleSearch,
+    setSort,
+    setFilter,
+    toggleExpand,
+  } = useChatHistoryStore();
+
+  const [openSortDropdown, setOpenSortDropdown] = useState(false);
+
   const [openDetail, setOpenDetail] = useState(false);
   const [selectedPersonaId, setSelectedPersonaId] = useState<
     number | string | null
   >(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [selectedFilter, setSelectedFilter] = useState<Filter | null>(null);
-  const [expanded, setExpanded] = useState<Record<string | number, boolean>>(
-    {}
-  ); // ✅ 각 채팅별 열림 상태
 
-  const filterMap: Record<"done" | "in-progress", string> = {
-    done: "ENDED",
-    "in-progress": "ACTIVE",
-  };
+  const {
+    data: conversations = [],
+    isLoading,
+    error,
+  } = useConversations(accessToken, selectedFilter);
 
-  const normalizeConversations = (arr: any): Conversation[] =>
-    (Array.isArray(arr) ? arr : [])
-      .filter(Boolean)
-      .filter((c) => !!c?.aiPersona);
+  const deleteMutation = useDeleteConversation(accessToken);
 
-  useEffect(() => {
-    if (!accessToken) return;
-
-    setLoading(true);
-    setError(null);
-
-    let query = "/api/conversations?sortBy=CREATED_AT_DESC&page=1&size=1000";
-    if (selectedFilter === "done" || selectedFilter === "in-progress") {
-      query += `&status=${filterMap[selectedFilter]}`;
-    }
-
-    fetch(query, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    })
-      .then(async (res) => {
-        if (!res.ok) {
-          const errText = await res.text(); // 서버가 보낸 에러 body
-          throw new Error(`${res.status} ${res.statusText}: ${errText}`);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        const sorted = normalizeConversations(data?.content).sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        );
-        setHistory(sorted);
-      })
-      .catch((err) => {
-        console.error("API 호출 에러:", err);
-        setError(err.message);
-      })
-      .finally(() => setLoading(false));
-  }, [accessToken, selectedFilter]);
-
-  useEffect(() => {
-    setFiltered(history);
-  }, [history]);
-
-  useEffect(() => {
+  const filteredConversations = useMemo(() => {
     const q = keyword.trim().toLowerCase();
-    if (!q) {
-      setFiltered(history);
-      return;
-    }
-    setFiltered(
-      history.filter((c) => (c.aiPersona?.name ?? "").toLowerCase().includes(q))
+    if (!q) return conversations;
+
+    return conversations.filter((c) =>
+      (c.aiPersona?.name ?? "").toLowerCase().includes(q)
     );
-  }, [keyword, history]);
+  }, [keyword, conversations]);
 
-  const toggleSearch = () =>
-    setIsSearchOpen((prev) => {
-      const next = !prev;
-      if (!next) {
-        setKeyword("");
-        setFiltered(history);
-      }
-      return next;
-    });
-
-  const toggleExpand = (id: number | string) => {
-    setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
-  const handleFilterClick = (filter: Filter) => {
-    setSelectedFilter((prev) => (prev === filter ? null : filter));
-  };
-  const handleOpenChat = (conversationId: string | number) => {
-    router.push(`/main/custom/chatroom/${conversationId}`);
-  };
-  const handleDeleteChat = async (conversationId: string | number) => {
-    try {
-      const res = await fetch(`/api/conversations/${conversationId}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${accessToken}` },
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to delete chat");
-      }
-      setHistory((prev) =>
-        prev.filter((chat) => chat.conversationId !== conversationId)
-      );
-    } catch (err) {
-      console.error("Delete chat error:", err);
-    }
-  };
   const sortedHistory = useMemo(() => {
-    return [...history].sort((a, b) => {
+    const base = [...filteredConversations];
+    return base.sort((a, b) => {
       const dateA = new Date(a.createdAt).getTime();
       const dateB = new Date(b.createdAt).getTime();
       return sort === "asc" ? dateA - dateB : dateB - dateA;
     });
-  }, [history, sort]);
+  }, [filteredConversations, sort]);
+
+  const handleFilterClick = (filter: Filter) => {
+    setFilter(selectedFilter === filter ? null : filter);
+  };
+
+  const handleOpenChat = (conversationId: string | number) => {
+    router.push(`/main/custom/chatroom/${conversationId}`);
+  };
+
+  const handleDeleteChat = (conversationId: string | number) => {
+    deleteMutation.mutate(conversationId);
+  };
+
+  const handleSearchToggle = () => {
+    if (isSearchOpen) {
+      setKeyword("");
+    }
+    toggleSearch();
+  };
 
   return (
     <div className="bg-gray-100 w-full flex flex-col pt-10">
       <div className="flex justify-between items-center space-x-2 relative z-10 px-4">
         <h1 className="text-xl font-bold z-10">Chatbot History</h1>
+
         <AnimatePresence>
           {isSearchOpen && (
             <motion.input
@@ -197,23 +142,18 @@ export default function ChatBothistoryPage() {
               transition={{ duration: 0.3 }}
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
-              onKeyDown={(e) =>
-                e.key === "Enter" &&
-                setFiltered(
-                  history.filter((c) =>
-                    (c.aiPersona?.name ?? "")
-                      .toLowerCase()
-                      .includes(keyword.trim().toLowerCase())
-                  )
-                )
-              }
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                }
+              }}
               className="border p-1 rounded overflow-hidden placeholder:pl-1 my-1"
               placeholder="Search..."
               style={{ minWidth: 0 }}
             />
           )}
         </AnimatePresence>
-        <button onClick={toggleSearch} className="cursor-pointer my-2">
+
+        <button onClick={handleSearchToggle} className="cursor-pointer my-2">
           <MagnifyingGlassIcon className="w-6 h-6 text-gray-700" />
         </button>
       </div>
@@ -236,10 +176,7 @@ export default function ChatBothistoryPage() {
         open={openDetail}
         onClose={() => setOpenDetail(false)}
         personaId={selectedPersonaId}
-        onDeleted={(deletedId) => {
-          setSliderItems((prev) =>
-            prev.filter((it) => !("isAdd" in it) && it.personaId !== deletedId)
-          );
+        onDeleted={() => {
           setOpenDetail(false);
         }}
       />
@@ -268,27 +205,26 @@ export default function ChatBothistoryPage() {
               In progress
             </button>
           </div>
+
           <div className="relative flex items-end justify-end px-4 mb-2">
-            {/* 드롭다운 토글 버튼 */}
             <button
-              onClick={() => setOpen(!open)}
-              className="flex items-center gap-1 text-xs cursor-pointer  rounded"
+              onClick={() => setOpenSortDropdown((prev) => !prev)}
+              className="flex items-center gap-1 text-xs cursor-pointer rounded"
             >
               {sort === "asc" ? "Oldest activity" : "Latest activity"}
               <ChevronDownIcon
                 className={`w-4 h-4 transform transition-transform pt-0.5 ${
-                  open ? "rotate-180" : ""
+                  openSortDropdown ? "rotate-180" : ""
                 }`}
               />
             </button>
 
-            {/* 드롭다운 옵션 목록 */}
-            {open && (
-              <div className="absolute right-6 top-full mt-0.5 w-25   z-10">
+            {openSortDropdown && (
+              <div className="absolute right-6 top-full mt-0.5 w-25 z-10 bg-white border border-gray-200 rounded-md shadow-sm">
                 <button
                   onClick={() => {
                     setSort("desc");
-                    setOpen(false);
+                    setOpenSortDropdown(false);
                   }}
                   className={`w-full text-center px-1 py-2 text-xs hover:bg-gray-100 ${
                     sort === "desc"
@@ -301,7 +237,7 @@ export default function ChatBothistoryPage() {
                 <button
                   onClick={() => {
                     setSort("asc");
-                    setOpen(false);
+                    setOpenSortDropdown(false);
                   }}
                   className={`w-full text-center px-1 py-2 text-xs hover:bg-gray-100 ${
                     sort === "asc" ? "bg-gray-50 font-medium text-blue-600" : ""
@@ -315,17 +251,21 @@ export default function ChatBothistoryPage() {
         </div>
       </div>
 
-      <div className="flex-1  pb-24 bg-white pt-2 border-t border-gray-400">
+      <div className="flex-1 pb-24 bg-white pt-2 border-t border-gray-400">
         <div className="space-y-2">
-          {loading ? (
+          {isLoading ? (
             <div className="flex items-center justify-center h-full py-30">
               <p>Loading...</p>
             </div>
           ) : (
             <>
-              {error && <p className="text-red-500">{error}</p>}
+              {error && (
+                <p className="text-red-500">
+                  {(error as Error).message ?? "Error"}
+                </p>
+              )}
 
-              {history.length === 0 && (
+              {conversations.length === 0 && !isLoading && !error && (
                 <div className="flex flex-col items-center justify-center mt-20">
                   <Image
                     src="/circle/circle4.png"
@@ -346,13 +286,14 @@ export default function ChatBothistoryPage() {
                 </div>
               )}
 
-              {history.length > 0 && filtered.length === 0 && (
-                <div className="flex flex-col items-center justify-center mt-10">
-                  <p className="text-gray-400">No search results.</p>
-                </div>
-              )}
+              {conversations.length > 0 &&
+                filteredConversations.length === 0 && (
+                  <div className="flex flex-col items-center justify-center mt-10">
+                    <p className="text-gray-400">No search results.</p>
+                  </div>
+                )}
 
-              {sortedHistory.map((chat) => {
+              {sortedHistory.map((chat: Conversation) => {
                 const name = getName(chat?.aiPersona?.name);
                 const desc = chat?.aiPersona?.description ?? "";
                 const img = getImg(chat?.aiPersona?.profileImageUrl);
@@ -426,17 +367,13 @@ export default function ChatBothistoryPage() {
                           <span>
                             {new Date(chat.createdAt).toLocaleDateString(
                               "en-US",
-                              {
-                                month: "short",
-                              }
+                              { month: "short" }
                             )}
-                          </span>{" "}
+                          </span>
                           <span>
                             {new Date(chat.createdAt).toLocaleDateString(
                               "en-US",
-                              {
-                                day: "numeric",
-                              }
+                              { day: "numeric" }
                             )}
                           </span>
                         </span>
@@ -449,6 +386,7 @@ export default function ChatBothistoryPage() {
                         </span>
                       </div>
                     </div>
+
                     <AnimatePresence initial={false}>
                       {isOpen && chat.status === "ACTIVE" && (
                         <motion.div
@@ -484,7 +422,7 @@ export default function ChatBothistoryPage() {
                         <motion.div
                           key="ended"
                           initial={{ maxHeight: 0, opacity: 0 }}
-                          animate={{ maxHeight: 400, opacity: 1 }} // 400 같은 넉넉한 값
+                          animate={{ maxHeight: 400, opacity: 1 }}
                           exit={{ maxHeight: 0, opacity: 0 }}
                           transition={{ duration: 0.3, ease: "easeInOut" }}
                           className="overflow-hidden"

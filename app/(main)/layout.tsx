@@ -18,8 +18,8 @@ export default function MainsLayout({
   );
   return (
     <AuthProvider>
-      <div className="w-full flex flex-col">
-        <div className="flex items-center justify-center w-full">
+      <div className="w-full flex flex-col items-center justify-center">
+        <div className="min-h-screen  flex flex-col  w-[375px] overflow-x-hidden overflow-y-auto">
           {children}
         </div>
         {!hideTabbar && (

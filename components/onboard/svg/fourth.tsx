@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import LottieAnimation from '@/components/etc/LottieAnimation';
-import { loadLottieAnimation, LOTTIE_PATHS } from '@/lib/lottie-loader';
+import { useState, useEffect } from "react";
+import LottieAnimation from "@/components/etc/LottieAnimation";
+import { loadLottieAnimation, LOTTIE_PATHS } from "@/lib/lottie-loader";
 
 export default function Fourth() {
   const [frameAnimation, setFrameAnimation] = useState<any>(null);
@@ -24,7 +24,7 @@ export default function Fourth() {
           setInnerAnimation(inner);
         }
       } catch (err) {
-        console.error('로티 로드 중 오류:', err);
+        console.error("로티 로드 중 오류:", err);
       }
     };
     loadAnimations();
@@ -45,17 +45,20 @@ export default function Fourth() {
         <div className="absolute inset-0">
           <LottieAnimation
             animationData={frameAnimation}
-            style={{ width: '100%', height: '100%' }}
+            style={{ width: "100%", height: "100%" }}
             loop={true}
             autoplay={true}
           />
         </div>
-        
+
         {/* 내부 애니메이션 (흰 박스 중앙에 배치) */}
-        <div className="absolute left-1/2 transform -translate-x-1/2" style={{ top: '65%', width: '200px', height: '200px' }}>
+        <div
+          className="absolute left-1/2 transform -translate-x-1/2"
+          style={{ top: "65%", width: "200px", height: "200px" }}
+        >
           <LottieAnimation
             animationData={innerAnimation}
-            style={{ width: '100%', height: '100%' }}
+            style={{ width: "100%", height: "100%" }}
             loop={true}
             autoplay={true}
           />
@@ -63,4 +66,4 @@ export default function Fourth() {
       </div>
     </div>
   );
-} 
+}

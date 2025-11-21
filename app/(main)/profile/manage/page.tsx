@@ -1,80 +1,82 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // app/account/manage/page.tsx
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { useAuth } from '@/lib/UserContext'
-import Link from 'next/link'
-import { ChevronLeftIcon } from '@heroicons/react/24/solid'
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/lib/UserContext";
+import Link from "next/link";
+import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 
 export default function AccountManage() {
-  const router = useRouter()
-  const { accessToken } = useAuth()
+  const router = useRouter();
+  const { accessToken } = useAuth();
   const [userInfo, setUserInfo] = useState<{
-    nickname: string
-    birthDate: string
-    email: string
-  } | null>(null)
+    nickname: string;
+    birthDate: string;
+    email: string;
+  } | null>(null);
 
-  const [password, setPassword] = useState('')
-  const masked = '•'.repeat(password.length)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string|null>(null)
+  const [password, setPassword] = useState("");
+  const masked = "•".repeat(password.length);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/users/me', {
+    fetch("/api/users/me", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-      }
+      },
     })
-      .then(r => r.json())
-      .then(data => {
+      .then((r) => r.json())
+      .then((data) => {
         setUserInfo({
           nickname: data.nickname,
           birthDate: data.birthDate,
-          email: data.email
-        })
+          email: data.email,
+        });
       })
-      .catch(console.error)
-  }, [accessToken])
+      .catch(console.error);
+  }, [accessToken]);
 
   const handleSubmit = async () => {
-    setLoading(true)
-    setError(null)
+    setLoading(true);
+    setError(null);
     try {
-      const res = await fetch('/api/users/me/profile', {
-        method: 'PUT',
+      const res = await fetch("/api/users/me/profile", {
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify({ password })
-      })
-      if (!res.ok) throw new Error('변경 실패')
-      alert('비밀번호가 변경되었습니다.')
-      router.back()
+        body: JSON.stringify({ password }),
+      });
+      if (!res.ok) throw new Error("변경 실패");
+      alert("비밀번호가 변경되었습니다.");
+      router.back();
     } catch (e: any) {
-      setError(e.message)
+      setError(e.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
-  if (!userInfo) return <p>로딩 중…</p>
+  if (!userInfo) return <p>로딩 중…</p>;
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* 헤더 */}
       <div className="px-4 pt-4 pb-3 border-b border-gray-200 bg-white">
         <div className="flex items-center">
-          <Link 
-            href="/profile" 
+          <Link
+            href="/profile"
             className="mr-3 p-1 hover:bg-gray-100 rounded-lg transition-colors"
           >
             <ChevronLeftIcon className="w-6 h-6 text-gray-600" />
           </Link>
-          <h1 className="text-gray-900 text-xl font-semibold font-pretendard">Manage Account</h1>
+          <h1 className="text-gray-900 text-xl font-semibold font-pretendard">
+            Manage Account
+          </h1>
         </div>
       </div>
 
@@ -142,5 +144,5 @@ export default function AccountManage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
