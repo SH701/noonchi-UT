@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import MainPage from "@/components/main/main";
-import { useAuth } from "@/lib/UserContext";
 import { useUserProfile } from "@/hooks/useUserProfile";
+import { useAuthStore } from "@/app/store/auth";
 
 export default function Main() {
-  const { accessToken } = useAuth();
+  const accessToken = useAuthStore((s) => s.accessToken);
 
   const { data: profile, isLoading, error } = useUserProfile(accessToken);
 

@@ -4,7 +4,6 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/lib/UserContext";
 import PersonaSlider from "@/components/bothistory/PersonaSlider";
 import PersonaDetailModal from "@/components/persona/PersonaDetailModal";
 import type { Conversation } from "@/lib/types";
@@ -25,6 +24,7 @@ import {
   useDeleteConversation,
 } from "@/hooks/useConversations";
 import { Filter, useChatHistoryStore } from "@/app/store/useChatHistorystore";
+import { useAuthStore } from "@/app/store/auth";
 
 const situationOptions = {
   BOSS: [
@@ -60,7 +60,7 @@ const getImg = (url?: string) => (typeof url === "string" ? url : "");
 
 export default function ChatBothistoryPage() {
   const router = useRouter();
-  const { accessToken } = useAuth();
+  const accessToken = useAuthStore((s) => s.accessToken);
 
   const {
     keyword,
@@ -76,7 +76,6 @@ export default function ChatBothistoryPage() {
   } = useChatHistoryStore();
 
   const [openSortDropdown, setOpenSortDropdown] = useState(false);
-
   const [openDetail, setOpenDetail] = useState(false);
   const [selectedPersonaId, setSelectedPersonaId] = useState<
     number | string | null

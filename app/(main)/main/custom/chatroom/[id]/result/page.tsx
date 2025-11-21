@@ -11,7 +11,6 @@ import Transcript from "@/components/main/result/transscript";
 import Section from "@/components/main/result/section";
 import { Feedback } from "@/lib/types";
 
-// 👉 메시지 타입
 type ChatMsg = {
   messageId: number;
   role: "USER" | "AI";
@@ -19,7 +18,6 @@ type ChatMsg = {
   createdAt: string;
 };
 
-// 👉 role 정규화 함수 (백엔드 type → 프론트 role)
 function normalizeRole(role: string): "USER" | "AI" {
   const upper = role.toUpperCase();
   return upper === "USER" ? "USER" : "AI";
@@ -29,7 +27,7 @@ export default function Result() {
   const [tab, setTab] = useState<"transcript" | "mistakes">("transcript");
   const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [messages, setMessages] = useState<ChatMsg[]>([]);
-  const [aiName, setAiName] = useState("AI"); // 👈 aiPersona 이름 저장
+  const [aiName, setAiName] = useState("AI");
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

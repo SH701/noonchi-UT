@@ -1,16 +1,18 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useAuth } from "@/lib/UserContext";
 import Loading from "@/app/after/loading";
 import Image from "next/image";
+import { useAuthStore } from "@/app/store/auth";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { setAccessToken } = useAuth();
+
+  const setAccessToken = useAuthStore((s) => s.setAccessToken);
+  const setKoreanLevel = useAuthStore((s) => s.setKoreanLevel);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -30,23 +32,18 @@ export default function LoginPage() {
         return;
       }
       setAccessToken(data.accessToken);
-
       const meRes = await fetch("/api/users/me", {
         headers: { Authorization: `Bearer ${data.accessToken}` },
       });
       const me = await meRes.json();
-
-      if (
-        me.koreanLevel === null ||
-        me.koreanLevel === "null" ||
-        me.koreanLevel === undefined
-      ) {
+      if (me.koreanLevel) {
+        setKoreanLevel(me.koreanLevel);
+      }
+      if (!me.koreanLevel || me.koreanLevel === "null") {
         router.replace("/after");
       } else {
         setLoading(true);
-        setTimeout(() => {
-          router.replace("/main");
-        }, 1500);
+        setTimeout(() => router.replace("/main"), 1500);
       }
     } catch (err) {
       console.error("Login error:", err);
@@ -54,13 +51,10 @@ export default function LoginPage() {
     }
   };
 
-  if (loading) {
-    return <Loading />;
-  }
+  if (loading) return <Loading />;
 
   return (
     <div className="min-h-screen flex flex-col bg-white px-4 overflow-y-hidden">
-      {/* 상단 로고 */}
       <div
         className="flex justify-center items-center"
         style={{ marginTop: "128px" }}
@@ -68,21 +62,16 @@ export default function LoginPage() {
         <Image src="/etc/logo_login.svg" alt="Logo" width={200} height={42} />
       </div>
 
-      {/* 로그인 폼 */}
       <div
         className="flex-1 flex items-start justify-center"
         style={{ marginTop: "42px" }}
       >
         <div className="w-full max-w-sm space-y-6">
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Email
             </label>
             <input
-              id="email"
               type="email"
               placeholder="example@gmail.com"
               className="w-full px-4 py-3 border border-gray-300 rounded-md bg-gray-50"
@@ -92,14 +81,10 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Password
             </label>
             <input
-              id="password"
               type="password"
               placeholder="••••••••"
               className="w-full px-4 py-3 border border-gray-300 rounded-md bg-gray-50"

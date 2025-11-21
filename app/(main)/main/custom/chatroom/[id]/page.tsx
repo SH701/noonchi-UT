@@ -3,51 +3,31 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { MyAI } from "@/lib/types";
-import { useAuth } from "@/lib/UserContext";
 import Link from "next/link";
-import MessageList from "@/components/chats/MessageList";
-import { HonorificResults } from "@/components/chats/HonorificSlider";
 import Image from "next/image";
-import LoadingModal from "@/components/chats/LoadingModal";
-import { useRecorder } from "@/hooks/useRecorder";
 import { AnimatePresence, motion } from "framer-motion";
 
-type ConversationDetail = {
-  conversationId: number;
-  userId: number;
-  aiPersona: MyAI;
-  status: "ACTIVE" | "ENDED";
-  situation: string;
-  chatNodeId: string;
-  createdAt: string;
-  endedAt: string | null;
-};
+import MessageList from "@/components/chats/MessageList";
+import LoadingModal from "@/components/chats/LoadingModal";
+import { HonorificResults } from "@/components/chats/HonorificSlider";
 
-type ChatMsg = {
-  messageId: string;
-  conversationId: number;
-  role: "USER" | "AI";
-  content: string;
-  createdAt: string;
-  feedback?: string;
-  isLoading?: boolean;
-  politenessScore?: number;
-  naturalnessScore?: number;
-};
+import { useRecorder } from "@/hooks/useRecorder";
+import { useAuthStore } from "@/app/store/auth";
+
+import { ChatMsg, useMessages } from "@/hooks/chat/useMessage";
+import { useConversationDetail } from "@/hooks/chat/useConversationDetail";
+
 type MicState = "idle" | "recording" | "recorded";
+
 export default function ChatroomPage() {
   const { id } = useParams<{ id: string }>();
-  const { accessToken } = useAuth();
+  const router = useRouter();
+  const accessToken = useAuthStore((s) => s.accessToken);
+  const canCall = Boolean(accessToken && id);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<ChatMsg[]>([]);
-  const [myAI, setMyAI] = useState<MyAI | null>(null);
-  const canCall = Boolean(accessToken);
-  const bottomRef = useRef<HTMLDivElement>(null);
   const [feedbackOpenId, setFeedbackOpenId] = useState<string | null>(null);
-  const router = useRouter();
-  const [conversationId, setConversationId] = useState<number | null>(null);
   const [honorificResults, setHonorificResults] = useState<
     Record<string, HonorificResults>
   >({});
@@ -55,84 +35,43 @@ export default function ChatroomPage() {
   const [hidden, setHidden] = useState(false);
   const [endModalOpen, setEndModalOpen] = useState(false);
   const [loadingModalOpen, setLoadingModalOpen] = useState(false);
-  const { isRecording, startRecording, stopRecording } = useRecorder();
   const [isTyping, setIsTyping] = useState(false);
   const [pendingAudioFile, setPendingAudioFile] = useState<Blob | null>(null);
   const [pendingAudioUrl, setPendingAudioUrl] = useState<string | null>(null);
   const [showVoiceError, setShowVoiceError] = useState(false);
   const [micState, setMicState] = useState<MicState>("idle");
 
-  const handleKeyboardClick = () => {
-    setIsTyping((prev) => !prev);
-  };
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const { isRecording, startRecording, stopRecording } = useRecorder();
 
-  // 대화 정보 로드
+  const {
+    data: conversation,
+    isLoading: isConversationLoading,
+    error: conversationError,
+  } = useConversationDetail(id);
+
+  const conversationId = conversation?.conversationId ?? null;
+  const myAI = conversation?.aiPersona ?? null;
+
+  const {
+    data: initialMessages = [],
+    isLoading: isMessagesLoading,
+    error: messagesError,
+  } = useMessages(id);
+
   useEffect(() => {
-    if (!canCall || !id) return;
-    (async () => {
-      try {
-        const res = await fetch(`/api/conversations/${id}`, {
-          headers: { Authorization: `Bearer ${accessToken}` },
-          cache: "no-store",
-        });
-        if (!res.ok) {
-          const errorText = await res.text();
-          console.error("대화 정보 조회 실패:", res.status, errorText);
-          return;
-        }
-        const data: ConversationDetail = await res.json();
-        setMyAI(data.aiPersona);
-        setConversationId(data.conversationId);
-      } catch (err) {
-        console.error("대화 정보 조회 오류:", err);
-      }
-    })();
-  }, [accessToken, id, canCall]);
-
-  // 메시지 목록 로드
-  const fetchMessages = async () => {
-    if (!canCall) return;
-    try {
-      const res = await fetch(
-        `/api/messages?conversationId=${id}&page=1&size=20`,
-        {
-          headers: { Authorization: `Bearer ${accessToken}` },
-          cache: "no-store",
-        }
-      );
-      if (!res.ok) {
-        const errorText = await res.text();
-        console.error("메시지 조회 실패:", res.status, errorText);
-        return;
-      }
-      const data = await res.json();
-      const list = (data?.content ?? data ?? []) as any[];
-      const mapped: ChatMsg[] = list.map((m) => ({
-        messageId: String(m.messageId),
-        conversationId: m.conversationId,
-        role: (m.role ?? m.type) as "USER" | "AI",
-        content: m.content ?? "",
-        createdAt: m.createdAt ?? new Date().toISOString(),
-        politenessScore: m.politenessScore ?? -1,
-        naturalnessScore: m.naturalnessScore ?? -1,
-      }));
-      setMessages(mapped);
-      if (!conversationId && list.length > 0 && list[0].conversationId) {
-        setConversationId(list[0].conversationId);
-      }
-    } catch (err) {
-      console.error("메시지 조회 오류:", err);
+    if (initialMessages && initialMessages.length > 0) {
+      setMessages(initialMessages);
     }
-  };
-
-  useEffect(() => {
-    fetchMessages();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accessToken, id]);
+  }, [initialMessages]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  const handleKeyboardClick = () => {
+    setIsTyping((prev) => !prev);
+  };
 
   const showVoiceErrorMessage = () => {
     setShowVoiceError(true);
@@ -141,26 +80,25 @@ export default function ChatroomPage() {
     }, 3000);
   };
 
-  // 메시지 전송
   const sendMessage = async (content?: string, audioUrl?: string) => {
-    if (!canCall || loading) return;
-    if (!conversationId) {
-      return;
-    }
-
+    if (!canCall || loading || !conversationId) return;
     if ((!content || !content.trim()) && !audioUrl) return;
+
     const displayContent = content ?? "";
+
     const optimistic: ChatMsg = {
       messageId: `user_${Date.now()}`,
       conversationId,
       role: "USER",
       content: displayContent,
       createdAt: new Date().toISOString(),
-      politenessScore: -1, // 아직 없음
+      politenessScore: -1,
       naturalnessScore: -1,
     };
+
     setMessages((prev) => [...prev, optimistic]);
     setMessage("");
+    setLoading(true);
 
     try {
       const userRes = await fetch("/api/messages", {
@@ -187,10 +125,14 @@ export default function ChatroomPage() {
       }
 
       if (!userRes.ok) {
+        setMessages((prev) =>
+          prev.filter((msg) => msg.messageId !== optimistic.messageId)
+        );
         return;
       }
 
       const userMsgData = await userRes.json();
+
       if (userMsgData?.messageId) {
         setMessages((prev) =>
           prev.map((msg) =>
@@ -210,6 +152,7 @@ export default function ChatroomPage() {
           )
         );
       }
+
       const aiLoadingMsg: ChatMsg = {
         messageId: `ai_loading_${Date.now()}`,
         conversationId,
@@ -219,6 +162,7 @@ export default function ChatroomPage() {
         isLoading: true,
       };
       setMessages((prev) => [...prev, aiLoadingMsg]);
+
       const aiRes = await fetch(
         `/api/messages/ai-reply?conversationId=${conversationId}`,
         {
@@ -226,8 +170,16 @@ export default function ChatroomPage() {
           headers: { Authorization: `Bearer ${accessToken}` },
         }
       );
-      if (!aiRes.ok) return;
+
+      if (!aiRes.ok) {
+        setMessages((prev) =>
+          prev.filter((msg) => msg.messageId !== aiLoadingMsg.messageId)
+        );
+        return;
+      }
+
       const aiData = await aiRes.json();
+
       if (aiData?.content?.trim()) {
         setMessages((prev) =>
           prev.map((msg) =>
@@ -253,44 +205,47 @@ export default function ChatroomPage() {
     }
   };
 
-  // 대화 종료
   const handleEnd = async () => {
+    if (!conversationId) return;
+
     setEndModalOpen(false);
     setLoadingModalOpen(true);
+
     try {
       const res = await fetch(`/api/conversations/${id}/end`, {
         method: "PUT",
         headers: { Authorization: `Bearer ${accessToken}` },
       });
+
       if (!res.ok) {
         setLoadingModalOpen(false);
         return;
       }
+
       router.push(`/main/custom/chatroom/${id}/result`);
-    } catch (e) {
+    } catch {
       setLoadingModalOpen(false);
     }
   };
 
   const handleFeedbacks = async (messageId: string) => {
-    if (!accessToken) {
-      return;
-    }
+    if (!accessToken) return;
+
     if (feedbackOpenId === messageId) {
       setFeedbackOpenId(null);
       return;
     }
+
     try {
       const res = await fetch(`/api/messages/${messageId}/feedback`, {
         method: "POST",
         headers: { Authorization: `Bearer ${accessToken}` },
       });
 
-      if (!res.ok) {
-        return;
-      }
+      if (!res.ok) return;
 
       const feedbackData = await res.json();
+
       setMessages((prev) =>
         prev.map((msg) =>
           msg.messageId === messageId ? { ...msg, feedback: feedbackData } : msg
@@ -302,6 +257,8 @@ export default function ChatroomPage() {
   };
 
   const handleHonorific = async (messageId: string) => {
+    if (!accessToken) return;
+
     if (honorificResults[messageId]) {
       setHonorificResults((prev) => {
         const copy = { ...prev };
@@ -324,10 +281,12 @@ export default function ChatroomPage() {
           headers: { Authorization: `Bearer ${accessToken}` },
         }
       );
+
       if (!res.ok) {
         console.error("존댓말 변환 실패");
         return;
       }
+
       const data = await res.json();
 
       setHonorificResults((prev) => ({
@@ -354,6 +313,7 @@ export default function ChatroomPage() {
       setMicState("recorded");
     }
   };
+
   const handleResetAudio = () => {
     setPendingAudioFile(null);
     setPendingAudioUrl(null);
@@ -361,33 +321,68 @@ export default function ChatroomPage() {
   };
 
   const handleSendAudio = async () => {
-    if (!pendingAudioFile) return;
+    if (!pendingAudioFile || !accessToken) return;
+    if (!conversationId) return;
 
-    const res = await fetch("/api/files/presigned-url", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({
-        fileType: "audio.wav",
-        fileExtension: "wav",
-      }),
-    });
-    if (!res.ok) throw new Error("presigned-url 요청 실패");
-    const { url: presignedUrl } = await res.json();
+    try {
+      const res = await fetch("/api/files/presigned-url", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          fileType: "audio.wav",
+          fileExtension: "wav",
+        }),
+      });
 
-    await fetch(presignedUrl, {
-      method: "PUT",
-      headers: { "Content-Type": "audio/wav" },
-      body: pendingAudioFile,
-    });
+      if (!res.ok) throw new Error("presigned-url 요청 실패");
 
-    const audioUrl = presignedUrl.split("?")[0];
-    await sendMessage("", audioUrl);
+      const { url: presignedUrl } = await res.json();
 
-    handleResetAudio();
+      await fetch(presignedUrl, {
+        method: "PUT",
+        headers: { "Content-Type": "audio/wav" },
+        body: pendingAudioFile,
+      });
+
+      const audioUrl = presignedUrl.split("?")[0];
+      await sendMessage("", audioUrl);
+
+      handleResetAudio();
+    } catch (e) {
+      console.error("handleSendAudio error:", e);
+      showVoiceErrorMessage();
+    }
   };
+
+  const isDataLoading = isConversationLoading || isMessagesLoading;
+  const hasError = conversationError || messagesError;
+
+  if (!accessToken) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-gray-600">로그인이 필요합니다.</p>
+      </div>
+    );
+  }
+
+  if (isDataLoading && messages.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p>Loading…</p>
+      </div>
+    );
+  }
+
+  if (hasError && messages.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-red-500">채팅방 정보를 불러오지 못했습니다.</p>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -418,7 +413,7 @@ export default function ChatroomPage() {
               {myAI?.name ?? "..."}
             </span>
             <button
-              onClick={() => setEndModalOpen(true)} // 모달 열기
+              onClick={() => setEndModalOpen(true)}
               aria-label="End conversation"
               className="text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
             >
@@ -430,6 +425,7 @@ export default function ChatroomPage() {
               />
             </button>
           </div>
+
           {!hidden && (
             <button
               className="absolute right-3"
@@ -440,12 +436,8 @@ export default function ChatroomPage() {
           )}
         </div>
 
-        {/* Error */}
-
         {/* Messages */}
         <div className="flex-1 bg-white px-4 py-4 overflow-y-auto mb-[139px]">
-          {" "}
-          {/* 여기서 입력란의 높이 만큼 마진을 주어 겹치지 않도록 */}
           <MessageList
             messages={messages}
             myAI={myAI}
@@ -459,7 +451,7 @@ export default function ChatroomPage() {
           <div ref={bottomRef} />
         </div>
 
-        {/* 🎯 Voice Error Message - Input 바로 위에 배치 */}
+        {/* Voice Error Toast */}
         <AnimatePresence>
           {showVoiceError && (
             <motion.div
@@ -468,7 +460,7 @@ export default function ChatroomPage() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="fixed bottom-[139px] left-1/2 -translate-x-1/2  -translate-y-3 z-40 flex flex-col items-center"
+              className="fixed bottom-[139px] left-1/2 -translate-x-1/2 -translate-y-3 z-40 flex flex-col items-center"
             >
               <Image
                 src="/etc/voice_error.png"
@@ -480,11 +472,10 @@ export default function ChatroomPage() {
           )}
         </AnimatePresence>
 
-        {/* Input - Fixed at bottom */}
+        {/* Input 영역 */}
         <div className="bg-blue-50 py-4 h-[139px] border-t border-gray-200 max-w-[500px] w-full flex justify-center items-center gap-8 fixed bottom-0 z-50">
           {!isTyping && (
             <>
-              {/* 새로고침 버튼 */}
               {micState === "recording" || micState === "recorded" ? (
                 <button
                   className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-100"
@@ -500,7 +491,7 @@ export default function ChatroomPage() {
               ) : (
                 <div className="w-12 h-12" />
               )}
-              {/* 중앙 버튼 */}
+
               {micState === "idle" && (
                 <button onClick={handleMicClick}>
                   <Image
@@ -532,7 +523,6 @@ export default function ChatroomPage() {
                 </button>
               )}
 
-              {/* 키보드 버튼 */}
               <button
                 className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-100"
                 onClick={handleKeyboardClick}
@@ -546,7 +536,7 @@ export default function ChatroomPage() {
               </button>
             </>
           )}
-          {/* Typing Section */}
+
           {isTyping && (
             <div className="flex items-center w-full max-w-[334px] min-w-0 border border-blue-300 rounded-full bg-white mx-4">
               <button
@@ -558,7 +548,6 @@ export default function ChatroomPage() {
                   alt="Mic"
                   width={44}
                   height={44}
-                  className=""
                 />
               </button>
               <input
@@ -578,7 +567,6 @@ export default function ChatroomPage() {
                   alt="Send"
                   width={28}
                   height={28}
-                  className=""
                 />
               </button>
             </div>
@@ -586,7 +574,6 @@ export default function ChatroomPage() {
         </div>
       </div>
 
-      {/* End Modal */}
       {endModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div
@@ -623,6 +610,7 @@ export default function ChatroomPage() {
           </div>
         </div>
       )}
+
       {loadingModalOpen && <LoadingModal open={loadingModalOpen} />}
     </>
   );

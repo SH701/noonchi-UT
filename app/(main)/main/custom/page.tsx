@@ -4,11 +4,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
-import { useAuth } from "@/lib/UserContext";
 
 import type { Persona } from "@/lib/types";
 import Loading from "./chatroom/[id]/loading";
 import InterviewForm from "@/components/forms/InterviewForm";
+import { useAuthStore } from "@/app/store/auth";
 
 const situationOptions = {
   BOSS: [
@@ -32,7 +32,7 @@ type Role = keyof typeof situationOptions;
 type SituationValue = (typeof situationOptions)[Role][number]["value"];
 
 export default function PersonaAndRoom() {
-  const { accessToken } = useAuth();
+  const accessToken = useAuthStore((s) => s.accessToken);
   const router = useRouter();
 
   const [company, setCompany] = useState("");
