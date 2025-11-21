@@ -4,8 +4,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Modal from "@/components/persona/modal";
-import { useAuth } from "@/lib/UserContext";
 import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/app/store/auth";
 
 type PersonaDetail = {
   id: number | string;
@@ -31,7 +31,7 @@ export default function PersonaDetailModal({
   personaId: number | string | null;
   onDeleted: (id: number | string) => void;
 }) {
-  const { accessToken } = useAuth();
+  const accessToken = useAuthStore((s) => s.accessToken);
   const router = useRouter();
   const [data, setData] = useState<PersonaDetail | null>(null);
   const [loading, setLoading] = useState(false);

@@ -20,7 +20,7 @@ export default function TabBar() {
   };
   return (
     <div className="fixed left-4 bottom-0 inset-x-0 flex justify-center bg-transparent ">
-      <div className="max-w-[375px] bg-white rounded-t-2xl shadow-[0_-4px_10px_0_rgba(0,0,0,0.08)] border border-gray-100">
+      <div className="w-[375px] bg-white rounded-t-2xl shadow-[0_-4px_10px_0_rgba(0,0,0,0.08)] border border-gray-100">
         {pathname === "/main" && (
           <div className=" px-4 relative">
             {open && (

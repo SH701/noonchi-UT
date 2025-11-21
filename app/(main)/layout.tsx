@@ -1,7 +1,6 @@
 "use client";
 
 import TabBar from "@/components/etc/tab-bar";
-import { AuthProvider } from "@/lib/UserContext";
 import { usePathname } from "next/navigation";
 
 export const dynamic = "force-dynamic";
@@ -16,18 +15,17 @@ export default function MainsLayout({
   const hideTabbar = hide.some(
     (path) => pathname === path || pathname.startsWith(path + "/")
   );
+
   return (
-    <AuthProvider>
-      <div className="w-full flex flex-col items-center justify-center">
-        <div className="min-h-screen  flex flex-col  w-[375px] overflow-x-hidden overflow-y-auto">
-          {children}
-        </div>
-        {!hideTabbar && (
-          <div className="fixed bottom-0 inset-x-0  z-50">
-            <TabBar />
-          </div>
-        )}
+    <div className="w-full flex flex-col items-center justify-center">
+      <div className="min-h-screen flex flex-col w-[375px] overflow-x-hidden overflow-y-auto">
+        {children}
       </div>
-    </AuthProvider>
+      {!hideTabbar && (
+        <div className="fixed bottom-0 inset-x-0 z-50">
+          <TabBar />
+        </div>
+      )}
+    </div>
   );
 }

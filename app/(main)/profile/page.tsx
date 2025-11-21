@@ -4,7 +4,7 @@ import Face0 from "@/components/character/face0";
 import Face1 from "@/components/character/face1";
 import Face2 from "@/components/character/face2";
 import Face3 from "@/components/character/face3";
-import { useAuth } from "@/lib/UserContext";
+
 import {
   ChevronRightIcon,
   UserIcon,
@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useUserProfile } from "@/hooks/useUserProfile";
+import { useAuthStore } from "@/app/store/auth";
 
 const FACES = [
   { Component: Face0, id: "face0" },
@@ -31,7 +32,7 @@ function normalizeSrc(src?: string) {
 
 export default function ProfilePage() {
   const router = useRouter();
-  const { accessToken } = useAuth();
+  const accessToken = useAuthStore((s) => s.accessToken);
 
   const { data: profile, isLoading, error } = useUserProfile(accessToken);
 

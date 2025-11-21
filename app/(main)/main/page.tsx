@@ -7,18 +7,33 @@ import { useAuthStore } from "@/app/store/auth";
 
 export default function Main() {
   const accessToken = useAuthStore((s) => s.accessToken);
-
   const { data: profile, isLoading, error } = useUserProfile(accessToken);
 
-  if (isLoading) return <p>Loading…</p>;
-  if (error) return <p className="text-red-500">로그인이 필요합니다.</p>;
-  if (!profile) return null;
+  if (isLoading)
+    return <p className="text-center py-10 text-gray-500">Loading…</p>;
+
+  if (error)
+    return (
+      <p className="text-red-500 text-center py-10">로그인이 필요합니다.</p>
+    );
+
+  if (!profile)
+    return (
+      <div className="flex flex-col overflow-x-hidden overflow-y-auto">
+        <div className="w-full py-6 px-7 text-white">
+          <Image
+            src="/etc/mainLogo.png"
+            width={112}
+            height={24}
+            alt="Main Logo"
+          />
+        </div>
+        <MainPage />
+      </div>
+    );
 
   return (
-    <div
-      className="min-h-screen flex flex-col w-[375px] overflow-x-hidden overflow-y-auto"
-      style={{ paddingBottom: "calc(153px + env(safe-area-inset-bottom))" }}
-    >
+    <div className="flex flex-col overflow-x-hidden overflow-y-auto">
       <div className="w-full py-6 px-7 text-white">
         <Image
           src="/etc/mainLogo.png"
@@ -27,7 +42,6 @@ export default function Main() {
           alt="Main Logo"
         />
       </div>
-
       <MainPage />
     </div>
   );

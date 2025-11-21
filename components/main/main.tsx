@@ -51,7 +51,7 @@ export default function MainPage() {
   const handleClick = () => {
     setOpen(true);
   };
-
+  
   return (
     <div className=" bg-[#F2F7FF]">
       <div className={`flex flex-col items-center  pt-6 pb-4`}>
