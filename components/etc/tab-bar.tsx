@@ -7,20 +7,20 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
 import ChatTextInput from "../chat/chattextinput";
 
 export default function TabBar() {
   const pathname = usePathname();
 
   return (
-    <div className="fixed  bottom-0 inset-x-0 flex justify-center bg-transparent ">
-      <div className="w-[375px] bg-white rounded-t-2xl shadow-[0_-4px_10px_0_rgba(0,0,0,0.08)] border border-gray-100">
+    <div className="fixed bottom-0 left-0 w-full bg-transparent z-50">
+      <div className="w-full max-w-[430px] mx-auto bg-white rounded-t-2xl shadow-[0_-4px_10px_0_rgba(0,0,0,0.08)] border border-gray-100">
         {pathname === "/main" && (
-          <div className=" px-4 relative">
+          <div className="px-4 relative">
             <ChatTextInput />
           </div>
         )}
+
         <div className="grid grid-cols-3">
           <Link
             href="/main"
@@ -38,6 +38,7 @@ export default function TabBar() {
               </>
             )}
           </Link>
+
           <Link
             href="/chatbothistory"
             className="flex-1 flex flex-col items-center justify-center py-4"
@@ -54,6 +55,7 @@ export default function TabBar() {
               </>
             )}
           </Link>
+
           <Link
             href="/profile"
             className="flex-1 flex flex-col items-center justify-center py-4"
