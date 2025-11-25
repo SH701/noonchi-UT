@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
 import FormInput from "./FormInput";
 import OptionButtons from "./OptionsButton";
 import FileUpload from "./FileUpload";
-import SubmitButton from "./SubmitButton";
+import Button from "../atoms/Button";
 
 interface InterviewFormProps {
   situationOptions: Record<string, readonly { value: string; label: string }[]>;
@@ -19,15 +18,17 @@ export default function InterviewForm({
   const [company, setCompany] = useState("");
   const [position, setPosition] = useState("");
   const [jobPosting, setJobPosting] = useState("");
-  const [description, setDescription] = useState("");
+  const [style, setStyle] = useState("standard");
+  console.log("relationship:", relationship);
+  console.log("options:", situationOptions[relationship]);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     console.log("submit!");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col  space-y-4">
+    <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
       <FormInput
         label="Company"
         required
@@ -59,12 +60,13 @@ export default function InterviewForm({
 
         <OptionButtons
           options={situationOptions[relationship]}
-          selected={description}
-          onSelect={setDescription}
+          selected={style}
+          onSelect={setStyle}
         />
       </div>
-
-      <SubmitButton />
+      <div className="lg:mt-20">
+        <Button label="Start Chatting" onClick={() => ""} />
+      </div>
     </form>
   );
 }

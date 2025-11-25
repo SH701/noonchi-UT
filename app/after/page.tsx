@@ -6,8 +6,8 @@ import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import { useAuthStore } from "@/app/store/auth";
-import { Level, Interest } from "@/app/store/auth";
+import { useAuthStore } from "@/store/auth";
+import { Level, Interest } from "@/store/auth";
 import ProfileChange from "@/components/afterlogin/profilechange";
 import Image from "next/image";
 import Loading from "./loading";

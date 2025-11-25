@@ -5,7 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { MyAI } from "@/lib/types";
 import HonorificSlider, { HonorificResults } from "./HonorificSlider";
-import { useAuthStore } from "@/app/store/auth";
+import { useAuthStore } from "@/store/auth";
 
 type MessageItemProps = {
   m: any;

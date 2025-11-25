@@ -11,7 +11,7 @@ import Face1 from "@/components/character/face1";
 import Face2 from "@/components/character/face2";
 import Face3 from "@/components/character/face3";
 
-import { useAuthStore } from "@/app/store/auth";
+import { useAuthStore } from "@/store/auth";
 import { useUserProfile } from "@/hooks/useUserProfile";
 
 type Profile = {

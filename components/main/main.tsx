@@ -1,9 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import ComingSoon from "@/components/modal/Comingsoon";
 import Image from "next/image";
+import Button from "../atoms/Button";
+import { useRouter } from "next/navigation";
 const CONTENT_WIDTH_CLASS = "w-full";
 
 export default function MainPage() {
@@ -51,6 +52,7 @@ export default function MainPage() {
   const handleClick = () => {
     setOpen(true);
   };
+  const router = useRouter();
 
   return (
     <div className=" bg-[#F2F7FF] min-h-screen pb-[140px]">
@@ -105,12 +107,10 @@ export default function MainPage() {
           </div>
         </div>
 
-        <Link
-          href="/main/custom"
-          className={`flex justify-center items-center w-[286px]  bg-blue-600 hover:bg-blue-700 text-blue-50 font-medium py-4 rounded-lg `}
-        >
-          Start Chatting
-        </Link>
+        <Button
+          label="Start Chatting"
+          onClick={() => router.push("/main/custom")}
+        />
       </div>
 
       <div className={`flex flex-col px-5  py-4`}>

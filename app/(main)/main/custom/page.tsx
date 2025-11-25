@@ -8,7 +8,7 @@ import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import type { Persona } from "@/lib/types";
 import Loading from "./chatroom/[id]/loading";
 import InterviewForm from "@/components/forms/InterviewForm";
-import { useAuthStore } from "@/app/store/auth";
+import { useAuthStore } from "@/store/auth";
 
 const situationOptions = {
   BOSS: [
@@ -138,7 +138,6 @@ export default function PersonaAndRoom() {
   }
   return (
     <div className="flex flex-col pt-14 relative bg-white  w-full overflow-x-hidden">
-      {/* Header */}
       <div className="flex items-center w-full px-4">
         <button
           onClick={() => router.back()}
@@ -154,89 +153,6 @@ export default function PersonaAndRoom() {
         Interview Preparation
       </h2>
 
-      {/* 사진 업로드 */}
-      {/* <div className="flex flex-col items-center mb-6">
-        <div className="relative">
-          <button
-            className="w-24 h-24 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 cursor-pointer"
-            onClick={() => setAvatarModalOpen(true)}
-          >
-            {profileImageUrl ? (
-              <Image
-                src={profileImageUrl}
-                width={96}
-                height={96}
-                alt="avatar"
-                className="object-cover w-full h-full"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-4xl text-gray-400">
-                +
-              </div>
-            )}
-          </button>
-        </div>
-      </div>
-
-      {avatarModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-            onClick={() => setAvatarModalOpen(false)}
-          />
-          <div className="relative bg-white rounded-2xl p-6 z-10 shadow-xl flex flex-col items-center gap-4 min-w-[320px]">
-            <h2 className="text-lg font-semibold mb-2">Select Avatar</h2>
-
-            <div className="grid grid-cols-3 gap-4">
-              {images.map((img, i) => (
-                <button
-                  key={img}
-                  className={`w-20 h-20 rounded-full overflow-hidden border-4 ${
-                    profileImageUrl === img
-                      ? "border-blue-500"
-                      : "border-transparent"
-                  }`}
-                  onClick={() => {
-                    setProfileImageUrl(img);
-                    setAvatarModalOpen(false);
-                  }}
-                >
-                  <Image
-                    src={img}
-                    width={80}
-                    height={80}
-                    alt={`avatar${i + 1}`}
-                  />
-                </button>
-              ))}
-            </div>
-
-            
-            <button
-              onClick={() =>
-                document.getElementById("fileUploadInput")?.click()
-              }
-              className="mt-4 px-4 py-2 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 cursor-pointer"
-            >
-              Upload Your Photo
-            </button>
-            <input
-              id="fileUploadInput"
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={handleFileChange}
-            />
-
-            <button
-              className=" text-gray-400 text-sm underline cursor-pointer"
-              onClick={() => setAvatarModalOpen(false)}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )} */}
       <div className="w-full flex justify-center">
         <div className="w-full max-w-[375px] px-5">
           <InterviewForm

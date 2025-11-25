@@ -7,6 +7,7 @@ import { slides } from "@/lib/setting";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export const settings: Settings = {
   dots: true,
@@ -100,7 +101,6 @@ export default function Onboard() {
           </Slider>
         </div>
 
-        {/* 버튼/로그인 영역 */}
         <div className="px-4 pb-6">
           <button
             onClick={handleNext}
@@ -109,7 +109,7 @@ export default function Onboard() {
             Get Started
           </button>
 
-          {/* <p className="text-center text-sm text-gray-500 mt-6">
+          <p className="text-center text-sm text-gray-500 mt-6">
             Already have an account?{" "}
             <Link
               href="/login"
@@ -117,7 +117,7 @@ export default function Onboard() {
             >
               Log in
             </Link>
-          </p> */}
+          </p>
         </div>
       </div>
     </div>

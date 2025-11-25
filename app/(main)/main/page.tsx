@@ -3,7 +3,7 @@
 import Image from "next/image";
 import MainPage from "@/components/main/main";
 import { useUserProfile } from "@/hooks/useUserProfile";
-import { useAuthStore } from "@/app/store/auth";
+import { useAuthStore } from "@/store/auth";
 
 export default function Main() {
   const accessToken = useAuthStore((s) => s.accessToken);

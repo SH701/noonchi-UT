@@ -9,7 +9,7 @@ import Score from "@/components/main/result/score";
 import Transcript from "@/components/main/result/transscript";
 import Section from "@/components/main/result/section";
 import { Feedback } from "@/lib/types";
-import { useAuthStore } from "@/app/store/auth";
+import { useAuthStore } from "@/store/auth";
 
 type ChatMsg = {
   messageId: number;

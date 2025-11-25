@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Conversation } from "@/lib/types";
-import { Filter } from "@/app/store/useChatHistorystore";
+import { Filter } from "@/store/useChatHistorystore";
 
 const filterMap: Record<Exclude<Filter, null>, string> = {
   done: "ENDED",

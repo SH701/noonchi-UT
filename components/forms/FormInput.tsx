@@ -16,7 +16,7 @@ export default function FormInput({
   placeholder,
 }: Props) {
   return (
-    <div>
+    <div className="mb-6">
       <label className="text-sm font-semibold text-black mb-2 flex gap-2">
         {label} {required && <p className="text-red-500">*</p>}
       </label>

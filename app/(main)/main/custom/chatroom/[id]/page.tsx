@@ -12,7 +12,7 @@ import LoadingModal from "@/components/chats/LoadingModal";
 import { HonorificResults } from "@/components/chats/HonorificSlider";
 
 import { useRecorder } from "@/hooks/useRecorder";
-import { useAuthStore } from "@/app/store/auth";
+import { useAuthStore } from "@/store/auth";
 
 import { ChatMsg, useMessages } from "@/hooks/chat/useMessage";
 import { useConversationDetail } from "@/hooks/chat/useConversationDetail";

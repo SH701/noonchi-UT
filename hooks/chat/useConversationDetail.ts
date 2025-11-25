@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@/app/store/auth";
+import { useAuthStore } from "@/store/auth";
 import type { MyAI } from "@/lib/types";
 
 export type ConversationDetail = {

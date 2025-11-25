@@ -15,7 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useUserProfile } from "@/hooks/useUserProfile";
-import { useAuthStore } from "@/app/store/auth";
+import { useAuthStore } from "@/store/auth";
 
 const FACES = [
   { Component: Face0, id: "face0" },

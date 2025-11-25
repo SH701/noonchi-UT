@@ -23,8 +23,8 @@ import {
   useConversations,
   useDeleteConversation,
 } from "@/hooks/useConversations";
-import { Filter, useChatHistoryStore } from "@/app/store/useChatHistorystore";
-import { useAuthStore } from "@/app/store/auth";
+import { Filter, useChatHistoryStore } from "@/store/useChatHistorystore";
+import { useAuthStore } from "@/store/auth";
 
 const situationOptions = {
   BOSS: [

@@ -19,7 +19,6 @@ export default function MainsLayout({
 
   return (
     <div className="w-full min-h-screen flex flex-col bg-gray-100">
-      {/* 데스크톱에서는 중앙 정렬, 모바일에서는 전체 화면 */}
       <div className="w-full min-h-screen md:flex md:justify-center">
         <div className="w-full md:max-w-[375px] md:shadow-xl bg-white">
           {children}

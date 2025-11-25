@@ -2,7 +2,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const BASE = process.env.API_URL;
-const PUBLIC_URL = process.env.PUBLIC_URL ?? "https://pangpang-one.vercel.app";
+const PUBLIC_URL = process.env.PUBLIC_URL ?? "https://noonchi.ai.kr/";
 
 const FORWARD_COOKIE_KEYS = [
   "accessToken",
