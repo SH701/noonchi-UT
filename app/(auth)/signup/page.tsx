@@ -31,12 +31,10 @@ export default function SignupStep1() {
         >
           <ChevronLeftIcon className="w-6 h-6" />
         </button>
-
         <h1 className="absolute left-1/2 transform -translate-x-1/2 text-xl font-semibold text-gray-800">
           Create account
         </h1>
       </div>
-
       <div className="flex-1 px-6 py-8 space-y-4 pb-32">
         <TextInput
           label="Email"
@@ -45,7 +43,6 @@ export default function SignupStep1() {
           value={email}
           onChange={setEmail}
         />
-
         <TextInput
           label="Password"
           type="password"
@@ -53,7 +50,6 @@ export default function SignupStep1() {
           value={pw}
           onChange={setPw}
         />
-
         <TextInput
           label="Re-enter password"
           type="password"
@@ -61,7 +57,6 @@ export default function SignupStep1() {
           value={pw2}
           onChange={setPw2}
         />
-
         <p className="text-sm text-blue-600">
           8–16 characters, include letters & numbers
         </p>

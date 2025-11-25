@@ -88,7 +88,6 @@ export default function SignupStep2() {
       </div>
 
       <div className="flex-1 px-6 py-8 space-y-4">
-        {/* Name */}
         <TextInput
           label="Name"
           required

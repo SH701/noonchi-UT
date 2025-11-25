@@ -111,7 +111,7 @@ export default function Onboard() {
         </div>
 
         <div className="px-4 pb-6">
-          <ActionButton label="Get Started" onClick={handleNext} />
+          <ActionButton onClick={handleNext}>Get Started</ActionButton>
           <p className="text-center text-sm text-gray-500 mt-6">
             Already have an account?{" "}
             <Link
