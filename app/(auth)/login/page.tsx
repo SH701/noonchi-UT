@@ -36,8 +36,14 @@ export default function LoginPage() {
         setLoading(false);
         return;
       }
-
-      setAccessToken(data.accessToken);
+      const { accessToken, refreshToken } = data;
+      if (!accessToken || !refreshToken) {
+        setError("토큰이 없습니다. 관리자에게 문의하세요.");
+        setLoading(false);
+        return;
+      }
+      setAccessToken(accessToken);
+      useAuthStore.getState().setRefreshToken(refreshToken);
 
       const meRes = await fetch("/api/users/me", {
         headers: { Authorization: `Bearer ${data.accessToken}` },

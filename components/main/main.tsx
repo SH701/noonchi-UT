@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ComingSoon from "@/components/modal/Comingsoon";
 import Image from "next/image";
-import Button from "../atoms/Button";
+import Button from "../atoms/button/Button";
 import { useRouter } from "next/navigation";
 const CONTENT_WIDTH_CLASS = "w-full";
 

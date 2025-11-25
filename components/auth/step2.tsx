@@ -58,14 +58,10 @@ export default function SignupStep2() {
         return;
       }
 
-      const token = data?.accessToken;
-      if (!token) {
-        setError("토큰이 없습니다. 관리자에게 문의하세요.");
-        return;
-      }
+      const { accessToken, refreshToken } = data;
 
-      setAccessToken(token);
-      localStorage.setItem("accessToken", token);
+      setAccessToken(accessToken);
+      useAuthStore.getState().setRefreshToken(refreshToken);
 
       setLoading(true);
       setTimeout(() => {

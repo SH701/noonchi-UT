@@ -5,9 +5,10 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider, { Settings } from "react-slick";
 import { slides } from "@/lib/setting";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useAuthStore } from "@/store/auth";
 
 export const settings: Settings = {
   dots: true,
@@ -36,7 +37,14 @@ export default function Onboard() {
   const handleSkip = () => {
     sliderRef.current?.slickGoTo(slides.length - 1);
   };
+  useEffect(() => {
+    const { accessToken, refreshToken } = useAuthStore.getState();
 
+    if (accessToken && !refreshToken) {
+      console.log("구버전 토큰 감지, 재로그인 필요");
+      useAuthStore.getState().logout();
+    }
+  }, []);
   return (
     <div className="h-screen w-full bg-white flex items-center justify-center overflow-hidden">
       <div className="w-full h-full flex flex-col mx-auto relative">

@@ -25,6 +25,8 @@ import {
 } from "@/hooks/useConversations";
 import { Filter, useChatHistoryStore } from "@/store/useChatHistorystore";
 import { useAuthStore } from "@/store/auth";
+import Error from "@/app/error/page";
+import LoginModal from "@/components/modal/LoginModal";
 
 const situationOptions = {
   BOSS: [
@@ -125,7 +127,9 @@ export default function ChatBothistoryPage() {
     }
     toggleSearch();
   };
-
+  if (!accessToken) {
+    return <LoginModal isOpen={true} onClose={() => router.push("/login")} />;
+  }
   return (
     <div className="bg-gray-100 w-full flex flex-col pt-10">
       <div className="flex justify-between items-center space-x-2 relative z-10 px-4">

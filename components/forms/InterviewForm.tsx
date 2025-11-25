@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import FormInput from "./FormInput";
+import FormInput from "../atoms/form/FormInput";
 import OptionButtons from "./OptionsButton";
 import FileUpload from "./FileUpload";
-import Button from "../atoms/Button";
+import Button from "../atoms/button/Button";
 
 interface InterviewFormProps {
   situationOptions: Record<string, readonly { value: string; label: string }[]>;
@@ -64,7 +64,7 @@ export default function InterviewForm({
           onSelect={setStyle}
         />
       </div>
-      <div className="lg:mt-20">
+      <div className="lg:mt-20 flex items-center justify-center">
         <Button label="Start Chatting" onClick={() => ""} />
       </div>
     </form>
