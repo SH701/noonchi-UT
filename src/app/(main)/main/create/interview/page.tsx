@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 
-import Loading from "./chatroom/[id]/loading";
+import Loading from "../../chatroom/[id]/loading";
 import InterviewForm from "@/components/forms/InterviewForm";
 import { useAuthStore } from "@/store/auth";
 import { Persona } from "@/types/persona";
@@ -17,7 +17,7 @@ const INTERVIEW_STYLES = [
 
 const DEFAULT_INTERVIEWER_IMAGE = "/characters/interviewer.png";
 
-export default function PersonaAndRoom() {
+export default function Interview() {
   const accessToken = useAuthStore((s) => s.accessToken);
   const router = useRouter();
 

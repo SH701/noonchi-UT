@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import FormInput from "../atoms/form/FormInput";
-import OptionButtons from "./OptionsButton";
-import FileUpload from "./FileUpload";
+import OptionButtons from "../atoms/button/OptionsButton";
+import FileUpload from "../atoms/form/FileUpload";
 import ActionButton from "../atoms/button/ActionButton";
 
 interface InterviewFormProps {

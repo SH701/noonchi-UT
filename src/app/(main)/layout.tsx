@@ -1,6 +1,5 @@
 "use client";
 
-
 import TabBar from "@/components/etc/tab-bar";
 import { usePathname } from "next/navigation";
 
@@ -13,13 +12,13 @@ export default function MainsLayout({
 }) {
   const pathname = usePathname();
 
-  const hide = ["/main/custom", "/main/role", "/main/honorific"];
+  const hide = ["/main/create", "/main/role", "/main/honorific"];
   const hideTabbar = hide.some(
     (path) => pathname === path || pathname.startsWith(path + "/")
   );
 
   return (
-    <div className="w-full min-h-screen flex flex-col bg-gray-100">
+    <div className="w-full min-h-screen flex flex-col ">
       <div className="w-full min-h-screen md:flex md:justify-center">
         <div className="w-full md:max-w-[375px] md:shadow-xl bg-white">
           {children}

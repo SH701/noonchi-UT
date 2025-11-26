@@ -540,7 +540,7 @@ export default function ChatroomPage() {
             <div className="flex items-center w-full max-w-[334px] min-w-0 border border-blue-300 rounded-full bg-white mx-4">
               <button
                 onClick={handleKeyboardClick}
-                className="p-2 flex-shrink-0"
+                className="p-2 shrink-0"
               >
                 <Image
                   src="/chatroom/mic.png"
@@ -552,14 +552,14 @@ export default function ChatroomPage() {
               <input
                 type="text"
                 placeholder="Reply here"
-                className="flex-grow min-w-0 p-2 text-gray-500 placeholder-gray-400 border-none outline-none"
+                className="grow min-w-0 p-2 text-gray-500 placeholder-gray-400 border-none outline-none"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && sendMessage(message)}
               />
               <button
                 onClick={() => sendMessage(message)}
-                className="flex-shrink-0 p-3 hover:bg-gray-50 rounded-full transition-colors"
+                className="shrink-0 p-3 hover:bg-gray-50 rounded-full transition-colors"
               >
                 <Image
                   src="/chatroom/up.png"

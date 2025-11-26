@@ -22,7 +22,7 @@ export default function MainPage() {
   const router = useRouter();
 
   return (
-    <div className=" bg-[#F2F7FF] min-h-screen pb-[140px]">
+    <div className=" bg-[#F2F7FF] min-h-screen pb-40">
       <div className={`flex flex-col items-center  pt-6 pb-4`}>
         <h2
           className={`text-2xl font-bold text-gray-900 mb-4 w-full text-left px-5`}
@@ -74,7 +74,7 @@ export default function MainPage() {
 
         <button
           className="w-[286px] h-13 flex items-center justify-center rounded-lg bg-blue-600 hover:bg-blue-700 cursor-pointer text-white font-medium "
-          onClick={() => router.push("/main/custom")}
+          onClick={() => router.push("/main/create/interview")}
         >
           Start Chatting
         </button>
@@ -104,7 +104,7 @@ export default function MainPage() {
               key={topic.id}
               className="flex items-center gap-5 p-3 bg-white hover:shadow-md 
                transition-shadow cursor-pointer border border-gray-200 mb-2 rounded-lg"
-              onClick={() => router.push("/main/custom")}
+              onClick={() => router.push("/main/create/roleplay")}
             >
               <div className="text-blue-600 font-semibold text-base">
                 {topic.id}

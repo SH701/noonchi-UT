@@ -25,7 +25,7 @@ import {
 } from "@/hooks/useConversations";
 import { Filter, useChatHistoryStore } from "@/store/useChatHistorystore";
 import { useAuthStore } from "@/store/auth";
-import Error from "@/error/page";
+import Error from "@/app/error/page";
 import LoginModal from "@/components/modal/LoginModal";
 import { Conversation } from "@/types/conversation";
 
