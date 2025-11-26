@@ -6,7 +6,7 @@ type HonorificBoxProps = {
   honorificResults: Record<string, any>;
   sliderValue: Record<string, number>;
   setSliderValue: React.Dispatch<React.SetStateAction<Record<string, number>>>;
-  className?: string; // ✅ 선택적
+  className?: string;
 };
 
 const formalityMap = ["lowFormality", "mediumFormality", "highFormality"];
@@ -25,7 +25,7 @@ export default function HonorificBox({
 
   return (
     <div
-      className={`bg-gray-600 rounded-b-xl shadow-sm -mt-4 px-3 pt-5 pb-3 max-w-[240px] ${className}`}
+      className={`bg-gray-600 rounded-b-xl shadow-sm -mt-4 px-3 pt-5 pb-3 max-w-60 ${className}`}
     >
       {/* 결과 문장 */}
       <h3 className="text-sm font-semibold text-white mb-3 font-pretendard">

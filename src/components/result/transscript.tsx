@@ -3,8 +3,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import HonorificBox from "./honorificbox";
+
 import { useAuthStore } from "@/store/auth";
+import HonorificBox from "@/components/result/honorificbox";
 
 type ChatMsg = {
   messageId: number;
@@ -160,7 +161,7 @@ export default function Transcript({
         m.role === "AI" ? (
           <div key={m.messageId} className="flex flex-col justify-start gap-4">
             {/* AI 메시지 스타일 */}
-            <div className="w-[240px] bg-gray-50 p-3 rounded-xl shadow-sm border border-gray-200 z-20">
+            <div className="w-60 bg-gray-50 p-3 rounded-xl shadow-sm border border-gray-200 z-20">
               <p className="text-xs font-semibold text-gray-600 mb-2 font-pretendard">
                 {aiName}
               </p>
@@ -207,7 +208,7 @@ export default function Transcript({
               </div>
             </div>
             {translated && (
-              <div className="p-4 bg-gray-600 shadow-sm w-[240px] rounded-b-xl -mt-6">
+              <div className="p-4 bg-gray-600 shadow-sm w-60 rounded-b-xl -mt-6">
                 <p className="text-gray-200 font-pretendard text-sm leading-relaxed">
                   {translated}
                 </p>
@@ -228,7 +229,7 @@ export default function Transcript({
             <div className="flex justify-end w-full mt-3">
               <div className="flex gap-2 w-60">
                 <div
-                  className="w-[18px] flex items-center justify-center flex-shrink-0"
+                  className="w-[18px] flex items-center justify-center shrink-0"
                   style={{ height: "74px" }}
                 >
                   {showFeedbackButton(m) && (

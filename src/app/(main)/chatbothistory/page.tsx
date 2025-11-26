@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import PersonaSlider from "@/components/bothistory/PersonaSlider";
-import PersonaDetailModal from "@/components/persona/PersonaDetailModal";
+import PersonaDetailModal from "@/components/modal/PersonaDetailModal";
 
 import Link from "next/link";
 import {

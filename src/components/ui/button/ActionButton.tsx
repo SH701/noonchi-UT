@@ -20,12 +20,12 @@ export default function ActionButton({
         w-[334px]
         h-[52px]
         px-[110px]
-        py-[16px]
+        py-4
         rounded-lg
         flex
         items-center
         justify-center
-        gap-[10px]
+        gap-2.5
         font-medium
         transition-all
         ${

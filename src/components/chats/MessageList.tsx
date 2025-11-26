@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
+import { MyAI } from "@/types/persona";
 import { HonorificResults } from "./HonorificSlider";
 import MessageItem from "./MessageItem";
-import { MyAI } from "@/lib/types";
 
 type MessageListProps = {
   messages: any[];

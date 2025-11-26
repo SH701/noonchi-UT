@@ -1,6 +1,6 @@
 import { useState } from "react";
-import FormInput from "../atoms/form/FormInput";
-import ActionButton from "../atoms/button/ActionButton";
+import FormInput from "../ui/form/FormInput";
+import ActionButton from "../ui/button/ActionButton";
 
 export default function RoleplayForm({
   onSubmit,

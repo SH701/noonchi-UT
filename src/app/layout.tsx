@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className="min-h-screen w-full">
         <QueryProvider>
           <div className="flex flex-col h-full">
-            <main className="flex-grow w-full ">{children}</main>
+            <main className="grow w-full ">{children}</main>
           </div>
         </QueryProvider>
       </body>

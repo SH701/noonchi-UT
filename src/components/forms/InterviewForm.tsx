@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import FormInput from "../atoms/form/FormInput";
-import OptionButtons from "../atoms/button/OptionsButton";
-import FileUpload from "../atoms/form/FileUpload";
-import ActionButton from "../atoms/button/ActionButton";
+import FormInput from "../ui/form/FormInput";
+import OptionButtons from "../ui/button/OptionsButton";
+import FileUpload from "../ui/form/FileUpload";
+import ActionButton from "../ui/button/ActionButton";
 
 interface InterviewFormProps {
   interviewStyles: readonly { value: string; label: string }[];

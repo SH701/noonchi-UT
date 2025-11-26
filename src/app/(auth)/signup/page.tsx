@@ -2,12 +2,16 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ChevronLeftIcon } from "@heroicons/react/24/solid";
-import ActionButton from "@/components/atoms/button/ActionButton";
-import TextInput from "@/components/atoms/form/TextInput";
+
+import ActionButton from "@/components/ui/button/ActionButton";
+
+import SignupHeader from "@/components/signup/SignupHeader";
+import SignupTemplate from "@/components/signup/SignupTemplate";
+import SignupFormStep1 from "@/components/signup/SignupForm1";
 
 export default function SignupStep1() {
   const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [pw2, setPw2] = useState("");
@@ -23,67 +27,24 @@ export default function SignupStep1() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
-      <div className="px-6 pt-4 pb-10 bg-white flex items-center justify-between relative mt-10">
-        <button
-          onClick={() => router.back()}
-          className="text-gray-600 hover:text-gray-800 transition-colors"
-        >
-          <ChevronLeftIcon className="w-6 h-6" />
-        </button>
-        <h1 className="absolute left-1/2 transform -translate-x-1/2 text-xl font-semibold text-gray-800">
-          Create account
-        </h1>
-      </div>
-      <div className="flex-1 px-6 py-8 space-y-4 pb-32">
-        <TextInput
-          label="Email"
-          type="email"
-          placeholder="example@gmail.com"
-          value={email}
-          onChange={setEmail}
-        />
-        <TextInput
-          label="Password"
-          type="password"
-          placeholder="••••••••"
-          value={pw}
-          onChange={setPw}
-        />
-        <TextInput
-          label="Re-enter password"
-          type="password"
-          placeholder="••••••••"
-          value={pw2}
-          onChange={setPw2}
-        />
-        <p className="text-sm text-blue-600">
-          8–16 characters, include letters & numbers
-        </p>
-        <label className="flex items-start space-x-3">
-          <input
-            type="checkbox"
-            checked={agree}
-            onChange={(e) => setAgree(e.target.checked)}
-            className="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
-          />
-          <span className="text-sm text-gray-700 leading-relaxed">
-            Agree with{" "}
-            <a href="#" className="text-black underline">
-              Terms of use
-            </a>{" "}
-            and our{" "}
-            <a href="#" className="text-black underline">
-              privacy policy
-            </a>
-          </span>
-        </label>
-        <div className="flex justify-center items-center fixed bottom-24">
-          <ActionButton disabled={!canNext} onClick={goNext}>
-            Next
-          </ActionButton>
-        </div>
-      </div>
-    </div>
+    <SignupTemplate
+      header={<SignupHeader title="Create account" />}
+      footer={
+        <ActionButton disabled={!canNext} onClick={goNext}>
+          Next
+        </ActionButton>
+      }
+    >
+      <SignupFormStep1
+        email={email}
+        setEmail={setEmail}
+        pw={pw}
+        setPw={setPw}
+        pw2={pw2}
+        setPw2={setPw2}
+        agree={agree}
+        setAgree={setAgree}
+      />
+    </SignupTemplate>
   );
 }

@@ -5,9 +5,9 @@
 import Image from "next/image";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Score from "@/components/main/result/score";
+import Score from "@/components/result/score";
 import Transcript from "@/components/main/result/transscript";
-import Section from "@/components/main/result/section";
+import Section from "@/components/result/section";
 
 import { useAuthStore } from "@/store/auth";
 import { Feedback } from "@/types/feedback";

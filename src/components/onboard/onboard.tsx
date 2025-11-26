@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useAuthStore } from "@/store/auth";
-import ActionButton from "../atoms/button/ActionButton";
+import ActionButton from "../ui/button/ActionButton";
 
 export const settings: Settings = {
   dots: true,
@@ -49,7 +49,7 @@ export default function Onboard() {
   return (
     <div className="h-screen w-full bg-white flex items-center justify-center overflow-hidden">
       <div className="w-full h-full flex flex-col mx-auto relative">
-        <div className="flex-grow">
+        <div className="grow">
           <Slider
             ref={sliderRef}
             {...settings}

@@ -4,10 +4,10 @@ import { useRouter } from "next/navigation";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { useAuthStore } from "@/store/auth";
 
-import ProfileHeader from "@/components/organisms/profile/ProfileHeader";
-import ProfileImage from "@/components/atoms/image/ProfileImage";
-import StatsCard from "@/components/molecules/profile/StatsCard";
-import ProfileMenuList from "@/components/molecules/profile/ProfileMenuList";
+import ProfileHeader from "@/components/profile/ProfileHeader";
+import ProfileImage from "@/components/ui/image/ProfileImage";
+import StatsCard from "@/components/profile/StatsCard";
+import ProfileMenuList from "@/components/profile/ProfileMenuList";
 import LoginModal from "@/components/modal/LoginModal";
 
 export default function ProfilePage() {

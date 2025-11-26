@@ -144,7 +144,7 @@ export default function MessageItem({
     >
       {/* 상대방 프로필 */}
       {!isMine && (
-        <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 mt-1 ring-1 ring-gray-200">
+        <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 mt-1 ring-1 ring-gray-200">
           {myAI?.profileImageUrl ? (
             <Image
               src={myAI.profileImageUrl}
@@ -164,7 +164,7 @@ export default function MessageItem({
           onClick={handleFeedbackClick}
           disabled={loadingFeedbacks[m.messageId]}
           className="w-[18px] h-[18px] border-2 border-red-500 rounded-full 
-       flex items-center justify-center shadow-sm flex-shrink-0 ml-13 mt-12
+       flex items-center justify-center shadow-sm shrink-0 ml-13 mt-12
        bg-transparent hover:bg-red-50 transition-colors cursor-pointer"
         >
           {loadingFeedbacks[m.messageId] ? (
@@ -264,7 +264,7 @@ export default function MessageItem({
                   <button
                     onClick={() => handleTranslateClick(m.messageId)}
                     disabled={loadingTranslate[m.messageId]}
-                    className="cursor-pointer flex items-center justify-cente h-[32px] rounded-2xl"
+                    className="cursor-pointer flex items-center justify-cente h-8 rounded-2xl"
                   >
                     <Image
                       src="/etc/language.svg"
@@ -281,7 +281,7 @@ export default function MessageItem({
             {isMine && (
               <div className="flex items-end justify-end gap-2">
                 <button
-                  className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs hover:bg-blue-700 flex-shrink-0 font-pretendard transition-colors"
+                  className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs hover:bg-blue-700 shrink-0 font-pretendard transition-colors"
                   onClick={handleClick}
                 >
                   Honorific Slider

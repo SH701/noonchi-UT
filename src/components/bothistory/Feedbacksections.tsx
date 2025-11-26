@@ -76,13 +76,13 @@ export default function FeedbackSection({ id }: { id: number | string }) {
       <div className="flex items-center justify-center gap-4 mt-[34px]">
         <button
           onClick={viewfeedback}
-          className="px-4 min-w-[120px] h-9 text-white bg-blue-600 rounded-[8px] cursor-pointer"
+          className="px-4 min-w-[120px] h-9 text-white bg-blue-600 rounded-lg cursor-pointer"
         >
           <p className="text-xs">View Feedback</p>
         </button>
         <button
           onClick={() => handleDeleteChat(id)}
-          className="px-4 min-w-[80px] h-9 text-white bg-gray-300 rounded-[8px] cursor-pointer"
+          className="px-4 min-w-20 h-9 text-white bg-gray-300 rounded-lg cursor-pointer"
         >
           <p className="text-xs"> Delete</p>
         </button>
