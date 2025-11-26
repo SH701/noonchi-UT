@@ -8,6 +8,7 @@ import ProfileHeader from "@/components/profile/ProfileHeader";
 import ProfileImage from "@/components/ui/image/ProfileImage";
 import StatsCard from "@/components/profile/StatsCard";
 import ProfileMenuList from "@/components/profile/ProfileMenuList";
+import LoginModal from "@/components/etc/LoginModal";
 
 export default function ProfilePage() {
   const router = useRouter();

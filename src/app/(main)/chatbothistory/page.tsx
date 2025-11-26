@@ -5,7 +5,6 @@ import { useMemo, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import PersonaSlider from "@/components/bothistory/PersonaSlider";
-import PersonaDetailModal from "@/components/modal/PersonaDetailModal";
 
 import Link from "next/link";
 import {
@@ -25,9 +24,10 @@ import {
 } from "@/hooks/useConversations";
 import { Filter, useChatHistoryStore } from "@/store/useChatHistorystore";
 import { useAuthStore } from "@/store/auth";
-import Error from "@/app/error/page";
-import LoginModal from "@/components/modal/LoginModal";
+
 import { Conversation } from "@/types/conversation";
+import LoginModal from "@/components/etc/LoginModal";
+import PersonaDetailModal from "@/components/persona/PersonaDetail";
 
 const situationOptions = {
   BOSS: [
