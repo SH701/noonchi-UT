@@ -79,7 +79,6 @@ export default function ChatBothistoryPage() {
     toggleExpand,
   } = useChatHistoryStore();
 
-  
   const [openDetail, setOpenDetail] = useState(false);
   const [selectedPersonaId, setSelectedPersonaId] = useState<
     number | string | null
@@ -125,9 +124,9 @@ export default function ChatBothistoryPage() {
     }
     toggleSearch();
   };
-  // if (!accessToken) {
-  //   return <LoginModal isOpen={true} onClose={() => router.push("/login")} />;
-  // }
+  if (!accessToken) {
+    return <LoginModal isOpen={true} onClose={() => router.push("/login")} />;
+  }
   return (
     <div className="bg-gray-100 w-full flex flex-col pt-10">
       <div className="flex justify-between items-center space-x-2 relative z-10 px-4">

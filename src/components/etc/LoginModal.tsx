@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import Modal from "../ui/modal/Modal";
-import Button from "../ui/button/ModalButton";
+
+import ModalButton from "../ui/button/ModalButton";
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -20,10 +21,10 @@ export default function LoginModal({ isOpen, onClose }: LoginModalProps) {
       description=""
     >
       <div className="flex items-center justify-center">
-        <Button
+        <ModalButton
           label="Login / Sign up"
           onClick={() => router.push("/login")}
-        ></Button>
+        ></ModalButton>
       </div>
     </Modal>
   );

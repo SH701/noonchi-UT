@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { Filter } from "@/store/useChatHistorystore";
 import { Conversation } from "@/types/conversation";
+import { FilterState } from "@/types/history";
 
-const filterMap: Record<Exclude<Filter, null>, string> = {
+const filterMap: Record<Exclude<FilterState, null>, string> = {
   done: "ENDED",
   "in-progress": "ACTIVE",
 };
@@ -16,7 +16,7 @@ const normalizeConversations = (arr: unknown): Conversation[] =>
 
 export const useConversations = (
   accessToken?: string | null,
-  filter: Filter = null
+  filter: FilterState = null
 ) => {
   return useQuery({
     queryKey: ["conversations", "history", filter],
