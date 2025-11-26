@@ -14,20 +14,22 @@ import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/24/solid";
 import { AnimatePresence, motion } from "framer-motion";
-import InProgressIcon from "@/components/bothistory/Inprogress";
-import DoneIcon from "@/components/bothistory/Done";
+import InProgressIcon from "@/components/etc/Inprogress";
+import DoneIcon from "@/components/etc/Done";
 import FeedbackSection from "@/components/bothistory/Feedbacksections";
 
 import {
   useConversations,
   useDeleteConversation,
 } from "@/hooks/useConversations";
-import { Filter, useChatHistoryStore } from "@/store/useChatHistorystore";
+import { useChatHistoryStore } from "@/store/useChatHistorystore";
 import { useAuthStore } from "@/store/auth";
 
 import { Conversation } from "@/types/conversation";
 import LoginModal from "@/components/etc/LoginModal";
 import PersonaDetailModal from "@/components/persona/PersonaDetail";
+import Filter from "@/components/bothistory/Filter";
+import Sort from "@/components/bothistory/Sort";
 
 const situationOptions = {
   BOSS: [
@@ -74,11 +76,10 @@ export default function ChatBothistoryPage() {
     setKeyword,
     toggleSearch,
     setSort,
-    setFilter,
     toggleExpand,
   } = useChatHistoryStore();
 
-  const [openSortDropdown, setOpenSortDropdown] = useState(false);
+  
   const [openDetail, setOpenDetail] = useState(false);
   const [selectedPersonaId, setSelectedPersonaId] = useState<
     number | string | null
@@ -110,10 +111,6 @@ export default function ChatBothistoryPage() {
     });
   }, [filteredConversations, sort]);
 
-  const handleFilterClick = (filter: Filter) => {
-    setFilter(selectedFilter === filter ? null : filter);
-  };
-
   const handleOpenChat = (conversationId: string | number) => {
     router.push(`/main/custom/chatroom/${conversationId}`);
   };
@@ -128,9 +125,9 @@ export default function ChatBothistoryPage() {
     }
     toggleSearch();
   };
-  if (!accessToken) {
-    return <LoginModal isOpen={true} onClose={() => router.push("/login")} />;
-  }
+  // if (!accessToken) {
+  //   return <LoginModal isOpen={true} onClose={() => router.push("/login")} />;
+  // }
   return (
     <div className="bg-gray-100 w-full flex flex-col pt-10">
       <div className="flex justify-between items-center space-x-2 relative z-10 px-4">
@@ -187,71 +184,8 @@ export default function ChatBothistoryPage() {
 
       <div className="mb-6 pl-6 pr-0">
         <div className="flex items-center justify-between">
-          <div className="flex space-x-2">
-            <button
-              onClick={() => handleFilterClick("done")}
-              className={`px-3 pt-1 pb-1.5 rounded-full border text-xs font-medium transition-colors cursor-pointer ${
-                selectedFilter === "done"
-                  ? " text-white bg-[#374151]"
-                  : "border-gray-300 text-gray-500 bg-white"
-              }`}
-            >
-              Done
-            </button>
-            <button
-              onClick={() => handleFilterClick("in-progress")}
-              className={`px-4 pt-1 pb-1.5 rounded-full border text-xs font-medium transition-colors cursor-pointer ${
-                selectedFilter === "in-progress"
-                  ? "text-white bg-[#374151]"
-                  : "border-gray-300 text-gray-500 bg-white"
-              }`}
-            >
-              In progress
-            </button>
-          </div>
-
-          <div className="relative flex items-end justify-end px-4 mb-2">
-            <button
-              onClick={() => setOpenSortDropdown((prev) => !prev)}
-              className="flex items-center gap-1 text-xs cursor-pointer rounded"
-            >
-              {sort === "asc" ? "Oldest activity" : "Latest activity"}
-              <ChevronDownIcon
-                className={`w-4 h-4 transform transition-transform pt-0.5 ${
-                  openSortDropdown ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-
-            {openSortDropdown && (
-              <div className="absolute right-6 top-full mt-0.5 w-25 z-10 bg-white border border-gray-200 rounded-md shadow-sm">
-                <button
-                  onClick={() => {
-                    setSort("desc");
-                    setOpenSortDropdown(false);
-                  }}
-                  className={`w-full text-center px-1 py-2 text-xs hover:bg-gray-100 ${
-                    sort === "desc"
-                      ? "bg-gray-50 font-medium text-blue-600"
-                      : ""
-                  }`}
-                >
-                  Latest activity
-                </button>
-                <button
-                  onClick={() => {
-                    setSort("asc");
-                    setOpenSortDropdown(false);
-                  }}
-                  className={`w-full text-center px-1 py-2 text-xs hover:bg-gray-100 ${
-                    sort === "asc" ? "bg-gray-50 font-medium text-blue-600" : ""
-                  }`}
-                >
-                  Oldest activity
-                </button>
-              </div>
-            )}
-          </div>
+          <Filter />
+          <Sort />
         </div>
       </div>
 

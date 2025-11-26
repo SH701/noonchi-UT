@@ -1,20 +1,17 @@
+import { FilterState, SortOrder } from "@/types/history";
 import { create } from "zustand";
-
-export type Filter = "done" | "in-progress" | null;
-
-type SortOrder = "asc" | "desc";
 
 interface ChatHistoryUIState {
   keyword: string;
   isSearchOpen: boolean;
   sort: SortOrder;
-  selectedFilter: Filter;
+  selectedFilter: FilterState;
   expanded: Record<string | number, boolean>;
 
   setKeyword: (value: string) => void;
   toggleSearch: () => void;
   setSort: (order: SortOrder) => void;
-  setFilter: (filter: Filter) => void;
+  setFilter: (filter: FilterState) => void;
   toggleExpand: (id: string | number) => void;
   reset: () => void;
 }

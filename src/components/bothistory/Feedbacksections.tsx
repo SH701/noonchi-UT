@@ -1,35 +1,20 @@
 "use client";
-import { useEffect, useState } from "react";
+
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/auth";
-
-type Feedback = {
-  overallEvaluation: string;
-  politenessScore: number;
-  naturalnessScore: number;
-};
+import { useFeedback } from "@/hooks/chat/useFeedback";
 
 export default function FeedbackSection({ id }: { id: number | string }) {
-  const accessToken = useAuthStore((s) => s.accessToken);
-  const [feedback, setFeedback] = useState<Feedback | null>(null);
   const router = useRouter();
-
-  useEffect(() => {
-    if (!accessToken) return;
-    fetch(`/api/conversations/${id}/feedback`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    })
-      .then((res) => res.json())
-      .then((data) => setFeedback(data));
-  }, [id, accessToken]);
-
-  if (!feedback) return null;
+  const conversationId = String(id);
+  const accessToken = useAuthStore((s) => s.accessToken);
+  const { data: feedback, isLoading, error } = useFeedback(conversationId);
 
   const viewfeedback = () => {
-    router.push(`/main/custom/chatroom/${id}/result`);
+    router.push(`/main/custom/chatroom/${conversationId}/result`);
   };
 
-  const handleDeleteChat = async (conversationId: string | number) => {
+  const handleDeleteChat = async () => {
     try {
       const res = await fetch(`/api/conversations/${conversationId}`, {
         method: "DELETE",
@@ -44,11 +29,15 @@ export default function FeedbackSection({ id }: { id: number | string }) {
     }
   };
 
+  if (isLoading) return <p>Loading…</p>;
+  if (error || !feedback) return <p>피드백 불러오기 실패</p>;
+
   return (
     <div className="px-5 py-3 bg-gray-50 space-y-3">
       <div className="bg-white p-4 border rounded-2xl border-[#E5E7EB]">
         <p className="text-sm text-gray-700">{feedback.overallEvaluation}</p>
       </div>
+
       <div className="space-y-2">
         <div className="flex justify-between text-sm">
           <span>Politeness</span>
@@ -58,7 +47,7 @@ export default function FeedbackSection({ id }: { id: number | string }) {
           <div
             className="h-full bg-blue-400 rounded-full"
             style={{ width: `${feedback.politenessScore}%` }}
-          ></div>
+          />
         </div>
 
         <div className="flex justify-between text-sm">
@@ -69,7 +58,7 @@ export default function FeedbackSection({ id }: { id: number | string }) {
           <div
             className="h-full bg-blue-400 rounded-full"
             style={{ width: `${feedback.naturalnessScore}%` }}
-          ></div>
+          />
         </div>
       </div>
 
@@ -81,10 +70,10 @@ export default function FeedbackSection({ id }: { id: number | string }) {
           <p className="text-xs">View Feedback</p>
         </button>
         <button
-          onClick={() => handleDeleteChat(id)}
+          onClick={handleDeleteChat}
           className="px-4 min-w-20 h-9 text-white bg-gray-300 rounded-lg cursor-pointer"
         >
-          <p className="text-xs"> Delete</p>
+          <p className="text-xs">Delete</p>
         </button>
       </div>
     </div>
