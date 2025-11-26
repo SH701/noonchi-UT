@@ -8,7 +8,6 @@ import ProfileHeader from "@/components/profile/ProfileHeader";
 import ProfileImage from "@/components/ui/image/ProfileImage";
 import StatsCard from "@/components/profile/StatsCard";
 import ProfileMenuList from "@/components/profile/ProfileMenuList";
-import LoginModal from "@/components/modal/LoginModal";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -19,7 +18,6 @@ export default function ProfilePage() {
   const handleLogout = async () => {
     const { refreshToken } = useAuthStore.getState();
 
-    // 🔥 logout API 요청
     await fetch("/api/auth/logout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -27,7 +25,6 @@ export default function ProfilePage() {
       body: JSON.stringify({ refreshToken }),
     });
 
-    // 🔥 cookie 제거
     const cookies = [
       "__clerk_db_jwt",
       "__client_uat",
@@ -40,10 +37,8 @@ export default function ProfilePage() {
         (document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`)
     );
 
-    // 🔥 zustand 초기화
     useAuthStore.getState().logout();
 
-    // 🔥 localStorage 제거
     localStorage.removeItem("auth-storage");
 
     router.push("/login");

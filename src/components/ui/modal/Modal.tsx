@@ -13,7 +13,7 @@ export default function Modal({
 
   return (
     <div
-      className="fixed inset-0 bg-black/40 z-[9999] flex items-center justify-center"
+      className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center"
       onClick={onClose}
     >
       <div
@@ -21,13 +21,13 @@ export default function Modal({
         className="
           w-[320px]
           bg-white
-          rounded-[12px]
+          rounded-xl
           flex flex-col
           justify-center
           items-center
-          px-[16px]
-          py-[48px]
-          gap-[28px]
+          px-4
+          py-12
+          gap-7
         "
       >
         {title && (

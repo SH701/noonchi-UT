@@ -6,11 +6,12 @@ import Image from "next/image";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Score from "@/components/result/score";
-import Transcript from "@/components/main/result/transscript";
+
 import Section from "@/components/result/section";
 
 import { useAuthStore } from "@/store/auth";
 import { Feedback } from "@/types/feedback";
+import Transcript from "@/components/result/transscript";
 
 type ChatMsg = {
   messageId: number;
@@ -134,7 +135,6 @@ export default function Result() {
       {/* 메인 콘텐츠 (스크롤 가능 영역) */}
       <div className="flex-1 flex justify-center overflow-y-auto">
         <div className="">
-          {/* Hero Section */}
           <div className="px-4 pt-6 pb-4 bg-[#EFF6FF]  w-full max-w-[500px]">
             <div className="flex items-center gap-3 mb-3">
               <Image
