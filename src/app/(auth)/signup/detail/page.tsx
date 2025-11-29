@@ -12,8 +12,8 @@ import SignupHeader from "@/components/signup/SignupHeader";
 
 export default function SignupStep2() {
   const router = useRouter();
+  const { accessToken } = useAuthStore();
   const setAccessToken = useAuthStore((s) => s.setAccessToken);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,21 +33,43 @@ export default function SignupStep2() {
   const handleSignup = async () => {
     if (!canSubmit) return;
 
+    const requestBody = {
+      email,
+      password,
+      nickname: name,
+      gender,
+      birthDate,
+    };
+
+    console.log("=== 요청 정보 ===");
+    console.log("Access Token:", accessToken);
+    console.log("Request Body:", requestBody);
+
     const res = await fetch("/api/auth/signup", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email,
-        password,
-        nickname: name,
-        gender,
-        birthDate,
-      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(requestBody),
     });
 
-    const data = await res.json();
+    console.log("=== 응답 정보 ===");
+    console.log("Status:", res.status);
+
+    const responseText = await res.text();
+    console.log("Response:", responseText);
+
+    if (!res.ok) {
+      alert(`회원가입 실패: ${res.status}\n${responseText}`);
+      return;
+    }
+
+    const data = JSON.parse(responseText);
+
     setAccessToken(data.accessToken);
     useAuthStore.getState().setRefreshToken(data.refreshToken);
+    useAuthStore.getState().setRole("ROLE_USER");
 
     setLoading(true);
     setTimeout(() => router.push("/after"), 1500);

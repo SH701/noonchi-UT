@@ -14,7 +14,7 @@ export type Interest =
   | "🍜 Ordering"
   | "💄 Beauty"
   | "👁️‍🗨️ Gathering";
-export type Role = "ROLE_GUEST" | "ROLE_USER" | "";
+export type Role = "ROLE_GUEST" | "ROLE_USER";
 
 export interface AuthState {
   accessToken: string | null;
@@ -58,7 +58,7 @@ export const useAuthStore = create<AuthState>()(
           accessToken: null,
           refreshToken: null,
           koreanLevel: "BEGINNER",
-          role: "",
+          role: "ROLE_GUEST",
           selectedFace: null,
           profileImageUrl: "",
           interests: [],

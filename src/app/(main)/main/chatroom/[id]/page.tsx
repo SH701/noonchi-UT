@@ -18,6 +18,8 @@ import LoadingModal from "@/components/chats/LoadingModal";
 
 import { ChatMsg } from "@/types/chatmessage";
 import EndModal from "@/components/result/EndModal";
+import Loading from "./loading";
+import ChatroomHeader from "@/components/ui/header/ChatroomHeader";
 
 type MicState = "idle" | "recording" | "recorded";
 
@@ -88,16 +90,13 @@ export default function ChatroomPage() {
     const displayContent = content ?? "";
 
     const optimistic: ChatMsg = {
-      messageId: `temp_${Date.now()}`,
+      messageId: Date.now(),
       conversationId,
-      role: "USER",
+      type: "USER",
       content: displayContent,
-      translatedContent: "",
-      audioUrl: null,
       createdAt: new Date().toISOString(),
       politenessScore: -1,
       naturalnessScore: -1,
-      pronunciationScore: -1,
     };
 
     setMessages((prev) => [...prev, optimistic]);
@@ -195,16 +194,11 @@ export default function ChatroomPage() {
           prev.map((msg) =>
             msg.messageId === aiLoadingMsg.messageId
               ? {
-                  messageId: aiData.messageId ?? `ai_${Date.now()}`,
+                  messageId:Date.now(),
                   conversationId,
-                  role: "AI",
+                  type: "AI",
                   content: aiData.content,
-                  translatedContent: aiData.translatedContent ?? "",
-                  audioUrl: aiData.audioUrl ?? null,
                   createdAt: aiData.createdAt ?? new Date().toISOString(),
-                  politenessScore: aiData.politenessScore ?? -1,
-                  naturalnessScore: aiData.naturalnessScore ?? -1,
-                  pronunciationScore: aiData.pronunciationScore ?? -1,
                   isLoading: false,
                 }
               : msg
@@ -352,20 +346,8 @@ export default function ChatroomPage() {
   const isDataLoading = isConversationLoading || isMessagesLoading;
   const hasError = conversationError || messagesError;
 
-  if (!accessToken) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-gray-600">로그인이 필요합니다.</p>
-      </div>
-    );
-  }
-
-  if (isDataLoading && messages.length === 0) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p>Loading…</p>
-      </div>
-    );
+  if ((isDataLoading && messages.length === 0) || !accessToken) {
+    <Loading />;
   }
 
   if (hasError && messages.length === 0) {
@@ -380,53 +362,12 @@ export default function ChatroomPage() {
     <>
       <div className="min-h-screen bg-white flex flex-col max-w-[500px] w-full">
         {/* Header */}
-        <div className="bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-50">
-          <div className="flex items-center justify-between w-full">
-            <Link
-              href="/main"
-              aria-label="Back"
-              className="text-gray-600 hover:text-gray-900 transition-colors"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </Link>
-            <span className="text-lg font-semibold text-gray-900 font-pretendard">
-              {myAI?.name ?? "..."}
-            </span>
-            <button
-              onClick={() => setEndModalOpen(true)}
-              aria-label="End conversation"
-              className="text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
-            >
-              <Image
-                src="/etc/exit_to_app.svg"
-                alt="exit"
-                width={24}
-                height={24}
-              />
-            </button>
-          </div>
-
-          {!hidden && (
-            <button
-              className="absolute right-3"
-              onClick={() => setHidden(true)}
-            >
-              <Image src="/etc/exit2.png" alt="exit" width={84} height={33} />
-            </button>
-          )}
-        </div>
+        <ChatroomHeader
+          name={myAI?.name}
+          hidden={hidden}
+          setHidden={setHidden}
+          openEndModal={() => setEndModalOpen(true)}
+        />
 
         {/* Messages */}
         <div className="flex-1 bg-white px-4 py-4 overflow-y-auto mb-[139px]">
@@ -465,7 +406,7 @@ export default function ChatroomPage() {
         </AnimatePresence>
 
         {/* Input 영역 */}
-        <div className="bg-blue-50 py-4 h-[139px] border-t border-gray-200 max-w-[500px] w-full flex justify-center items-center gap-8 fixed bottom-0 z-50">
+        <div className="bg-blue-50 py-4 h-[139px] border-t border-gray-200 max-w-[375px] w-full flex justify-center items-center gap-8 fixed bottom-0 z-50">
           {!isTyping && (
             <>
               {micState === "recording" || micState === "recorded" ? (
@@ -562,12 +503,8 @@ export default function ChatroomPage() {
           )}
         </div>
       </div>
-
-      <EndModal
-        isOpen={endModalOpen}
-        onClose={() => setEndModalOpen(false)}
-        conversationId={id}
-      />
+          
+     
     </>
   );
 }

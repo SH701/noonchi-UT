@@ -4,8 +4,7 @@ import { proxyJSON } from "@/app/api/_lib/proxy";
 export async function POST(req: NextRequest) {
   return proxyJSON(req, "/api/auth/signup", {
     method: "POST",
-    retries: 0, 
-    timeoutMs: 10000,
-    forwardAuth: false,
+    retries: 0,
+    forwardAuth: true,
   });
 }

@@ -28,21 +28,34 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const conversationId = Math.floor(Math.random() * 1000000000);
-
-    const personaId = Math.floor(Math.random() * 100000);
-
-    return NextResponse.json(
+    const backendResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/conversations/interview`,
       {
-        conversationId,
-        personaId,
-        companyName,
-        jobTitle,
-        interviewStyle,
-        files,
-      },
-      { status: 201 }
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          companyName,
+          jobTitle,
+          jobPosting,
+          interviewStyle,
+          files,
+        }),
+      }
     );
+
+    if (!backendResponse.ok) {
+      const errorData = await backendResponse.json();
+      return NextResponse.json(
+        { error: errorData.message || "Backend request failed" },
+        { status: backendResponse.status }
+      );
+    }
+
+    const data = await backendResponse.json();
+    return NextResponse.json(data, { status: 200 });
   } catch (e: any) {
     return NextResponse.json(
       { error: e?.message ?? "Internal Server Error" },

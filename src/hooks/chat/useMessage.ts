@@ -29,7 +29,7 @@ export function useMessages(conversationId?: string) {
       const list = (data?.content ?? data ?? []) as any[];
 
       return list.map((m) => ({
-        messageId: String(m.messageId),
+        messageId: m.messageId,
         conversationId: m.conversationId,
         role: (m.role ?? m.type) as "USER" | "AI",
         content: m.content ?? "",

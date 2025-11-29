@@ -1,7 +1,7 @@
 export type ChatMsg = {
-  messageId: string;
+  messageId: number;
   conversationId: number;
-  role: "USER" | "AI";
+  type: "USER" | "AI";
   content: string;
   translatedContent?: string;
   audioUrl?: string | null;

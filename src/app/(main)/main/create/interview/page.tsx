@@ -18,15 +18,11 @@ export default function Interview() {
   const accessToken = useAuthStore((s) => s.accessToken);
   const router = useRouter();
   const [showLoading, setShowLoading] = useState(false);
-
   const handleSubmit = async (data: any) => {
     setShowLoading(true);
-
     try {
       const uploadedFiles = [];
-
       for (const file of data.files) {
-        // 1) 프리사인 URL 요청
         const presignRes = await fetch("/api/files/presigned-url", {
           method: "POST",
           headers: {
@@ -38,26 +34,25 @@ export default function Interview() {
             fileType: file.type,
           }),
         });
+        console.log(file.type);
+        const { url } = await presignRes.json();
 
-        const { url: presignedUrl, fileUrl } = await presignRes.json();
-
-        // 2) S3 업로드
-        await fetch(presignedUrl, {
+        await fetch(url, {
           method: "PUT",
           headers: { "Content-Type": file.type },
           body: file,
         });
+        console.log(url);
+        const fileUrl = url.split("?")[0];
 
-        // 3) 백엔드에 넘길 파일 정보
         uploadedFiles.push({
-          fileUrl, // S3 실제 URL
+          fileUrl,
           fileName: file.name,
           fileType: file.type,
           fileSize: file.size,
         });
       }
 
-      // 4) 인터뷰 생성 API 호출
       const res = await fetch("/api/conversations/interview", {
         method: "POST",
         headers: {

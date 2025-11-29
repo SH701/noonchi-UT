@@ -44,7 +44,7 @@ export default function FileUpload({ onFilesChange }: FileUploadProps) {
         ref={inputRef}
         type="file"
         multiple
-        accept=".pdf,.docx"
+        accept=".pdf,.docx,.png"
         className="hidden"
         onChange={handleFileChange}
       />

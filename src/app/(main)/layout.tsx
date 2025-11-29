@@ -14,7 +14,12 @@ export default function MainsLayout({
 }) {
   const pathname = usePathname();
   const router = useRouter();
-  const hide = ["/main/create", "/main/role", "/main/honorific"];
+  const hide = [
+    "/main/create",
+    "/main/role",
+    "/main/honorific",
+    "/main/chatroom",
+  ];
   const hideTabbar = hide.some(
     (path) => pathname === path || pathname.startsWith(path + "/")
   );
