@@ -1,4 +1,3 @@
-// hooks/useRecorder.ts
 import { useState, useRef } from "react";
 
 export function useRecorder() {
@@ -6,7 +5,6 @@ export function useRecorder() {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
 
-  // 🎤 녹음 시작
   const startRecording = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     const mediaRecorder = new MediaRecorder(stream);
@@ -24,7 +22,6 @@ export function useRecorder() {
     setIsRecording(true);
   };
 
-  // ⏹ 녹음 정지 + Blob 반환
   const stopRecording = async (): Promise<Blob> => {
     return new Promise((resolve) => {
       if (!mediaRecorderRef.current) return resolve(new Blob());

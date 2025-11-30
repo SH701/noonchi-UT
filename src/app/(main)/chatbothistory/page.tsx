@@ -76,9 +76,9 @@ export default function ChatBothistoryPage() {
     data: conversations = [],
     isLoading,
     error,
-  } = useConversations(accessToken, selectedFilter);
+  } = useConversations(selectedFilter);
 
-  const deleteMutation = useDeleteConversation(accessToken);
+  const deleteMutation = useDeleteConversation();
 
   const filteredConversations = useMemo(() => {
     const q = keyword.trim().toLowerCase();

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-
 import { Conversation } from "@/types/conversation";
 import { FilterState } from "@/types/history";
+import { apiFetch } from "@/lib/api";
 
 const filterMap: Record<Exclude<FilterState, null>, string> = {
   done: "ENDED",
@@ -14,24 +14,18 @@ const normalizeConversations = (arr: unknown): Conversation[] =>
     .filter(Boolean)
     .filter((c: any) => !!c?.aiPersona) as Conversation[];
 
-export const useConversations = (
-  accessToken?: string | null,
-  filter: FilterState = null
-) => {
+export const useConversations = (filter: FilterState = null) => {
   return useQuery({
     queryKey: ["conversations", "history", filter],
-    enabled: !!accessToken,
     queryFn: async () => {
-      if (!accessToken) return [];
       let query = "/api/conversations?sortBy=CREATED_AT_DESC&page=1&size=1000";
+
       if (filter && filterMap[filter]) {
         query += `&status=${filterMap[filter]}`;
       }
-      const res = await fetch(query, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+
+      const res = await apiFetch(query);
+
       if (!res.ok) {
         const errText = await res.text();
         throw new Error(`${res.status} ${res.statusText}: ${errText}`);
@@ -42,25 +36,18 @@ export const useConversations = (
     },
   });
 };
-
-export const useDeleteConversation = (accessToken?: string | null) => {
+export const useDeleteConversation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (conversationId: string | number) => {
-      if (!accessToken) {
-        throw new Error("No access token");
-      }
-
-      const res = await fetch(`/api/conversations/${conversationId}`, {
+      const res = await apiFetch(`/api/conversations/${conversationId}`, {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
       });
 
       if (!res.ok) {
-        throw new Error("Failed to delete chat");
+        const text = await res.text();
+        throw new Error(`Failed to delete chat: ${text}`);
       }
 
       return conversationId;

@@ -3,10 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
-
 import Loading from "../../chatroom/[id]/loading";
 import InterviewForm from "@/components/forms/InterviewForm";
-import { useAuthStore } from "@/store/auth";
+import { apiFetch } from "@/lib/api";
 
 const INTERVIEW_STYLES = [
   { value: "friendly", label: "Friendly" },
@@ -15,20 +14,17 @@ const INTERVIEW_STYLES = [
 ] as const;
 export type UploadedFiles = File[];
 export default function Interview() {
-  const accessToken = useAuthStore((s) => s.accessToken);
   const router = useRouter();
   const [showLoading, setShowLoading] = useState(false);
   const handleSubmit = async (data: any) => {
     setShowLoading(true);
+
     try {
       const uploadedFiles = [];
+
       for (const file of data.files) {
-        const presignRes = await fetch("/api/files/presigned-url", {
+        const presignRes = await apiFetch("/api/files/presigned-url", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessToken}`,
-          },
           body: JSON.stringify({
             fileExtension: file.name.split(".").pop(),
             fileType: file.type,
@@ -42,7 +38,7 @@ export default function Interview() {
           headers: { "Content-Type": file.type },
           body: file,
         });
-        console.log(url);
+
         const fileUrl = url.split("?")[0];
 
         uploadedFiles.push({
@@ -53,12 +49,8 @@ export default function Interview() {
         });
       }
 
-      const res = await fetch("/api/conversations/interview", {
+      const res = await apiFetch("/api/conversations/interview", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
         body: JSON.stringify({
           companyName: data.company,
           jobTitle: data.position,

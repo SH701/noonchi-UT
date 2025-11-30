@@ -1,18 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/auth";
 import { Feedback } from "@/types/feedback";
+import { apiFetch } from "@/lib/api";
 
 export function useConversaitonFeedback(conversationId?: string) {
-  const accessToken = useAuthStore((s) => s.accessToken);
-
   return useQuery<Feedback>({
     queryKey: ["feedback", conversationId],
-    enabled: !!accessToken && !!conversationId,
+    enabled: !!conversationId,
     queryFn: async () => {
-      const res = await fetch(`/api/conversations/${conversationId}/feedback`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-        cache: "no-store",
-      });
+      const res = await apiFetch(
+        `/api/conversations/${conversationId}/feedback`,
+        {
+          cache: "no-store",
+        }
+      );
 
       if (!res.ok) {
         const text = await res.text();

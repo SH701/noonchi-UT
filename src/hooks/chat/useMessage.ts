@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/auth";
 import { ChatMsg } from "@/types/chatmessage";
+import { apiFetch } from "@/lib/api";
 
 export function useMessages(conversationId?: string) {
   const accessToken = useAuthStore((s) => s.accessToken);
@@ -10,12 +11,9 @@ export function useMessages(conversationId?: string) {
     queryKey: ["messages", conversationId],
     enabled: !!accessToken && !!conversationId,
     queryFn: async () => {
-      const res = await fetch(
+      const res = await apiFetch(
         `/api/messages?conversationId=${conversationId}&page=1&size=20`,
-        {
-          headers: { Authorization: `Bearer ${accessToken}` },
-          cache: "no-store",
-        }
+        { cache: "no-store" }
       );
 
       if (!res.ok) {

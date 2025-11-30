@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/auth";
 import { MyAI } from "@/types/persona";
-
+import { apiFetch } from "@/lib/api";
 
 export type ConversationDetail = {
   conversationId: number;
@@ -21,10 +21,7 @@ export function useConversationDetail(id?: string) {
     queryKey: ["conversation", id],
     enabled: !!accessToken && !!id,
     queryFn: async () => {
-      const res = await fetch(`/api/conversations/${id}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+      const res = await apiFetch(`/api/conversations/${id}`, {
         cache: "no-store",
       });
 
@@ -37,6 +34,6 @@ export function useConversationDetail(id?: string) {
 
       return res.json();
     },
-    staleTime: 1000 * 60, 
+    staleTime: 1000 * 60,
   });
 }

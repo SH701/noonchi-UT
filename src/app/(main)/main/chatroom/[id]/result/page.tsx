@@ -10,7 +10,6 @@ import { useConversaitonFeedback } from "@/hooks/useConversationFeedback";
 import ActionButton from "@/components/ui/button/ActionButton";
 import MessageList from "@/components/chats/MessageList";
 import { useMessageFeedback } from "@/hooks/useMessageFeedback";
-import { useAuthStore } from "@/store/auth";
 import { useConversationDetail } from "@/hooks/chat/useConversationDetail";
 import ResultTab from "@/components/result/ResultTab";
 
@@ -22,14 +21,9 @@ export default function Result() {
   const conversationId = conversation?.conversationId ?? 0;
   const myAI = conversation?.aiPersona ?? null;
 
-  const accessToken = useAuthStore((s) => s.accessToken);
-
   const [feedbackOpenId, setFeedbackOpenId] = useState<string | null>(null);
 
-  const { mutate: createFeedback } = useMessageFeedback(
-    conversationId,
-    accessToken
-  );
+  const { mutate: createFeedback } = useMessageFeedback(conversationId);
 
   const handleFeedbacks = (messageId: string) => {
     if (feedbackOpenId === messageId) {

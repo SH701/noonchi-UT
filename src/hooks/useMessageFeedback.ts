@@ -1,16 +1,13 @@
+import { apiFetch } from "@/lib/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export function useMessageFeedback(
-  conversationId?: number,
-  accessToken?: string | null
-) {
+export function useMessageFeedback(conversationId?: number) {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (messageId: string) => {
-      const res = await fetch(`/api/messages/${messageId}/feedback`, {
+      const res = await apiFetch(`/api/messages/${messageId}/feedback`, {
         method: "POST",
-        headers: { Authorization: `Bearer ${accessToken}` },
       });
 
       if (!res.ok) throw new Error("Feedback API failed");

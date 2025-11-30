@@ -1,23 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 import { Profile } from "@/types/user";
+import { apiFetch } from "@/lib/api";
+import { useAuthStore } from "@/store/auth";
 
-export const useUserProfile = (accessToken?: string | null) => {
+export const useUserProfile = () => {
+  const accessToken = useAuthStore((s) => s.accessToken);
+
   return useQuery<Profile>({
-    queryKey: ["user", accessToken],
+    queryKey: ["userProfile"],
     enabled: !!accessToken,
     queryFn: async () => {
-      const res = await fetch("/api/users/me", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const res = await apiFetch("/api/users/me");
 
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.message || "Failed to load profile");
+        const text = await res.text();
+        throw new Error(text || "Failed to load profile");
       }
 
       return res.json();
