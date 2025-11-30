@@ -23,8 +23,8 @@ export default function MainsLayout({
   const hideTabbar = hide.some(
     (path) => pathname === path || pathname.startsWith(path + "/")
   );
-  const { accessToken } = useAuthStore();
-  const { isError, error } = useUserProfile(accessToken);
+
+  const { isError, error } = useUserProfile();
   if (isError) {
     const status = Number(error.message);
     if (status === 401 || status === 403) {
