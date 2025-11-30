@@ -6,6 +6,7 @@ import { topicsByCategory } from "@/data/topics";
 import { useRouter } from "next/navigation";
 import TopicButton from "@/components/ui/button/TopicButton";
 import Link from "next/link";
+import ComingSoonModal from "@/components/etc/Comingsoon";
 
 export default function Main() {
   const sliders = [
@@ -16,10 +17,12 @@ export default function Main() {
 
   const [activeIndex, setActiveIndex] = useState(1);
   const [category, setCategory] =
-    useState<keyof typeof topicsByCategory>("Career");
+    useState<keyof typeof topicsByCategory>("Popular");
 
   const topics = topicsByCategory[category];
   const router = useRouter();
+  const [showComingSoon, setShowComingSoon] = useState(false);
+
   return (
     <>
       <div className="w-full py-6 px-7 bg-white">
@@ -63,16 +66,23 @@ export default function Main() {
                       />
                     </div>
 
-                    <div className="absolute top-4 left-4 bg-black/30 px-2 py-1 rounded-md text-xs text-white">
+                    <div className="absolute top-4 left-4 bg-black/20 px-2 py-1 rounded-md text-xs text-white">
                       Career
                     </div>
-
+                    <div className="absolute bottom-13 right-4">
+                      <Image
+                        src="/etc/chat.png"
+                        alt="사진"
+                        width={32}
+                        height={32}
+                      />
+                    </div>
                     <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-white text-xl font-semibold">
-                        Job Interview
+                      <h3 className="text-white text-xl font-semibold pb-2">
+                        Interview Coach
                       </h3>
                       <p className="text-gray-300 text-xs">
-                        Experience real Korean interview situations
+                        Real Korean interview questions <br /> from your resume.
                       </p>
                     </div>
                   </div>
@@ -91,8 +101,8 @@ export default function Main() {
           <div className="flex gap-1 mb-5 w-full">
             <TopicButton
               label="Career"
-              active={category === "Career"}
-              onClick={() => setCategory("Career")}
+              active={category === "Popular"}
+              onClick={() => setCategory("Popular")}
             />
             <TopicButton
               label="Greeting"
@@ -107,12 +117,10 @@ export default function Main() {
           </div>
           <div className="grid grid-cols-2 gap-4 w-full py-4">
             <div
-              className="flex items-center justify-center bg-blue-50 border-2 border-dashed 
-      border-blue-300 rounded-xl  cursor-pointer hover:bg-blue-100 
-      transition-colors min-h-40"
-              onClick={() => router.push("/main/create/roleplay")}
+              className="flex items-center justify-center bg-white rounded-xl  cursor-pointer hover:shadow-md transition-colors min-h-40"
+              onClick={() => setShowComingSoon(true)}
             >
-              <span className="text-blue-600 font-semibold text-lg">
+              <span className="text-blue-600 font-semibold ">
                 + Create Chat
               </span>
             </div>
@@ -141,6 +149,10 @@ export default function Main() {
             ))}
           </div>
         </div>
+        <ComingSoonModal
+          isOpen={showComingSoon}
+          onClose={() => setShowComingSoon(false)}
+        />
       </div>
     </>
   );

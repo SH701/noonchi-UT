@@ -11,7 +11,7 @@ export default function ComingSoonModal({ isOpen, onClose }: ModalProps) {
       description={`Sorry for the inconvenience.\nWe're preparing a better experience for you`}
     >
       <div className="flex items-center justify-center">
-        <ModalButton label="Close" />
+        <ModalButton label="Close" onClick={onClose} />
       </div>
     </Modal>
   );

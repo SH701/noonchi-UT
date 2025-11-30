@@ -8,20 +8,21 @@ import TopicButton from "@/components/ui/button/TopicButton";
 export default function TopicAll() {
   const router = useRouter();
   const [category, setCategory] =
-    useState<keyof typeof topicsByCategory>("Career");
+    useState<keyof typeof topicsByCategory>("Popular");
 
   const topics = topicsByCategory[category];
 
   return (
-    <div className="px-5">
-      <p className="text-xl text-gray-800 font-semibold pb-3">Topic</p>
-
-      {/* 카테고리 탭 */}
+    <div className="px-5 min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <p className="text-xl text-gray-800 font-semibold pb-3 text-start">
+        Topic
+      </p>
+      /
       <div className="flex gap-1 mb-5 w-full">
         <TopicButton
-          label="Career"
-          active={category === "Career"}
-          onClick={() => setCategory("Career")}
+          label="Popular"
+          active={category === "Popular"}
+          onClick={() => setCategory("Popular")}
         />
         <TopicButton
           label="Greeting"
@@ -34,8 +35,6 @@ export default function TopicAll() {
           onClick={() => setCategory("KPOP")}
         />
       </div>
-
-      {/* 토픽 리스트 */}
       <div className="w-full">
         {topics.map((topic) => (
           <div

@@ -98,7 +98,7 @@ export const KPopTopics = [
 ];
 
 export const topicsByCategory = {
-  Career: CareerTopics,
+  Popular: CareerTopics,
   Greeting: GreetingTopics,
   KPOP: KPopTopics,
 } as const;

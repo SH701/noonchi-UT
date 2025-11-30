@@ -31,7 +31,7 @@ export default function Modal({
           )}
 
           {description && (
-            <p className="text-sm text-gray-700 text-center whitespace-pre-line">
+            <p className="text-sm text-gray-700 text-center whitespace-pre-line leading-5">
               {description}
             </p>
           )}

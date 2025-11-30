@@ -9,7 +9,7 @@ export default function RoleplayForm({
 }) {
   const [isAI, setIsAI] = useState("");
   const [me, setMe] = useState("");
-
+  const [detail, setDetail] = useState("");
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -24,7 +24,7 @@ export default function RoleplayForm({
   return (
     <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
       <FormInput
-        label="AI"
+        label="AI`s role"
         required
         value={isAI}
         onChange={setIsAI}
@@ -32,18 +32,18 @@ export default function RoleplayForm({
       />
 
       <FormInput
-        label="Position"
+        label="My role"
         required
         value={me}
         onChange={setMe}
         placeholder="Enter the you"
       />
       <FormInput
-        label="Situation"
+        label="Detail"
         required
-        value={isAI}
-        onChange={setIsAI}
-        placeholder="Enter the situation"
+        value={detail}
+        onChange={setDetail}
+        placeholder="Please the job posting from the company"
       />
       <div className=" fixed bottom-8 flex items-center justify-center">
         <ActionButton type="submit">Start Chatting</ActionButton>
