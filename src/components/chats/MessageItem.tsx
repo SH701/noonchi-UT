@@ -13,9 +13,7 @@ type MessageItemProps = {
   isMine: boolean;
   isFeedbackOpen: boolean;
   feedbackOpenId: string | null;
-
   handleFeedbacks: (messageId: string) => void;
-
   messageStatus?: "default" | "error";
 };
 
@@ -43,7 +41,19 @@ export default function MessageItem({
     (m.politenessScore ?? -1) >= 0 &&
     (m.naturalnessScore ?? -1) >= 0 &&
     (m.politenessScore + m.naturalnessScore) / 2 <= 80;
-
+  const avgScore = ((m.politenessScore ?? 0) + (m.naturalnessScore ?? 0)) / 2;
+  let scoreLabel = "None";
+  let scoreColor = "text-green-500";
+  let scoreIcon = "/chatroom/satisfied.png";
+  if (avgScore < 50) {
+    scoreLabel = "Serious";
+    scoreColor = "text-red-500";
+    scoreIcon = "/chatroom/dissatisfied.png";
+  } else if (avgScore < 80) {
+    scoreLabel = "Mild";
+    scoreColor = "text-yellow-500";
+    scoreIcon = "/chatroom/neutral.png";
+  }
   const isErrorOrFeedback =
     messageStatus === "error" ||
     (showFeedbackButton && m.feedback) ||
@@ -54,13 +64,12 @@ export default function MessageItem({
     setLoadingFeedbacks((prev) => ({ ...prev, [m.messageId]: false }));
   };
   const bubbleClass = clsx(
-    "relative z-30 p-3 sm:p-4 rounded-2xl border shadow-sm w-full",
-
+    "relative z-30 p-4 rounded-2xl border  w-full",
     isMine
       ? isErrorOrFeedback
         ? "bg-rose-100 text-black border-red-500"
         : "bg-blue-500 text-white border border-transparent"
-      : "bg-white text-black border-gray-200"
+      : "bg-white text-black border-gray-300"
   );
 
   const handleTTsClick = async (messageId: string) => {
@@ -125,7 +134,7 @@ export default function MessageItem({
               onClick={handleFeedbackClick}
               disabled={loadingFeedbacks[m.messageId]}
               className="w-[18px] h-[18px] border-2 border-red-500 rounded-full 
-       flex items-center justify-center shadow-sm shrink-0 
+       flex items-center justify-center  shrink-0 
        bg-transparent  cursor-pointer"
             >
               {loadingFeedbacks[m.messageId] ? (
@@ -190,10 +199,16 @@ export default function MessageItem({
             )}
           </div>
         </div>
+        {isMine && (
+          <div className={`flex items-center justify-end mt-1 ${scoreColor}`}>
+            <Image src={scoreIcon} alt="아이콘" width={16} height={16} />
+            <span className="text-xs font-semibold">{scoreLabel}</span>
+          </div>
+        )}
 
         {/* 피드백 박스 */}
         {isMine && isFeedbackOpen && m.feedback && (
-          <div className="p-4 bg-gray-600 rounded-xl shadow-sm -mt-5 pt-6 transform translate-x-[30px] mr-7.5">
+          <div className="p-4 bg-gray-600 rounded-xl  -mt-5 pt-6 transform translate-x-[30px] mr-7.5">
             <div className="text-white text-sm pb-2 border-b border-gray-500">
               {m.feedback.appropriateExpression}
             </div>
@@ -204,7 +219,7 @@ export default function MessageItem({
         )}
 
         {translated && (
-          <div className="px-3 pb-3 pt-6 bg-gray-600 rounded-xl shadow-sm mt-2">
+          <div className="px-3 pb-3 pt-6 bg-gray-600 rounded-xl  mt-2">
             <p className="text-gray-100 text-sm">{translated}</p>
           </div>
         )}
