@@ -1,5 +1,5 @@
-import { Upload } from "lucide-react";
-import { useRef } from "react";
+import { Upload, FileText } from "lucide-react";
+import { useRef, useState } from "react";
 
 interface FileUploadProps {
   onFilesChange: (files: File[]) => void;
@@ -7,6 +7,7 @@ interface FileUploadProps {
 
 export default function FileUpload({ onFilesChange }: FileUploadProps) {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const handleClick = () => {
     inputRef.current?.click();
@@ -16,6 +17,7 @@ export default function FileUpload({ onFilesChange }: FileUploadProps) {
     if (!e.target.files) return;
 
     const files = Array.from(e.target.files);
+    setSelectedFiles(files);
     onFilesChange(files);
   };
 
@@ -31,20 +33,47 @@ export default function FileUpload({ onFilesChange }: FileUploadProps) {
 
       <div
         onClick={handleClick}
-        className="w-full p-4 border border-dashed border-gray-300 rounded-lg cursor-pointer flex gap-3 items-center bg-white hover:bg-gray-50"
+        className="w-full p-4 border border-dashed border-gray-300 rounded-lg cursor-pointer bg-white hover:bg-gray-50"
       >
-        <Upload className="text-gray-500 w-5 h-5" />
-        <span className="text-gray-500 text-sm">
-          Upload up to 2 files (.pdf, .docx) <br />
-          (Max 10MB each)
-        </span>
+        {selectedFiles.length === 0 && (
+          <div className="flex items-center gap-3">
+            <Upload className="text-gray-500 w-5 h-5" />
+            <span className="text-gray-500 text-sm leading-tight">
+              Upload up to 2 files (.pdf, .docx)
+              <br />
+              (Max 10MB each)
+            </span>
+          </div>
+        )}
+
+        {selectedFiles.length > 0 && (
+          <div className="space-y-2">
+            {selectedFiles.map((file, idx) => (
+              <div
+                key={idx}
+                className="flex items-center justify-between rounded-md p-4 bg-gray-100"
+              >
+                <div className="flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-gray-600" />
+                  <span className="text-sm text-gray-700 truncate">
+                    {file.name}
+                  </span>
+                </div>
+
+                <span className="text-xs text-gray-500">
+                  {(file.size / 1024 / 1024).toFixed(2)} MB
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <input
         ref={inputRef}
         type="file"
         multiple
-        accept=".pdf,.docx,.png"
+        accept=".pdf,.docx"
         className="hidden"
         onChange={handleFileChange}
       />

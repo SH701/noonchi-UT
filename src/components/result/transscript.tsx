@@ -6,15 +6,7 @@ import Image from "next/image";
 
 import { useAuthStore } from "@/store/auth";
 import HonorificBox from "@/components/result/honorificbox";
-
-type ChatMsg = {
-  messageId: string;
-  role: "USER" | "AI";
-  content: string;
-  feedback?: string;
-  politenessScore?: number;
-  naturalnessScore?: number;
-};
+import { ChatMsg } from "@/types/chatmessage";
 
 export default function Transcript({
   messages,
@@ -56,7 +48,6 @@ export default function Transcript({
       setFeedbacks((prev) => ({
         ...prev,
         [messageId]: {
-          // ✅ Number() 제거
           explain: feedbackData.explain,
           appropriateExpression: feedbackData.appropriateExpression,
         },
@@ -148,7 +139,7 @@ export default function Transcript({
   };
 
   const showFeedbackButton = (m: ChatMsg) => {
-    if (m.role !== "USER") return false;
+    if (m.type !== "USER") return false;
     if (
       m.politenessScore === undefined ||
       m.naturalnessScore === undefined ||
@@ -164,7 +155,7 @@ export default function Transcript({
   return (
     <div className="space-y-4">
       {messages.map((m) =>
-        m.role === "AI" ? (
+        m.type === "AI" ? (
           <div key={m.messageId} className="flex flex-col justify-start gap-4">
             {/* AI 메시지 스타일 */}
             <div className="w-60 bg-gray-50 p-3 rounded-xl shadow-sm border border-gray-200 z-20">

@@ -182,7 +182,7 @@ export default function ChatroomPage() {
         messageId: String(Date.now()),
         conversationId,
         type: "AI",
-        content: "...",
+        content: "AI가 대화를 생각하고 있어요..",
         translatedContent: "",
         audioUrl: null,
         createdAt: new Date().toISOString(),

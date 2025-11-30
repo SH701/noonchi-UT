@@ -39,7 +39,7 @@ export default function EndModal({
         return;
       }
 
-      router.push(`/main/custom/chatroom/${conversationId}/result`);
+      router.push(`/main/chatroom/${conversationId}/result`);
     } catch (error) {
       console.error("Error ending conversation:", error);
       setIsLoading(false);
