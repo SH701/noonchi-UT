@@ -1,13 +1,14 @@
-import { useState } from "react";
-
-export default function ResultTab() {
-  const [tab, setTab] = useState<"transcript" | "mistakes">("transcript");
+interface ResultTabProps {
+  tab: "transcript" | "mistakes";
+  setTab: (value: "transcript" | "mistakes") => void;
+}
+export default function ResultTab({ tab, setTab }: ResultTabProps) {
   return (
-    <div className="px-4 pt-6">
+    <div className="pb-2">
       <div className="flex border-b border-gray-200">
         <button
           onClick={() => setTab("transcript")}
-          className={`flex-1 py-3 text-sm font-medium transition-all duration-200 border-b-2 text-center ${
+          className={`flex-1 py-1.5 text-sm font-medium transition-all duration-200 border-b-2 text-center ${
             tab === "transcript"
               ? "text-blue-600 border-blue-600"
               : "text-gray-500 border-transparent hover:text-gray-700"
@@ -15,9 +16,10 @@ export default function ResultTab() {
         >
           Transcript
         </button>
+
         <button
           onClick={() => setTab("mistakes")}
-          className={`flex-1 py-3 text-sm font-medium transition-all duration-200 border-b-2 text-center ${
+          className={`flex-1 py-1.5 text-sm font-medium transition-all duration-200 border-b-2 text-center ${
             tab === "mistakes"
               ? "text-blue-600 border-blue-600"
               : "text-gray-500 border-transparent hover:text-gray-700"

@@ -12,9 +12,10 @@ import MessageList from "@/components/chats/MessageList";
 import { useMessageFeedback } from "@/hooks/useMessageFeedback";
 import { useAuthStore } from "@/store/auth";
 import { useConversationDetail } from "@/hooks/chat/useConversationDetail";
+import ResultTab from "@/components/result/ResultTab";
 
 export default function Result() {
-  const [tab] = useState<"transcript" | "mistakes">("transcript");
+  const [tab, setTab] = useState<"transcript" | "mistakes">("transcript");
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
   const { data: conversation } = useConversationDetail(id);
@@ -120,7 +121,8 @@ export default function Result() {
           </div>
 
           {/* Content Section */}
-          <div className="px-4 pt-6 pb-6">
+          <div className="px-4 pb-6">
+            <ResultTab tab={tab} setTab={setTab} />
             {tab === "transcript" ? (
               <MessageList
                 messages={messages}
@@ -129,7 +131,7 @@ export default function Result() {
                 handleFeedbacks={handleFeedbacks}
               />
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-4 pb-2">
                 <Section
                   title="Conversation Summary"
                   desc={feedback.summary || ""}

@@ -2,13 +2,17 @@
 
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/auth";
-import { useFeedback } from "@/hooks/useConversationFeedback";
+import { useConversaitonFeedback } from "@/hooks/useConversationFeedback";
 
 export default function FeedbackSection({ id }: { id: number | string }) {
   const router = useRouter();
   const conversationId = String(id);
   const accessToken = useAuthStore((s) => s.accessToken);
-  const { data: feedback, isLoading, error } = useFeedback(conversationId);
+  const {
+    data: feedback,
+    isLoading,
+    error,
+  } = useConversaitonFeedback(conversationId);
 
   const viewfeedback = () => {
     router.push(`/main/custom/chatroom/${conversationId}/result`);
