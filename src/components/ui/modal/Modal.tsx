@@ -19,23 +19,25 @@ export default function Modal({
 
   return (
     <div
-      className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center"
+      className="fixed inset-0 bg-black/40 z-9999 flex items-center justify-center"
       onClick={onClose}
     >
-      <div onClick={(e) => e.stopPropagation()} className={finalClassName}>
-        {title && (
-          <h3 className="text-xl font-semibold text-gray-900 text-center whitespace-pre-line">
-            {title}
-          </h3>
-        )}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div onClick={(e) => e.stopPropagation()} className={finalClassName}>
+          {title && (
+            <h3 className="text-xl font-semibold text-gray-900 text-center whitespace-pre-line">
+              {title}
+            </h3>
+          )}
 
-        {description && (
-          <p className="text-sm text-gray-700 text-center whitespace-pre-line">
-            {description}
-          </p>
-        )}
+          {description && (
+            <p className="text-sm text-gray-700 text-center whitespace-pre-line">
+              {description}
+            </p>
+          )}
 
-        {children}
+          {children}
+        </div>
       </div>
     </div>
   );
