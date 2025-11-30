@@ -18,10 +18,10 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const setMe = useAuthStore((s) => s.setMe);
   const handleLogin = async () => {
-    setError("");
     setLoading(true);
+    setError("");
 
     try {
       const res = await fetch("/api/auth/login", {
@@ -29,42 +29,27 @@ export default function LoginPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
       const data = await res.json();
-
       if (!res.ok) {
         setError(data.message || "Login failed");
         setLoading(false);
         return;
       }
       const { accessToken, refreshToken } = data;
-      if (!accessToken || !refreshToken) {
-        setError("토큰이 없습니다. 관리자에게 문의하세요.");
-        setLoading(false);
-        return;
-      }
       setAccessToken(accessToken);
       useAuthStore.getState().setRefreshToken(refreshToken);
-
       const meRes = await fetch("/api/users/me", {
-        headers: { Authorization: `Bearer ${data.accessToken}` },
+        headers: { Authorization: `Bearer ${accessToken}` },
       });
-
       const me = await meRes.json();
-
-      const hasKoreanLevel =
-        me.koreanLevel &&
-        ["BEGINNER", "INTERMEDIATE", "ADVANCED"].includes(me.koreanLevel);
-
-      if (hasKoreanLevel) {
+      setMe(me);
+      if (me.koreanLevel) {
         setKoreanLevel(me.koreanLevel as Level);
-        router.replace("/main");
-      } else {
-        router.replace("/after");
       }
+      router.replace("/main");
     } catch (err) {
-      console.error("Login error:", err);
       setError("Something went wrong");
+    } finally {
       setLoading(false);
     }
   };

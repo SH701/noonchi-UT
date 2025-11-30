@@ -53,15 +53,13 @@ export default function Main() {
               ${isActive ? "scale-100 opacity-100" : "scale-95 opacity-40"}
             `}
                   >
-                    <div
-                      className="relative w-full h-full"
-                      onClick={() => router.push("/main/create/interview")}
-                    >
+                    <div className="relative w-full h-full">
                       <Image
                         src={s.img}
                         alt="사진"
                         fill
                         className="object-cover"
+                        onClick={() => router.push("/main/create/interview")}
                       />
                     </div>
 

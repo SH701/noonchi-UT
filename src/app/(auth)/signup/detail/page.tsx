@@ -41,10 +41,6 @@ export default function SignupStep2() {
       birthDate,
     };
 
-    console.log("=== 요청 정보 ===");
-    console.log("Access Token:", accessToken);
-    console.log("Request Body:", requestBody);
-
     const res = await fetch("/api/auth/signup", {
       method: "POST",
       headers: {
@@ -54,11 +50,7 @@ export default function SignupStep2() {
       body: JSON.stringify(requestBody),
     });
 
-    console.log("=== 응답 정보 ===");
-    console.log("Status:", res.status);
-
     const responseText = await res.text();
-    console.log("Response:", responseText);
 
     if (!res.ok) {
       alert(`회원가입 실패: ${res.status}\n${responseText}`);
