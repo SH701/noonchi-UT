@@ -8,8 +8,8 @@ import PersonaSlider from "@/components/bothistory/PersonaSlider";
 
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 
-import InProgressIcon from "@/components/etc/Inprogress";
-import DoneIcon from "@/components/etc/Done";
+import InProgressIcon from "@/components/bothistory/etc/Inprogress";
+import DoneIcon from "@/components/bothistory/etc/Done";
 
 import {
   useConversations,
@@ -26,7 +26,7 @@ import Sort from "@/components/bothistory/Sort";
 import SearchBar from "@/components/bothistory/SearchBar";
 import EmptyState from "@/components/bothistory/EmptyState";
 import HistorySection from "@/components/bothistory/HistorySection";
-import LoginModal from "@/components/etc/LoginModal";
+import LoginModal from "@/components/modal/LoginModal";
 
 const situationOptions = {
   BOSS: [

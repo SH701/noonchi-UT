@@ -78,9 +78,6 @@ export default function AfterPage() {
     }
   };
 
-  // ------------------------------------
-  // 🔥 프로필 저장 API
-  // ------------------------------------
   const submitProfile = async () => {
     setError(null);
     setSubmitting(true);

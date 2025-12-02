@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+
 import TopicSlider from "@/components/topic/TopicSlider";
 import { CategoryType, Topics } from "@/types/topic";
 import { topicsByCategory } from "@/data/topics";

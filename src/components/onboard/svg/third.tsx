@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import LottieAnimation from "@/components/etc/LottieAnimation";
+import LottieAnimation from "@/components/onboard/LottieAnimation";
 import { loadLottieAnimation, LOTTIE_PATHS } from "@/lib/lottie-loader";
 
 export default function Third() {

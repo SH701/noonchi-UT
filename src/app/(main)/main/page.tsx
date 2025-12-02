@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import ComingSoonModal from "@/components/etc/Comingsoon";
+import ComingSoonModal from "@/components/modal/Comingsoon";
 import { CategoryType } from "@/types/topic";
 import TopicList from "@/components/topic/TopicList";
 import Interviewsection from "@/components/interview/Interviewsection";

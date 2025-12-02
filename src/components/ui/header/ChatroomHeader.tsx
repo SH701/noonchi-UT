@@ -1,4 +1,4 @@
-import LoginModal from "@/components/etc/LoginModal";
+import LoginModal from "@/components/modal/LoginModal";
 import EndModal from "@/components/result/EndModal";
 import { useAuthStore } from "@/store/auth";
 import Image from "next/image";
