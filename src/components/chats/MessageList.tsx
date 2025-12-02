@@ -35,7 +35,7 @@ export default function MessageList({
             m={m}
             myAI={myAI}
             isMine={isMine}
-            isFeedbackOpen={isFeedbackOpen}
+            isFeedbackOpen={feedbackOpenId === m.messageId}
             feedbackOpenId={feedbackOpenId}
             handleFeedbacks={handleFeedbacks}
             messageStatus={messageStatuses[m.messageId] || "default"}

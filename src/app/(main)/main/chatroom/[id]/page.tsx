@@ -141,7 +141,14 @@ export default function ChatroomPage() {
   };
 
   const handleFeedbacks = (messageId: string) => {
-    createFeedback(messageId);
+    createFeedback(messageId, {
+      onSuccess: (feedback) => {
+        setMessages((prev) =>
+          prev.map((m) => (m.messageId === messageId ? { ...m, feedback } : m))
+        );
+        setFeedbackOpenId(messageId);
+      },
+    });
   };
 
   const handleMicClick = async () => {

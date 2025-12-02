@@ -6,6 +6,8 @@ import Image from "next/image";
 import clsx from "clsx";
 import { useAuthStore } from "@/store/auth";
 import { MyAI } from "@/types/persona";
+import { Info, User } from "lucide-react";
+import { BotMessageSquare } from "lucide-react";
 
 type MessageItemProps = {
   m: any;
@@ -42,6 +44,18 @@ export default function MessageItem({
     (m.naturalnessScore ?? -1) >= 0 &&
     (m.politenessScore + m.naturalnessScore) / 2 <= 80;
   const avgScore = ((m.politenessScore ?? 0) + (m.naturalnessScore ?? 0)) / 2;
+
+  const isErrorOrFeedback =
+    messageStatus === "error" ||
+    (showFeedbackButton && m.feedback) ||
+    showFeedbackButton;
+    
+  const handleFeedbackClick = async () => {
+    setLoadingFeedbacks((prev) => ({ ...prev, [m.messageId]: true }));
+    await handleFeedbacks(m.messageId);
+    setLoadingFeedbacks((prev) => ({ ...prev, [m.messageId]: false }));
+  };
+
   let scoreLabel = "None";
   let scoreColor = "text-green-500";
   let scoreIcon = "/chatroom/satisfied.png";
@@ -54,15 +68,7 @@ export default function MessageItem({
     scoreColor = "text-yellow-500";
     scoreIcon = "/chatroom/neutral.png";
   }
-  const isErrorOrFeedback =
-    messageStatus === "error" ||
-    (showFeedbackButton && m.feedback) ||
-    showFeedbackButton;
-  const handleFeedbackClick = async () => {
-    setLoadingFeedbacks((prev) => ({ ...prev, [m.messageId]: true }));
-    await handleFeedbacks(m.messageId);
-    setLoadingFeedbacks((prev) => ({ ...prev, [m.messageId]: false }));
-  };
+
   const bubbleClass = clsx(
     "relative z-30 p-4 rounded-2xl border  w-full",
     isMine
@@ -118,7 +124,7 @@ export default function MessageItem({
     >
       {!isMine && (
         <div className=" flex flex-row gap-2 mb-1">
-          <div className="w-6 h-6 rounded-full n  bg-gray-300"></div>
+          <User className="w-6 h-6 rounded-full  bg-gray-300 text-white" />
           <p className="text-sm font-medium text-gray-600">
             {myAI?.name ?? "AI"}
           </p>
@@ -133,9 +139,7 @@ export default function MessageItem({
             <button
               onClick={handleFeedbackClick}
               disabled={loadingFeedbacks[m.messageId]}
-              className="w-[18px] h-[18px] border-2 border-red-500 rounded-full 
-       flex items-center justify-center  shrink-0 
-       bg-transparent  cursor-pointer"
+              className=" cursor-pointer"
             >
               {loadingFeedbacks[m.messageId] ? (
                 <svg
@@ -157,9 +161,7 @@ export default function MessageItem({
                   />
                 </svg>
               ) : (
-                <span className="text-red-500 text-xs font-bold leading-none">
-                  i
-                </span>
+                <Info className="text-red-500 size-4"></Info>
               )}
             </button>
           )}
@@ -171,30 +173,35 @@ export default function MessageItem({
 
             {/* 번역/tts 버튼 (AI 메시지) */}
             {!isMine && (
-              <div className="flex gap-2 mt-2 pt-2 border-t border-gray-200">
-                <button
-                  onClick={() => handleTTsClick(m.messageId)}
-                  disabled={loadingTTS[m.messageId]}
-                >
-                  <Image
-                    src="/etc/volume_up.svg"
-                    width={20}
-                    height={20}
-                    alt="TTS"
-                  />
-                </button>
+              <div className="flex justify-between border-t border-gray-200 mt-2 pt-2">
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleTTsClick(m.messageId)}
+                    disabled={loadingTTS[m.messageId]}
+                  >
+                    <Image
+                      src="/etc/volume_up.svg"
+                      width={20}
+                      height={20}
+                      alt="TTS"
+                    />
+                  </button>
 
-                <button
-                  onClick={() => handleTranslateClick(m.messageId)}
-                  disabled={loadingTranslate[m.messageId]}
-                >
-                  <Image
-                    src="/etc/language.svg"
-                    width={20}
-                    height={20}
-                    alt="Translate"
-                  />
-                </button>
+                  <button
+                    onClick={() => handleTranslateClick(m.messageId)}
+                    disabled={loadingTranslate[m.messageId]}
+                  >
+                    <Image
+                      src="/etc/language.svg"
+                      width={20}
+                      height={20}
+                      alt="Translate"
+                    />
+                  </button>
+                </div>
+                <div>
+                  <BotMessageSquare className="size-5 text-gray-600" />
+                </div>
               </div>
             )}
           </div>
@@ -207,7 +214,7 @@ export default function MessageItem({
         )}
 
         {/* 피드백 박스 */}
-        {isMine && isFeedbackOpen && (
+        {isMine && isFeedbackOpen && m.feedback && (
           <div className="p-4 bg-gray-600 rounded-xl  -mt-5 pt-6 transform translate-x-[30px] mr-7.5">
             <div className="text-white text-sm pb-2 border-b border-gray-500">
               {m.feedback.appropriateExpression}
