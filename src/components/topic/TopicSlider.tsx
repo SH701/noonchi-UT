@@ -26,7 +26,7 @@ export default function TopicSlider({ topics, active, onSelect }: TopicProps) {
   }, [topics]);
 
   return (
-    <div ref={containerRef} className="overflow-hidden w-full">
+    <div ref={containerRef} className="overflow-hidden w-full py-3">
       <motion.div
         ref={trackRef}
         className="flex cursor-grab active:cursor-grabbing"

@@ -45,7 +45,7 @@ export default function RoleplayForm({
         onChange={setDetail}
         placeholder="Please the job posting from the company"
       />
-      <div className=" fixed bottom-8 flex items-center justify-center">
+      <div className=" bottom-8 flex items-center justify-center">
         <ActionButton type="submit">Start Chatting</ActionButton>
       </div>
     </form>

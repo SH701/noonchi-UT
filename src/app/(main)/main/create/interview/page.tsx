@@ -12,42 +12,43 @@ const INTERVIEW_STYLES = [
   { value: "standard", label: "Standard" },
   { value: "strict", label: "Strict" },
 ] as const;
+
 export type UploadedFiles = File[];
+
 export default function Interview() {
   const router = useRouter();
   const [showLoading, setShowLoading] = useState(false);
+
   const handleSubmit = async (data: any) => {
-    setShowLoading(true);
+    setTimeout(() => setShowLoading(true), 0);
 
     try {
-      const uploadedFiles = [];
+      const uploadedFiles = await Promise.all(
+        data.files.map(async (file: File) => {
+          const presignRes = await apiFetch("/api/files/presigned-url", {
+            method: "POST",
+            body: JSON.stringify({
+              fileExtension: file.name.split(".").pop(),
+              fileType: file.type,
+            }),
+          });
 
-      for (const file of data.files) {
-        const presignRes = await apiFetch("/api/files/presigned-url", {
-          method: "POST",
-          body: JSON.stringify({
-            fileExtension: file.name.split(".").pop(),
+          const { url } = await presignRes.json();
+
+          await fetch(url, {
+            method: "PUT",
+            headers: { "Content-Type": file.type },
+            body: file,
+          });
+
+          return {
+            fileUrl: url.split("?")[0],
+            fileName: file.name,
             fileType: file.type,
-          }),
-        });
-
-        const { url } = await presignRes.json();
-
-        await fetch(url, {
-          method: "PUT",
-          headers: { "Content-Type": file.type },
-          body: file,
-        });
-
-        const fileUrl = url.split("?")[0];
-
-        uploadedFiles.push({
-          fileUrl,
-          fileName: file.name,
-          fileType: file.type,
-          fileSize: file.size,
-        });
-      }
+            fileSize: file.size,
+          };
+        })
+      );
 
       const res = await apiFetch("/api/conversations/interview", {
         method: "POST",
@@ -63,18 +64,16 @@ export default function Interview() {
       if (!res.ok) throw new Error("인터뷰 생성 실패");
 
       const convo = await res.json();
+
       router.push(`/main/chatroom/${convo.conversationId}`);
     } catch (e) {
       console.error(e);
-      alert("생성 실패");
-    } finally {
+      alert("인터뷰 생성 실패 🤯");
       setShowLoading(false);
     }
   };
 
-  if (showLoading) {
-    return <Loading />;
-  }
+  if (showLoading) return <Loading />;
 
   return (
     <div className="flex flex-col pt-14 relative bg-white w-full overflow-x-hidden">
@@ -89,6 +88,7 @@ export default function Interview() {
           Create Interview
         </h1>
       </div>
+
       <h2 className="text-left text-xl font-bold mb-12 pl-5 mt-6">
         Interview Preparation
       </h2>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import TopicSlider from "@/components/topic/TopicSlider";
 import { CategoryType, Topics } from "@/types/topic";
 import { topicsByCategory } from "@/data/topics";
+import { useRouter } from "next/navigation";
 
 type TopicListProps = {
   category: CategoryType;
@@ -16,7 +17,7 @@ export default function TopicList({
   setShowComingSoon,
 }: TopicListProps) {
   const topics = topicsByCategory[category];
-
+  const router = useRouter();
   return (
     <div className="px-5">
       <div className="flex justify-between">
@@ -50,6 +51,7 @@ export default function TopicList({
           <div
             key={topic.id}
             className="flex flex-col bg-white border border-gray-200 rounded-xl p-3 cursor-pointer hover:shadow-md transition-shadow min-h-40 justify-between"
+            onClick={() => router.push("/main/create/roleplay")}
           >
             <div className="flex flex-col gap-2 mb-4">
               <h4 className="text-base font-semibold text-gray-900 mb-1.5">

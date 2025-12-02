@@ -1,66 +1,73 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import TopicSlider from "@/components/topic/TopicSlider";
+import { CategoryType, Topics } from "@/types/topic";
 import { topicsByCategory } from "@/data/topics";
+import { useRouter } from "next/navigation";
+import BackButton from "@/components/ui/button/Backbutton";
 import { useState } from "react";
-import TopicButton from "@/components/ui/button/TopicButton";
 
 export default function TopicAll() {
-  const router = useRouter();
-  const [category, setCategory] =
-    useState<keyof typeof topicsByCategory>("Popular");
+  const [category, setCategory] = useState<CategoryType>("Career");
 
   const topics = topicsByCategory[category];
+  const router = useRouter();
 
   return (
-    <div className="px-5 min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      <p className="text-xl text-gray-800 font-semibold pb-3 text-start">
-        Topic
-      </p>
-      /
-      <div className="flex gap-1 mb-5 w-full">
-        <TopicButton
-          label="Popular"
-          active={category === "Popular"}
-          onClick={() => setCategory("Popular")}
-        />
-        <TopicButton
-          label="Greeting"
-          active={category === "Greeting"}
-          onClick={() => setCategory("Greeting")}
-        />
-        <TopicButton
-          label="K POP"
-          active={category === "KPOP"}
-          onClick={() => setCategory("KPOP")}
-        />
+    <div className="px-5 pt-7  flex gap-3 flex-col">
+      <div className="flex justify-between">
+        <BackButton />
+        <p className="text-xl text-gray-800 font-semibold pb-3">Topic</p>
+        <div></div>
       </div>
-      <div className="w-full">
-        {topics.map((topic) => (
+
+      <TopicSlider
+        topics={[
+          { id: 1, label: "Career" },
+          { id: 2, label: "Family" },
+          { id: 3, label: "Romance" },
+          { id: 4, label: "Belonging" },
+          { id: 5, label: "K-POP" },
+        ]}
+        active={category}
+        onSelect={(c) => setCategory(c)}
+      />
+
+      <div className="flex flex-col gap-4 w-full ">
+        {topics.map((topic: Topics) => (
           <div
             key={topic.id}
-            className="flex items-center gap-5 p-3 bg-white hover:shadow-md 
-              transition-shadow cursor-pointer border border-gray-200 
-              mb-2 rounded-lg"
+            className="flex flex-col gap-3 bg-white border border-gray-200 rounded-xl p-3 cursor-pointer hover:shadow-md transition-shadow  justify-between"
             onClick={() => router.push("/main/create/roleplay")}
           >
-            <div className="text-blue-600 font-semibold text-base">
-              {topic.id}
-            </div>
-
-            <div className="shrink-0">
-              <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-lg text-2xl">
-                {topic.icon}
-              </div>
-            </div>
-
-            <div className="flex-1 min-w-0">
-              <h4 className="text-base font-semibold text-gray-900 mb-1 leading-6">
+            <div className="flex flex-col gap-2 mb-4">
+              <h4 className="text-base font-semibold text-gray-900 mb-1.5">
                 {topic.title}
               </h4>
-              <p className="text-xs text-gray-600 leading-4">
+              <p className="text-[11px] text-gray-900 leading-4">
                 {topic.description}
               </p>
+            </div>
+
+            <div className="flex gap-1">
+              <div className="w-9 h-4 bg-blue-100 px-1.5 rounded-md flex items-center">
+                <Image
+                  src="/credits/topicroom.png"
+                  alt=""
+                  width={24}
+                  height={16}
+                />
+              </div>
+              <div className="w-9 h-4 bg-black px-1.5 rounded-md flex items-center">
+                <Image
+                  src="/credits/report.png"
+                  alt=""
+                  width={36}
+                  height={16}
+                />
+              </div>
             </div>
           </div>
         ))}

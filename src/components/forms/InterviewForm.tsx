@@ -82,7 +82,7 @@ export default function InterviewForm({
         />
       </div>
 
-      <div className=" fixed bottom-8 flex items-center justify-center">
+      <div className="mt-20 flex items-center justify-center">
         <ActionButton type="submit">Start Chatting</ActionButton>
       </div>
     </form>
