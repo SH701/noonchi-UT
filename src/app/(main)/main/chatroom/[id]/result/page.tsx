@@ -9,7 +9,8 @@ import { ActionButton } from "@/components/ui/button";
 import MessageList from "@/components/chatroom/MessageList";
 import { useMessageFeedback } from "@/hooks/chatroom/useMessageFeedback";
 import { useConversationDetail } from "@/hooks/conversation/useConversationDetail";
-import { ResultTab, Score, Section } from "@/components/result";
+import { ResultTab, Score } from "@/components/result";
+import Section from "@/components/result/Section";
 
 export default function Result() {
   const [tab, setTab] = useState<"transcript" | "mistakes">("transcript");
