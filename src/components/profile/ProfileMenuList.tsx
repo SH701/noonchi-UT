@@ -4,9 +4,9 @@ import Link from "next/link";
 import {
   UserIcon,
   ChartBarIcon,
-  DocumentTextIcon,
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
+import { Receipt } from "lucide-react";
 
 export default function ProfileMenuList() {
   const items = [
@@ -21,9 +21,9 @@ export default function ProfileMenuList() {
       label: "Difficulty",
     },
     {
-      href: "/terms",
-      icon: <DocumentTextIcon className="w-6 h-6 text-gray-600" />,
-      label: "Terms of Service / Licenses",
+      href: "/billing",
+      icon: <Receipt className="w-6 h-6 text-gray-600" />,
+      label: "Charge Credits",
     },
   ];
 

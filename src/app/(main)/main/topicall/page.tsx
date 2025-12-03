@@ -39,7 +39,7 @@ export default function TopicAll() {
         {topics.map((topic: Topics) => (
           <div
             key={topic.id}
-            className="flex flex-col gap-3 bg-white border border-gray-200 rounded-xl p-3 cursor-pointer hover:shadow-md transition-shadow  justify-between"
+            className="flex flex-col gap-3 bg-[#F3F4F6] rounded-xl p-3 cursor-pointer hover:shadow-md transition-shadow  justify-between"
             onClick={() => router.push("/main/create/roleplay")}
           >
             <div className="flex flex-col gap-2 mb-4">

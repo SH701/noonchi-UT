@@ -35,7 +35,6 @@ export default function ProfilePage() {
       (name) =>
         (document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`)
     );
-
     useAuthStore.getState().logout();
     localStorage.removeItem("auth-store");
     router.push("/login");
