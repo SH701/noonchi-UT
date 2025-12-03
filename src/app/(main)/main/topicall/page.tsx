@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 
-import TopicSlider from "@/components/topic/TopicSlider";
 import { CategoryType, Topics } from "@/types/topic";
 import { topicsByCategory } from "@/data/topics";
 import { useRouter } from "next/navigation";
 import BackButton from "@/components/ui/button/Backbutton";
 import { useState } from "react";
+import { TopicSlider } from "@/components/mainpage";
 
 export default function TopicAll() {
   const [category, setCategory] = useState<CategoryType>("Career");

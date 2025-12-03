@@ -5,8 +5,7 @@ import { useState } from "react";
 
 import ComingSoonModal from "@/components/modal/Comingsoon";
 import { CategoryType } from "@/types/topic";
-import TopicList from "@/components/topic/TopicList";
-import Interviewsection from "@/components/interview/Interviewsection";
+import { Interviewsection, TopicList } from "@/components/mainpage";
 
 export default function Main() {
   const [category, setCategory] = useState<CategoryType>("Career");

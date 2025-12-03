@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
-type UIState = {
-  loadingModalOpen: boolean;
-  setLoadingModalOpen: (v: boolean) => void;
-};
+interface UIState {
+  isBottomSheetOpen: boolean;
+  setBottomSheetOpen: (v: boolean) => void;
+}
 
 export const useUIStore = create<UIState>((set) => ({
-  loadingModalOpen: false,
-  setLoadingModalOpen: (v) => set({ loadingModalOpen: v }),
+  isBottomSheetOpen: false,
+  setBottomSheetOpen: (v) => set({ isBottomSheetOpen: v }),
 }));

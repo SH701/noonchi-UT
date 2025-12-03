@@ -1,14 +1,23 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 
-
-
 import RoleplayForm from "@/components/forms/RoleplayForm";
+import { topicsByCategory } from "@/data/topics";
 
 export default function RolePlay() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const topicId = searchParams.get("topicId");
+  const topic = Object.values(topicsByCategory)
+    .flat()
+    .find((t) => t.id === Number(topicId));
+
+  const handleSubmit = (data: { isAI: string; me: string; detail: string }) => {
+    console.log("Form submitted:", data);
+  };
 
   return (
     <div className="flex flex-col pt-14 relative bg-white w-full overflow-x-hidden">
@@ -30,9 +39,9 @@ export default function RolePlay() {
       <div className="w-full flex justify-center">
         <div className="w-full max-w-[375px] px-5">
           <RoleplayForm
-            onSubmit={(data) => {
-              //채팅방으로 이동
-            }}
+            // AiRole={topic?.aiRole}
+            // myRole={topic?.myRole}
+            onSubmit={handleSubmit}
           />
         </div>
       </div>

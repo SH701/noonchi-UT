@@ -2,23 +2,31 @@ import { useState } from "react";
 import FormInput from "../ui/form/FormInput";
 import ActionButton from "../ui/button/ActionButton";
 import Image from "next/image";
+
+interface RoleplayProps {
+  onSubmit: (data: { isAI: string; me: string; detail: string }) => void; // 수정
+  AiRole?: string;
+  myRole?: string;
+}
+
 export default function RoleplayForm({
   onSubmit,
-}: {
-  onSubmit: (data: { isAI: string; me: string }) => void;
-}) {
-  const [isAI, setIsAI] = useState("");
-  const [me, setMe] = useState("");
+  AiRole,
+  myRole,
+}: RoleplayProps) {
+  const [isAI, setIsAI] = useState(AiRole || "");
+  const [me, setMe] = useState(myRole || "");
   const [detail, setDetail] = useState("");
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!isAI.trim() || !me.trim()) {
-      alert("회사명과 직무를 입력해주세요.");
+    if (!isAI?.trim() || !me?.trim()) {
+      alert("Please fill in all required fields.");
       return;
     }
 
-    onSubmit({ isAI, me });
+    onSubmit({ isAI, me, detail });
   };
 
   return (

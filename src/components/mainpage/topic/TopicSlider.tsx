@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import TopicButton from "../ui/button/TopicButton";
+import TopicButton from "../../ui/button/TopicButton";
 import { TopicProps } from "@/types/topic";
 
 export default function TopicSlider({ topics, active, onSelect }: TopicProps) {

@@ -17,7 +17,7 @@ import MessageList from "@/components/chats/MessageList";
 import { ChatMsg } from "@/types/chatmessage";
 import Loading from "./loading";
 import ChatroomHeader from "@/components/ui/header/ChatroomHeader";
-import ChatroomInput from "@/components/chats/ChatRoomInput.";
+import ChatroomInput from "@/components/chats/ChatroomInput.";
 import clsx from "clsx";
 import { useMessageFeedback } from "@/hooks/useMessageFeedback";
 import { useSendMessage } from "@/hooks/chat/useSendMessage";
