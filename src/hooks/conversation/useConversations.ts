@@ -18,12 +18,11 @@ export const useConversations = (filter: FilterState = null) => {
   return useQuery({
     queryKey: ["conversations", "history", filter],
     queryFn: async () => {
-      let query = "/api/conversations?sortBy=CREATED_AT_DESC&page=1&size=1000";
+      let query = `${process.env.NEXT_PUBLIC_API_URL}/api/conversations?sortBy=CREATED_AT_DESC&page=1&size=10`;
 
       if (filter && filterMap[filter]) {
         query += `&status=${filterMap[filter]}`;
       }
-
       const res = await apiFetch(query);
 
       if (!res.ok) {

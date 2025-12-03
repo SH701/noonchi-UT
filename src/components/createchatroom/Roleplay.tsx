@@ -9,11 +9,16 @@ import RoleplayForm from "@/components/ui/forms/RoleplayForm";
 export default function RolePlay() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const mode = searchParams.get("mode") as "topic" | "custom";
+  const category = searchParams.get(
+    "category"
+  ) as keyof typeof topicsByCategory;
+  const topicId = Number(searchParams.get("topicId"));
 
-  const topicId = searchParams.get("topicId");
-  const topic = Object.values(topicsByCategory)
-    .flat()
-    .find((t) => t.id === Number(topicId));
+  const topic =
+    category && topicId
+      ? topicsByCategory[category]?.find((t) => t.id === topicId)
+      : undefined;
 
   const handleSubmit = (data: { isAI: string; me: string; detail: string }) => {
     console.log("Form submitted:", data);
@@ -39,9 +44,10 @@ export default function RolePlay() {
       <div className="w-full flex justify-center">
         <div className="w-full max-w-[375px] px-5">
           <RoleplayForm
-            // AiRole={topic?.aiRole}
-            // myRole={topic?.myRole}
+            AiRole={topic?.aiRole}
+            myRole={topic?.myRole}
             onSubmit={handleSubmit}
+            mode={mode}
           />
         </div>
       </div>

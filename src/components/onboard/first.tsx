@@ -32,10 +32,10 @@ export default function First() {
 
   return (
     <div className="w-full h-full flex items-center justify-center">
-      <div className="w-[375px] h-[426px] flex items-center justify-center">
+      <div className="w-full h-[426px] flex items-center justify-center">
         <LottieAnimation
           animationData={animationData}
-          style={{ width: "375px", height: "426px" }}
+          style={{ width: "400px", height: "426px" }}
           loop={true}
           autoplay={true}
         />

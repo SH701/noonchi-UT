@@ -18,6 +18,14 @@ const LoginModal = dynamic(import("@/components/modal/LoginModal"), {
 export default function ProfilePage() {
   const router = useRouter();
   const { data: profile, isLoading } = useUserProfile();
+  if (isLoading) return <p>Loading...</p>;
+
+  if (!profile) {
+    return <LoginModal isOpen={true} onClose={() => router.push("/login")} />;
+  }
+  if (profile.role === "ROLE_GUEST") {
+    return <LoginModal isOpen={true} onClose={() => router.push("/login")} />;
+  }
 
   const handleLogout = async () => {
     const { refreshToken } = useAuthStore.getState();
@@ -45,11 +53,6 @@ export default function ProfilePage() {
     localStorage.removeItem("device_id");
     router.push("/login");
   };
-  if (profile?.role === "ROLE_GUEST") {
-    return <LoginModal isOpen={true} onClose={() => router.push("/login")} />;
-  }
-
-  if (isLoading) return <p className="text-center mt-10">Loading…</p>;
 
   return (
     <div className="min-h-screen bg-white flex flex-col">

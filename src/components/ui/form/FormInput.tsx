@@ -6,6 +6,7 @@ interface Props {
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
+  className?: string;
 }
 
 export default function FormInput({
@@ -14,6 +15,7 @@ export default function FormInput({
   value,
   onChange,
   placeholder,
+  className,
 }: Props) {
   return (
     <div className="mb-6">
@@ -24,7 +26,9 @@ export default function FormInput({
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-[335px] p-2.5 rounded-lg border border-gray-200 bg-white text-black placeholder-gray-400 placeholder:text-sm"
+        className={`w-[335px] p-2.5 rounded-lg border ${
+          className || "border-gray-200 bg-white"
+        }  text-black placeholder-gray-400 placeholder:text-sm`}
         placeholder={placeholder}
       />
     </div>

@@ -5,15 +5,17 @@ import FormInput from "../form/FormInput";
 import { ActionButton } from "../button";
 
 interface RoleplayProps {
-  onSubmit: (data: { isAI: string; me: string; detail: string }) => void; // 수정
+  onSubmit: (data: { isAI: string; me: string; detail: string }) => void;
   AiRole?: string;
   myRole?: string;
+  mode: "topic" | "custom";
 }
 
 export default function RoleplayForm({
   onSubmit,
   AiRole,
   myRole,
+  mode,
 }: RoleplayProps) {
   const [isAI, setIsAI] = useState(AiRole || "");
   const [me, setMe] = useState(myRole || "");
@@ -29,7 +31,8 @@ export default function RoleplayForm({
 
     onSubmit({ isAI, me, detail });
   };
-
+  const inputStyle =
+    mode === "topic" ? "bg-indigo-50 border-blue-600 text-blue-600" : "";
   return (
     <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
       <FormInput
@@ -38,6 +41,7 @@ export default function RoleplayForm({
         value={isAI}
         onChange={setIsAI}
         placeholder="Enter the AI"
+        className={inputStyle}
       />
 
       <FormInput
@@ -46,6 +50,7 @@ export default function RoleplayForm({
         value={me}
         onChange={setMe}
         placeholder="Enter the you"
+        className={inputStyle}
       />
       <FormInput
         label="Detail"

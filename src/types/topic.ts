@@ -22,6 +22,6 @@ export type Topics = {
   id: number;
   title: string;
   description: string;
-  aiRole?: string;
-  myRole?: string;
+  aiRole: string;
+  myRole: string;
 };
