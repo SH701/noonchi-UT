@@ -1,30 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
-
-import InProgressIcon from "@/components/bothistory/etc/Inprogress";
-import DoneIcon from "@/components/bothistory/etc/Done";
-
 import {
   useConversations,
   useDeleteConversation,
 } from "@/hooks/useConversations";
 import { useChatHistoryStore } from "@/store/useChatHistorystore";
 import { useAuthStore } from "@/store/auth";
-
 import { Conversation } from "@/types/conversation";
-
-import Filter from "@/components/bothistory/Filter";
-import Sort from "@/components/bothistory/Sort";
-import SearchBar from "@/components/bothistory/SearchBar";
-import EmptyState from "@/components/bothistory/EmptyState";
-import HistorySection from "@/components/bothistory/HistorySection";
 import LoginModal from "@/components/modal/LoginModal";
+import {
+  EmptyState,
+  Filter,
+  HistorySection,
+  SearchBar,
+  Sort,
+} from "@/components/bothistory";
+import { InprogressIcon, DoneIcon } from "@/components/ui/icon";
 
 const situationOptions = {
   BOSS: [
@@ -193,7 +189,7 @@ export default function ChatBothistoryPage() {
                             >
                               {chat.status === "ACTIVE" ? (
                                 <>
-                                  <InProgressIcon className="w-4 h-4" />
+                                  <InprogressIcon className="w-4 h-4" />
                                   <span className="pb-0.5">In progress</span>
                                 </>
                               ) : (

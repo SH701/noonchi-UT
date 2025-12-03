@@ -1,8 +1,7 @@
 "use client";
 
-import TabBar from "@/components/tab-bar/tab-bar";
+import TabBar from "@/components/ui/tab-bar/tab-bar";
 import { useUserProfile } from "@/hooks/useUserProfile";
-import { useAuthStore } from "@/store/auth";
 import { usePathname, useRouter } from "next/navigation";
 
 export const dynamic = "force-dynamic";

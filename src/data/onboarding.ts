@@ -1,9 +1,9 @@
 import type { ComponentType } from "react";
-import First from "@/components/onboard/svg/first";
-import Second from "@/components/onboard/svg/second";
-import Third from "@/components/onboard/svg/third";
-import Fourth from "@/components/onboard/svg/fourth";
-import Fifth from "@/components/onboard/svg/fifth";
+import First from "@/components/onboard/first";
+import Second from "@/components/onboard/second";
+import Third from "@/components/onboard/third";
+import Fourth from "@/components/onboard/fourth";
+import Fifth from "@/components/onboard/fifth";
 
 type Slide = {
   id: number;

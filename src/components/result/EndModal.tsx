@@ -1,13 +1,13 @@
 "use client";
 
-import ModalButton from "@/components/ui/button/ModalButton";
-import FeedbackCloseButton from "@/components/ui/button/ModalCloseButton";
+import { ModalButton } from "@/components/ui/button/";
+import { FeedbackCloseButton } from "@/components/ui/button";
 import Modal from "@/components/ui/modal/Modal";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useAuthStore } from "@/store/auth";
 import { useState } from "react";
-import LoadingModal from "../chats/LoadingModal";
+import LoadingModal from "../chatroom/LoadingModal";
 
 interface EndModalProps {
   isOpen: boolean;

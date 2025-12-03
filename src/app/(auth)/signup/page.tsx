@@ -2,12 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-
-import ActionButton from "@/components/ui/button/ActionButton";
-
 import SignupHeader from "@/components/signup/SignupHeader";
 import SignupTemplate from "@/components/signup/SignupTemplate";
 import SignupFormStep1 from "@/components/signup/SignupForm1";
+import { ActionButton } from "@/components/ui/button";
 
 export default function SignupStep1() {
   const router = useRouter();

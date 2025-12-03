@@ -4,8 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import Loading from "../../chatroom/[id]/loading";
-import InterviewForm from "@/components/forms/InterviewForm";
+
 import { apiFetch } from "@/lib/api";
+import InterviewForm from "@/components/ui/forms/InterviewForm";
 
 const INTERVIEW_STYLES = [
   { value: "friendly", label: "Friendly" },

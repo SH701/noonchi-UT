@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CategoryType, Topics } from "@/types/topic";
 import { topicsByCategory } from "@/data/topics";
 import { useRouter } from "next/navigation";
-import BackButton from "@/components/ui/button/Backbutton";
+import { BackButton } from "@/components/ui/button";
 import { useState } from "react";
 import { TopicSlider } from "@/components/mainpage";
 

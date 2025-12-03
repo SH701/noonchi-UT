@@ -8,9 +8,10 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ActionButton from "../ui/button/ActionButton";
+
 import { isTokenExpired, guestLogin, getOrCreateDeviceId } from "@/utils/auth";
 import { useAuthStore } from "@/store/auth";
+import { ActionButton } from "../ui/button";
 
 export const settings: Settings = {
   dots: true,

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function ChatTextInput() {
+export default function HonorificHelper() {
   return (
     <div className="flex w-[340px] items-center gap-2 px-2 rounded-[99px] border border-blue-200 bg-white h-13  mt-4">
       <Link href="/error" className="flex gap-2 items-center">

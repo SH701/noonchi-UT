@@ -1,6 +1,6 @@
 import { ModalProps } from "@/types/modal";
 import Modal from "../ui/modal/Modal";
-import ModalButton from "../ui/button/ModalButton";
+import {ModalButton} from "../ui/button";
 
 export default function ComingSoonModal({ isOpen, onClose }: ModalProps) {
   return (

@@ -3,15 +3,13 @@
 import Image from "next/image";
 import { useRouter, useParams } from "next/navigation";
 import { useState } from "react";
-import Score from "@/components/result/score";
-import Section from "@/components/result/section";
 import { useMessages } from "@/hooks/chat/useMessage";
 import { useConversaitonFeedback } from "@/hooks/useConversationFeedback";
-import ActionButton from "@/components/ui/button/ActionButton";
-import MessageList from "@/components/chats/MessageList";
+import { ActionButton } from "@/components/ui/button";
+import MessageList from "@/components/chatroom/MessageList";
 import { useMessageFeedback } from "@/hooks/useMessageFeedback";
 import { useConversationDetail } from "@/hooks/useConversationDetail";
-import ResultTab from "@/components/result/ResultTab";
+import { ResultTab, Score, Section } from "@/components/result";
 
 export default function Result() {
   const [tab, setTab] = useState<"transcript" | "mistakes">("transcript");

@@ -5,24 +5,24 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-
 import { useRecorder } from "@/hooks/useRecorder";
 import { useAuthStore } from "@/store/auth";
-
 import { useMessages } from "@/hooks/chat/useMessage";
 import { useConversationDetail } from "@/hooks/useConversationDetail";
 
-import MessageList from "@/components/chats/MessageList";
-
 import { ChatMsg } from "@/types/chatmessage";
 import Loading from "./loading";
-import ChatroomHeader from "@/components/ui/header/ChatroomHeader";
-import ChatroomInput from "@/components/chats/ChatroomInput.";
+
 import clsx from "clsx";
 import { useMessageFeedback } from "@/hooks/useMessageFeedback";
 import { useSendMessage } from "@/hooks/chat/useSendMessage";
 import { useAiReply } from "@/hooks/chat/useAiReply";
-import ChatRoomInfo from "@/components/chats/ChatRoomInfo";
+import {
+  ChatroomHeader,
+  ChatroomInput,
+  MessageList,
+  ChatroomInfo,
+} from "@/components/chatroom";
 
 type MicState = "idle" | "recording" | "recorded";
 
@@ -287,7 +287,7 @@ export default function ChatroomPage() {
           handleSendAudio={handleSendAudio}
           sendMessage={sendMessage}
         />
-        <ChatRoomInfo
+        <ChatroomInfo
           isOpen={infoOpen}
           onClose={() => setInfoOpen(false)}
           companyName={conversation?.companyName ?? ""}

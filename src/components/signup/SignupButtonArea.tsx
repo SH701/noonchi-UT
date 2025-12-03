@@ -1,6 +1,6 @@
 "use client";
 
-import ActionButton from "@/components/ui/button/ActionButton";
+import { ActionButton } from "../ui/button";
 
 export default function SignupButtonArea({
   disabled,

@@ -6,7 +6,8 @@ import { useState } from "react";
 import Loading from "@/app/after/loading";
 import Image from "next/image";
 import { useAuthStore, type Level } from "@/store/auth";
-import ActionButton from "@/components/ui/button/ActionButton";
+import { ActionButton } from "@/components/ui/button";
+
 
 export default function LoginPage() {
   const router = useRouter();

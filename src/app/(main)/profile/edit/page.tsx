@@ -6,10 +6,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeftIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
-import Face0 from "@/components/character/face0";
-import Face1 from "@/components/character/face1";
-import Face2 from "@/components/character/face2";
-import Face3 from "@/components/character/face3";
+import Face0 from "@/components/character/Face0";
+import Face1 from "@/components/character/Face1";
+import Face2 from "@/components/character/Face2";
+import Face3 from "@/components/character/Face3";
 
 import { useAuthStore } from "@/store/auth";
 import { useUserProfile } from "@/hooks/useUserProfile";

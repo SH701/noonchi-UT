@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Modal from "../ui/modal/Modal";
 
-import ModalButton from "../ui/button/ModalButton";
+import { ModalButton } from "../ui/button";
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;

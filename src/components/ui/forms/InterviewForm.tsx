@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import FormInput from "../ui/form/FormInput";
-import OptionButtons from "../ui/button/OptionsButton";
-import FileUpload from "../ui/form/FileUpload";
-import ActionButton from "../ui/button/ActionButton";
+
 import Image from "next/image";
+
+import { ActionButton } from "../button";
+import OptionButtons from "../button/OptionsButton";
+import { FileUpload, FormInput } from "../form";
 
 export interface InterviewFormProps {
   interviewStyles: readonly { value: string; label: string }[];

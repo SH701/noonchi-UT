@@ -3,7 +3,7 @@
 import React from "react";
 import { Info, Check, X } from "lucide-react";
 import Modal from "../ui/modal/Modal";
-import ModalButton from "../ui/button/ModalButton";
+import { ModalButton } from "../ui/button";
 import { ModalProps } from "@/types/modal";
 import { useRouter } from "next/navigation";
 

@@ -3,8 +3,8 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 
-import RoleplayForm from "@/components/forms/RoleplayForm";
 import { topicsByCategory } from "@/data/topics";
+import RoleplayForm from "@/components/ui/forms/RoleplayForm";
 
 export default function RolePlay() {
   const router = useRouter();

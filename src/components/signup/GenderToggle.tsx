@@ -1,7 +1,8 @@
 "use client";
 
 import LabelText from "@/components/ui/text/LabelText";
-import GenderButton from "@/components/ui/button/GenderButton";
+import { GenderButton } from "../ui/button";
+
 
 export default function GenderToggle({
   gender,

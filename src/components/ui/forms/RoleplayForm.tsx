@@ -1,7 +1,8 @@
 import { useState } from "react";
-import FormInput from "../ui/form/FormInput";
-import ActionButton from "../ui/button/ActionButton";
+
 import Image from "next/image";
+import FormInput from "../form/FormInput";
+import { ActionButton } from "../button";
 
 interface RoleplayProps {
   onSubmit: (data: { isAI: string; me: string; detail: string }) => void; // 수정

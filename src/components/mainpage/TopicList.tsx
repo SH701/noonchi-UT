@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import TopicSlider from "@/components/mainpage/topic/TopicSlider";
+import TopicSlider from "@/components/mainpage/TopicSlider";
 import { CategoryType, Topics } from "@/types/topic";
 import { topicsByCategory } from "@/data/topics";
 import { useRouter } from "next/navigation";

@@ -1,10 +1,7 @@
 "use client";
 
+import { Face0, Face1, Face2, Face3 } from "@/components/character";
 import Image from "next/image";
-import Face0 from "@/components/character/face0";
-import Face1 from "@/components/character/face1";
-import Face2 from "@/components/character/face2";
-import Face3 from "@/components/character/face3";
 
 const FACES = {
   face0: Face0,

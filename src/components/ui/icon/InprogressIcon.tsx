@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-export default function InProgressIcon(props: React.SVGProps<SVGSVGElement>) {
+export default function InprogressIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

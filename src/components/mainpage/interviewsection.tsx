@@ -30,7 +30,6 @@ export default function Interviewsection() {
 
   return (
     <>
-      {/* 리스트 카드 영역 */}
       <motion.div
         className="flex flex-col items-center pt-6 pb-4 relative"
         animate={{
@@ -43,7 +42,6 @@ export default function Interviewsection() {
             {sliders.map((s, index) => {
               const isCenter = index === 1;
 
-              // 🔥 가운데 카드만 layoutId 연결
               if (isCenter) {
                 return (
                   <motion.div
@@ -91,7 +89,6 @@ export default function Interviewsection() {
                 );
               }
 
-              // 양옆 카드
               return (
                 <div
                   key={s.id}
@@ -120,7 +117,7 @@ export default function Interviewsection() {
           >
             <motion.div
               layoutId="interview-card"
-              className="relative w-full h-[60vh] max-w-[375px]"
+              className="relative w-full h-[60vh] md:max-w-[375px]"
               transition={sharedTransition}
             >
               <Image
@@ -151,7 +148,6 @@ export default function Interviewsection() {
         )}
       </AnimatePresence>
 
-      {/* 바텀시트 */}
       <AnimatePresence>
         {isBottomSheetOpen && (
           <motion.div

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import ActionButton from "@/components/ui/button/ActionButton";
+import { ActionButton } from "@/components/ui/button";
 import Loading from "@/app/after/loading";
 import { useAuthStore } from "@/store/auth";
 import SignupFormStep2 from "@/components/signup/SignupForm2";

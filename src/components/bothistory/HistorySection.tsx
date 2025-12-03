@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import FeedbackSection from "@/components/bothistory/Feedbacksections";
+import FeedbackSection from "@/components/bothistory/FeedbackSection";
 
 interface SectionProps {
   isOpen: boolean;

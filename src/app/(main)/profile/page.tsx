@@ -3,11 +3,12 @@
 import { useRouter } from "next/navigation";
 import { useUserProfile } from "@/hooks/useUserProfile";
 import { useAuthStore } from "@/store/auth";
-
-import ProfileHeader from "@/components/profile/ProfileHeader";
-import ProfileImage from "@/components/ui/image/ProfileImage";
-import StatsCard from "@/components/profile/StatsCard";
-import ProfileMenuList from "@/components/profile/ProfileMenuList";
+import {
+  ProfileHeader,
+  ProfileImage,
+  ProfileMenuList,
+  StatsCard,
+} from "@/components/profile";
 
 export default function ProfilePage() {
   const router = useRouter();
