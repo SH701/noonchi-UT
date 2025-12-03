@@ -103,13 +103,13 @@ export default function ChatBothistoryPage() {
     return <LoginModal isOpen={true} onClose={() => router.push("/login")} />;
   }
   return (
-    <div className="bg-gray-100 w-full flex flex-col pt-10">
+    <div className="bg-gray-100 w-full flex flex-col pt-12">
       <div className="flex justify-between items-center space-x-2 relative z-10 px-4">
         <h1 className="text-xl font-bold z-10">Chatbot History</h1>
         <SearchBar />
       </div>
 
-      <div className="mb-6 pl-6 pr-0">
+      <div className="my-6 pl-6">
         <div className="flex items-center justify-between">
           <Filter />
           <Sort />

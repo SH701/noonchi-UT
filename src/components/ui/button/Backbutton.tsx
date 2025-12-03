@@ -9,7 +9,7 @@ export default function BackButton() {
   return (
     <button
       onClick={() => router.back()}
-      className="text-gray-600 hover:text-gray-800 transition-colors cursor-pointer"
+      className="text-gray-800 hover:text-gray-900 transition-colors cursor-pointer"
     >
       <ChevronLeftIcon className="w-6 h-6" />
     </button>
