@@ -1,6 +1,8 @@
 import type { ComponentType } from "react";
 import First from "@/components/onboard/first";
-import Fifth from "@/components/onboard/fifth";
+import Fourth from "@/components/onboard/fourth";
+import Second from "@/components/onboard/second";
+import Third from "@/components/onboard/third";
 
 type Slide = {
   id: number;
@@ -17,11 +19,22 @@ export const slides: Slide[] = [
     desc: "Noonchi helps you speak naturally and respectfully without second guessing.",
     icon: First,
   },
-
   {
-    id: 5,
+    id: 2,
+    title: "",
+    desc: "",
+    icon: Second,
+  },
+  {
+    id: 3,
+    title: "Choose your interests",
+    desc: "Pick what you love to talk about!",
+    icon: Third,
+  },
+  {
+    id: 4,
     title: "Ready to start?",
     desc: "Practice honorifics naturally by chatting with K-Etiquette.",
-    icon: Fifth,
+    icon: Fourth,
   },
 ];

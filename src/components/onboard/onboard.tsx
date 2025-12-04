@@ -13,6 +13,7 @@ import { isTokenExpired, getOrCreateDeviceId } from "@/utils/auth";
 import { useAuthStore } from "@/store/useAuth";
 import { ActionButton } from "../ui/button";
 import { useGuestLogin } from "@/hooks/guest/useGuestLogin";
+import React from "react";
 
 export const settings: Settings = {
   dots: true,
@@ -57,7 +58,7 @@ export default function Onboard() {
     }
   };
   useEffect(() => {
-    if (currentSlide === lastIndex - 1) {
+    if (currentSlide === 3) {
       const timer = setTimeout(() => {
         handleOnboardingToMain();
       }, 1000);
@@ -80,59 +81,64 @@ export default function Onboard() {
             ref={sliderRef}
             {...settings}
             afterChange={(i) => setCurrentSlide(i)}
+            className={
+              currentSlide === 1 || currentSlide === 2
+                ? "dots-top"
+                : "dots-hidden"
+            }
+            appendDots={(dots) => {
+              if (currentSlide === 0 || currentSlide === 3) {
+                return <div style={{ display: "none" }} />;
+              }
+              const dotsArray = React.Children.toArray(dots);
+              const filtered = dotsArray.slice(1, 3);
+              return (
+                <div className="dots-wrapper">
+                  <ul className="slick-dots custom-dots">{filtered}</ul>
+                </div>
+              );
+            }}
           >
-            {slides.map((slide, i) => (
-              <div key={slide.id} className="flex flex-col h-full">
-                <div
-                  className={`relative h-[400px] flex items-center justify-center ${
-                    slide.id !== 1 && slide.id !== 5 ? "bg-[#EFF6FF]" : ""
-                  }`}
-                >
-                  {i !== slides.length - 1 && (
-                    <button
-                      onClick={handleSkip}
-                      className="absolute top-4 right-4 text-sm underline text-gray-500 z-50"
-                    >
-                      Skip
-                    </button>
-                  )}
-                  {slide.icon && <slide.icon />}
-                  {slide.img && (
-                    <Image
-                      src={slide.img}
-                      alt="image"
-                      width={340}
-                      height={295}
-                    />
-                  )}
-                </div>
+            {slides.map((slide, i) => {
+              const Icon = slide.icon;
+              const isFormSlide = slide.id === 2 || slide.id === 3;
 
-                <div className="w-full mx-auto max-w-76 flex flex-col items-center justify-center text-center mt-10">
-                  <h2
-                    className={`text-center text-2xl font-semibold leading-tight text-[#111827] ${
-                      slide.id === 3 ? "tracking-tight" : ""
-                    }`}
+              return (
+                <div key={slide.id} className="flex flex-col h-full">
+                  <div
+                    className={
+                      isFormSlide
+                        ? "relative flex-1 flex items-start pt-20 px-4 overflow-y-auto"
+                        : "relative h-[400px] flex items-center justify-center"
+                    }
                   >
-                    {slide.title}
-                  </h2>
-                  {slide.id === 4 && (
-                    <div className="text-center text-2xl font-semibold leading-tight text-[#111827] ">
-                      <div>Powered by K-AI,</div>
-                      <div>trained for Korean culture</div>
-                    </div>
+                    {i !== slides.length - 1 && (
+                      <button
+                        onClick={handleSkip}
+                        className="absolute top-4 right-4 text-sm underline text-gray-500 z-50"
+                      >
+                        Skip
+                      </button>
+                    )}
+                    <Icon />
+                  </div>
+                  {!isFormSlide && (
+                    <>
+                      <div className="w-full mx-auto max-w-76 flex flex-col items-center justify-center text-center mt-10">
+                        <h2 className="text-center text-2xl font-semibold leading-tight text-[#111827]">
+                          {slide?.title}
+                        </h2>
+                      </div>
+                      <div className="w-full flex flex-col items-center text-center mx-auto ">
+                        <p className="text-[#9CA3AF] mt-2 mb-3 text-sm leading-snug">
+                          {slide?.desc}
+                        </p>
+                      </div>
+                    </>
                   )}
                 </div>
-                <div
-                  className={`w-full flex flex-col items-center text-center mx-auto ${
-                    slide.id === 4 ? "max-w-[350px]" : "max-w-[300px]"
-                  }`}
-                >
-                  <p className="text-[#9CA3AF] mt-2 mb-3 text-sm leading-snug">
-                    {slide.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </Slider>
         </div>
 

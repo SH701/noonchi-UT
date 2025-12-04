@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Loading from "@/app/after/loading";
+import Loading from "@/app/(auth)/loading";
 import Image from "next/image";
 import { useAuthStore, type Level } from "@/store/useAuth";
 import { ActionButton } from "@/components/ui/button";

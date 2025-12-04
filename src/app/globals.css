@@ -46,30 +46,14 @@ body {
   justify-content: center;
   min-height: 60vh;
 }
-.btn {
-  @apply text-black px-4 py-2 rounded-md text-sm font-medium   cursor-pointer bg-white border border-gray-300;
-}
-
-.btn:hover {
-  @apply bg-blue-500;
-}
-
-.btn:focus {
-  @apply bg-blue-600 text-white;
-}
-
-.btn:disabled {
-  @apply bg-gray-300 text-gray-400 cursor-not-allowed;
-}
 
 /* Custom Slider Styles */
 .slick-dots {
-  margin-bottom: 40px !important; /* mb-10과 동일 (2.5rem = 40px) */
+  display: none !important;
 }
 
 .slick-dots li button:before {
   color: #d1d5db !important; /* 기본 dot 색상 (gray-300) */
-  font-size: 8px !important;
   opacity: 1 !important;
 }
 
@@ -77,37 +61,14 @@ body {
   color: #3b82f6 !important; /* active dot 하늘색 (blue-500) */
   opacity: 1 !important;
 }
-
-/* Custom Slider Styles */
-.slider-blue::-webkit-slider-thumb {
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: white;
-  border: 2px solid #3b82f6;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.dots-hidden .slick-dots {
+  display: none !important;
 }
 
-.slider-blue::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: white;
-  border: 2px solid #3b82f6;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.slider-blue::-webkit-slider-track {
-  background: transparent;
-  border: none;
-}
-
-.slider-blue::-moz-range-track {
-  background: transparent;
-  border: none;
+.dots-top .slick-dots {
+  display: block !important;
+  top: 20px;
+  bottom: auto;
 }
 
 /* Dropdown Animation */

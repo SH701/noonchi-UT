@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import LottieAnimation from "@/components/onboard/LottieAnimation";
 import { loadLottieAnimation, LOTTIE_PATHS } from "@/lib/lottie-loader";
 
-export default function Fifth() {
+export default function Fourth() {
   const [animationData, setAnimationData] = useState<any>(null);
 
   useEffect(() => {
