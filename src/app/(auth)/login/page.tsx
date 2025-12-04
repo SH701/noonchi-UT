@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Loading from "@/app/(auth)/loading";
+import Loading from "@/components/loading/loading";
 import Image from "next/image";
-import { useAuthStore, type Level } from "@/store/useAuth";
+import { useAuthStore } from "@/store/useAuth";
 import { ActionButton } from "@/components/ui/button";
+import { Level } from "@/types/user";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -43,6 +44,7 @@ export default function LoginPage() {
       });
       const me = await meRes.json();
       setMe(me);
+
       if (me.koreanLevel) {
         setKoreanLevel(me.koreanLevel as Level);
       }

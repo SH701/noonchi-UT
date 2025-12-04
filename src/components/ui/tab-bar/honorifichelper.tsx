@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function HonorificHelper() {
   return (
-    <div className="flex w-[340px] items-center gap-2 px-2 rounded-[99px] border border-blue-200 bg-white h-13  mt-4">
+    <div className="flex max-w-100 items-center gap-2 px-2 rounded-[99px] border border-blue-200 bg-white h-13  mt-4">
       <Link href="/error" className="flex gap-2 items-center">
         <Image src="/circle/circle4.png" alt="circle" width={28} height={28} />
         <span className="text-gray-500 text-sm">

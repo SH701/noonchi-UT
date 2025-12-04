@@ -9,7 +9,7 @@ interface EmptyStateProps {
 export default function EmptyState({ type }: EmptyStateProps) {
   if (type === "no-history") {
     return (
-      <div className="flex flex-col items-center justify-center mt-20">
+      <div className="flex flex-col items-center justify-center mt-60">
         <Image src="/circle/circle4.png" alt="loading" width={81} height={81} />
         <p className="text-gray-400 text-center mt-10">No chat history.</p>
         <Link

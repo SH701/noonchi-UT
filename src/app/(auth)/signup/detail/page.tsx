@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { ActionButton } from "@/components/ui/button";
-import Loading from "@/app/(auth)/loading";
+import Loading from "@/components/loading/loading";
 import { useAuthStore } from "@/store/useAuth";
 import SignupFormStep2 from "@/components/signup/SignupForm2";
 import SignupTemplate from "@/components/signup/SignupTemplate";
@@ -16,7 +16,6 @@ export default function SignupStep2() {
   const setAccessToken = useAuthStore((s) => s.setAccessToken);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [name, setName] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [gender, setGender] = useState<"MALE" | "FEMALE">("MALE");
@@ -64,7 +63,7 @@ export default function SignupStep2() {
     useAuthStore.getState().setRole("ROLE_USER");
 
     setLoading(true);
-    setTimeout(() => router.push("/after"), 1500);
+    setTimeout(() => router.push("/main"), 1500);
   };
 
   if (loading) return <Loading />;

@@ -3,10 +3,12 @@
 import { ActionButton, Back } from "@/components/ui/button";
 
 import { Check } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Billing() {
   const [selectedPack, setSelectedPack] = useState("level-up");
+  const router = useRouter();
 
   const packs = [
     {
@@ -51,7 +53,6 @@ export default function Billing() {
           Choose Your credit pack
         </h1>
 
-        {/* Credit Packs */}
         <div className="px-4 space-y-4 flex-1 pb-24 items-center justify-center">
           {packs.map((pack) => (
             <div
@@ -79,7 +80,6 @@ export default function Billing() {
                 )}
               </div>
 
-              {/* Credits and Price */}
               <div className="mb-4">
                 <div className="flex items-baseline gap-1 mb-1">
                   <span className="text-3xl font-bold text-blue-500">
@@ -90,7 +90,6 @@ export default function Billing() {
                 <div className="text-sm text-gray-600">/ {pack.price}</div>
               </div>
 
-              {/* Features */}
               <div className="space-y-2">
                 {pack.features.map((feature, index) => (
                   <div key={index} className="flex items-start gap-1">
@@ -104,7 +103,9 @@ export default function Billing() {
             </div>
           ))}
           <div className=" flex items-center justify-center mt-6">
-            <ActionButton>Get Credits</ActionButton>
+            <ActionButton onClick={() => router.push("/main")}>
+              Get Credits
+            </ActionButton>
           </div>
         </div>
       </div>

@@ -1,14 +1,17 @@
+// hooks/user/useUserProfile.ts
 import { useQuery } from "@tanstack/react-query";
-import { Profile } from "@/types/user";
 import { apiFetch } from "@/lib/api";
 import { useAuthStore } from "@/store/useAuth";
+import { Profile } from "@/types/user";
 
 export const useUserProfile = () => {
   const accessToken = useAuthStore((s) => s.accessToken);
+  const me = useAuthStore((s) => s.me);
 
   return useQuery<Profile>({
     queryKey: ["userProfile"],
     enabled: !!accessToken,
+
     queryFn: async () => {
       const res = await apiFetch("/api/users/me");
 

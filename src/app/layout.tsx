@@ -19,13 +19,14 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/icon-180.png" />
-
         <meta name="theme-color" content="#0453fd" />
       </head>
       <body className="min-h-screen w-full">
         <QueryProvider>
-          <div className="flex flex-col h-full">
-            <main className="grow w-full ">{children}</main>
+          <div className="w-full min-h-screen md:flex md:justify-center">
+            <div className="w-full md:max-w-[375px] md:shadow-xl bg-white">
+              {children}
+            </div>
           </div>
         </QueryProvider>
       </body>

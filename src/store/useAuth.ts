@@ -1,36 +1,13 @@
+import { Interest, Level, Role, User } from "@/types/user";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export type Level = "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
-export type Interest =
-  | "💬 Daily"
-  | "💼 Business"
-  | "✈️ Travel"
-  | "🎬 K-Drama"
-  | "🎵 K-Pop"
-  | "🙇‍♂️ Etiquette"
-  | "🔥 Internet Slang"
-  | "🥘 Food"
-  | "🍜 Ordering"
-  | "💄 Beauty"
-  | "👁️‍🗨️ Gathering";
 
-export type Role = "ROLE_GUEST" | "ROLE_USER";
 
-export interface User {
-  id: string;
-  email: string;
-  koreanLevel: Level;
-  profileImageUrl: string;
-  interests: Interest[];
-  role: Role;
-}
 
 export interface AuthState {
   accessToken: string | null;
   refreshToken: string | null;
-
-  // 🔥 새로 추가됨
   me: User | null;
 
   koreanLevel: Level;
@@ -55,10 +32,7 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       accessToken: null,
       refreshToken: null,
-
-      // 🔥 기본값
       me: null,
-
       role: "ROLE_GUEST",
       koreanLevel: "BEGINNER",
       selectedFace: null,

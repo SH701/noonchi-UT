@@ -13,7 +13,7 @@ import { useAuthStore } from "@/store/useAuth";
 import { ActionButton } from "../ui/button";
 import { useGuestLogin } from "@/hooks/guest/useGuestLogin";
 import React from "react";
-import Loading from "@/app/(auth)/loading";
+import Loading from "@/components/loading/loading";
 
 export const settings: Settings = {
   dots: true,
