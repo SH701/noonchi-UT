@@ -7,6 +7,7 @@ interface Props {
   onChange: (v: string) => void;
   placeholder?: string;
   className?: string;
+  disabled?: boolean;
 }
 
 export default function FormInput({
@@ -16,6 +17,7 @@ export default function FormInput({
   onChange,
   placeholder,
   className,
+  disabled,
 }: Props) {
   return (
     <div className="mb-6">
@@ -25,6 +27,7 @@ export default function FormInput({
       <input
         type="text"
         value={value}
+        disabled={disabled}
         onChange={(e) => onChange(e.target.value)}
         className={`w-[335px] p-2.5 rounded-lg border ${
           className || "border-gray-200 bg-white"

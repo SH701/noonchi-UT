@@ -155,16 +155,17 @@ export default function InterviewSection() {
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={sharedTransition}
-            className="fixed bottom-0 left-0 right-0 bg-white z-40 p-6 min-h-[40vh] pb-24 rounded-t-3xl"
+            className="fixed bottom-0 left-0 right-0 bg-white z-40 p-6 min-h-[10vh] pb-24 rounded-t-3xl"
           >
             <div className="flex-1 overflow-y-auto px-6">
-              <div className="mb-6 flex flex-col items-center justify-center gap-4">
+              <div className="mb-6 flex flex-col items-center justify-center">
                 <p className="text-blue-600 text-sm font-medium mb-2">
                   Credits Used
                 </p>
-                <p className="text-3xl font-semibold">
-                  60 <span className="text-blue-600">credit</span>
-                </p>
+                <div className="text-3xl font-semibold flex gap-2 mb-6">
+                  <p>60</p>
+                  <p className="text-blue-600 ">credit</p>
+                </div>
                 <ActionButton
                   onClick={() => router.push("/main/create/interview")}
                 >

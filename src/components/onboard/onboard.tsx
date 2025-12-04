@@ -6,7 +6,6 @@ import Slider, { Settings } from "react-slick";
 import { slides } from "@/data/onboarding";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 import { isTokenExpired, getOrCreateDeviceId } from "@/utils/auth";
@@ -14,6 +13,7 @@ import { useAuthStore } from "@/store/useAuth";
 import { ActionButton } from "../ui/button";
 import { useGuestLogin } from "@/hooks/guest/useGuestLogin";
 import React from "react";
+import Loading from "@/app/(auth)/loading";
 
 export const settings: Settings = {
   dots: true,
@@ -30,6 +30,7 @@ export const settings: Settings = {
 export default function Onboard() {
   const router = useRouter();
   const sliderRef = useRef<Slider>(null);
+  const [loading, setLoading] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const { accessToken, setAccessToken } = useAuthStore();
   const { mutateAsync: guestLogin } = useGuestLogin();
@@ -59,12 +60,14 @@ export default function Onboard() {
   };
   useEffect(() => {
     if (currentSlide === 3) {
-      const timer = setTimeout(() => {
-        handleOnboardingToMain();
-      }, 1000);
+      const timer = setTimeout(async () => {
+        setLoading(true);
+        await handleOnboardingToMain();
+      }, 1500);
+
       return () => clearTimeout(timer);
     }
-  }, [currentSlide, lastIndex]);
+  }, [currentSlide]);
 
   const handleNext = () => {
     if (currentSlide === lastIndex) {
@@ -73,6 +76,18 @@ export default function Onboard() {
       sliderRef.current?.slickNext();
     }
   };
+  useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(async () => {
+        await handleOnboardingToMain();
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [loading]);
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className="h-screen w-full bg-white flex items-center justify-center overflow-hidden">
       <div className="w-full h-full flex flex-col mx-auto relative">

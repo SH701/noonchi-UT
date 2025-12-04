@@ -32,7 +32,7 @@ export default function RoleplayForm({
     onSubmit({ isAI, me, detail });
   };
   const inputStyle =
-    mode === "topic" ? "bg-indigo-50 border-blue-600 text-blue-600" : "";
+    mode === "topic" ? "bg-indigo-50 border-blue-600 text-blue-600 " : "";
   return (
     <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
       <FormInput
@@ -42,6 +42,7 @@ export default function RoleplayForm({
         onChange={setIsAI}
         placeholder="Enter the AI"
         className={inputStyle}
+        disabled={mode === "topic"}
       />
 
       <FormInput
@@ -51,6 +52,7 @@ export default function RoleplayForm({
         onChange={setMe}
         placeholder="Enter the you"
         className={inputStyle}
+        disabled={mode === "topic"}
       />
       <FormInput
         label="Detail"
