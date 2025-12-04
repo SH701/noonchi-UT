@@ -50,6 +50,10 @@ export default function RolePlay() {
     detail: string;
   }) => {
     if (!topic) return;
+    if (!topicEnum) {
+      alert("준비중인 시나리오 입니다!");
+      return router.push("/main");
+    }
     setLoading(true);
     try {
       const deduct = await apiFetch("/api/users/credit/deduct", {
