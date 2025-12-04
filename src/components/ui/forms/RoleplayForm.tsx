@@ -57,12 +57,12 @@ export default function RoleplayForm({
         className={inputStyle}
         disabled={mode === "topic"}
       />
-      <FormInput
-        label="Detail"
+      <textarea
         required
         value={detail}
-        onChange={setDetail}
-        placeholder="Please the job posting from the company"
+        onChange={(e) => setDetail(e.target.value)}
+        placeholder="Include details like the reason for the interaction, the setting, timing, and emotional atmosphere."
+        className="w-[335px] py-4.5 px-4 h-30 rounded-lg border text-black placeholder-gray-400 placeholder:text-sm placeholder:leading-5 outline-none"
       />
       <div className="flex items-center flex-col fixed bottom-8">
         <div className="flex gap-2.5  px-4 py-2.5 bg-blue-100 mt-20  rounded-lg">
