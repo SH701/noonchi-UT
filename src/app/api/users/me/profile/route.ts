@@ -9,7 +9,6 @@ export async function PUT(req: NextRequest) {
     auth = undefined;
   }
 
-  // 쿠키에서 accessToken 읽어서 Bearer 만들기
   if (!auth) {
     const token = req.cookies.get("accessToken")?.value;
 

@@ -10,9 +10,9 @@ import {
   useDeleteConversation,
 } from "@/hooks/conversation/useConversations";
 import { useChatHistoryStore } from "@/store/useChatHistorystore";
-import { useAuthStore } from "@/store/useAuth";
+
 import { Conversation } from "@/types/conversation";
-import LoginModal from "@/components/modal/LoginModal";
+
 import {
   EmptyState,
   Filter,
@@ -22,41 +22,11 @@ import {
 } from "@/components/bothistory";
 import { InprogressIcon, DoneIcon } from "@/components/ui/icon";
 
-const situationOptions = {
-  BOSS: [
-    { value: "BOSS1", label: "Apologizing for a mistake at work." },
-    { value: "BOSS2", label: "Requesting half-day or annual leave" },
-    { value: "BOSS3", label: "Requesting feedback on work" },
-  ],
-  GF_PARENTS: [
-    { value: "GF_PARENTS1", label: "Meeting for the first time" },
-    { value: "GF_PARENTS2", label: "Asking for permission" },
-    { value: "GF_PARENTS3", label: "Discussing future plans" },
-  ],
-  CLERK: [
-    { value: "CLERK1", label: "Making a reservation" },
-    { value: "CLERK2", label: "Asking for information" },
-    { value: "CLERK3", label: "Filing a complaint" },
-  ],
-} as const;
-
-const getSituationLabel = (value?: string) => {
-  if (!value) return "";
-  for (const key in situationOptions) {
-    const found = situationOptions[key as keyof typeof situationOptions].find(
-      (opt) => opt.value === value
-    );
-    if (found) return found.label;
-  }
-  return value;
-};
-
 const getName = (name?: string) => (name && name.trim() ? name : "Unknown");
 const getImg = (url?: string) => (typeof url === "string" ? url : "");
 
 export default function ChatBothistoryPage() {
   const router = useRouter();
-  const accessToken = useAuthStore((s) => s.accessToken);
 
   const { keyword, sort, selectedFilter, expanded, toggleExpand } =
     useChatHistoryStore();
@@ -95,9 +65,6 @@ export default function ChatBothistoryPage() {
     deleteMutation.mutate(conversationId);
   };
 
-  if (!accessToken) {
-    return <LoginModal isOpen={true} onClose={() => router.push("/login")} />;
-  }
   return (
     <div className="bg-gray-100 w-full flex flex-col pt-12">
       <div className="flex justify-between items-center space-x-2 relative z-10 px-4">
@@ -141,9 +108,7 @@ export default function ChatBothistoryPage() {
                 const name = getName(chat?.aiPersona?.name);
                 const desc = chat?.aiPersona?.description ?? "";
                 const img = getImg(chat?.aiPersona?.profileImageUrl);
-                const situationLabel = getSituationLabel(
-                  (chat as any)?.situation
-                );
+
                 const isOpen = expanded[chat.conversationId];
 
                 return (
@@ -201,7 +166,7 @@ export default function ChatBothistoryPage() {
                             </span>
                           </div>
                           <p className="text-[13px] text-gray-600 truncate">
-                            {situationLabel || desc}
+                            {desc}
                           </p>
                         </div>
                       </div>

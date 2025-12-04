@@ -68,7 +68,7 @@ export default function InterviewSection() {
                     </div>
                     <div className="absolute bottom-13 right-4">
                       <Image
-                        src="/etc/chat.png"
+                        src="/etc/Chat.png"
                         alt="사진"
                         width={32}
                         height={32}
@@ -162,9 +162,21 @@ export default function InterviewSection() {
                 <p className="text-blue-600 text-sm font-medium mb-2">
                   Credits Used
                 </p>
-                <div className="text-3xl font-semibold flex gap-2 mb-6">
-                  <p>60</p>
-                  <p className="text-blue-600 ">credit</p>
+                <div className="flex items-end gap-1 text-blue-600 font-semibold mb-2">
+                  <p className="text-3xl leading-none">100</p>
+                  <p className="text-2xl leading-none">credit</p>
+                </div>
+                <div className="flex items-center bg-gray-100 rounded-4xl px-2.5 py-1.5 gap-2 mb-5">
+                  <Image
+                    src="/credits/crediticon.png"
+                    width={20}
+                    height={20}
+                    alt="크레딧"
+                  />
+                  <p className="text-gray-600 font-semibold">Chat</p>
+                  <p className="text-blue-600 font-semibold">60</p>
+                  <p className="text-gray-600 font-semibold">+ Report</p>
+                  <p className="text-blue-600 font-semibold">40</p>
                 </div>
                 <ActionButton
                   onClick={() => router.push("/main/create/interview")}

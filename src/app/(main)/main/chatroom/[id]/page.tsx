@@ -121,6 +121,17 @@ export default function ChatroomPage() {
   };
 
   const handleFeedbacks = (messageId: string) => {
+    if (feedbackOpenId === messageId) {
+      setFeedbackOpenId(null);
+      return;
+    }
+
+    const targetMessage = messages.find((m) => m.messageId === messageId);
+    if (targetMessage?.feedback) {
+      setFeedbackOpenId(messageId);
+      return;
+    }
+
     createFeedback(messageId, {
       onSuccess: (feedback) => {
         setMessages((prev) =>

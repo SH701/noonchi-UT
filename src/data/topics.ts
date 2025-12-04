@@ -39,43 +39,7 @@ export const CareerTopics = [
   },
 ];
 
-export const FamilyTopics = [
-  {
-    id: 1,
-    title: "Soft Shields with In-laws",
-    description: "Set gentle boundaries—polite but not a pushover.",
-    aiRole: "Korean in-law elder",
-    myRole: "Partner marrying into a Korean family",
-  },
-  {
-    id: 2,
-    title: "The “Eat More~” Challenge",
-    description: "Respond naturally to over-caring Korean moms.",
-    aiRole: "Korean mom / mother-in-law",
-    myRole: "Guest at a Korean family table",
-  },
-  {
-    id: 3,
-    title: "Saying No to Sweet Elders",
-    description: "Decline elder requests politely and guilt-free.",
-    aiRole: "Friendly Korean elder / ajumma",
-    myRole: "Neighbor living in Korea",
-  },
-  {
-    id: 4,
-    title: "Heart-Talk Without Drama",
-    description: "Share real feelings calmly without emotional explosion.",
-    aiRole: "Korean husband/wife",
-    myRole: "Spouse in a Korean–non-Korean couple",
-  },
-  {
-    id: 5,
-    title: "Talking About Your Partner",
-    description: "Introduce your relationship to parents confidently.",
-    aiRole: "Korean parent listening",
-    myRole: "Boyfriend/girlfriend in a cross-cultural relationship",
-  },
-];
+
 
 export const LoveTopics = [
   {
@@ -196,7 +160,7 @@ export const KPopTopics = [
 
 export const topicsByCategory = {
   Career: CareerTopics,
-  Family: FamilyTopics,
+  
   Romance: LoveTopics,
   Belonging: BelongingTopics,
   "K-POP": KPopTopics,

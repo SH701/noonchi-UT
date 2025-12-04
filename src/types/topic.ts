@@ -1,9 +1,4 @@
-export type CategoryType =
-  | "Career"
-  | "Family"
-  | "Romance"
-  | "Belonging"
-  | "K-POP";
+export type CategoryType = "Career" | "Romance" | "Belonging" | "K-POP";
 
 export type Topic = {
   id: number | string;

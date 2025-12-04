@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 import { useAuthStore } from "@/store/useAuth";
@@ -26,6 +26,7 @@ export default function MessageItem({
   myAI,
   isMine,
   isFeedbackOpen,
+  feedbackOpenId,
   handleFeedbacks,
   messageStatus = "default",
 }: MessageItemProps) {
@@ -47,7 +48,7 @@ export default function MessageItem({
     isMine &&
     (m.politenessScore ?? -1) >= 0 &&
     (m.naturalnessScore ?? -1) >= 0 &&
-    (m.politenessScore + m.naturalnessScore) / 2 <= 70;
+    (m.politenessScore + m.naturalnessScore) / 2 <= 80;
   const avgScore = ((m.politenessScore ?? 0) + (m.naturalnessScore ?? 0)) / 2;
 
   const isErrorOrFeedback =
@@ -64,11 +65,11 @@ export default function MessageItem({
   let scoreLabel = "None";
   let scoreColor = "text-green-500";
   let scoreIcon = "/chatroom/satisfied.png";
-  if (avgScore < 30) {
+  if (avgScore < 50) {
     scoreLabel = "Serious";
     scoreColor = "text-red-500";
     scoreIcon = "/chatroom/dissatisfied.png";
-  } else if (avgScore < 70) {
+  } else if (avgScore < 80) {
     scoreLabel = "Mild";
     scoreColor = "text-yellow-500";
     scoreIcon = "/chatroom/neutral.png";
@@ -182,7 +183,7 @@ export default function MessageItem({
                   />
                 </svg>
               ) : (
-                <Info className="text-red-500 size-4"></Info>
+                <Info className="text-red-500 size-4" />
               )}
             </button>
           )}
@@ -254,7 +255,7 @@ export default function MessageItem({
 
         {/* 피드백 박스 */}
         <div className="w-full z-50 translate-x-[30px] max-w-[88%]">
-          {isMine && isFeedbackOpen && m.feedback && (
+          {isMine && feedbackOpenId === m.messageId && m.feedback && (
             <div className="p-4 bg-gray-600 rounded-xl -mt-10 ">
               <div className="text-white text-sm pb-3 border-b border-gray-500 mb-3 pt-4">
                 {m.feedback.appropriateExpression}

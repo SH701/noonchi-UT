@@ -28,7 +28,7 @@ export default function InterviewForm({
   const [jobPosting, setJobPosting] = useState("");
   const [style, setStyle] = useState("standard");
   const [files, setFiles] = useState<File[]>([]);
-
+  const [hidden, setHidden] = useState(false);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -84,17 +84,24 @@ export default function InterviewForm({
         />
       </div>
       <div className="flex items-center flex-col fixed bottom-8">
-        <div className="flex gap-2.5  px-4 py-2.5 bg-blue-100 mt-20  rounded-lg">
-          <Image
-            src="/credits/interviewcredit.png"
-            alt="크레딧 소모"
-            width={16}
-            height={16}
-          />
-          <p className="text-blue-600 text-xs">
-            It costs 60 credits to run this chat
-          </p>
-        </div>
+        {!hidden && (
+          <div className="">
+            <button
+              onClick={() => setHidden(true)}
+              className="flex gap-2.5 px-4 py-2.5 bg-blue-100 rounded-lg"
+            >
+              <Image
+                src="/credits/interviewcredit.png"
+                alt="크레딧 소모"
+                width={16}
+                height={16}
+              />
+              <p className="text-blue-600 text-xs">
+                It costs 60 credits to run this chat
+              </p>
+            </button>
+          </div>
+        )}
         <div className="mt-2">
           <ActionButton type="submit">Start Chatting</ActionButton>
         </div>

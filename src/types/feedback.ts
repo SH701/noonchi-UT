@@ -1,3 +1,8 @@
+export type ImprovementPoint = {
+  point: string;
+  tip: string;
+};
+
 export type Feedback = {
   feedbackId: number;
   conversationId: number;
@@ -6,7 +11,6 @@ export type Feedback = {
   pronunciationScore: number;
   summary: string;
   goodPoints: string;
-  improvementPoints: string;
-  improvementExamples: string;
+  improvementPoints: ImprovementPoint[];
   overallEvaluation: string;
 };

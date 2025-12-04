@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRouter, useParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMessages } from "@/hooks/chatroom/useMessage";
 import { useConversaitonFeedback } from "@/hooks/conversation/useConversationFeedback";
 import { ActionButton } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import MessageList from "@/components/chatroom/MessageList";
 import { useMessageFeedback } from "@/hooks/chatroom/useMessageFeedback";
 import { useConversationDetail } from "@/hooks/conversation/useConversationDetail";
 import { ResultTab, Point, Part } from "@/components/result";
+import { ChatMsg } from "@/types/chatmessage";
 
 export default function Result() {
   const [tab, setTab] = useState<"transcript" | "mistakes">("transcript");
@@ -18,9 +19,9 @@ export default function Result() {
   const { data: conversation } = useConversationDetail(id);
   const conversationId = conversation?.conversationId ?? 0;
   const myAI = conversation?.aiPersona ?? null;
-
+  const [messages, setMessages] = useState<ChatMsg[]>([]);
   const [feedbackOpenId, setFeedbackOpenId] = useState<string | null>(null);
-
+  const [isInitialized, setIsInitialized] = useState(false);
   const { mutate: createFeedback } = useMessageFeedback(conversationId);
 
   const handleFeedbacks = (messageId: string) => {
@@ -29,12 +30,24 @@ export default function Result() {
       return;
     }
 
-    createFeedback(messageId);
-    setFeedbackOpenId(messageId);
+    const targetMessage = messages.find((m) => m.messageId === messageId);
+    if (targetMessage?.feedback) {
+      setFeedbackOpenId(messageId);
+      return;
+    }
+
+    createFeedback(messageId, {
+      onSuccess: (feedback) => {
+        setMessages((prev) =>
+          prev.map((m) => (m.messageId === messageId ? { ...m, feedback } : m))
+        );
+        setFeedbackOpenId(messageId);
+      },
+    });
   };
 
   const {
-    data: messages = [],
+    data: initialMessages = [],
     error: messagesError,
     isLoading: messagesLoading,
   } = useMessages(id);
@@ -44,7 +57,12 @@ export default function Result() {
     error: feedbackError,
     isLoading: feedbackLoading,
   } = useConversaitonFeedback(id);
-
+  useEffect(() => {
+    if (!isInitialized && initialMessages && initialMessages.length > 0) {
+      setMessages(initialMessages);
+      setIsInitialized(true);
+    }
+  }, [initialMessages, isInitialized]);
   if (messagesLoading || feedbackLoading) {
     return <p className="p-6">Loading...</p>;
   }
@@ -67,7 +85,7 @@ export default function Result() {
   if (!feedback) {
     return <p className="p-6">No feedback available</p>;
   }
-
+  console.log(feedback);
   return (
     <div className="min-h-screen bg-white flex flex-col overflow-x-hidden">
       {/* 메인 콘텐츠 (스크롤 가능 영역) */}
@@ -116,7 +134,7 @@ export default function Result() {
                 />
                 <Part
                   title="What you did well"
-                  desc={feedback.goodPoints || ""}
+                  desc={feedback.goodPoints || "참 잘했어요!"}
                 />
                 <div className="bg-white rounded-2xl border border-gray-200 p-4">
                   <h3 className="text-gray-900 text-base font-semibold font-pretendard leading-[130%] mb-3">
@@ -124,14 +142,16 @@ export default function Result() {
                   </h3>
                   <div className="border-t border-gray-200 pt-3 flex flex-col">
                     <p className="text-gray-700 text-sm font-medium font-pretendard leading-[130%] mb-4">
-                      {feedback.improvementPoints || ""}
+                      {feedback.improvementPoints?.[0]?.point ||
+                        "점검 중입니다."}
                     </p>
                     <div className="bg-gray-50 rounded-xl p-3">
                       <p className="text-gray-600 bg-blue-200 w-10 py-1 font-semibold text-center rounded-full text-sm font-pretendard leading-[130%] mb-3">
                         Try
                       </p>
                       <p className="text-gray-700 text-sm font-medium font-pretendard leading-[130%]">
-                        {feedback.improvementExamples || ""}
+                        {feedback.improvementPoints?.[0]?.tip ||
+                          "점검 중입니다2."}
                       </p>
                     </div>
                   </div>
@@ -141,7 +161,6 @@ export default function Result() {
           </div>
         </div>
       </div>
-
       <div className="px-4 pb-6 sticky bottom-0 bg-white z-50">
         <ActionButton
           children="Complete"

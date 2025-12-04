@@ -10,7 +10,7 @@ import { Interviewsection, TopicList } from "@/components/mainpage";
 export default function Main() {
   const [category, setCategory] = useState<CategoryType>("Career");
   const [showComingSoon, setShowComingSoon] = useState(false);
-  const [credits, setCredits] = useState(500);
+  const [credits, setCredits] = useState(250);
   return (
     <>
       <div className="w-full py-6 px-7 bg-[#F2F7FF] flex justify-between">

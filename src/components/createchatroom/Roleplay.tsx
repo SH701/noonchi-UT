@@ -5,7 +5,13 @@ import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 
 import { topicsByCategory } from "@/data/topics";
 import RoleplayForm from "@/components/ui/forms/RoleplayForm";
-
+import { apiFetch } from "@/lib/api";
+const TOPIC_ENUM_BY_ID: Record<number, string> = {
+  1: "after_work_escape_mode",
+  2: "could_you_soften_your_tone",
+  3: "midnight_mom_energy",
+  4: "bias_talk_irl",
+};
 export default function RolePlay() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -20,8 +26,30 @@ export default function RolePlay() {
       ? topicsByCategory[category]?.find((t) => t.id === topicId)
       : undefined;
 
-  const handleSubmit = (data: { isAI: string; me: string; detail: string }) => {
-    console.log("Form submitted:", data);
+  const handleSubmit = async (data: {
+    isAI: string;
+    me: string;
+    detail: string;
+  }) => {
+    if (!topic) return;
+
+    try {
+      const topicEnum = TOPIC_ENUM_BY_ID[topicId];
+
+      const res = await apiFetch(`/api/conversations/role-playing`, {
+        method: "POST",
+        body: JSON.stringify({
+          conversationTopic: topicEnum,
+          details: data.detail,
+        }),
+      });
+      if (!res.ok) throw new Error("인터뷰 생성 실패");
+      const convo = await res.json();
+
+      router.push(`/main/chatroom/${convo.conversationId}`);
+    } catch (err) {
+      console.error("Error:", err);
+    }
   };
 
   return (
