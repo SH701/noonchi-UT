@@ -9,6 +9,7 @@ import { useAuthStore } from "@/store/useAuth";
 import SignupFormStep2 from "@/components/signup/SignupForm2";
 import SignupTemplate from "@/components/signup/SignupTemplate";
 import SignupHeader from "@/components/signup/SignupHeader";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function SignupStep2() {
   const router = useRouter();
@@ -19,6 +20,7 @@ export default function SignupStep2() {
   const [name, setName] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [gender, setGender] = useState<"MALE" | "FEMALE">("MALE");
+  const queryClient = useQueryClient();
 
   const [loading, setLoading] = useState(false);
 
@@ -62,6 +64,14 @@ export default function SignupStep2() {
     useAuthStore.getState().setRefreshToken(data.refreshToken);
     useAuthStore.getState().setRole("ROLE_USER");
 
+    // ✅ userProfile 쿼리 무효화 및 리페치
+    await queryClient.invalidateQueries({
+      queryKey: ["userProfile"],
+    });
+    await queryClient.refetchQueries({
+      queryKey: ["userProfile"],
+    });
+
     setLoading(true);
     const pendingInterviewId = localStorage.getItem("pendingInterviewId");
 
@@ -69,7 +79,6 @@ export default function SignupStep2() {
       setTimeout(() => {
         router.push(`/main/chatroom/${pendingInterviewId}`);
         localStorage.removeItem("pendingInterviewId");
-        useAuthStore.getState().setRole("ROLE_USER");
       }, 1500);
     } else {
       setTimeout(() => router.push("/main"), 1500);
