@@ -1,11 +1,13 @@
-// "use client";
+"use client";
 
-// import { useEffect } from "react";
+import { useEffect } from "react";
 
-// export function useSW() {
-//   useEffect(() => {
-//     if ("serviceWorker" in navigator) {
-//       navigator.serviceWorker.register("/sw.js");
-//     }
-//   }, []);
-// }
+export function SWRegister() {
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js");
+    }
+  }, []);
+
+  return null;
+}

@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Metadata } from "next";
 import QueryProvider from "@/providers/QueryProvider";
+import { SWRegister } from "./sw-register";
 
 export const metadata: Metadata = {
   title: "Noonchi.ai",
@@ -28,6 +29,7 @@ export default function RootLayout({
               {children}
             </div>
           </div>
+          <SWRegister />
         </QueryProvider>
       </body>
     </html>
