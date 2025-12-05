@@ -9,9 +9,7 @@ type MessageListProps = {
   messages: any[];
   myAI: MyAI | null;
   feedbackOpenId: string | null;
-
   handleFeedbacks: (messageId: string) => void;
-
   messageStatuses?: Record<string, "default" | "error">;
 };
 
@@ -19,9 +17,7 @@ export default function MessageList({
   messages,
   myAI,
   feedbackOpenId,
-
   handleFeedbacks,
-
   messageStatuses = {},
 }: MessageListProps) {
   return (

@@ -15,7 +15,7 @@ export default function FeedbackSection({ id }: { id: number | string }) {
   } = useConversaitonFeedback(conversationId);
 
   const viewfeedback = () => {
-    router.push(`/main/custom/chatroom/${conversationId}/result`);
+    router.push(`/main/chatroom/${conversationId}/result`);
   };
 
   const handleDeleteChat = async () => {
