@@ -1,13 +1,13 @@
 "use client";
 
-import { ModalButton } from "@/components/ui/button/";
-import { FeedbackCloseButton } from "@/components/ui/button";
+
 import Modal from "@/components/ui/modal/Modal";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useAuthStore } from "@/store/useAuth";
 import { useState } from "react";
 import LoadingModal from "../chatroom/LoadingModal";
+import { Button } from "../ui/button";
 
 interface EndModalProps {
   isOpen: boolean;
@@ -57,16 +57,22 @@ and receive feedback?"
         className="w-[320px] bg-white rounded-xl flex flex-col justify-center items-center px-4 py-12 gap-4"
       >
         <Image src="/etc/exitchar.svg" alt="exit" width={130} height={94} />
-        <ModalButton
-          label={isLoading ? "Loading..." : "Get Feedback"}
+        <Button
+          variant="primary"
+          size="md"
           onClick={handleEnd}
           disabled={isLoading}
-        />
-        <FeedbackCloseButton
-          label="Keep conversation"
+        >
+          {isLoading ? "Loading..." : "Get Feedback"}
+        </Button>
+        <Button
+          variant="secondary"
+          size="md"
           onClick={onClose}
           disabled={isLoading}
-        />
+        >
+          Keep conversation
+        </Button>
       </Modal>
       {isLoading && <LoadingModal open={true} />}
     </>

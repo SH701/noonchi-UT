@@ -1,8 +1,7 @@
 "use client";
 
-import LabelText from "@/components/ui/text/LabelText";
-import { GenderButton } from "../ui/button";
 
+import { Button } from "../ui/button";
 
 export default function GenderToggle({
   gender,
@@ -13,21 +12,25 @@ export default function GenderToggle({
 }) {
   return (
     <div>
-      <LabelText>Gender</LabelText>
+      <label className="block text-sm font-medium text-gray-700 mb-2">
+        Gender
+      </label>
       <div className="flex space-x-4">
-        <GenderButton
-          active={gender === "MALE"}
+        <Button
+          variant={gender === "MALE" ? "selected" : "outline"}
+          size="fluid"
           onClick={() => setGender("MALE")}
         >
           Male
-        </GenderButton>
+        </Button>
 
-        <GenderButton
-          active={gender === "FEMALE"}
+        <Button
+          variant={gender === "FEMALE" ? "selected" : "outline"}
+          size="fluid"
           onClick={() => setGender("FEMALE")}
         >
           Female
-        </GenderButton>
+        </Button>
       </div>
     </div>
   );

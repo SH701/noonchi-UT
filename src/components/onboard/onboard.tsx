@@ -10,7 +10,7 @@ import Link from "next/link";
 
 import { isTokenExpired, getOrCreateDeviceId } from "@/utils/auth";
 import { useAuthStore } from "@/store/useAuth";
-import { ActionButton } from "../ui/button";
+import { Button } from "../ui/button";
 import { useGuestLogin } from "@/hooks/guest/useGuestLogin";
 import React from "react";
 import Loading from "@/components/loading/loading";
@@ -67,7 +67,7 @@ export default function Onboard() {
 
       return () => clearTimeout(timer);
     }
-  }, [currentSlide]);
+  }, [currentSlide, handleOnboardingToMain]);
 
   const handleNext = () => {
     if (currentSlide === lastIndex) {
@@ -159,7 +159,9 @@ export default function Onboard() {
 
         <div className="px-4">
           {currentSlide !== 3 && (
-            <ActionButton onClick={handleNext}>Next</ActionButton>
+            <Button variant="primary" size="lg" onClick={handleNext}>
+              Next
+            </Button>
           )}
         </div>
         <div className="pb-6">

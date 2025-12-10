@@ -1,7 +1,5 @@
 "use client";
 
-
-import DescriptionText from "@/components/ui/text/DescriptionText";
 import { Checkbox, TextInput } from "../ui/form";
 
 export default function SignupFormStep1({
@@ -35,7 +33,6 @@ export default function SignupFormStep1({
         value={email}
         onChange={setEmail}
       />
-
       <TextInput
         label="Password"
         type="password"
@@ -43,7 +40,6 @@ export default function SignupFormStep1({
         value={pw}
         onChange={setPw}
       />
-
       <TextInput
         label="Re-enter password"
         type="password"
@@ -51,10 +47,9 @@ export default function SignupFormStep1({
         value={pw2}
         onChange={setPw2}
       />
-
-      <DescriptionText>
+      <p className="text-sm text-gray-500 leading-[140%]">
         8–16 characters, include letters & numbers
-      </DescriptionText>
+      </p>
 
       <label className="flex items-start space-x-3">
         <Checkbox checked={agree} onChange={setAgree} />

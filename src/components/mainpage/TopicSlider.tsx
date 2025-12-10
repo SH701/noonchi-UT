@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { TopicButton } from "../ui/button";
+import { Button } from "../ui/button";
 import { TopicProps } from "@/types/topic";
 
 export default function TopicSlider({ topics, active, onSelect }: TopicProps) {
@@ -36,11 +36,13 @@ export default function TopicSlider({ topics, active, onSelect }: TopicProps) {
       >
         {topics.map((t) => (
           <div key={t.label} className="shrink-0 mr-1">
-            <TopicButton
-              label={t.label}
-              active={active === t.label}
+            <Button
+              variant={active === t.label ? "destructive" : "outline"}
+              size="sm"
               onClick={() => onSelect(t.label)}
-            />
+            >
+              {t.label}
+            </Button>
           </div>
         ))}
       </motion.div>

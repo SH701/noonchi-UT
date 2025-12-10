@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Image from "next/image";
 import FormInput from "../form/FormInput";
-import { ActionButton } from "../button";
+import { Button } from "../button";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface RoleplayProps {
@@ -77,7 +77,9 @@ export default function RoleplayForm({
           </p>
         </div>
         <div className="mt-2">
-          <ActionButton type="submit">Start Chatting</ActionButton>
+          <Button variant="primary" size="lg" type="submit">
+            Start Chatting
+          </Button>
         </div>
       </div>
     </form>

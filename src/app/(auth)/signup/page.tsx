@@ -5,7 +5,7 @@ import { useState } from "react";
 import SignupHeader from "@/components/signup/SignupHeader";
 import SignupTemplate from "@/components/signup/SignupTemplate";
 import SignupFormStep1 from "@/components/signup/SignupForm1";
-import { ActionButton } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 export default function SignupStep1() {
   const router = useRouter();
@@ -28,9 +28,14 @@ export default function SignupStep1() {
     <SignupTemplate
       header={<SignupHeader title="Create account" />}
       footer={
-        <ActionButton disabled={!canNext} onClick={goNext}>
+        <Button
+          variant="primary"
+          size="lg"
+          disabled={!canNext}
+          onClick={goNext}
+        >
           Next
-        </ActionButton>
+        </Button>
       }
     >
       <SignupFormStep1

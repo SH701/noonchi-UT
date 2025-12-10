@@ -1,6 +1,7 @@
 "use client";
 
-import { ActionButton, Back } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
+import Back from "@/components/ui/button/Back";
 import { apiFetch } from "@/lib/api";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -125,13 +126,15 @@ export default function Billing() {
             </div>
           ))}
           <div className=" flex items-center justify-center mt-6">
-            <ActionButton
+            <Button
+              variant="primary"
+              size="lg"
               onClick={() => {
                 handleCharge().then(() => router.push("/main"));
               }}
             >
               Get Credits
-            </ActionButton>
+            </Button>
           </div>
         </div>
       </div>

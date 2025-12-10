@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { ActionButton } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import Loading from "@/components/loading/loading";
 import SignupFormStep2 from "@/components/signup/SignupForm2";
 import SignupTemplate from "@/components/signup/SignupTemplate";
@@ -75,9 +75,14 @@ export default function SignupStep2() {
     <SignupTemplate
       header={<SignupHeader title="Create account" />}
       footer={
-        <ActionButton disabled={!canSubmit} onClick={handleSignup}>
+        <Button
+          variant="primary"
+          size="lg"
+          disabled={!canSubmit}
+          onClick={handleSignup}
+        >
           Next
-        </ActionButton>
+        </Button>
       }
     >
       <SignupFormStep2

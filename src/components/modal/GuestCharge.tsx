@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
 import { Info, Check, X } from "lucide-react";
 import Modal from "../ui/modal/Modal";
-import { ModalButton } from "../ui/button";
+import { Button } from "../ui/button";
 import { ModalProps } from "@/types/modal";
 import { useRouter } from "next/navigation";
 
@@ -27,7 +26,7 @@ export default function GuestCharge({ isOpen, onClose }: ModalProps) {
       </div>
 
       <h2 className="text-xl font-semibold  text-gray-900 mb-2">
-        You've used up all credits
+        You&apos;ve used up all credits
       </h2>
 
       <p className=" text-gray-600 text-sm mb-7 font-semibold text-center">
@@ -53,14 +52,16 @@ export default function GuestCharge({ isOpen, onClose }: ModalProps) {
         </div>
       </div>
 
-      <ModalButton label="Sign Up" onClick={() => router.push("/signup")} />
-
-      <button
-        className="w-full text-gray-500 text-sm hover:text-gray-700 mt-3 underline"
-        onClick={() => router.push("/login")}
+      <Button
+        variant="primary"
+        size="md"
+        onClick={() => router.push("/signup")}
       >
+        Sign Up
+      </Button>
+      <Button variant="primary" size="md" onClick={() => router.push("/login")}>
         Log in
-      </button>
+      </Button>
     </Modal>
   );
 }

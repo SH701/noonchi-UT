@@ -1,6 +1,6 @@
 "use client";
 
-import { ActionButton } from "../ui/button";
+import { Button } from "../ui/button";
 
 export default function SignupButtonArea({
   disabled,
@@ -13,9 +13,9 @@ export default function SignupButtonArea({
 }) {
   return (
     <div className="fixed bottom-24 w-full flex justify-center items-center">
-      <ActionButton disabled={disabled} onClick={onClick}>
+      <Button variant="primary" size="lg" disabled={disabled} onClick={onClick}>
         {label}
-      </ActionButton>
+      </Button>
     </div>
   );
 }

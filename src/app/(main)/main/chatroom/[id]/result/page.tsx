@@ -5,7 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useMessages } from "@/hooks/chatroom/useMessage";
 import { useConversaitonFeedback } from "@/hooks/conversation/useConversationFeedback";
-import { ActionButton } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import MessageList from "@/components/chatroom/MessageList";
 import { useMessageFeedback } from "@/hooks/chatroom/useMessageFeedback";
 import { useConversationDetail } from "@/hooks/conversation/useConversationDetail";
@@ -162,10 +162,13 @@ export default function Result() {
         </div>
       </div>
       <div className="px-4 pb-6 sticky bottom-0 bg-white z-50">
-        <ActionButton
-          children="Complete"
+        <Button
+          variant="primary"
+          size="lg"
           onClick={() => router.push("/main")}
-        />
+        >
+          Complete
+        </Button>
       </div>
     </div>
   );

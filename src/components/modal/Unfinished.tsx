@@ -1,5 +1,5 @@
 import { Info } from "lucide-react";
-import { ModalButton } from "../ui/button";
+import { Button } from "../ui/button";
 import Modal from "../ui/modal/Modal";
 
 export default function Unfinished({
@@ -19,8 +19,12 @@ export default function Unfinished({
     >
       <Info className="text-red-500 size-10 absolute top-2" />
       <div className="flex flex-col gap-3 w-full mt-4 items-center">
-        <ModalButton label="Continue" onClick={onClose} />
-        <ModalButton label="Quit" onClick={onClose} />
+        <Button variant="primary" size="md" onClick={onClose}>
+          Contiune
+        </Button>
+        <Button variant="primary" size="md" onClick={onClose}>
+          Quit
+        </Button>
       </div>
     </Modal>
   );

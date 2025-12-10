@@ -1,5 +1,5 @@
 import { Info } from "lucide-react";
-import { ModalButton } from "../ui/button";
+import { Button } from "../ui/button";
 import Modal from "../ui/modal/Modal";
 import { useRouter } from "next/navigation";
 
@@ -21,7 +21,13 @@ export default function Sucess({
     >
       <Info className="text-green-500 size-10 absolute top-4" />
       <div className="flex flex-col gap-3 w-full mt-4 items-center">
-        <ModalButton label="Sign up" onClick={() => router.push("/signup")} />
+        <Button
+          variant="primary"
+          size="md"
+          onClick={() => router.push("/signup")}
+        >
+          Sign up
+        </Button>
       </div>
     </Modal>
   );

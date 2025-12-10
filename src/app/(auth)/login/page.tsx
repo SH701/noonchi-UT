@@ -6,7 +6,7 @@ import { useState } from "react";
 import Image from "next/image";
 
 import Loading from "@/components/loading/loading";
-import { ActionButton } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/useAuth";
 import { performLogin } from "@/lib/service/login";
 
@@ -96,12 +96,14 @@ export default function LoginPage() {
           {error && <p className="text-sm text-red-500 text-center">{error}</p>}
 
           <div className="flex items-center justify-center">
-            <ActionButton
+            <Button
+              variant="primary"
               onClick={handleLogin}
               disabled={!email || !password || loading}
+              size="lg"
             >
               Sign in
-            </ActionButton>
+            </Button>
           </div>
 
           <p className="text-center text-sm text-gray-500">

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ActionButton from "@/components/ui/button/ActionButton";
+import { Button } from "@/components/ui/button";
 import { useUIStore } from "@/store/uiStore";
 
 export default function InterviewSection() {
@@ -178,11 +178,13 @@ export default function InterviewSection() {
                   <p className="text-gray-600 font-semibold">+ Report</p>
                   <p className="text-blue-600 font-semibold">40</p>
                 </div>
-                <ActionButton
+                <Button
+                  variant="primary"
+                  size="lg"
                   onClick={() => router.push("/main/create/interview")}
                 >
                   Start Chatting
-                </ActionButton>
+                </Button>
               </div>
             </div>
           </motion.div>

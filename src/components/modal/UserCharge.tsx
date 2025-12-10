@@ -1,9 +1,8 @@
 "use client";
 
-import React from "react";
 import { Info, Check, X } from "lucide-react";
 import Modal from "../ui/modal/Modal";
-import { ModalButton } from "../ui/button";
+import { Button } from "../ui/button";
 import { ModalProps } from "@/types/modal";
 import { useRouter } from "next/navigation";
 
@@ -28,11 +27,11 @@ export default function UserCharge({ isOpen, onClose }: ModalProps) {
       </div>
 
       <h2 className="text-xl font-semibold  text-gray-900 mb-2">
-        You've used up all credits
+        You&apos;ve used up all credits
       </h2>
 
       <p className=" text-gray-600 text-sm mb-7 font-semibold text-center">
-        Get more Noonchi credits
+        Get more NoonDon&apos;t forget credits
         <br />
         to keep practicing
       </p>
@@ -47,10 +46,13 @@ export default function UserCharge({ isOpen, onClose }: ModalProps) {
         </div>
       </div>
 
-      <ModalButton
-        label="Go to payment"
+      <Button
+        variant="primary"
+        size="md"
         onClick={() => router.push("/billing")}
-      />
+      >
+        Go to payemnt
+      </Button>
     </Modal>
   );
 }

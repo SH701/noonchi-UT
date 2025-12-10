@@ -4,8 +4,8 @@ import { useState } from "react";
 
 import Image from "next/image";
 
-import { ActionButton } from "../button";
-import OptionButtons from "../button/OptionsButton";
+import { Button } from "../button";
+
 import { FileUpload, FormInput } from "../form";
 
 export interface InterviewFormProps {
@@ -47,7 +47,7 @@ export default function InterviewForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+    <form className="flex flex-col space-y-4">
       <FormInput
         label="Company"
         required
@@ -77,11 +77,19 @@ export default function InterviewForm({
         <label className="text-sm font-semibold text-black mb-2 flex gap-2">
           Interview Style
         </label>
-        <OptionButtons
-          options={interviewStyles}
-          selected={style}
-          onSelect={setStyle}
-        />
+        <div className="flex gap-3 mt-2  justify-center">
+          {interviewStyles.map((opt) => (
+            <Button
+              key={opt.value}
+              variant={style === opt.value ? "selected" : "outline"}
+              size="sm"
+              className="w-[90px] h-11"
+              onClick={() => setStyle(opt.value)}
+            >
+              {opt.label}
+            </Button>
+          ))}
+        </div>
       </div>
       <div className="flex items-center flex-col fixed bottom-8">
         {!hidden && (
@@ -103,7 +111,9 @@ export default function InterviewForm({
           </div>
         )}
         <div className="mt-2">
-          <ActionButton type="submit">Start Chatting</ActionButton>
+          <Button variant="primary" size="lg" onSubmit={handleSubmit}>
+            Start Chatting
+          </Button>
         </div>
       </div>
     </form>

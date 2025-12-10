@@ -1,6 +1,6 @@
 import { ModalProps } from "@/types/modal";
 import Modal from "../ui/modal/Modal";
-import {ModalButton} from "../ui/button";
+import { Button } from "../ui/button";
 
 export default function ComingSoonModal({ isOpen, onClose }: ModalProps) {
   return (
@@ -11,7 +11,9 @@ export default function ComingSoonModal({ isOpen, onClose }: ModalProps) {
       description={`Sorry for the inconvenience.\nWe're preparing a better experience for you`}
     >
       <div className="flex items-center justify-center">
-        <ModalButton label="Close" onClick={onClose} />
+        <Button variant="primary" size="md" onClick={onClose}>
+          Close
+        </Button>
       </div>
     </Modal>
   );

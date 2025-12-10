@@ -5,7 +5,7 @@ import { CategoryType, Topics } from "@/types/topic";
 import { topicsByCategory } from "@/data/topics";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { ActionButton } from "../ui/button";
+import { Button } from "../ui/button";
 import { useState } from "react";
 import { X } from "lucide-react";
 import { useUIStore } from "@/store/uiStore";
@@ -131,7 +131,9 @@ export default function TopicList({
                   </div>
 
                   {selectedTopic && (
-                    <ActionButton
+                    <Button
+                      variant="primary"
+                      size="lg"
                       onClick={() =>
                         router.push(
                           `/main/create/roleplay?mode=topic&category=${category}&topicId=${selectedTopic.id}`
@@ -139,7 +141,7 @@ export default function TopicList({
                       }
                     >
                       Start Chatting
-                    </ActionButton>
+                    </Button>
                   )}
                 </div>
               </div>
