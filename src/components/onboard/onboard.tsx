@@ -11,7 +11,7 @@ import Link from "next/link";
 import { isTokenExpired, getOrCreateDeviceId } from "@/utils/auth";
 import { useAuthStore } from "@/store/useAuth";
 import { Button } from "../ui/button";
-import { useGuestLogin } from "@/hooks/guest/useGuestLogin";
+import { useGuestLogin } from "@/hooks/mutations/useGuest";
 import React from "react";
 import Loading from "@/components/loading/loading";
 

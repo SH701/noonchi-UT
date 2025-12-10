@@ -9,7 +9,7 @@ import { apiFetch } from "@/lib/api/api";
 import InterviewForm from "@/components/ui/forms/InterviewForm";
 import { useQueryClient } from "@tanstack/react-query";
 import UserCharge from "@/components/modal/UserCharge";
-import { useUserProfile } from "@/hooks/user/useUserProfile";
+import { useUserProfile } from "@/hooks/queries/useUserProfile";
 import GuestCharge from "@/components/modal/GuestCharge";
 import {
   INTERVIEW_STYLES,
@@ -100,7 +100,7 @@ export default function Interview() {
     <div className="flex flex-col pt-14 relative bg-white w-full overflow-x-hidden">
       <div className="flex items-center w-full px-4">
         <button
-          onClick={() => router.back()}
+          onClick={() => router.push("/main")}
           className="text-black cursor-pointer"
         >
           <ChevronLeftIcon className="size-6" />

@@ -41,7 +41,7 @@ export default function InterviewForm({
   };
 
   return (
-    <form className="flex flex-col space-y-4">
+    <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
       <FormInput
         label="Company"
         required
@@ -77,6 +77,7 @@ export default function InterviewForm({
               key={opt.value}
               variant={interviewStyle === opt.value ? "selected" : "outline"}
               size="sm"
+              type="button"
               className="w-[90px] h-11"
               onClick={() => setInterviewStyle(opt.value)}
             >
@@ -91,6 +92,7 @@ export default function InterviewForm({
             <button
               onClick={() => setHidden(true)}
               className="flex gap-2.5 px-4 py-2.5 bg-blue-100 rounded-lg"
+              type="button"
             >
               <Image
                 src="/credits/interviewcredit.png"
@@ -105,7 +107,7 @@ export default function InterviewForm({
           </div>
         )}
         <div className="mt-2">
-          <Button variant="primary" size="lg" onSubmit={handleSubmit}>
+          <Button variant="primary" size="lg" type="submit">
             Start Chatting
           </Button>
         </div>

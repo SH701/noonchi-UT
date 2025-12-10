@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useUserProfile } from "@/hooks/user/useUserProfile";
+import { useUserProfile } from "@/hooks/queries/useUserProfile";
 import {
   ProfileHeader,
   ProfileImage,

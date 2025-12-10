@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { apiFetch } from "@/lib/api/api";
 
-export function useGuestLogin() {
+export function useGuest() {
   return useMutation({
     mutationFn: async (deviceId: string) => {
       try {

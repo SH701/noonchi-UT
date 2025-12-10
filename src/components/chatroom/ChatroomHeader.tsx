@@ -1,4 +1,4 @@
-import { useConversationDetail } from "@/hooks/conversation/useConversationDetail";
+import { useConversationDetail } from "@/hooks/queries/useConversationDetail";
 import { Check } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import Unfinished from "../modal/Unfinished";
 import Sucess from "../modal/Sucess";
-import { useUserProfile } from "@/hooks/user/useUserProfile";
+import { useUserProfile } from "@/hooks/queries/useUserProfile";
 import { useAuthStore } from "@/store/useAuth";
 import { apiFetch } from "@/lib/api/api";
 import { useQueryClient } from "@tanstack/react-query";

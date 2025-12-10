@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 "use client";
 
 import Image from "next/image";
@@ -37,6 +37,7 @@ export default function ChatroomInput({
   handleSendAudio,
   sendMessage,
 }: ChatroomInputProps) {
+ 
   return (
     <>
       <AnimatePresence>

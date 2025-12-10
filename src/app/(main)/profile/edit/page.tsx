@@ -7,7 +7,7 @@ import Image from "next/image";
 import { ChevronLeftIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 import { useAuthStore } from "@/store/useAuth";
-import { useUserProfile } from "@/hooks/user/useUserProfile";
+import { useUserProfile } from "@/hooks/queries/useUserProfile";
 import {
   Character0,
   Character1,

@@ -7,8 +7,6 @@ interface Props {
   chat: Conversation;
   isOpen: boolean;
   onToggle: () => void;
-  onOpenChat: () => void;
-  onDeleteChat: () => void;
 }
 
 export default function ConversationRow({ chat, isOpen, onToggle }: Props) {

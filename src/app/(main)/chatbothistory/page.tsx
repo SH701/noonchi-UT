@@ -1,11 +1,11 @@
 "use client";
 
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import {
   useConversations,
   useDeleteConversation,
-} from "@/hooks/conversation/useConversations";
+} from "@/hooks/queries/useConversations";
 import { useChatHistoryStore } from "@/store/useChatHistorystore";
 
 import { EmptyState, Filter, SearchBar, Sort } from "@/components/bothistory";
@@ -29,22 +29,31 @@ export default function ChatBothistoryPage() {
 
   const deleteMutation = useDeleteConversation();
 
-  const openChat = (id: string | number) => {
-    router.push(`/main/chatroom/${id}`);
-  };
+  const handleOpenChat = useCallback(
+    (id: string | number) => router.push(`/main/chatroom/${id}`),
+    [router]
+  );
 
-  const deleteChat = (id: string | number) => {
-    if (!confirm("정말 삭제하시겠습니까?")) return;
+  const handleDeleteChat = useCallback(
+    (id: string | number) => {
+      if (!confirm("정말 삭제하시겠습니까?")) return;
 
-    deleteMutation.mutate(id, {
-      onSuccess: () => {
-        queryClient.refetchQueries({
-          queryKey: ["conversations", "history", selectedFilter],
-        });
-      },
-      onError: (error) => console.error("❌ Delete error:", error),
-    });
-  };
+      deleteMutation.mutate(id, {
+        onSuccess: () => {
+          queryClient.refetchQueries({
+            queryKey: ["conversations", "history", selectedFilter],
+          });
+        },
+        onError: (error) => console.error("❌ Delete error:", error),
+      });
+    },
+    [deleteMutation, queryClient, selectedFilter]
+  );
+
+  const handleToggle = useCallback(
+    (id: string | number) => toggleExpand(id),
+    [toggleExpand]
+  );
 
   const processedData = useMemo(() => {
     let list = [...conversations];
@@ -78,7 +87,6 @@ export default function ChatBothistoryPage() {
           <Sort />
         </div>
       </section>
-
       <main className="flex-1 pb-24 bg-white pt-2 border-t border-gray-400 space-y-2">
         {isLoading ? (
           <div className="flex items-center justify-center py-30">
@@ -86,8 +94,10 @@ export default function ChatBothistoryPage() {
           </div>
         ) : error ? (
           <p className="text-red-500">{(error as Error).message}</p>
-        ) : processedData.length === 0 ? (
+        ) : conversations.length === 0 ? (
           <EmptyState type="no-history" />
+        ) : processedData.length === 0 ? (
+          <EmptyState type="no-results" />
         ) : (
           processedData.map((chat) => {
             const isOpen = expanded[chat.conversationId];
@@ -97,17 +107,15 @@ export default function ChatBothistoryPage() {
                 <ConversationRow
                   chat={chat}
                   isOpen={isOpen}
-                  onToggle={() => toggleExpand(chat.conversationId)}
-                  onOpenChat={() => openChat(chat.conversationId)}
-                  onDeleteChat={() => deleteChat(chat.conversationId)}
+                  onToggle={() => handleToggle(chat.conversationId)}
                 />
 
                 <HistorySection
                   isOpen={isOpen}
                   status={chat.status as "ACTIVE" | "ENDED"}
                   conversationId={chat.conversationId}
-                  onOpenChat={() => openChat(chat.conversationId)}
-                  onDelete={() => deleteChat(chat.conversationId)}
+                  onOpenChat={() => handleOpenChat(chat.conversationId)}
+                  onDelete={() => handleDeleteChat(chat.conversationId)}
                 />
               </div>
             );
