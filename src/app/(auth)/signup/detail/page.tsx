@@ -4,13 +4,12 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Loading from "@/components/loading/loading";
-import SignupFormStep2 from "@/components/signup/SignupForm2";
-import SignupTemplate from "@/components/signup/SignupTemplate";
-import SignupHeader from "@/components/signup/SignupHeader";
+
 import { useAuthStore } from "@/store/auth/useAuth";
 import { useQueryClient } from "@tanstack/react-query";
 import { performSignup } from "@/lib/service/signup";
 import { useUserStore } from "@/store";
+import { SignupHeader, SignupTemplate, SignupForm2 } from "@/components/auth";
 
 export default function SignupStep2() {
   const router = useRouter();
@@ -83,7 +82,7 @@ export default function SignupStep2() {
         </Button>
       }
     >
-      <SignupFormStep2
+      <SignupForm2
         name={name}
         setName={setName}
         birthDate={birthDate}

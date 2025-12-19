@@ -1,9 +1,10 @@
 "use client";
 
 import { TextInput } from "@/components/ui/form";
-import GenderToggle from "@/components/signup/GenderToggle";
+import GenderToggle from "./GenderToggle";
 
-export default function SignupFormStep2({
+
+export default function SignupForm2({
   name,
   setName,
   birthDate,

@@ -1,6 +1,8 @@
 "use client";
 
-import { Back } from "../ui/button";
+import { Back } from "@/components/ui/button";
+
+
 
 export default function SignupHeader({ title }: { title: string }) {
   return (

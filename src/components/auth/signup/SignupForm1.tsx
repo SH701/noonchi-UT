@@ -1,8 +1,10 @@
 "use client";
 
-import { Checkbox, TextInput } from "../ui/form";
+import { Checkbox, TextInput } from "@/components/ui/form";
 
-export default function SignupFormStep1({
+
+
+export default function SignupForm1({
   email,
   setEmail,
   pw,

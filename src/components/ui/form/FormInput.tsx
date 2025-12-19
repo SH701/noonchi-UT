@@ -29,7 +29,7 @@ export default function FormInput({
         value={value}
         disabled={disabled}
         onChange={(e) => onChange(e.target.value)}
-        className={`w-[335px] p-2.5 rounded-lg border ${
+        className={`w-83.75 p-2.5 rounded-lg border ${
           className || "border-gray-200 bg-white"
         }  text-black placeholder-gray-400 placeholder:text-sm`}
         placeholder={placeholder}

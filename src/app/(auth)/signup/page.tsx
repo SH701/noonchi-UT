@@ -2,10 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import SignupHeader from "@/components/signup/SignupHeader";
-import SignupTemplate from "@/components/signup/SignupTemplate";
-import SignupFormStep1 from "@/components/signup/SignupForm1";
+
 import { Button } from "@/components/ui/button";
+import { SignupForm1, SignupHeader, SignupTemplate } from "@/components/auth";
 
 export default function SignupStep1() {
   const router = useRouter();
@@ -38,7 +37,7 @@ export default function SignupStep1() {
         </Button>
       }
     >
-      <SignupFormStep1
+      <SignupForm1
         email={email}
         setEmail={setEmail}
         pw={pw}
