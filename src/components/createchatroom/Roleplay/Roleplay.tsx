@@ -5,10 +5,8 @@ import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 
-import Loading from "@/app/(main)/main/chatroom/[id]/loading";
-import RoleplayForm from "@/components/ui/forms/RoleplayForm";
-import UserCharge from "../modal/UserCharge";
-import GuestCharge from "../modal/GuestCharge";
+import Loading from "@/components/ui/loading/ChatroomLoading";
+import RoleplayForm from "@/components/createchatroom/Roleplay/RoleplayForm";
 
 import { topicsByCategory } from "@/data/topics";
 
@@ -17,6 +15,7 @@ import { TOPIC_ENUMS } from "@/types/conversations";
 import { useCreateRoleplay } from "@/hooks/mutations/useRoleplay";
 import { useUser } from "@/hooks/queries/useUser";
 import { useDeductCredit } from "@/hooks/mutations/useCredit";
+import { GuestCharge, UserCharge } from "@/components/modal";
 
 export default function RolePlay() {
   const router = useRouter();

@@ -2,10 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronLeftIcon } from "@heroicons/react/24/solid";
-import Loading from "../../chatroom/[id]/loading";
 
-import InterviewForm from "@/components/ui/forms/InterviewForm";
 import { useQueryClient } from "@tanstack/react-query";
 import UserCharge from "@/components/modal/UserCharge";
 import { useUser } from "@/hooks/queries/useUser";
@@ -17,6 +14,8 @@ import {
 } from "@/hooks/mutations/useInterview";
 import { INTERVIEW_STYLES, InterviewFormData } from "@/types/conversations";
 import { useDeductCredit } from "@/hooks/mutations/useCredit";
+import { ChatroomLoading } from "@/components/ui/loading";
+import { InterviewForm, InterviewHeader } from "@/components/createchatroom";
 
 export default function Interview() {
   const router = useRouter();
@@ -62,26 +61,11 @@ export default function Interview() {
     }
   };
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <ChatroomLoading />;
 
   return (
     <div className="flex flex-col pt-14 relative bg-white w-full overflow-x-hidden">
-      <div className="flex items-center w-full px-4">
-        <button
-          onClick={() => router.push("/main")}
-          className="text-black cursor-pointer"
-        >
-          <ChevronLeftIcon className="size-6" />
-        </button>
-        <h1 className="flex-1 text-center font-semibold text-black text-lg">
-          Create Interview
-        </h1>
-      </div>
-
-      <h2 className="text-left text-xl font-bold mb-12 pl-5 mt-6">
-        Interview Preparation
-      </h2>
-
+      <InterviewHeader />
       <div className="w-full flex justify-center">
         <div className="w-full max-w-93.75 px-5">
           <InterviewForm

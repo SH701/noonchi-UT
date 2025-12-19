@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import Loading from "@/components/loading/loading";
+import { AuthLoading } from "@/components/ui/loading";
 
 import { useAuthStore } from "@/store/auth/useAuth";
 import { useQueryClient } from "@tanstack/react-query";
@@ -66,7 +66,7 @@ export default function SignupStep2() {
     }
   };
 
-  if (loading) return <Loading />;
+  if (loading) return <AuthLoading />;
 
   return (
     <SignupTemplate

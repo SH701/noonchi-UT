@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import Image from "next/image";
-import FormInput from "../form/FormInput";
-import { Button } from "../button";
+import FormInput from "../../ui/form/FormInput";
+import { Button } from "../../ui/button";
 
 interface RoleplayProps {
   onSubmit: (data: { details: string }) => void;

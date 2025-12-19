@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 import { useEffect, useRef, useState } from "react";
-import Loading from "./loading";
+
 import {
   ChatroomHeader,
   ChatroomInfo,
@@ -16,6 +16,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useConversationDetail } from "@/hooks/queries/useConversationDetail";
 import { useChatMessages } from "@/hooks/useChatMessages";
 import { useVoiceChat } from "@/hooks/useVoiceChat";
+import { ChatroomLoading } from "@/components/ui/loading";
+
 
 export default function ChatroomPage() {
   const { id } = useParams<{ id: string }>();
@@ -62,7 +64,7 @@ export default function ChatroomPage() {
   const hasError = conversationError;
 
   if ((isDataLoading && messages.length === 0) || !accessToken) {
-    return <Loading />;
+    return <ChatroomLoading />;
   }
 
   if (hasError && messages.length === 0) {

@@ -3,11 +3,10 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import Loading from "@/components/loading/loading";
-
 import { performLogin } from "@/lib/service/login";
 import { useUserStore, useAuthStore } from "@/store";
 import { LoginAction, LoginForm, LoginHeader } from "@/components/auth";
+import { AuthLoading } from "@/components/ui/loading";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -42,7 +41,7 @@ export default function LoginPage() {
     }
   };
 
-  if (loading) return <Loading />;
+  if (loading) return <AuthLoading />;
 
   return (
     <div className="min-h-screen flex flex-col bg-white px-4">

@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 
-import { Button } from "../button";
-import { FileUpload, FormInput } from "../form";
+import { Button } from "../../ui/button";
+import { FileUpload, FormInput } from "../../ui/form";
 import { InterviewFormData } from "@/types/conversations";
 
 export interface InterviewFormProps {

@@ -4,13 +4,13 @@ export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
 export const runtime = "nodejs";
 
-import RolePlay from "@/components/createchatroom/Roleplay";
+import { Roleplay } from "@/components/createchatroom/";
 import { Suspense } from "react";
 
 export default function Page() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <RolePlay />
+      <Roleplay />
     </Suspense>
   );
 }
