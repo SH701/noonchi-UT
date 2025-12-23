@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useUser } from "@/hooks/queries/useUser";
 import {
-  ProfileHeader,
   ProfileImage,
   ProfileMenuList,
   StatsCard,
@@ -38,7 +37,11 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <ProfileHeader />
+      <div className="px-4 pt-4 pb-3 border-b border-gray-200 bg-white">
+        <h1 className="text-gray-900 text-xl font-semibold font-pretendard">
+          Profile
+        </h1>
+      </div>
 
       <div className="flex-1 flex flex-col items-center w-93.75 mx-auto">
         <div className="flex flex-col items-center pt-6">
