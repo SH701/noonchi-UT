@@ -18,18 +18,16 @@ export default function LoginForm({
   return (
     <>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Email
-        </label>
         <Controller
           name="email"
           control={control}
           render={({ field }) => (
             <TextInput
-              label="email"
+              label="Email"
               type="email"
               value={field.value}
               onChange={field.onChange}
+              placeholder="example@naver.com"
             />
           )}
         />
@@ -39,18 +37,16 @@ export default function LoginForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Password
-        </label>
         <Controller
           name="password"
           control={control}
           render={({ field }) => (
             <TextInput
-              label="password"
+              label="Password"
               type="password"
               value={field.value}
               onChange={field.onChange}
+              placeholder="••••••••"
             />
           )}
         />
