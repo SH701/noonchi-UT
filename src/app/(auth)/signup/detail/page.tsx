@@ -14,6 +14,7 @@ import { performSignup } from "@/lib/service/signup";
 import { useUserStore } from "@/store";
 import { SignupHeader, SignupTemplate, SignupForm2 } from "@/components/auth";
 import { signup2Schema } from "@/types/auth";
+import { ApiError } from "@/api/api";
 
 type Step2FormData = z.infer<typeof signup2Schema>;
 
@@ -22,7 +23,7 @@ export default function SignupStep2() {
   const setTokens = useAuthStore((s) => s.setTokens);
   const setUser = useUserStore((s) => s.setUser);
   const queryClient = useQueryClient();
-
+  const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -70,8 +71,12 @@ export default function SignupStep2() {
       } else {
         router.push("/main");
       }
-    } catch {
-      alert("Signup failed");
+    } catch (err) {
+      if (err instanceof ApiError) {
+        setError(err.message);
+      } else {
+        setError("An unexpected error occurred. Please try again");
+      }
     } finally {
       setLoading(false);
     }
@@ -94,6 +99,7 @@ export default function SignupStep2() {
       }
     >
       <SignupForm2 control={control} errors={errors} />
+      {error && <p className="text-red-500 text-sm text-center">{error}</p>}
     </SignupTemplate>
   );
 }
