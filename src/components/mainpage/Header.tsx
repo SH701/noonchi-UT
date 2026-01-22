@@ -1,22 +1,60 @@
-import { useUser } from "@/hooks/queries";
-import Image from "next/image";
+import { Menu, SquarePen } from "lucide-react";
+import { motion } from "framer-motion";
+import { useRef, useState } from "react";
 
 export default function Header() {
-  const { data: user } = useUser();
+  const [open, setOpen] = useState(false);
+  const [toggle, setToggle] = useState(false);
+  const askRef = useRef<HTMLSpanElement>(null);
+  const roleRef = useRef<HTMLSpanElement>(null);
+
+  const handleOpen = () => {
+    setOpen((prev) => !prev);
+  };
+
+  const getActiveStyles = () => {
+    const activeRef = toggle ? roleRef : askRef;
+    if (!activeRef.current) return { width: 0, x: 0 };
+    return {
+      width: activeRef.current.offsetWidth,
+      x: activeRef.current.offsetLeft - 4,
+    };
+  };
+
   return (
-    <div className="w-full py-6 px-7 bg-[#F2F7FF] flex justify-between">
-      <div className="bg-white px-2 py-1 rounded-4xl flex gap-1">
-        <Image
-          src="/credits/crediticon.png"
-          width={16}
-          height={16}
-          alt="크레딧"
+    <div className="w-full py-6 px-7  flex justify-between cursor-pointer">
+      <Menu onClick={handleOpen} />
+      {open && <div>1</div>}
+
+      <div
+        className="relative flex items-center bg-gray-100 rounded-full cursor-pointer"
+        onClick={() => setToggle((prev) => !prev)}
+      >
+        <motion.div
+          className="absolute bg-white rounded-full h-6"
+          initial={false}
+          animate={getActiveStyles()}
+          transition={{ type: "spring", stiffness: 200, damping: 25 }}
+          style={{ left: 4 }}
         />
-        <p className="text-sm font-semibold text-gray-600">
-          {user?.creditPoint}
-        </p>
-        <p className="text-xs text-gray-400 pt-0.5">credits</p>
+        <span
+          ref={askRef}
+          className={`relative z-10 px-3 py-1 text-sm font-medium transition-colors ${
+            !toggle ? "text-gray-800" : "text-gray-400"
+          }`}
+        >
+          Ask
+        </span>
+        <span
+          ref={roleRef}
+          className={`relative z-10 px-3 py-1 text-sm font-medium transition-colors ${
+            toggle ? "text-gray-800" : "text-gray-400"
+          }`}
+        >
+          Role playing
+        </span>
       </div>
+      <SquarePen />
     </div>
   );
 }
