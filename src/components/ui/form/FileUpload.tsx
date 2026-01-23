@@ -27,7 +27,7 @@ export default function FileUpload({ onFilesChange }: FileUploadProps) {
         Resume / Cover Letter
       </label>
 
-      <p className="text-gray-500 text-xs py-2">
+      <p className="text-gray-500 text-sm py-2">
         The uploaded files will be used to customize your interview practice.
       </p>
 

@@ -38,11 +38,15 @@ export default function TopicList({
             <div
               key={topic.id}
               className="relative flex flex-col rounded-xl cursor-pointer hover:shadow-md transition-shadow w-41 h-41 overflow-hidden group"
-              onClick={() =>
-                router.push(
-                  `/main/create/roleplay?mode=topic&category=${category}&topicId=${topic.id}`,
-                )
-              }
+              onClick={() => {
+                if (topic.topic === "Career" && topic.id === 1) {
+                  router.push("/main/create/interview");
+                } else {
+                  router.push(
+                    `/main/create/roleplay?category=${category}&topicId=${topic.id}`,
+                  );
+                }
+              }}
             >
               <Image src={topic.img} alt="사진" fill className="object-cover" />
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import FormInput from "../../ui/form/FormInput";
+import TextInput from "../../ui/form/TextInput";
 import { Button } from "@/components/ui/button/button";
+import { Textarea } from "@/components/ui/form";
 
 interface RoleplayProps {
   onSubmit: (data: { details: string; tone: string }) => void;
@@ -51,14 +52,14 @@ export default function RoleplayForm({
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-      <FormInput
+      <TextInput
         label="My role"
         value={me}
         onChange={setMe}
         className={inputStyle}
         disabled={mode === "topic"}
       />
-      <FormInput
+      <TextInput
         label="AI's role"
         value={isAI}
         onChange={setIsAI}
@@ -90,12 +91,11 @@ export default function RoleplayForm({
         </div>
       </div>
 
-      <textarea
+      <Textarea
         required
         value={details}
-        onChange={(e) => setDetails(e.target.value)}
+        onChange={setDetails}
         placeholder="Include details like the reason for the interaction..."
-        className="w-full py-4 px-4 h-30 rounded-lg border"
       />
 
       <div className="flex mt-auto pb-4">

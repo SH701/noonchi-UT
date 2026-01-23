@@ -1,5 +1,5 @@
 "use client";
-
+import { CareerTopics } from "@/data/topics";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -12,7 +12,8 @@ import {
 } from "@/hooks/mutations";
 import { InterviewFormData } from "@/types/conversations";
 
-import { InterviewForm, InterviewHeader } from "@/components/createchatroom";
+import { InterviewForm } from "@/components/createchatroom";
+import InterviewSection from "@/components/createchatroom/Interview/InterviewSection";
 
 export default function Interview() {
   const router = useRouter();
@@ -58,10 +59,11 @@ export default function Interview() {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <div className="flex flex-col pt-14 relative bg-white w-full overflow-x-hidden">
-      <InterviewHeader />
-      <div className="w-full flex justify-center">
-        <div className="w-full max-w-93.75 px-5">
+    <div className="flex flex-col  relative  w-full overflow-x-hidden">
+      <div className="w-full flex justify-center items-center">
+        <div className="w-full max-w-93.75">
+          <InterviewSection topic={CareerTopics[0]} />
+          <p className="font-semibold pb-5 pt-8">Conversation Context</p>
           <InterviewForm onSubmit={handleSubmit} />
         </div>
       </div>

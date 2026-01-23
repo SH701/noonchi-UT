@@ -9,6 +9,7 @@ interface TextInputProps {
   type?: string;
   required?: boolean;
   className?: string;
+  disabled?: boolean;
 }
 
 export default function TextInput({
@@ -20,11 +21,14 @@ export default function TextInput({
   type = "text",
   required,
   className = "",
+  disabled,
 }: TextInputProps) {
   return (
     <div className="flex flex-col space-y-2 w-full">
       {label && (
-        <label className="text-sm font-medium text-gray-700">{label}</label>
+        <label className="text-sm font-semibold text-gray-700 flex gap-1">
+          {label} {required && <span className="text-red-500">*</span>}
+        </label>
       )}
 
       <input
@@ -32,13 +36,14 @@ export default function TextInput({
         required={required}
         placeholder={placeholder}
         value={value}
+        disabled={disabled}
         onBlur={onBlur}
         onChange={(e) => onChange(e.target.value)}
         className={`
           w-full p-2.5
-           border border-gray-400 
+           border border-gray-400 bg-white
           rounded-xl text-gray-900 placeholder-gray-400
-          focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500
+          focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-inset focus:ring-blue-500
           transition-colors
           ${className}
         `}
