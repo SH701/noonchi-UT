@@ -48,6 +48,7 @@ export const apiMutations = {
     logout: async (): Promise<void> => {
       return apiFetch<void>("/api/auth/logout", {
         method: "POST",
+        
       });
     },
 

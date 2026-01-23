@@ -2,10 +2,9 @@ import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Metadata } from "next";
-
+import { Toaster } from "@/components/ui/toast/toast";
 import ModalRender from "@/components/modal/ModalRender";
-import { ClientProvider, QueryProvider,AuthProvider } from "@/providers";
-
+import { ClientProvider, QueryProvider, AuthProvider } from "@/providers";
 
 export const metadata: Metadata = {
   title: "Noonchi.ai",
@@ -29,6 +28,7 @@ export default function RootLayout({
                   {children}
                 </div>
               </div>
+              <Toaster />
               <ModalRender />
             </ClientProvider>
           </QueryProvider>

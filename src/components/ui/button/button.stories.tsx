@@ -51,23 +51,9 @@ export const Outline: Story = {
   },
 };
 
-export const Selected: Story = {
-  args: {
-    variant: "selected",
-    children: "버튼",
-  },
-};
-
 export const Ghost: Story = {
   args: {
     variant: "ghost",
-    children: "버튼",
-  },
-};
-
-export const Destructive: Story = {
-  args: {
-    variant: "destructive",
     children: "버튼",
   },
 };

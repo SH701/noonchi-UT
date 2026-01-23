@@ -1,15 +1,16 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useUser } from "@/hooks/queries";
+
 import { ProfileImage, ProfileMenuList, StatsCard } from "@/components/profile";
 import { apiMutations } from "@/api/mutations";
+import { useSession } from "next-auth/react";
+import { toast } from "@/components/ui/toast/toast";
 
 export default function ProfilePage() {
   const router = useRouter();
-  const { data: profile } = useUser();
-
-  if (profile?.role === "ROLE_GUEST") {
+  const { data: session } = useSession();
+  if (session?.user.role === "ROLE_GUEST") {
     return (
       <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
         <h2 className="text-2xl font-bold mb-4">Sign Up Required</h2>
@@ -27,45 +28,48 @@ export default function ProfilePage() {
   }
 
   const handleLogout = async () => {
-    await apiMutations.auth.logout();
-    router.push("/login");
+    try {
+      await apiMutations.auth.logout();
+      router.push("/preview");
+      toast.success("You are logged out");
+    } catch {
+      toast.error("Logout failed");
+    }
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <div className="px-4 pt-4 pb-3 border-b border-gray-200 bg-white">
-        <h1 className="text-gray-900 text-xl font-semibold font-pretendard">
-          Profile
-        </h1>
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <h1 className="text-gray-900 text-xl font-semibold font-pretendard">
+        Profile
+      </h1>
 
-      <div className="flex-1 flex flex-col items-center w-93.75 mx-auto">
+      <div className="flex-1 flex flex-col items-center w-93.75 ">
         <div className="flex flex-col items-center pt-6">
-          <ProfileImage src={profile?.profileImageUrl} />
+          <ProfileImage src={session?.user.profileImageUrl} />
 
           <button
             onClick={() => router.push("/profile/edit")}
             className="text-xl font-semibold mt-4"
           >
-            {profile?.nickname}
+            {session?.user.nickname}
           </button>
         </div>
 
-        <div className="px-4 pt-6 w-full">
+        <div className=" pt-6 ">
           <StatsCard
-            sentenceCount={profile?.sentenceCount}
-            koreanLevel={profile?.koreanLevel || "1"}
+            sentenceCount={session?.user.sentenceCount}
+            koreanLevel={session?.user.koreanLevel || "1"}
           />
         </div>
 
-        <div className="px-4 pt-6 w-full">
+        <div className=" pt-6">
           <ProfileMenuList />
         </div>
 
-        <div className="px-4 pt-6 pb-6 w-full">
+        <div className=" pt-6 pb-6 ">
           <button
             onClick={handleLogout}
-            className="w-full py-4 text-gray-600 text-base underline"
+            className=" py-4 text-gray-600 text-base underline"
           >
             Log out
           </button>
