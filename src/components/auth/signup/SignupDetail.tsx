@@ -5,14 +5,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button/button";
-
-import { useQueryClient } from "@tanstack/react-query";
 import { performSignup } from "@/lib/service/signup";
-
 import { SignupHeader, SignupTemplate, SignupForm2 } from "@/components/auth";
 import { signup2Schema } from "@/types/auth";
 import { ApiError } from "@/api/api";
-import { useUserStore } from "@/store/user/useUsersStore";
 import { signIn } from "next-auth/react";
 import StepIndicator from "./StepIndicator";
 
@@ -32,8 +28,6 @@ export default function SignupDetail({
   step,
 }: SignupDetailProps) {
   const router = useRouter();
-  const setUser = useUserStore((s) => s.setUser);
-  const queryClient = useQueryClient();
 
   const {
     control,
@@ -50,7 +44,7 @@ export default function SignupDetail({
 
   const onSubmit = async (data: Step2FormData) => {
     try {
-      const { user } = await performSignup({
+      await performSignup({
         email,
         password,
         nickname: data.name,
@@ -62,10 +56,6 @@ export default function SignupDetail({
         password,
         redirect: false,
       });
-
-      setUser(user);
-
-      await queryClient.invalidateQueries({ queryKey: ["userProfile"] });
 
       const pendingInterviewId = localStorage.getItem("pendingInterviewId");
       if (pendingInterviewId) {

@@ -5,23 +5,19 @@ import { useRouter } from "next/navigation";
 
 import { useQueryClient } from "@tanstack/react-query";
 
-import { useUser } from "@/hooks/queries";
-
 import {
   useUploadFiles,
   useCreateInterview,
   useDeductCredit,
 } from "@/hooks/mutations";
-import { INTERVIEW_STYLES, InterviewFormData } from "@/types/conversations";
+import { InterviewFormData } from "@/types/conversations";
 
 import { InterviewForm, InterviewHeader } from "@/components/createchatroom";
 
 export default function Interview() {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const [needCharge, setNeedCharge] = useState(false);
-
-  const { data: user } = useUser();
+  const [, setNeedCharge] = useState(false);
 
   const uploadFiles = useUploadFiles();
   const deductCredit = useDeductCredit();
@@ -49,7 +45,6 @@ export default function Interview() {
         companyName: data.companyName,
         jobTitle: data.jobTitle,
         jobPosting: data.jobPosting,
-        interviewStyle: data.interviewStyle.toUpperCase(),
         files: uploadedFiles,
       });
 
@@ -67,10 +62,7 @@ export default function Interview() {
       <InterviewHeader />
       <div className="w-full flex justify-center">
         <div className="w-full max-w-93.75 px-5">
-          <InterviewForm
-            interviewStyles={INTERVIEW_STYLES}
-            onSubmit={handleSubmit}
-          />
+          <InterviewForm onSubmit={handleSubmit} />
         </div>
       </div>
     </div>

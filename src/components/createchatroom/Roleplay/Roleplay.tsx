@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { useState } from "react";
+
 import { useQueryClient } from "@tanstack/react-query";
 
 import RoleplayForm from "@/components/createchatroom/Roleplay/RoleplayForm";
@@ -12,14 +12,11 @@ import { topicsByCategory } from "@/data/topics";
 import { TOPIC_ENUMS } from "@/types/conversations";
 
 import { useCreateRoleplay, useDeductCredit } from "@/hooks/mutations";
-import { useUser } from "@/hooks/queries/useUser";
 
 export default function RolePlay() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
-  const { data: user } = useUser();
-  const [needCharge, setNeedCharge] = useState(false);
 
   const mode = searchParams.get("mode") as "topic" | "custom";
   const category = searchParams.get(
@@ -50,7 +47,6 @@ export default function RolePlay() {
       router.push(`/main/chatroom/${convo.conversationId}`);
     } catch {
       if (deductCredit.isError) {
-        setNeedCharge(true);
         return;
       }
       alert("채팅 생성 실패 🤯");

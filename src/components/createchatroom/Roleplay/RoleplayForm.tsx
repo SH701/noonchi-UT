@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FormInput from "../../ui/form/FormInput";
-import { Button } from "../../ui/button";
+import { Button } from "@/components/ui/button/button";
 
 interface RoleplayProps {
   onSubmit: (data: { details: string; tone: string }) => void;

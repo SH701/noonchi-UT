@@ -11,7 +11,6 @@ export type InterviewFormData = {
   companyName: string;
   jobTitle: string;
   jobPosting: string;
-  interviewStyle: string;
   files: File[];
 };
 
@@ -19,7 +18,6 @@ export type InterviewApiRequest = {
   companyName: string;
   jobTitle: string;
   jobPosting: string;
-  interviewStyle: string;
   files: UploadedFile[];
 };
 

@@ -2,8 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { Button } from "../ui/button";
+
 import { TopicProps } from "@/types/topics";
+import { Button } from "../ui/button/button";
 
 export default function TopicSlider({ topics, active, onSelect }: TopicProps) {
   const containerRef = useRef<HTMLDivElement>(null);

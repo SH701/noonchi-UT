@@ -81,6 +81,11 @@ export default function LoginContent() {
               {serverErrors.password}
             </p>
           )}
+          {serverErrors.general && (
+            <p className="text-red-500 text-sm text-center">
+              {serverErrors.general}
+            </p>
+          )}
         </div>
       </div>
     </div>

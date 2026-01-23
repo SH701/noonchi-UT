@@ -32,7 +32,7 @@ export default function TopicList({
         onSelect={(c) => setCategory(c)}
       />
 
-      <div className="grid grid-cols-2 gap-4 w-full">
+      <div className="grid grid-cols-2 gap-4 w-full pb-10">
         {topics.map((topic: Topics) => {
           return (
             <div

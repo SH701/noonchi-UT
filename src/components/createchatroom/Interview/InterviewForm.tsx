@@ -3,23 +3,19 @@
 import { useState } from "react";
 import Image from "next/image";
 
-import { Button } from "../../ui/button";
 import { FileUpload, FormInput } from "../../ui/form";
 import { InterviewFormData } from "@/types/conversations";
+import { Button } from "@/components/ui/button/button";
 
 export interface InterviewFormProps {
-  interviewStyles: readonly { value: string; label: string }[];
   onSubmit: (data: InterviewFormData) => void;
 }
 
-export default function InterviewForm({
-  interviewStyles,
-  onSubmit,
-}: InterviewFormProps) {
+export default function InterviewForm({ onSubmit }: InterviewFormProps) {
   const [companyName, setCompanyName] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [jobPosting, setJobPosting] = useState("");
-  const [interviewStyle, setInterviewStyle] = useState("standard");
+
   const [files, setFiles] = useState<File[]>([]);
   const [hidden, setHidden] = useState(false);
 
@@ -27,7 +23,6 @@ export default function InterviewForm({
     e.preventDefault();
 
     if (!companyName.trim() || !jobTitle.trim()) {
-      alert("회사명과 지원 직무를 입력해주세요.");
       return;
     }
 
@@ -35,7 +30,6 @@ export default function InterviewForm({
       companyName,
       jobTitle,
       jobPosting,
-      interviewStyle,
       files,
     });
   };
@@ -71,20 +65,6 @@ export default function InterviewForm({
         <label className="text-sm font-semibold text-black mb-2 flex gap-2">
           Interview Style
         </label>
-        <div className="flex gap-3 mt-2 justify-center">
-          {interviewStyles.map((opt) => (
-            <Button
-              key={opt.value}
-              variant={interviewStyle === opt.value ? "selected" : "outline"}
-              size="sm"
-              type="button"
-              className="w-22.5 h-11"
-              onClick={() => setInterviewStyle(opt.value)}
-            >
-              {opt.label}
-            </Button>
-          ))}
-        </div>
       </div>
       <div className="flex items-center flex-col fixed bottom-8">
         {!hidden && (

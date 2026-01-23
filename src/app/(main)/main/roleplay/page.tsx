@@ -12,7 +12,7 @@ export default function Roleplay() {
 
   return (
     <>
-      <div>
+      <div >
         <div className="flex flex-col gap-3 pb-10">
           <span className="text-3xl font-medium">
             Do you want to sound more natural in Korean?
