@@ -1,5 +1,3 @@
-import Header from "@/components/mainpage/Header";
-
 export default function MainsLayout({
   children,
 }: {
@@ -7,8 +5,7 @@ export default function MainsLayout({
 }) {
   return (
     <div className="w-full min-h-screen flex flex-col px-5 relative">
-      <Header />
-      <div className="flex flex-col flex-1">{children}</div>
+      {children}
     </div>
   );
 }

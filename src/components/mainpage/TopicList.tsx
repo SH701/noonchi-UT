@@ -1,6 +1,6 @@
 import TopicSlider from "@/components/mainpage/TopicSlider";
 import { CategoryType, Topics } from "@/types/topics";
-import { topicsByCategory } from "@/data/topics";
+import { topicsByCategory } from "@/data";
 import { useRouter } from "next/navigation";
 import { Heart } from "lucide-react";
 import Image from "next/image";

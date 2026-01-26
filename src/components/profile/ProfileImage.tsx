@@ -18,8 +18,8 @@ export default function ProfileImage({ src }: { src?: string }) {
       <Image
         src={src!}
         alt="프로필"
-        width={120}
-        height={120}
+        width={52}
+        height={52}
         className="rounded-full object-cover"
       />
     );

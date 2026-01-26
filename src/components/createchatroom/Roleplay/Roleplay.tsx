@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import RoleplayForm from "@/components/createchatroom/Roleplay/RoleplayForm";
 
-import { topicsByCategory } from "@/data/topics";
+import { topicsByCategory } from "@/data";
 
 import { TOPIC_ENUMS } from "@/types/conversations";
 

@@ -1,20 +1,7 @@
 "use client";
 
+import { INTEREST_OPTIONS } from "@/data";
 import { usePreferenceStore } from "@/store/preference/usePreferenceStore";
-
-const INTEREST_OPTIONS = [
-  "💬 Daily Conversation",
-  "💼 Business",
-  "✈️ Travel",
-  "🎬 K-Drama",
-  "🎵 K-Pop",
-  "🙇‍♂️ Etiquette",
-  "🔥 Internet Slang",
-  "🥘 Food",
-  "🍜 Ordering",
-  "💄 Beauty",
-  "👁️‍🗨️ Gathering",
-] as const;
 
 export default function Taste() {
   const interests = usePreferenceStore((s) => s.interests);

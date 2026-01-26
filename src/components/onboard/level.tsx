@@ -1,13 +1,5 @@
+import { levelDescription } from "@/data";
 import { usePreferenceStore } from "@/store/preference/usePreferenceStore";
-
-const levelDescription = {
-  BEGINNER:
-    "I know basic polite words, but I'm not sure when or how to use honorifics.",
-  INTERMEDIATE:
-    "I can use -요 endings, but I’m not confident in using formal or respectful language correctly.",
-  ADVANCED:
-    "I understand and use honorifics naturally depending on context or relationship.",
-} as const;
 
 export default function Level() {
   const koreanLevel = usePreferenceStore((s) => s.koreanLevel);
