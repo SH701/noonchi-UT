@@ -1,3 +1,5 @@
+"use client";
+
 import { useChatHistoryStore } from "@/store/chathistory/useChatHistorystore";
 import { ChevronDownIcon } from "lucide-react";
 import { useState } from "react";

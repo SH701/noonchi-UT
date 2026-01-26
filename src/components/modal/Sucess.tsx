@@ -1,7 +1,8 @@
 import { Info } from "lucide-react";
-import { Button } from "../ui/button";
+
 import Modal from "../ui/modal/Modal";
 import { useRouter } from "next/navigation";
+import { Button } from "../ui/button/button";
 
 export default function Sucess({
   isOpen,

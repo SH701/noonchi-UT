@@ -4,9 +4,11 @@ import { Menu, SquarePen } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { useTabStore } from "@/store/tab/useTabStore";
+import Tab from "../tab/Tab";
 
 export default function Header() {
-  const [open, setOpen] = useState(false);
+  const { isOpen, toggleTab, closeTab } = useTabStore();
 
   const askRef = useRef<HTMLSpanElement>(null);
   const roleRef = useRef<HTMLSpanElement>(null);
@@ -21,9 +23,21 @@ export default function Header() {
     });
   }, [pathname]);
 
-  const handleOpen = () => {
-    setOpen((prev) => !prev);
-  };
+  useEffect(() => {
+    const sideClick = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) {
+        closeTab();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("keydown", sideClick);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", sideClick);
+    };
+  }, [isOpen, closeTab]);
 
   const getActiveStyles = () => {
     const activeRef = isRoleplay ? roleRef : askRef;
@@ -43,8 +57,8 @@ export default function Header() {
   };
   return (
     <div className="w-full py-8   flex justify-between cursor-pointer">
-      <Menu onClick={handleOpen} />
-      {open && <div>1</div>}
+      <Menu onClick={toggleTab} />
+      <Tab />
 
       <div
         className="relative flex items-center bg-white/30 rounded-full cursor-pointer"
