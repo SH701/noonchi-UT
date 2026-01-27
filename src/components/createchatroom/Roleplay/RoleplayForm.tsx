@@ -2,28 +2,20 @@ import { useState } from "react";
 import TextInput from "../../ui/form/TextInput";
 import { Button } from "@/components/ui/button/button";
 import { Textarea } from "@/components/ui/form";
+import { toast } from "@/components/ui/toast/toast";
+import { TONE_OPTIONS } from "@/constants/tone";
 
 interface RoleplayProps {
-  onSubmit: (data: { details: string; tone: string }) => void;
+  onSubmit: (data: {
+    myRole: string;
+    aiRole: string;
+    details: string;
+    tone: string;
+  }) => void;
   AiRole?: string;
   myRole?: string;
   mode: "topic" | "custom";
 }
-
-const TONE_OPTIONS = [
-  { value: "casual", label: "Casual", description: "(Friends, Siblings)" },
-  { value: "friendly", label: "Friendly", description: "(Close colleagues)" },
-  {
-    value: "professional",
-    label: "Professional",
-    description: "(Clients, Professors)",
-  },
-  {
-    value: "formal",
-    label: "Formal",
-    description: "(High-level executives, Public)",
-  },
-];
 
 export default function RoleplayForm({
   onSubmit,
@@ -31,40 +23,59 @@ export default function RoleplayForm({
   myRole,
   mode,
 }: RoleplayProps) {
-  const [isAI, setIsAI] = useState(AiRole || "");
-  const [me, setMe] = useState(myRole || "");
+  const [isAI] = useState(AiRole || "");
+  const [isMe] = useState(myRole || "");
   const [details, setDetails] = useState("");
   const [selectedTone, setSelectedTone] = useState("casual");
 
+  const [displayMe, setDisplayMe] = useState("");
+  const [displayAI, setDisplayAI] = useState("");
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!details.trim()) {
-      alert("Please fill in the details.");
+      toast.error("Please fill in the details.");
       return;
     }
-
-    onSubmit({ details, tone: selectedTone });
+    onSubmit({
+      myRole: isMe,
+      aiRole: isAI,
+      details,
+      tone: selectedTone,
+    });
   };
 
   const inputStyle =
     mode === "topic" ? "bg-indigo-50 border-blue-600 text-blue-600" : "";
 
+  const handleHintMe = () => {
+    setDisplayMe(isMe);
+  };
+
+  const handleHintAi = () => {
+    setDisplayAI(isAI);
+  };
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
       <TextInput
         label="My role"
-        value={me}
-        onChange={setMe}
+        value={displayMe}
+        onChange={setDisplayMe}
         className={inputStyle}
+        placeholder="Write your role"
         disabled={mode === "topic"}
+        onClick={handleHintMe}
       />
+
       <TextInput
         label="AI's role"
-        value={isAI}
-        onChange={setIsAI}
+        value={displayAI}
+        onChange={setDisplayAI}
         className={inputStyle}
+        placeholder="Write ai role"
         disabled={mode === "topic"}
+        onClick={handleHintAi}
       />
 
       <div className="space-y-2">
@@ -79,8 +90,8 @@ export default function RoleplayForm({
                 py-3 px-4 rounded-lg border transition-all text-left
                 ${
                   selectedTone === tone.value
-                    ? "border-blue-500 bg-blue-50 "
-                    : ""
+                    ? "border-blue-500 bg-blue-50"
+                    : "border-gray-200 hover:border-gray-300"
                 }
               `}
             >

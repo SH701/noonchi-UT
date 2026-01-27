@@ -1,9 +1,12 @@
 "use client";
 
+import { Wand } from "lucide-react";
+
 interface TextInputProps {
   label?: string;
   value: string;
   onChange: (value: string) => void;
+  onClick?: () => void;
   onBlur?: () => void;
   placeholder?: string;
   type?: string;
@@ -22,9 +25,10 @@ export default function TextInput({
   required,
   className = "",
   disabled,
+  onClick,
 }: TextInputProps) {
   return (
-    <div className="flex flex-col space-y-2 w-full">
+    <div className="flex flex-col space-y-2 w-full relative">
       {label && (
         <label className="text-sm font-semibold text-gray-700 flex gap-1">
           {label} {required && <span className="text-red-500">*</span>}
@@ -48,6 +52,13 @@ export default function TextInput({
           ${className}
         `}
       />
+      <button
+        className="absolute right-3 top-10"
+        onClick={onClick}
+        type="button"
+      >
+        <Wand />
+      </button>
     </div>
   );
 }
