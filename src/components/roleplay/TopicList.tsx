@@ -1,4 +1,4 @@
-import TopicSlider from "@/components/mainpage/TopicSlider";
+import TopicSlider from "@/components/roleplay/TopicSlider";
 import { CategoryType, Topics } from "@/types/topics";
 import { topicsByCategory } from "@/data";
 import { useRouter } from "next/navigation";
@@ -23,7 +23,8 @@ export default function TopicList({
     <div>
       <TopicSlider
         topics={[
-          { id: 1, label: "Career" },
+          { id: 1, label: "Popular" },
+          { id: 2, label: "Career" },
           { id: 3, label: "Family" },
           { id: 4, label: "Belonging" },
           { id: 5, label: "K-POP" },
@@ -40,10 +41,10 @@ export default function TopicList({
               className="relative flex flex-col rounded-xl cursor-pointer hover:shadow-md transition-shadow w-41 h-41 overflow-hidden group"
               onClick={() => {
                 if (topic.topic === "Career" && topic.id === 1) {
-                  router.push("/main/create/interview");
+                  router.push("/main/roleplay/create/interview");
                 } else {
                   router.push(
-                    `/main/create/roleplay?category=${category}&topicId=${topic.id}`,
+                    `/main/roleplay/create?category=${category}&topicId=${topic.id}`,
                   );
                 }
               }}

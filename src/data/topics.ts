@@ -15,8 +15,8 @@ export const CareerTopics = [
     title: "Asking for Help",
     description: "Practice asking for help clearly and politely at work.",
     img: "/roleplay/carrer/asking.png",
-    aiRole: "Your Korean manager",
-    myRole: "Junior staff who made a mistake",
+    aiRole: "A collugue",
+    myRole: "A team member",
   },
   {
     id: 3,
@@ -24,8 +24,8 @@ export const CareerTopics = [
     title: "Morning Greeting",
     description: "Start the workday with a natural greeting.",
     img: "/roleplay/carrer/morning_greeting.jpg",
-    aiRole: "Your Korean team lead",
-    myRole: "Junior planner/teammate in Korea",
+    aiRole: "A collugue",
+    myRole: "A team member",
   },
   {
     id: 4,
@@ -33,8 +33,8 @@ export const CareerTopics = [
     title: "Small Talk at work",
     description: "Make light conversation during a short work break.",
     img: "/roleplay/carrer/smalltalk.png",
-    aiRole: "Busy Korean senior coworker",
-    myRole: "Intern or new hire in Korea",
+    aiRole: "A collugue",
+    myRole: "A team member",
   },
   {
     id: 5,
@@ -42,8 +42,8 @@ export const CareerTopics = [
     title: "Setting Work Boundaries",
     description: "Say no or set limits without sounding rude.",
     img: "/roleplay/carrer/boundaries.png",
-    aiRole: "Korean team leader running the meeting",
-    myRole: "Junior teammate in a meeting",
+    aiRole: "Supervisor",
+    myRole: "Employee",
   },
 ];
 
@@ -54,8 +54,8 @@ export const FamliyTopics = [
     title: "Explaning Your Choice",
     description: "Explain your decisions calmly and clearly.",
     img: "/roleplay/family/explain.png",
-    aiRole: "Korean boyfriend/girlfriend",
-    myRole: "Partner in a Korean–non-Korean couple",
+    aiRole: "Grandma",
+    myRole: "Family Member",
   },
   {
     id: 2,
@@ -63,8 +63,8 @@ export const FamliyTopics = [
     title: "Sensitive Topics, Softly",
     description: "Bring up sensitive topics without hurting feelings.",
     img: "/roleplay/family/sensitive.png",
-    aiRole: "Busy Korean partner",
-    myRole: "Partner feeling anxious about replies",
+    aiRole: "Parent",
+    myRole: "Family Member",
   },
   {
     id: 3,
@@ -72,8 +72,8 @@ export const FamliyTopics = [
     title: "Morning at Home",
     description: "Start the day with a warm family greeting.",
     img: "/roleplay/family/morning.png",
-    aiRole: "Korean partner with little time",
-    myRole: "Partner in a busy or long-distance relationship",
+    aiRole: "Family Member",
+    myRole: "Family Member",
   },
   {
     id: 4,
@@ -81,8 +81,8 @@ export const FamliyTopics = [
     title: "Gratitude,Grwon-Up Style",
     description: "Express thanks in a polite, adult way.",
     img: "/roleplay/family/gratitude.png",
-    aiRole: "Korean friend who might misunderstand",
-    myRole: "Friend with a crush in Korea",
+    aiRole: "A Colleague",
+    myRole: "Family Member",
   },
   {
     id: 5,
@@ -90,8 +90,8 @@ export const FamliyTopics = [
     title: "Family Mealtime",
     description: "Make casual conversation during family meals.",
     img: "/roleplay/family/meal.png",
-    aiRole: "Korean “some” partner",
-    myRole: "In an “almost-relationship”",
+    aiRole: "Parent and Sibling",
+    myRole: "Family Member",
   },
 ];
 export const BelongingTopics = [
@@ -101,8 +101,8 @@ export const BelongingTopics = [
     title: "Midnight Thanks",
     description: " Thank someone warmly after late-night help.",
     img: "/roleplay/belonging/midnight.png",
-    aiRole: "Korean host / house “mom”",
-    myRole: "Student or worker living in Korea",
+    aiRole: "Son's friend's mother",
+    myRole: "Mother with son",
   },
   {
     id: 2,
@@ -110,8 +110,8 @@ export const BelongingTopics = [
     title: "Kind but Pressured",
     description: "Say no kindly when you feel pressured.",
     img: "/roleplay/belonging/kind.png",
-    aiRole: "Korean ajumma shop owner",
-    myRole: "Customer at a Korean market or restaurant",
+    aiRole: "Mother’s-friend",
+    myRole: "Daughter",
   },
   {
     id: 3,
@@ -119,8 +119,8 @@ export const BelongingTopics = [
     title: "Polite to Playful",
     description: "Move from polite talk to light jokes.",
     img: "/roleplay/belonging/polite.png",
-    aiRole: "Same-age Korean friend",
-    myRole: "Friend in a mixed Korean–global friend group",
+    aiRole: "Senior Group",
+    myRole: "Volunteer",
   },
   {
     id: 4,
@@ -128,8 +128,8 @@ export const BelongingTopics = [
     title: "First Drink Vibes",
     description: "Find the right tone at a first group drink.",
     img: "/roleplay/belonging/drink.png",
-    aiRole: "Charismatic Korean senior / team lead",
-    myRole: "Newcomer at a Korean drinking gathering",
+    aiRole: "Club Members",
+    myRole: "Club Member",
   },
   {
     id: 5,
@@ -137,8 +137,8 @@ export const BelongingTopics = [
     title: "Making Peace Gently",
     description: "Talk about hurt feelings without drama.",
     img: "/roleplay/belonging/makingpeace.png",
-    aiRole: "Korean friend who thought it was just banter",
-    myRole: "Friend who got hurt by a joke",
+    aiRole: "Friend",
+    myRole: "Friend",
   },
 ];
 export const KPopTopics = [
@@ -148,8 +148,8 @@ export const KPopTopics = [
     title: "Talking About Your Bias",
     description: "Talk about your favorite idol naturally.",
     img: "/roleplay/kpop/talking.png",
-    aiRole: "Korean friend who also likes K-pop",
-    myRole: "K-pop fan learning Korean",
+    aiRole: "Idol fan",
+    myRole: "Idol fan",
   },
   {
     id: 2,
@@ -157,8 +157,8 @@ export const KPopTopics = [
     title: "Playlist Share",
     description: "Practice asking for help clearly and politely at work.",
     img: "/roleplay/kpop/share.png",
-    aiRole: "Korean friend / crush listening",
-    myRole: "Friend sharing songs",
+    aiRole: "Friend",
+    myRole: "Idol fan",
   },
   {
     id: 3,
@@ -166,8 +166,8 @@ export const KPopTopics = [
     title: "Fliming a Challenge Reel",
     description: "Talk about filming a dance or challenge reel together.",
     img: "/roleplay/kpop/challenge.png",
-    aiRole: "Korean friend or dance buddy",
-    myRole: "K-pop / dance fan",
+    aiRole: "Friend",
+    myRole: "Friend",
   },
   {
     id: 4,
@@ -175,8 +175,8 @@ export const KPopTopics = [
     title: "Light Fan Slang",
     description: "Use fan slang lightly and naturally.",
     img: "/roleplay/kpop/fanslang.png",
-    aiRole: "Korean longtime fan friend",
-    myRole: "Fan learning Korean fandom slang",
+    aiRole: "Hardcore idol fan",
+    myRole: "Casual idol fan",
   },
   {
     id: 5,
@@ -184,8 +184,8 @@ export const KPopTopics = [
     title: "Concert Memories ",
     description: "Share concert memories in a fun, natural way.",
     img: "/roleplay/kpop/concert.png",
-    aiRole: "Korean friend who wants to hear about it",
-    myRole: "Fan after a concert",
+    aiRole: "Friend",
+    myRole: "Idol fan",
   },
 ];
 

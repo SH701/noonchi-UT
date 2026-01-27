@@ -1,4 +1,4 @@
-import Header from "@/components/mainpage/Header";
+import Header from "@/components/roleplay/Header";
 
 export default function MainLayout({
   children,

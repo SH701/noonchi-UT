@@ -24,7 +24,7 @@ export default function LoginContent() {
     formState: { errors, isValid },
   } = useForm<LoginData>({
     resolver: zodResolver(loginSchema),
-    mode: "onBlur",
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",

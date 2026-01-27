@@ -100,7 +100,7 @@ export default function RoleplayForm({
 
       <div className="flex mt-auto pb-4">
         <Button variant="primary" size="lg" type="submit">
-          Start Chatting
+          Start
         </Button>
       </div>
     </form>

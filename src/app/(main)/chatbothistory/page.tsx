@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useConversations, useDeleteConversation } from "@/hooks/queries";
 import { useChatHistoryStore } from "@/store/chathistory/useChatHistorystore";
@@ -15,6 +15,7 @@ import {
 } from "@/components/bothistory";
 
 import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "@/components/ui/toast/toast";
 
 export default function ChatBothistoryPage() {
   const router = useRouter();
@@ -31,42 +32,31 @@ export default function ChatBothistoryPage() {
 
   const deleteMutation = useDeleteConversation();
 
-  const handleOpenChat = useCallback(
-    (id: string | number) => router.push(`/main/chatroom/${id}`),
-    [router],
-  );
+  const handleOpenChat = (id: string | number) =>
+    router.push(`/main/chatroom/${id}`);
 
-  const handleDeleteChat = useCallback(
-    (id: string | number) => {
-      if (!confirm("정말 삭제하시겠습니까?")) return;
+  const handleDeleteChat = (id: string | number) => {
+    deleteMutation.mutate(id, {
+      onSuccess: () => {
+        queryClient.refetchQueries({
+          queryKey: ["conversations", "history", selectedFilter],
+        });
+        toast.success("ChattingRoom is deleted");
+      },
+      onError: () => toast.error("Delete error"),
+    });
+  };
 
-      deleteMutation.mutate(id, {
-        onSuccess: () => {
-          queryClient.refetchQueries({
-            queryKey: ["conversations", "history", selectedFilter],
-          });
-        },
-        onError: (error) => console.error("❌ Delete error:", error),
-      });
-    },
-    [deleteMutation, queryClient, selectedFilter],
-  );
-
-  const handleToggle = useCallback(
-    (id: string | number) => toggleExpand(id),
-    [toggleExpand],
-  );
+  const handleToggle = (id: string | number) => toggleExpand(id);
 
   const processedData = useMemo(() => {
     let list = [...conversations];
-
     if (keyword.trim()) {
       const q = keyword.trim().toLowerCase();
       list = list.filter((c) =>
         (c.aiPersona?.name ?? "").toLowerCase().includes(q),
       );
     }
-
     list.sort((a, b) => {
       const timeA = new Date(a.createdAt).getTime();
       const timeB = new Date(b.createdAt).getTime();

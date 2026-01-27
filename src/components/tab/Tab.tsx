@@ -54,13 +54,18 @@ export default function Tab() {
                 onClick={handleProfileClick}
                 className="mt-auto flex w-full gap-4 bg-gray-700 p-4"
               >
-                <Image
-                  src={session?.user.profileImageUrl ?? ""}
-                  alt="profile"
-                  width={48}
-                  height={48}
-                  className="rounded-full"
-                />
+                {session?.user.profileImageUrl ? (
+                  <Image
+                    src={session?.user.profileImageUrl ?? ""}
+                    alt="profile"
+                    width={48}
+                    height={48}
+                    className="rounded-full"
+                  />
+                ) : (
+                  <div className="size-12 rounded-full bg-gray-400" />
+                )}
+
                 <span className="text-white pt-3">{session?.user.name}</span>
               </button>
             </motion.div>

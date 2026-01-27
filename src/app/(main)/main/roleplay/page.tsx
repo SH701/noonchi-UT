@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import ComingSoonModal from "@/components/modal/Comingsoon";
 import { CategoryType } from "@/types/topics/topics.type";
-import { TopicList } from "@/components/mainpage";
+import { TopicList } from "@/components/roleplay";
 
 export default function Roleplay() {
   const [category, setCategory] = useState<CategoryType>("Career");
@@ -12,7 +12,7 @@ export default function Roleplay() {
 
   return (
     <>
-      <div >
+      <div>
         <div className="flex flex-col gap-3 pb-10">
           <span className="text-3xl font-medium">
             Do you want to sound more natural in Korean?

@@ -61,8 +61,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             },
           );
 
-          console.log("Login response status:", res.status);
-
           if (!res.ok) {
             const errorData = await res.json().catch(() => ({}));
             console.log("Login error response:", errorData);
@@ -70,7 +68,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           }
 
           const data: AuthResponse = await res.json();
-          console.log("Login success data:", data);
 
           return {
             id: String(data.user.id),

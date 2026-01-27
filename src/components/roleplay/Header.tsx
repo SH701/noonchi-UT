@@ -29,11 +29,9 @@ export default function Header() {
         closeTab();
       }
     };
-
     if (isOpen) {
       document.addEventListener("keydown", sideClick);
     }
-
     return () => {
       document.removeEventListener("keydown", sideClick);
     };
