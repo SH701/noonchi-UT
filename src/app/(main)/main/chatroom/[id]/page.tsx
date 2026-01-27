@@ -36,7 +36,6 @@ export default function ChatroomPage() {
 
   const {
     messages,
-    isMessagesLoading,
     sendMessage,
     isAIResponding,
     feedbackOpenId,

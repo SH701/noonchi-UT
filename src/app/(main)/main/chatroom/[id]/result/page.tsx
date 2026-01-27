@@ -8,12 +8,13 @@ import {
   useConversationDetail,
   useChatQuery,
 } from "@/hooks/queries";
-import { Button } from "@/components/ui/button";
+
 import { MessageList } from "@/components/chatroom";
 import { useMessageFeedback } from "@/hooks/mutations";
 
 import { ResultTab, Point, Part } from "@/components/result";
 import { ChatMsg } from "@/types/messages";
+import { Button } from "@/components/ui/button/button";
 
 export default function Result() {
   const [tab, setTab] = useState<"transcript" | "mistakes">("transcript");

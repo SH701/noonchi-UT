@@ -4,8 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
-import Unfinished from "../modal/Unfinished";
-import Sucess from "../modal/Sucess";
+
 import { useConversationDetail } from "@/hooks/queries";
 import { useQueryClient } from "@tanstack/react-query";
 import LoadingModal from "./LoadingModal";
@@ -30,8 +29,6 @@ export default function ChatroomHeader({
   const { id } = useParams<{ id: string }>();
   const { data: conversation } = useConversationDetail(id);
 
-  const [isUnfinishedOpen, setIsUnfinishedOpen] = useState(false);
-  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const queryClient = useQueryClient();
   const { data: session } = useSession();
   const router = useRouter();
@@ -40,10 +37,9 @@ export default function ChatroomHeader({
   const endConversation = useConversationEnd();
   const handleExit = () => {
     if (conversation?.taskAllCompleted === false) {
-      setIsUnfinishedOpen(true);
+      return;
     } else if (session?.user?.role !== "ROLE_USER") {
       localStorage.setItem("pendingInterviewId", conversationId);
-      setIsSuccessOpen(true);
     } else {
       ConversationEnd();
     }
@@ -134,16 +130,6 @@ export default function ChatroomHeader({
           )}
         </div>
       </div>
-      <Unfinished
-        isOpen={isUnfinishedOpen}
-        onClose={() => setIsUnfinishedOpen(false)}
-      />
-      {session?.user?.role === "ROLE_USER" ? null : (
-        <Sucess
-          isOpen={isSuccessOpen}
-          onClose={() => setIsSuccessOpen(false)}
-        />
-      )}
     </>
   );
 }

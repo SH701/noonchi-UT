@@ -1,5 +1,6 @@
 export * from "./useConversationEnd";
 export * from "./useCredit";
+export * from "./useEnd"
 export * from "./useGuest";
 export * from "./useInterview";
 export * from "./useMessageFeedback";

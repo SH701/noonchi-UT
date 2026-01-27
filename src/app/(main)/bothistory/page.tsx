@@ -10,12 +10,12 @@ import {
   ConversationRow,
   EmptyState,
   Filter,
-  SearchBar,
   Sort,
 } from "@/components/bothistory";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "@/components/ui/toast/toast";
+import { SearchBar } from "@/components/common";
 
 export default function BothistoryPage() {
   const router = useRouter();

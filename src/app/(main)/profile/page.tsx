@@ -11,6 +11,7 @@ import {
 import { apiMutations } from "@/api/mutations";
 import { useSession } from "next-auth/react";
 import { toast } from "@/components/ui/toast/toast";
+import { Button } from "@/components/ui/button/button";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -29,12 +30,12 @@ export default function ProfilePage() {
   return (
     <div className="flex flex-col max-w-93.75 ">
       <ProfileHeader />
-      <div className="space-y-6">
+      <div>
         <ProfileInfo
           img={session?.user.profileImageUrl}
           name={session?.user.name ?? "User"}
         />
-        <div className=" pt-6 ">
+        <div className=" pt-4 ">
           <StatsCard
             totalPractices={0}
             avgScore={0}
@@ -43,18 +44,13 @@ export default function ProfilePage() {
             KoreanLevel={3}
           />
         </div>
-
-        <div className=" pt-6">
+        <div className=" pt-2">
           <ProfileMenuList />
         </div>
-
-        <div className=" pt-6 pb-6 ">
-          <button
-            onClick={handleLogout}
-            className=" py-4 text-gray-600 text-base underline"
-          >
+        <div className=" py-6 ">
+          <Button onClick={handleLogout} size="lg">
             Log out
-          </button>
+          </Button>
         </div>
       </div>
     </div>
