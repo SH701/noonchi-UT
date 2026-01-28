@@ -1,4 +1,4 @@
-import Header from "@/components/roleplay/RoleplayHeader";
+import { RoleplayHeader } from "@/components/roleplay";
 
 export default function MainLayout({
   children,
@@ -7,7 +7,7 @@ export default function MainLayout({
 }) {
   return (
     <>
-      <Header />
+      <RoleplayHeader />
       <div className="flex flex-col flex-1">{children}</div>
     </>
   );

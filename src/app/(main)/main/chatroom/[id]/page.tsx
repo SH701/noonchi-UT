@@ -26,11 +26,8 @@ export default function ChatroomPage() {
   const [isTyping, setIsTyping] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  const {
-    data: conversation,
-    isLoading: isConversationLoading,
-    error: conversationError,
-  } = useConversationDetail(id);
+  const { data: conversation, error: conversationError } =
+    useConversationDetail(id);
 
   const conversationId = conversation?.conversationId;
 

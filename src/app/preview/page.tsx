@@ -9,10 +9,10 @@ export default function Preview() {
   const handle = () => {
     openModal(<PreviewEnd />);
   };
-
+  // Todo: 프리뷰 카운트가 없으면 openModal
   return (
     <div className="min-h-screen">
-      <button onClick={handle}>띄우기</button>
+      <button onClick={handle}>Todo: 프리뷰 카운트가 없으면 openModal</button>
     </div>
   );
 }

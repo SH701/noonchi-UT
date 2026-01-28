@@ -1,6 +1,7 @@
 "use client";
 
 import { Wand } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 interface TextInputProps {
   label?: string;
@@ -27,6 +28,7 @@ export default function TextInput({
   disabled,
   onClick,
 }: TextInputProps) {
+  const pathname = usePathname();
   return (
     <div className="flex flex-col space-y-2 w-full relative">
       {label && (
@@ -45,20 +47,22 @@ export default function TextInput({
         onChange={(e) => onChange(e.target.value)}
         className={`
           w-full p-2.5
-           border border-gray-400 bg-white
-          rounded-xl text-gray-900 placeholder-gray-400
+           border border-gray-400 bg-white text-sm
+          rounded-xl text-gray-900 placeholder-gray-400 placeholder:text-sm
           focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-inset focus:ring-blue-500
           transition-colors
           ${className}
         `}
       />
-      <button
-        className="absolute right-3 top-10"
-        onClick={onClick}
-        type="button"
-      >
-        <Wand />
-      </button>
+      {pathname.startsWith("/main/roleplay/create/roleplay") && (
+        <button
+          className="absolute right-3 top-10"
+          onClick={onClick}
+          type="button"
+        >
+          <Wand />
+        </button>
+      )}
     </div>
   );
 }

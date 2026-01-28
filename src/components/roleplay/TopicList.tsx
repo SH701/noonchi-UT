@@ -1,8 +1,10 @@
+"use client";
+
 import TopicSlider from "@/components/roleplay/TopicSlider";
 import { CategoryType, Topics } from "@/types/topics";
 import { topicsByCategory } from "@/data";
 import { useRouter } from "next/navigation";
-import { Heart } from "lucide-react";
+import { Heart, Plus } from "lucide-react";
 import Image from "next/image";
 
 type TopicListProps = {
@@ -63,9 +65,12 @@ export default function TopicList({ category, setCategory }: TopicListProps) {
           );
         })}
 
-        <div className="flex items-end justify-start bg-white rounded-xl cursor-pointer hover:shadow-md transition-colors min-h-40 p-4">
-          <span className="text-gray-400 font-semibold">Coming soon</span>
-        </div>
+        <button
+          className="flex items-center justify-center size-10 bg-white rounded-full z-9999 absolute right-4 bottom-8"
+          onClick={() => router.push("/main/roleplay/create/custom")}
+        >
+          <Plus />
+        </button>
       </div>
     </div>
   );

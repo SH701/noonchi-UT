@@ -48,7 +48,6 @@ export const apiMutations = {
     logout: async (): Promise<void> => {
       return apiFetch<void>("/api/auth/logout", {
         method: "POST",
-        
       });
     },
 
@@ -86,7 +85,7 @@ export const apiMutations = {
         `/api/messages/${messageId}/tts`,
         {
           method: "PUT",
-        }
+        },
       );
       return audioUrl;
     },
@@ -95,7 +94,7 @@ export const apiMutations = {
         `/api/messages/${messageId}/translate`,
         {
           method: "PUT",
-        }
+        },
       );
       return translatedText;
     },
@@ -103,7 +102,7 @@ export const apiMutations = {
 
   conversations: {
     createInterview: async (
-      data: InterviewApiRequest
+      data: InterviewApiRequest,
     ): Promise<ConversationResponse> => {
       return apiFetch<ConversationResponse>("/api/conversations/interview", {
         method: "POST",
@@ -112,7 +111,7 @@ export const apiMutations = {
     },
 
     createRoleplay: async (
-      data: RoleplayApiRequest
+      data: RoleplayApiRequest,
     ): Promise<ConversationResponse> => {
       return apiFetch<ConversationResponse>("/api/conversations/role-playing", {
         method: "POST",
@@ -120,21 +119,21 @@ export const apiMutations = {
       });
     },
     deleteConversation: async (
-      conversationId: string
+      conversationId: string,
     ): Promise<DeleteConversationResponse | null> => {
       return apiFetch<DeleteConversationResponse | null>(
         `/api/conversations/${conversationId}`,
         {
           method: "DELETE",
-        }
+        },
       );
     },
     endConversation: async (
-      conversationId: string
+      conversationId: string,
     ): Promise<EndConversationResponse> => {
       return apiFetch<EndConversationResponse>(
         `/api/conversations/${conversationId}/end`,
-        { method: "PUT" }
+        { method: "PUT" },
       );
     },
   },
@@ -166,7 +165,7 @@ export const apiMutations = {
                 fileExtension: file.name.split(".").pop(),
                 fileType: file.type,
               }),
-            }
+            },
           );
 
           await fetch(presignedData.url, {
@@ -181,7 +180,7 @@ export const apiMutations = {
             fileType: file.type,
             fileSize: file.size,
           };
-        })
+        }),
       );
     },
   },

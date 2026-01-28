@@ -10,7 +10,7 @@ interface RoleplayProps {
     myRole: string;
     aiRole: string;
     details: string;
-    tone: string;
+    tone?: string;
   }) => void;
   AiRole?: string;
   myRole?: string;

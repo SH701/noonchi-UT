@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { useTabStore } from "@/store/tab/useTabStore";
-import { SearchBar } from "../bothistory";
+import { SearchBar } from "../common";
 
 const slideVariants = {
   hidden: { width: 0 },

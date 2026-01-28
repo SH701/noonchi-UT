@@ -9,7 +9,7 @@ import {
   ProfileHeader,
 } from "@/components/profile";
 import { apiMutations } from "@/api/mutations";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { toast } from "@/components/ui/toast/toast";
 import { Button } from "@/components/ui/button/button";
 
@@ -20,6 +20,7 @@ export default function ProfilePage() {
   const handleLogout = async () => {
     try {
       await apiMutations.auth.logout();
+      await signOut({ redirect: false });
       router.push("/preview");
       toast.success("You are logged out");
     } catch {
