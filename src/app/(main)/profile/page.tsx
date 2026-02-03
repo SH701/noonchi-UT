@@ -38,7 +38,7 @@ export default function ProfilePage() {
         />
         <div className=" pt-4 ">
           <StatsCard
-            totalPractices={0}
+            totalPractices={50}
             avgScore={0}
             bestScore={0}
             currentStreak={"1 day"}

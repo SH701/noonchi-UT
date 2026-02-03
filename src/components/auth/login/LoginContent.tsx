@@ -41,7 +41,6 @@ export default function LoginContent() {
         password: data.password,
         redirect: false,
       });
-
       if (result?.error) {
         setServerErrors({
           general: "Email or password incorrect!",
@@ -49,7 +48,6 @@ export default function LoginContent() {
         setLoading(false);
         return;
       }
-
       closeModal();
       router.replace("/main");
     } catch {

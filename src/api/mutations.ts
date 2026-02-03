@@ -39,10 +39,13 @@ export const apiMutations = {
     },
 
     signup: async (payload: SignupRequest): Promise<AuthResponse> => {
-      return apiFetch<AuthResponse>("/api/auth/signup", {
+      console.log("signup payload:", payload);
+      const response = await apiFetch<AuthResponse>("/api/auth/signup", {
         method: "POST",
         body: JSON.stringify(payload),
       });
+      console.log("signup response:", response);
+      return response;
     },
 
     logout: async (): Promise<void> => {

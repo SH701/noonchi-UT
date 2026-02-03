@@ -1,17 +1,6 @@
 import { axios } from "@/api/common";
 import { AxiosError } from "axios";
 
-export class ApiError extends Error {
-  constructor(
-    message: string,
-    public status: number,
-    public errors?: Record<string, string>,
-  ) {
-    super(message);
-    this.name = "ApiError";
-  }
-}
-
 export async function apiFetch<T>(
   url: string,
   options: RequestInit = {},
@@ -27,12 +16,13 @@ export async function apiFetch<T>(
     return res.data;
   } catch (error) {
     if (error instanceof AxiosError) {
-      const status = error.response?.status || 500;
       const errorData = error.response?.data;
       const errorMessage =
-        errorData?.message || errorData?.error || `API Error: ${status}`;
+        errorData?.message ||
+        errorData?.error ||
+        `API Error: ${error.response?.status || 500}`;
 
-      throw new ApiError(errorMessage, status);
+      throw new Error(errorMessage);
     }
     throw error;
   }

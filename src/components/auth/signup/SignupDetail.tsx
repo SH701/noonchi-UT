@@ -5,10 +5,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button/button";
-import { performSignup } from "@/lib/service/signup";
+import { apiMutations } from "@/api/mutations";
 import { SignupHeader, SignupTemplate, SignupForm2 } from "@/components/auth";
 import { signup2Schema } from "@/types/auth";
-import { ApiError } from "@/api/api";
 import { signIn } from "next-auth/react";
 import StepIndicator from "./StepIndicator";
 
@@ -44,7 +43,7 @@ export default function SignupDetail({
 
   const onSubmit = async (data: Step2FormData) => {
     try {
-      await performSignup({
+      await apiMutations.auth.signup({
         email,
         password,
         nickname: data.name,
@@ -56,16 +55,9 @@ export default function SignupDetail({
         password,
         redirect: false,
       });
-
-      const pendingInterviewId = localStorage.getItem("pendingInterviewId");
-      if (pendingInterviewId) {
-        router.push(`/main/chatroom/${pendingInterviewId}`);
-        localStorage.removeItem("pendingInterviewId");
-      } else {
-        router.push("/main");
-      }
+      router.push("/main");  
     } catch (err) {
-      if (err instanceof ApiError) {
+      if (err instanceof Error) {
         serverErrors(err.message);
       }
     }

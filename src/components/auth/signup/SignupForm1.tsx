@@ -3,7 +3,7 @@
 import { TextInput } from "@/components/ui/form";
 import { Controller, Control, FieldErrors } from "react-hook-form";
 
-type SignupForm1Data = {
+interface SignupForm1Props  {
   email: string;
   password: string;
   confirmpassword: string;
@@ -14,8 +14,8 @@ export default function SignupForm1({
   control,
   errors,
 }: {
-  control: Control<SignupForm1Data>;
-  errors: FieldErrors<SignupForm1Data>;
+  control: Control<SignupForm1Props>;
+  errors: FieldErrors<SignupForm1Props>;
 }) {
   return (
     <div className="space-y-4">

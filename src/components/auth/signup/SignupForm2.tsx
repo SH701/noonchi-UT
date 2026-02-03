@@ -4,7 +4,7 @@ import { TextInput } from "@/components/ui/form";
 
 import { Controller, Control, FieldErrors } from "react-hook-form";
 
-interface SignupForm2Data {
+interface SignupForm2Props {
   name: string;
   birthdate: string;
 }
@@ -13,8 +13,8 @@ export default function SignupForm2({
   control,
   errors,
 }: {
-  control: Control<SignupForm2Data>;
-  errors: FieldErrors<SignupForm2Data>;
+  control: Control<SignupForm2Props>;
+  errors: FieldErrors<SignupForm2Props>;
 }) {
   return (
     <div className="space-y-4">
@@ -25,7 +25,6 @@ export default function SignupForm2({
           render={({ field }) => (
             <TextInput
               label="Name"
-              required
               placeholder="Enter your name"
               value={field.value}
               onChange={field.onChange}
