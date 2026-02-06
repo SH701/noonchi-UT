@@ -10,6 +10,7 @@ import { SignupHeader, SignupTemplate, SignupForm2 } from "@/components/auth";
 import { signup2Schema } from "@/types/auth";
 import { signIn } from "next-auth/react";
 import StepIndicator from "./StepIndicator";
+import { useModalActions } from "@/store/modal/useModalStore";
 
 type Step2FormData = z.infer<typeof signup2Schema>;
 
@@ -27,7 +28,7 @@ export default function SignupDetail({
   step,
 }: SignupDetailProps) {
   const router = useRouter();
-
+  const { closeModal } = useModalActions();
   const {
     control,
     handleSubmit,
@@ -38,6 +39,7 @@ export default function SignupDetail({
     defaultValues: {
       name: "",
       birthdate: "",
+      gender: "MALE",
     },
   });
 
@@ -48,6 +50,7 @@ export default function SignupDetail({
         password,
         nickname: data.name,
         birthDate: data.birthdate,
+        gender: "MALE",
       });
 
       await signIn("credentials", {
@@ -55,7 +58,8 @@ export default function SignupDetail({
         password,
         redirect: false,
       });
-      router.push("/main");  
+      closeModal();
+      router.push("/main");
     } catch (err) {
       if (err instanceof Error) {
         serverErrors(err.message);

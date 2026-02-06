@@ -16,12 +16,12 @@ import { useConversationDetail } from "@/hooks/queries/";
 import { useChatMessages } from "@/hooks/useChatMessages";
 import { useVoiceChat } from "@/hooks/useVoiceChat";
 
-export default function ChatroomPage() {
+export default function RolePlayChatRoom() {
   const { id } = useParams<{ id: string }>();
 
   const [infoOpen, setInfoOpen] = useState(false);
   const [message, setMessage] = useState("");
-
+  const [isTyping, setIsTyping] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const { data: conversation, error: conversationError } =
@@ -104,6 +104,8 @@ export default function ChatroomPage() {
       </AnimatePresence>
 
       <ChatroomInput
+        isTyping={isTyping}
+        setIsTyping={setIsTyping}
         message={message}
         setMessage={setMessage}
         isAIResponding={isAIResponding}

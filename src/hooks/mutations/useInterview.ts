@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { apiMutations } from "@/api/mutations";
-import { InterviewApiRequest } from "@/types/conversations";
+import { InterviewFormData } from "@/types/conversations";
 
 export const useUploadFiles = () => {
   return useMutation({
@@ -10,7 +10,7 @@ export const useUploadFiles = () => {
 
 export const useCreateInterview = () => {
   return useMutation({
-    mutationFn: async (data: InterviewApiRequest) => {
+    mutationFn: async (data: InterviewFormData) => {
       return apiMutations.conversations.createInterview(data);
     },
   });

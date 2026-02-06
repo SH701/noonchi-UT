@@ -1,21 +1,16 @@
- 
-"use client";
-
+import { Asterisk, Lightbulb } from "lucide-react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import clsx from "clsx";
+import { MicrophoneIcon } from "@heroicons/react/24/solid";
 
 interface ChatroomInputProps {
-  isTyping: boolean;
   micState: "idle" | "recording" | "recorded";
   message: string;
   pendingAudioUrl: string | null;
   showVoiceError: boolean;
   isAIResponding?: boolean;
   sttText: string;
-  setIsTyping: (v: boolean) => void;
-  setMessage: (v: string) => void;
 
+  setMessage: (v: string) => void;
   handleMicClick: () => void;
   handleResetAudio: () => void;
   handleSendAudio: () => void;
@@ -23,185 +18,59 @@ interface ChatroomInputProps {
 }
 
 export default function ChatroomInput({
-  isTyping,
   micState,
   message,
   showVoiceError,
   isAIResponding = false,
   sttText,
-  setIsTyping,
-  setMessage,
 
+  setMessage,
   handleMicClick,
   handleResetAudio,
   handleSendAudio,
   sendMessage,
 }: ChatroomInputProps) {
- 
   return (
-    <>
-      <AnimatePresence>
-        {showVoiceError && (
-          <motion.div
-            key="voice-error"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="fixed bottom-43.5 left-1/2 -translate-x-1/2 -translate-y-3 z-40 flex flex-col items-center"
+    <div className="border-gray-200 max-w-93.75 w-full flex justify-center items-center flex-col gap-6 absoulte bottom-0 z-50">
+      <div className="flex flex-col items-center w-full max-w-83.5 h-25 min-w-0 border border-blue-300 rounded-[20px] bg-white">
+        <input
+          type="text"
+          placeholder={
+            isAIResponding ? "AI is responding..." : "Type your answer..."
+          }
+          className="grow min-w-0 px-2 text-gray-500 placeholder-gray-400 border-none outline-none disabled:bg-gray-50"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) =>
+            e.key === "Enter" &&
+            !isAIResponding &&
+            message.trim() &&
+            sendMessage(message)
+          }
+          disabled={isAIResponding}
+        />
+        <div className="flex gap-1">
+          <button className="flex border rounded-full px-2 h-6.5 ">
+            <Asterisk />
+            <p>situation</p>
+          </button>
+
+          <button className="flex border rounded-full px-2 h-6.5 ">
+            <Lightbulb className=" py-1" />
+            <p>hint</p>
+          </button>
+          <button
+            onClick={() => sendMessage(message)}
+            className="shrink-0 p-3 hover:bg-gray-50 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isAIResponding || !message.trim()}
           >
-            <Image
-              src="/etc/voice_error.png"
-              alt="Voice Error"
-              width={150}
-              height={60}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <div
-        className={clsx(
-          "h-37.5 border-t border-gray-200 md:max-w-93.75 w-full flex justify-center items-center flex-col gap-6 absoulte bottom-0 z-50"
-        )}
-      >
-        <div className="flex gap-8 items-center justify-center">
-          {!isTyping && (
-            <>
-              <div>
-                <div>
-                  <input
-                    type="text"
-                    className="rounded-[100px] px-5 py-1 w-83.5 bg-gray-100 mt-2 "
-                    placeholder={
-                      isAIResponding
-                        ? "AI is responding..."
-                        : "Press the voice button."
-                    }
-                    value={sttText}
-                    disabled
-                  />
-                </div>
-                <div className="flex gap-4 justify-between mx-10 items-center  pt-2">
-                  {micState === "recording" || micState === "recorded" ? (
-                    <button
-                      className="w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-100"
-                      onClick={handleResetAudio}
-                      disabled={isAIResponding}
-                    >
-                      <Image
-                        src="/chatroom/cancel.png"
-                        alt="Refresh"
-                        width={64}
-                        height={64}
-                        className={isAIResponding ? "opacity-50 " : ""}
-                      />
-                    </button>
-                  ) : (
-                    <div className="w-12 h-12" />
-                  )}
-
-                  {micState === "idle" && (
-                    <button onClick={handleMicClick} disabled={isAIResponding}>
-                      <Image
-                        src="/chatroom/voice.png"
-                        alt="Mic"
-                        width={82}
-                        height={82}
-                        className={isAIResponding ? "opacity-50" : ""}
-                      />
-                    </button>
-                  )}
-
-                  {micState === "recording" && (
-                    <button onClick={handleMicClick} disabled={isAIResponding}>
-                      <Image
-                        src="/chatroom/voicesave.png"
-                        alt="Pause"
-                        width={82}
-                        height={82}
-                        className={isAIResponding ? "opacity-50" : ""}
-                      />
-                    </button>
-                  )}
-
-                  {micState === "recorded" && (
-                    <button onClick={handleSendAudio} disabled={isAIResponding}>
-                      <Image
-                        src="/chatroom/send.png"
-                        alt="Send"
-                        width={60}
-                        height={60}
-                        className={isAIResponding ? "opacity-50" : ""}
-                      />
-                    </button>
-                  )}
-
-                  <button
-                    className="bg-white rounded-full flex items-center justify-center hover:bg-gray-100 disabled:opacity-50"
-                    onClick={() => setIsTyping(true)}
-                    disabled={isAIResponding}
-                  >
-                    <Image
-                      src="/chatroom/bluekeyboard.png"
-                      alt="Keyboard"
-                      width={56}
-                      height={56}
-                    />
-                  </button>
-                </div>
-              </div>
-            </>
-          )}
-
-          {isTyping && (
-            <div className="flex items-center w-full max-w-83.5 min-w-0 border border-blue-300 rounded-full bg-white mx-4">
-              <button
-                onClick={() => setIsTyping(false)}
-                className="p-2 shrink-0 disabled:opacity-50"
-                disabled={isAIResponding}
-              >
-                <Image
-                  src="/chatroom/mic.png"
-                  alt="Mic"
-                  width={24}
-                  height={24}
-                />
-              </button>
-
-              <input
-                type="text"
-                placeholder={
-                  isAIResponding ? "AI is responding..." : "Type your answer..."
-                }
-                className="grow min-w-0 p-2 text-gray-500 placeholder-gray-400 border-none outline-none disabled:bg-gray-50"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                onKeyDown={(e) =>
-                  e.key === "Enter" &&
-                  !isAIResponding &&
-                  message.trim() &&
-                  sendMessage(message)
-                }
-                disabled={isAIResponding}
-              />
-
-              <button
-                onClick={() => sendMessage(message)}
-                className="shrink-0 p-3 hover:bg-gray-50 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={isAIResponding || !message.trim()}
-              >
-                <Image
-                  src="/chatroom/up.png"
-                  alt="Send"
-                  width={28}
-                  height={28}
-                />
-              </button>
-            </div>
-          )}
+            <Image src="/chatroom/up.png" alt="Send" width={28} height={28} />
+          </button>
+          <button className="border rounded-full size-8">
+            <MicrophoneIcon className="size-7" />
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,4 +1,3 @@
-export { default as ChatroomHeader } from "./ChatroomHeader";
 export { default as ChatroomInfo } from "./ChatroomInfo";
 export { default as ChatroomInput } from "./ChatroomInput";
 export { default as LoadingModal } from "./LoadingModal";

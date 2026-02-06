@@ -17,7 +17,7 @@ export default async function ProfilePage() {
   const session = await auth();
 
   return (
-    <div className="flex flex-col max-w-93.75 ">
+    <div className="flex flex-col max-w-93.75">
       <ProfileHeader />
       <div className="space-y-5">
         <ProfileInfo

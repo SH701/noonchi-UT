@@ -12,7 +12,7 @@ export default function Logout() {
     try {
       await apiMutations.auth.logout();
       await signOut({ redirect: false });
-      router.push("/preview");
+      router.push("/");
       toast.success("You are logged out");
     } catch {
       toast.error("Logout failed");

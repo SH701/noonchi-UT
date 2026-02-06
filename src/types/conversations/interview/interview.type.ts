@@ -1,25 +1,20 @@
-export type PresignedUrlResponse = {
+export interface PresignedUrlResponse {
   url: string;
-};
-export type UploadedFile = {
+}
+export interface UploadedFile {
   fileUrl: string;
   fileName: string;
   fileType: string;
   fileSize: number;
-};
-export type InterviewFormData = {
+}
+export interface InterviewFormData {
   companyName: string;
   jobTitle: string;
   jobPosting: string;
   files: File[];
-};
+}
 
-export type InterviewApiRequest = {
-  companyName: string;
-  jobTitle: string;
-  jobPosting: string;
-  files: UploadedFile[];
-};
+
 
 export const INTERVIEW_STYLES = [
   { value: "friendly", label: "Friendly" },

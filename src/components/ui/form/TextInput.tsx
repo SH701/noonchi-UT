@@ -54,7 +54,7 @@ export default function TextInput({
           ${className}
         `}
       />
-      {pathname.startsWith("/main/roleplay/create/roleplay") && (
+      {pathname.startsWith("/main/roleplay/create") && (
         <button
           className="absolute right-3 top-10"
           onClick={onClick}

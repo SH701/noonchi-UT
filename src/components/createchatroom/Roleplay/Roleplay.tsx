@@ -7,14 +7,19 @@ import RoleplayForm from "@/components/createchatroom/Roleplay/RoleplayForm";
 
 import { topicsByCategory } from "@/data";
 
-import { TOPIC_ENUMS } from "@/types/conversations";
+import { useCreateRoleplay } from "@/hooks/mutations";
+import { toast } from "@/components/ui/toast/toast";
 
-import { useCreateRoleplay, useDeductCredit } from "@/hooks/mutations";
+interface SubmitProps {
+  myRole: string;
+  aiRole: string;
+  situation: string;
+  tone: string;
+}
 
 export default function RolePlay() {
   const router = useRouter();
   const searchParams = useSearchParams();
-
   const mode = searchParams.get("mode") as "topic" | "custom";
   const category = searchParams.get(
     "category",
@@ -26,24 +31,26 @@ export default function RolePlay() {
       ? topicsByCategory[category]?.find((t) => t.id === topicId)
       : undefined;
 
-  const deductCredit = useDeductCredit();
   const createRoleplay = useCreateRoleplay();
 
-  const handleSubmit = async ({ details }: { details: string }) => {
+  const handleSubmit = async ({
+    myRole,
+    aiRole,
+    situation,
+    tone,
+  }: SubmitProps) => {
     try {
-      const conversationTopic = TOPIC_ENUMS[category][1];
-
-      const convo = await createRoleplay.mutateAsync({
-        conversationTopic,
-        details: details,
-      });
-
-      router.push(`/main/chatroom/${convo.conversationId}`);
+      const requestData = {
+        conversationTopicId: topicId,
+        userRole: myRole,
+        aiRole,
+        closeness: tone || "casual",
+        situation,
+      };
+      const convo = await createRoleplay.mutateAsync(requestData);
+      router.push(`/main/roleplay/chatroom/${convo.conversationId}`);
     } catch {
-      if (deductCredit.isError) {
-        return;
-      }
-      alert("채팅 생성 실패 🤯");
+      toast.error("Failed to create chat room");
     }
   };
 

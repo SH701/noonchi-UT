@@ -3,10 +3,12 @@
 import { TextInput } from "@/components/ui/form";
 
 import { Controller, Control, FieldErrors } from "react-hook-form";
+import GenderToggle from "./GenderToggle";
 
 interface SignupForm2Props {
   name: string;
   birthdate: string;
+  gender: "MALE" | "FEMALE";
 }
 
 export default function SignupForm2({
@@ -58,6 +60,18 @@ export default function SignupForm2({
           <p className="text-red-500 text-sm mt-1">
             {errors.birthdate?.message}
           </p>
+        )}
+      </div>
+      <div>
+        <Controller
+          name="gender"
+          control={control}
+          render={({ field }) => (
+            <GenderToggle gender={field.value} setGender={field.onChange} />
+          )}
+        />
+        {errors.gender && (
+          <p className="text-red-500 text-sm mt-1">{errors.gender.message}</p>
         )}
       </div>
     </div>

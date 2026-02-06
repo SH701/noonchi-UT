@@ -4,7 +4,7 @@ import { AuthResponse, LoginRequest, SignupRequest } from "@/types/auth";
 import { normalizeChatMessage } from "@/utils/normalizeChatMessage";
 
 import {
-  InterviewApiRequest,
+  InterviewFormData,
   PresignedUrlResponse,
   UploadedFile,
   ConversationResponse,
@@ -105,7 +105,7 @@ export const apiMutations = {
 
   conversations: {
     createInterview: async (
-      data: InterviewApiRequest,
+      data: InterviewFormData,
     ): Promise<ConversationResponse> => {
       return apiFetch<ConversationResponse>("/api/conversations/interview", {
         method: "POST",
