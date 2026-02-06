@@ -1,6 +1,6 @@
 "use client";
 
-import Onboard from "@/components/onboard/Onboard";
+import { Onboarding } from "@/components/onboard";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <main className="h-screen w-full max-w-93.75 mx-auto flex items-center justify-center overflow-hidden">
-      <Onboard />
+      <Onboarding />
     </main>
   );
 }

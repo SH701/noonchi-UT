@@ -23,7 +23,7 @@ export const settings: Settings = {
   swipe: false,
   dotsClass: "slick-dots custom-dots",
 };
-export default function Onboard() {
+export default function Onboarding() {
   const router = useRouter();
   const sliderRef = useRef<Slider>(null);
   const [initialLoading, setInitialLoading] = useState(true);
