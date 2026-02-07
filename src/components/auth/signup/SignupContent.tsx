@@ -11,9 +11,11 @@ import {
   SignupHeader,
   SignupTemplate,
   SignupDetail,
+  LoginContent,
 } from "@/components/auth";
 import { signupSchema } from "@/types/auth";
 import StepIndicator from "./StepIndicator";
+import { useModalActions } from "@/store/modal/useModalStore";
 
 type Step1FormData = z.infer<typeof signupSchema>;
 
@@ -21,6 +23,7 @@ export default function SignupContent() {
   const [step, setStep] = useState<1 | 2>(1);
   const [signupData, setSignupData] = useState({ email: "", password: "" });
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
+  const { openModal } = useModalActions();
   const {
     control,
     handleSubmit,
@@ -80,6 +83,15 @@ export default function SignupContent() {
             {serverErrors.email}
           </p>
         )}
+        <div className="text-center text-sm text-gray-500">
+          Already have an account?{" "}
+          <button
+            className="font-medium text-blue-500 hover:underline"
+            onClick={() => openModal(<LoginContent />)}
+          >
+            Login
+          </button>
+        </div>
       </SignupTemplate>
     </div>
   );

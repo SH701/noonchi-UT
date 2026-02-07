@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, SquarePen } from "lucide-react";
+import { Menu, MessageCircle, Sparkles, SquarePen } from "lucide-react";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
@@ -10,7 +10,7 @@ import Header from "../common/Header";
 
 export default function RoleplayHeader() {
   const { isOpen, toggleTab, closeTab } = useTabStore();
-
+  const [open, setOpen] = useState(false);
   const askRef = useRef<HTMLSpanElement>(null);
   const roleRef = useRef<HTMLSpanElement>(null);
   const pathname = usePathname();
@@ -54,7 +54,12 @@ export default function RoleplayHeader() {
       router.push("/main/ask");
     }
   };
-
+  const handleExit = () => {
+    setOpen(!open);
+  };
+  const handleEnd = () => {
+    console.log("End");
+  };
   const ToggleSwitch = (
     <div
       className="relative flex items-center bg-white/30 rounded-full cursor-pointer"
@@ -91,9 +96,21 @@ export default function RoleplayHeader() {
       <Header
         leftIcon={<Menu onClick={toggleTab} />}
         center={ToggleSwitch}
-        rightIcon={isRoleplay ? undefined : <SquarePen />}
+        rightIcon={isRoleplay ? <SquarePen onClick={handleExit} /> : undefined}
       />
       <Tab />
+      {open && (
+        <div className="p-3 rounded-xl bg-white flex flex-col gap-1 absolute right-5 top-16 z-50">
+          <button className="p-2 flex gap-2">
+            <Sparkles />
+            New Chat
+          </button>
+          <button className="p-2 flex gap-2" onClick={handleEnd}>
+            <MessageCircle />
+            Get Reports
+          </button>
+        </div>
+      )}
     </>
   );
 }

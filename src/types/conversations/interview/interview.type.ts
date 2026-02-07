@@ -11,6 +11,7 @@ export interface InterviewFormData {
   companyName: string;
   jobTitle: string;
   jobPosting: string;
+  interviewStyle:string
   files: File[];
 }
 

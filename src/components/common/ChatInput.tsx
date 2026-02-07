@@ -1,0 +1,96 @@
+"use client";
+
+import { Asterisk, Lightbulb, Send } from "lucide-react";
+import { MicrophoneIcon } from "@heroicons/react/24/solid";
+import { useRef, useEffect } from "react";
+
+interface ChatInputProps {
+  message: string;
+  setMessage: (v: string) => void;
+  onSend: () => void;
+  onMicClick?: () => void;
+  disabled?: boolean;
+  placeholder?: string;
+  showSituation?: boolean;
+  showHint?: boolean;
+}
+
+export default function ChatInput({
+  message,
+  setMessage,
+  onSend,
+  onMicClick,
+  disabled = false,
+  placeholder = "Type your answer...",
+  showSituation = true,
+  showHint = true,
+}: ChatInputProps) {
+  const textRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (textRef.current) {
+      textRef.current.style.height = "auto";
+      textRef.current.style.height = `${textRef.current.scrollHeight}px`;
+    }
+  }, [message]);
+
+  return (
+    <div className="border-gray-200 max-w-93.75 w-full flex-col gap-6 fixed bottom-10 z-50 items-center justify-center">
+      <div className="flex flex-col items-center w-full max-w-83.75 min-w-0 rounded-[20px] bg-white px-4 py-3">
+        <textarea
+          ref={textRef}
+          rows={1}
+          placeholder={placeholder}
+          className="grow min-w-0 w-full text-gray-500 placeholder-gray-400 border-none outline-none disabled:bg-gray-50 max-h-30 resize-none overflow-y-auto mb-3"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (
+              e.key === "Enter" &&
+              !e.shiftKey &&
+              !disabled &&
+              message.trim()
+            ) {
+              e.preventDefault();
+              onSend();
+            }
+          }}
+          disabled={disabled}
+        />
+        <div className="flex gap-1 w-full items-end justify-between">
+          <div className="flex gap-1">
+            {showSituation && (
+              <button className="flex border rounded-full px-2 h-6.5">
+                <Asterisk />
+                <p>situation</p>
+              </button>
+            )}
+            {showHint && (
+              <button className="flex border rounded-full px-2 h-6.5">
+                <Lightbulb className="py-1" />
+                <p>hint</p>
+              </button>
+            )}
+          </div>
+          <div className="flex gap-1">
+            {onMicClick && (
+              <button
+                onClick={onMicClick}
+                className="shrink-0 hover:bg-gray-50 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <MicrophoneIcon className="size-7" />
+              </button>
+            )}
+            <button
+              onClick={onSend}
+              className="shrink-0 hover:bg-gray-50 rounded-full transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={disabled || !message.trim()}
+            >
+              <Send className="size-7 text-blue-600" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

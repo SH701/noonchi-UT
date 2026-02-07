@@ -46,6 +46,7 @@ export default function InterviewContent() {
         companyName: data.companyName,
         jobTitle: data.jobTitle,
         jobPosting: data.jobPosting,
+        interviewStyle: "friendly",
         files: uploadedFiles,
       });
       router.push(`/main/roleplay/chatroom/${convo.conversationId}`);

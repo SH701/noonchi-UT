@@ -11,7 +11,7 @@ import {
   RoleplayApiRequest,
 } from "@/types/conversations";
 import { ChatMsg } from "@/types/messages";
-import { Preview } from "@/types/preview/preview.type";
+import { Preview, PreviewSendResponse } from "@/types/preview/preview.type";
 import axios from "axios";
 
 interface SendMessageResponse {
@@ -200,17 +200,54 @@ export const apiMutations = {
       sessionId: string,
       userMessage: string,
       inputType: "text" | "voice" = "text",
-    ): Promise<string> => {
-      const { data } = await axios.post<string>(
+      onChunk?: (chunk: string) => void,
+    ): Promise<PreviewSendResponse> => {
+      const response = await fetch(
         `${process.env.NEXT_PUBLIC_PREVIEW_BASE_URL}/preview/roleplay/${sessionId}/messages`,
-        { user_message: userMessage, input_type: inputType },
         {
+          method: "POST",
           headers: {
+            "Content-Type": "application/json",
             "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY || "",
           },
+          body: JSON.stringify({
+            user_message: userMessage,
+            input_type: inputType,
+          }),
         },
       );
-      return data;
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+      let fullText = "";
+      let doneData: PreviewSendResponse | null = null;
+      let buffer = "";
+
+      if (reader) {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+
+          const lines = buffer.split("\n");
+          buffer = lines.pop() || "";
+
+          for (const line of lines) {
+            if (!line.startsWith("data: ")) continue;
+            const json = JSON.parse(line.slice(6));
+            if (json.type === "chunk") {
+              fullText += json.content;
+              onChunk?.(fullText);
+            } else if (json.type === "done") {
+              doneData = json.data as PreviewSendResponse;
+            }
+          }
+        }
+      }
+
+      return doneData!;
     },
     remove: async (sessionId: string): Promise<void> => {
       await axios.delete(
