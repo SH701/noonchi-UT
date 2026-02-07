@@ -40,4 +40,11 @@ export const apiClient = {
       return apiFetch<Feedback>(`/api/messages/${messageId}/feedback`);
     },
   },
+  preview:{
+    getPreview:async(sessionId:string):Promise<void>=>{
+      const data = await apiFetch<void>(
+        `/api/preview/roleplay/${sessionId}/hints`,
+      )
+    }
+  }
 };

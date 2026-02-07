@@ -1,7 +1,8 @@
 "use client";
 
 import { Header } from "@/components/common";
-import { LANGUAGE_OPTIONS } from "@/lib/common/constants";
+import { LANGUAGE_OPTIONS } from "@/constants/language";
+
 import { XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 

@@ -82,5 +82,19 @@ body {
     #e3edf4 33%,
     #e2ddf6 66%,
     #e5d2ff 100%
-  ) !important;
+  );
+}
+
+.border-gradient-primary {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(white, white) padding-box,
+    linear-gradient(90deg, #7091f9 0%, #b0dff7 50%, #dc8cd8 100%) border-box;
+}
+
+.text-gradient-primary {
+  background: linear-gradient(90deg, #7091f9 0%, #b0dff7 50%, #dc8cd8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

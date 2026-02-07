@@ -11,6 +11,8 @@ import {
   RoleplayApiRequest,
 } from "@/types/conversations";
 import { ChatMsg } from "@/types/messages";
+import { Preview } from "@/types/preview/preview.type";
+import axios from "axios";
 
 interface SendMessageResponse {
   taskResult: {
@@ -51,13 +53,6 @@ export const apiMutations = {
     logout: async (): Promise<void> => {
       return apiFetch<void>("/api/auth/logout", {
         method: "POST",
-      });
-    },
-
-    guestLogin: async (deviceId: string): Promise<AuthResponse> => {
-      return apiFetch<AuthResponse>("/api/auth/guest-login", {
-        method: "POST",
-        body: JSON.stringify({ deviceId }),
       });
     },
   },
@@ -184,6 +179,47 @@ export const apiMutations = {
             fileSize: file.size,
           };
         }),
+      );
+    },
+  },
+  preview: {
+    start: async (): Promise<Preview> => {
+      const { data } = await axios.post<Preview>(
+        `${process.env.NEXT_PUBLIC_PREVIEW_BASE_URL}/preview/roleplay/start`,
+        null,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY || "",
+          },
+        },
+      );
+      console.log(process.env.NEXT_PUBLIC_PREVIEW_BASE_URL);
+      return data;
+    },
+    send: async (
+      sessionId: string,
+      userMessage: string,
+      inputType: "text" | "voice" = "text",
+    ): Promise<string> => {
+      const { data } = await axios.post<string>(
+        `${process.env.NEXT_PUBLIC_PREVIEW_BASE_URL}/preview/roleplay/${sessionId}/messages`,
+        { user_message: userMessage, input_type: inputType },
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY || "",
+          },
+        },
+      );
+      return data;
+    },
+    remove: async (sessionId: string): Promise<void> => {
+      await axios.delete(
+        `${process.env.NEXT_PUBLIC_PREVIEW_BASE_URL}/api/preview/roleplay/${sessionId}`,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_X_API_KEY || "",
+          },
+        },
       );
     },
   },
