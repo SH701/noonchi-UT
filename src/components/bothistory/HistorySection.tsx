@@ -42,7 +42,7 @@ export default function HistorySection({
               </button>
             </div>
           ) : (
-            <FeedbackSection id={conversationId} />
+            <FeedbackSection />
           )}
         </motion.div>
       )}

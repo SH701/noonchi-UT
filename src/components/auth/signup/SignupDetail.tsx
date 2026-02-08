@@ -59,7 +59,7 @@ export default function SignupDetail({
         redirect: false,
       });
       closeModal();
-      router.push("/main");
+      router.push("/main/roleplay");
     } catch (err) {
       if (err instanceof Error) {
         serverErrors(err.message);

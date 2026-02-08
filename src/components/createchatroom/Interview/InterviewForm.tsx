@@ -24,12 +24,12 @@ export default function InterviewForm({ onSubmit }: InterviewFormProps) {
       return;
     }
 
-    onSubmit({
-      companyName,
-      jobTitle,
-      jobPosting,
-      files,
-    });
+    // onSubmit({
+    //   companyName,
+    //   jobTitle,
+    //   jobPosting,
+    //   files,
+    // });
   };
 
   return (

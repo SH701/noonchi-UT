@@ -13,6 +13,7 @@ import {
 import { ChatMsg } from "@/types/messages";
 import { Preview, PreviewSendResponse } from "@/types/preview/preview.type";
 import axios from "axios";
+import { AskAPiRequest } from "@/types/conversations/ask/ask.type";
 
 interface SendMessageResponse {
   taskResult: {
@@ -109,6 +110,12 @@ export const apiMutations = {
       data: RoleplayApiRequest,
     ): Promise<ConversationResponse> => {
       return apiFetch<ConversationResponse>("/api/conversations/role-playing", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+    },
+    createAsk: async (data: AskAPiRequest): Promise<ConversationResponse> => {
+      return apiFetch<ConversationResponse>("/api/conversations/ask", {
         method: "POST",
         body: JSON.stringify(data),
       });

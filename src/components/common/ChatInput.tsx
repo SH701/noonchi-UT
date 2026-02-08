@@ -24,8 +24,8 @@ export default function ChatInput({
   onHintClick,
   disabled = false,
   placeholder = "Type your answer...",
-  showSituation = true,
-  showHint = true,
+  showSituation = false,
+  showHint = false,
 }: ChatInputProps) {
   const textRef = useRef<HTMLTextAreaElement>(null);
 
@@ -68,7 +68,10 @@ export default function ChatInput({
               </button>
             )}
             {showHint && (
-              <button onClick={onHintClick} className="flex border rounded-full px-2 h-6.5">
+              <button
+                onClick={onHintClick}
+                className="flex border rounded-full px-2 h-6.5"
+              >
                 <Lightbulb className="py-1" />
                 <p>hint</p>
               </button>

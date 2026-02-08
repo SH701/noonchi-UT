@@ -49,7 +49,7 @@ export default function LoginContent() {
         return;
       }
       closeModal();
-      router.replace("/main");
+      router.replace("/main/roleplay");
     } catch {
       setServerErrors({ general: "Login Error!" });
       setLoading(false);
