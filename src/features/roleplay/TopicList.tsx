@@ -1,15 +1,12 @@
 "use client";
 
-import TopicSlider from "@/features/roleplay/TopicSlider";
+import { TopicSlider } from "@/features/roleplay";
 import { CategoryType } from "@/types/topics";
 import { useRouter } from "next/navigation";
 import { Heart, Plus } from "lucide-react";
 import Image from "next/image";
-import {
-  useAddFavorite,
-  useRemoveFavorite,
-} from "@/hooks/mutations/topics/useFavorite";
-import { useTopics } from "@/hooks/queries/useTopics";
+import { useAddFavorite, useRemoveFavorite } from "@/hooks/mutations";
+import { useTopics } from "@/hooks/queries";
 import TopicListSkeleton from "./TopicListSkeleton";
 
 interface TopicListProps {

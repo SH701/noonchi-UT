@@ -3,9 +3,12 @@
 import { useRef, useEffect } from "react";
 import { useState } from "react";
 import { ChatInput, ChatLoading } from "../../components/common";
-import { useMessageTranslate, useMessageTTS } from "@/hooks/mutations";
+import {
+  useMessageTranslate,
+  useMessageTTS,
+  useAskMessages,
+} from "@/hooks/mutations";
 import { BulbIcon, LanguageIcon, VolumeUpIcon } from "@/assets/svgr";
-import { useAskMessages } from "@/hooks/mutations/messages/useAskMessages";
 import { ChevronDownIcon, ChevronUp } from "lucide-react";
 import { CLOSENESS_OPTIONS, STEP_QUESTIONS } from "@/constants";
 

@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { useCreateRoleplay } from "@/hooks/mutations";
 import { toast } from "@/components/ui/toast/toast";
-import { useTopics } from "@/hooks/queries/useTopics";
+import { useTopics } from "@/hooks/queries";
 import RoleplayForm from "./RoleplayForm";
 
 interface SubmitProps {

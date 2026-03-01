@@ -2,15 +2,14 @@
 
 import { useState } from "react";
 import clsx from "clsx";
-import { MyAI } from "@/types/etc/persona.type";
-import { ChatMsg } from "@/types/messages/messages.type";
+import { MyAI } from "@/types/etc";
+import { ChatMsg } from "@/types/messages";
 
 import {
   useMessageFeedback,
   useMessageTTS,
   useMessageTranslate,
-} from "@/hooks/mutations/messages/useMessage";
-import NotTTS from "../modal/NotTTS";
+} from "@/hooks/mutations";
 import { Spinner } from "../ui/spinner/spinner";
 import { ChatLoading } from "../common";
 import {
@@ -19,6 +18,7 @@ import {
   RefreshIcon,
   VolumeUpIcon,
 } from "@/assets/svgr";
+import { NotTTS } from "../modal";
 
 type MessageItemProps = {
   messages: Pick<ChatMsg, "content"> & Partial<ChatMsg>;

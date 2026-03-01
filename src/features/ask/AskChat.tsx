@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { ChatInput } from "../../components/common";
-import { Button } from "@/components/ui/button/button";
-import { useAsk } from "@/hooks/mutations/conversation/useAsk";
+
+import { useAsk } from "@/hooks/mutations";
 import { Spinner } from "../../components/ui/spinner/spinner";
 import { CLOSENESS_OPTIONS, Step, STEP_QUESTIONS, STEPS } from "@/constants";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button/button";
 
 export default function AskChat() {
   const [step, setStep] = useState<Step>("askTarget");

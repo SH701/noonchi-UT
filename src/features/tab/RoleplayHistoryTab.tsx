@@ -1,7 +1,6 @@
-import { useConversations } from "@/hooks/queries";
+import { useConversations, useTopics } from "@/hooks/queries";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useTopics } from "@/hooks/queries/useTopics";
 import { ChevronRightIcon } from "@/assets/svgr";
 import RoleplayHistorySkeleton from "./RoleplayHistorySkeleton";
 import { useChatHistoryStore } from "@/store/chathistory/useChatHistorystore";
@@ -9,8 +8,12 @@ import { useChatHistoryStore } from "@/store/chathistory/useChatHistorystore";
 export default function RoleplayHistoryTab() {
   const router = useRouter();
   const { keyword } = useChatHistoryStore();
-  const { data: conversations, isPending: isConversationsPending } = useConversations();
-  const { data: topics = [], isPending: isTopicsPending } = useTopics("", false);
+  const { data: conversations, isPending: isConversationsPending } =
+    useConversations();
+  const { data: topics = [], isPending: isTopicsPending } = useTopics(
+    "",
+    false,
+  );
   const isPending = isConversationsPending || isTopicsPending;
 
   const handleHistoryPage = () => {
@@ -20,7 +23,7 @@ export default function RoleplayHistoryTab() {
     <div>
       <button
         onClick={handleHistoryPage}
-        className="flex items-center gap-1 mb-3"
+        className="mb-3 flex items-center gap-1"
       >
         <span className="text-sm font-medium">Role Playing</span>
         <ChevronRightIcon size={18} className="text-gray-400" />
@@ -28,12 +31,14 @@ export default function RoleplayHistoryTab() {
       {isPending ? (
         <RoleplayHistorySkeleton />
       ) : (
-        <div className="flex gap-3 overflow-x-auto ">
+        <div className="flex gap-3 overflow-x-auto">
           {conversations
             ?.filter((convo) => convo.conversationType === "ROLE_PLAYING")
             .filter((convo) =>
               keyword
-                ? convo.conversationTopic.toLowerCase().includes(keyword.toLowerCase())
+                ? convo.conversationTopic
+                    .toLowerCase()
+                    .includes(keyword.toLowerCase())
                 : true,
             )
             .map((convo) => {
@@ -44,7 +49,7 @@ export default function RoleplayHistoryTab() {
               return (
                 <div
                   key={convo.conversationId}
-                  className="size-32 rounded-2xl overflow-hidden shrink-0 relative border border-white/10 shadow-lg"
+                  className="relative size-32 shrink-0 overflow-hidden rounded-2xl border border-white/10 shadow-lg"
                 >
                   {matchedTopic?.imageUrl ? (
                     <Image
@@ -54,16 +59,16 @@ export default function RoleplayHistoryTab() {
                       className="object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gray-600" />
+                    <div className="h-full w-full bg-gray-600" />
                   )}
 
-                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="bg-linear-to-t absolute inset-0 from-black/80 via-black/20 to-transparent" />
 
-                  <div className="flex flex-col justify-end p-3 text-white absolute inset-0">
-                    <span className="text-[10px] text-gray-300 uppercase tracking-wider">
+                  <div className="absolute inset-0 flex flex-col justify-end p-3 text-white">
+                    <span className="text-[10px] uppercase tracking-wider text-gray-300">
                       {convo.conversationTrack}
                     </span>
-                    <h4 className="text-xs font-bold leading-tight line-clamp-2">
+                    <h4 className="line-clamp-2 text-xs font-bold leading-tight">
                       {convo.conversationTopic}
                     </h4>
                   </div>

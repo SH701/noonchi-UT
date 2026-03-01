@@ -1,6 +1,6 @@
 "use client";
 
-import { MyAI } from "@/types/etc/persona.type";
+import { MyAI } from "@/types/etc";
 
 import MessageItem from "./MessageItem";
 import { ChatMsg } from "@/types/messages";

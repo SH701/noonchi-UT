@@ -2,7 +2,7 @@
 
 import { use } from "react";
 
-import RoleplayEnd from "@/features/roleplay/RoleplayEnd";
+import { RoleplayEnd } from "@/features/roleplay";
 
 export default function Result({
   params,

@@ -1,3 +1,4 @@
+export * from "./conversation/useAsk";
 export * from "./conversation/useConversation";
 export * from "./conversation/useInterview";
 export * from "./conversation/useRoleplay";

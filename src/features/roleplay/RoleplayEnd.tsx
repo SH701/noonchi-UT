@@ -10,10 +10,9 @@ import {
 
 import { MessageList } from "@/components/chatroom";
 
-import { ResultTab, Point } from "@/features/result";
+import { ResultTab, Point, FeedbackPart } from "@/features/result";
 
-import FeedbackPart from "@/features/result/FeedbackPart";
-import ChatroomHeader from "@/features/roleplay/ChatroomHeader";
+import { ChatroomHeader } from "@/features/roleplay";
 interface RoleplayEndProps {
   conversationId: number;
 }

@@ -1,15 +1,13 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { MessageList } from "@/components/chatroom";
+import { MessageList, HintMessage } from "@/components/chatroom";
 
-import { useConversationDetail } from "@/hooks/queries";
+import { useConversationDetail, useRoleplayHint } from "@/hooks/queries";
 import { ChatInput } from "@/components/common";
-import { useRoleplayMessages } from "@/hooks/mutations/messages/useRoleplayMessages";
-import { useRoleplayHint } from "@/hooks/queries/useRoleplayHint";
+import { useRoleplayMessages } from "@/hooks/mutations";
 import { useVoiceChat } from "@/hooks/useVoiceChat";
 import { NoticeIcon } from "@/assets/svgr";
-import ChatroomHeader from "@/features/roleplay/ChatroomHeader";
-import HintMessage from "@/components/chatroom/HintMessage";
+import { ChatroomHeader } from "@/features/roleplay";
 
 interface RoleplayChatRoomProps {
   conversationId: number;
