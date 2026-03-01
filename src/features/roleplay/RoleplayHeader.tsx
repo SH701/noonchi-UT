@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useTabStore } from "@/store/tab/useTabStore";
 import Tab from "../tab/Tab";
@@ -17,14 +17,16 @@ export default function RoleplayHeader() {
   const router = useRouter();
   const isAsk = pathname.startsWith("/main/ask");
 
-  const getActiveStyles = () => {
+  const [activeStyles, setActiveStyles] = useState<{ width: number; x: number } | null>(null);
+
+  useEffect(() => {
     const activeRef = isAsk ? askRef : roleRef;
-    if (!activeRef.current) return { width: 40, x: 0 };
-    return {
+    if (!activeRef.current) return;
+    setActiveStyles({
       width: activeRef.current.offsetWidth,
       x: activeRef.current.offsetLeft - 4,
-    };
-  };
+    });
+  }, [isAsk]);
 
   const handleToggle = () => {
     router.push(isAsk ? "/main" : "/main/ask");
@@ -39,13 +41,14 @@ export default function RoleplayHeader() {
             className="relative flex items-center bg-white/30 rounded-full cursor-pointer"
             onClick={handleToggle}
           >
-            <motion.div
-              className="absolute bg-white rounded-full h-6 w-full"
-              initial={false}
-              animate={getActiveStyles()}
-              transition={{ type: "spring", stiffness: 200, damping: 25 }}
-              
-            />
+            {activeStyles && (
+              <motion.div
+                className="absolute bg-white rounded-full h-6"
+                initial={false}
+                animate={activeStyles}
+                transition={{ type: "spring", stiffness: 200, damping: 25 }}
+              />
+            )}
             <span
               ref={roleRef}
               className={`relative z-10 px-3 py-1 text-sm font-medium transition-colors ${

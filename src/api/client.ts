@@ -87,7 +87,7 @@ export const apiClient = {
           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
       );
     },
-    getFeedback: async (messageId: string): Promise<Feedback> => {
+    getFeedback: async (messageId: number): Promise<Feedback> => {
       return apiFetch<Feedback>(`/api/messages/${messageId}/feedback`);
     },
   },

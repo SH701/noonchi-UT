@@ -127,15 +127,15 @@ export default function PreviewChat() {
     setOpenNotice((prev) => !prev);
   };
   return (
-    <div className="h-screen flex flex-col">
+    <div className="flex h-screen flex-col">
       {/* 스크롤 영역 */}
-      <div className="flex-1 overflow-y-auto px-5">
-        <div className="sticky top-0 ">
+      <div className="flex-1 overflow-y-auto">
+        <div className="sticky top-0">
           <Header
             leftIcon={<HamburgerIcon />}
             center="RolePlay Preview"
             rightIcon="Skip"
-            className="text-gray-600 font-medium"
+            className="font-medium text-gray-600"
             onRightClick={handleMoveAuth}
           />
         </div>
@@ -143,17 +143,17 @@ export default function PreviewChat() {
           <ChatLoading />
         ) : (
           <>
-            <div className="border-y border-white px-5 py-3 flex gap-4 bg-white/50 -mx-5 mb-4">
+            <div className="-mx-5 mb-4 flex gap-4 border-y border-white bg-white/50 px-5 py-3">
               {openNotice ? (
-                <div className="flex justify-between w-full">
-                  <NoticeIcon className="text-gray-600 shrink-0" />
+                <div className="flex w-full justify-between">
+                  <NoticeIcon className="shrink-0 text-gray-600" />
                   <span className="text-sm font-medium text-gray-600">
                     {data?.scenario.description}
                   </span>
                   <ChevronUp className="shrink-0" onClick={handleNotice} />
                 </div>
               ) : (
-                <div className="flex items-center justify-between w-full">
+                <div className="flex w-full items-center justify-between">
                   <QuoteIcon />
                   <ChevronDown onClick={handleNotice} />
                 </div>
@@ -211,12 +211,12 @@ export default function PreviewChat() {
       </div>
 
       {/* 하단 고정 영역 */}
-      <div className="relative px-5 pb-5 flex flex-col gap-2">
+      <div className="relative flex flex-col gap-2 px-5 pb-5">
         {/* 남은 턴수 */}
         {!isPending && (
           <motion.div
             key={aiResponses.length}
-            className="absolute -top-12 left-5 right-5 text-white px-5 py-2.5 flex gap-2.5 items-center justify-center bg-gray-800/50 rounded-xl"
+            className="absolute -top-12 left-5 right-5 flex items-center justify-center gap-2.5 rounded-xl bg-gray-800/50 px-5 py-2.5 text-white"
             initial={{ opacity: 1 }}
             animate={{ opacity: 0 }}
             transition={{ duration: 4 }}

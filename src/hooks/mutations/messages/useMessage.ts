@@ -3,7 +3,7 @@ import { apiMutations } from "@/api/mutations";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
 
-export function useMessageFeedback(messageId?: string) {
+export function useMessageFeedback(messageId?: number) {
   return useQuery({
     queryKey: ["feedback", messageId],
     queryFn: () => apiClient.messages.getFeedback(messageId!),
@@ -13,14 +13,14 @@ export function useMessageFeedback(messageId?: string) {
 
 export function useMessageTTS() {
   return useMutation({
-    mutationFn: (messageId: string) =>
+    mutationFn: (messageId: number) =>
       apiMutations.messages.tts(Number(messageId)),
   });
 }
 
 export function useMessageTranslate() {
   return useMutation({
-    mutationFn: (messageId: string) =>
+    mutationFn: (messageId: number) =>
       apiMutations.messages.translate(Number(messageId)),
   });
 }

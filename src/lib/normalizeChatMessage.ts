@@ -21,5 +21,7 @@ export function normalizeChatMessage(m: ChatMsg) {
     hiddenMeaning: m.hiddenMeaning ?? "",
     visualAction: m.visualAction ?? "",
     situationDescription: m.situationDescription ?? "",
+    askApproachTip: m.askApproachTip,
+    askCulturalInsight: m.askCulturalInsight,
   };
 }

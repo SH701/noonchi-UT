@@ -4,7 +4,7 @@ export default function MainsLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full min-h-screen flex flex-col px-5 relative">
+    <div className="relative flex min-h-screen w-full flex-col px-5">
       {children}
     </div>
   );

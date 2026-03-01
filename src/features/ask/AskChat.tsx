@@ -1,14 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { ChatInput } from "../../components/common";
 import { Button } from "@/components/ui/button/button";
 import { useAsk } from "@/hooks/mutations/conversation/useAsk";
-import { useAskMessages } from "@/hooks/mutations/messages/useAskMessages";
 import { Spinner } from "../../components/ui/spinner/spinner";
-import { useMessageTranslate, useMessageTTS } from "@/hooks/mutations";
-import { BulbIcon, LanguageIcon, VolumeUpIcon } from "@/assets/svgr";
 import { CLOSENESS_OPTIONS, Step, STEP_QUESTIONS, STEPS } from "@/constants";
+import { useRouter } from "next/navigation";
 
 export default function AskChat() {
   const [step, setStep] = useState<Step>("askTarget");
@@ -16,20 +14,10 @@ export default function AskChat() {
   const [askTarget, setAskTarget] = useState("");
   const [closeness, setCloseness] = useState("");
   const [situation, setSituation] = useState("");
-  const [conversationId, setConversationId] = useState<number>();
-  const { data: res, mutate: createAsk, isPending } = useAsk();
-  const { messages, sendMessage, isAIResponding } =
-    useAskMessages(conversationId);
-  const { mutate: TTS } = useMessageTTS();
-  const { mutate: translate } = useMessageTranslate();
-
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const { mutate: createAsk, isPending } = useAsk();
+  const router = useRouter();
 
   const currentStepIdx = STEPS.indexOf(step);
-
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, step]);
 
   const handleSendTarget = () => {
     if (!message.trim()) return;
@@ -45,7 +33,7 @@ export default function AskChat() {
   };
 
   const handleSendSituation = () => {
-    if (!message.trim() || isPending || conversationId) return;
+    if (!message.trim() || isPending) return;
     setSituation(message.trim());
     createAsk(
       {
@@ -55,58 +43,38 @@ export default function AskChat() {
       },
       {
         onSuccess: (data) => {
-          setConversationId(data.conversationId);
-          setStep("chat");
+          const query = new URLSearchParams({
+            askTarget,
+            closeness,
+            situation: message.trim(),
+          }).toString();
+          router.push(`/main/ask/${data.conversationId}?${query}`);
         },
       },
     );
     setMessage("");
   };
 
-  const handleSendMessage = async () => {
-    if (!message.trim() || !conversationId) return;
-    await sendMessage(message.trim());
-    setMessage("");
-  };
-  const handleTTS = () => {
-    if (!res?.messageId) return;
-    TTS(String(res.messageId));
-  };
-  const handleTranslate = () => {
-    if (!res?.messageId) return;
-    translate(String(res.messageId));
-  };
   return (
-    <div className="min-h-screen flex flex-col w-full">
-      <div className="flex-1 flex flex-col">
+    <div className="flex w-full flex-1 flex-col">
+      <div className="flex flex-1 flex-col">
         {/* 타겟 */}
-        <div className="flex flex-col mb-6">
-          <span className="text-xl font-semibold">
-            {STEP_QUESTIONS.askTarget}
-          </span>
-          <span className="text-gray-600">
-            This can be something you`re <br /> about to say or do
-          </span>
-          {askTarget && (
-            <div className="flex justify-end mt-2">
-              <div className="flex flex-col gap-2 rounded-tl-xl rounded-b-xl p-4 border border-gray-300 bg-white w-61">
-                <p className="text-sm">{askTarget}</p>
-              </div>
+        <span className="text-xl font-semibold">
+          {STEP_QUESTIONS.askTarget}
+        </span>
+        <span className="text-gray-600">
+          This can be something you`re <br /> about to say or do
+        </span>
+        {askTarget && (
+          <div className="mt-2 flex justify-end">
+            <div className="w-61 flex flex-col gap-2 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
+              <p className="text-sm">{askTarget}</p>
             </div>
-          )}
-          {step === "askTarget" && (
-            <ChatInput
-              message={message}
-              setMessage={setMessage}
-              onSend={handleSendTarget}
-              placeholder="Type your answer..."
-            />
-          )}
-        </div>
-
+          </div>
+        )}
         {/* 가까움 정도 */}
         {currentStepIdx >= 1 && (
-          <div className="flex flex-col gap-2 mb-6">
+          <div className="mb-6 flex flex-col gap-2">
             <span className="text-xl font-semibold">
               {STEP_QUESTIONS.closeness}
             </span>
@@ -114,8 +82,8 @@ export default function AskChat() {
               This helps me understand the right tone
             </span>
             {closeness ? (
-              <div className="flex justify-end mt-2">
-                <div className="rounded-tl-xl rounded-b-xl p-4 border border-gray-300 bg-white">
+              <div className="mt-2 flex justify-end">
+                <div className="rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
                   <p className="text-sm">
                     {CLOSENESS_OPTIONS.find((o) => o.value === closeness)
                       ?.label ?? closeness}
@@ -123,7 +91,7 @@ export default function AskChat() {
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col gap-3 mt-4">
+              <div className="mt-4 flex flex-col gap-3">
                 {CLOSENESS_OPTIONS.map((option) => (
                   <Button
                     key={option.value}
@@ -141,7 +109,7 @@ export default function AskChat() {
 
         {/* 상황 */}
         {currentStepIdx >= 2 && (
-          <div className="flex flex-col mb-6">
+          <div className="mb-6 flex flex-col">
             <span className="text-xl font-semibold">
               {STEP_QUESTIONS.situation}
             </span>
@@ -149,8 +117,8 @@ export default function AskChat() {
               Describe the situation or what you want to express
             </span>
             {situation && (
-              <div className="flex justify-end mt-2">
-                <div className="rounded-tl-xl rounded-b-xl p-4 border border-gray-300 bg-white">
+              <div className="mt-2 flex justify-end">
+                <div className="rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
                   <p className="text-sm">{situation}</p>
                 </div>
               </div>
@@ -160,79 +128,32 @@ export default function AskChat() {
 
         {/* 로딩 */}
         {isPending && (
-          <div className="flex flex-col gap-2 justify-center items-center pt-4">
-            <Spinner size="64px" />
-            <span>Processing AI...</span>
-          </div>
-        )}
-
-        {res?.content && (
-          <div className="flex gap-2 mb-1 flex-col">
-            <div className="flex flex-col">
-              <span className="text-xl font-semibold">
-                Here is the best way to say it
-              </span>
-              <span className="text-gray-600">{res?.askApproachTip}</span>
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex flex-col gap-2 rounded-tr-xl rounded-b-xl p-4 border border-gray-300 bg-white mb-5 max-w-61">
-                <p className="text-sm  my-1">{res?.content || "..."}</p>
-                <div className="flex justify-between pt-3 border-t border-gray-200">
-                  <div className="flex gap-2">
-                    <VolumeUpIcon onClick={handleTTS} />
-                    <LanguageIcon onClick={handleTranslate} />
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col gap-1 text-sm">
-                <div className="flex gap-1 text-blue-600">
-                  <BulbIcon size={14} /> Cultural Insights
-                </div>
-                {res?.askCulturalInsight}
-              </div>
+          <div className="flex flex-col gap-2 pt-4">
+            <div className="flex flex-col items-center justify-center gap-2">
+              <Spinner size="64px" />
+              <span>Processing AI...</span>
             </div>
           </div>
         )}
-
-        {/* 이후 대화 메시지 */}
-        {messages.slice(7).map((m) => (
-          <div
-            key={m.messageId}
-            className={`flex ${m.type === "USER" ? "justify-end" : "justify-start"} mt-2 mb-4`}
-          >
-            <div
-              className={`p-4 border border-gray-300 bg-white max-w-61 ${
-                m.type === "USER"
-                  ? "rounded-tl-xl rounded-b-xl"
-                  : "rounded-tr-xl rounded-b-xl"
-              }`}
-            >
-              <p className="text-sm">{m.content}</p>
-            </div>
-          </div>
-        ))}
-
-        {isAIResponding && (
-          <div className="flex flex-col gap-2 justify-center items-center pt-4">
-            <Spinner />
-            <span>Processing AI...</span>
-          </div>
-        )}
-
-        <div ref={bottomRef} />
       </div>
 
       {/* 하단 고정 ChatInput */}
-      <div className=" pb-5 flex flex-col backdrop-blur-md sticky bottom-0">
-        {(step === "situation" || step === "chat") && (
+      <div className="sticky bottom-0 flex flex-col pb-5 backdrop-blur-md">
+        {step === "askTarget" && (
           <ChatInput
             message={message}
             setMessage={setMessage}
-            onSend={step === "chat" ? handleSendMessage : handleSendSituation}
-            disabled={step === "chat" ? isAIResponding : isPending}
-            placeholder={
-              step === "chat" ? "Type your message..." : "Type your answer..."
-            }
+            onSend={handleSendTarget}
+            placeholder="Type your answer..."
+          />
+        )}
+        {step === "situation" && (
+          <ChatInput
+            message={message}
+            setMessage={setMessage}
+            onSend={handleSendSituation}
+            disabled={isPending}
+            placeholder="Type your answer..."
           />
         )}
       </div>
