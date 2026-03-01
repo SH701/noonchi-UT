@@ -52,7 +52,7 @@ export default function PreviewChat() {
   const { micState, sttText, handleMicClick, handleSendAudio } =
     useVoiceChat(3000);
   const started = useRef(false);
-
+  const ended = useRef(false);
   useEffect(() => {
     if (started.current) return;
     started.current = true;
@@ -63,10 +63,14 @@ export default function PreviewChat() {
     if (
       data &&
       aiResponses.length > 0 &&
-      data.max_turns === aiResponses.length
+      data.max_turns === aiResponses.length &&
+      !ended.current
     ) {
-      removePreview(data.session_id);
-      setShowPreviewModal(true);
+      ended.current = true;
+      setTimeout(() => {
+        removePreview(data.session_id);
+        setShowPreviewModal(true);
+      }, 8000);
     }
   }, [data, aiResponses, removePreview, setShowPreviewModal]);
 
@@ -180,7 +184,7 @@ export default function PreviewChat() {
                   userName={data?.my_name}
                   isPreview={true}
                 />
-                {messageLoading ? (
+                {messageLoading && idx === userMessages.length - 1 ? (
                   <ChatLoading />
                 ) : (
                   aiResponses[idx] && (
@@ -231,7 +235,7 @@ export default function PreviewChat() {
         )}
         {showHintPanel && hintData && (
           <HintMessage
-            hintData={hintData.hints}
+            hintData={hintData}
             onSelect={(h) => {
               setMessage(h);
               setShowHintPanel(false);

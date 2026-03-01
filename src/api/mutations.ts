@@ -1,10 +1,7 @@
 import { apiFetch } from "./api";
 
-
-
 import {
   InterviewFormData,
-  
   UploadedFile,
   RoleplayReq,
   ConversationRes,
@@ -17,9 +14,6 @@ import { Preview, PreviewSendRes } from "@/types/preview/preview.type";
 import axios from "axios";
 import { TopicScenario } from "@/types/topics";
 import { AuthRes, LoginReq, SignupReq } from "@/types/auth";
-
-
-
 
 export const apiMutations = {
   auth: {
@@ -88,9 +82,7 @@ export const apiMutations = {
       });
     },
 
-    createRoleplay: async (
-      data: RoleplayReq,
-    ): Promise<ConversationRes> => {
+    createRoleplay: async (data: RoleplayReq): Promise<ConversationRes> => {
       return apiFetch<ConversationRes>("/api/conversations/role-playing", {
         method: "POST",
         body: JSON.stringify(data),
@@ -107,13 +99,10 @@ export const apiMutations = {
         method: "DELETE",
       });
     },
-    endConversation: async (
-      conversationId: number,
-    ): Promise<number> => {
-      return apiFetch<number>(
-        `/api/conversations/${conversationId}/end`,
-        { method: "PUT" },
-      );
+    endConversation: async (conversationId: number): Promise<number> => {
+      return apiFetch<number>(`/api/conversations/${conversationId}/end`, {
+        method: "PUT",
+      });
     },
   },
 
@@ -165,13 +154,15 @@ export const apiMutations = {
     uploadAudio: async (blob: Blob): Promise<string> => {
       const blobType = blob.type || "audio/webm";
       const fileExtension = blobType.includes("webm") ? "webm" : "wav";
-      const { url: presignedUrl } = await apiFetch<PresignedUrlRes>(
-        "/api/files/presigned-url",
-        {
-          method: "POST",
-          body: JSON.stringify({ fileType: blobType, fileExtension }),
-        },
-      );
+      const res = await fetch("/api/files/presigned-url", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fileExtension: fileExtension,
+          fileType: blobType,
+        }),
+      });
+      const { url: presignedUrl } = await res.json();
       await fetch(presignedUrl, {
         method: "PUT",
         headers: { "Content-Type": blobType },

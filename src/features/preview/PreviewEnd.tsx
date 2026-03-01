@@ -28,7 +28,7 @@ export default function PreviewEnd() {
           Preview Roleplay Ended
         </p>
         <div className="flex flex-col items-center justify-center text-sm text-gray-600 font-medium">
-          <span>The Prevoew roleplay has ended.</span>
+          <span>The Preview roleplay has ended.</span>
           <span>To continue the conversation,</span>
           <span>please log in or sign up</span>
         </div>

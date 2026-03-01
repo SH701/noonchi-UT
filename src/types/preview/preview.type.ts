@@ -20,8 +20,10 @@ export interface Preview {
 }
 
 export interface PreviewHint {
-  hints: string[];
+  suggestions: string[];
   explanations: string[];
+  translations: string[];
+  wrongIndex: number;
 }
 
 export interface PreviewSendRes {

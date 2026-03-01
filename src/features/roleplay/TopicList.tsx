@@ -76,8 +76,11 @@ export default function TopicList({ category, setCategory }: TopicListProps) {
               <Image
                 src={topic.imageUrl}
                 alt={topic.name}
-                fill
                 className="object-cover"
+                style={{ width: 164, height: 164 }}
+                width={164}
+                height={164}
+                loading="eager"
               />
               <div className="flex flex-col justify-end px-4 py-2 text-white gap-1 absolute inset-x-0 bottom-0 h-auto bg-gray backdrop-blur-sm rounded-b-xl">
                 <span className="text-xs">{topic.category}</span>

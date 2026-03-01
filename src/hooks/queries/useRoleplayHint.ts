@@ -5,7 +5,7 @@ export const useRoleplayHint = (conversationId?: number) => {
   return useQuery({
     queryKey: ["roleplayHint", conversationId],
     queryFn: async () => {
-      return apiClient.language.getHint(conversationId!);
+      return apiClient.language.getHlep(conversationId!);
     },
     enabled: !!conversationId,
   });

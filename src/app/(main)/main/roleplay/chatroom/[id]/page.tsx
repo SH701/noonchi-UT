@@ -12,7 +12,11 @@ import { NoticeIcon } from "@/assets/svgr";
 import ChatroomHeader from "@/features/roleplay/ChatroomHeader";
 import HintMessage from "@/components/chatroom/HintMessage";
 
-export default function RolePlayChatroomPage({ params }: { params: Promise<{ id: number }> }) {
+export default function RolePlayChatroomPage({
+  params,
+}: {
+  params: Promise<{ id: number }>;
+}) {
   const { id } = use(params);
   const [showHintPanel, setShowHintPanel] = useState(false);
   const [message, setMessage] = useState("");
@@ -66,7 +70,9 @@ export default function RolePlayChatroomPage({ params }: { params: Promise<{ id:
               hintData={hintData}
               onSelect={(h) => {
                 setMessage(h);
-                setShowHintPanel(false);
+                setTimeout(() => {
+                  setShowHintPanel(false);
+                }, 2000);
               }}
             />
           )}

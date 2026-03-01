@@ -108,18 +108,27 @@ export default function ChatInput({
               >
                 <MicIcon className="size-6 text-white animate-pulse" />
               </button>
-            ) : isFocused || micState === "recorded" || isHintActive || message.trim() ? (
+            ) : isFocused ||
+              micState === "recorded" ||
+              isHintActive ||
+              message.trim() ? (
               <button
                 type="button"
                 onClick={onSend}
-                className="flex items-center justify-center shrink-0  rounded-full transition-colors  bg-blue-100 p-1"
+                className="flex items-center justify-center shrink-0 rounded-full transition-colors p-1"
                 disabled={disabled || !message.trim()}
-                style={{
-                  background:
-                    "linear-gradient(180deg, #86C3E8 0%, #8397FF 100%)",
-                }}
+                style={
+                  message.trim()
+                    ? {
+                        background:
+                          "linear-gradient(180deg, #86C3E8 0%, #8397FF 100%)",
+                      }
+                    : { background: "#ffffff", border: "1px solid #D1D5DB" }
+                }
               >
-                <SendIcon className="text-blue-600" />
+                <SendIcon
+                  className={message.trim() ? "text-white" : "text-gray-300"}
+                />
               </button>
             ) : (
               <button

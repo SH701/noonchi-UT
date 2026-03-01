@@ -30,8 +30,13 @@ export const apiClient = {
       params.set("favoritesOnly", String(favoritesOnly));
       return apiFetch<TopicRes[]>(`/api/topics?${params.toString()}`);
     },
-    getRecentTopic: async (page: number = 1, size: number = 10): Promise<TopicRes[]> => {
-      const res = await apiFetch<PagedTopicRes>(`/api/topics/recent?page=${page}&size=${size}`);
+    getRecentTopic: async (
+      page: number = 1,
+      size: number = 10,
+    ): Promise<TopicRes[]> => {
+      const res = await apiFetch<PagedTopicRes>(
+        `/api/topics/recent?page=${page}&size=${size}`,
+      );
       return res.content;
     },
   },
@@ -100,9 +105,9 @@ export const apiClient = {
     },
   },
   language: {
-    getHint: async (conversationId: number): Promise<string[]> => {
-      return apiFetch<string[]>(
-        `/api/language/hint?conversationId=${conversationId}`,
+    getHlep: async (conversationId: number): Promise<PreviewHint> => {
+      return apiFetch<PreviewHint>(
+        `/api/language/help?conversationId=${conversationId}`,
       );
     },
   },
