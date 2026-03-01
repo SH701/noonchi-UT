@@ -51,7 +51,8 @@ export default function MessageItem({
   const [translateOpen, setTranslateOpen] = useState(false);
   const [ttsOpen, setTtsOpen] = useState(false);
   const [meanOpen, setMeanOpen] = useState(false);
-  const isMeanOpen = onToggleReveal !== undefined ? (isRevealed ?? false) : meanOpen;
+  const isMeanOpen =
+    onToggleReveal !== undefined ? (isRevealed ?? false) : meanOpen;
   const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   const {
@@ -119,7 +120,9 @@ export default function MessageItem({
         {/* 유저 말풍선 박스 */}
         {isMine && (
           <div className="flex flex-col gap-1">
-            <p className="text-end">{userName ?? myAI?.userRole}</p>
+            <p className="text-end text-sm font-medium pt">
+              {userName ?? myAI?.userRole}
+            </p>
             <div className="p-4 bg-white rounded-b-xl rounded-tl-xl">
               {showsituation && messages.visualAction && (
                 <div className="mb-2 p-3 bg-blue-50 border border-blue-100 rounded-lg shadow-sm animate-in fade-in duration-300">

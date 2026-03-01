@@ -8,6 +8,8 @@ import { useConversationEnd } from "@/hooks/mutations";
 import { useConversationDetail } from "@/hooks/queries";
 import { ExitChatting } from "../../components/modal";
 import { HamburgerIcon, SqurepenIcon } from "@/assets/svgr";
+import { useTabStore } from "@/store/tab/useTabStore";
+import Tab from "../tab/Tab";
 
 interface ChatroomHeaderProps {
   roomId: number;
@@ -22,7 +24,9 @@ export default function ChatroomHeader({ roomId, title }: ChatroomHeaderProps) {
   const toggleBtnRef = useRef<HTMLDivElement>(null);
   const { data: detailData } = useConversationDetail(roomId);
   const { mutate: conversationEnd } = useConversationEnd(roomId);
+  const { openTab } = useTabStore();
 
+  // 다른곳 클릭시 open 없애기
   useEffect(() => {
     if (!open) return;
     const handleClickOutside = (e: MouseEvent) => {
@@ -59,35 +63,38 @@ export default function ChatroomHeader({ roomId, title }: ChatroomHeaderProps) {
     }
     setOpen(false);
   };
-
+  const handleTab = () => {
+    openTab();
+  };
   return (
     <>
       <div className="sticky top-0 ">
         <Header
-          leftIcon={<HamburgerIcon />}
+          leftIcon={<HamburgerIcon onClick={handleTab} />}
           center={title}
           rightIcon={
-            <div ref={toggleBtnRef}>
+            <div ref={toggleBtnRef} className="relative">
               <SqurepenIcon onClick={() => setOpen((prev) => !prev)} />
+              {open && (
+                <div
+                  ref={dropdownRef}
+                  className="p-3 rounded-xl bg-white flex flex-col gap-1 absolute right-0 top-8 z-50 w-36 text-sm"
+                >
+                  <button className="p-2 flex gap-2" onClick={handleNewChat}>
+                    <Sparkles className="size-5" />
+                    New Chat
+                  </button>
+                  <button className="p-2 flex gap-2" onClick={handleEnd}>
+                    <MessageCircle className="size-5" />
+                    Get Reports
+                  </button>
+                </div>
+              )}
             </div>
           }
         />
       </div>
-      {open && (
-        <div
-          ref={dropdownRef}
-          className="p-3 rounded-xl bg-white flex flex-col gap-1 absolute right-5 top-16 z-50"
-        >
-          <button className="p-2 flex gap-2" onClick={handleNewChat}>
-            <Sparkles />
-            New Chat
-          </button>
-          <button className="p-2 flex gap-2" onClick={handleEnd}>
-            <MessageCircle />
-            Get Reports
-          </button>
-        </div>
-      )}
+      <Tab />
       {showExitModal && (
         <ExitChatting
           onClose={() => setShowExitModal(false)}
