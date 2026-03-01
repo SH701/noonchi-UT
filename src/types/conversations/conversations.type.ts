@@ -1,8 +1,8 @@
 import { MyAI } from "../etc";
 import { Feedback } from "../messages";
 
-export interface ConversationRes{
-  conversationId:number
+export interface ConversationRes {
+  conversationId: number;
 }
 export interface Conversation {
   conversationId: number;
@@ -34,6 +34,7 @@ export interface Conversation {
   taskAllCompleted: string;
   closeness: string;
   askTarget: string;
+  canGetReport: boolean;
 }
 
 export interface ConversationDetail {

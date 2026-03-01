@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -23,7 +23,7 @@ export default function SignupContent() {
   const [step, setStep] = useState<1 | 2>(1);
   const [signupData, setSignupData] = useState({ email: "", password: "" });
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
-  const { openModal } = useModalActions();
+  const { openModal, setOnDimClose } = useModalActions();
   const {
     control,
     handleSubmit,
@@ -49,6 +49,14 @@ export default function SignupContent() {
     setStep(1);
   };
 
+  useEffect(() => {
+    if (step === 2) {
+      setOnDimClose(() => setStep(1));
+    } else {
+      setOnDimClose(null);
+    }
+  }, [step]);
+
   if (step === 2) {
     return (
       <SignupDetail
@@ -56,6 +64,7 @@ export default function SignupContent() {
         password={signupData.password}
         serverErrors={handleError}
         step={step}
+        onBack={() => setStep(1)}
       />
     );
   }
@@ -63,7 +72,6 @@ export default function SignupContent() {
   return (
     <div>
       <StepIndicator currentStep={step} totalStep={2} />
-
       <SignupTemplate
         header={<SignupHeader title="Create Account" />}
         footer={

@@ -17,6 +17,7 @@ export default function RecentTopic() {
               width={162}
               height={162}
               className="rounded-xl"
+              loading="eager"
             />
             <div className="flex flex-col justify-end p-3  absolute inset-0">
               <span className="text-xs text-gray-100 uppercase tracking-wider">

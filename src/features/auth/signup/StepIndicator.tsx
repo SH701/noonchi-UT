@@ -1,21 +1,24 @@
 interface StepIndicatorProps {
   currentStep: number;
   totalStep: number;
+  onStepClick?: (step: number) => void;
 }
 
 export default function StepIndicator({
   currentStep,
   totalStep,
+  onStepClick,
 }: StepIndicatorProps) {
   return (
     <div className="flex items-center justify-center pt-7">
       {Array.from({ length: totalStep }, (_, i) => i + 1).map((num, index) => (
         <div key={num} className="flex items-center">
           <div
+            onClick={() => onStepClick?.(num)}
             className={`size-8 rounded-full p-2 flex justify-center items-center ${
               currentStep === num
                 ? "bg-[#E7EDFF] border border-white shadow-[0_0_12px_0_rgba(31,84,255,0.20)]"
-                : "bg-gray-50 text-gray-300"
+                : "bg-gray-50 text-gray-300 cursor-pointer"
             }`}
           >
             <p>{num}</p>

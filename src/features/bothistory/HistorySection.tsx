@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { NoteIcon } from "@/assets/svgr";
+import { ChevronRightIcon, NoteIcon } from "@/assets/svgr";
 import { useConversations } from "@/hooks/queries";
 import { useRouter } from "next/navigation";
 
@@ -8,7 +8,10 @@ export default function HistorySection() {
   const router = useRouter();
   const { data: conversations } = useConversations();
   const handleReport = (conversationId: number) => {
-    router.push(`/main/roleplay/chatroom/${conversationId}/result`)
+    router.push(`/main/roleplay/chatroom/${conversationId}/result`);
+  };
+  const handleChatroom = (conversationId: number)=>{
+    router.push(`/main/roleplay/chatroom/${conversationId}`);
   }
   return (
     <div>
@@ -19,12 +22,18 @@ export default function HistorySection() {
             <div className="flex items-center justify-center bg-gray-300 w-10 h-10 rounded-full shrink-0">
               <span>{convo.aiPersona.name[0].toUpperCase()}</span>
             </div>
-            <div className="flex flex-col gap-0.5 min-w-0">
+            <div className="flex flex-col gap-0.5 w-full">
               <div className="flex justify-between">
-              <span className="font-semibold">{convo.conversationTopic}</span>
-                <button onClick={() => handleReport(convo.conversationId)}>
-                  <NoteIcon/>
-                </button>
+                <span className="font-semibold">{convo.conversationTopic}</span>
+                {convo.canGetReport ? (
+                  <button onClick={() => handleReport(convo.conversationId)}>
+                    <NoteIcon />
+                  </button>
+                ) : (
+                  <button onClick={() => handleChatroom(convo.conversationId)}>
+                    <ChevronRightIcon />
+                  </button>
+                )}
               </div>
               <span className="text-xs truncate text-gray-600">
                 {convo.situation}

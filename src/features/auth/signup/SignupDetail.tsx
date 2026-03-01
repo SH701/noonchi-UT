@@ -19,6 +19,7 @@ interface SignupDetailProps {
   password: string;
   serverErrors: (error: string) => void;
   step: number;
+  onBack: () => void;
 }
 
 export default function SignupDetail({
@@ -26,6 +27,7 @@ export default function SignupDetail({
   password,
   serverErrors,
   step,
+  onBack,
 }: SignupDetailProps) {
   const router = useRouter();
   const { closeModal } = useModalActions();
@@ -69,7 +71,7 @@ export default function SignupDetail({
 
   return (
     <div>
-      <StepIndicator currentStep={step} totalStep={2} />
+      <StepIndicator currentStep={step} totalStep={2} onStepClick={(s) => s < step && onBack()} />
       <SignupTemplate
         header={<SignupHeader title="Create account" />}
         footer={
