@@ -6,7 +6,6 @@ import { toast } from "@/components/ui/toast/toast";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button/button";
 
-
 export default function Logout() {
   const router = useRouter();
   const handleLogout = async () => {
@@ -20,8 +19,13 @@ export default function Logout() {
     }
   };
   return (
-    <Button onClick={handleLogout} size="lg">
-      Log out
-    </Button>
+    <div className="flex flex-col items-center gap-2">
+      <Button onClick={handleLogout} size="lg">
+        Log out
+      </Button>
+      <Button size="lg" variant="secondary">
+        Delete Account
+      </Button>
+    </div>
   );
 }

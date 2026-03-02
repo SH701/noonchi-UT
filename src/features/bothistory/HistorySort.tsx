@@ -4,8 +4,6 @@ import { ChevronDownIcon } from "@/assets/svgr";
 import { ConversationSortBy } from "@/types/conversations";
 import { useState } from "react";
 
-
-
 interface HistorySortProps {
   sortBy: ConversationSortBy;
   onSortChange: (sortBy: ConversationSortBy) => void;

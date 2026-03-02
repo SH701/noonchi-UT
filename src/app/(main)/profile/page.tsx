@@ -9,7 +9,6 @@ import {
   ProfileMenuList,
   ProfileHeader,
   Logout,
-  DeleteAccount,
 } from "@/features/profile";
 import { auth } from "@/lib/next-auth/auth";
 
@@ -17,7 +16,7 @@ export default async function ProfilePage() {
   const session = await auth();
 
   return (
-    <div className="flex flex-col max-w-93.75">
+    <div className="max-w-93.75 flex flex-col">
       <ProfileHeader />
       <div className="space-y-5">
         <ProfileInfo
@@ -36,12 +35,12 @@ export default async function ProfilePage() {
               {
                 label: "Topics of Interest",
                 href: "/profile/interest",
-                icon: <ControlIcon  />,
+                icon: <ControlIcon />,
               },
               {
                 label: "Language",
                 href: "/profile/language",
-                icon: <AlpabatIcon  />,
+                icon: <AlpabatIcon />,
               },
               {
                 label: "Subscription Management",
@@ -71,10 +70,8 @@ export default async function ProfilePage() {
             ]}
           />
         </div>
-        <div className="flex flex-col gap-2 pb-6">
-          <Logout />
-          <DeleteAccount />
-        </div>
+
+        <Logout />
       </div>
     </div>
   );

@@ -32,7 +32,7 @@ export default function RoleplayHistoryTab() {
       {isPending ? (
         <RoleplayHistorySkeleton />
       ) : conversations.length === 0 ? (
-        <div className="size-30 flex flex-col items-center justify-center gap-2 rounded-lg border border-white bg-white/30">
+        <div className="flex size-32 flex-col items-center justify-center gap-2 rounded-lg border border-white bg-white/30">
           <Plus />
           <span className="text-sm font-medium">Start a roleplay</span>
         </div>
@@ -55,7 +55,7 @@ export default function RoleplayHistoryTab() {
               return (
                 <div
                   key={convo.conversationId}
-                  className="size-30 relative shrink-0 overflow-hidden rounded-2xl border border-white/10 shadow-lg"
+                  className="relative size-32 shrink-0 overflow-hidden rounded-2xl border border-white/10 shadow-lg"
                 >
                   {matchedTopic?.imageUrl ? (
                     <Image

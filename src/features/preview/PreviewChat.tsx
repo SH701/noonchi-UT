@@ -129,7 +129,7 @@ export default function PreviewChat() {
   return (
     <div className="flex h-screen flex-col">
       {/* 스크롤 영역 */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1">
         <div className="sticky top-0">
           <Header
             leftIcon={<HamburgerIcon />}

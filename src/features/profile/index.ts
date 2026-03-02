@@ -1,4 +1,3 @@
-export { default as DeleteAccount } from "./DeleteAccount";
 export { default as Logout } from "./Logout";
 export { default as ProfileMenuList } from "./ProfileMenuList";
 export { default as ProfileInfo } from "./ProfileInfo";

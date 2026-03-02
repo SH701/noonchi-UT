@@ -7,7 +7,7 @@ export default function TopicListSkeleton() {
         {skeletonCards.map((_, index) => (
           <div
             key={index}
-            className="relative flex flex-col rounded-xl w-41 h-41 overflow-hidden bg-gray-200 animate-pulse"
+            className="relative w-full aspect-square rounded-xl overflow-hidden bg-gray-200 animate-pulse"
           >
             <div className="absolute top-3 right-3 size-6 bg-gray-300 rounded-full" />
           </div>

@@ -11,6 +11,7 @@ import { signup2Schema } from "@/types/auth";
 import { signIn } from "next-auth/react";
 import StepIndicator from "./StepIndicator";
 import { useModalActions } from "@/store/modal/useModalStore";
+import { Spinner } from "@/components/ui/spinner/spinner";
 
 type Step2FormData = z.infer<typeof signup2Schema>;
 
@@ -34,7 +35,7 @@ export default function SignupDetail({
   const {
     control,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
   } = useForm<Step2FormData>({
     resolver: zodResolver(signup2Schema),
     mode: "onChange",
@@ -71,18 +72,22 @@ export default function SignupDetail({
 
   return (
     <div>
-      <StepIndicator currentStep={step} totalStep={2} onStepClick={(s) => s < step && onBack()} />
+      <StepIndicator
+        currentStep={step}
+        totalStep={2}
+        onStepClick={(s) => s < step && onBack()}
+      />
       <SignupTemplate
         header={<SignupHeader title="Create account" />}
         footer={
           <Button
             variant="primary"
             size="lg"
-            disabled={!isValid}
+            disabled={!isValid || isSubmitting}
             onClick={handleSubmit(onSubmit)}
             className="mb-8"
           >
-            Get Started
+            {isSubmitting ? <Spinner /> : <p>Get Started</p>}
           </Button>
         }
       >

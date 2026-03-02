@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button/button";
 import { useModalActions } from "@/store/modal/useModalStore";
 import SignupContent from "../signup/SignupContent";
+import { Spinner } from "@/components/ui/spinner/spinner";
 
 interface Props {
   loading: boolean;
@@ -19,7 +20,7 @@ export default function LoginAction({ loading, handleLogin, isValid }: Props) {
           disabled={!isValid || loading}
           size="lg"
         >
-          Log in
+          {loading ? <Spinner /> : <p>Log in</p>}
         </Button>
       </div>
 

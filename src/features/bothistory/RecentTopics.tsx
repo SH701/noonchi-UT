@@ -2,8 +2,12 @@
 
 import { useRecentTopics } from "@/hooks/queries/useTopics";
 import Image from "next/image";
+import RecentTopicsSkeleton from "./RecentTopicsSkeleton";
+
 export default function RecentTopic() {
-  const { data: recent } = useRecentTopics();
+  const { data: recent, isPending } = useRecentTopics();
+
+  if (isPending) return <RecentTopicsSkeleton />;
 
   return (
     <div>

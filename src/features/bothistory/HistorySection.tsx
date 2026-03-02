@@ -5,6 +5,7 @@ import { useConversations } from "@/hooks/queries";
 import { ConversationSortBy } from "@/types/conversations";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import HistorySectiontSkeleton from "./HistorySectiontSkeleton";
 
 interface HistorySectionProps {
   sortBy: ConversationSortBy;
@@ -13,7 +14,7 @@ interface HistorySectionProps {
 export default function HistorySection({ sortBy }: HistorySectionProps) {
   const router = useRouter();
   const [page, setPage] = useState(1);
-  const { data } = useConversations(undefined, sortBy, page);
+  const { data, isPending } = useConversations(undefined, sortBy, page);
   const conversations = data?.conversations ?? [];
   const totalPages = data?.totalPages ?? 1;
 
@@ -23,7 +24,7 @@ export default function HistorySection({ sortBy }: HistorySectionProps) {
   const handleChatroom = (conversationId: number) => {
     router.push(`/main/roleplay/chatroom/${conversationId}`);
   };
-
+  if (isPending) return <HistorySectiontSkeleton />;
   return (
     <div className="flex flex-col gap-4">
       {conversations

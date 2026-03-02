@@ -50,7 +50,7 @@ export default function TopicList({ category, setCategory }: TopicListProps) {
       {isPending ? (
         <TopicListSkeleton />
       ) : isLove && topics.length === 0 ? (
-        <div className="flex flex-col items-center justify-center w-full py-20 gap-2 ">
+        <div className="flex w-full flex-col items-center justify-center gap-2 py-20">
           <span className="text-2xl font-medium">
             YYour Favorites are empty
           </span>
@@ -59,11 +59,11 @@ export default function TopicList({ category, setCategory }: TopicListProps) {
           </span>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-4 w-full pb-10">
+        <div className="grid w-full grid-cols-2 items-center justify-center gap-4 pb-10">
           {topics.map((topic) => (
             <div
               key={topic.topicId}
-              className="relative flex flex-col rounded-xl cursor-pointer hover:shadow-md transition-shadow w-41 h-41 overflow-hidden group"
+              className="group relative aspect-square w-full cursor-pointer overflow-hidden rounded-xl transition-shadow hover:shadow-md"
               onClick={() =>
                 router.push(
                   `/main/roleplay/create?category=${category}&topicId=${topic.topicId}`,
@@ -73,18 +73,16 @@ export default function TopicList({ category, setCategory }: TopicListProps) {
               <Image
                 src={topic.imageUrl}
                 alt={topic.name}
+                fill
                 className="object-cover"
-                style={{ width: 164, height: 164 }}
-                width={164}
-                height={164}
                 loading="eager"
               />
-              <div className="flex flex-col justify-end px-4 py-2 text-white gap-1 absolute inset-x-0 bottom-0 h-auto bg-gray backdrop-blur-sm rounded-b-xl">
+              <div className="bg-gray absolute inset-x-0 bottom-0 flex h-auto flex-col justify-end gap-1 rounded-b-xl px-4 py-2 text-white backdrop-blur-sm">
                 <span className="text-xs">{topic.category}</span>
                 <h4 className="text-sm font-semibold">{topic.name}</h4>
               </div>
               <button
-                className="absolute top-3 right-3 text-white transition-opacity"
+                className="absolute right-3 top-3 text-white transition-opacity"
                 onClick={(e) => {
                   e.stopPropagation();
                   toggleFavorite(topic.topicId, topic.isFavorite);
@@ -95,7 +93,7 @@ export default function TopicList({ category, setCategory }: TopicListProps) {
             </div>
           ))}
           <button
-            className="flex items-center justify-center size-10 bg-white rounded-full z-99 fixed right-4 bottom-8 border border-gradient-primary"
+            className="z-99 border-gradient-primary fixed bottom-8 right-4 flex size-10 items-center justify-center rounded-full border bg-white"
             onClick={() => router.push("/main/roleplay/create/custom")}
           >
             <Plus />
