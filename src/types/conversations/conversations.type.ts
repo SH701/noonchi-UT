@@ -69,10 +69,17 @@ export interface ConversationFeedback {
   improvementPoints: ImprovementPoint[];
   overallEvaluation: string;
 }
-
+export interface ConversationPaged {
+  content: Conversation[];
+  first: boolean;
+  last: boolean;
+  pageNumber: number;
+  pageSize: number;
+  totalPages: number;
+  totalElements: number;
+}
 export type FilterState = "done" | "in-progress" | null;
-
-export type SortOrder = "asc" | "desc";
+export type ConversationSortBy = "CREATED_AT_DESC" | "LAST_ACTIVITY_DESC";
 export interface ImprovementPoint {
   point: string;
   tip: string;

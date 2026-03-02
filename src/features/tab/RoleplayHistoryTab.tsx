@@ -4,12 +4,13 @@ import Image from "next/image";
 import { ChevronRightIcon } from "@/assets/svgr";
 import RoleplayHistorySkeleton from "./RoleplayHistorySkeleton";
 import { useChatHistoryStore } from "@/store/chathistory/useChatHistorystore";
+import { Plus } from "lucide-react";
 
 export default function RoleplayHistoryTab() {
   const router = useRouter();
   const { keyword } = useChatHistoryStore();
-  const { data: conversations, isPending: isConversationsPending } =
-    useConversations();
+  const { data, isPending: isConversationsPending } = useConversations();
+  const conversations = data?.conversations ?? [];
   const { data: topics = [], isPending: isTopicsPending } = useTopics(
     "",
     false,
@@ -30,10 +31,15 @@ export default function RoleplayHistoryTab() {
       </button>
       {isPending ? (
         <RoleplayHistorySkeleton />
+      ) : conversations.length === 0 ? (
+        <div className="size-30 flex flex-col items-center justify-center gap-2 rounded-lg border border-white bg-white/30">
+          <Plus />
+          <span className="text-sm font-medium">Start a roleplay</span>
+        </div>
       ) : (
         <div className="flex gap-3 overflow-x-auto">
           {conversations
-            ?.filter((convo) => convo.conversationType === "ROLE_PLAYING")
+            .filter((convo) => convo.conversationType === "ROLE_PLAYING")
             .filter((convo) =>
               keyword
                 ? convo.conversationTopic
@@ -49,7 +55,7 @@ export default function RoleplayHistoryTab() {
               return (
                 <div
                   key={convo.conversationId}
-                  className="relative size-32 shrink-0 overflow-hidden rounded-2xl border border-white/10 shadow-lg"
+                  className="size-30 relative shrink-0 overflow-hidden rounded-2xl border border-white/10 shadow-lg"
                 >
                   {matchedTopic?.imageUrl ? (
                     <Image

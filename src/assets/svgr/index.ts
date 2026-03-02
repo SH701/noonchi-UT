@@ -6,6 +6,7 @@ export { default as ChevronDownIcon } from "./chevrondown.svg";
 export { default as ChevronLeftIcon } from "./chevronleft.svg";
 export { default as ChevronRightIcon } from "./chevronright.svg";
 export { default as ControlIcon } from "./control.svg";
+export { default as EmptyAskIcon } from "./emptyask.svg";
 export { default as EmptyheartIcon } from "./emptyheart.svg";
 export { default as FullheartIcon } from "./fullheart.svg";
 export { default as HamburgerIcon } from "./hamburger.svg";

@@ -4,9 +4,10 @@ import { User } from "@/types/user/user.type";
 import { normalizeChatMessage } from "@/lib/normalizeChatMessage";
 import { ChatMsg, Feedback } from "@/types/messages";
 import {
-  Conversation,
   ConversationDetail,
   ConversationFeedback,
+  ConversationPaged,
+  ConversationSortBy,
   FilterState,
 } from "@/types/conversations";
 import { filterMap } from "@/constants";
@@ -41,15 +42,15 @@ export const apiClient = {
     },
   },
   conversations: {
-    getConversations: async (filter: FilterState) => {
+    getConversations: async (filter: FilterState, sortBy: ConversationSortBy = "LAST_ACTIVITY_DESC", page: number = 1): Promise<ConversationPaged> => {
       const status = filter ? filterMap[filter] : null;
       const queryString = new URLSearchParams({
-        sortBy: "CREATED_AT_DESC",
-        page: "1",
-        size: "1000",
+        sortBy,
+        page: String(page),
+        size: "6",
         ...(status && { status }),
       }).toString();
-      return apiFetch<{ content: Conversation[] }>(
+      return apiFetch<ConversationPaged>(
         `/api/conversations?${queryString}`,
         { cache: "no-cache" },
       );
