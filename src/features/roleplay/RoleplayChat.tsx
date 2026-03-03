@@ -8,7 +8,7 @@ import { useRoleplayMessages } from "@/hooks/mutations";
 import { useVoiceChat } from "@/hooks/useVoiceChat";
 import { NoticeIcon, QuoteIcon } from "@/assets/svgr";
 import { ChatroomHeader } from "@/features/roleplay";
-import { useChatStore } from "@/store";
+import { useChatUI } from "@/hooks/useChatUI";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface RoleplayChatRoomProps {
@@ -27,8 +27,8 @@ export default function RoleplayChat({
     conversationId,
     sendMessage,
   );
-  const { showHintPanel, toggleHint, showSituation, toggleSituation, showNotice,toggleNotice } =
-    useChatStore();
+  const { showHintPanel, toggleHint, showSituation, toggleSituation, showNotice, toggleNotice } =
+    useChatUI();
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });

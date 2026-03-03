@@ -15,7 +15,7 @@ import { useVoiceChat } from "@/hooks/useVoiceChat";
 import { motion } from "framer-motion";
 import { HintMessage, MessageItem } from "@/components/chatroom";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { useChatStore } from "@/store";
+import { useChatUI } from "@/hooks/useChatUI";
 
 interface AiMessage {
   content: string;
@@ -38,7 +38,7 @@ export default function PreviewChat() {
     toggleSituation,
     showNotice,
     toggleNotice,
-  } = useChatStore();
+  } = useChatUI();
   const [showPreviewModal, setShowPreviewModal] = useState(false);
   const router = useRouter();
 
