@@ -8,7 +8,7 @@ import {
 } from "@/hooks/mutations/";
 import { ChatInput, ChatLoading, Header } from "@/components/common";
 import { useRouter } from "next/navigation";
-import { usePreviewHint } from "@/hooks/queries/usePreviewHint";
+import { usePreviewHint } from "@/hooks/queries/preview/usePreviewHint";
 import { PreviewModal } from "@/components/modal";
 import { HamburgerIcon, InfoIcon, NoticeIcon, QuoteIcon } from "@/assets/svgr";
 import { useVoiceChat } from "@/hooks/useVoiceChat";

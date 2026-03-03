@@ -3,7 +3,7 @@ import { apiMutations } from "@/api";
 import { ChatMsg } from "@/types/messages";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useChatQuery } from "@/hooks/queries/useChatQuery";
+import { useChatQuery } from "@/hooks/queries/messages/useChatQuery";
 
 export function useRoleplayMessages(conversationId?: number) {
   const [optimisticMessages, setOptimisticMessages] = useState<ChatMsg[]>([]);

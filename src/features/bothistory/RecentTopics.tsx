@@ -1,6 +1,6 @@
 "use client";
 
-import { useRecentTopics } from "@/hooks/queries/useTopics";
+import { useRecentTopics } from "@/hooks/queries/topic/useTopics";
 import Image from "next/image";
 import RecentTopicsSkeleton from "./RecentTopicsSkeleton";
 

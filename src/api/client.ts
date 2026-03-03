@@ -42,7 +42,11 @@ export const apiClient = {
     },
   },
   conversations: {
-    getConversations: async (filter: FilterState, sortBy: ConversationSortBy = "LAST_ACTIVITY_DESC", page: number = 1): Promise<ConversationPaged> => {
+    getConversations: async (
+      filter: FilterState,
+      sortBy: ConversationSortBy = "LAST_ACTIVITY_DESC",
+      page: number = 1,
+    ): Promise<ConversationPaged> => {
       const status = filter ? filterMap[filter] : null;
       const queryString = new URLSearchParams({
         sortBy,
@@ -50,10 +54,9 @@ export const apiClient = {
         size: "6",
         ...(status && { status }),
       }).toString();
-      return apiFetch<ConversationPaged>(
-        `/api/conversations?${queryString}`,
-        { cache: "no-cache" },
-      );
+      return apiFetch<ConversationPaged>(`/api/conversations?${queryString}`, {
+        cache: "no-cache",
+      });
     },
     getDetail: async (conversationId: number): Promise<ConversationDetail> => {
       return apiFetch<ConversationDetail>(
@@ -106,7 +109,7 @@ export const apiClient = {
     },
   },
   language: {
-    getHlep: async (conversationId: number): Promise<PreviewHint> => {
+    getHelp: async (conversationId: number): Promise<PreviewHint> => {
       return apiFetch<PreviewHint>(
         `/api/language/help?conversationId=${conversationId}`,
       );

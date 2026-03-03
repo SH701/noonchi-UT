@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface ChatHistoryUIState {
+interface ChatHistoryState {
   keyword: string;
   isSearchOpen: boolean;
 
@@ -9,7 +9,7 @@ interface ChatHistoryUIState {
   reset: () => void;
 }
 
-export const useChatHistoryStore = create<ChatHistoryUIState>((set) => ({
+export const useChatHistoryStore = create<ChatHistoryState>((set) => ({
   keyword: "",
   isSearchOpen: false,
   setKeyword: (value) => set({ keyword: value }),
