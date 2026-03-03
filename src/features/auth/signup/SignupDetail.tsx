@@ -10,7 +10,7 @@ import { SignupHeader, SignupTemplate, SignupForm2 } from "@/features/auth";
 import { signup2Schema } from "@/types/auth";
 import { signIn } from "next-auth/react";
 import StepIndicator from "./StepIndicator";
-import { useModalActions } from "@/store/modal/useModalStore";
+import { useModalActions } from "@/store/useModalStore";
 import { Spinner } from "@/components/ui/spinner/spinner";
 
 type Step2FormData = z.infer<typeof signup2Schema>;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useModalActions } from "@/store/modal/useModalStore";
+import { useModalActions } from "@/store/useModalStore";
 import Image from "next/image";
 import { Button } from "../../components/ui/button/button";
 import { LoginContent, SignupContent } from "../auth";

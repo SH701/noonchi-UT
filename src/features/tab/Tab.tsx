@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { useTabStore } from "@/store/tab/useTabStore";
+import { useTabStore } from "@/store/useTabStore";
 import { SearchBar } from "../../components/common";
 import RoleplayHistoryTab from "./RoleplayHistoryTab";
 import AskHistoryTab from "./AskHistoryTab";

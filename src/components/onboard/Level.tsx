@@ -1,5 +1,5 @@
 import { levelDescription } from "@/data";
-import { usePreferenceStore } from "@/store/preference/usePreferenceStore";
+import { usePreferenceStore } from "@/store/usePreferenceStore";
 
 export default function Level() {
   const koreanLevel = usePreferenceStore((s) => s.koreanLevel);

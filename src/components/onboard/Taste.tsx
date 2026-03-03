@@ -1,7 +1,7 @@
 "use client";
 
 import { INTEREST_OPTIONS } from "@/data";
-import { usePreferenceStore } from "@/store/preference/usePreferenceStore";
+import { usePreferenceStore } from "@/store/usePreferenceStore";
 
 export default function Taste() {
   const interests = usePreferenceStore((s) => s.interests);

@@ -9,7 +9,7 @@ import { signIn } from "next-auth/react";
 
 import { LoginAction, LoginForm } from "@/features/auth";
 import { loginSchema } from "@/types/auth";
-import { useModalActions } from "@/store/modal/useModalStore";
+import { useModalActions } from "@/store/useModalStore";
 
 type LoginData = z.infer<typeof loginSchema>;
 

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button/button";
-import { useModalActions } from "@/store/modal/useModalStore";
+import { useModalActions } from "@/store/useModalStore";
 import SignupContent from "../signup/SignupContent";
 import { Spinner } from "@/components/ui/spinner/spinner";
 

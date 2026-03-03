@@ -1,6 +1,6 @@
 "use client";
 
-import { RoleplayChatRoom } from "@/features/roleplay";
+import { RoleplayChat } from "@/features/roleplay";
 import { use } from "react";
 
 export default function RolePlayChatroomPage({
@@ -9,5 +9,5 @@ export default function RolePlayChatroomPage({
   params: Promise<{ id: number }>;
 }) {
   const { id } = use(params);
-  return <RoleplayChatRoom conversationId={id} />;
+  return <RoleplayChat conversationId={id} />;
 }

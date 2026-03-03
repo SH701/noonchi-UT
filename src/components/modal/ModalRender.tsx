@@ -1,6 +1,6 @@
 "use client";
 
-import { useModalStore, useModalActions } from "@/store/modal/useModalStore";
+import { useModalStore, useModalActions } from "@/store/useModalStore";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function ModalRender() {

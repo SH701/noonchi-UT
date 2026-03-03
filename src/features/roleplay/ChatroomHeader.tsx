@@ -8,7 +8,7 @@ import { useConversationEnd } from "@/hooks/mutations";
 import { useConversationDetail } from "@/hooks/queries";
 import { ExitChatting } from "../../components/modal";
 import { HamburgerIcon, SqurepenIcon } from "@/assets/svgr";
-import { useTabStore } from "@/store/tab/useTabStore";
+import { useTabStore } from "@/store/useTabStore";
 import Tab from "../tab/Tab";
 
 interface ChatroomHeaderProps {

@@ -6,19 +6,19 @@ import { useConversationDetail, useRoleplayHint } from "@/hooks/queries";
 import { ChatInput } from "@/components/common";
 import { useRoleplayMessages } from "@/hooks/mutations";
 import { useVoiceChat } from "@/hooks/useVoiceChat";
-import { NoticeIcon } from "@/assets/svgr";
+import { NoticeIcon, QuoteIcon } from "@/assets/svgr";
 import { ChatroomHeader } from "@/features/roleplay";
+import { useChatStore } from "@/store";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface RoleplayChatRoomProps {
   conversationId: number;
 }
 
-export default function RoleplayChatRoom({
+export default function RoleplayChat({
   conversationId,
 }: RoleplayChatRoomProps) {
-  const [showHintPanel, setShowHintPanel] = useState(false);
   const [message, setMessage] = useState("");
-  const [situationOpen, setSituationOpen] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const { data: conversation } = useConversationDetail(conversationId);
   const { messages, sendMessage } = useRoleplayMessages(conversationId);
@@ -27,6 +27,8 @@ export default function RoleplayChatRoom({
     conversationId,
     sendMessage,
   );
+  const { showHintPanel, toggleHint, showSituation, toggleSituation, showNotice,toggleNotice } =
+    useChatStore();
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -38,24 +40,37 @@ export default function RoleplayChatRoom({
     setMessage("");
     await sendMessage(message);
   };
+  if(!conversation){
+    return ;
+  }
   return (
     <>
       <ChatroomHeader
         roomId={conversationId}
-        title={conversation?.conversationTopic ?? ""}
+        title={conversation.conversationTopic ?? "RoleplayChat"}
       />
       <div className="flex min-h-screen w-full flex-col">
-        <div className="-mx-5 mb-4 flex gap-4 border-y border-white bg-white/50 px-5 py-3">
-          <NoticeIcon className="shrink-0 text-gray-600" />
-          <span className="text-sm font-medium text-gray-600">
-            {conversation?.situation}
-          </span>
-        </div>
+       <div className="-mx-5 mb-4 flex gap-4 border-y border-white bg-white/50 px-5 py-3">
+              {showNotice ? (
+                <div className="flex w-full justify-between">
+                  <NoticeIcon className="shrink-0 text-gray-600" />
+                  <span className="text-sm font-medium text-gray-600">
+                    {conversation.situation}
+                  </span>
+                  <ChevronUp className="shrink-0" onClick={toggleNotice} />
+                </div>
+              ) : (
+                <div className="flex w-full items-center justify-between">
+                  <QuoteIcon />
+                  <ChevronDown onClick={toggleNotice} />
+                </div>
+              )}
+            </div>
         <div className="flex flex-1 flex-col">
           <MessageList
             messages={messages}
             myAI={myAI}
-            showsituation={situationOpen}
+            showsituation={showSituation}
           />
           <div ref={bottomRef} />
         </div>
@@ -67,7 +82,7 @@ export default function RoleplayChatRoom({
               onSelect={(h) => {
                 setMessage(h);
                 setTimeout(() => {
-                  setShowHintPanel(false);
+                  toggleHint();
                 }, 2000);
               }}
             />
@@ -76,13 +91,13 @@ export default function RoleplayChatRoom({
             message={micState === "recorded" ? sttText : message}
             setMessage={setMessage}
             showHint={true}
-            onHintClick={() => setShowHintPanel((prev) => !prev)}
-            onSituationClick={() => setSituationOpen((prev) => !prev)}
+            onHintClick={toggleHint}
+            onSituationClick={toggleSituation}
             showSituation={true}
             onSend={micState === "recorded" ? handleSendAudio : handleSendText}
             onMicClick={handleMicClick}
             isHintActive={showHintPanel}
-            isSituationActive={situationOpen}
+            isSituationActive={showSituation}
             micState={micState}
           />
         </div>

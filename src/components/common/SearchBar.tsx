@@ -1,7 +1,7 @@
 "use client";
 
 import { SearchIcon } from "@/assets/svgr";
-import { useChatHistoryStore } from "@/store/chathistory/useChatHistorystore";
+import { useChatHistoryStore } from "@/store/useChatHistorystore";
 
 export default function SearchBar() {
   const { keyword, setKeyword } = useChatHistoryStore();

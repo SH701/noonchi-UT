@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ChevronRightIcon } from "@/assets/svgr";
 import RoleplayHistorySkeleton from "./RoleplayHistorySkeleton";
-import { useChatHistoryStore } from "@/store/chathistory/useChatHistorystore";
+import { useChatHistoryStore } from "@/store/useChatHistorystore";
 import { Plus } from "lucide-react";
 
 export default function RoleplayHistoryTab() {

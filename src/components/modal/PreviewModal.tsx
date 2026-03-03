@@ -1,7 +1,7 @@
 import { ModalProps } from "@/types/etc";
 import Modal from "./Modal";
 import { Button } from "../ui/button/button";
-import { useModalActions } from "@/store/modal/useModalStore";
+import { useModalActions } from "@/store/useModalStore";
 import { LoginContent, SignupContent } from "@/features/auth";
 
 

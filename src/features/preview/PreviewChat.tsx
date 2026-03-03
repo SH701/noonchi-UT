@@ -15,6 +15,7 @@ import { useVoiceChat } from "@/hooks/useVoiceChat";
 import { motion } from "framer-motion";
 import { HintMessage, MessageItem } from "@/components/chatroom";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { useChatStore } from "@/store";
 
 interface AiMessage {
   content: string;
@@ -30,10 +31,15 @@ export default function PreviewChat() {
   const [userMessages, setUserMessages] = useState<string[]>([]);
   const [aiResponses, setAiResponses] = useState<AiMessage[]>([]);
   const [firstHiddenMessage, setFirstHiddenMessage] = useState(false);
-  const [showHintPanel, setShowHintPanel] = useState(false);
-  const [showSituation, setShowSituation] = useState(false);
+  const {
+    showHintPanel,
+    toggleHint,
+    showSituation,
+    toggleSituation,
+    showNotice,
+    toggleNotice,
+  } = useChatStore();
   const [showPreviewModal, setShowPreviewModal] = useState(false);
-  const [openNotice, setOpenNotice] = useState(true);
   const router = useRouter();
 
   const handleChunk = useCallback((chunk: string) => {
@@ -76,6 +82,7 @@ export default function PreviewChat() {
 
   const handleSend = () => {
     if (!data?.session_id || !message.trim() || messageLoading) return;
+    setMessage("");
     setUserMessages((prev) => [...prev, message]);
     setAiResponses((prev) => [
       ...prev,
@@ -101,7 +108,6 @@ export default function PreviewChat() {
         },
       },
     );
-    setMessage("");
   };
 
   const toggleReveal = (idx: number) => {
@@ -111,21 +117,16 @@ export default function PreviewChat() {
       ),
     );
   };
-  const handleHint = () => {
-    setShowHintPanel((prev) => !prev);
-  };
+
   const handleMoveAuth = () => {
     router.push("/preview/end");
   };
   const handleHiddenMessage = () => {
     setFirstHiddenMessage((prev) => !prev);
   };
-  const handleSituation = () => {
-    setShowSituation((prev) => !prev);
-  };
-  const handleNotice = () => {
-    setOpenNotice((prev) => !prev);
-  };
+  if (!data) {
+    return;
+  }
   return (
     <div className="flex h-screen flex-col">
       {/* 스크롤 영역 */}
@@ -144,18 +145,18 @@ export default function PreviewChat() {
         ) : (
           <>
             <div className="-mx-5 mb-4 flex gap-4 border-y border-white bg-white/50 px-5 py-3">
-              {openNotice ? (
+              {showNotice ? (
                 <div className="flex w-full justify-between">
                   <NoticeIcon className="shrink-0 text-gray-600" />
                   <span className="text-sm font-medium text-gray-600">
-                    {data?.scenario.description}
+                    {data.scenario.description}
                   </span>
-                  <ChevronUp className="shrink-0" onClick={handleNotice} />
+                  <ChevronUp className="shrink-0" onClick={toggleNotice} />
                 </div>
               ) : (
                 <div className="flex w-full items-center justify-between">
                   <QuoteIcon />
-                  <ChevronDown onClick={handleNotice} />
+                  <ChevronDown onClick={toggleNotice} />
                 </div>
               )}
             </div>
@@ -163,16 +164,16 @@ export default function PreviewChat() {
             {/* 첫 AI 메세지 */}
             <MessageItem
               messages={{
-                content: data?.ai_message ?? "",
-                visualAction: data?.visual_action,
+                content: data.ai_message ?? "",
+                visualAction: data.visual_action,
               }}
               aiName={data?.ai_name}
               isPreview={true}
-              hiddenMeaning={data?.ai_hidden_meaning}
+              hiddenMeaning={data.ai_hidden_meaning}
               isRevealed={firstHiddenMessage}
               onToggleReveal={handleHiddenMessage}
               showsituation={showSituation}
-              translatedContent={data?.ai_message_en}
+              translatedContent={data.ai_message_en}
             />
 
             {/* 대화 히스토리 */}
@@ -191,10 +192,10 @@ export default function PreviewChat() {
                     <MessageItem
                       messages={{
                         content: aiResponses[idx].content || "...",
-                        visualAction: data?.visual_action,
+                        visualAction: data.visual_action,
                       }}
                       isMine={false}
-                      aiName={data?.ai_name}
+                      aiName={data.ai_name}
                       isPreview={true}
                       hiddenMeaning={aiResponses[idx].hiddenMeaning}
                       isRevealed={aiResponses[idx].isRevealed}
@@ -238,7 +239,7 @@ export default function PreviewChat() {
             hintData={hintData}
             onSelect={(h) => {
               setMessage(h);
-              setShowHintPanel(false);
+              toggleHint();
             }}
           />
         )}
@@ -246,8 +247,8 @@ export default function PreviewChat() {
           message={micState === "recorded" ? sttText : message}
           setMessage={setMessage}
           onSend={micState === "recorded" ? handleSendAudio : handleSend}
-          onHintClick={handleHint}
-          onSituationClick={handleSituation}
+          onHintClick={toggleHint}
+          onSituationClick={toggleSituation}
           onMicClick={handleMicClick}
           showHint={true}
           showSituation={true}

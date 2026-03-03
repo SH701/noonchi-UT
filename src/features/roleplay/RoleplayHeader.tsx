@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { useTabStore } from "@/store/tab/useTabStore";
+import { useTabStore } from "@/store/useTabStore";
 import Tab from "../tab/Tab";
 import Header from "../../components/common/Header";
 import { HamburgerIcon } from "@/assets/svgr";
