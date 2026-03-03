@@ -14,7 +14,7 @@ export default function PreAsk() {
   return (
     <>
       {step === "chat" ? (
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-1 flex-col">
           <div className="pt-6">
             <div className="flex flex-col gap-3">
               <span className="text-3xl font-medium">
@@ -26,7 +26,7 @@ export default function PreAsk() {
               </span>
             </div>
           </div>
-          <div className="mt-auto pb-13 ">
+          <div className="pb-13 mx-auto mt-auto">
             <Button variant="primary" size="lg" onClick={handleStart}>
               Check how is sounds
             </Button>

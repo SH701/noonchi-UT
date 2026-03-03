@@ -10,6 +10,7 @@ import { SearchBar } from "../../components/common";
 import RoleplayHistoryTab from "./RoleplayHistoryTab";
 import AskHistoryTab from "./AskHistoryTab";
 import { PeopleIcon } from "@/assets/svgr";
+import { User } from "lucide-react";
 
 const slideVariants = {
   hidden: { scaleX: 0 },
@@ -39,12 +40,12 @@ export default function Tab() {
       {isOpen && (
         <>
           <div
-            className="fixed inset-0 z-9998 bg-black/60 flex items-center justify-center"
+            className="z-9998 fixed inset-0 flex items-center justify-center bg-black/60"
             onClick={closeTab}
           />
           <motion.div
             key="tab"
-            className="fixed left-1/2 top-0 z-9999 h-full w-70 -translate-x-2/3 origin-left bg-gradient-primary pt-15"
+            className="z-9999 w-70 bg-gradient-primary pt-15 fixed left-1/2 top-0 h-full origin-left -translate-x-2/3"
             variants={slideVariants}
             initial="hidden"
             animate="visible"
@@ -59,20 +60,20 @@ export default function Tab() {
               exit="hidden"
               transition={{ duration: 0.15 }}
             >
-              <div className="flex flex-col flex-1 px-5 min-h-0">
-                <div className="flex flex-col gap-5 mb-5 shrink-0">
+              <div className="flex min-h-0 flex-1 flex-col px-5">
+                <div className="mb-5 flex shrink-0 flex-col gap-5">
                   {" "}
                   <SearchBar />
                   <button
-                    className="flex gap-2 cursor-pointer"
+                    className="flex cursor-pointer gap-2"
                     onClick={handleCoach}
                   >
                     <PeopleIcon />
-                    <span className="text-sm pt-1">Live 1:1 Coaching</span>
+                    <span className="pt-1 text-sm">Live 1:1 Coaching</span>
                   </button>
                 </div>
 
-                <div className="flex-1  min-h-0  custom-scrollbar">
+                <div className="custom-scrollbar min-h-0 flex-1">
                   <RoleplayHistoryTab />
                   <AskHistoryTab />
                 </div>
@@ -80,7 +81,7 @@ export default function Tab() {
 
               <button
                 onClick={handleProfileClick}
-                className="flex gap-4 bg-white p-4 w-70 z-9999"
+                className="w-70 z-9999 flex gap-4 bg-white p-4"
               >
                 {session?.user.profileImageUrl ? (
                   <Image
@@ -88,12 +89,12 @@ export default function Tab() {
                     alt="profile"
                     width={48}
                     height={48}
-                    className="rounded-full shrink-0"
+                    className="shrink-0 rounded-full"
                   />
                 ) : (
-                  <div className="size-12 rounded-full bg-gray-400 shrink-0" />
+                  <User className="size-12 shrink-0" />
                 )}
-                <span className=" pt-3">{session?.user.name}</span>
+                <span className="pt-3">{session?.user.name}</span>
               </button>
             </motion.div>
           </motion.div>

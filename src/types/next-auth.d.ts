@@ -4,11 +4,11 @@ declare module "next-auth" {
   interface Session {
     accessToken: string;
     refreshToken: string;
-    user: AppUser;
+    user: AppUser & Record<string, unknown>;
   }
 
   interface User {
-    id: string;
+    id: number;
     accessToken: string;
     refreshToken: string;
     user: AppUser;

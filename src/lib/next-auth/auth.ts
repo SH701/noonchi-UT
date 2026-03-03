@@ -70,7 +70,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           const data: AuthRes = await res.json();
 
           return {
-            id: String(data.user.id),
+            id: data.user.id,
             email: data.user.email,
             name: data.user.nickname,
             image: data.user.profileImageUrl,
@@ -118,17 +118,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       session.refreshToken = token.refreshToken as string;
       if (token.user) {
         const u = token.user as User;
-        (session.user as User).id = u.id;
-        session.user.email = u.email;
-        session.user.nickname = u.nickname;
-        session.user.birthDate = u.birthDate;
-        session.user.role = u.role;
-        session.user.provider = u.provider;
-        session.user.koreanLevel = u.koreanLevel;
-        session.user.sentenceCount = u.sentenceCount;
-        session.user.profileImageUrl = u.profileImageUrl;
-        session.user.creditPoint = u.creditPoint;
-        session.user.interests = u.interests;
+        Object.assign(session.user, u);
       }
       return session;
     },
