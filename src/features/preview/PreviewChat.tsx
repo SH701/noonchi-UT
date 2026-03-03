@@ -11,11 +11,11 @@ import { useRouter } from "next/navigation";
 import { usePreviewHint } from "@/hooks/queries/preview/usePreviewHint";
 import { PreviewModal } from "@/components/modal";
 import { HamburgerIcon, InfoIcon, NoticeIcon, QuoteIcon } from "@/assets/svgr";
-import { useVoiceChat } from "@/hooks/useVoiceChat";
+import { useVoiceChat } from "@/hooks/custom/useVoiceChat";
 import { motion } from "framer-motion";
 import { HintMessage, MessageItem } from "@/components/chatroom";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { useChatUI } from "@/hooks/useChatUI";
+import { useChatUI } from "@/hooks/custom/useChatUI";
 
 interface AiMessage {
   content: string;

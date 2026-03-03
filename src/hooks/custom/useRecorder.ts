@@ -22,7 +22,7 @@ export function useRecorder() {
     setIsRecording(true);
   };
 
-  const stopRecording = async (): Promise<Blob> => {
+  const stopRecording = (): Promise<Blob> => {
     return new Promise((resolve) => {
       if (!mediaRecorderRef.current) return resolve(new Blob());
       mediaRecorderRef.current.onstop = () => {

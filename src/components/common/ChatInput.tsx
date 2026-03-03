@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import { MicIcon, SendIcon } from "@/assets/svgr";
 import { Asterisk, Lightbulb } from "lucide-react";
-import { MicState } from "@/hooks/useVoiceChat";
+import { MicState } from "@/hooks/custom/useVoiceChat";
 
 interface ChatInputProps {
   message: string;

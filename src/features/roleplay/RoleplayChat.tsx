@@ -5,10 +5,10 @@ import { MessageList, HintMessage } from "@/components/chatroom";
 import { useConversationDetail, useRoleplayHint } from "@/hooks/queries";
 import { ChatInput } from "@/components/common";
 import { useRoleplayMessages } from "@/hooks/mutations";
-import { useVoiceChat } from "@/hooks/useVoiceChat";
+import { useVoiceChat } from "@/hooks/custom/useVoiceChat";
 import { NoticeIcon, QuoteIcon } from "@/assets/svgr";
 import { ChatroomHeader } from "@/features/roleplay";
-import { useChatUI } from "@/hooks/useChatUI";
+import { useChatUI } from "@/hooks/custom/useChatUI";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface RoleplayChatRoomProps {

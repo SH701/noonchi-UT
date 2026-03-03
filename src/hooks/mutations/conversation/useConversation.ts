@@ -1,5 +1,14 @@
 import { apiMutations } from "@/api/mutations";
+import { AskReq, InterviewFormData, RoleplayReq } from "@/types/conversations";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+export const useAsk = () => {
+  return useMutation({
+    mutationFn: async (data: AskReq) => {
+      return apiMutations.conversations.createAsk(data);
+    },
+  });
+};
 
 export const useConversationEnd = (conversationId: number) => {
   return useMutation({
@@ -22,3 +31,25 @@ export function useDeleteConversation() {
     },
   });
 }
+
+export const useUploadFiles = () => {
+  return useMutation({
+    mutationFn: apiMutations.files.uploadFiles,
+  });
+};
+
+export const useCreateInterview = () => {
+  return useMutation({
+    mutationFn: async (data: InterviewFormData) => {
+      return apiMutations.conversations.createInterview(data);
+    },
+  });
+};
+
+export const useCreateRoleplay = () => {
+  return useMutation({
+    mutationFn: async (data: RoleplayReq) => {
+      return apiMutations.conversations.createRoleplay(data);
+    },
+  });
+};
