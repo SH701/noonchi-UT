@@ -9,6 +9,7 @@ import {
   ConversationPaged,
   ConversationSortBy,
   FilterState,
+  RoleplayHint,
 } from "@/types/conversations";
 import { filterMap } from "@/constants";
 import { TopicRes, PagedTopicRes } from "@/types/topics";
@@ -109,8 +110,8 @@ export const apiClient = {
     },
   },
   language: {
-    getHelp: async (conversationId: number): Promise<PreviewHint> => {
-      return apiFetch<PreviewHint>(
+    getHelp: async (conversationId: number): Promise<RoleplayHint> => {
+      return apiFetch<RoleplayHint>(
         `/api/language/help?conversationId=${conversationId}`,
       );
     },

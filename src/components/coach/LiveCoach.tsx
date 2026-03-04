@@ -1,22 +1,11 @@
-"use client";
-
-
-import { ChevronLeftIcon } from "@/assets/svgr";
-import { Header } from "../common";
 import { coach } from "@/data/coach";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import CoachBackButton from "./CoachBackButton";
+
 export default function LiveCoach() {
-  const router = useRouter();
-  const handleBack = () => {
-    router.back();
-  };
   return (
     <div className="min-h-screen">
-      <Header
-        leftIcon={<ChevronLeftIcon onClick={handleBack} />}
-        center="Live 1:1 Coaching"
-      />
+      <CoachBackButton />
       <div className="mb-5 flex flex-col gap-2 rounded-xl border border-white bg-white/50 p-4">
         <span className="font-semibold">Risk Management Coaching</span>
         <span className="text-sm text-gray-700">

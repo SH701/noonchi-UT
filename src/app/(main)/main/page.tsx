@@ -1,13 +1,6 @@
-"use client";
-
-import { useState } from "react";
-
-import { CategoryType } from "@/types/topics/topics.type";
 import { TopicList } from "@/features/roleplay";
 
 export default function Main() {
-  const [category, setCategory] = useState<CategoryType>("Career");
-
   return (
     <>
       <div>
@@ -19,7 +12,7 @@ export default function Main() {
             Let`s practice role-playing with me.
           </span>
         </div>
-        <TopicList category={category} setCategory={setCategory} />
+        <TopicList />
       </div>
     </>
   );

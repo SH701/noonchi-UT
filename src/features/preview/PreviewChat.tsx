@@ -124,9 +124,7 @@ export default function PreviewChat() {
   const handleHiddenMessage = () => {
     setFirstHiddenMessage((prev) => !prev);
   };
-  if (!data) {
-    return;
-  }
+
   return (
     <div className="flex h-screen flex-col">
       {/* 스크롤 영역 */}
@@ -149,7 +147,7 @@ export default function PreviewChat() {
                 <div className="flex w-full justify-between">
                   <NoticeIcon className="shrink-0 text-gray-600" />
                   <span className="text-sm font-medium text-gray-600">
-                    {data.scenario.description}
+                    {data?.scenario.description}
                   </span>
                   <ChevronUp className="shrink-0" onClick={toggleNotice} />
                 </div>
@@ -164,16 +162,16 @@ export default function PreviewChat() {
             {/* 첫 AI 메세지 */}
             <MessageItem
               messages={{
-                content: data.ai_message ?? "",
-                visualAction: data.visual_action,
+                content: data?.ai_message ?? "",
+                visualAction: data?.visual_action,
               }}
               aiName={data?.ai_name}
               isPreview={true}
-              hiddenMeaning={data.ai_hidden_meaning}
+              hiddenMeaning={data?.ai_hidden_meaning}
               isRevealed={firstHiddenMessage}
               onToggleReveal={handleHiddenMessage}
               showsituation={showSituation}
-              translatedContent={data.ai_message_en}
+              translatedContent={data?.ai_message_en}
             />
 
             {/* 대화 히스토리 */}
@@ -192,10 +190,10 @@ export default function PreviewChat() {
                     <MessageItem
                       messages={{
                         content: aiResponses[idx].content || "...",
-                        visualAction: data.visual_action,
+                        visualAction: data?.visual_action,
                       }}
                       isMine={false}
-                      aiName={data.ai_name}
+                      aiName={data?.ai_name}
                       isPreview={true}
                       hiddenMeaning={aiResponses[idx].hiddenMeaning}
                       isRevealed={aiResponses[idx].isRevealed}
@@ -212,7 +210,7 @@ export default function PreviewChat() {
       </div>
 
       {/* 하단 고정 영역 */}
-      <div className="relative flex flex-col gap-2 px-5 pb-5">
+      <div className="relative flex flex-col gap-2 pb-5">
         {/* 남은 턴수 */}
         {!isPending && (
           <motion.div

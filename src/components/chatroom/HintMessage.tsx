@@ -1,46 +1,52 @@
 import { AlpabatIcon } from "@/assets/svgr";
+import { RoleplayHint } from "@/types/conversations";
 import { PreviewHint } from "@/types/preview/preview.type";
 import { Check, Lightbulb, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 interface HintProps {
-  hintData: PreviewHint;
+  hintData: PreviewHint | RoleplayHint;
   onSelect: (hint: string) => void;
 }
 
 export default function HintMessage({ hintData, onSelect }: HintProps) {
   const [openTranslate, setOpenTranslate] = useState<number | null>(null);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
-
+  const pahtname = usePathname();
+  const isPreview = pahtname.startsWith("/preview");
   const handleSelect = (suggestion: string, idx: number) => {
     setSelectedIdx(idx);
     onSelect(suggestion);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2 bg-white border px-3 pt-3 pb-7 shadow-sm rounded-t-[20px] border-white -mb-6">
-      <div className="flex gap-2 text-sm text-gray-400 font-medium">
+    <div className="-mb-6 flex flex-col items-center justify-center gap-2 rounded-t-[20px] border border-white bg-white px-3 pb-7 pt-3 shadow-sm">
+      <div className="flex gap-2 text-sm font-medium text-gray-400">
         {selectedIdx === null ? (
           <>
             <Lightbulb className="size-4" />
             <span>Please choose the correct one</span>
           </>
         ) : selectedIdx === hintData.wrongIndex ? (
-          <div className="text-red-500 flex gap-0.5 items-center">
-            <X className="size-5.5 " />
+          <div className="flex items-center gap-0.5 text-red-500">
+            <X className="size-5.5" />
             <span>Sounds off</span>
           </div>
         ) : (
-          <div className="flex gap-0.5 items-center">
+          <div className="flex items-center gap-0.5">
             <Check className="size-5.5 text-blue-400" />
             <span className="text-text-accent">Sounds Natural</span>
           </div>
         )}
       </div>
-      {hintData.suggestions.map((suggestion, idx) => (
+      {(isPreview
+        ? (hintData as PreviewHint).hints
+        : (hintData as RoleplayHint).suggestions
+      ).map((suggestion: string, idx: number) => (
         <div
           key={idx}
-          className={`rounded-xl px-3.5 py-3 w-full flex flex-col gap-1 cursor-pointer ${
+          className={`flex w-full cursor-pointer flex-col gap-1 rounded-xl px-3.5 py-3 ${
             selectedIdx === idx
               ? idx === hintData.wrongIndex
                 ? "border border-red-500"

@@ -6,7 +6,7 @@ export default function RecentTopicsSkeleton() {
         {Array.from({ length: 4 }).map((_, i) => (
           <div
             key={i}
-            className="size-[162px] shrink-0 animate-pulse rounded-xl bg-gray-200"
+            className="size-40.5 shrink-0 animate-pulse rounded-xl bg-gray-200"
           />
         ))}
       </div>

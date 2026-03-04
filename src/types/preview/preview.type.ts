@@ -20,11 +20,12 @@ export interface Preview {
 }
 
 export interface PreviewHint {
-  suggestions: string[];
+  hints: string[];
   explanations: string[];
   translations: string[];
   wrongIndex: number;
 }
+
 
 export interface PreviewSendRes {
   session_id: string;

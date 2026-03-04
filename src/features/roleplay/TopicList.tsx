@@ -8,13 +8,10 @@ import Image from "next/image";
 import { useAddFavorite, useRemoveFavorite } from "@/hooks/mutations";
 import { useTopics } from "@/hooks/queries";
 import TopicListSkeleton from "./TopicListSkeleton";
+import { useState } from "react";
 
-interface TopicListProps {
-  category: CategoryType;
-  setCategory: (c: CategoryType) => void;
-}
-
-export default function TopicList({ category, setCategory }: TopicListProps) {
+export default function TopicList() {
+  const [category, setCategory] = useState<CategoryType>("Career");
   const isLove = category === "Favorites";
   const { data: topics = [], isPending } = useTopics(
     isLove ? "" : category,

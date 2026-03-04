@@ -5,3 +5,9 @@ export interface RoleplayReq {
   closeness: string;
   situation: string;
 }
+export interface RoleplayHint {
+  suggestions: string[];
+  explanations: string[];
+  translations: string[];
+  wrongIndex: number;
+}
