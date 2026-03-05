@@ -32,3 +32,10 @@ export interface Feedback {
   contentsFeedback: string;
   nuanceFeedback: string;
 }
+
+export interface HintMessages {
+  suggestions: string[];
+  explanations: string[];
+  translations: string[];
+  wrongIndex: number;
+}

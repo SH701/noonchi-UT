@@ -19,12 +19,7 @@ export interface Preview {
   max_turns: number;
 }
 
-export interface PreviewHint {
-  hints: string[];
-  explanations: string[];
-  translations: string[];
-  wrongIndex: number;
-}
+
 
 
 export interface PreviewSendRes {

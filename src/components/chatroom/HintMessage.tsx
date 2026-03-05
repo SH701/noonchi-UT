@@ -1,20 +1,19 @@
 import { AlpabatIcon } from "@/assets/svgr";
-import { RoleplayHint } from "@/types/conversations";
-import { PreviewHint } from "@/types/preview/preview.type";
+import { HintMessages } from "@/types/messages";
+
 import { Check, Lightbulb, X } from "lucide-react";
-import { usePathname } from "next/navigation";
+
 import { useState } from "react";
 
 interface HintProps {
-  hintData: PreviewHint | RoleplayHint;
+  hintData: HintMessages;
   onSelect: (hint: string) => void;
 }
 
 export default function HintMessage({ hintData, onSelect }: HintProps) {
   const [openTranslate, setOpenTranslate] = useState<number | null>(null);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
-  const pahtname = usePathname();
-  const isPreview = pahtname.startsWith("/preview");
+
   const handleSelect = (suggestion: string, idx: number) => {
     setSelectedIdx(idx);
     onSelect(suggestion);
@@ -40,10 +39,7 @@ export default function HintMessage({ hintData, onSelect }: HintProps) {
           </div>
         )}
       </div>
-      {(isPreview
-        ? (hintData as PreviewHint).hints
-        : (hintData as RoleplayHint).suggestions
-      ).map((suggestion: string, idx: number) => (
+      {hintData.suggestions.map((suggestion: string, idx: number) => (
         <div
           key={idx}
           className={`flex w-full cursor-pointer flex-col gap-1 rounded-xl px-3.5 py-3 ${

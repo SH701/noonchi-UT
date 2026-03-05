@@ -9,11 +9,11 @@ import {
   ConversationPaged,
   ConversationSortBy,
   FilterState,
-  RoleplayHint,
+
 } from "@/types/conversations";
 import { filterMap } from "@/constants";
 import { TopicRes, PagedTopicRes } from "@/types/topics";
-import { PreviewHint } from "@/types/preview/preview.type";
+import { HintMessages } from "@/types/messages";
 import axios from "axios";
 
 export const apiClient = {
@@ -97,8 +97,8 @@ export const apiClient = {
     },
   },
   preview: {
-    getHint: async (sessionId: string): Promise<PreviewHint> => {
-      const res = await axios.get<PreviewHint>(
+    getHint: async (sessionId: string): Promise<HintMessages> => {
+      const res = await axios.get<HintMessages>(
         `${process.env.NEXT_PUBLIC_PREVIEW_BASE_URL}/preview/roleplay/${sessionId}/hints`,
         {
           headers: {
@@ -110,8 +110,8 @@ export const apiClient = {
     },
   },
   language: {
-    getHelp: async (conversationId: number): Promise<RoleplayHint> => {
-      return apiFetch<RoleplayHint>(
+    getHelp: async (conversationId: number): Promise<HintMessages> => {
+      return apiFetch<HintMessages>(
         `/api/language/help?conversationId=${conversationId}`,
       );
     },
