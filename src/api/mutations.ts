@@ -89,7 +89,7 @@ export const apiMutations = {
       });
     },
     createAsk: async (data: AskReq): Promise<AskRes> => {
-      return apiFetch<AskRes>("/api/conversations/ask", {
+      return apiFetch<AskRes>("/api/conversations/ask/stream", {
         method: "POST",
         body: JSON.stringify(data),
       });

@@ -58,7 +58,9 @@ export default function AskChatRoom({ conversationId, askTarget, closeness, situ
     <div className="flex w-full flex-1 flex-col">
       <div className="flex flex-1 flex-col">
         {/* 이전 대화 */}
-        <span className="text-xl font-semibold">{STEP_QUESTIONS.askTarget}</span>
+        <span className="text-xl font-semibold">
+          {STEP_QUESTIONS.askTarget}
+        </span>
         <span className="text-gray-600">
           This can be something you`re <br /> about to say or do
         </span>
@@ -70,19 +72,28 @@ export default function AskChatRoom({ conversationId, askTarget, closeness, situ
           </div>
         )}
         <div className="mb-6 flex flex-col gap-2">
-          <span className="text-xl font-semibold">{STEP_QUESTIONS.closeness}</span>
-          <span className="text-gray-600">This helps me understand the right tone</span>
+          <span className="text-xl font-semibold">
+            {STEP_QUESTIONS.closeness}
+          </span>
+          <span className="text-gray-600">
+            This helps me understand the right tone
+          </span>
           <div className="mt-2 flex justify-end">
             <div className="rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
               <p className="text-sm">
-                {CLOSENESS_OPTIONS.find((o) => o.value === closeness)?.label ?? closeness}
+                {CLOSENESS_OPTIONS.find((o) => o.value === closeness)?.label ??
+                  closeness}
               </p>
             </div>
           </div>
         </div>
         <div className="mb-6 flex flex-col">
-          <span className="text-xl font-semibold">{STEP_QUESTIONS.situation}</span>
-          <span className="text-gray-600">Describe the situation or what you want to express</span>
+          <span className="text-xl font-semibold">
+            {STEP_QUESTIONS.situation}
+          </span>
+          <span className="text-gray-600">
+            Describe the situation or what you want to express
+          </span>
           {situation && (
             <div className="mt-2 flex justify-end">
               <div className="rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
@@ -125,9 +136,13 @@ export default function AskChatRoom({ conversationId, askTarget, closeness, situ
                   </>
                 ) : (
                   <>
-                    {firstAI.askCulturalInsight?.slice(0, 40)}...
-                    <div className="flex items-center justify-center">
-                      <ChevronUp onClick={handleInsight} />
+                    <div className="w-full min-w-0">
+                      <p className="flex-1 truncate">
+                        {firstAI.askCulturalInsight}
+                      </p>
+                      <div className="flex items-center justify-center">
+                        <ChevronUp onClick={handleInsight} />
+                      </div>
                     </div>
                   </>
                 )}

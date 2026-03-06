@@ -92,7 +92,7 @@ export default function AskChat() {
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col gap-3">
+              <div className="mt-5 flex flex-col gap-3">
                 {CLOSENESS_OPTIONS.map((option) => (
                   <Button
                     key={option.value}
