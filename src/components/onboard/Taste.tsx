@@ -8,8 +8,8 @@ export default function Taste() {
   const setInterests = usePreferenceStore((s) => s.setInterests);
 
   return (
-    <div className="pt-4 h-full flex flex-col">
-      <h1 className="text-2xl font-semibold text-gray-900 mb-11">
+    <div className="flex h-full flex-col pt-4">
+      <h1 className="mb-11 text-2xl font-semibold">
         Please select your <br /> interests
       </h1>
       <div className="flex flex-wrap gap-3">
@@ -22,10 +22,10 @@ export default function Taste() {
                 : [...interests, opt];
               setInterests(next);
             }}
-            className="flex items-center text-sm font-medium border p-3 rounded-full cursor-pointer"
+            className="flex cursor-pointer items-center rounded-full border p-3 text-sm font-medium"
             style={{
-              borderColor: interests.includes(opt) ? "#316CEC" : "#E5E7EB",
-              background: interests.includes(opt) ? "#EFF6FF" : "#FFFFFF",
+              borderColor: interests.includes(opt) ? "#6366F1" : "#E5E7EB",
+              background: interests.includes(opt) ? "#EEF2FF" : "",
             }}
           >
             {opt}

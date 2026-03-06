@@ -6,14 +6,15 @@ import {
   usePreviewSend,
   usePreviewStart,
 } from "@/hooks/mutations/";
-import { ChatInput, ChatLoading, Header } from "@/components/common";
+import { ChatInput, ChatLoading } from "@/components/common";
 import { useRouter } from "next/navigation";
 import { usePreviewHint } from "@/hooks/queries";
 import { PreviewModal } from "@/components/modal";
-import { HamburgerIcon, InfoIcon } from "@/assets/svgr";
+import { InfoIcon } from "@/assets/svgr";
 import { useVoiceChat, useChatUI } from "@/hooks/custom";
 import { motion } from "framer-motion";
 import { HintMessage, MessageItem, ChatNotice } from "@/components/chatroom";
+import PreviewHeader from "./PreviewHeader";
 
 interface AiMessage {
   content: string;
@@ -132,13 +133,7 @@ export default function PreviewChat() {
       {/* 스크롤 영역 */}
       <div className="flex-1">
         <div className="sticky top-0">
-          <Header
-            leftIcon={<HamburgerIcon />}
-            center="RolePlay Preview"
-            rightIcon="Skip"
-            className="font-medium text-gray-600"
-            onRightClick={handleMoveAuth}
-          />
+          <PreviewHeader handleMoveAuth={handleMoveAuth} />
         </div>
         {isPending ? (
           <ChatLoading />
