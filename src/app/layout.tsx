@@ -35,7 +35,7 @@ export default function RootLayout({
         <AuthProvider>
           <QueryProvider>
             <ClientProvider>
-              <div className="min-h-screen w-full md:flex md:justify-center">
+              <div className="h-full min-h-screen w-full md:flex md:justify-center">
                 <div className="md:max-w-93.75 bg-gradient-primary w-full md:shadow-xl">
                   {children}
                 </div>

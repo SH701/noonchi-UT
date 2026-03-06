@@ -67,15 +67,15 @@ export default function AskChat() {
           This can be something you`re <br /> about to say or do
         </span>
         {askTarget && (
-          <div className="mt-2 flex justify-end">
-            <div className="w-61 flex flex-col gap-2 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
+          <div className="flex justify-end">
+            <div className="mt-5 flex flex-col gap-2 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
               <p className="text-sm">{askTarget}</p>
             </div>
           </div>
         )}
         {/* 가까움 정도 */}
         {currentStepIdx >= 1 && (
-          <div className="mb-6 flex flex-col gap-2">
+          <div className="mt-5 flex flex-col">
             <span className="text-xl font-semibold">
               {STEP_QUESTIONS.closeness}
             </span>
@@ -83,8 +83,8 @@ export default function AskChat() {
               This helps me understand the right tone
             </span>
             {closeness ? (
-              <div className="mt-2 flex justify-end">
-                <div className="rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
+              <div className="flex justify-end">
+                <div className="mt-5 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
                   <p className="text-sm">
                     {CLOSENESS_OPTIONS.find((o) => o.value === closeness)
                       ?.label ?? closeness}
@@ -92,7 +92,7 @@ export default function AskChat() {
                 </div>
               </div>
             ) : (
-              <div className="mt-4 flex flex-col gap-3">
+              <div className="flex flex-col gap-3">
                 {CLOSENESS_OPTIONS.map((option) => (
                   <Button
                     key={option.value}
@@ -110,7 +110,7 @@ export default function AskChat() {
 
         {/* 상황 */}
         {currentStepIdx >= 2 && (
-          <div className="mb-6 flex flex-col">
+          <div className="mt-5 flex flex-col">
             <span className="text-xl font-semibold">
               {STEP_QUESTIONS.situation}
             </span>
@@ -118,8 +118,8 @@ export default function AskChat() {
               Describe the situation or what you want to express
             </span>
             {situation && (
-              <div className="mt-2 flex justify-end">
-                <div className="rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
+              <div className="flex justify-end">
+                <div className="my-5 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
                   <p className="text-sm">{situation}</p>
                 </div>
               </div>
@@ -129,7 +129,7 @@ export default function AskChat() {
 
         {/* 로딩 */}
         {isPending && (
-          <div className="flex flex-col gap-2 pt-4">
+          <div className="flex flex-col gap-1">
             <div className="flex flex-col items-center justify-center gap-2">
               <Spinner size="64px" />
               <span>Processing AI...</span>

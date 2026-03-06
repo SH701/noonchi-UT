@@ -34,7 +34,7 @@ export default function HistorySection({ sortBy }: HistorySectionProps) {
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-300">
               <span>{convo.aiPersona.name[0].toUpperCase()}</span>
             </div>
-            <div className="flex w-full flex-col gap-0.5">
+            <div className="flex min-w-0 flex-col gap-0.5">
               <div className="flex justify-between">
                 <span className="font-semibold">{convo.conversationTopic}</span>
                 {convo.canGetReport ? (

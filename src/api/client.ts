@@ -99,7 +99,7 @@ export const apiClient = {
   preview: {
     getHint: async (sessionId: string): Promise<HintMessages> => {
       const res = await axios.get<HintMessages>(
-        `${process.env.NEXT_PUBLIC_PREVIEW_BASE_URL}/preview/roleplay/${sessionId}/hints`,
+        `${process.env.NEXT_PUBLIC_PREVIEW_BASE_URL}/preview/roleplay/${sessionId}/help`,
         {
           headers: {
             "X-API-KEY": process.env.NEXT_PUBLIC_X_API_KEY,

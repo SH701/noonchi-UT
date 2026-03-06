@@ -28,7 +28,8 @@ export default function PreAsk() {
           </div>
           <div className="pb-13 mx-auto mt-auto">
             <Button variant="primary" size="lg" onClick={handleStart}>
-              Check how is sounds
+              Check how <span className="-skew-x-12 px-1 underline">it</span>{" "}
+              sounds
             </Button>
           </div>
         </div>

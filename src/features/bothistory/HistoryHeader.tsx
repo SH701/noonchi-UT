@@ -11,7 +11,7 @@ export default function HistoryHeader() {
   return (
     <Header
       leftIcon={<ChevronLeftIcon onClick={() => router.back()} />}
-      center="Role Play"
+      center="Role Playing"
       rightIcon={<SqurepenIcon onClick={handleNewChat} />}
     />
   );

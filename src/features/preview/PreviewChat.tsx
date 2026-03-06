@@ -10,12 +10,12 @@ import { ChatInput, ChatLoading, Header } from "@/components/common";
 import { useRouter } from "next/navigation";
 import { usePreviewHint } from "@/hooks/queries/preview/usePreviewHint";
 import { PreviewModal } from "@/components/modal";
-import { HamburgerIcon, InfoIcon, NoticeIcon, QuoteIcon } from "@/assets/svgr";
+import { HamburgerIcon, InfoIcon } from "@/assets/svgr";
 import { useVoiceChat } from "@/hooks/custom/useVoiceChat";
 import { motion } from "framer-motion";
 import { HintMessage, MessageItem } from "@/components/chatroom";
-import { ChevronDown, ChevronUp } from "lucide-react";
 import { useChatUI } from "@/hooks/custom/useChatUI";
+import ChatNotice from "@/components/chatroom/ChatNotice";
 
 interface AiMessage {
   content: string;
@@ -142,22 +142,11 @@ export default function PreviewChat() {
           <ChatLoading />
         ) : (
           <>
-            <div className="-mx-5 mb-4 flex gap-4 border-y border-white bg-white/50 px-5 py-3">
-              {showNotice ? (
-                <div className="flex w-full justify-between">
-                  <NoticeIcon className="shrink-0 text-gray-600" />
-                  <span className="text-sm font-medium text-gray-600">
-                    {data?.scenario.description}
-                  </span>
-                  <ChevronUp className="shrink-0" onClick={toggleNotice} />
-                </div>
-              ) : (
-                <div className="flex w-full items-center justify-between">
-                  <QuoteIcon />
-                  <ChevronDown onClick={toggleNotice} />
-                </div>
-              )}
-            </div>
+            <ChatNotice
+              description={data?.scenario.description}
+              showNotice={showNotice}
+              toggleNotice={toggleNotice}
+            />
 
             {/* 첫 AI 메세지 */}
             <MessageItem
