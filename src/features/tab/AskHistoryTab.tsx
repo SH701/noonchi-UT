@@ -45,7 +45,7 @@ export default function AskHistoryTab() {
                 className="mb-2 rounded-lg bg-white/10 p-3"
               >
                 <div className="flex flex-col">
-                  <span className="text-sm font-bold text-blue-500">
+                  <span className="text-sm font-bold text-black">
                     {convo.askTarget.toUpperCase()}
                   </span>
                   <span className="text-xs text-gray-500">

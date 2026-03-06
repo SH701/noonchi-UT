@@ -21,10 +21,13 @@ export default function RoleplayHeader() {
 
   useEffect(() => {
     const activeRef = isAsk ? askRef : roleRef;
-    if (!activeRef.current) return;
+    const container = activeRef.current?.closest("div");
+    if (!activeRef.current || !container) return;
+    const containerRect = container.getBoundingClientRect();
+    const activeRect = activeRef.current.getBoundingClientRect();
     setActiveStyles({
-      width: activeRef.current.offsetWidth,
-      x: activeRef.current.offsetLeft - 4,
+      width: activeRect.width,
+      x: activeRect.left - containerRect.left,
     });
   }, [isAsk]);
 
@@ -38,12 +41,12 @@ export default function RoleplayHeader() {
         leftIcon={<HamburgerIcon onClick={toggleTab} />}
         center={
           <div
-            className="relative flex items-center bg-white/30 rounded-full cursor-pointer"
+            className="relative flex cursor-pointer items-center rounded-full bg-white/30"
             onClick={handleToggle}
           >
             {activeStyles && (
               <motion.div
-                className="absolute bg-white rounded-full h-6"
+                className="absolute h-6 rounded-full bg-white"
                 initial={false}
                 animate={activeStyles}
                 transition={{ type: "spring", stiffness: 200, damping: 25 }}
@@ -51,7 +54,7 @@ export default function RoleplayHeader() {
             )}
             <span
               ref={roleRef}
-              className={`relative z-10 px-3 py-1 text-sm font-medium transition-colors ${
+              className={`relative z-10 px-1.5 py-1 text-sm font-medium transition-colors ${
                 isAsk ? "text-gray-400" : "text-gray-800"
               }`}
             >
@@ -59,7 +62,7 @@ export default function RoleplayHeader() {
             </span>
             <span
               ref={askRef}
-              className={`relative z-10 px-3 py-1 text-sm font-medium transition-colors ${
+              className={`relative z-10 px-1.5 py-1 text-sm font-medium transition-colors ${
                 !isAsk ? "text-gray-400" : "text-gray-800"
               }`}
             >

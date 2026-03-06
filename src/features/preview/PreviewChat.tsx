@@ -8,14 +8,12 @@ import {
 } from "@/hooks/mutations/";
 import { ChatInput, ChatLoading, Header } from "@/components/common";
 import { useRouter } from "next/navigation";
-import { usePreviewHint } from "@/hooks/queries/preview/usePreviewHint";
+import { usePreviewHint } from "@/hooks/queries";
 import { PreviewModal } from "@/components/modal";
 import { HamburgerIcon, InfoIcon } from "@/assets/svgr";
-import { useVoiceChat } from "@/hooks/custom/useVoiceChat";
+import { useVoiceChat, useChatUI } from "@/hooks/custom";
 import { motion } from "framer-motion";
-import { HintMessage, MessageItem } from "@/components/chatroom";
-import { useChatUI } from "@/hooks/custom/useChatUI";
-import ChatNotice from "@/components/chatroom/ChatNotice";
+import { HintMessage, MessageItem, ChatNotice } from "@/components/chatroom";
 
 interface AiMessage {
   content: string;
@@ -41,7 +39,9 @@ export default function PreviewChat() {
   } = useChatUI();
   const [showPreviewModal, setShowPreviewModal] = useState(false);
   const router = useRouter();
-
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const started = useRef(false);
+  const ended = useRef(false);
   const handleChunk = useCallback((chunk: string) => {
     setAiResponses((prev) => {
       const newResponses = [...prev];
@@ -57,8 +57,10 @@ export default function PreviewChat() {
   const { mutate: removePreview } = usePreviewRemove();
   const { micState, sttText, handleMicClick, handleSendAudio } =
     useVoiceChat(3000);
-  const started = useRef(false);
-  const ended = useRef(false);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
   useEffect(() => {
     if (started.current) return;
     started.current = true;
@@ -226,7 +228,9 @@ export default function PreviewChat() {
             hintData={hintData}
             onSelect={(h) => {
               setMessage(h);
-              toggleHint();
+              setTimeout(() => {
+                toggleHint();
+              }, 3000);
             }}
           />
         )}

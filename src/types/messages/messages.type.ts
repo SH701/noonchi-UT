@@ -37,5 +37,5 @@ export interface HintMessages {
   suggestions: string[];
   explanations: string[];
   translations: string[];
-  wrongIndex: number;
+  wrong_index: number;
 }

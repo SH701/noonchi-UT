@@ -83,7 +83,7 @@ export default function RoleplayChat({
                 setMessage(h);
                 setTimeout(() => {
                   toggleHint();
-                }, 2000);
+                }, 3000);
               }}
             />
           )}

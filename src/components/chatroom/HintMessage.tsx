@@ -27,7 +27,7 @@ export default function HintMessage({ hintData, onSelect }: HintProps) {
             <Lightbulb className="size-4" />
             <span>Please choose the correct one</span>
           </>
-        ) : selectedIdx === hintData.wrongIndex ? (
+        ) : selectedIdx === hintData.wrong_index ? (
           <div className="flex items-center gap-0.5 text-red-500">
             <X className="size-5.5" />
             <span>Sounds off</span>
@@ -44,7 +44,7 @@ export default function HintMessage({ hintData, onSelect }: HintProps) {
           key={idx}
           className={`flex w-full cursor-pointer flex-col gap-1 rounded-xl px-3.5 py-3 ${
             selectedIdx === idx
-              ? idx === hintData.wrongIndex
+              ? idx === hintData.wrong_index
                 ? "border border-red-500"
                 : "border-gradient-primary"
               : "border border-gray-300 bg-white/50"
