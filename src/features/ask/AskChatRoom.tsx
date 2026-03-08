@@ -49,8 +49,7 @@ export default function AskChatRoom({
   };
 
   const handleTTS = () => {
-    if (!firstAI?.messageId) return;
-    TTS(firstAI.messageId);
+    TTS(message);
   };
 
   const handleTranslate = () => {
