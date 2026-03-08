@@ -56,7 +56,7 @@ export function usePreviewMessages() {
     }
   }, [data, aiResponses, removePreview]);
 
-  const sendMessage = (message: string) => {
+  const sendMessage = (message: string, audioUrl?: string) => {
     if (!data?.session_id || !message.trim() || isSending) return;
     setUserMessages((prev) => [...prev, message]);
     setAiResponses((prev) => [
@@ -69,7 +69,11 @@ export function usePreviewMessages() {
       },
     ]);
     sendMutation(
-      { sessionId: data.session_id, userMessage: message },
+      {
+        sessionId: data.session_id,
+        userMessage: message,
+        inputType: audioUrl ? "voice" : "text",
+      },
       {
         onSuccess: (res) => {
           setAiResponses((prev) => {
@@ -79,6 +83,9 @@ export function usePreviewMessages() {
             return next;
           });
           RehintData();
+        },
+        onError: () => {
+          setShowPreviewModal(true);
         },
       },
     );

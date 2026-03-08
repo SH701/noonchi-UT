@@ -24,15 +24,19 @@ export function useVoiceChat(
     } else if (micState === "recording") {
       try {
         const blob = await stopRecording();
+
         if (!blob || blob.size === 0) {
           throw new Error("빈 오디오 blob");
         }
         const audioUrl = await apiMutations.files.uploadAudio(blob);
+
         const content = await apiMutations.language.stt(audioUrl);
+
         setSttText(content);
         setMicState("recorded");
         setPendingAudioUrl(audioUrl);
       } catch {
+
         handleResetAudio();
       }
     }
