@@ -11,13 +11,6 @@ export function useMessageFeedback(messageId?: number) {
   });
 }
 
-export function useMessageTTS() {
-  return useMutation({
-    mutationFn: (messageId: number) =>
-      apiMutations.messages.tts(Number(messageId)),
-  });
-}
-
 export function useMessageTranslate() {
   return useMutation({
     mutationFn: (messageId: number) =>
