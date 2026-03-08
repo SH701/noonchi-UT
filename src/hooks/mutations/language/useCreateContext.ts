@@ -8,3 +8,9 @@ export const useCreateContext = (scenarioId: number) => {
     onSuccess: () => queryClient.invalidateQueries(),
   });
 };
+
+export function useMessageTTS() {
+  return useMutation({
+    mutationFn: (text: string) => apiMutations.language.tts(text),
+  });
+}

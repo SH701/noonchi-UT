@@ -73,9 +73,8 @@ export default function MessageItem({
   const handleFeedback = () => {
     setFeedbackOpen((prev) => !prev);
   };
-  const handleTTsClick = (messageId: number | undefined) => {
-    if (!messageId) return;
-    tts(messageId);
+  const handleTTsClick = (text: string) => {
+    tts(text);
   };
 
   const handleTranslateClick = (messageId: number | undefined) => {
@@ -128,11 +127,9 @@ export default function MessageItem({
             </p>
             <div className="rounded-b-xl rounded-tl-xl bg-white p-4">
               {showsituation && messages.visualAction && (
-                <div className="animate-in fade-in mb-2 rounded-lg border border-blue-100 bg-blue-50 p-3 shadow-sm duration-300">
-                  <p className="text-sm italic text-blue-800">
-                    {messages.visualAction}
-                  </p>
-                </div>
+                <p className="text-sm italic text-blue-600">
+                  * {messages.visualAction}
+                </p>
               )}
               <p className="whitespace-pre-wrap pb-2 pt-1 text-sm">
                 {messages.content}
@@ -167,51 +164,55 @@ export default function MessageItem({
 
         {/* AI 말풍선 */}
         {!isMine && (
-          <div className="flex flex-col gap-2 rounded-b-xl rounded-tr-xl border border-gray-300 bg-white p-4">
-            {showsituation && messages.visualAction && (
-              <div className="animate-in fade-in mb-2 rounded-lg border border-blue-100 bg-blue-50 p-3 shadow-sm duration-300">
-                <p className="text-sm italic text-blue-800">
-                  {messages.visualAction}
+          <>
+            <div>
+              {showsituation && messages.visualAction && (
+                <p className="text-sm text-blue-800">
+                  * {messages.visualAction}
                 </p>
-              </div>
-            )}
-            <p className="my-1 whitespace-pre-wrap text-sm leading-[130%]">
-              {messages.content}
-            </p>
-
-            <div className="mt-2 flex justify-between border-t border-gray-200 pt-2">
-              <div className="flex gap-2">
-                <button
-                  onClick={() => handleTTsClick(messages.messageId)}
-                  disabled={loadingTTS}
-                >
-                  <VolumeUpIcon size={20} />
-                </button>
-
-                <button
-                  onClick={() => handleTranslateClick(messages.messageId)}
-                  disabled={loadingTranslate}
-                >
-                  {loadingTranslate ? (
-                    <Spinner size="20px" />
-                  ) : (
-                    <LanguageIcon />
-                  )}
-                </button>
-              </div>
-
-              <button
-                className="border-gradient-primary rounded-full border px-2 py-1"
-                onClick={handleHiddenMean}
-              >
-                👀{" "}
-                <span className="text-gradient-primary text-xs font-semibold">
-                  Really mean
-                </span>
-              </button>
+              )}
             </div>
-            {translateOpen && <span>{translatedContent ?? translateText}</span>}
-          </div>
+            <div className="flex flex-col gap-2 rounded-b-xl rounded-tr-xl border border-gray-300 bg-white p-4">
+              <p className="my-1 whitespace-pre-wrap text-sm leading-[130%]">
+                {messages.content}
+              </p>
+
+              <div className="mt-2 flex justify-between border-t border-gray-200 pt-2">
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => handleTTsClick(messages.content)}
+                    disabled={loadingTTS}
+                  >
+                    <VolumeUpIcon size={20} />
+                  </button>
+
+                  <button
+                    onClick={() => handleTranslateClick(messages.messageId)}
+                    disabled={loadingTranslate}
+                  >
+                    {loadingTranslate ? (
+                      <Spinner size="20px" />
+                    ) : (
+                      <LanguageIcon />
+                    )}
+                  </button>
+                </div>
+
+                <button
+                  className="border-gradient-primary rounded-full border px-2 py-1"
+                  onClick={handleHiddenMean}
+                >
+                  👀{" "}
+                  <span className="text-gradient-primary text-xs font-semibold">
+                    Really mean
+                  </span>
+                </button>
+              </div>
+              {translateOpen && (
+                <span>{translatedContent ?? translateText}</span>
+              )}
+            </div>
+          </>
         )}
       </div>
       {ttsOpen && <NotTTS isOpen={ttsOpen} onClose={() => setTtsOpen(false)} />}

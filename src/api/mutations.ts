@@ -59,11 +59,7 @@ export const apiMutations = {
         body: JSON.stringify({ conversationId, content, audioUrl }),
       });
     },
-    tts: async (messageId: number): Promise<string> => {
-      return apiFetch<string>(`/api/messages/${messageId}/tts`, {
-        method: "PUT",
-      });
-    },
+
     translate: async (messageId: number): Promise<string> => {
       return apiFetch<string>(`/api/messages/${messageId}/translate`, {
         method: "PUT",
@@ -282,6 +278,12 @@ export const apiMutations = {
         },
       );
       return res.text();
+    },
+    tts: async (text: string): Promise<string> => {
+      return apiFetch<string>(`/api/language/tts`, {
+        method: "POST",
+        body: JSON.stringify({ text }),
+      });
     },
   },
 };
