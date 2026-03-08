@@ -3,3 +3,4 @@ export { default as Modal } from "./Modal";
 export { default as ModalRender } from "./ModalRender";
 export { default as NotTTS } from "./NotTTS";
 export { default as PreviewModal } from "./PreviewModal";
+export { default as CominSoonModal } from "./CominSoonModal";

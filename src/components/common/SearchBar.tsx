@@ -1,8 +1,7 @@
 "use client";
 
-import { SearchIcon } from "@/assets/svgr";
+import { HomeIcon, SearchIcon } from "@/assets/svgr";
 import { useChatHistoryStore } from "@/store/useChatHistorystore";
-import { SquarePen } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function SearchBar() {
@@ -30,7 +29,7 @@ export default function SearchBar() {
         <SearchIcon className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2" />
       </div>
       <div className="min-w-0">
-        <SquarePen className="mt-3 shrink-0" onClick={handleNewChat} />
+        <HomeIcon className="mt-3 shrink-0" onClick={handleNewChat} />
       </div>
     </div>
   );

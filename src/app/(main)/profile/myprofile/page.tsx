@@ -1,5 +1,4 @@
 import MyInfo from "@/features/profile/myinfo/MyInfo";
-import { getAge } from "@/lib/time-format";
 import { auth } from "@/lib/next-auth/auth";
 
 export default async function MyProfile() {
@@ -8,7 +7,8 @@ export default async function MyProfile() {
     <div>
       <MyInfo
         name={session?.user.name ?? "User"}
-        age={getAge(session?.user.birthDate ?? "")}
+        birth={session?.user.birthDate ?? ""}
+        email={session?.user.email ?? ""}
       />
     </div>
   );

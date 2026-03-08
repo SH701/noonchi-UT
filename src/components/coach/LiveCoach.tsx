@@ -25,7 +25,11 @@ export default function LiveCoach() {
               className="h-14 w-14 shrink-0"
             />
             <div className="flex flex-col">
-              <a href={c.link} className="pb-1 font-medium leading-6 underline">
+              <a
+                href={c.link}
+                className="pb-1 font-medium leading-6 underline"
+                target="_blank"
+              >
                 {c.name}
               </a>
               <span className="pb-3 text-sm text-gray-600">{c.position}</span>

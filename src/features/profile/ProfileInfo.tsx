@@ -1,5 +1,7 @@
+"use client";
 import { ChevronRightIcon, DefaultIcon } from "@/assets/svgr";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface ProfileInfoProps {
   img?: string;
@@ -7,6 +9,10 @@ interface ProfileInfoProps {
 }
 
 export default function ProfileInfo({ img, name }: ProfileInfoProps) {
+  const router = useRouter();
+  const handleProfile = () => {
+    router.push("/profile/myprofile");
+  };
   return (
     <div className="flex items-center justify-between rounded-2xl border border-gray-500 p-4">
       <div className="flex gap-4">
@@ -26,7 +32,7 @@ export default function ProfileInfo({ img, name }: ProfileInfoProps) {
         </div>
       </div>
       <button>
-        <ChevronRightIcon />
+        <ChevronRightIcon onClick={handleProfile} />
       </button>
     </div>
   );
