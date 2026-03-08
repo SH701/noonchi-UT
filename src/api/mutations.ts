@@ -93,6 +93,7 @@ export const apiMutations = {
         body: JSON.stringify(data),
       });
     },
+
     deleteConversation: async (conversationId: number): Promise<void> => {
       return apiFetch<void>(`/api/conversations/${conversationId}`, {
         method: "DELETE",
@@ -272,13 +273,15 @@ export const apiMutations = {
       });
     },
     stt: async (audioUrl: string): Promise<string> => {
-      const res = await fetch("/api/language/stt", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ audioUrl }),
-      });
-      const data = await res.json();
-      return data;
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/language/stt`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ audioUrl }),
+        },
+      );
+      return res.text();
     },
   },
 };

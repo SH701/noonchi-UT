@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePreviewMessages } from "@/hooks/mutations";
 import { ChatInput, ChatLoading } from "@/components/common";
 import { useRouter } from "next/navigation";
@@ -8,7 +8,11 @@ import { PreviewModal } from "@/components/modal";
 import { InfoIcon } from "@/assets/svgr";
 import { useVoiceChat, useChatUI } from "@/hooks/custom";
 import { motion } from "framer-motion";
-import { HintMessage, ChatNotice, PreviewMessageList } from "@/components/chatroom";
+import {
+  HintMessage,
+  ChatNotice,
+  PreviewMessageList,
+} from "@/components/chatroom";
 import PreviewHeader from "./PreviewHeader";
 
 export default function PreviewChat() {
@@ -38,13 +42,25 @@ export default function PreviewChat() {
     toggleNotice,
   } = useChatUI();
 
-  const { micState, sttText, handleMicClick, handleSendAudio } =
-    useVoiceChat(3000);
+  const {
+    micState,
+    sttText,
+    handleMicClick,
+    pendingAudioUrl,
+    handleSendAudio,
+  } = useVoiceChat();
 
+  useEffect(() => {
+    if (micState === "recorded" && sttText) {
+      console.log(sttText, micState);
+      setMessage(sttText);
+    }
+  }, [sttText, micState]);
   const handleSend = () => {
     if (!message.trim() || isSending) return;
-    sendMessage(message);
+    sendMessage(message, pendingAudioUrl ?? undefined);
     setMessage("");
+    handleSendAudio();
   };
 
   const handleMoveAuth = () => router.push("/preview/end");
@@ -107,9 +123,9 @@ export default function PreviewChat() {
           />
         )}
         <ChatInput
-          message={micState === "recorded" ? sttText : message}
+          message={message}
           setMessage={setMessage}
-          onSend={micState === "recorded" ? handleSendAudio : handleSend}
+          onSend={handleSend}
           onHintClick={toggleHint}
           onSituationClick={toggleSituation}
           onMicClick={handleMicClick}
