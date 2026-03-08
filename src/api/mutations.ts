@@ -272,10 +272,13 @@ export const apiMutations = {
       });
     },
     stt: async (audioUrl: string): Promise<string> => {
-      return apiFetch<string>(`/api/language/stt`, {
+      const res = await fetch("/api/language/stt", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ audioUrl }),
       });
+      const data = await res.json();
+      return data;
     },
   },
 };

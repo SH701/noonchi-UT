@@ -17,7 +17,7 @@ export default function PreviewHeader({ handleMoveAuth }: PreviewHeaderProps) {
         onRightClick={handleMoveAuth}
       />
       <motion.div
-        className="top-15 absolute -right-1 flex h-16 w-36 items-center justify-center rounded-b-xl rounded-tl-xl bg-gray-800 p-3"
+        className="top-15 p pointer-events-none absolute -right-1 flex h-16 w-36 items-center justify-center rounded-b-xl rounded-tl-xl bg-gray-800 p-3"
         initial={{ opacity: 1 }}
         animate={{ opacity: 0 }}
         transition={{ duration: 4 }}

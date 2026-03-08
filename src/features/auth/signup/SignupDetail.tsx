@@ -12,6 +12,7 @@ import { signIn } from "next-auth/react";
 import StepIndicator from "./StepIndicator";
 import { useModalActions } from "@/store/useModalStore";
 import { Spinner } from "@/components/ui/spinner/spinner";
+import { X } from "lucide-react";
 
 type Step2FormData = z.infer<typeof signup2Schema>;
 
@@ -78,7 +79,12 @@ export default function SignupDetail({
         onStepClick={(s) => s < step && onBack()}
       />
       <SignupTemplate
-        header={<SignupHeader title="Create account" />}
+        header={
+          <SignupHeader
+            title="Create account"
+            rightIcon={<X onClick={() => closeModal()} />}
+          />
+        }
         footer={
           <Button
             variant="primary"

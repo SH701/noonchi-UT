@@ -16,6 +16,7 @@ import {
 import { signupSchema } from "@/types/auth";
 import StepIndicator from "./StepIndicator";
 import { useModalActions } from "@/store/useModalStore";
+import { X } from "lucide-react";
 
 type Step1FormData = z.infer<typeof signupSchema>;
 
@@ -23,7 +24,7 @@ export default function SignupContent() {
   const [step, setStep] = useState<1 | 2>(1);
   const [signupData, setSignupData] = useState({ email: "", password: "" });
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
-  const { openModal, setOnDimClose } = useModalActions();
+  const { openModal, setOnDimClose, closeModal } = useModalActions();
   const {
     control,
     handleSubmit,
@@ -73,7 +74,12 @@ export default function SignupContent() {
     <div>
       <StepIndicator currentStep={step} totalStep={2} />
       <SignupTemplate
-        header={<SignupHeader title="Create Account" />}
+        header={
+          <SignupHeader
+            title="Create account"
+            rightIcon={<X onClick={() => closeModal()} />}
+          />
+        }
         footer={
           <Button
             variant="primary"
@@ -87,12 +93,12 @@ export default function SignupContent() {
       >
         <SignupForm1 control={control} errors={errors} />
         {serverErrors.email && (
-          <p className="text-red-500 text-sm text-center">
+          <p className="text-center text-sm text-red-500">
             {serverErrors.email}
           </p>
         )}
       </SignupTemplate>
-      <div className="text-center text-sm text-gray-500 pb-10 pt-6">
+      <div className="pb-10 pt-6 text-center text-sm text-gray-500">
         Already have an account?{" "}
         <button
           className="font-medium text-blue-500 hover:underline"

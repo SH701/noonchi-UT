@@ -74,10 +74,8 @@ export default function RoleplayChat({
               hintData={hintData}
               onSelect={(h) => {
                 setMessage(h);
-                setTimeout(() => {
-                  toggleHint();
-                }, 3000);
               }}
+              onClose={toggleHint}
             />
           )}
           <ChatInput

@@ -10,6 +10,7 @@ import { signIn } from "next-auth/react";
 import { LoginAction, LoginForm } from "@/features/auth";
 import { loginSchema } from "@/types/auth";
 import { useModalActions } from "@/store/useModalStore";
+import { X } from "lucide-react";
 
 type LoginData = z.infer<typeof loginSchema>;
 
@@ -34,7 +35,6 @@ export default function LoginContent() {
   const onSubmit = async (data: LoginData) => {
     setServerErrors({});
     setLoading(true);
-
     try {
       const result = await signIn("credentials", {
         email: data.email,
@@ -57,12 +57,14 @@ export default function LoginContent() {
   };
 
   return (
-    <div className=" flex flex-col  px-4  pb-10">
-      <div className="flex-1 flex items-center justify-center  ">
+    <div className="flex flex-col px-4 pb-10">
+      <div className="flex flex-1 items-center justify-center">
         <div className="w-full max-w-sm space-y-6">
-          <p className=" mt-14 my-10 text-center text-2xl font-semibold ">
-            Welcome back
-          </p>
+          <div className="my-10 mt-14 flex justify-between">
+            <p></p>
+            <p className="text-center text-2xl font-semibold">Welcome back</p>
+            <X onClick={() => closeModal()} />
+          </div>
           <LoginForm control={control} errors={errors} />
           <LoginAction
             loading={loading}
@@ -70,17 +72,17 @@ export default function LoginContent() {
             isValid={isValid}
           />
           {serverErrors.email && (
-            <p className="text-red-500 text-sm text-center">
+            <p className="text-center text-sm text-red-500">
               {serverErrors.email}
             </p>
           )}
           {serverErrors.password && (
-            <p className="text-red-500 text-sm text-center">
+            <p className="text-center text-sm text-red-500">
               {serverErrors.password}
             </p>
           )}
           {serverErrors.general && (
-            <p className="text-red-500 text-sm text-center">
+            <p className="text-center text-sm text-red-500">
               {serverErrors.general}
             </p>
           )}

@@ -37,6 +37,7 @@ export default function PreviewChat() {
     showNotice,
     toggleNotice,
   } = useChatUI();
+
   const { micState, sttText, handleMicClick, handleSendAudio } =
     useVoiceChat(3000);
 
@@ -49,7 +50,7 @@ export default function PreviewChat() {
   const handleMoveAuth = () => router.push("/preview/end");
 
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex min-h-screen flex-col">
       <div className="flex-1">
         <div className="sticky top-0">
           <PreviewHeader handleMoveAuth={handleMoveAuth} />
@@ -92,17 +93,17 @@ export default function PreviewChat() {
                 They`re waiting for your reply! ({aiResponses.length}/2)
               </span>
             ) : (
-              <span>One shot left! Finish strong! ({aiResponses.length}/2)</span>
+              <span>
+                One shot left! Finish strong! ({aiResponses.length}/2)
+              </span>
             )}
           </motion.div>
         )}
         {showHintPanel && hintData && (
           <HintMessage
             hintData={hintData}
-            onSelect={(h) => {
-              setMessage(h);
-              setTimeout(() => toggleHint(), 3000);
-            }}
+            onSelect={(h) => setMessage(h)}
+            onClose={toggleHint}
           />
         )}
         <ChatInput

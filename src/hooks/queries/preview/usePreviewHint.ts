@@ -8,5 +8,7 @@ export const usePreviewHint = (sessionId?: string) => {
       return apiClient.preview.getHint(sessionId!);
     },
     enabled: !!sessionId,
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
   });
 };

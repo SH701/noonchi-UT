@@ -19,7 +19,9 @@ export function usePreviewMessages() {
   const started = useRef(false);
   const ended = useRef(false);
 
-  const { data: hintData } = usePreviewHint(data?.session_id);
+  const { data: hintData, refetch: RehintData } = usePreviewHint(
+    data?.session_id,
+  );
 
   const handleChunk = useCallback((chunk: string) => {
     setAiResponses((prev) => {
@@ -59,7 +61,12 @@ export function usePreviewMessages() {
     setUserMessages((prev) => [...prev, message]);
     setAiResponses((prev) => [
       ...prev,
-      { content: "", hiddenMeaning: "", isRevealed: false, translatedContent: "" },
+      {
+        content: "",
+        hiddenMeaning: "",
+        isRevealed: false,
+        translatedContent: "",
+      },
     ]);
     sendMutation(
       { sessionId: data.session_id, userMessage: message },
@@ -71,6 +78,7 @@ export function usePreviewMessages() {
             next[next.length - 1].translatedContent = res.ai_message_en;
             return next;
           });
+          RehintData();
         },
       },
     );
