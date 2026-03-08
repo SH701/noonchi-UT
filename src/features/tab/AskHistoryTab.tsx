@@ -43,6 +43,14 @@ export default function AskHistoryTab() {
               <div
                 key={convo.conversationId}
                 className="mb-2 rounded-lg bg-white/10 p-3"
+                onClick={() => {
+                  const query = new URLSearchParams({
+                    askTarget: convo.askTarget,
+                    closeness: convo.closeness,
+                    situation: convo.situation,
+                  }).toString();
+                  router.push(`/main/ask/${convo.conversationId}?${query}`);
+                }}
               >
                 <div className="flex flex-col">
                   <span className="text-sm font-bold text-black">

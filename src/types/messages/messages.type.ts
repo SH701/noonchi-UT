@@ -16,7 +16,7 @@ export interface ChatMsg {
   isLoading?: boolean;
   createdAt: string;
   hiddenMeaning: string;
-  visualAction: string;
+  visualAction?: string;
   situationDescription: string;
   askApproachTip?: string;
   askCulturalInsight?: string;

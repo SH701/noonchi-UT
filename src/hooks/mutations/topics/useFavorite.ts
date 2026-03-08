@@ -8,7 +8,7 @@ export const useAddFavorite = () => {
     mutationFn: (topicId: number) => apiMutations.topic.addfavorite(topicId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["topics"] });
-      toast.success("Added to favorites!");
+      toast.favorite();
     },
   });
 };

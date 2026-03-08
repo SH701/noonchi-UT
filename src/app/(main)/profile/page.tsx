@@ -1,9 +1,4 @@
-import {
-  AlpabatIcon,
-  ControlIcon,
-  PersonIcon,
-  SettingIcon,
-} from "@/assets/svgr";
+import { AlpabatIcon, ControlIcon, SettingIcon } from "@/assets/svgr";
 import {
   ProfileInfo,
   ProfileMenuList,
@@ -28,11 +23,6 @@ export default async function ProfilePage() {
             title="Personal settings"
             items={[
               {
-                label: "My Profile",
-                href: "/profile/myprofile",
-                icon: <PersonIcon />,
-              },
-              {
                 label: "Topics of Interest",
                 href: "/profile/interest",
                 icon: <ControlIcon />,
@@ -43,7 +33,7 @@ export default async function ProfilePage() {
                 icon: <AlpabatIcon />,
               },
               {
-                label: "Subscription Management",
+                label: "Manage Subscription",
                 href: "/profile/subscription",
                 icon: <SettingIcon />,
               },
@@ -52,21 +42,11 @@ export default async function ProfilePage() {
         </div>
         <div>
           <ProfileMenuList
-            title="Need Help?"
-            items={[
-              { label: "About Chatting", href: "/profile" },
-              { label: "About Chatting", href: "/profile" },
-              { label: "About Chatting", href: "/profile" },
-            ]}
-          />
-        </div>
-        <div>
-          <ProfileMenuList
             title="Legal"
             items={[
-              { label: "Privacy policy", href: "/profile" },
-              { label: "Money-back Policy", href: "/profile" },
               { label: "Terms of Use", href: "/profile" },
+              { label: "Privacy policy", href: "/profile" },
+              { label: "Help & Support", href: "/profile" },
             ]}
           />
         </div>

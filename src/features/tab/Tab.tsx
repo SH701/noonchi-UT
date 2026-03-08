@@ -9,8 +9,7 @@ import { useTabStore } from "@/store/useTabStore";
 import { SearchBar } from "../../components/common";
 import RoleplayHistoryTab from "./RoleplayHistoryTab";
 import AskHistoryTab from "./AskHistoryTab";
-import { PeopleIcon } from "@/assets/svgr";
-import { User } from "lucide-react";
+import { DefaultIcon, PeopleIcon } from "@/assets/svgr";
 
 const slideVariants = {
   hidden: { scaleX: 0 },
@@ -45,7 +44,7 @@ export default function Tab() {
           />
           <motion.div
             key="tab"
-            className="z-9999 w-70 bg-gradient-primary pt-15 fixed left-1/2 top-0 h-full origin-left -translate-x-2/3"
+            className="z-9999 w-70 bg-gradient-primary fixed left-1/2 top-0 h-full origin-left -translate-x-2/3 pt-10"
             variants={slideVariants}
             initial="hidden"
             animate="visible"
@@ -92,7 +91,7 @@ export default function Tab() {
                     className="shrink-0 rounded-full"
                   />
                 ) : (
-                  <User className="size-12 shrink-0" />
+                  <DefaultIcon className="shrink-0" />
                 )}
                 <span className="pt-3">{session?.user.name}</span>
               </button>

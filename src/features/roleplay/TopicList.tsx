@@ -3,12 +3,13 @@
 import { TopicSlider } from "@/features/roleplay";
 import { CategoryType } from "@/types/topics";
 import { useRouter } from "next/navigation";
-import { Heart, Plus } from "lucide-react";
+import { Heart, Lock, Plus } from "lucide-react";
 import Image from "next/image";
 import { useAddFavorite, useRemoveFavorite } from "@/hooks/mutations";
 import { useTopics } from "@/hooks/queries";
 import TopicListSkeleton from "./TopicListSkeleton";
 import { useState } from "react";
+import { toast } from "@/components/ui/toast/toast";
 
 export default function TopicList() {
   const [category, setCategory] = useState<CategoryType>("Career");
@@ -61,19 +62,37 @@ export default function TopicList() {
             <div
               key={topic.topicId}
               className="group relative aspect-square w-full cursor-pointer overflow-hidden rounded-xl transition-shadow hover:shadow-md"
-              onClick={() =>
+              onClick={() => {
+                if (category === "Career" && topic.name === "Job Interview") {
+                  toast.warning("This content will be available soon");
+                  return;
+                }
                 router.push(
                   `/main/roleplay/create?category=${category}&topicId=${topic.topicId}`,
-                )
-              }
+                );
+              }}
             >
-              <Image
-                src={topic.imageUrl}
-                alt={topic.name}
-                fill
-                className="object-cover"
-                loading="eager"
-              />
+              {category === "Career" && topic.name === "Job Interview" ? (
+                <>
+                  <Image
+                    src={topic.imageUrl}
+                    alt={topic.name}
+                    fill
+                    className="object-cover blur-sm"
+                    loading="eager"
+                  />
+                  <Lock className="size-15 absolute inset-0 z-50 mx-auto mt-8 text-white" />
+                </>
+              ) : (
+                <Image
+                  src={topic.imageUrl}
+                  alt={topic.name}
+                  fill
+                  className="object-cover"
+                  loading="eager"
+                />
+              )}
+
               <div className="bg-gray absolute inset-x-0 bottom-0 flex h-auto flex-col justify-end gap-1 rounded-b-xl px-4 py-2 text-white backdrop-blur-sm">
                 <span className="text-xs">{topic.category}</span>
                 <h4 className="text-sm font-semibold">{topic.name}</h4>
@@ -82,6 +101,7 @@ export default function TopicList() {
                 className="absolute right-3 top-3 text-white transition-opacity"
                 onClick={(e) => {
                   e.stopPropagation();
+                  if (category === "Career" && topic.name === "Job Interview") return;
                   toggleFavorite(topic.topicId, topic.isFavorite);
                 }}
               >

@@ -11,6 +11,7 @@ import {
 import { BulbIcon, LanguageIcon, VolumeUpIcon } from "@/assets/svgr";
 import { ChevronDownIcon, ChevronUp } from "lucide-react";
 import { CLOSENESS_OPTIONS, STEP_QUESTIONS } from "@/constants";
+import ChatQuickActions from "./ChatQuickActions";
 
 interface AskChatRoomProps {
   conversationId: number;
@@ -19,7 +20,12 @@ interface AskChatRoomProps {
   situation: string;
 }
 
-export default function AskChatRoom({ conversationId, askTarget, closeness, situation }: AskChatRoomProps) {
+export default function AskChatRoom({
+  conversationId,
+  askTarget,
+  closeness,
+  situation,
+}: AskChatRoomProps) {
   const [message, setMessage] = useState("");
   const { messages, sendMessage, isAIResponding } =
     useAskMessages(conversationId);
@@ -34,7 +40,8 @@ export default function AskChatRoom({ conversationId, askTarget, closeness, situ
 
   const firstAIIndex = messages.findIndex((m) => m.type === "AI");
   const firstAI = firstAIIndex !== -1 ? messages[firstAIIndex] : undefined;
-  const followUpMessages = firstAIIndex !== -1 ? messages.slice(firstAIIndex + 1) : [];
+  const followUpMessages =
+    firstAIIndex !== -1 ? messages.slice(firstAIIndex + 1) : [];
   const handleSendMessage = async () => {
     if (!message.trim()) return;
     await sendMessage(message.trim());
@@ -176,13 +183,13 @@ export default function AskChatRoom({ conversationId, askTarget, closeness, situ
             </div>
           </div>
         ))}
-
         {isAIResponding && <ChatLoading />}
         <div ref={bottomRef} />
       </div>
 
       {/* 하단 고정 ChatInput */}
       <div className="sticky bottom-0 flex flex-col pb-5 backdrop-blur-md">
+        <ChatQuickActions />
         <ChatInput
           message={message}
           setMessage={setMessage}

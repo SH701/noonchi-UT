@@ -3,7 +3,6 @@
 import { useState } from "react";
 import clsx from "clsx";
 import { MyAI } from "@/types/etc";
-import { ChatMsg } from "@/types/messages";
 
 import {
   useMessageFeedback,
@@ -21,7 +20,13 @@ import {
 import { NotTTS } from "../modal";
 
 type MessageItemProps = {
-  messages: ChatMsg;
+  messages: {
+    content: string;
+    visualAction?: string;
+    isLoading?: boolean;
+    messageId?: number;
+    hiddenMeaning?: string;
+  };
   myAI?: MyAI | null;
   isMine?: boolean;
   isFirstAIMessage?: boolean;
