@@ -61,6 +61,13 @@
   background-attachment: fixed;
   min-height: 100vh;
 }
+.bg-gradient-secondary {
+  background: linear-gradient(
+    90deg,
+    var(--color-grad-text-1),
+    var(--color-grad-text-2)
+  );
+}
 
 .border-gradient-primary {
   border: 1px solid transparent;

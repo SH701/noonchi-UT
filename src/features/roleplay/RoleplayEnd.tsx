@@ -10,9 +10,13 @@ import {
 
 import { MessageList } from "@/components/chatroom";
 
-import { ResultTab, Point, FeedbackPart } from "@/features/result";
+import {
+  ResultTab,
+  Point,
+  FeedbackPart,
+  ResultHeader,
+} from "@/features/result";
 
-import { ChatroomHeader } from "@/features/roleplay";
 interface RoleplayEndProps {
   conversationId: number;
 }
@@ -29,10 +33,7 @@ export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
   }
   return (
     <div className="flex min-h-screen flex-col overflow-x-hidden">
-      <ChatroomHeader
-        roomId={roomId}
-        title={conversation?.conversationTopic ?? ""}
-      />
+      <ResultHeader />
       <div className="flex flex-1 justify-center overflow-y-auto">
         <div>
           <div className="max-w-125 w-full">

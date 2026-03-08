@@ -25,7 +25,7 @@ export default function Taste() {
             className="flex cursor-pointer items-center rounded-full border p-3 text-sm font-medium"
             style={{
               borderColor: interests.includes(opt) ? "#6366F1" : "#E5E7EB",
-              background: interests.includes(opt) ? "#EEF2FF" : "",
+              background: interests.includes(opt) ? "#EEF2FF" : "#FFFFFF",
             }}
           >
             {opt}

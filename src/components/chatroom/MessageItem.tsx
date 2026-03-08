@@ -21,7 +21,7 @@ import {
 import { NotTTS } from "../modal";
 
 type MessageItemProps = {
-  messages: Pick<ChatMsg, "content"> & Partial<ChatMsg>;
+  messages: ChatMsg;
   myAI?: MyAI | null;
   isMine?: boolean;
   isFirstAIMessage?: boolean;

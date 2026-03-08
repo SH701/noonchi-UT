@@ -28,7 +28,6 @@ export const apiMutations = {
         method: "POST",
         body: JSON.stringify(payload),
       });
-      console.log("signup response:", response);
       return response;
     },
 

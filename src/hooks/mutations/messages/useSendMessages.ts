@@ -1,27 +1,27 @@
 import { useMemo, useState } from "react";
-import { apiMutations } from "@/api";
 import { ChatMsg } from "@/types/messages";
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useChatQuery } from "@/hooks/queries/messages/useChatQuery";
+import { apiMutations } from "@/api";
 
-export function useAskMessages(conversationId?: number) {
+interface SendParams {
+  conversationId: number;
+  content?: string;
+  audioUrl?: string;
+}
+
+export function useSendMessages(
+  conversationId: number,
+  mutationFn: (params: SendParams) => Promise<ChatMsg>,
+) {
   const [optimisticMessages, setOptimisticMessages] = useState<ChatMsg[]>([]);
   const queryClient = useQueryClient();
 
   const { data: serverMessages = [] } = useChatQuery(conversationId);
 
   const { mutateAsync: sendMutation, isPending } = useMutation({
-    mutationFn: (params: {
-      conversationId: number;
-      content?: string;
-      audioUrl?: string;
-    }) =>
-      apiMutations.messages.asksend(
-        params.conversationId,
-        params.content,
-        params.audioUrl,
-      ),
+    mutationFn,
   });
 
   const messages = useMemo(() => {
@@ -100,4 +100,23 @@ export function useAskMessages(conversationId?: number) {
     isAIResponding,
     isSending: isPending,
   };
+}
+
+export function useAskMessages(conversationId: number) {
+  return useSendMessages(conversationId, (params) =>
+    apiMutations.messages.asksend(
+      params.conversationId,
+      params.content,
+      params.audioUrl,
+    ),
+  );
+}
+export function useRoleplayMessages(conversationId: number) {
+  return useSendMessages(conversationId, (params) =>
+    apiMutations.messages.roleplaysend(
+      params.conversationId,
+      params.content,
+      params.audioUrl,
+    ),
+  );
 }

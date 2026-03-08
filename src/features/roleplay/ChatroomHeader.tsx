@@ -63,12 +63,13 @@ export default function ChatroomHeader({ roomId, title }: ChatroomHeaderProps) {
     }
     setOpen(false);
   };
+
   const handleTab = () => {
     openTab();
   };
   return (
     <>
-      <div className="sticky top-0 ">
+      <div className="sticky top-0">
         <Header
           leftIcon={<HamburgerIcon onClick={handleTab} />}
           center={title}
@@ -78,16 +79,32 @@ export default function ChatroomHeader({ roomId, title }: ChatroomHeaderProps) {
               {open && (
                 <div
                   ref={dropdownRef}
-                  className="p-3 rounded-xl bg-white flex flex-col gap-1 absolute right-0 top-8 z-50 w-36 text-sm"
+                  className="absolute right-0 top-8 z-50 flex w-36 flex-col gap-1 rounded-xl bg-white p-3 text-sm"
                 >
-                  <button className="p-2 flex gap-2" onClick={handleNewChat}>
+                  <button
+                    className="flex gap-2 rounded-lg bg-black p-2 text-white"
+                    onClick={handleNewChat}
+                  >
                     <Sparkles className="size-5" />
                     New Chat
                   </button>
-                  <button className="p-2 flex gap-2" onClick={handleEnd}>
-                    <MessageCircle className="size-5" />
-                    Get Reports
-                  </button>
+                  {detailData?.canGetReport ? (
+                    <button
+                      className="bg-gradient-secondary flex gap-2 rounded-lg p-2 text-white"
+                      onClick={handleEnd}
+                    >
+                      <MessageCircle className="size-5" />
+                      Get Reports
+                    </button>
+                  ) : (
+                    <button
+                      className="flex gap-2 p-2 text-gray-400"
+                      onClick={handleEnd}
+                    >
+                      <MessageCircle className="size-5" />
+                      Get Reports
+                    </button>
+                  )}
                 </div>
               )}
             </div>

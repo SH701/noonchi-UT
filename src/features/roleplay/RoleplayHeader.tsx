@@ -17,8 +17,12 @@ export default function RoleplayHeader() {
   const router = useRouter();
   const isAsk = pathname.startsWith("/main/ask");
 
-  const [activeStyles, setActiveStyles] = useState<{ width: number; x: number } | null>(null);
+  const [activeStyles, setActiveStyles] = useState<{
+    width: number;
+    x: number;
+  } | null>(null);
 
+  // 가운데 주소 기준으로 배경 채우기
   useEffect(() => {
     const activeRef = isAsk ? askRef : roleRef;
     const container = activeRef.current?.closest("div");
