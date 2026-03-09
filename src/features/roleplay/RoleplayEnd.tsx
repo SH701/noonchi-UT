@@ -16,6 +16,7 @@ import {
   FeedbackPart,
   ResultHeader,
 } from "@/features/result";
+import FeedbackLoading from "./FeedbackLoading";
 
 interface RoleplayEndProps {
   conversationId: number;
@@ -27,9 +28,14 @@ export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
   const { data: conversation } = useConversationDetail(roomId);
   const myAI = conversation?.aiPersona ?? null;
   const { data: messages = [] } = useChatQuery(roomId);
-  const { data: feedback } = useConversationFeedback(roomId);
+  const { data: feedback, isPending: isFeedbackLoading } =
+    useConversationFeedback(roomId);
+
   if (!feedback) {
     return <p className="p-6">No feedback available</p>;
+  }
+  if (isFeedbackLoading) {
+    return <FeedbackLoading />;
   }
   return (
     <div className="flex min-h-screen flex-col overflow-x-hidden">

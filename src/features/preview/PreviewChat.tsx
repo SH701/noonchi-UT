@@ -75,11 +75,13 @@ export default function PreviewChat() {
           <ChatLoading />
         ) : (
           <>
-            <ChatNotice
-              description={data?.scenario.description}
-              showNotice={showNotice}
-              toggleNotice={toggleNotice}
-            />
+            <div className="top-23 sticky">
+              <ChatNotice
+                description={data?.scenario.description}
+                showNotice={showNotice}
+                toggleNotice={toggleNotice}
+              />
+            </div>
             <PreviewMessageList
               data={data}
               userMessages={userMessages}

@@ -40,6 +40,7 @@ interface MessageItemProps {
   isRevealed?: boolean;
   onToggleReveal?: () => void;
   translatedContent?: string;
+  previewFeedback?: string;
 }
 
 export default function MessageItem({
@@ -54,6 +55,7 @@ export default function MessageItem({
   isRevealed,
   onToggleReveal,
   translatedContent,
+  previewFeedback,
 }: MessageItemProps) {
   const [translateOpen, setTranslateOpen] = useState(false);
   const [meanOpen, setMeanOpen] = useState(false);
@@ -79,8 +81,8 @@ export default function MessageItem({
   };
 
   const handleTranslateClick = (messageId: number | undefined) => {
-    if (!messageId) return;
-    if (!translateOpen) {
+    if (!messageId && !translatedContent) return;
+    if (!translateOpen && messageId) {
       translate(messageId);
     }
     setTranslateOpen((prev) => !prev);
@@ -138,7 +140,7 @@ export default function MessageItem({
               <div className="border-t border-gray-200 pt-2.5" />
               {feedbackOpen ? (
                 <div>
-                  <span>{feedbackData?.nuanceFeedback}</span>
+                  <span>{previewFeedback ?? feedbackData?.nuanceFeedback}</span>
                   <button
                     className="mt-2.5 flex gap-1 rounded-full border border-blue-500 px-2 py-1"
                     onClick={handleFeedback}

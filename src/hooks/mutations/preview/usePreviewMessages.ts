@@ -9,9 +9,14 @@ export interface PreviewAiMessage {
   translatedContent: string;
 }
 
+export interface PreviewUserMessage {
+  content: string;
+  feedback: string;
+}
+
 export function usePreviewMessages() {
   const { data, mutate: startChat, isPending: isStarting } = usePreviewStart();
-  const [userMessages, setUserMessages] = useState<string[]>([]);
+  const [userMessages, setUserMessages] = useState<PreviewUserMessage[]>([]);
   const [aiResponses, setAiResponses] = useState<PreviewAiMessage[]>([]);
   const [firstHiddenMessage, setFirstHiddenMessage] = useState(false);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
@@ -26,7 +31,9 @@ export function usePreviewMessages() {
   const handleChunk = useCallback((chunk: string) => {
     setAiResponses((prev) => {
       const next = [...prev];
-      if (next.length > 0) next[next.length - 1].content = chunk;
+      if (next.length > 0) {
+        next[next.length - 1] = { ...next[next.length - 1], content: chunk };
+      }
       return next;
     });
   }, []);
@@ -58,7 +65,7 @@ export function usePreviewMessages() {
 
   const sendMessage = (message: string, audioUrl?: string) => {
     if (!data?.session_id || !message.trim() || isSending) return;
-    setUserMessages((prev) => [...prev, message]);
+    setUserMessages((prev) => [...prev, { content: message, feedback: "" }]);
     setAiResponses((prev) => [
       ...prev,
       {
@@ -78,8 +85,19 @@ export function usePreviewMessages() {
         onSuccess: (res) => {
           setAiResponses((prev) => {
             const next = [...prev];
-            next[next.length - 1].hiddenMeaning = res.ai_hidden_meaning;
-            next[next.length - 1].translatedContent = res.ai_message_en;
+            next[next.length - 1] = {
+              ...next[next.length - 1],
+              hiddenMeaning: res.ai_hidden_meaning,
+              translatedContent: res.ai_message_en,
+            };
+            return next;
+          });
+          setUserMessages((prev) => {
+            const next = [...prev];
+            next[next.length - 1] = {
+              ...next[next.length - 1],
+              feedback: res.feedback.feedback_text,
+            };
             return next;
           });
           RehintData();

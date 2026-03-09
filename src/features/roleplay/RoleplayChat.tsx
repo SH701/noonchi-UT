@@ -8,7 +8,7 @@ import { useRoleplayMessages } from "@/hooks/mutations";
 import { useVoiceChat } from "@/hooks/custom/useVoiceChat";
 
 import { useChatUI } from "@/hooks/custom/useChatUI";
-import RoleplayHeader from "./RoleplayHeader";
+import RoleplayHeader from "./ChatroomHeader";
 
 interface RoleplayChatRoomProps {
   conversationId: number;
