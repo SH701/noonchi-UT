@@ -20,6 +20,7 @@ export default function MessageList({
     <>
       {messages.map((m) => {
         const isMine = m.type === "USER";
+        const isAI = m.type === "AI";
         const isPending = m.messageId < 0;
         return (
           <MessageItem
@@ -27,6 +28,7 @@ export default function MessageList({
             messages={m}
             myAI={myAI}
             isMine={isMine}
+            isAI={isAI}
             isPending={isPending}
             showsituation={showsituation}
           />

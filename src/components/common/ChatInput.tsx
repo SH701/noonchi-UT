@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import { renderWithAction } from "@/lib/renderWithAction";
 import { MicIcon, SendIcon } from "@/assets/svgr";
 import { Asterisk, Lightbulb } from "lucide-react";
 import { MicState } from "@/hooks/custom/useVoiceChat";
@@ -60,29 +61,39 @@ export default function ChatInput({
   return (
     <div className="w-full">
       <div className="flex w-full min-w-0 flex-col items-center rounded-[20px] bg-white px-4 py-3 shadow-[0_-3px_8px_0_rgba(80,41,138,0.08)]">
-        <textarea
-          ref={textRef}
-          rows={1}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          placeholder={placeholder}
-          className="max-h-30 mb-3 w-full min-w-0 grow resize-none overflow-y-auto border-none text-gray-800 placeholder-gray-400 outline-none disabled:bg-gray-50"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={(e) => {
-            if (
-              e.key === "Enter" &&
-              !e.shiftKey &&
-              !e.nativeEvent.isComposing &&
-              !disabled &&
-              message.trim()
-            ) {
-              e.preventDefault();
-              onSend();
-            }
-          }}
-          disabled={disabled}
-        />
+        <div className="relative mb-3 w-full">
+          <div
+            aria-hidden
+            className="max-h-30 wrap-break-word pointer-events-none w-full min-w-0 overflow-y-auto whitespace-pre-wrap text-sm text-gray-800"
+          >
+            {renderWithAction(message)}
+            {/* 높이 유지용 */}
+            <span className="invisible">&nbsp;</span>
+          </div>
+          <textarea
+            ref={textRef}
+            rows={1}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            placeholder={placeholder}
+            className="max-h-30 absolute inset-0 w-full min-w-0 resize-none overflow-y-auto border-none bg-transparent text-sm text-transparent placeholder-gray-400 caret-gray-800 outline-none disabled:bg-transparent"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={(e) => {
+              if (
+                e.key === "Enter" &&
+                !e.shiftKey &&
+                !e.nativeEvent.isComposing &&
+                !disabled &&
+                message.trim()
+              ) {
+                e.preventDefault();
+                onSend();
+              }
+            }}
+            disabled={disabled}
+          />
+        </div>
         <div className="flex w-full items-end justify-between gap-1">
           <div className="flex gap-1">
             {showSituation && (

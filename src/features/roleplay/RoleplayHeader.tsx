@@ -22,14 +22,16 @@ export default function RoleplayHeader({ roomId }: ChatroomHeaderProps) {
   const [showExitModal, setShowExitModal] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleBtnRef = useRef<HTMLDivElement>(null);
-  const { data: detailData } = useConversationDetail(roomId);
-  const { mutate: conversationEnd } = useConversationEnd(roomId!);
+
   const { openTab } = useTabStore();
   const askRef = useRef<HTMLSpanElement>(null);
   const roleRef = useRef<HTMLSpanElement>(null);
   const pathname = usePathname();
   const isAsk = pathname.startsWith("/main/ask");
   const isChat = pathname.startsWith("/main/roleplay/chatroom");
+
+  const { data: detailData } = useConversationDetail(roomId);
+  const { mutate: conversationEnd } = useConversationEnd(roomId!);
   const [activeStyles, setActiveStyles] = useState<{
     width: number;
     x: number;
@@ -56,6 +58,7 @@ export default function RoleplayHeader({ roomId }: ChatroomHeaderProps) {
       document.removeEventListener("keydown", handleEsc);
     };
   }, [open]);
+
   // 가운데 주소 기준으로 배경 채우기
   useEffect(() => {
     const activeRef = isAsk ? askRef : roleRef;
@@ -68,6 +71,7 @@ export default function RoleplayHeader({ roomId }: ChatroomHeaderProps) {
       x: activeRect.left - containerRect.left,
     });
   }, [isAsk]);
+
   const handleToggle = () => {
     router.push(isAsk ? "/main" : "/main/ask");
   };
@@ -127,6 +131,9 @@ export default function RoleplayHeader({ roomId }: ChatroomHeaderProps) {
         rightIcon={
           isChat ? (
             <div ref={toggleBtnRef} className="relative">
+              {detailData?.canGetReport && (
+                <div className="z-9999 absolute left-4 size-2 rounded-full bg-red-500" />
+              )}
               <SqurepenIcon onClick={() => setOpen((prev) => !prev)} />
               {open && (
                 <div

@@ -11,6 +11,10 @@ export const useCreateContext = (scenarioId: number) => {
 
 export function useMessageTTS() {
   return useMutation({
-    mutationFn: (text: string) => apiMutations.language.tts(text),
+    mutationFn: (text: string) =>
+      apiMutations.language.tts(text).then((url) => url.replace(/\s+/g, "")),
+    onSuccess: (url) => {
+      new Audio(url).play();
+    },
   });
 }

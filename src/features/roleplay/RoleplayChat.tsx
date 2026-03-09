@@ -8,6 +8,7 @@ import { useRoleplayMessages } from "@/hooks/mutations";
 import { useVoiceChat } from "@/hooks/custom/useVoiceChat";
 
 import { useChatUI } from "@/hooks/custom/useChatUI";
+import RoleplayHeader from "./RoleplayHeader";
 
 interface RoleplayChatRoomProps {
   conversationId: number;
@@ -51,7 +52,7 @@ export default function RoleplayChat({
   }
   return (
     <>
-
+      <RoleplayHeader roomId={conversationId} />
       <div className="sticky top-0 flex min-h-screen w-full flex-col">
         <div className="top-23 sticky z-10">
           <ChatNotice
