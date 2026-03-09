@@ -9,27 +9,44 @@ import { Ban, Check, Info } from "lucide-react";
 type ToastType = "success" | "error" | "warning";
 
 const ICON_MAP: Record<ToastType, ReactNode> = {
-  success: <Check className="size-8" />,
-  error: <Ban className="size-8" />,
+  success: <Check className="size-8 text-emerald-500" />,
+  error: <Ban className="size-8 text-red-500" />,
   warning: <Info className="size-8" />,
 };
 const STYLE_MAP: Record<ToastType, string> = {
-  success: "bg-emerald-500",
-  error: "bg-red-500",
+  success: "border border-emerald-300",
+  error: "border border-red-300",
   warning: "bg-white",
 };
-const renderToast = (message: string, type: ToastType, duration = 2000) => {
+
+const GRADIENT_MAP: Partial<Record<ToastType, string>> = {
+  success: "linear-gradient(90deg, #FFF 0%, #BBF7D0 100%)",
+  error: "linear-gradient(90deg, #FFF 0%, #FFB4B4 100%)",
+};
+
+const renderToast = (
+  message: string,
+  type: ToastType,
+  sub?: string,
+  duration = 2000,
+) => {
   sonnerToast.custom(
     (id) => (
       <div
         onClick={() => sonnerToast.dismiss(id)}
         className={cn(
-          `${type === "warning" ? "text-black" : "text-white"} flex items-center gap-2 rounded-xl bg-black/60 px-4 py-3 font-sans text-sm leading-5`,
+          `flex items-center gap-3 rounded-xl border px-4 py-3 font-sans text-sm leading-5 text-black`,
           STYLE_MAP[type],
         )}
+        style={
+          GRADIENT_MAP[type] ? { background: GRADIENT_MAP[type] } : undefined
+        }
       >
         {ICON_MAP[type]}
-        <span className="truncate">{message}</span>
+        <div className="gap-2s flex flex-col">
+          <span className="truncate">{message}</span>
+          <span className="text-sm text-gray-600">{sub}</span>
+        </div>
       </div>
     ),
     { duration },
@@ -37,12 +54,12 @@ const renderToast = (message: string, type: ToastType, duration = 2000) => {
 };
 
 export const toast = {
-  success: (message: string, duration?: number) =>
-    renderToast(message, "success", duration),
-  warning: (message: string, duration?: number) =>
-    renderToast(message, "warning", duration),
-  error: (message: string, duration?: number) =>
-    renderToast(message, "error", duration),
+  success: (message: string, sub?: string, duration?: number) =>
+    renderToast(message, "success", sub, duration),
+  warning: (message: string, sub?: string, duration?: number) =>
+    renderToast(message, "warning", sub, duration),
+  error: (message: string, sub?: string, duration?: number) =>
+    renderToast(message, "error", sub, duration),
 
   favorite: (duration = 1000) => {
     const el = document.createElement("div");

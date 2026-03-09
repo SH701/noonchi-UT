@@ -10,6 +10,9 @@ export const useAddFavorite = () => {
       queryClient.invalidateQueries({ queryKey: ["topics"] });
       toast.favorite();
     },
+    onError: () => {
+      toast.error("Failed to save to Liked !", "Please try again");
+    },
   });
 };
 export const useRemoveFavorite = () => {
