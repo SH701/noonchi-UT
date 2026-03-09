@@ -1,6 +1,7 @@
 import { apiMutations } from "@/api/mutations";
 import { AskReq, InterviewFormData, RoleplayReq } from "@/types/conversations";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 
 export const useAsk = () => {
   return useMutation({
@@ -10,6 +11,34 @@ export const useAsk = () => {
   });
 };
 
+export const useAskStream = () => {
+  const [approachTip, setApproachTip] = useState("");
+  const [aiMessage, setAiMessage] = useState("");
+  const [culturalInsight, setCulturalInsight] = useState("");
+  const [isPending, setIsPending] = useState(false);
+
+  const mutate = async (data: AskReq) => {
+    setIsPending(true);
+    setApproachTip("");
+    setAiMessage("");
+    setCulturalInsight("");
+    try {
+      await apiMutations.conversations.createAskStream(
+        data,
+        (type, content) => {
+          if (type === "approach_tip") setApproachTip((prev) => prev + content);
+          else if (type === "chunk") setAiMessage((prev) => prev + content);
+          else if (type === "cultural_insight")
+            setCulturalInsight((prev) => prev + content);
+        },
+      );
+    } finally {
+      setIsPending(false);
+    }
+  };
+
+  return { mutate, isPending, approachTip, aiMessage, culturalInsight };
+};
 export const useConversationEnd = (conversationId: number) => {
   return useMutation({
     mutationFn: () =>

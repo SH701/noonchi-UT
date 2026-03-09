@@ -26,7 +26,7 @@ export default function RoleplayForm({
 }: RoleplayProps) {
   const [details, setDetails] = useState<string | undefined>(undefined);
   const [selectedTone, setSelectedTone] = useState("casual");
-  const { mutate: createContext } = useCreateContext(topicId);
+ 
   const [pendingMe, setPendingMe] = useState(false);
   const [pendingAI, setPendingAI] = useState(false);
   const [pendingDetail, setPendingDetail] = useState(false);
@@ -36,7 +36,12 @@ export default function RoleplayForm({
   const [displayAI, setDisplayAI] = useState<string | undefined>(
     AiRole || undefined,
   );
-
+  const { mutate: createContext } = useCreateContext(
+    topicId,
+    displayMe,
+    displayAI,
+    details,
+  );
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit({

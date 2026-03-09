@@ -4,7 +4,7 @@ import { MessageList, HintMessage, ChatNotice } from "@/components/chatroom";
 
 import { useConversationDetail, useRoleplayHint } from "@/hooks/queries";
 import { ChatInput } from "@/components/common";
-import { useRoleplayMessages } from "@/hooks/mutations";
+import { useRoleMessageStream, useRoleplayMessages } from "@/hooks/mutations";
 import { useVoiceChat } from "@/hooks/custom/useVoiceChat";
 
 import { useChatUI } from "@/hooks/custom/useChatUI";
@@ -20,12 +20,14 @@ export default function RoleplayChat({
   const [message, setMessage] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
   const { data: conversation } = useConversationDetail(conversationId);
-  const { messages, sendMessage } = useRoleplayMessages(conversationId);
+  const { messages } = useRoleplayMessages(conversationId);
+  const { streamMessages, sendStreamMessage } =
+    useRoleMessageStream(conversationId);
   const { data: hintData, refetch: refetchHint } =
     useRoleplayHint(conversationId);
   const { micState, sttText, handleMicClick, handleSendAudio } = useVoiceChat(
     conversationId,
-    sendMessage,
+    sendStreamMessage,
   );
   const {
     showHintPanel,
@@ -38,14 +40,14 @@ export default function RoleplayChat({
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  }, [streamMessages]);
 
   const myAI = conversation?.aiPersona ?? null;
 
   const handleSendText = async () => {
     refetchHint();
     setMessage("");
-    await sendMessage(message);
+    await sendStreamMessage(message);
   };
   if (!conversation) {
     return;
@@ -63,7 +65,7 @@ export default function RoleplayChat({
         </div>
         <div className="flex flex-1 flex-col">
           <MessageList
-            messages={messages}
+            messages={[...messages, ...streamMessages]}
             myAI={myAI}
             showsituation={showSituation}
           />

@@ -20,6 +20,7 @@ export interface ChatMsg {
   situationDescription: string;
   askApproachTip?: string;
   askCulturalInsight?: string;
+  streamFeedback?: string;
 }
 
 export interface Feedback {
@@ -31,6 +32,24 @@ export interface Feedback {
   appropriateExpression: string;
   contentsFeedback: string;
   nuanceFeedback: string;
+}
+
+export interface RoleplayStreamDoneData {
+  conversation_id: number;
+  ai_message: string;
+  ai_message_en: string;
+  ai_hidden_meaning: string;
+  visual_action: string;
+  user_visual_action: string;
+  situation_description: string | null;
+  feedback: {
+    feedback_text: string;
+    is_appropriate: boolean;
+    suggested_alternatives: string[];
+  };
+  turn_count: number;
+  can_get_report: boolean;
+  is_conversation_ending: boolean;
 }
 
 export interface HintMessages {

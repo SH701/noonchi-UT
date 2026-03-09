@@ -31,6 +31,8 @@ export default function MessageList({
             isAI={isAI}
             isPending={isPending}
             showsituation={showsituation}
+            translatedContent={m.translatedContent ?? undefined}
+            previewFeedback={m.streamFeedback}
           />
         );
       })}
