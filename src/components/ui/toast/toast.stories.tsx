@@ -16,11 +16,13 @@ export const Playground: Story = {
     <>
       <Toaster />
       <div className="flex gap-3">
-        <button onClick={() => toast.success("성공 토스트입니다")}>
+        <button onClick={() => toast.success("성공 토스트입니다", "설명")}>
           Success
         </button>
 
-        <button onClick={() => toast.error("에러 토스트입니다")}>Error</button>
+        <button onClick={() => toast.error("에러 토스트입니다", "설명")}>
+          Error
+        </button>
       </div>
     </>
   ),
