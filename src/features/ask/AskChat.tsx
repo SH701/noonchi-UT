@@ -3,10 +3,9 @@
 import { useState } from "react";
 import { ChatInput } from "../../components/common";
 
-import { useAsk } from "@/hooks/mutations";
+import { useAskStream } from "@/hooks/mutations";
 import { Spinner } from "../../components/ui/spinner/spinner";
 import { CLOSENESS_OPTIONS, Step, STEP_QUESTIONS, STEPS } from "@/constants";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button/button";
 
 export default function AskChat() {
@@ -15,8 +14,7 @@ export default function AskChat() {
   const [askTarget, setAskTarget] = useState("");
   const [closeness, setCloseness] = useState("");
   const [situation, setSituation] = useState("");
-  const { mutate: createAsk, isPending } = useAsk();
-  const router = useRouter();
+  const { mutate: createAsk, isPending, approachTip, aiMessage, culturalInsight } = useAskStream();
 
   const currentStepIdx = STEPS.indexOf(step);
 
@@ -36,23 +34,11 @@ export default function AskChat() {
   const handleSendSituation = () => {
     if (!message.trim() || isPending) return;
     setSituation(message.trim());
-    createAsk(
-      {
-        askTarget,
-        closeness,
-        situation: message.trim(),
-      },
-      {
-        onSuccess: (data) => {
-          const query = new URLSearchParams({
-            askTarget,
-            closeness,
-            situation: message.trim(),
-          }).toString();
-          router.push(`/main/ask/${data.conversationId}?${query}`);
-        },
-      },
-    );
+    createAsk({
+      askTarget,
+      closeness,
+      situation: message.trim(),
+    });
     setMessage("");
   };
 
@@ -128,12 +114,25 @@ export default function AskChat() {
         )}
 
         {/* 로딩 */}
-        {isPending && (
-          <div className="flex flex-col gap-1">
-            <div className="flex flex-col items-center justify-center gap-2">
-              <Spinner size="64px" />
-              <span>Processing AI...</span>
+        {isPending && !aiMessage && (
+          <div className="flex flex-col items-center justify-center gap-2">
+            <Spinner size="64px" />
+            <span>Processing AI...</span>
+          </div>
+        )}
+
+        {/* 스트리밍 결과 */}
+        {aiMessage && (
+          <div className="mt-5 flex flex-col gap-3">
+            {approachTip && (
+              <p className="text-sm text-gray-600">{approachTip}</p>
+            )}
+            <div className="rounded-b-xl rounded-tr-xl border border-gray-300 bg-white p-4">
+              <p className="text-sm">{aiMessage}</p>
             </div>
+            {culturalInsight && (
+              <p className="text-sm text-gray-500">{culturalInsight}</p>
+            )}
           </div>
         )}
       </div>

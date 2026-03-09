@@ -111,6 +111,65 @@ export function useAskMessages(conversationId: number) {
     ),
   );
 }
+export function useAskMessageStream(conversationId: number) {
+  const [messages, setMessages] = useState<ChatMsg[]>([]);
+  const [isAIResponding, setIsAIResponding] = useState(false);
+
+  const sendMessage = async (content: string) => {
+    if (!conversationId || !content) return;
+
+    const userMsg: ChatMsg = {
+      messageId: -Date.now(),
+      conversationId,
+      type: "USER",
+      content,
+      audioUrl: null,
+      createdAt: new Date().toISOString(),
+      hiddenMeaning: "",
+      visualAction: "",
+      situationDescription: "",
+    };
+
+    setMessages((prev) => [...prev, userMsg]);
+    setIsAIResponding(true);
+
+    const tempAiId = -Date.now() - 1;
+    setMessages((prev) => [
+      ...prev,
+      {
+        messageId: tempAiId,
+        conversationId,
+        type: "AI",
+        content: "",
+        audioUrl: null,
+        createdAt: new Date().toISOString(),
+        hiddenMeaning: "",
+        visualAction: "",
+        situationDescription: "",
+      },
+    ]);
+
+    try {
+      await apiMutations.messages.asksendstream(
+        conversationId,
+        content,
+        (chunk) => {
+          setMessages((prev) =>
+            prev.map((m) =>
+              m.messageId === tempAiId
+                ? { ...m, content: m.content + chunk }
+                : m,
+            ),
+          );
+        },
+      );
+    } finally {
+      setIsAIResponding(false);
+    }
+  };
+
+  return { messages, sendMessage, isAIResponding };
+}
 export function useRoleplayMessages(conversationId: number) {
   return useSendMessages(conversationId, (params) =>
     apiMutations.messages.roleplaysend(
@@ -119,4 +178,99 @@ export function useRoleplayMessages(conversationId: number) {
       params.audioUrl,
     ),
   );
+}
+export function useRoleMessageStream(conversationId: number) {
+  const [streamMessages, setStreamMessages] = useState<ChatMsg[]>([]);
+  const [isAIResponding, setIsAIResponding] = useState(false);
+
+  const sendStreamMessage = async (content?: string, audioUrl?: string) => {
+    if (!conversationId || (!content && !audioUrl)) return;
+
+    const tempUserId = -Date.now();
+    const userMsg: ChatMsg = {
+      messageId: tempUserId,
+      conversationId,
+      type: "USER",
+      content: content ?? "[Voice Message]",
+      audioUrl: audioUrl ?? null,
+      createdAt: new Date().toISOString(),
+      hiddenMeaning: "",
+      visualAction: "",
+      situationDescription: "",
+    };
+
+    setStreamMessages((prev) => [...prev, userMsg]);
+    setIsAIResponding(true);
+
+    const tempAiId = -Date.now() - 1;
+    setStreamMessages((prev) => [
+      ...prev,
+      {
+        messageId: tempAiId,
+        conversationId,
+        type: "AI",
+        content: "",
+        audioUrl: null,
+        createdAt: new Date().toISOString(),
+        hiddenMeaning: "",
+        visualAction: "",
+        situationDescription: "",
+      },
+    ]);
+
+    try {
+      const doneData = await apiMutations.messages.roleplaysendStream(
+        conversationId,
+        content ?? "",
+        (chunk, type) => {
+          if (type === "situation") {
+            setStreamMessages((prev) => [
+              ...prev,
+              {
+                messageId: -Date.now() - 2,
+                conversationId,
+                type: "SYSTEM",
+                content: chunk,
+                audioUrl: null,
+                createdAt: new Date().toISOString(),
+                hiddenMeaning: "",
+                visualAction: "",
+                situationDescription: "",
+              },
+            ]);
+          } else {
+            setStreamMessages((prev) =>
+              prev.map((m) =>
+                m.messageId === tempAiId
+                  ? { ...m, content: m.content + chunk }
+                  : m,
+              ),
+            );
+          }
+        },
+      );
+      if (doneData) {
+        setStreamMessages((prev) =>
+          prev.map((m) => {
+            if (m.messageId === tempAiId) {
+              return {
+                ...m,
+                hiddenMeaning: doneData.ai_hidden_meaning,
+                translatedContent: doneData.ai_message_en,
+                visualAction: doneData.visual_action,
+              };
+            }
+            if (m.messageId === tempUserId) {
+              return { ...m, streamFeedback: doneData.feedback.feedback_text };
+            }
+            return m;
+          }),
+        );
+      }
+    } finally {
+      setIsAIResponding(false);
+    }
+  };
+
+  return { streamMessages, sendStreamMessage, isAIResponding };
 }

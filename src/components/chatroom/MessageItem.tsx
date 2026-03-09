@@ -48,7 +48,7 @@ export default function MessageItem({
   myAI,
   isMine,
   isAI,
-  showsituation,
+  isPending,
   aiName,
   userName,
   hiddenMeaning,
@@ -70,7 +70,7 @@ export default function MessageItem({
   } = useMessageTranslate();
   const { mutate: tts, isPending: loadingTTS } = useMessageTTS();
   const { data: feedbackData } = useMessageFeedback(
-    feedbackOpen ? messages.messageId : undefined,
+    feedbackOpen && !isPending ? messages.messageId : undefined,
   );
 
   const handleFeedback = () => {
@@ -118,7 +118,7 @@ export default function MessageItem({
         ))}
 
       {/* 메시지 박스 */}
-      <div className="w-61">
+      <div className={clsx(!isMine && !isAI ? "w-full" : "w-61")}>
         {/* 유저 말풍선 박스 */}
         {isMine && (
           <div className="flex flex-col gap-1">
@@ -129,12 +129,15 @@ export default function MessageItem({
               <p className="whitespace-pre-wrap pb-2 pt-1 text-sm">
                 {renderWithAction(messages.content)}
               </p>
-              {showsituation && messages.visualAction && (
-                <div className="flex min-w-0 text-sm text-gray-500">
-                  <div className="pb-1">
+              {messages.visualAction && (
+                <div className="flex min-w-0 pb-2 text-sm text-gray-500">
+                  <div className="pt-[2.5px]">
                     <Asterisk className="size-3.5 shrink-0" />{" "}
                   </div>
                   {messages.visualAction}
+                  <div className="pt-[2.5px]">
+                    <Asterisk className="size-3.5 shrink-0" />{" "}
+                  </div>
                 </div>
               )}
               <div className="border-t border-gray-200 pt-2.5" />
@@ -172,14 +175,6 @@ export default function MessageItem({
               <p className="my-1 whitespace-pre-wrap text-sm leading-[130%]">
                 {messages.content}
               </p>
-              {showsituation && messages.visualAction && (
-                <div className="flex min-w-0 text-sm text-gray-500">
-                  <div className="pb-1">
-                    <Asterisk className="size-3.5 shrink-0" />{" "}
-                  </div>
-                  {messages.visualAction}
-                </div>
-              )}
               <div className="mt-2 flex justify-between border-t border-gray-200 pt-2">
                 <div className="flex gap-2">
                   <button
@@ -219,9 +214,8 @@ export default function MessageItem({
         )}
         {/* System 컨텐츠 */}
         {!isMine && !isAI && (
-          <div className="flex min-w-0 gap-1 pr-2 text-blue-500">
+          <div className="flex w-full gap-1 pr-2 text-sm text-blue-500">
             <Asterisk className="shrink-0" />
-
             <p>{messages.content}</p>
           </div>
         )}

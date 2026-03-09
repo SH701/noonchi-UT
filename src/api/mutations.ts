@@ -1,5 +1,6 @@
 import { apiFetch } from "./api";
 
+import { getSession } from "next-auth/react";
 import {
   InterviewFormData,
   UploadedFile,
@@ -9,7 +10,7 @@ import {
   AskRes,
   PresignedUrlRes,
 } from "@/types/conversations";
-import { ChatMsg } from "@/types/messages";
+import { ChatMsg, RoleplayStreamDoneData } from "@/types/messages";
 import { Preview, PreviewSendRes } from "@/types/preview/preview.type";
 import axios from "axios";
 import { TopicScenario } from "@/types/topics";
@@ -49,6 +50,58 @@ export const apiMutations = {
         body: JSON.stringify({ conversationId, content, audioUrl }),
       });
     },
+    roleplaysendStream: async (
+      conversationId: number,
+      content: string,
+      onChunk: (chunk: string, type: string) => void,
+    ): Promise<RoleplayStreamDoneData> => {
+      const session = await getSession();
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/messages/roleplay/stream`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(session?.accessToken && {
+              Authorization: `Bearer ${session.accessToken}`,
+            }),
+          },
+          body: JSON.stringify({ conversationId, content }),
+        },
+      );
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      let doneData: RoleplayStreamDoneData | null = null;
+      if (reader) {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+
+          const lines = buffer.split("\n");
+          buffer = lines.pop() || "";
+
+          for (const line of lines) {
+            if (!line.startsWith("data:")) continue;
+            const parsed = JSON.parse(line.slice(5).trim()) as {
+              type: string;
+              content?: string;
+              data?: RoleplayStreamDoneData;
+            };
+            if (parsed.type === "chunk" || parsed.type === "situation") {
+              onChunk(parsed.content ?? "", parsed.type);
+            } else if (parsed.type === "done") {
+              doneData = parsed.data ?? null;
+              return doneData!;
+            }
+          }
+        }
+      }
+      return doneData!;
+    },
     asksend: async (
       conversationId: number,
       content?: string,
@@ -59,7 +112,56 @@ export const apiMutations = {
         body: JSON.stringify({ conversationId, content, audioUrl }),
       });
     },
+    asksendstream: async (
+      conversationId: number,
+      content: string,
 
+      onChunk: (chunk: string) => void,
+    ): Promise<void> => {
+      const session = await getSession();
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/messages/ask/stream`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(session?.accessToken && {
+              Authorization: `Bearer ${session.accessToken}`,
+            }),
+          },
+          body: JSON.stringify({ conversationId, content }),
+        },
+      );
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      if (reader) {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+
+          const lines = buffer.split("\n");
+          buffer = lines.pop() || "";
+
+          for (const line of lines) {
+            if (!line.startsWith("data:")) continue;
+            const json: { type: string; content?: string } = JSON.parse(
+              line.slice(5).trim(),
+            );
+            if (json.type === "chunk") {
+              onChunk(json.content ?? "");
+            } else if (json.type === "done") {
+              return;
+            }
+          }
+        }
+      }
+    },
     translate: async (messageId: number): Promise<string> => {
       return apiFetch<string>(`/api/messages/${messageId}/translate`, {
         method: "PUT",
@@ -84,10 +186,65 @@ export const apiMutations = {
       });
     },
     createAsk: async (data: AskReq): Promise<AskRes> => {
-      return apiFetch<AskRes>("/api/conversations/ask/stream", {
+      return apiFetch<AskRes>("/api/conversations/ask", {
         method: "POST",
         body: JSON.stringify(data),
       });
+    },
+    createAskStream: async (
+      data: AskReq,
+      onChunk: (
+        type: "approach_tip" | "chunk" | "cultural_insight",
+        content: string,
+      ) => void,
+    ): Promise<void> => {
+      const session = await getSession();
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/conversations/ask/stream`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(session?.accessToken && {
+              Authorization: `Bearer ${session.accessToken}`,
+            }),
+          },
+          body: JSON.stringify(data),
+        },
+      );
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      if (reader) {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+
+          const lines = buffer.split("\n");
+          buffer = lines.pop() || "";
+
+          for (const line of lines) {
+            if (!line.startsWith("data:")) continue;
+            const json: { type: string; content?: string } = JSON.parse(
+              line.slice(5).trim(),
+            );
+            if (
+              json.type === "approach_tip" ||
+              json.type === "chunk" ||
+              json.type === "cultural_insight"
+            ) {
+              onChunk(json.type, json.content ?? "");
+            } else if (json.type === "done") {
+              return;
+            }
+          }
+        }
+      }
     },
 
     deleteConversation: async (conversationId: number): Promise<void> => {
