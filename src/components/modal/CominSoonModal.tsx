@@ -2,7 +2,7 @@ import { ModalProps } from "@/types/etc";
 import Modal from "./Modal";
 import { Button } from "../ui/button/button";
 
-export default function ProfileModal({ isOpen, onClose }: ModalProps) {
+export default function CominSoonModal({ isOpen, onClose }: ModalProps) {
   return (
     <Modal
       isOpen={isOpen}

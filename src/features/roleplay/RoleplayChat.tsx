@@ -20,7 +20,8 @@ export default function RoleplayChat({
   const bottomRef = useRef<HTMLDivElement>(null);
   const { data: conversation } = useConversationDetail(conversationId);
   const { messages, sendMessage } = useRoleplayMessages(conversationId);
-  const { data: hintData } = useRoleplayHint(conversationId);
+  const { data: hintData, refetch: refetchHint } =
+    useRoleplayHint(conversationId);
   const { micState, sttText, handleMicClick, handleSendAudio } = useVoiceChat(
     conversationId,
     sendMessage,
@@ -41,6 +42,7 @@ export default function RoleplayChat({
   const myAI = conversation?.aiPersona ?? null;
 
   const handleSendText = async () => {
+    refetchHint();
     setMessage("");
     await sendMessage(message);
   };
@@ -49,16 +51,15 @@ export default function RoleplayChat({
   }
   return (
     <>
-      <ChatroomHeader
-        roomId={conversationId}
-        title={conversation.conversationTopic ?? "RoleplayChat"}
-      />
-      <div className="flex min-h-screen w-full flex-col">
-        <ChatNotice
-          description={conversation.situation}
-          showNotice={showNotice}
-          toggleNotice={toggleNotice}
-        />
+      <ChatroomHeader roomId={conversationId} />
+      <div className="sticky top-0 flex min-h-screen w-full flex-col">
+        <div className="top-23 sticky z-10">
+          <ChatNotice
+            description={conversation.situation}
+            showNotice={showNotice}
+            toggleNotice={toggleNotice}
+          />
+        </div>
         <div className="flex flex-1 flex-col">
           <MessageList
             messages={messages}

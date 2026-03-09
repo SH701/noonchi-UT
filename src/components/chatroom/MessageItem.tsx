@@ -18,6 +18,7 @@ import {
   VolumeUpIcon,
 } from "@/assets/svgr";
 import { NotTTS } from "../modal";
+import { Asterisk } from "lucide-react";
 
 type MessageItemProps = {
   messages: {
@@ -127,9 +128,9 @@ export default function MessageItem({
             </p>
             <div className="rounded-b-xl rounded-tl-xl bg-white p-4">
               {showsituation && messages.visualAction && (
-                <p className="text-sm italic text-blue-600">
-                  * {messages.visualAction}
-                </p>
+                <div className="flex gap-1 text-sm text-blue-500">
+                  <Asterisk className="pb-1" /> {messages.visualAction}
+                </div>
               )}
               <p className="whitespace-pre-wrap pb-2 pt-1 text-sm">
                 {messages.content}
@@ -167,9 +168,9 @@ export default function MessageItem({
           <>
             <div>
               {showsituation && messages.visualAction && (
-                <p className="text-sm text-blue-800">
-                  * {messages.visualAction}
-                </p>
+                <div className="flex gap-1 text-sm text-blue-500">
+                  <Asterisk className="pb-1" /> {messages.visualAction}
+                </div>
               )}
             </div>
             <div className="flex flex-col gap-2 rounded-b-xl rounded-tr-xl border border-gray-300 bg-white p-4">
