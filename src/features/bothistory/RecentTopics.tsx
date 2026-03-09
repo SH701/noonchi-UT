@@ -1,8 +1,9 @@
 "use client";
 
+import RecentTopicsSkeleton from "@/components/skeleton/RecentTopicsSkeleton";
 import { useRecentTopics } from "@/hooks/queries/topic/useTopics";
 import Image from "next/image";
-import RecentTopicsSkeleton from "./RecentTopicsSkeleton";
+
 
 export default function RecentTopic() {
   const { data: recent, isPending } = useRecentTopics();

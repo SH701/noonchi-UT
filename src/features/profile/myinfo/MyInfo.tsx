@@ -1,30 +1,36 @@
 "use client";
 
+import { ChevronLeftIcon } from "@/assets/svgr";
 import { Header } from "@/components/common";
-import { XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface MyInfoProps {
   name: string;
-  age: number;
+  birth: string;
+  email: string;
 }
 
-export default function MyInfo({ name, age }: MyInfoProps) {
+export default function MyInfo({ name, birth, email }: MyInfoProps) {
   const router = useRouter();
   return (
     <div>
       <Header
+        leftIcon={<ChevronLeftIcon onClick={() => router.back()} />}
         center="My Profile"
-        rightIcon={<XIcon onClick={() => router.back()} />}
       />
-      <div className="bg-white rounded-2xl p-4 flex flex-col gap-4 text-sm  ">
+      <div className="flex flex-col gap-4 rounded-2xl bg-white p-4 text-sm">
         <div className="flex justify-between">
           <span>Name</span>
           <span>{name}</span>
         </div>
+
         <div className="flex justify-between">
-          <span>Age</span>
-          <span>{age}</span>
+          <span>Birth</span>
+          <span>{birth}</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Email</span>
+          <span>{email}</span>
         </div>
       </div>
     </div>

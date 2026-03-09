@@ -7,12 +7,14 @@ import { Heart, Lock, Plus } from "lucide-react";
 import Image from "next/image";
 import { useAddFavorite, useRemoveFavorite } from "@/hooks/mutations";
 import { useTopics } from "@/hooks/queries";
-import TopicListSkeleton from "./TopicListSkeleton";
+import { TopicListSkeleton } from "../../components/skeleton";
 import { useState } from "react";
 import { toast } from "@/components/ui/toast/toast";
+import { CominSoonModal } from "@/components/modal";
 
 export default function TopicList() {
   const [category, setCategory] = useState<CategoryType>("Career");
+  const [showModal, setShowModal] = useState(false);
   const isLove = category === "Favorites";
   const { data: topics = [], isPending } = useTopics(
     isLove ? "" : category,
@@ -49,15 +51,13 @@ export default function TopicList() {
         <TopicListSkeleton />
       ) : isLove && topics.length === 0 ? (
         <div className="flex w-full flex-col items-center justify-center gap-2 py-20">
-          <span className="text-2xl font-medium">
-            YYour Favorites are empty
-          </span>
+          <span className="text-2xl font-medium">Your Favorites are empty</span>
           <span className="text-sm text-gray-600">
             Tap the heart on roles you like
           </span>
         </div>
       ) : (
-        <div className="grid w-full grid-cols-2 items-center justify-center gap-4 pb-10">
+        <div className="grid w-full grid-cols-2 items-center justify-center gap-4">
           {topics.map((topic) => (
             <div
               key={topic.topicId}
@@ -68,7 +68,7 @@ export default function TopicList() {
                   return;
                 }
                 router.push(
-                  `/main/roleplay/create?category=${category}&topicId=${topic.topicId}`,
+                  `/main/roleplay/create?category=${isLove ? topic.category : category}&topicId=${topic.topicId}`,
                 );
               }}
             >
@@ -101,7 +101,8 @@ export default function TopicList() {
                 className="absolute right-3 top-3 text-white transition-opacity"
                 onClick={(e) => {
                   e.stopPropagation();
-                  if (category === "Career" && topic.name === "Job Interview") return;
+                  if (category === "Career" && topic.name === "Job Interview")
+                    return;
                   toggleFavorite(topic.topicId, topic.isFavorite);
                 }}
               >
@@ -111,12 +112,13 @@ export default function TopicList() {
           ))}
           <button
             className="z-99 border-gradient-primary fixed bottom-8 right-4 flex size-10 items-center justify-center rounded-full border bg-white"
-            onClick={() => router.push("/main/roleplay/create/custom")}
+            onClick={() => setShowModal(true)}
           >
             <Plus />
           </button>
         </div>
       )}
+      <CominSoonModal isOpen={showModal} onClose={() => setShowModal(false)} />
     </div>
   );
 }

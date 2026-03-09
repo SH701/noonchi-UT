@@ -9,7 +9,7 @@ export default function Main() {
             Do you want to sound more natural in Korean?
           </span>
           <span className="text-gray-500">
-            Let`s practice role-playing with me.
+            Let's practice role-playing with me.
           </span>
         </div>
         <TopicList />

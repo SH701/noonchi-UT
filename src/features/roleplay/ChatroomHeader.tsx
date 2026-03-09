@@ -2,7 +2,7 @@
 
 import { MessageCircle, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Header from "../../components/common/Header";
 import { useConversationEnd } from "@/hooks/mutations";
 import { useConversationDetail } from "@/hooks/queries";
@@ -11,20 +11,24 @@ import { HamburgerIcon, SqurepenIcon } from "@/assets/svgr";
 import { useTabStore } from "@/store/useTabStore";
 import Tab from "../tab/Tab";
 
+import { ModeToggle } from "@/components/common";
+
 interface ChatroomHeaderProps {
-  roomId: number;
-  title: string;
+  roomId?: number;
 }
 
-export default function ChatroomHeader({ roomId, title }: ChatroomHeaderProps) {
+export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [showExitModal, setShowExitModal] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleBtnRef = useRef<HTMLDivElement>(null);
-  const { data: detailData } = useConversationDetail(roomId);
-  const { mutate: conversationEnd } = useConversationEnd(roomId);
   const { openTab } = useTabStore();
+  const pathname = usePathname();
+  const isChat = pathname.startsWith("/main/roleplay/chatroom");
+
+  const { data: detailData } = useConversationDetail(roomId);
+  const { mutate: conversationEnd } = useConversationEnd(roomId!);
 
   // 다른곳 클릭시 open 없애기
   useEffect(() => {
@@ -49,6 +53,8 @@ export default function ChatroomHeader({ roomId, title }: ChatroomHeaderProps) {
     };
   }, [open]);
 
+
+  
   const handleNewChat = () => {
     router.push("/main");
     setOpen(false);
@@ -69,12 +75,17 @@ export default function ChatroomHeader({ roomId, title }: ChatroomHeaderProps) {
   };
   return (
     <>
-      <div className="sticky top-0">
-        <Header
-          leftIcon={<HamburgerIcon onClick={handleTab} />}
-          center={title}
-          rightIcon={
+      <Header
+        leftIcon={<HamburgerIcon onClick={handleTab} />}
+        center={
+         <ModeToggle/>
+        }
+        rightIcon={
+          isChat ? (
             <div ref={toggleBtnRef} className="relative">
+              {detailData?.canGetReport && (
+                <div className="z-9999 absolute left-4 size-2 rounded-full bg-red-500" />
+              )}
               <SqurepenIcon onClick={() => setOpen((prev) => !prev)} />
               {open && (
                 <div
@@ -108,9 +119,9 @@ export default function ChatroomHeader({ roomId, title }: ChatroomHeaderProps) {
                 </div>
               )}
             </div>
-          }
-        />
-      </div>
+          ) : undefined
+        }
+      />
       <Tab />
       {showExitModal && (
         <ExitChatting

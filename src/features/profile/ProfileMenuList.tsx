@@ -1,10 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { ReactNode } from "react";
 
 interface ProfileMenuItem {
   label: string;
-  href: string;
+  href?: string;
   icon?: ReactNode;
+  onClick?: () => void;
 }
 
 interface ProfileMenuListProps {
@@ -22,10 +25,20 @@ export default function ProfileMenuList({
       <div className="bg-white rounded-2xl p-4 flex flex-col gap-4 text-sm cursor-pointer">
         {items.map((item, idx) => (
           <div key={idx}>
-            <Link href={item.href} className="flex items-center gap-3">
-              {item.icon && <span>{item.icon}</span>}
-              {item.label}
-            </Link>
+            {item.onClick ? (
+              <button
+                onClick={item.onClick}
+                className="flex items-center gap-3"
+              >
+                {item.icon && <span>{item.icon}</span>}
+                {item.label}
+              </button>
+            ) : (
+              <Link href={item.href!} className="flex items-center gap-3">
+                {item.icon && <span>{item.icon}</span>}
+                {item.label}
+              </Link>
+            )}
           </div>
         ))}
       </div>

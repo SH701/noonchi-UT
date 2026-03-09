@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import { renderWithAction } from "@/lib/renderWithAction";
 import { MicIcon, SendIcon } from "@/assets/svgr";
 import { Asterisk, Lightbulb } from "lucide-react";
 import { MicState } from "@/hooks/custom/useVoiceChat";
@@ -45,36 +46,59 @@ export default function ChatInput({
     }
   }, [message]);
 
+  useEffect(() => {
+    if (isSituationActive && textRef.current) {
+      setMessage("**");
+      textRef.current.focus();
+      setTimeout(() => {
+        textRef.current?.setSelectionRange(1, 1);
+      }, 0);
+    } else {
+      setMessage("");
+    }
+  }, [isSituationActive]);
+
   return (
-    <div className="w-full ">
-      <div className="flex flex-col items-center w-full min-w-0 rounded-[20px] bg-white px-4 py-3 shadow-[0_-3px_8px_0_rgba(80,41,138,0.08)]">
-        <textarea
-          ref={textRef}
-          rows={1}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          placeholder={placeholder}
-          className="grow min-w-0 w-full text-gray-800 placeholder-gray-400 border-none outline-none disabled:bg-gray-50 max-h-30 resize-none overflow-y-auto mb-3"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={(e) => {
-            if (
-              e.key === "Enter" &&
-              !e.shiftKey &&
-              !disabled &&
-              message.trim()
-            ) {
-              e.preventDefault();
-              onSend();
-            }
-          }}
-          disabled={disabled}
-        />
-        <div className="flex gap-1 w-full items-end justify-between">
+    <div className="w-full">
+      <div className="flex w-full min-w-0 flex-col items-center rounded-[20px] bg-white px-4 py-3 shadow-[0_-3px_8px_0_rgba(80,41,138,0.08)]">
+        <div className="relative mb-3 w-full">
+          <div
+            aria-hidden
+            className="max-h-30 wrap-break-word pointer-events-none w-full min-w-0 overflow-y-auto whitespace-pre-wrap text-sm text-gray-800"
+          >
+            {renderWithAction(message)}
+            {/* 높이 유지용 */}
+            <span className="invisible">&nbsp;</span>
+          </div>
+          <textarea
+            ref={textRef}
+            rows={1}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            placeholder={placeholder}
+            className="max-h-30 absolute inset-0 w-full min-w-0 resize-none overflow-y-auto border-none bg-transparent text-sm text-transparent placeholder-gray-400 caret-gray-800 outline-none disabled:bg-transparent"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={(e) => {
+              if (
+                e.key === "Enter" &&
+                !e.shiftKey &&
+                !e.nativeEvent.isComposing &&
+                !disabled &&
+                message.trim()
+              ) {
+                e.preventDefault();
+                onSend();
+              }
+            }}
+            disabled={disabled}
+          />
+        </div>
+        <div className="flex w-full items-end justify-between gap-1">
           <div className="flex gap-1">
             {showSituation && (
               <button
-                className={`flex border rounded-full px-1 h-6.5 ${isSituationActive ? "border-indigo-500 text-indigo-500" : ""}`}
+                className={`h-6.5 flex rounded-full border px-1 ${isSituationActive ? "border-indigo-500 text-indigo-500" : ""}`}
                 onClick={onSituationClick}
               >
                 <Asterisk
@@ -86,7 +110,7 @@ export default function ChatInput({
             {showHint && (
               <button
                 onClick={onHintClick}
-                className={`flex border rounded-full px-2 h-6.5 ${isHintActive ? "border-indigo-500 text-indigo-500" : ""}`}
+                className={`h-6.5 flex rounded-full border px-2 ${isHintActive ? "border-indigo-500 text-indigo-500" : ""}`}
               >
                 <Lightbulb
                   className={`py-1 ${isHintActive ? "text-indigo-500" : ""}`}
@@ -99,14 +123,14 @@ export default function ChatInput({
             {micState === "recording" ? (
               <button
                 onClick={onMicClick}
-                className="shrink-0 rounded-full flex items-center justify-center p-1 border border-white"
+                className="flex shrink-0 items-center justify-center rounded-full border border-white p-1"
                 style={{
                   background:
                     "linear-gradient(180deg, #B499FF 0%, #98AEFF 100%)",
                   boxShadow: "0 0 12px 0 #8434FF",
                 }}
               >
-                <MicIcon className="size-6 text-white animate-pulse" />
+                <MicIcon className="size-6 animate-pulse text-white" />
               </button>
             ) : isFocused ||
               micState === "recorded" ||
@@ -115,7 +139,7 @@ export default function ChatInput({
               <button
                 type="button"
                 onClick={onSend}
-                className="flex items-center justify-center shrink-0 rounded-full transition-colors p-1"
+                className="flex shrink-0 items-center justify-center rounded-full p-1 transition-colors"
                 disabled={disabled || !message.trim()}
                 style={
                   message.trim()
@@ -133,7 +157,7 @@ export default function ChatInput({
             ) : (
               <button
                 onClick={onMicClick}
-                className="shrink-0 rounded-full border flex items-center justify-center p-1"
+                className="flex shrink-0 items-center justify-center rounded-full border p-1"
               >
                 <MicIcon className="size-6" />
               </button>

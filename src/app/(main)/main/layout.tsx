@@ -13,7 +13,7 @@ export default function MainLayout({
   return (
     <>
       {!isChat && <RoleplayHeader />}
-      <div className="flex flex-col flex-1">{children}</div>
+      <div className="flex flex-1 flex-col">{children}</div>
     </>
   );
 }

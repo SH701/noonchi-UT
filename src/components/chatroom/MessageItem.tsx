@@ -17,9 +17,9 @@ import {
   RefreshIcon,
   VolumeUpIcon,
 } from "@/assets/svgr";
-import { NotTTS } from "../modal";
-
-type MessageItemProps = {
+import { Asterisk } from "lucide-react";
+import { renderWithAction } from "@/lib/renderWithAction";
+interface MessageItemProps {
   messages: {
     content: string;
     visualAction?: string;
@@ -29,6 +29,7 @@ type MessageItemProps = {
   };
   myAI?: MyAI | null;
   isMine?: boolean;
+  isAI?: boolean;
   isFirstAIMessage?: boolean;
   isPending?: boolean;
   showsituation?: boolean;
@@ -39,12 +40,14 @@ type MessageItemProps = {
   isRevealed?: boolean;
   onToggleReveal?: () => void;
   translatedContent?: string;
-};
+  previewFeedback?: string;
+}
 
 export default function MessageItem({
   messages,
   myAI,
   isMine,
+  isAI,
   showsituation,
   aiName,
   userName,
@@ -52,9 +55,9 @@ export default function MessageItem({
   isRevealed,
   onToggleReveal,
   translatedContent,
+  previewFeedback,
 }: MessageItemProps) {
   const [translateOpen, setTranslateOpen] = useState(false);
-  const [ttsOpen, setTtsOpen] = useState(false);
   const [meanOpen, setMeanOpen] = useState(false);
   const isMeanOpen =
     onToggleReveal !== undefined ? (isRevealed ?? false) : meanOpen;
@@ -78,12 +81,8 @@ export default function MessageItem({
   };
 
   const handleTranslateClick = (messageId: number | undefined) => {
-    if (translatedContent) {
-      setTranslateOpen((prev) => !prev);
-      return;
-    }
-    if (!messageId) return;
-    if (!translateOpen) {
+    if (!messageId && !translatedContent) return;
+    if (!translateOpen && messageId) {
       translate(messageId);
     }
     setTranslateOpen((prev) => !prev);
@@ -106,16 +105,17 @@ export default function MessageItem({
         isMine ? "justify-end" : "flex flex-col justify-start",
       )}
     >
-      {!isMine && (
-        <div className="mb-1 flex flex-row gap-2">
-          <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/50">
-            <span>{(aiName ?? myAI?.aiRole ?? "A")[0].toUpperCase()}</span>
+      {isMine ||
+        (isAI && (
+          <div className="mb-1 flex flex-row gap-2">
+            <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/50">
+              <span>{(aiName ?? myAI?.aiRole ?? "A")[0].toUpperCase()}</span>
+            </div>
+            <p className="pt-1.5 text-sm font-medium">
+              {aiName ?? myAI?.name ?? "AI"}
+            </p>
           </div>
-          <p className="pt-1.5 text-sm font-medium">
-            {aiName ?? myAI?.name ?? "AI"}
-          </p>
-        </div>
-      )}
+        ))}
 
       {/* 메시지 박스 */}
       <div className="w-61">
@@ -126,18 +126,21 @@ export default function MessageItem({
               {userName ?? myAI?.userRole}
             </p>
             <div className="rounded-b-xl rounded-tl-xl bg-white p-4">
-              {showsituation && messages.visualAction && (
-                <p className="text-sm italic text-blue-600">
-                  * {messages.visualAction}
-                </p>
-              )}
               <p className="whitespace-pre-wrap pb-2 pt-1 text-sm">
-                {messages.content}
+                {renderWithAction(messages.content)}
               </p>
+              {showsituation && messages.visualAction && (
+                <div className="flex min-w-0 text-sm text-gray-500">
+                  <div className="pb-1">
+                    <Asterisk className="size-3.5 shrink-0" />{" "}
+                  </div>
+                  {messages.visualAction}
+                </div>
+              )}
               <div className="border-t border-gray-200 pt-2.5" />
               {feedbackOpen ? (
                 <div>
-                  <span>{feedbackData?.nuanceFeedback}</span>
+                  <span>{previewFeedback ?? feedbackData?.nuanceFeedback}</span>
                   <button
                     className="mt-2.5 flex gap-1 rounded-full border border-blue-500 px-2 py-1"
                     onClick={handleFeedback}
@@ -163,20 +166,20 @@ export default function MessageItem({
         )}
 
         {/* AI 말풍선 */}
-        {!isMine && (
+        {isAI && (
           <>
-            <div>
-              {showsituation && messages.visualAction && (
-                <p className="text-sm text-blue-800">
-                  * {messages.visualAction}
-                </p>
-              )}
-            </div>
             <div className="flex flex-col gap-2 rounded-b-xl rounded-tr-xl border border-gray-300 bg-white p-4">
               <p className="my-1 whitespace-pre-wrap text-sm leading-[130%]">
                 {messages.content}
               </p>
-
+              {showsituation && messages.visualAction && (
+                <div className="flex min-w-0 text-sm text-gray-500">
+                  <div className="pb-1">
+                    <Asterisk className="size-3.5 shrink-0" />{" "}
+                  </div>
+                  {messages.visualAction}
+                </div>
+              )}
               <div className="mt-2 flex justify-between border-t border-gray-200 pt-2">
                 <div className="flex gap-2">
                   <button
@@ -214,8 +217,15 @@ export default function MessageItem({
             </div>
           </>
         )}
+        {/* System 컨텐츠 */}
+        {!isMine && !isAI && (
+          <div className="flex min-w-0 gap-1 pr-2 text-blue-500">
+            <Asterisk className="shrink-0" />
+
+            <p>{messages.content}</p>
+          </div>
+        )}
       </div>
-      {ttsOpen && <NotTTS isOpen={ttsOpen} onClose={() => setTtsOpen(false)} />}
       {isMeanOpen && (
         <div className="w-61 rounded-xl border border-white bg-white/50 p-4">
           <span className="text-sm text-gray-800">

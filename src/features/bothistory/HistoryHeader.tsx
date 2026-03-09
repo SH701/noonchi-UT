@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { Header } from "../../components/common";
-import { ChevronLeftIcon, SqurepenIcon } from "@/assets/svgr";
+import { ChevronLeftIcon, HomeIcon } from "@/assets/svgr";
 
 export default function HistoryHeader() {
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function HistoryHeader() {
     <Header
       leftIcon={<ChevronLeftIcon onClick={() => router.back()} />}
       center="Role Playing"
-      rightIcon={<SqurepenIcon onClick={handleNewChat} />}
+      rightIcon={<HomeIcon onClick={handleNewChat} />}
     />
   );
 }

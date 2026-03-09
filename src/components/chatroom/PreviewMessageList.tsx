@@ -2,12 +2,15 @@
 
 import { ChatLoading } from "@/components/common";
 import { Preview } from "@/types/preview/preview.type";
-import { PreviewAiMessage } from "@/hooks/mutations/preview/usePreviewMessages";
+import {
+  PreviewAiMessage,
+  PreviewUserMessage,
+} from "@/hooks/mutations/preview/usePreviewMessages";
 import MessageItem from "./MessageItem";
 
 interface PreviewMessageListProps {
   data: Preview | undefined;
-  userMessages: string[];
+  userMessages: PreviewUserMessage[];
   aiResponses: PreviewAiMessage[];
   firstHiddenMessage: boolean;
   onToggleFirstHidden: () => void;
@@ -28,11 +31,23 @@ export default function PreviewMessageList({
 }: PreviewMessageListProps) {
   return (
     <>
+      <div className="pb-3 text-sm text-gray-600">
+        <p>
+          <span className="font-bold">AI: </span>
+          {data?.scenario.ai_role}
+        </p>
+        <p>
+          <span className="font-bold">You: </span>
+          {data?.my_name}
+        </p>
+      </div>
+      {/* 첫 AI 메세지 */}
       <MessageItem
         messages={{
           content: data?.ai_message ?? "",
           visualAction: data?.visual_action,
         }}
+        isAI={true}
         aiName={data?.ai_name}
         isPreview={true}
         hiddenMeaning={data?.ai_hidden_meaning}
@@ -41,18 +56,20 @@ export default function PreviewMessageList({
         showsituation={showSituation}
         translatedContent={data?.ai_message_en}
       />
-
+      {/* 대화 목록 */}
       {userMessages.map((userMsg, idx) => (
         <div key={idx}>
           <MessageItem
-            messages={{ content: userMsg }}
+            messages={{ content: userMsg.content }}
             isMine={true}
             userName={data?.my_name}
             isPreview={true}
+            previewFeedback={userMsg.feedback}
           />
           {isSending && idx === userMessages.length - 1 ? (
             <ChatLoading />
           ) : (
+            // AI 답변
             aiResponses[idx] && (
               <MessageItem
                 messages={{
@@ -61,6 +78,7 @@ export default function PreviewMessageList({
                 }}
                 isMine={false}
                 aiName={data?.ai_name}
+                isAI={true}
                 isPreview={true}
                 hiddenMeaning={aiResponses[idx].hiddenMeaning}
                 isRevealed={aiResponses[idx].isRevealed}

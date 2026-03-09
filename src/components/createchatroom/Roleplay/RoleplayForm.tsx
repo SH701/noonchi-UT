@@ -26,7 +26,10 @@ export default function RoleplayForm({
 }: RoleplayProps) {
   const [details, setDetails] = useState<string | undefined>(undefined);
   const [selectedTone, setSelectedTone] = useState("casual");
-  const { mutate: createContext, isPending } = useCreateContext(topicId);
+  const { mutate: createContext } = useCreateContext(topicId);
+  const [pendingMe, setPendingMe] = useState(false);
+  const [pendingAI, setPendingAI] = useState(false);
+  const [pendingDetail, setPendingDetail] = useState(false);
   const [displayMe, setDisplayMe] = useState<string | undefined>(
     myRole || undefined,
   );
@@ -45,18 +48,24 @@ export default function RoleplayForm({
   };
 
   const handleMeHint = () => {
+    setPendingMe(true);
     createContext(undefined, {
       onSuccess: (data) => setDisplayMe(data.myRole),
+      onSettled: () => setPendingMe(false),
     });
   };
   const handleAIHint = () => {
+    setPendingAI(true);
     createContext(undefined, {
       onSuccess: (data) => setDisplayAI(data.aiRole),
+      onSettled: () => setPendingAI(false),
     });
   };
   const handleDetailHint = () => {
+    setPendingDetail(true);
     createContext(undefined, {
       onSuccess: (data) => setDetails(data.detail),
+      onSettled: () => setPendingDetail(false),
     });
   };
 
@@ -68,7 +77,7 @@ export default function RoleplayForm({
         value={displayMe || ""}
         onChange={setDisplayMe}
         placeholder="Write your role"
-        disabled={isPending}
+        disabled={pendingMe}
         onClick={handleMeHint}
       />
 
@@ -78,7 +87,7 @@ export default function RoleplayForm({
         value={displayAI || ""}
         onChange={setDisplayAI}
         placeholder="Write ai role"
-        disabled={isPending}
+        disabled={pendingAI}
         onClick={handleAIHint}
       />
 
@@ -91,10 +100,10 @@ export default function RoleplayForm({
         onChange={setDetails}
         placeholder="Include details like the reason for the interaction..."
         onClick={handleDetailHint}
-        disabled={isPending}
+        disabled={pendingDetail}
       />
 
-      <div className="flex mt-auto pb-4">
+      <div className="mt-auto flex pb-4">
         <Button variant="primary" size="lg" type="submit">
           Start
         </Button>

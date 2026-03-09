@@ -1,11 +1,12 @@
 "use client";
 
 import { ChevronRightIcon, NoteIcon } from "@/assets/svgr";
+import HistorySectiontSkeleton from "@/components/skeleton/HistorySectiontSkeleton";
 import { useConversations } from "@/hooks/queries";
 import { ConversationSortBy } from "@/types/conversations";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import HistorySectiontSkeleton from "./HistorySectiontSkeleton";
+
 
 interface HistorySectionProps {
   sortBy: ConversationSortBy;

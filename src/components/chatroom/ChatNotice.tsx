@@ -13,7 +13,7 @@ export default function ChatNotice({
   toggleNotice,
 }: ChatNoticeProps) {
   return (
-    <div className="-mx-5 mb-4 flex gap-4 border-y border-white bg-white/50 px-5 py-3">
+    <div className="-mx-5 mb-4 flex gap-4 border-y border-white bg-white/50 px-5 py-3 backdrop-blur-md">
       {showNotice ? (
         <div className="flex w-full items-center justify-between gap-4">
           <NoticeIcon className="shrink-0 text-gray-500" />

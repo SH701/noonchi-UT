@@ -10,7 +10,7 @@ export const coach = [
   {
     id: 2,
     name: "Hyuna Anna Choi",
-    position: "Marketing & Strategt Advisor",
+    position: "Marketing & Strategy Advisor",
     career: ["Korean/English", "Marketing Strategy", "NPD"],
     img: "/etc/H.png",
     link: "https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ1QX11ijYvjIwJzjHrNPBatOh3h3210o4sdS03WGxVfgMe7HPjcBNuzvXCxr1bpKGMGzZsnzVTf",
