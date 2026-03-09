@@ -6,7 +6,7 @@ import { useConversationDetail, useRoleplayHint } from "@/hooks/queries";
 import { ChatInput } from "@/components/common";
 import { useRoleplayMessages } from "@/hooks/mutations";
 import { useVoiceChat } from "@/hooks/custom/useVoiceChat";
-import { ChatroomHeader } from "@/features/roleplay";
+
 import { useChatUI } from "@/hooks/custom/useChatUI";
 
 interface RoleplayChatRoomProps {
@@ -51,7 +51,7 @@ export default function RoleplayChat({
   }
   return (
     <>
-      <ChatroomHeader roomId={conversationId} />
+
       <div className="sticky top-0 flex min-h-screen w-full flex-col">
         <div className="top-23 sticky z-10">
           <ChatNotice

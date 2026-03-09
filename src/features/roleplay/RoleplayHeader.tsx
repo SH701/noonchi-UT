@@ -16,7 +16,7 @@ interface ChatroomHeaderProps {
   roomId?: number;
 }
 
-export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
+export default function RoleplayHeader({ roomId }: ChatroomHeaderProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [showExitModal, setShowExitModal] = useState(false);
@@ -29,6 +29,7 @@ export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
   const roleRef = useRef<HTMLSpanElement>(null);
   const pathname = usePathname();
   const isAsk = pathname.startsWith("/main/ask");
+  const isChat = pathname.startsWith("/main/roleplay/chatroom");
   const [activeStyles, setActiveStyles] = useState<{
     width: number;
     x: number;
@@ -124,40 +125,42 @@ export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
           </div>
         }
         rightIcon={
-          <div ref={toggleBtnRef} className="relative">
-            <SqurepenIcon onClick={() => setOpen((prev) => !prev)} />
-            {open && (
-              <div
-                ref={dropdownRef}
-                className="absolute right-0 top-8 z-50 flex w-36 flex-col gap-1 rounded-xl bg-white p-3 text-sm"
-              >
-                <button
-                  className="flex gap-2 rounded-lg bg-black p-2 text-white"
-                  onClick={handleNewChat}
+          isChat ? (
+            <div ref={toggleBtnRef} className="relative">
+              <SqurepenIcon onClick={() => setOpen((prev) => !prev)} />
+              {open && (
+                <div
+                  ref={dropdownRef}
+                  className="absolute right-0 top-8 z-50 flex w-36 flex-col gap-1 rounded-xl bg-white p-3 text-sm"
                 >
-                  <Sparkles className="size-5" />
-                  New Chat
-                </button>
-                {detailData?.canGetReport ? (
                   <button
-                    className="bg-gradient-secondary flex gap-2 rounded-lg p-2 text-white"
-                    onClick={handleEnd}
+                    className="flex gap-2 rounded-lg bg-black p-2 text-white"
+                    onClick={handleNewChat}
                   >
-                    <MessageCircle className="size-5" />
-                    Get Reports
+                    <Sparkles className="size-5" />
+                    New Chat
                   </button>
-                ) : (
-                  <button
-                    className="flex gap-2 p-2 text-gray-400"
-                    onClick={handleEnd}
-                  >
-                    <MessageCircle className="size-5" />
-                    Get Reports
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
+                  {detailData?.canGetReport ? (
+                    <button
+                      className="bg-gradient-secondary flex gap-2 rounded-lg p-2 text-white"
+                      onClick={handleEnd}
+                    >
+                      <MessageCircle className="size-5" />
+                      Get Reports
+                    </button>
+                  ) : (
+                    <button
+                      className="flex gap-2 p-2 text-gray-400"
+                      onClick={handleEnd}
+                    >
+                      <MessageCircle className="size-5" />
+                      Get Reports
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          ) : undefined
         }
       />
       <Tab />

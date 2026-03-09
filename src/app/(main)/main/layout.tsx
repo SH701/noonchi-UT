@@ -1,19 +1,14 @@
-"use client";
-
-import { ChatroomHeader } from "@/features/roleplay";
-import { usePathname } from "next/navigation";
+import { RoleplayHeader } from "@/features/roleplay";
 
 export default function MainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const pathname = usePathname();
-  const isChat = pathname.startsWith("/main/roleplay/chatroom");
   return (
     <>
-      {!isChat && <ChatroomHeader />}
-      <div className="flex flex-col flex-1">{children}</div>
+      <RoleplayHeader />
+      <div className="flex flex-1 flex-col">{children}</div>
     </>
   );
 }
