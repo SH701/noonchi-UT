@@ -4,14 +4,17 @@ import { useChatHistoryStore } from "@/store/useChatHistorystore";
 import { EmptyAskIcon } from "@/assets/svgr";
 import { Button } from "@/components/ui/button/button";
 import { useRouter } from "next/navigation";
+import { useTabStore } from "@/store/useTabStore";
 
 export default function AskHistoryTab() {
   const { data: result, isPending } = useConversations();
   const conversations = result?.conversations ?? [];
   const { keyword } = useChatHistoryStore();
   const router = useRouter();
+  const { closeTab } = useTabStore();
   const handleAsk = () => {
     router.push("/main/ask");
+    closeTab();
   };
   return (
     <div className="flex h-full flex-col overflow-hidden">
@@ -50,6 +53,7 @@ export default function AskHistoryTab() {
                     situation: convo.situation,
                   }).toString();
                   router.push(`/main/ask/${convo.conversationId}?${query}`);
+                  closeTab();
                 }}
               >
                 <div className="flex flex-col">

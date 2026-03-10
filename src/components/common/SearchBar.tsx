@@ -3,12 +3,15 @@
 import { HomeIcon, SearchIcon } from "@/assets/svgr";
 import { useChatHistoryStore } from "@/store/useChatHistorystore";
 import { useRouter } from "next/navigation";
+import { useTabStore } from "@/store/useTabStore";
 
 export default function SearchBar() {
   const { keyword, setKeyword } = useChatHistoryStore();
   const router = useRouter();
+  const { closeTab } = useTabStore();
   const handleNewChat = () => {
     router.push("/main");
+    closeTab();
   };
   return (
     <div className="flex gap-4">

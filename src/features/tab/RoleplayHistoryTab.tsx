@@ -5,10 +5,12 @@ import { ChevronRightIcon } from "@/assets/svgr";
 import { RoleplayHistorySkeleton } from "../../components/skeleton";
 import { useChatHistoryStore } from "@/store/useChatHistorystore";
 import { Plus } from "lucide-react";
+import { useTabStore } from "@/store/useTabStore";
 
 export default function RoleplayHistoryTab() {
   const router = useRouter();
   const { keyword } = useChatHistoryStore();
+  const { closeTab } = useTabStore();
   const { data, isPending: isConversationsPending } = useConversations();
   const conversations = data?.conversations ?? [];
   const { data: topics = [], isPending: isTopicsPending } = useTopics(
@@ -19,6 +21,7 @@ export default function RoleplayHistoryTab() {
 
   const handleHistoryPage = () => {
     router.push("/bothistory/roleplay");
+    closeTab();
   };
   return (
     <div>
@@ -55,7 +58,8 @@ export default function RoleplayHistoryTab() {
               return (
                 <div
                   key={convo.conversationId}
-                  className="relative size-32 shrink-0 overflow-hidden rounded-2xl border border-white/10 shadow-lg"
+                  className="relative size-32 shrink-0 overflow-hidden rounded-2xl border border-white/10 shadow-lg cursor-pointer"
+                  onClick={() => { router.push(`/main/roleplay/chatroom/${convo.conversationId}`); closeTab(); }}
                 >
                   {matchedTopic?.imageUrl ? (
                     <Image
