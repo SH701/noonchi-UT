@@ -52,10 +52,10 @@ export default function PreviewChat() {
 
   useEffect(() => {
     if (micState === "recorded" && sttText) {
-      console.log(sttText, micState);
       setMessage(sttText);
     }
   }, [sttText, micState]);
+
   const handleSend = () => {
     if (!message.trim() || isSending) return;
     sendMessage(message, pendingAudioUrl ?? undefined);

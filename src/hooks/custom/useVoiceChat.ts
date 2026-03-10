@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useRecorder } from "@/hooks/custom/useRecorder";
 import { apiMutations } from "@/api/mutations";
+import { toast } from "@/components/ui/toast/toast";
 
 export type MicState = "idle" | "recording" | "recorded";
 
@@ -31,12 +32,15 @@ export function useVoiceChat(
         const audioUrl = await apiMutations.files.uploadAudio(blob);
 
         const content = await apiMutations.language.stt(audioUrl);
-
+        if (content === "") {
+          toast.error("Couldn't recognize your voice. Please try again");
+          handleResetAudio();
+          return;
+        }
         setSttText(content);
         setMicState("recorded");
         setPendingAudioUrl(audioUrl);
       } catch {
-
         handleResetAudio();
       }
     }

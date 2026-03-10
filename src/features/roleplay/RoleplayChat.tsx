@@ -32,10 +32,8 @@ export default function RoleplayChat({
     useRoleMessageStream(conversationId);
   const { data: hintData, refetch: refetchHint } =
     useRoleplayHint(conversationId);
-  const { micState, sttText, handleMicClick, handleSendAudio } = useVoiceChat(
-    conversationId,
-    sendStreamMessage,
-  );
+  const { micState, sttText, pendingAudioUrl, handleMicClick, handleResetAudio } =
+    useVoiceChat(conversationId, sendStreamMessage);
   const {
     showHintPanel,
     toggleHint,
@@ -49,12 +47,25 @@ export default function RoleplayChat({
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [streamMessages]);
 
+  useEffect(() => {
+    if (micState === "recorded" && sttText) {
+      setMessage(sttText);
+    }
+  }, [sttText, micState]);
+
   const myAI = conversation?.aiPersona ?? null;
 
   const handleSendText = async () => {
+    if (!message.trim()) return;
     refetchHint();
+    const textToSend = message;
+    const audioToSend =
+      micState === "recorded" && pendingAudioUrl && message === sttText
+        ? pendingAudioUrl
+        : undefined;
+    if (micState === "recorded") handleResetAudio();
     setMessage("");
-    await sendStreamMessage(message);
+    await sendStreamMessage(textToSend, audioToSend);
   };
   const handleInfo = () => {
     setOpen((prev) => !prev);
@@ -99,13 +110,13 @@ export default function RoleplayChat({
             />
           )}
           <ChatInput
-            message={micState === "recorded" ? sttText : message}
+            message={message}
             setMessage={setMessage}
             showHint={true}
             onHintClick={toggleHint}
             onSituationClick={toggleSituation}
             showSituation={true}
-            onSend={micState === "recorded" ? handleSendAudio : handleSendText}
+            onSend={handleSendText}
             onMicClick={handleMicClick}
             isHintActive={showHintPanel}
             isSituationActive={showSituation}

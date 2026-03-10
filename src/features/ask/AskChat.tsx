@@ -74,11 +74,12 @@ export default function AskChat() {
     });
   };
   const handleAskStream = () => {
-    if (micState === "recorded" && pendingAudioUrl) {
-      sendMessage(sttText ?? "", pendingAudioUrl);
+    if (!message.trim()) return;
+    if (micState === "recorded" && pendingAudioUrl && message === sttText) {
+      sendMessage(message, pendingAudioUrl);
       handleResetAudio();
     } else {
-      if (!message.trim()) return;
+      if (micState === "recorded") handleResetAudio();
       sendMessage(message);
     }
     setMessage("");
