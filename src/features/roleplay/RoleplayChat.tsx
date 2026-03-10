@@ -1,6 +1,12 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { MessageList, HintMessage, ChatNotice } from "@/components/chatroom";
+import {
+  MessageList,
+  HintMessage,
+  ChatNotice,
+  RoleInfo,
+  ChatroomInfo,
+} from "@/components/chatroom";
 
 import { useConversationDetail, useRoleplayHint } from "@/hooks/queries";
 import { ChatInput } from "@/components/common";
@@ -19,6 +25,7 @@ export default function RoleplayChat({
 }: RoleplayChatRoomProps) {
   const [message, setMessage] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
+  const [open, setOpen] = useState(false);
   const { data: conversation } = useConversationDetail(conversationId);
   const { messages } = useRoleplayMessages(conversationId);
   const { streamMessages, sendStreamMessage } =
@@ -49,9 +56,13 @@ export default function RoleplayChat({
     setMessage("");
     await sendStreamMessage(message);
   };
+  const handleInfo = () => {
+    setOpen((prev) => !prev);
+  };
   if (!conversation) {
     return;
   }
+
   return (
     <>
       <RoleplayHeader roomId={conversationId} />
@@ -64,10 +75,15 @@ export default function RoleplayChat({
           />
         </div>
         <div className="flex flex-1 flex-col">
+          <RoleInfo
+            aiRole={conversation.aiPersona.aiRole}
+            userRole={conversation.aiPersona.userRole}
+          />
           <MessageList
             messages={[...messages, ...streamMessages]}
             myAI={myAI}
             showsituation={showSituation}
+            onInfoClick={handleInfo}
           />
           <div ref={bottomRef} />
         </div>
@@ -96,6 +112,16 @@ export default function RoleplayChat({
             micState={micState}
           />
         </div>
+        {open && (
+          <ChatroomInfo
+            isOpen={open}
+            onClose={() => setOpen(false)}
+            topic={conversation.aiPersona.description}
+            aiRole={conversation.aiPersona.aiRole}
+            userRole={conversation.aiPersona.userRole}
+            detail={conversation.situation}
+          />
+        )}
       </div>
     </>
   );

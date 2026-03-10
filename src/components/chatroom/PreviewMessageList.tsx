@@ -7,6 +7,7 @@ import {
   PreviewUserMessage,
 } from "@/hooks/mutations/preview/usePreviewMessages";
 import MessageItem from "./MessageItem";
+import RoleInfo from "./RoleInfo";
 
 interface PreviewMessageListProps {
   data: Preview | undefined;
@@ -31,16 +32,10 @@ export default function PreviewMessageList({
 }: PreviewMessageListProps) {
   return (
     <>
-      <div className="pb-3 text-sm text-gray-600">
-        <p>
-          <span className="font-bold">AI: </span>
-          {data?.scenario.ai_role}
-        </p>
-        <p>
-          <span className="font-bold">You: </span>
-          {data?.my_name}
-        </p>
-      </div>
+      <RoleInfo
+        aiRole={data?.scenario.ai_role || ""}
+        userRole={data?.my_name || ""}
+      />
       {/* 첫 AI 메세지 */}
       <MessageItem
         messages={{
