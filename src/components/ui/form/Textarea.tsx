@@ -22,9 +22,9 @@ export default function Textarea({
   disabled,
 }: TextareaProps) {
   return (
-    <div className="flex flex-col space-y-2 w-full relative">
+    <div className="relative flex w-full flex-col space-y-2">
       {label && (
-        <label className="text-sm font-semibold text-gray-700 flex gap-1">
+        <label className="flex gap-1 text-sm font-semibold text-gray-700">
           {label} {required && <span className="text-red-500">*</span>}
         </label>
       )}
@@ -34,20 +34,13 @@ export default function Textarea({
         disabled={disabled}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className={`
-          w-full py-2.5 pl-2.5 pr-10  h-30
-           border border-gray-400 bg-white
-          rounded-xl text-gray-800 placeholder-gray-400
-          focus:outline-none focus:border-blue-500 focus:ring-1  focus:ring-inset focus:ring-blue-500
-          transition-colors
-          ${className}
-        `}
+        className={`h-30 w-full rounded-xl border border-gray-400 bg-white py-2.5 pl-2.5 pr-10 text-gray-800 placeholder-gray-400 transition-colors focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-blue-500 ${className} `}
       />
       {disabled ? (
-        <Spinner className=" absolute right-3 top-10" />
+        <Spinner className="absolute right-3 top-10" />
       ) : (
         <button
-          className="absolute right-3 top-10"
+          className="absolute right-3 top-10 cursor-pointer"
           onClick={onClick}
           type="button"
         >

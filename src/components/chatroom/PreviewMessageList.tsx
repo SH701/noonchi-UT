@@ -7,6 +7,7 @@ import {
   PreviewUserMessage,
 } from "@/hooks/mutations/preview/usePreviewMessages";
 import MessageItem from "./MessageItem";
+import RoleInfo from "./RoleInfo";
 
 interface PreviewMessageListProps {
   data: Preview | undefined;
@@ -31,16 +32,10 @@ export default function PreviewMessageList({
 }: PreviewMessageListProps) {
   return (
     <>
-      <div className="pb-3 text-sm text-gray-600">
-        <p>
-          <span className="font-bold">AI: </span>
-          {data?.scenario.ai_role}
-        </p>
-        <p>
-          <span className="font-bold">You: </span>
-          {data?.my_name}
-        </p>
-      </div>
+      <RoleInfo
+        aiRole={data?.scenario.ai_role || ""}
+        userRole={data?.my_name || ""}
+      />
       {/* 첫 AI 메세지 */}
       <MessageItem
         messages={{
@@ -71,21 +66,30 @@ export default function PreviewMessageList({
           ) : (
             // AI 답변
             aiResponses[idx] && (
-              <MessageItem
-                messages={{
-                  content: aiResponses[idx].content || "...",
-                  visualAction: data?.visual_action,
-                }}
-                isMine={false}
-                aiName={data?.ai_name}
-                isAI={true}
-                isPreview={true}
-                hiddenMeaning={aiResponses[idx].hiddenMeaning}
-                isRevealed={aiResponses[idx].isRevealed}
-                onToggleReveal={() => onToggleReveal(idx)}
-                showsituation={showSituation}
-                translatedContent={aiResponses[idx].translatedContent}
-              />
+              <>
+                {aiResponses[idx].situationDescription && (
+                  <MessageItem
+                    messages={{
+                      content: aiResponses[idx].situationDescription,
+                    }}
+                  />
+                )}
+                <MessageItem
+                  messages={{
+                    content: aiResponses[idx].content || "...",
+                    visualAction: data?.visual_action,
+                  }}
+                  isMine={false}
+                  aiName={data?.ai_name}
+                  isAI={true}
+                  isPreview={true}
+                  hiddenMeaning={aiResponses[idx].hiddenMeaning}
+                  isRevealed={aiResponses[idx].isRevealed}
+                  onToggleReveal={() => onToggleReveal(idx)}
+                  showsituation={showSituation}
+                  translatedContent={aiResponses[idx].translatedContent}
+                />
+              </>
             )
           )}
         </div>

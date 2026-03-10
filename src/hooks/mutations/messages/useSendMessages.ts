@@ -116,6 +116,8 @@ interface AskTurn {
   approachTip: string;
   aiMessage: string;
   culturalInsight: string;
+  messageId?: number;
+  translatedContent?: string;
 }
 
 export function useAskMessageStream(conversationId: number) {
@@ -154,9 +156,7 @@ export function useAskMessageStream(conversationId: number) {
         setTurns((prev) =>
           prev.map((t, i) =>
             i === turnIndex
-              ? {
-                  ...t,
-                }
+              ? { ...t, messageId: doneData.ai_message_id }
               : t,
           ),
         );
@@ -166,7 +166,15 @@ export function useAskMessageStream(conversationId: number) {
     }
   };
 
-  return { turns, sendMessage, isAIResponding };
+  const updateTranslation = (messageId: number, translatedContent: string) => {
+    setTurns((prev) =>
+      prev.map((t) =>
+        t.messageId === messageId ? { ...t, translatedContent } : t,
+      ),
+    );
+  };
+
+  return { turns, sendMessage, isAIResponding, updateTranslation };
 }
 export function useRoleplayMessages(conversationId: number) {
   return useSendMessages(conversationId, (params) =>
@@ -223,20 +231,26 @@ export function useRoleMessageStream(conversationId: number) {
         content ?? "",
         (chunk, type) => {
           if (type === "situation") {
-            setStreamMessages((prev) => [
-              ...prev,
-              {
+            setStreamMessages((prev) => {
+              const aiIdx = prev.findIndex((m) => m.messageId === tempAiId);
+              const systemMsg = {
                 messageId: -Date.now() - 2,
                 conversationId,
-                type: "SYSTEM",
+                type: "SYSTEM" as const,
                 content: chunk,
                 audioUrl: null,
                 createdAt: new Date().toISOString(),
                 hiddenMeaning: "",
                 visualAction: "",
                 situationDescription: "",
-              },
-            ]);
+              };
+              if (aiIdx === -1) return [...prev, systemMsg];
+              return [
+                ...prev.slice(0, aiIdx),
+                systemMsg,
+                ...prev.slice(aiIdx),
+              ];
+            });
           } else {
             setStreamMessages((prev) =>
               prev.map((m) =>

@@ -47,12 +47,13 @@ export const apiClient = {
       filter: FilterState,
       sortBy: ConversationSortBy = "LAST_ACTIVITY_DESC",
       page: number = 1,
+      size: number = 20,
     ): Promise<ConversationPaged> => {
       const status = filter ? filterMap[filter] : null;
       const queryString = new URLSearchParams({
         sortBy,
         page: String(page),
-        size: "6",
+        size: String(size),
         ...(status && { status }),
       }).toString();
       return apiFetch<ConversationPaged>(`/api/conversations?${queryString}`, {
@@ -76,6 +77,11 @@ export const apiClient = {
           cache: "no-cache",
         },
       );
+    },
+    getConversationSearch: async (keyword: string): Promise<ConversationPaged> => {
+      return apiFetch<ConversationPaged>(`/api/conversations/search?keyword=${encodeURIComponent(keyword)}`, {
+        cache: "no-cache",
+      });
     },
   },
   messages: {

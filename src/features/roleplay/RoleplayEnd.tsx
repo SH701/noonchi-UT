@@ -17,29 +17,28 @@ import {
   ResultHeader,
 } from "@/features/result";
 import FeedbackLoading from "./FeedbackLoading";
+import Tab from "@/features/tab/Tab";
 
 interface RoleplayEndProps {
   conversationId: number;
 }
 
 export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
-  const [tab, setTab] = useState<"transcript" | "mistakes">("transcript");
+  const [tab, setTab] = useState<"Feedback" | "Detailed Metrics">("Feedback");
   const roomId = conversationId;
   const { data: conversation } = useConversationDetail(roomId);
   const myAI = conversation?.aiPersona ?? null;
   const { data: messages = [] } = useChatQuery(roomId);
-  const { data: feedback, isPending: isFeedbackLoading } =
+  const { data: feedback, isLoading: isFeedbackLoading } =
     useConversationFeedback(roomId);
 
-  if (!feedback) {
-    return <p className="p-6">No feedback available</p>;
-  }
-  if (isFeedbackLoading) {
+  if (isFeedbackLoading || !feedback) {
     return <FeedbackLoading />;
   }
   return (
     <div className="flex min-h-screen flex-col overflow-x-hidden">
       <ResultHeader />
+      <Tab />
       <div className="flex flex-1 justify-center overflow-y-auto">
         <div>
           <div className="max-w-125 w-full">
@@ -57,7 +56,7 @@ export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
 
           <div className="pb-6">
             <ResultTab tab={tab} setTab={setTab} />
-            {tab === "transcript" ? (
+            {tab === "Feedback" ? (
               <MessageList messages={messages} myAI={myAI} />
             ) : (
               <FeedbackPart

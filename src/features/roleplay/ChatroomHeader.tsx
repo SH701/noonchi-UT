@@ -4,7 +4,6 @@ import { MessageCircle, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Header from "../../components/common/Header";
-import { useConversationEnd } from "@/hooks/mutations";
 import { useConversationDetail } from "@/hooks/queries";
 import { ExitChatting } from "../../components/modal";
 import { HamburgerIcon, SqurepenIcon } from "@/assets/svgr";
@@ -15,9 +14,10 @@ import { ModeToggle } from "@/components/common";
 
 interface ChatroomHeaderProps {
   roomId?: number;
+  onEnd?: () => void;
 }
 
-export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
+export default function ChatroomHeader({ roomId, onEnd }: ChatroomHeaderProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [showExitModal, setShowExitModal] = useState(false);
@@ -28,7 +28,6 @@ export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
   const isChat = pathname.startsWith("/main/roleplay/chatroom");
 
   const { data: detailData } = useConversationDetail(roomId);
-  const { mutate: conversationEnd } = useConversationEnd(roomId!);
 
   // 다른곳 클릭시 open 없애기
   useEffect(() => {
@@ -53,8 +52,6 @@ export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
     };
   }, [open]);
 
-
-  
   const handleNewChat = () => {
     router.push("/main");
     setOpen(false);
@@ -62,8 +59,7 @@ export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
 
   const handleEnd = () => {
     if (detailData?.canGetReport) {
-      conversationEnd();
-      router.push(`/main/roleplay/chatroom/${roomId}/result`);
+      onEnd?.();
     } else {
       setShowExitModal(true);
     }
@@ -77,9 +73,7 @@ export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
     <>
       <Header
         leftIcon={<HamburgerIcon onClick={handleTab} />}
-        center={
-         <ModeToggle/>
-        }
+        center={<ModeToggle />}
         rightIcon={
           isChat ? (
             <div ref={toggleBtnRef} className="relative">
@@ -93,7 +87,7 @@ export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
                   className="absolute right-0 top-8 z-50 flex w-36 flex-col gap-1 rounded-xl bg-white p-3 text-sm"
                 >
                   <button
-                    className="flex gap-2 rounded-lg bg-black p-2 text-white"
+                    className="flex cursor-pointer gap-2 rounded-lg bg-black p-2 text-white"
                     onClick={handleNewChat}
                   >
                     <Sparkles className="size-5" />
@@ -101,7 +95,7 @@ export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
                   </button>
                   {detailData?.canGetReport ? (
                     <button
-                      className="bg-gradient-secondary flex gap-2 rounded-lg p-2 text-white"
+                      className="bg-gradient-secondary flex cursor-pointer gap-2 rounded-lg p-2 text-white"
                       onClick={handleEnd}
                     >
                       <MessageCircle className="size-5" />

@@ -52,10 +52,10 @@ export default function PreviewChat() {
 
   useEffect(() => {
     if (micState === "recorded" && sttText) {
-      console.log(sttText, micState);
       setMessage(sttText);
     }
   }, [sttText, micState]);
+
   const handleSend = () => {
     if (!message.trim() || isSending) return;
     sendMessage(message, pendingAudioUrl ?? undefined);
@@ -111,7 +111,7 @@ export default function PreviewChat() {
                 They`re waiting for your reply! ({aiResponses.length}/2)
               </span>
             ) : (
-              <span>
+              <span className="text-sm">
                 One shot left! Finish strong! ({aiResponses.length}/2)
               </span>
             )}

@@ -1,24 +1,40 @@
-import { useConversations, useTopics } from "@/hooks/queries";
+import {
+  useConversations,
+  useConversationSearch,
+  useTopics,
+} from "@/hooks/queries";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ChevronRightIcon } from "@/assets/svgr";
 import { RoleplayHistorySkeleton } from "../../components/skeleton";
 import { useChatHistoryStore } from "@/store/useChatHistorystore";
-import { Plus } from "lucide-react";
+import { useTabStore } from "@/store/useTabStore";
 
 export default function RoleplayHistoryTab() {
   const router = useRouter();
-  const { keyword } = useChatHistoryStore();
-  const { data, isPending: isConversationsPending } = useConversations();
-  const conversations = data?.conversations ?? [];
+  const { searchKeyword } = useChatHistoryStore();
+  const { closeTab } = useTabStore();
+  const isSearching = searchKeyword.trim().length > 0;
+
+  const { data: listData, isPending: isListPending } = useConversations();
+  const { data: searchData, isPending: isSearchPending } =
+    useConversationSearch(searchKeyword, "ROLE_PLAYING");
   const { data: topics = [], isPending: isTopicsPending } = useTopics(
     "",
     false,
   );
-  const isPending = isConversationsPending || isTopicsPending;
+
+  const isPending =
+    isTopicsPending || (isSearching ? isSearchPending : isListPending);
+  const conversations = isSearching
+    ? (searchData?.conversations ?? [])
+    : (listData?.conversations ?? []).filter(
+        (c) => c.conversationType === "ROLE_PLAYING",
+      );
 
   const handleHistoryPage = () => {
     router.push("/bothistory/roleplay");
+    closeTab();
   };
   return (
     <div>
@@ -31,56 +47,51 @@ export default function RoleplayHistoryTab() {
       </button>
       {isPending ? (
         <RoleplayHistorySkeleton />
-      ) : conversations.length === 0 ? (
-        <div className="flex size-32 flex-col items-center justify-center gap-2 rounded-lg border border-white bg-white/30">
-          <Plus />
-          <span className="text-sm font-medium">Start a roleplay</span>
-        </div>
-      ) : (
+      ) : conversations.length === 0 ? undefined : (
         <div className="flex gap-3 overflow-x-auto">
-          {conversations
-            .filter((convo) => convo.conversationType === "ROLE_PLAYING")
-            .filter((convo) =>
-              keyword
-                ? convo.conversationTopic
-                    .toLowerCase()
-                    .includes(keyword.toLowerCase())
-                : true,
-            )
-            .map((convo) => {
-              const matchedTopic = topics?.find(
-                (topic) => topic.name === convo.conversationTopic,
-              );
+          {conversations.map((convo) => {
+            const matchedTopic = topics?.find(
+              (topic) => topic.name === convo.conversationTopic,
+            );
+            return (
+              <div
+                key={convo.conversationId}
+                className="relative size-32 shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-white/10 shadow-lg"
+                onClick={() => {
+                  router.push(
+                    convo.status === "DONE"
+                      ? `/main/roleplay/chatroom/${convo.conversationId}/result`
+                      : `/main/roleplay/chatroom/${convo.conversationId}`,
+                  );
+                  closeTab();
+                }}
+              >
+                {matchedTopic?.imageUrl ? (
+                  <Image
+                    src={matchedTopic.imageUrl}
+                    alt={convo.conversationTopic}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 430px) 100vw, 80vw"
+                    loading="eager"
+                  />
+                ) : (
+                  <div className="h-full w-full bg-gray-600" />
+                )}
 
-              return (
-                <div
-                  key={convo.conversationId}
-                  className="relative size-32 shrink-0 overflow-hidden rounded-2xl border border-white/10 shadow-lg"
-                >
-                  {matchedTopic?.imageUrl ? (
-                    <Image
-                      src={matchedTopic.imageUrl}
-                      alt={convo.conversationTopic}
-                      fill
-                      className="object-cover"
-                    />
-                  ) : (
-                    <div className="h-full w-full bg-gray-600" />
-                  )}
+                <div className="bg-linear-to-t absolute inset-0 from-black/80 via-black/20 to-transparent" />
 
-                  <div className="bg-linear-to-t absolute inset-0 from-black/80 via-black/20 to-transparent" />
-
-                  <div className="absolute inset-0 flex flex-col justify-end p-3 text-white">
-                    <span className="text-[10px] uppercase tracking-wider text-gray-300">
-                      {convo.conversationTrack}
-                    </span>
-                    <h4 className="line-clamp-2 text-xs font-bold leading-tight">
-                      {convo.conversationTopic}
-                    </h4>
-                  </div>
+                <div className="absolute inset-0 flex flex-col justify-end p-3 text-white">
+                  <span className="text-[10px] uppercase tracking-wider text-gray-300">
+                    {convo.conversationTrack}
+                  </span>
+                  <h4 className="line-clamp-2 text-xs font-bold leading-tight">
+                    {convo.conversationTopic}
+                  </h4>
                 </div>
-              );
-            })}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>

@@ -20,11 +20,11 @@ export default function Header({
   className,
 }: HeaderProps) {
   return (
-    <div className="sticky top-0 z-20 py-8 flex justify-between items-center backdrop-blur-md -mx-5 px-5">
+    <div className="sticky top-0 z-20 -mx-5 flex items-center justify-between px-5 py-8 backdrop-blur-md">
       <div className="w-6 cursor-pointer" onClick={onLeftClick}>
         {leftIcon}
       </div>
-      <span className="text-xl font-semibold">{center}</span>
+      <span className="cursor-pointer text-xl font-semibold">{center}</span>
       <div
         className={`w-6 cursor-pointer ${className ?? ""}`}
         onClick={onRightClick}

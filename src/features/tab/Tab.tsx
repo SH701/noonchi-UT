@@ -6,10 +6,11 @@ import { useSession } from "next-auth/react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { useTabStore } from "@/store/useTabStore";
-import { SearchBar } from "../../components/common";
+;
 import RoleplayHistoryTab from "./RoleplayHistoryTab";
 import AskHistoryTab from "./AskHistoryTab";
 import { DefaultIcon, PeopleIcon } from "@/assets/svgr";
+import SearchBar from "./SearchBar";
 
 const slideVariants = {
   hidden: { scaleX: 0 },
@@ -44,7 +45,7 @@ export default function Tab() {
           />
           <motion.div
             key="tab"
-            className="z-9999 w-70 bg-gradient-primary fixed left-1/2 top-0 h-full origin-left -translate-x-2/3 pt-10"
+            className="z-9999 w-70 bg-gradient-primary fixed left-0 top-0 h-full origin-left pt-10 md:left-1/2 md:-translate-x-2/3"
             variants={slideVariants}
             initial="hidden"
             animate="visible"

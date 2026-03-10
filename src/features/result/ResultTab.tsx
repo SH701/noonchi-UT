@@ -1,28 +1,28 @@
 interface ResultTabProps {
-  tab: "transcript" | "mistakes";
-  setTab: (value: "transcript" | "mistakes") => void;
+  tab: "Feedback" | "Detailed Metrics";
+  setTab: (value: "Feedback" | "Detailed Metrics") => void;
 }
 export default function ResultTab({ tab, setTab }: ResultTabProps) {
   return (
-    <div className="py-3.5 mb-4.5">
+    <div className="mb-4.5 py-3.5">
       <div className="flex border-b border-gray-200">
         <button
-          onClick={() => setTab("transcript")}
-          className={`flex-1 py-1.5 text-sm font-semibold transition-all duration-200 border-b-2 text-center ${
-            tab === "transcript"
-              ? "text-gray-900 border-gray-900"
-              : "text-gray-500 border-transparent hover:text-gray-700"
+          onClick={() => setTab("Feedback")}
+          className={`flex-1 border-b-2 py-1.5 text-center text-sm font-semibold transition-all duration-200 ${
+            tab === "Feedback"
+              ? "border-gray-900 text-gray-900"
+              : "border-transparent text-gray-500 hover:text-gray-700"
           }`}
         >
           Transcript
         </button>
 
         <button
-          onClick={() => setTab("mistakes")}
-          className={`flex-1 py-1.5 text-sm font-medium transition-all duration-200 border-b-2 text-center ${
-            tab === "mistakes"
-              ? "text-blue-600 border-blue-600"
-              : "text-gray-500 border-transparent hover:text-gray-700"
+          onClick={() => setTab("Detailed Metrics")}
+          className={`flex-1 border-b-2 py-1.5 text-center text-sm font-medium transition-all duration-200 ${
+            tab === "Detailed Metrics"
+              ? "border-blue-600 text-blue-600"
+              : "border-transparent text-gray-500 hover:text-gray-700"
           }`}
         >
           Common Mistakes

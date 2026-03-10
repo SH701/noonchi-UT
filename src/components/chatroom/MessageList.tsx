@@ -9,12 +9,14 @@ interface MessageListProps {
   messages: ChatMsg[];
   myAI: MyAI | null;
   showsituation?: boolean;
+  onInfoClick?: () => void;
 }
 
 export default function MessageList({
   messages,
   myAI,
   showsituation,
+  onInfoClick,
 }: MessageListProps) {
   return (
     <>
@@ -33,6 +35,7 @@ export default function MessageList({
             showsituation={showsituation}
             translatedContent={m.translatedContent ?? undefined}
             previewFeedback={m.streamFeedback}
+            onInfoClick={isAI ? onInfoClick : undefined}
           />
         );
       })}
