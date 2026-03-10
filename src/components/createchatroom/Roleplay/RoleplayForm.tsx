@@ -108,7 +108,7 @@ export default function RoleplayForm({
         disabled={pendingDetail}
       />
 
-      <div className="mt-auto flex pb-4">
+      <div className="mx-auto mt-auto flex pb-4">
         <Button variant="primary" size="lg" type="submit">
           Start
         </Button>

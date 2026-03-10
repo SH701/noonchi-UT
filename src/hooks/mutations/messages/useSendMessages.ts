@@ -223,20 +223,26 @@ export function useRoleMessageStream(conversationId: number) {
         content ?? "",
         (chunk, type) => {
           if (type === "situation") {
-            setStreamMessages((prev) => [
-              ...prev,
-              {
+            setStreamMessages((prev) => {
+              const aiIdx = prev.findIndex((m) => m.messageId === tempAiId);
+              const systemMsg = {
                 messageId: -Date.now() - 2,
                 conversationId,
-                type: "SYSTEM",
+                type: "SYSTEM" as const,
                 content: chunk,
                 audioUrl: null,
                 createdAt: new Date().toISOString(),
                 hiddenMeaning: "",
                 visualAction: "",
                 situationDescription: "",
-              },
-            ]);
+              };
+              if (aiIdx === -1) return [...prev, systemMsg];
+              return [
+                ...prev.slice(0, aiIdx),
+                systemMsg,
+                ...prev.slice(aiIdx),
+              ];
+            });
           } else {
             setStreamMessages((prev) =>
               prev.map((m) =>

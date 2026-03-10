@@ -24,7 +24,7 @@ interface RoleplayEndProps {
 }
 
 export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
-  const [tab, setTab] = useState<"transcript" | "mistakes">("transcript");
+  const [tab, setTab] = useState<"Feedback" | "Detailed Metrics">("Feedback");
   const roomId = conversationId;
   const { data: conversation } = useConversationDetail(roomId);
   const myAI = conversation?.aiPersona ?? null;
@@ -56,7 +56,7 @@ export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
 
           <div className="pb-6">
             <ResultTab tab={tab} setTab={setTab} />
-            {tab === "transcript" ? (
+            {tab === "Feedback" ? (
               <MessageList messages={messages} myAI={myAI} />
             ) : (
               <FeedbackPart

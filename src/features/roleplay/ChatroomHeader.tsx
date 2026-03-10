@@ -4,7 +4,6 @@ import { MessageCircle, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Header from "../../components/common/Header";
-import { useConversationEnd } from "@/hooks/mutations";
 import { useConversationDetail } from "@/hooks/queries";
 import { ExitChatting } from "../../components/modal";
 import { HamburgerIcon, SqurepenIcon } from "@/assets/svgr";
@@ -12,13 +11,13 @@ import { useTabStore } from "@/store/useTabStore";
 import Tab from "../tab/Tab";
 
 import { ModeToggle } from "@/components/common";
-import FeedbackLoading from "./FeedbackLoading";
 
 interface ChatroomHeaderProps {
   roomId?: number;
+  onEnd?: () => void;
 }
 
-export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
+export default function ChatroomHeader({ roomId, onEnd }: ChatroomHeaderProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [showExitModal, setShowExitModal] = useState(false);
@@ -29,9 +28,6 @@ export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
   const isChat = pathname.startsWith("/main/roleplay/chatroom");
 
   const { data: detailData } = useConversationDetail(roomId);
-  const { mutate: conversationEnd, isPending: isEnding } = useConversationEnd(
-    roomId!,
-  );
 
   // 다른곳 클릭시 open 없애기
   useEffect(() => {
@@ -63,11 +59,7 @@ export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
 
   const handleEnd = () => {
     if (detailData?.canGetReport) {
-      conversationEnd(undefined, {
-        onSuccess: () => {
-          router.push(`/main/roleplay/chatroom/${roomId}/result`);
-        },
-      });
+      onEnd?.();
     } else {
       setShowExitModal(true);
     }
@@ -125,7 +117,6 @@ export default function ChatroomHeader({ roomId }: ChatroomHeaderProps) {
         }
       />
       <Tab />
-      {isEnding && <FeedbackLoading />}
       {showExitModal && (
         <ExitChatting
           onClose={() => setShowExitModal(false)}
