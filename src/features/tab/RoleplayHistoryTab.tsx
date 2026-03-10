@@ -53,7 +53,6 @@ export default function RoleplayHistoryTab() {
             const matchedTopic = topics?.find(
               (topic) => topic.name === convo.conversationTopic,
             );
-
             return (
               <div
                 key={convo.conversationId}
@@ -73,6 +72,8 @@ export default function RoleplayHistoryTab() {
                     alt={convo.conversationTopic}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 430px) 100vw, 80vw"
+                    loading="eager"
                   />
                 ) : (
                   <div className="h-full w-full bg-gray-600" />
