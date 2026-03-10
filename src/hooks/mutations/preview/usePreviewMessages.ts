@@ -7,6 +7,7 @@ export interface PreviewAiMessage {
   hiddenMeaning: string;
   isRevealed: boolean;
   translatedContent: string;
+  situationDescription: string;
 }
 
 export interface PreviewUserMessage {
@@ -73,6 +74,7 @@ export function usePreviewMessages() {
         hiddenMeaning: "",
         isRevealed: false,
         translatedContent: "",
+        situationDescription: "",
       },
     ]);
     sendMutation(
@@ -89,6 +91,7 @@ export function usePreviewMessages() {
               ...next[next.length - 1],
               hiddenMeaning: res.ai_hidden_meaning,
               translatedContent: res.ai_message_en,
+              situationDescription: res.situation_description ?? "",
             };
             return next;
           });

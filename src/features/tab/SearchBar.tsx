@@ -1,14 +1,17 @@
 "use client";
 
 import { HomeIcon, SearchIcon } from "@/assets/svgr";
+import { useTabStore } from "@/store";
 import { useChatHistoryStore } from "@/store/useChatHistorystore";
 import { useRouter } from "next/navigation";
 
 export default function SearchBar() {
   const { keyword, setKeyword, submitSearch } = useChatHistoryStore();
+  const { closeTab } = useTabStore();
   const router = useRouter();
   const handleNewChat = () => {
     router.push("/main");
+    closeTab();
   };
 
   return (

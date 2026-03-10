@@ -66,21 +66,30 @@ export default function PreviewMessageList({
           ) : (
             // AI 답변
             aiResponses[idx] && (
-              <MessageItem
-                messages={{
-                  content: aiResponses[idx].content || "...",
-                  visualAction: data?.visual_action,
-                }}
-                isMine={false}
-                aiName={data?.ai_name}
-                isAI={true}
-                isPreview={true}
-                hiddenMeaning={aiResponses[idx].hiddenMeaning}
-                isRevealed={aiResponses[idx].isRevealed}
-                onToggleReveal={() => onToggleReveal(idx)}
-                showsituation={showSituation}
-                translatedContent={aiResponses[idx].translatedContent}
-              />
+              <>
+                {aiResponses[idx].situationDescription && (
+                  <MessageItem
+                    messages={{
+                      content: aiResponses[idx].situationDescription,
+                    }}
+                  />
+                )}
+                <MessageItem
+                  messages={{
+                    content: aiResponses[idx].content || "...",
+                    visualAction: data?.visual_action,
+                  }}
+                  isMine={false}
+                  aiName={data?.ai_name}
+                  isAI={true}
+                  isPreview={true}
+                  hiddenMeaning={aiResponses[idx].hiddenMeaning}
+                  isRevealed={aiResponses[idx].isRevealed}
+                  onToggleReveal={() => onToggleReveal(idx)}
+                  showsituation={showSituation}
+                  translatedContent={aiResponses[idx].translatedContent}
+                />
+              </>
             )
           )}
         </div>

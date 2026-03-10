@@ -28,15 +28,9 @@ export default function ModeToggle() {
     });
   }, [isAsk]);
 
-  const handleToggle = () => {
-    router.push(isAsk ? "/main" : "/main/ask");
-  };
 
   return (
-    <div
-      className="relative flex cursor-pointer items-center rounded-full bg-white/30"
-      onClick={handleToggle}
-    >
+    <div className="relative flex cursor-pointer items-center rounded-full bg-white/30">
       {activeStyles && (
         <motion.div
           className="absolute h-6 rounded-full bg-white"
@@ -50,6 +44,7 @@ export default function ModeToggle() {
         className={`relative z-10 px-1.5 py-1 text-sm font-medium transition-colors ${
           isAsk ? "text-gray-400" : "text-gray-800"
         }`}
+        onClick={() => router.push("/main")}
       >
         Role playing
       </span>
@@ -58,6 +53,7 @@ export default function ModeToggle() {
         className={`relative z-10 px-1.5 py-1 text-sm font-medium transition-colors ${
           !isAsk ? "text-gray-400" : "text-gray-800"
         }`}
+        onClick={() => router.push("/main/ask")}
       >
         Ask
       </span>
