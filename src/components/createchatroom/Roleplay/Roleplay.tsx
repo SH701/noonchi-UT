@@ -7,6 +7,7 @@ import { useCreateRoleplay } from "@/hooks/mutations";
 import { toast } from "@/components/ui/toast/toast";
 import { useTopics } from "@/hooks/queries";
 import RoleplayForm from "./RoleplayForm";
+import { RoleplayLoading } from "@/features/roleplay";
 
 interface SubmitProps {
   myRole: string | undefined;
@@ -24,10 +25,14 @@ export default function RolePlay() {
   const { data: topics = [], isLoading } = useTopics(category, false);
   const topic = topics.find((t) => t.topicId === topicId);
 
-  const createRoleplay = useCreateRoleplay();
+ const { mutateAsync: createRoleplay, isPending } = useCreateRoleplay();
 
   if (isLoading || !topic) {
     return <div>loading...</div>;
+  }
+
+  if (isPending) {
+    return <RoleplayLoading />;
   }
 
   const handleSubmit = async ({
@@ -45,7 +50,7 @@ export default function RolePlay() {
         closeness: tone || "casual",
         situation,
       };
-      const convo = await createRoleplay.mutateAsync(requestData);
+      const convo = await createRoleplay(requestData);
       router.push(`/main/roleplay/chatroom/${convo.conversationId}`);
     } catch {
       toast.error("Failed to create chat room");
