@@ -67,7 +67,7 @@ export default function MessageItem({
 
   const { data: translateText, mutate: translate } = useMessageTranslate();
   const { mutate: tts, isPending: loadingTTS } = useMessageTTS();
-  const { data: feedbackData, isPending: loaidngFeedback } = useMessageFeedback(
+  const { data: feedbackData } = useMessageFeedback(
     feedbackOpen && !isPending ? messages.messageId : undefined,
   );
 
@@ -106,7 +106,10 @@ export default function MessageItem({
       >
         {isMine ||
           (isAI && (
-            <div className="mb-1 flex flex-row gap-2 cursor-pointer" onClick={onInfoClick}>
+            <div
+              className="mb-1 flex cursor-pointer flex-row gap-2"
+              onClick={onInfoClick}
+            >
               <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/50">
                 <span>{(aiName ?? myAI?.aiRole ?? "A")[0].toUpperCase()}</span>
               </div>
@@ -146,26 +149,21 @@ export default function MessageItem({
                       {previewFeedback ?? feedbackData?.nuanceFeedback}
                     </span>
                     <button
-                      className="mt-2.5 flex gap-1 rounded-full border border-blue-500 px-2 py-1"
+                      className="mt-2.5 flex cursor-pointer gap-1 rounded-full border border-blue-500 px-2 py-1"
                       onClick={handleFeedback}
-                      disabled={loaidngFeedback}
                     >
-                      {loaidngFeedback ? (
-                        <Spinner />
-                      ) : (
-                        <div className="flex gap-1">
-                          <InfoIcon className="text-blue-500" />
-                          <span className="text-sm text-blue-500">
-                            Hide feedback
-                          </span>
-                        </div>
-                      )}
+                      <div className="flex gap-1">
+                        <InfoIcon className="text-blue-500" />
+                        <span className="text-sm text-blue-500">
+                          Hide feedback
+                        </span>
+                      </div>
                     </button>
                   </div>
                 ) : (
                   <div className="flex justify-between">
                     <button
-                      className="flex gap-1 rounded-full border border-blue-500 px-2 py-1"
+                      className="flex cursor-pointer gap-1 rounded-full border border-blue-500 px-2 py-1"
                       onClick={handleFeedback}
                     >
                       <InfoIcon className="text-blue-500" />
@@ -198,19 +196,21 @@ export default function MessageItem({
                     <button
                       onClick={() => handleTTsClick(messages.content)}
                       disabled={loadingTTS}
+                      className="cursor-pointer"
                     >
                       {loadingTTS ? <Spinner /> : <VolumeUpIcon size={20} />}
                     </button>
 
                     <button
                       onClick={() => handleTranslateClick(messages.messageId)}
+                      className="cursor-pointer"
                     >
                       <LanguageIcon />
                     </button>
                   </div>
 
                   <button
-                    className="border-gradient-primary rounded-full border px-2 py-1"
+                    className="border-gradient-primary cursor-pointer rounded-full border px-2 py-1"
                     onClick={handleHiddenMean}
                   >
                     👀{" "}

@@ -98,11 +98,11 @@ export default function ChatInput({
           <div className="flex gap-1">
             {showSituation && (
               <button
-                className={`h-6.5 flex rounded-full border px-1 ${isSituationActive ? "border-indigo-500 text-indigo-500" : ""}`}
+                className={`h-6.5 flex cursor-pointer rounded-full border px-1 ${isSituationActive ? "border-indigo-500 text-indigo-500" : ""}`}
                 onClick={onSituationClick}
               >
                 <Asterisk
-                  className={`py-1 ${isSituationActive ? "text-indigo-500" : ""}`}
+                  className={` ${isSituationActive ? "text-indigo-500" : ""}`}
                 />
                 <p>situation</p>
               </button>
@@ -110,10 +110,10 @@ export default function ChatInput({
             {showHint && (
               <button
                 onClick={onHintClick}
-                className={`h-6.5 flex rounded-full border px-2 ${isHintActive ? "border-indigo-500 text-indigo-500" : ""}`}
+                className={`h-6.5 flex cursor-pointer rounded-full border px-2 ${isHintActive ? "border-indigo-500 text-indigo-500" : ""}`}
               >
                 <Lightbulb
-                  className={`py-1 ${isHintActive ? "text-indigo-500" : ""}`}
+                  className={`py-0.5 ${isHintActive ? "text-indigo-500" : ""}`}
                 />
                 <p>needhelp</p>
               </button>
@@ -123,7 +123,7 @@ export default function ChatInput({
             {micState === "recording" ? (
               <button
                 onClick={onMicClick}
-                className="flex shrink-0 items-center justify-center rounded-full border border-white p-1"
+                className="flex shrink-0 cursor-pointer items-center justify-center rounded-full border border-white p-1"
                 style={{
                   background:
                     "linear-gradient(180deg, #B499FF 0%, #98AEFF 100%)",
@@ -139,7 +139,7 @@ export default function ChatInput({
               <button
                 type="button"
                 onClick={onSend}
-                className="flex shrink-0 items-center justify-center rounded-full p-1 transition-colors"
+                className="flex shrink-0 cursor-pointer items-center justify-center rounded-full p-1 transition-colors"
                 disabled={disabled || !message.trim()}
                 style={
                   message.trim()
@@ -157,7 +157,7 @@ export default function ChatInput({
             ) : (
               <button
                 onClick={onMicClick}
-                className="flex shrink-0 items-center justify-center rounded-full border p-1"
+                className="flex shrink-0 cursor-pointer items-center justify-center rounded-full border p-1"
               >
                 <MicIcon className="size-6" />
               </button>

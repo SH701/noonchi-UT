@@ -69,5 +69,5 @@ export interface HintMessages {
   suggestions: string[];
   explanations: string[];
   translations: string[];
-  wrong_index: number;
+  wrongIndex: number;
 }

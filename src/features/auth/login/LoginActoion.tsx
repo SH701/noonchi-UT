@@ -27,7 +27,7 @@ export default function LoginAction({ loading, handleLogin, isValid }: Props) {
       <div className="text-center text-sm text-gray-500">
         First time here?{" "}
         <button
-          className="font-medium text-blue-500 hover:underline"
+          className="cursor-pointer font-medium text-blue-500 hover:underline"
           onClick={() => openModal(<SignupContent />)}
         >
           Create an account

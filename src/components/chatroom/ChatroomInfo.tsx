@@ -70,7 +70,7 @@ export default function ChatRoomInfo({
 
               <div>
                 <div className="flex gap-2">
-                  <MessageCircle className="text-gray-600" />
+                  <MessageCircle className="shrink-0 text-gray-600" />
                   <div className="flex flex-col gap-1">
                     <p className="text-sm text-gray-500">Detail</p>
                     <p className="text-base font-medium text-white">{detail}</p>

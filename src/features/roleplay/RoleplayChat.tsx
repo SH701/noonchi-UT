@@ -15,6 +15,9 @@ import { useVoiceChat } from "@/hooks/custom/useVoiceChat";
 
 import { useChatUI } from "@/hooks/custom/useChatUI";
 import RoleplayHeader from "./ChatroomHeader";
+import { motion } from "framer-motion";
+
+import { SqurepenIcon } from "@/assets/svgr";
 
 interface RoleplayChatRoomProps {
   conversationId: number;
@@ -26,14 +29,20 @@ export default function RoleplayChat({
   const [message, setMessage] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
-  const { data: conversation } = useConversationDetail(conversationId);
+  const { data: conversation, refetch: conversationDeatil } =
+    useConversationDetail(conversationId);
   const { messages } = useRoleplayMessages(conversationId);
   const { streamMessages, sendStreamMessage } =
     useRoleMessageStream(conversationId);
   const { data: hintData, refetch: refetchHint } =
     useRoleplayHint(conversationId);
-  const { micState, sttText, pendingAudioUrl, handleMicClick, handleResetAudio } =
-    useVoiceChat(conversationId, sendStreamMessage);
+  const {
+    micState,
+    sttText,
+    pendingAudioUrl,
+    handleMicClick,
+    handleResetAudio,
+  } = useVoiceChat(conversationId, sendStreamMessage);
   const {
     showHintPanel,
     toggleHint,
@@ -65,8 +74,10 @@ export default function RoleplayChat({
         : undefined;
     if (micState === "recorded") handleResetAudio();
     setMessage("");
+    conversationDeatil();
     await sendStreamMessage(textToSend, audioToSend);
   };
+
   const handleInfo = () => {
     setOpen((prev) => !prev);
   };
@@ -108,6 +119,18 @@ export default function RoleplayChat({
               }}
               onClose={toggleHint}
             />
+          )}
+          {conversation.canGetReport && (
+            <motion.div
+              className="absolute -top-12 left-5 right-5 flex items-center justify-center gap-2.5 rounded-xl bg-gray-800/50 px-5 py-2.5 text-sm text-white"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 0 }}
+              transition={{ duration: 4 }}
+            >
+              <span>Report unlocked! Tap</span>
+              <SqurepenIcon />
+              <span>to view</span>
+            </motion.div>
           )}
           <ChatInput
             message={message}
