@@ -111,64 +111,62 @@ export function useAskMessages(conversationId: number) {
     ),
   );
 }
+interface AskTurn {
+  userContent: string;
+  approachTip: string;
+  aiMessage: string;
+  culturalInsight: string;
+}
+
 export function useAskMessageStream(conversationId: number) {
-  const [messages, setMessages] = useState<ChatMsg[]>([]);
+  const [turns, setTurns] = useState<AskTurn[]>([]);
   const [isAIResponding, setIsAIResponding] = useState(false);
 
-  const sendMessage = async (content: string) => {
-    if (!conversationId || !content) return;
+  const sendMessage = async (content: string, audioUrl?: string) => {
+    if (!conversationId || (!content && !audioUrl)) return;
 
-    const userMsg: ChatMsg = {
-      messageId: -Date.now(),
-      conversationId,
-      type: "USER",
-      content,
-      audioUrl: null,
-      createdAt: new Date().toISOString(),
-      hiddenMeaning: "",
-      visualAction: "",
-      situationDescription: "",
-    };
-
-    setMessages((prev) => [...prev, userMsg]);
-    setIsAIResponding(true);
-
-    const tempAiId = -Date.now() - 1;
-    setMessages((prev) => [
+    const turnIndex = turns.length;
+    setTurns((prev) => [
       ...prev,
       {
-        messageId: tempAiId,
-        conversationId,
-        type: "AI",
-        content: "",
-        audioUrl: null,
-        createdAt: new Date().toISOString(),
-        hiddenMeaning: "",
-        visualAction: "",
-        situationDescription: "",
+        userContent: content,
+        approachTip: "",
+        aiMessage: "",
+        culturalInsight: "",
       },
     ]);
+    setIsAIResponding(true);
 
     try {
-      await apiMutations.messages.asksendstream(
+      const doneData = await apiMutations.messages.asksendstream(
         conversationId,
         content,
         (chunk) => {
-          setMessages((prev) =>
-            prev.map((m) =>
-              m.messageId === tempAiId
-                ? { ...m, content: m.content + chunk }
-                : m,
+          setTurns((prev) =>
+            prev.map((t, i) =>
+              i === turnIndex ? { ...t, aiMessage: t.aiMessage + chunk } : t,
             ),
           );
         },
+        audioUrl,
       );
+      if (doneData) {
+        setTurns((prev) =>
+          prev.map((t, i) =>
+            i === turnIndex
+              ? {
+                  ...t,
+                }
+              : t,
+          ),
+        );
+      }
     } finally {
       setIsAIResponding(false);
     }
   };
 
-  return { messages, sendMessage, isAIResponding };
+  return { turns, sendMessage, isAIResponding };
 }
 export function useRoleplayMessages(conversationId: number) {
   return useSendMessages(conversationId, (params) =>
@@ -215,6 +213,7 @@ export function useRoleMessageStream(conversationId: number) {
         hiddenMeaning: "",
         visualAction: "",
         situationDescription: "",
+        isLoading: true,
       },
     ]);
 
@@ -242,7 +241,7 @@ export function useRoleMessageStream(conversationId: number) {
             setStreamMessages((prev) =>
               prev.map((m) =>
                 m.messageId === tempAiId
-                  ? { ...m, content: m.content + chunk }
+                  ? { ...m, content: m.content + chunk, isLoading: false }
                   : m,
               ),
             );

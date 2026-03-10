@@ -10,7 +10,12 @@ import {
   AskRes,
   PresignedUrlRes,
 } from "@/types/conversations";
-import { ChatMsg, RoleplayStreamDoneData } from "@/types/messages";
+import {
+  AskStreamDoneData,
+  AskMessageStreamDoneData,
+  ChatMsg,
+  RoleplayStreamDoneData,
+} from "@/types/messages";
 import { Preview, PreviewSendRes } from "@/types/preview/preview.type";
 import axios from "axios";
 import { TopicScenario } from "@/types/topics";
@@ -115,9 +120,9 @@ export const apiMutations = {
     asksendstream: async (
       conversationId: number,
       content: string,
-
       onChunk: (chunk: string) => void,
-    ): Promise<void> => {
+      audioUrl?: string,
+    ): Promise<AskMessageStreamDoneData> => {
       const session = await getSession();
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/messages/ask/stream`,
@@ -129,7 +134,7 @@ export const apiMutations = {
               Authorization: `Bearer ${session.accessToken}`,
             }),
           },
-          body: JSON.stringify({ conversationId, content }),
+          body: JSON.stringify({ conversationId, content, audioUrl }),
         },
       );
 
@@ -138,7 +143,8 @@ export const apiMutations = {
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
       let buffer = "";
-
+      let doneData: AskMessageStreamDoneData | null = null;
+      let isDoneEvent = false;
       if (reader) {
         while (true) {
           const { done, value } = await reader.read();
@@ -149,18 +155,26 @@ export const apiMutations = {
           buffer = lines.pop() || "";
 
           for (const line of lines) {
-            if (!line.startsWith("data:")) continue;
-            const json: { type: string; content?: string } = JSON.parse(
-              line.slice(5).trim(),
-            );
-            if (json.type === "chunk") {
-              onChunk(json.content ?? "");
-            } else if (json.type === "done") {
-              return;
+            if (line === "event:done") {
+              isDoneEvent = true;
+              continue;
             }
+            if (!line.startsWith("data:")) continue;
+            const raw = line.slice(5).trim();
+            if (!raw) continue;
+            if (isDoneEvent) {
+              try {
+                doneData = JSON.parse(raw);
+              } catch {
+                // ignore
+              }
+              return doneData!;
+            }
+            onChunk(raw);
           }
         }
       }
+      return doneData!;
     },
     translate: async (messageId: number): Promise<string> => {
       return apiFetch<string>(`/api/messages/${messageId}/translate`, {
@@ -197,7 +211,7 @@ export const apiMutations = {
         type: "approach_tip" | "chunk" | "cultural_insight",
         content: string,
       ) => void,
-    ): Promise<void> => {
+    ): Promise<AskStreamDoneData> => {
       const session = await getSession();
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/conversations/ask/stream`,
@@ -218,6 +232,7 @@ export const apiMutations = {
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
       let buffer = "";
+      let doneData: AskStreamDoneData | null = null;
 
       if (reader) {
         while (true) {
@@ -230,9 +245,18 @@ export const apiMutations = {
 
           for (const line of lines) {
             if (!line.startsWith("data:")) continue;
-            const json: { type: string; content?: string } = JSON.parse(
-              line.slice(5).trim(),
-            );
+            const raw = line.slice(5).trim();
+            if (!raw) continue;
+            let json: {
+              type: string;
+              content?: string;
+              data?: AskStreamDoneData;
+            };
+            try {
+              json = JSON.parse(raw);
+            } catch {
+              continue;
+            }
             if (
               json.type === "approach_tip" ||
               json.type === "chunk" ||
@@ -240,11 +264,13 @@ export const apiMutations = {
             ) {
               onChunk(json.type, json.content ?? "");
             } else if (json.type === "done") {
-              return;
+              doneData = json.data ?? null;
+              return doneData!;
             }
           }
         }
       }
+      return doneData!;
     },
 
     deleteConversation: async (conversationId: number): Promise<void> => {

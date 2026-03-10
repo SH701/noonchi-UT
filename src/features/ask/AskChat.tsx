@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChatInput } from "../../components/common";
 
-import { useAskStream } from "@/hooks/mutations";
+import { useAskMessageStream, useAskStream } from "@/hooks/mutations";
 import { Spinner } from "../../components/ui/spinner/spinner";
 import { CLOSENESS_OPTIONS, Step, STEP_QUESTIONS, STEPS } from "@/constants";
 import { Button } from "@/components/ui/button/button";
+import ChatQuickActions from "./ChatQuickActions";
+import { useVoiceChat } from "@/hooks/custom";
 
 export default function AskChat() {
   const [step, setStep] = useState<Step>("askTarget");
@@ -14,9 +16,35 @@ export default function AskChat() {
   const [askTarget, setAskTarget] = useState("");
   const [closeness, setCloseness] = useState("");
   const [situation, setSituation] = useState("");
-  const { mutate: createAsk, isPending, approachTip, aiMessage, culturalInsight } = useAskStream();
-
+  const bottomRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
+  const {
+    mutate: createAsk,
+    isPending,
+    approachTip,
+    aiMessage,
+    culturalInsight,
+    conversationId,
+  } = useAskStream();
+  const { turns, sendMessage, isAIResponding } = useAskMessageStream(
+    Number(conversationId),
+  );
+  const {
+    micState,
+    sttText,
+    handleMicClick,
+    pendingAudioUrl,
+    handleResetAudio,
+  } = useVoiceChat();
   const currentStepIdx = STEPS.indexOf(step);
+  useEffect(() => {
+    if (micState === "recorded" && sttText) {
+      console.log(sttText, micState);
+      setMessage(sttText);
+    }
+  }, [sttText, micState]);
 
   const handleSendTarget = () => {
     if (!message.trim()) return;
@@ -34,14 +62,23 @@ export default function AskChat() {
   const handleSendSituation = () => {
     if (!message.trim() || isPending) return;
     setSituation(message.trim());
+    setMessage("");
     createAsk({
       askTarget,
       closeness,
       situation: message.trim(),
     });
+  };
+  const handleAskStream = () => {
+    if (micState === "recorded" && pendingAudioUrl) {
+      sendMessage(sttText ?? "", pendingAudioUrl);
+      handleResetAudio();
+    } else {
+      if (!message.trim()) return;
+      sendMessage(message);
+    }
     setMessage("");
   };
-
   return (
     <div className="flex w-full flex-1 flex-col">
       <div className="flex flex-1 flex-col">
@@ -135,10 +172,36 @@ export default function AskChat() {
             )}
           </div>
         )}
+        {/* 이후 스트리밍 메세지 */}
+        {turns.map((turn, i) => (
+          <div key={i} className="mt-5 flex flex-col gap-3">
+            <div className="flex justify-end">
+              <div className="rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
+                <p className="text-sm">{turn.userContent}</p>
+              </div>
+            </div>
+            {turn.aiMessage && (
+              <>
+                {turn.approachTip && (
+                  <p className="text-sm text-gray-600">{turn.approachTip}</p>
+                )}
+                <div className="rounded-b-xl rounded-tr-xl border border-gray-300 bg-white p-4">
+                  <p className="text-sm">{turn.aiMessage}</p>
+                </div>
+                {turn.culturalInsight && (
+                  <p className="text-sm text-gray-500">
+                    {turn.culturalInsight}
+                  </p>
+                )}
+              </>
+            )}
+          </div>
+        ))}
       </div>
 
       {/* 하단 고정 ChatInput */}
       <div className="sticky bottom-0 flex flex-col pb-5 backdrop-blur-md">
+        {aiMessage && <ChatQuickActions />}
         {step === "askTarget" && (
           <ChatInput
             message={message}
@@ -147,12 +210,23 @@ export default function AskChat() {
             placeholder="Type your answer..."
           />
         )}
-        {step === "situation" && (
+        {step === "situation" && !aiMessage && (
           <ChatInput
             message={message}
             setMessage={setMessage}
             onSend={handleSendSituation}
             disabled={isPending}
+            placeholder="Type your answer..."
+          />
+        )}
+        {aiMessage && (
+          <ChatInput
+            message={message}
+            setMessage={setMessage}
+            onMicClick={handleMicClick}
+            onSend={handleAskStream}
+            disabled={isAIResponding}
+            micState={micState}
             placeholder="Type your answer..."
           />
         )}

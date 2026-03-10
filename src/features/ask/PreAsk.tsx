@@ -21,15 +21,14 @@ export default function PreAsk() {
                 Not sure how <br /> this might sound?
               </span>
               <span className="text-gray-600">
-                I`ll help you understand how it sounds <br />
+                I'll help you understand how it sounds <br />
                 in Korean
               </span>
             </div>
           </div>
           <div className="pb-13 mx-auto mt-auto">
             <Button variant="primary" size="lg" onClick={handleStart}>
-              Check how <span className="-skew-x-12 px-1 underline">it</span>{" "}
-              sounds
+              Check how it sounds
             </Button>
           </div>
         </div>
