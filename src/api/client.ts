@@ -52,7 +52,7 @@ export const apiClient = {
       const queryString = new URLSearchParams({
         sortBy,
         page: String(page),
-        size: "6",
+        size: "20",
         ...(status && { status }),
       }).toString();
       return apiFetch<ConversationPaged>(`/api/conversations?${queryString}`, {

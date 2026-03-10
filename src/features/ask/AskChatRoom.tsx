@@ -32,8 +32,12 @@ export default function AskChatRoom({
     useAskMessages(conversationId);
   const { mutate: TTS } = useMessageTTS();
   const { mutate: translate } = useMessageTranslate();
+  const [translatedMap, setTranslatedMap] = useState<Record<number, string>>(
+    {},
+  );
   const bottomRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(true);
+  const [translateOpen, setTranslateOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [translateMsg, setTranslateMsg] = useState(false);
   useEffect(() => {
@@ -51,7 +55,7 @@ export default function AskChatRoom({
   };
 
   const handleTTS = () => {
-    TTS(message);
+    TTS(firstAI?.content ?? "");
   };
 
   const handleTranslate = () => {
@@ -65,7 +69,7 @@ export default function AskChatRoom({
   return (
     <div className="flex w-full flex-1 flex-col">
       <CominSoonModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col pb-2">
         {/* 이전 대화 */}
         <span className="text-xl font-semibold">
           {STEP_QUESTIONS.askTarget}
@@ -74,21 +78,21 @@ export default function AskChatRoom({
           This can be something you`re <br /> about to say or do
         </span>
         {askTarget && (
-          <div className="mt-2 flex justify-end">
-            <div className="w-61 flex flex-col gap-2 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
+          <div className="flex justify-end">
+            <div className="w-61 mt-5 flex flex-col gap-2 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
               <p className="text-sm">{askTarget}</p>
             </div>
           </div>
         )}
-        <div className="mb-6 flex flex-col gap-2">
+        <div className="mt-5 flex flex-col">
           <span className="text-xl font-semibold">
             {STEP_QUESTIONS.closeness}
           </span>
           <span className="text-gray-600">
             This helps me understand the right tone
           </span>
-          <div className="mt-2 flex justify-end">
-            <div className="rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
+          <div className="flex justify-end">
+            <div className="mt-5 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
               <p className="text-sm">
                 {CLOSENESS_OPTIONS.find((o) => o.value === closeness)?.label ??
                   closeness}
@@ -96,7 +100,7 @@ export default function AskChatRoom({
             </div>
           </div>
         </div>
-        <div className="mb-6 flex flex-col">
+        <div className="mt-5 flex flex-col">
           <span className="text-xl font-semibold">
             {STEP_QUESTIONS.situation}
           </span>
@@ -104,7 +108,7 @@ export default function AskChatRoom({
             Describe the situation or what you want to express
           </span>
           {situation && (
-            <div className="mt-2 flex justify-end">
+            <div className="my-5 flex justify-end">
               <div className="rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
                 <p className="text-sm">{situation}</p>
               </div>
@@ -167,19 +171,37 @@ export default function AskChatRoom({
             className={`flex ${m.type === "USER" ? "justify-end" : "justify-start"} mb-4 mt-2`}
           >
             <div
-              className={`max-w-61 border border-gray-300 bg-white p-4 ${
+              className={` border border-gray-300 bg-white p-4 ${
                 m.type === "USER"
-                  ? "rounded-b-xl rounded-tl-xl"
-                  : "rounded-b-xl rounded-tr-xl"
+                  ? "rounded-b-xl rounded-tl-xl max-w-61"
+                  : "rounded-b-xl rounded-tr-xl w-61"
               }`}
             >
-              <p className="text-sm">{m.content}</p>
+              {m.type === "USER" ? (
+                <p className="my-1 text-sm">{m.content}</p>
+              ) : (
+                <p className="my-1 pb-2 text-sm">{m.content}</p>
+              )}
               {m.type === "AI" && (
-                <div className="flex justify-between border-t border-gray-200 pt-3">
-                  <div className="flex gap-2">
-                    <VolumeUpIcon onClick={handleTTS} />
-                    <LanguageIcon onClick={handleTranslate} />
+                <div className="flex flex-col justify-between gap-2">
+                  <div className="flex gap-2 border-t border-gray-200 pt-3">
+                    <VolumeUpIcon onClick={() => TTS(m.content)} />
+                    <LanguageIcon
+                      onClick={() => {
+                        setTranslateOpen((prev) => !prev);
+                        translate(m.messageId, {
+                          onSuccess: (result) =>
+                            setTranslatedMap((prev) => ({
+                              ...prev,
+                              [m.messageId]: result,
+                            })),
+                        });
+                      }}
+                    />
                   </div>
+                  {translateOpen && translatedMap[m.messageId] && (
+                    <p>{translatedMap[m.messageId]}</p>
+                  )}
                 </div>
               )}
             </div>

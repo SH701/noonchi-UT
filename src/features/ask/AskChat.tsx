@@ -3,24 +3,41 @@
 import { useEffect, useRef, useState } from "react";
 import { ChatInput, ChatLoading } from "../../components/common";
 
-import { useAskMessageStream, useAskStream } from "@/hooks/mutations";
+import {
+  useAskMessageStream,
+  useAskStream,
+  useMessageTranslate,
+  useMessageTTS,
+} from "@/hooks/mutations";
 import { Spinner } from "../../components/ui/spinner/spinner";
-import { CLOSENESS_OPTIONS, Step, STEP_QUESTIONS, STEPS } from "@/constants";
-import { Button } from "@/components/ui/button/button";
 import ChatQuickActions from "./ChatQuickActions";
 import { useVoiceChat } from "@/hooks/custom";
-import { BulbIcon, ChevronDownIcon } from "@/assets/svgr";
+import {
+  BulbIcon,
+  ChevronDownIcon,
+  LanguageIcon,
+  VolumeUpIcon,
+} from "@/assets/svgr";
 import { ChevronUp } from "lucide-react";
 import { CominSoonModal } from "@/components/modal";
+import AskSteps from "./AskSteps";
 
 export default function AskChat() {
-  const [step, setStep] = useState<Step>("askTarget");
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [translateOpen, setTranslateOpen] = useState(false);
+  const [translatedMap, setTranslatedMap] = useState<Record<number, string>>(
+    {},
+  );
+  const [started, setStarted] = useState(false);
+
+  const [step, setStep] = useState<"askTarget" | "closeness" | "situation">(
+    "askTarget",
+  );
   const [askTarget, setAskTarget] = useState("");
   const [closeness, setCloseness] = useState("");
-  const [situation, setSituation] = useState("");
+  const [, setSituation] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const {
@@ -31,9 +48,12 @@ export default function AskChat() {
     culturalInsight,
     conversationId,
   } = useAskStream();
+
   const { turns, sendMessage, isAIResponding } = useAskMessageStream(
     Number(conversationId),
   );
+  const { mutate: tts } = useMessageTTS();
+  const { mutate: translate } = useMessageTranslate();
   const {
     micState,
     sttText,
@@ -41,7 +61,7 @@ export default function AskChat() {
     pendingAudioUrl,
     handleResetAudio,
   } = useVoiceChat();
-  const currentStepIdx = STEPS.indexOf(step);
+
   useEffect(() => {
     if (micState === "recorded" && sttText) {
       setMessage(sttText);
@@ -50,31 +70,35 @@ export default function AskChat() {
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [aiMessage, turns]);
-  const handleSendTarget = () => {
-    if (!message.trim()) return;
-    setAskTarget(message.trim());
-    setMessage("");
-    setStep("closeness");
+
+  const handleStepsComplete = (
+    askTarget: string,
+    closeness: string,
+    situation: string,
+  ) => {
+    setStarted(true);
+    createAsk({ askTarget, closeness, situation });
   };
 
-  const handleSelectCloseness = (value: string) => {
-    setCloseness(value);
-    setMessage("");
-    setStep("situation");
-  };
-
-  const handleSendSituation = () => {
-    if (!message.trim() || isPending) return;
-    setSituation(message.trim());
-    setMessage("");
-    createAsk({
-      askTarget,
-      closeness,
-      situation: message.trim(),
-    });
-  };
   const handleAskStream = () => {
     if (!message.trim()) return;
+
+    if (!started) {
+      if (step === "askTarget") {
+        setAskTarget(message);
+        setStep("closeness");
+        setMessage("");
+        return;
+      }
+      if (step === "situation") {
+        setSituation(message);
+        setMessage("");
+        handleStepsComplete(askTarget, closeness, message);
+        return;
+      }
+      return;
+    }
+
     if (micState === "recorded" && pendingAudioUrl && message === sttText) {
       sendMessage(message, pendingAudioUrl);
       handleResetAudio();
@@ -84,6 +108,7 @@ export default function AskChat() {
     }
     setMessage("");
   };
+
   const handleInsight = () => {
     setOpen((prev) => !prev);
   };
@@ -91,72 +116,16 @@ export default function AskChat() {
     <div className="flex w-full flex-1 flex-col">
       <CominSoonModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
       <div className="flex flex-1 flex-col pb-2">
-        {/* 타겟 */}
-        <span className="text-xl font-semibold">
-          {STEP_QUESTIONS.askTarget}
-        </span>
-        <span className="text-gray-600">
-          This can be something you`re <br /> about to say or do
-        </span>
-        {askTarget && (
-          <div className="flex justify-end">
-            <div className="mt-5 flex flex-col gap-2 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
-              <p className="text-sm">{askTarget}</p>
-            </div>
-          </div>
-        )}
-        {/* 가까움 정도 */}
-        {currentStepIdx >= 1 && (
-          <div className="mt-5 flex flex-col">
-            <span className="text-xl font-semibold">
-              {STEP_QUESTIONS.closeness}
-            </span>
-            <span className="text-gray-600">
-              This helps me understand the right tone
-            </span>
-            {closeness ? (
-              <div className="flex justify-end">
-                <div className="mt-5 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
-                  <p className="text-sm">
-                    {CLOSENESS_OPTIONS.find((o) => o.value === closeness)
-                      ?.label ?? closeness}
-                  </p>
-                </div>
-              </div>
-            ) : (
-              <div className="mt-5 flex flex-col gap-3">
-                {CLOSENESS_OPTIONS.map((option) => (
-                  <Button
-                    key={option.value}
-                    variant="outline"
-                    size="lg"
-                    onClick={() => handleSelectCloseness(option.value)}
-                  >
-                    {option.label}
-                  </Button>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* 상황 */}
-        {currentStepIdx >= 2 && (
-          <div className="mt-5 flex flex-col">
-            <span className="text-xl font-semibold">
-              {STEP_QUESTIONS.situation}
-            </span>
-            <span className="text-gray-600">
-              Describe the situation or what you want to express
-            </span>
-            {situation && (
-              <div className="flex justify-end">
-                <div className="my-5 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
-                  <p className="text-sm">{situation}</p>
-                </div>
-              </div>
-            )}
-          </div>
+        {!started && (
+          <AskSteps
+            step={step}
+            askTarget={askTarget}
+            closeness={closeness}
+            onSelectCloseness={(value) => {
+              setCloseness(value);
+              setStep("situation");
+            }}
+          />
         )}
 
         {/* 로딩 */}
@@ -219,7 +188,33 @@ export default function AskChat() {
                   <p className="text-sm text-gray-600">{turn.approachTip}</p>
                 )}
                 <div className="w-61 rounded-b-xl rounded-tr-xl border border-gray-300 bg-white p-4">
-                  <p className="text-sm">{turn.aiMessage}</p>
+                  <p className="pb-3 text-sm">{turn.aiMessage}</p>
+                  {turn.translatedContent && (
+                    <p className="pb-3 text-sm text-gray-500">
+                      {turn.translatedContent}
+                    </p>
+                  )}
+                  <div className="flex justify-between border-t border-gray-200 pt-3">
+                    <div className="flex gap-2 pb-2">
+                      <VolumeUpIcon onClick={() => tts(turn.aiMessage)} />
+                      <LanguageIcon
+                        onClick={() => {
+                          setTranslateOpen((prev) => !prev);
+                          translate(turn.messageId || 1, {
+                            onSuccess: (result) => {
+                              setTranslatedMap((prev) => ({
+                                ...prev,
+                                [turn.messageId || 1]: result,
+                              }));
+                            },
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                  {translateOpen && translatedMap[turn.messageId || 1] && (
+                    <p>{translatedMap[turn.messageId || 1]}</p>
+                  )}
                 </div>
                 {turn.culturalInsight && (
                   <p className="text-sm text-gray-500">
@@ -239,24 +234,7 @@ export default function AskChat() {
         {aiMessage && (
           <ChatQuickActions onOpenModal={() => setModalOpen(true)} />
         )}
-        {step === "askTarget" && (
-          <ChatInput
-            message={message}
-            setMessage={setMessage}
-            onSend={handleSendTarget}
-            placeholder="Type your answer..."
-          />
-        )}
-        {step === "situation" && !aiMessage && (
-          <ChatInput
-            message={message}
-            setMessage={setMessage}
-            onSend={handleSendSituation}
-            disabled={isPending}
-            placeholder="Type your answer..."
-          />
-        )}
-        {aiMessage && (
+        {(aiMessage || (!started && step !== "closeness")) && (
           <ChatInput
             message={message}
             setMessage={setMessage}
@@ -264,7 +242,13 @@ export default function AskChat() {
             onSend={handleAskStream}
             disabled={isAIResponding}
             micState={micState}
-            placeholder="Type your answer..."
+            placeholder={
+              step === "askTarget"
+                ? "Who are you talking to?"
+                : step === "situation"
+                  ? "Describe the situation..."
+                  : "Type your answer..."
+            }
           />
         )}
       </div>
