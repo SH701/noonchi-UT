@@ -1,8 +1,13 @@
 export default function HistorySectiontSkeleton() {
-  return (
-    <div className="mb-2 flex items-center justify-between">
-      <div className="h-4 w-6 animate-pulse rounded bg-gray-200" />
-      <div className="h-4 w-24 animate-pulse rounded bg-gray-200" />
-    </div>
-  );
+  
+    return (
+      <div className="mt-6 flex flex-col items-center justify-between gap-4">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <div
+            key={i}
+            className="h-20 w-full animate-pulse rounded bg-gray-200"
+          />
+        ))}
+      </div>
+    );
 }

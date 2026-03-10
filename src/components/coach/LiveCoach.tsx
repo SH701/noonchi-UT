@@ -27,7 +27,7 @@ export default function LiveCoach() {
             <div className="flex flex-col">
               <a
                 href={c.link}
-                className="pb-1 font-medium leading-6 underline"
+                className="pb-1 font-medium leading-6"
                 target="_blank"
               >
                 {c.name}
