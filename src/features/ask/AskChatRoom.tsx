@@ -12,6 +12,7 @@ import { BulbIcon, LanguageIcon, VolumeUpIcon } from "@/assets/svgr";
 import { ChevronDownIcon, ChevronUp } from "lucide-react";
 import { CLOSENESS_OPTIONS, STEP_QUESTIONS } from "@/constants";
 import ChatQuickActions from "./ChatQuickActions";
+import { CominSoonModal } from "@/components/modal";
 
 interface AskChatRoomProps {
   conversationId: number;
@@ -63,6 +64,7 @@ export default function AskChatRoom({
   };
   return (
     <div className="flex w-full flex-1 flex-col">
+      <CominSoonModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
       <div className="flex flex-1 flex-col">
         {/* 이전 대화 */}
         <span className="text-xl font-semibold">
