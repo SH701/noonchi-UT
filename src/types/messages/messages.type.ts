@@ -52,6 +52,19 @@ export interface RoleplayStreamDoneData {
   is_conversation_ending: boolean;
 }
 
+export interface AskStreamDoneData {
+  conversation_id: number;
+  coaching: string;
+  ai_message: string;
+  ai_message_en: string;
+  approach_tip: string;
+  cultural_insight: string;
+}
+
+export interface AskMessageStreamDoneData {
+  status: string;
+  ai_message_id: number;
+}
 export interface HintMessages {
   suggestions: string[];
   explanations: string[];

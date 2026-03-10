@@ -33,6 +33,7 @@ export default function AskChatRoom({
   const { mutate: translate } = useMessageTranslate();
   const bottomRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
   const [translateMsg, setTranslateMsg] = useState(false);
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -188,7 +189,7 @@ export default function AskChatRoom({
 
       {/* 하단 고정 ChatInput */}
       <div className="sticky bottom-0 flex flex-col pb-5 backdrop-blur-md">
-        <ChatQuickActions />
+        <ChatQuickActions onOpenModal={() => setModalOpen(true)} />
         <ChatInput
           message={message}
           setMessage={setMessage}

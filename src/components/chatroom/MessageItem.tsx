@@ -63,13 +63,9 @@ export default function MessageItem({
     onToggleReveal !== undefined ? (isRevealed ?? false) : meanOpen;
   const [feedbackOpen, setFeedbackOpen] = useState(false);
 
-  const {
-    data: translateText,
-    mutate: translate,
-    isPending: loadingTranslate,
-  } = useMessageTranslate();
+  const { data: translateText, mutate: translate } = useMessageTranslate();
   const { mutate: tts, isPending: loadingTTS } = useMessageTTS();
-  const { data: feedbackData } = useMessageFeedback(
+  const { data: feedbackData, isPending: loaidngFeedback } = useMessageFeedback(
     feedbackOpen && !isPending ? messages.messageId : undefined,
   );
 
@@ -147,9 +143,18 @@ export default function MessageItem({
                   <button
                     className="mt-2.5 flex gap-1 rounded-full border border-blue-500 px-2 py-1"
                     onClick={handleFeedback}
+                    disabled={loaidngFeedback}
                   >
-                    <InfoIcon className="text-blue-500" />
-                    <span className="text-sm text-blue-500">Hide feedback</span>
+                    {loaidngFeedback ? (
+                      <Spinner />
+                    ) : (
+                      <div className="flex gap-1">
+                        <InfoIcon className="text-blue-500" />
+                        <span className="text-sm text-blue-500">
+                          Hide feedback
+                        </span>
+                      </div>
+                    )}
                   </button>
                 </div>
               ) : (
@@ -167,7 +172,13 @@ export default function MessageItem({
             </div>
           </div>
         )}
-
+        {/* System 컨텐츠 */}
+        {!isMine && !isAI && (
+          <div className="flex w-full gap-1 pr-2 text-sm text-blue-500">
+            <Asterisk className="shrink-0" />
+            <p>{messages.content}</p>
+          </div>
+        )}
         {/* AI 말풍선 */}
         {isAI && (
           <>
@@ -181,18 +192,13 @@ export default function MessageItem({
                     onClick={() => handleTTsClick(messages.content)}
                     disabled={loadingTTS}
                   >
-                    <VolumeUpIcon size={20} />
+                    {loadingTTS ? <Spinner /> : <VolumeUpIcon size={20} />}
                   </button>
 
                   <button
                     onClick={() => handleTranslateClick(messages.messageId)}
-                    disabled={loadingTranslate}
                   >
-                    {loadingTranslate ? (
-                      <Spinner size="20px" />
-                    ) : (
-                      <LanguageIcon />
-                    )}
+                    <LanguageIcon />
                   </button>
                 </div>
 
@@ -211,13 +217,6 @@ export default function MessageItem({
               )}
             </div>
           </>
-        )}
-        {/* System 컨텐츠 */}
-        {!isMine && !isAI && (
-          <div className="flex w-full gap-1 pr-2 text-sm text-blue-500">
-            <Asterisk className="shrink-0" />
-            <p>{messages.content}</p>
-          </div>
         )}
       </div>
       {isMeanOpen && (

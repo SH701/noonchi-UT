@@ -16,6 +16,7 @@ export const useAskStream = () => {
   const [aiMessage, setAiMessage] = useState("");
   const [culturalInsight, setCulturalInsight] = useState("");
   const [isPending, setIsPending] = useState(false);
+  const [conversationId, setConversationId] = useState<number | null>(null);
 
   const mutate = async (data: AskReq) => {
     setIsPending(true);
@@ -23,7 +24,7 @@ export const useAskStream = () => {
     setAiMessage("");
     setCulturalInsight("");
     try {
-      await apiMutations.conversations.createAskStream(
+      const result = await apiMutations.conversations.createAskStream(
         data,
         (type, content) => {
           if (type === "approach_tip") setApproachTip((prev) => prev + content);
@@ -32,12 +33,13 @@ export const useAskStream = () => {
             setCulturalInsight((prev) => prev + content);
         },
       );
+      setConversationId(result.conversation_id);
     } finally {
       setIsPending(false);
     }
   };
 
-  return { mutate, isPending, approachTip, aiMessage, culturalInsight };
+  return { mutate, isPending, approachTip, aiMessage, culturalInsight, conversationId };
 };
 export const useConversationEnd = (conversationId: number) => {
   return useMutation({
