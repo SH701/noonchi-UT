@@ -15,12 +15,12 @@ export default function Level() {
           Tell us how comfortable you are <br /> chatting in Korean!
         </p>
 
-        <div className="space-y-4">
+        <div className="space-y-2">
           {(["BEGINNER", "INTERMEDIATE", "ADVANCED"] as const).map((lvl) => (
             <div
               key={lvl}
               onClick={() => setKoreanLevel(lvl)}
-              className="flex w-full cursor-pointer items-center gap-4 rounded-2xl border bg-white px-4 py-5 transition-all"
+              className="h-25 flex w-full cursor-pointer items-center gap-4 rounded-2xl border bg-white px-4 py-5 transition-all"
               style={{
                 borderColor: koreanLevel === lvl ? "#6366F1" : "#E5E7EB",
                 background: koreanLevel === lvl ? "#EEF2FF" : "",

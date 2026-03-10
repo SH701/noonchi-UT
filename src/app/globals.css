@@ -59,7 +59,7 @@
     var(--color-grad-4) 100%
   );
   background-attachment: fixed;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 .bg-gradient-secondary {
   background: linear-gradient(
