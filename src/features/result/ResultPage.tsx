@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   useConversationFeedback,
@@ -31,10 +31,16 @@ export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
   const { data: messages = [] } = useChatQuery(roomId);
   const { data: feedback, isLoading: isFeedbackLoading } =
     useConversationFeedback(roomId);
-
+  useEffect(() => {
+    if (feedback) {
+      gtag("event", "feedback_view");
+    }
+  }, [feedback]);
   if (isFeedbackLoading || !feedback) {
     return <FeedbackLoading />;
   }
+
+
   return (
     <div className="flex min-h-screen flex-col overflow-x-hidden">
       <ResultHeader />

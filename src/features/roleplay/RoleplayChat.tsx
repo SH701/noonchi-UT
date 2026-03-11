@@ -62,6 +62,10 @@ export default function RoleplayChat({
   const myAI = conversation?.aiPersona ?? null;
 
   const handleEnd = () => {
+    gtag("event", "roleplay_complete", {
+      topic: conversation?.aiPersona.description,
+      situation: conversation?.situation,
+    });
     conversationEnd(undefined, {
       onSuccess: () => {
         router.push(`/main/roleplay/chatroom/${conversationId}/result`);

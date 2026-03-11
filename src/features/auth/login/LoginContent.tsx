@@ -61,6 +61,7 @@ export default function LoginContent() {
       //   await update();
       //   resetPreferences();
       // }
+      gtag("event", "login", { method: "email" });
       closeModal();
       router.replace("/main");
     } catch {

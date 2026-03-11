@@ -77,8 +77,8 @@ export default function SignupDetail({
       //   await update();
       //   resetPreferences();
       // }
-
-      closeModal();
+      gtag("event", "sign_up", { method: "email" });
+      closeModal(); 
       router.push("/main");
     } catch (err) {
       if (err instanceof Error) {

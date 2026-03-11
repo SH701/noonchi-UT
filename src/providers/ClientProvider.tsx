@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { InternalAxiosRequestConfig } from "axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 import { axios } from "@/api/common";
 
@@ -15,7 +16,10 @@ export default function ClientProvider({ children }: Props) {
   const { data: session, status } = useSession();
   const queryClient = useQueryClient();
   const prevStatus = useRef<string | null>(null);
-
+  const pathname = usePathname();
+  useEffect(() => {
+    gtag("event", "page_view", { page_path: pathname });
+  }, [pathname]);
   useEffect(() => {
     const reqInterceptor = axios.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
@@ -53,6 +57,7 @@ export default function ClientProvider({ children }: Props) {
       status === "unauthenticated"
     ) {
       queryClient.clear();
+      gtag("set", { user_id: undefined });
     }
 
     // 로그인 시 리패칭
@@ -62,6 +67,10 @@ export default function ClientProvider({ children }: Props) {
       session?.accessToken
     ) {
       queryClient.invalidateQueries();
+    }
+
+    if (status === "authenticated" && session?.user?.id) {
+      gtag("set", { user_id: String(session.user.id) });
     }
 
     prevStatus.current = status;

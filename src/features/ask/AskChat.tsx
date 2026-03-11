@@ -53,22 +53,25 @@ export default function AskChat() {
     situation: string,
   ) => {
     setStarted(true);
+    gtag("event", "ask_start");
     createAsk({ askTarget, closeness, situation });
   };
 
   const handleAskStream = () => {
     if (!message.trim()) return;
-
     if (!started) {
       if (step === "askTarget") {
         setAskTarget(message);
+        gtag("event", "ask_first_question");
         setStep("closeness");
         setMessage("");
+  
         return;
       }
       if (step === "situation") {
         setSituation(message);
         setMessage("");
+        gtag("event", "ask_third_question");
         handleStepsComplete(askTarget, closeness, message);
         return;
       }
@@ -88,6 +91,7 @@ export default function AskChat() {
   const handleInsight = () => {
     setOpen((prev) => !prev);
   };
+
   return (
     <div className="flex w-full flex-1 flex-col">
       <CominSoonModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
@@ -99,6 +103,7 @@ export default function AskChat() {
             closeness={closeness}
             onSelectCloseness={(value) => {
               setCloseness(value);
+              gtag("event", "ask_second_question");
               setStep("situation");
             }}
           />

@@ -51,6 +51,11 @@ export default function RolePlay() {
         situation,
       };
       const convo = await createRoleplay(requestData);
+      gtag("event", "roleplay_start", {
+        category: category,
+        topic_name: topic.name,
+        topic_id: topicId,
+      });
       router.push(`/main/roleplay/chatroom/${convo.conversationId}`);
     } catch {
       toast.error("Failed to create chat room");
