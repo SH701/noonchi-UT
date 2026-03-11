@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import z from "zod";
 import { AuthRes } from "@/types/auth";
-import { User } from "@/types/user";
+import { User as AppUser } from "@/types/user";
 
 async function refreshAccessToken(refreshToken: string) {
   try {
@@ -73,6 +73,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             id: data.user.id,
             email: data.user.email,
             name: data.user.nickname,
+            birthDate: data.user.birthDate,
             image: data.user.profileImageUrl,
             accessToken: data.accessToken,
             refreshToken: data.refreshToken,
@@ -85,6 +86,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
   callbacks: {
     async jwt({ token, user }) {
       // 최초 로그인 시 토큰 저장
@@ -117,8 +121,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       session.accessToken = token.accessToken as string;
       session.refreshToken = token.refreshToken as string;
       if (token.user) {
-        const u = token.user as User;
-        Object.assign(session.user, u);
+        const appUser = token.user as AppUser;
+
+        session.user = {
+          ...session.user,
+          ...appUser,
+          id: String(appUser.id),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } as any;
       }
       return session;
     },

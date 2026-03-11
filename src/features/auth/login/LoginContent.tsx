@@ -11,7 +11,9 @@ import { LoginAction, LoginForm } from "@/features/auth";
 import { loginSchema } from "@/types/auth";
 import { useModalActions } from "@/store/useModalStore";
 import { X } from "lucide-react";
-
+import { usePreferenceStore } from "@/store/usePreferenceStore";
+import { useUpdateProfile } from "@/hooks/mutations/user/useProfile";
+import { useSession } from "next-auth/react";
 type LoginData = z.infer<typeof loginSchema>;
 
 export default function LoginContent() {
@@ -19,6 +21,9 @@ export default function LoginContent() {
   const [loading, setLoading] = useState(false);
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
   const { closeModal } = useModalActions();
+  const { update } = useSession();
+  const { koreanLevel, interests, resetPreferences } = usePreferenceStore();
+  const { mutateAsync: updateProfile } = useUpdateProfile();
   const {
     control,
     handleSubmit,
@@ -48,6 +53,14 @@ export default function LoginContent() {
         setLoading(false);
         return;
       }
+      // if (koreanLevel || interests.length > 0) {
+      //   await updateProfile({
+      //     koreanLevel: koreanLevel ?? undefined,
+      //     interests,
+      //   });
+      //   await update();
+      //   resetPreferences();
+      // }
       closeModal();
       router.replace("/main");
     } catch {

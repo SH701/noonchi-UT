@@ -10,7 +10,7 @@ export default function Logout() {
   const router = useRouter();
   const handleLogout = async () => {
     try {
-      await apiMutations.auth.logout();
+      await apiMutations.auth.Logout();
       await signOut({ redirect: false });
       router.push("/");
       toast.success("You are logged out");

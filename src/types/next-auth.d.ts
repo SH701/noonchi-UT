@@ -4,7 +4,10 @@ declare module "next-auth" {
   interface Session {
     accessToken: string;
     refreshToken: string;
-    user: AppUser & Record<string, unknown>;
+    user: AppUser &
+      Omit<DefaultSession["user"], "id"> & {
+        id: string | number;
+      };
   }
 
   interface User {

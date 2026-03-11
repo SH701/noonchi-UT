@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import clsx from "clsx";
-import { MyAI } from "@/types/etc";
 
 import {
   useMessageFeedback,
@@ -19,6 +18,7 @@ import {
 } from "@/assets/svgr";
 import { Asterisk } from "lucide-react";
 import { renderWithAction } from "@/lib/renderWithAction";
+import { MyAI } from "@/types/conversations";
 interface MessageItemProps {
   messages: {
     content: string;

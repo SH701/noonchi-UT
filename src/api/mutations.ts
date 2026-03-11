@@ -18,16 +18,10 @@ import {
 import { Preview, PreviewSendRes } from "@/types/preview/preview.type";
 import axios from "axios";
 import { TopicScenario } from "@/types/topics";
-import { AuthRes, LoginReq, SignupReq } from "@/types/auth";
+import { AuthRes, SignupReq } from "@/types/auth";
 
 export const apiMutations = {
   auth: {
-    Login: async (payload: LoginReq): Promise<AuthRes> => {
-      return apiFetch<AuthRes>("/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify({ payload }),
-      });
-    },
     Signup: async (payload: SignupReq): Promise<AuthRes> => {
       const response = await apiFetch<AuthRes>("/api/auth/signup", {
         method: "POST",
@@ -42,7 +36,6 @@ export const apiMutations = {
       });
     },
   },
-
   messages: {
     asksend: async (
       conversationId: number,
@@ -171,7 +164,6 @@ export const apiMutations = {
       });
     },
   },
-
   conversations: {
     CreateInterview: async (
       data: InterviewFormData,
@@ -267,7 +259,6 @@ export const apiMutations = {
       });
     },
   },
-
   files: {
     UploadFiles: async (files: File[]): Promise<UploadedFile[]> => {
       return Promise.all(
@@ -437,6 +428,22 @@ export const apiMutations = {
       return apiFetch<string>(`/api/language/tts`, {
         method: "POST",
         body: JSON.stringify({ text }),
+      });
+    },
+  },
+  user: {
+    UpadateProfile: async (
+      koreanLevel?: string,
+
+      interests?: string[],
+    ) => {
+      return apiFetch("/api/users/me/profile", {
+        method: "PUT",
+        body: JSON.stringify({
+          koreanLevel,
+
+          interests,
+        }),
       });
     },
   },

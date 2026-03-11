@@ -6,7 +6,6 @@ import {
 } from "@tanstack/react-query";
 import {
   Conversation,
-  ConversationDetail,
   ConversationFeedback,
   ConversationSortBy,
   FilterState,
@@ -85,9 +84,9 @@ export const useConversationSearch = (
 
 export function useConversationDetail(
   conversationId?: number,
-  options?: Partial<UseQueryOptions<ConversationDetail>>,
+  options?: Partial<UseQueryOptions<Conversation>>,
 ) {
-  return useQuery<ConversationDetail>({
+  return useQuery<Conversation>({
     queryKey: ["conversationDetail", conversationId],
     queryFn: () => apiClient.conversations.getDetail(conversationId!),
     ...options,

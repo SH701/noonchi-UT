@@ -4,12 +4,11 @@ import { User } from "@/types/user/user.type";
 import { normalizeChatMessage } from "@/lib/normalizeChatMessage";
 import { ChatMsg, Feedback } from "@/types/messages";
 import {
-  ConversationDetail,
+  Conversation,
   ConversationFeedback,
   ConversationPaged,
   ConversationSortBy,
   FilterState,
-
 } from "@/types/conversations";
 import { filterMap } from "@/constants";
 import { TopicRes, PagedTopicRes } from "@/types/topics";
@@ -60,13 +59,10 @@ export const apiClient = {
         cache: "no-cache",
       });
     },
-    getDetail: async (conversationId: number): Promise<ConversationDetail> => {
-      return apiFetch<ConversationDetail>(
-        `/api/conversations/${conversationId}`,
-        {
-          cache: "no-store",
-        },
-      );
+    getDetail: async (conversationId: number): Promise<Conversation> => {
+      return apiFetch<Conversation>(`/api/conversations/${conversationId}`, {
+        cache: "no-store",
+      });
     },
     getConversationFeedback: async (
       conversationId: number,
@@ -78,10 +74,15 @@ export const apiClient = {
         },
       );
     },
-    getConversationSearch: async (keyword: string): Promise<ConversationPaged> => {
-      return apiFetch<ConversationPaged>(`/api/conversations/search?keyword=${encodeURIComponent(keyword)}`, {
-        cache: "no-cache",
-      });
+    getConversationSearch: async (
+      keyword: string,
+    ): Promise<ConversationPaged> => {
+      return apiFetch<ConversationPaged>(
+        `/api/conversations/search?keyword=${encodeURIComponent(keyword)}`,
+        {
+          cache: "no-cache",
+        },
+      );
     },
   },
   messages: {

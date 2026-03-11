@@ -29,9 +29,10 @@ export default function Onboarding() {
   const [initialLoading, setInitialLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
 
+
   const lastIndex = slides.length - 1;
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentSlide === lastIndex) {
       router.push("/preview");
     } else {
@@ -48,8 +49,8 @@ export default function Onboarding() {
     return <OnboardLoading />;
   }
   return (
-    <div className="h-screen w-full  flex items-center justify-center overflow-hidden">
-      <div className="w-full h-full flex flex-col mx-auto relative">
+    <div className="flex h-screen w-full items-center justify-center overflow-hidden">
+      <div className="relative mx-auto flex h-full w-full flex-col">
         <div className="grow">
           <Slider
             ref={sliderRef}
@@ -71,25 +72,25 @@ export default function Onboarding() {
               const isFormSlide = slide.id === 1 || slide.id === 2;
 
               return (
-                <div key={slide.id} className="flex flex-col h-full">
+                <div key={slide.id} className="flex h-full flex-col">
                   <div
                     className={
                       isFormSlide
-                        ? "relative flex-1 flex items-start pt-20 px-4 overflow-y-auto"
-                        : "relative h-100 flex items-center justify-center"
+                        ? "relative flex flex-1 items-start overflow-y-auto px-4 pt-20"
+                        : "h-100 relative flex items-center justify-center"
                     }
                   >
                     <Content />
                   </div>
                   {!isFormSlide && (
                     <>
-                      <div className="w-full mx-auto max-w-76 flex flex-col items-center justify-center text-center mt-10">
-                        <h2 className="text-center text-2xl font-semibold leading-tight text-icon-primary">
+                      <div className="max-w-76 mx-auto mt-10 flex w-full flex-col items-center justify-center text-center">
+                        <h2 className="text-icon-primary text-center text-2xl font-semibold leading-tight">
                           {slide?.title}
                         </h2>
                       </div>
-                      <div className="w-full flex flex-col items-center text-center mx-auto ">
-                        <p className="text-[#9CA3AF] mt-2 mb-3 text-sm leading-snug">
+                      <div className="mx-auto flex w-full flex-col items-center text-center">
+                        <p className="mb-3 mt-2 text-sm leading-snug text-[#9CA3AF]">
                           {slide?.desc}
                         </p>
                       </div>

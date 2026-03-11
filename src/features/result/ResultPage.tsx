@@ -16,7 +16,7 @@ import {
   FeedbackPart,
   ResultHeader,
 } from "@/features/result";
-import FeedbackLoading from "./FeedbackLoading";
+import FeedbackLoading from "../roleplay/FeedbackLoading";
 import Tab from "@/features/tab/Tab";
 
 interface RoleplayEndProps {
