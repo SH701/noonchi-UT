@@ -12,7 +12,7 @@ import { loginSchema } from "@/types/auth";
 import { useModalActions } from "@/store/useModalStore";
 import { X } from "lucide-react";
 import { usePreferenceStore } from "@/store/usePreferenceStore";
-import { useUpdateProfile } from "@/hooks/mutations/user/useProfile";
+import { useUpdateProfile } from "@/hooks/mutations";
 import { useSession } from "next-auth/react";
 type LoginData = z.infer<typeof loginSchema>;
 

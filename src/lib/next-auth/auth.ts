@@ -101,6 +101,24 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
       // 토큰이 아직 유효하면 그대로 반환
       if (Date.now() < (token.accessTokenExpires as number)) {
+        // token.user가 없으면 accessToken으로 유저 정보 복구
+        if (!token.user && token.accessToken) {
+          try {
+            const res = await fetch(
+              `${process.env.NEXT_PUBLIC_API_URL}/api/users/me`,
+              {
+                headers: {
+                  Authorization: `Bearer ${token.accessToken}`,
+                },
+              },
+            );
+            if (res.ok) {
+              token.user = await res.json();
+            }
+          } catch (e) {
+            console.error("Failed to fetch user info:", e);
+          }
+        }
         return token;
       }
       // 토큰 만료 시 갱신 시도
@@ -115,8 +133,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           token.error = "RefreshTokenError";
         }
       }
+
       return token;
     },
+
     async session({ session, token }) {
       session.accessToken = token.accessToken as string;
       session.refreshToken = token.refreshToken as string;

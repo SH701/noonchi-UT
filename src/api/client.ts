@@ -1,5 +1,4 @@
 import { apiFetch } from "./api";
-import { User } from "@/types/user/user.type";
 
 import { normalizeChatMessage } from "@/lib/normalizeChatMessage";
 import { ChatMsg, Feedback } from "@/types/messages";
@@ -16,11 +15,6 @@ import { HintMessages } from "@/types/messages";
 import axios from "axios";
 
 export const apiClient = {
-  users: {
-    getMe: async (): Promise<User> => {
-      return apiFetch<User>("/api/users/me");
-    },
-  },
   topic: {
     getTopic: async (
       category: string,

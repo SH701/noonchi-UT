@@ -14,7 +14,7 @@ import { useModalActions } from "@/store/useModalStore";
 import { Spinner } from "@/components/ui/spinner/spinner";
 import { X } from "lucide-react";
 import { usePreferenceStore } from "@/store/usePreferenceStore";
-import { useUpdateProfile } from "@/hooks/mutations/user/useProfile";
+import { useUpdateProfile } from "@/hooks/mutations";
 import { useSession } from "next-auth/react";
 
 type Step2FormData = z.infer<typeof signup2Schema>;
