@@ -1,35 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { ChatInput, ChatLoading } from "../../components/common";
 
-import {
-  useAskMessageStream,
-  useAskStream,
-  useMessageTranslate,
-  useMessageTTS,
-} from "@/hooks/mutations";
+import { useAskMessageStream, useAskStream } from "@/hooks/mutations";
 import { Spinner } from "../../components/ui/spinner/spinner";
 import ChatQuickActions from "./ChatQuickActions";
-import { useVoiceChat } from "@/hooks/custom";
-import {
-  BulbIcon,
-  ChevronDownIcon,
-  LanguageIcon,
-  VolumeUpIcon,
-} from "@/assets/svgr";
+import { useScrollToBottom, useVoiceChat } from "@/hooks/custom";
+import { BulbIcon, ChevronDownIcon } from "@/assets/svgr";
 import { ChevronUp } from "lucide-react";
 import { CominSoonModal } from "@/components/modal";
 import AskSteps from "./AskSteps";
+import MessageItem from "@/components/chatroom/MessageItem";
 
 export default function AskChat() {
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [translateOpen, setTranslateOpen] = useState(false);
-  const [translatedMap, setTranslatedMap] = useState<Record<number, string>>(
-    {},
-  );
   const [started, setStarted] = useState(false);
 
   const [step, setStep] = useState<"askTarget" | "closeness" | "situation">(
@@ -38,7 +25,6 @@ export default function AskChat() {
   const [askTarget, setAskTarget] = useState("");
   const [closeness, setCloseness] = useState("");
   const [, setSituation] = useState("");
-  const bottomRef = useRef<HTMLDivElement>(null);
 
   const {
     mutate: createAsk,
@@ -52,24 +38,15 @@ export default function AskChat() {
   const { turns, sendMessage, isAIResponding } = useAskMessageStream(
     Number(conversationId),
   );
-  const { mutate: tts } = useMessageTTS();
-  const { mutate: translate } = useMessageTranslate();
   const {
     micState,
     sttText,
     handleMicClick,
     pendingAudioUrl,
     handleResetAudio,
-  } = useVoiceChat();
+  } = useVoiceChat(undefined, undefined, setMessage);
 
-  useEffect(() => {
-    if (micState === "recorded" && sttText) {
-      setMessage(sttText);
-    }
-  }, [sttText, micState]);
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [aiMessage, turns]);
+  const bottomRef = useScrollToBottom([aiMessage, turns]);
 
   const handleStepsComplete = (
     askTarget: string,
@@ -177,45 +154,20 @@ export default function AskChat() {
         {/* 이후 스트리밍 메세지 */}
         {turns.map((turn, i) => (
           <div key={i} className="mt-5 flex flex-col gap-3">
-            <div className="flex justify-end">
-              <div className="rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
-                <p className="text-sm">{turn.userContent}</p>
-              </div>
-            </div>
+            <MessageItem messages={{ content: turn.userContent }} isMine />
             {turn.aiMessage && (
               <>
                 {turn.approachTip && (
                   <p className="text-sm text-gray-600">{turn.approachTip}</p>
                 )}
-                <div className="w-61 rounded-b-xl rounded-tr-xl border border-gray-300 bg-white p-4">
-                  <p className="pb-3 text-sm">{turn.aiMessage}</p>
-                  {turn.translatedContent && (
-                    <p className="pb-3 text-sm text-gray-500">
-                      {turn.translatedContent}
-                    </p>
-                  )}
-                  <div className="flex justify-between border-t border-gray-200 pt-3">
-                    <div className="flex gap-2 pb-2">
-                      <VolumeUpIcon onClick={() => tts(turn.aiMessage)} />
-                      <LanguageIcon
-                        onClick={() => {
-                          setTranslateOpen((prev) => !prev);
-                          translate(turn.messageId || 1, {
-                            onSuccess: (result) => {
-                              setTranslatedMap((prev) => ({
-                                ...prev,
-                                [turn.messageId || 1]: result,
-                              }));
-                            },
-                          });
-                        }}
-                      />
-                    </div>
-                  </div>
-                  {translateOpen && translatedMap[turn.messageId || 1] && (
-                    <p>{translatedMap[turn.messageId || 1]}</p>
-                  )}
-                </div>
+                <MessageItem
+                  messages={{
+                    content: turn.aiMessage,
+                    messageId: turn.messageId,
+                  }}
+                  isAI
+                  translatedContent={turn.translatedContent}
+                />
                 {turn.culturalInsight && (
                   <p className="text-sm text-gray-500">
                     {turn.culturalInsight}

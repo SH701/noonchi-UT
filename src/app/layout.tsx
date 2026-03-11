@@ -30,7 +30,7 @@ export default function RootLayout({
       <head></head>
       <body className="min-h-dvh w-full">
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-BJ45G5B4PZ"
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -38,7 +38,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-BJ45G5B4PZ');
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
           `}
         </Script>
         <AuthProvider>

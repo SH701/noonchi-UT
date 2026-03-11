@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import {
   MessageList,
   HintMessage,
@@ -10,13 +10,8 @@ import {
 
 import { useConversationDetail, useRoleplayHint } from "@/hooks/queries";
 import { ChatInput } from "@/components/common";
-import {
-  useConversationEnd,
-  useRoleMessageStream,
-  useRoleplayMessages,
-} from "@/hooks/mutations";
-import { useVoiceChat } from "@/hooks/custom/useVoiceChat";
-
+import { useConversationEnd, useRoleMessageStream } from "@/hooks/mutations";
+import { useVoiceChat, useScrollToBottom } from "@/hooks/custom";
 import { useChatUI } from "@/hooks/custom/useChatUI";
 import RoleplayHeader from "./ChatroomHeader";
 import { motion } from "framer-motion";
@@ -33,11 +28,11 @@ export default function RoleplayChat({
   conversationId,
 }: RoleplayChatRoomProps) {
   const [message, setMessage] = useState("");
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const { data: conversation, refetch: conversationDeatil } =
     useConversationDetail(conversationId);
-  const { messages } = useRoleplayMessages(conversationId);
+
   const { streamMessages, sendStreamMessage } =
     useRoleMessageStream(conversationId);
   const { data: hintData, refetch: refetchHint } =
@@ -48,7 +43,7 @@ export default function RoleplayChat({
     pendingAudioUrl,
     handleMicClick,
     handleResetAudio,
-  } = useVoiceChat(conversationId, sendStreamMessage);
+  } = useVoiceChat(conversationId, sendStreamMessage, setMessage);
   const {
     showHintPanel,
     toggleHint,
@@ -58,19 +53,10 @@ export default function RoleplayChat({
     toggleNotice,
   } = useChatUI();
 
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [streamMessages]);
-
-  useEffect(() => {
-    if (micState === "recorded" && sttText) {
-      setMessage(sttText);
-    }
-  }, [sttText, micState]);
+  const bottomRef = useScrollToBottom([streamMessages]);
 
   const { mutate: conversationEnd, isPending: isEnding } =
     useConversationEnd(conversationId);
-  const router = useRouter();
 
   const myAI = conversation?.aiPersona ?? null;
 
@@ -84,7 +70,6 @@ export default function RoleplayChat({
 
   const handleSendText = async () => {
     if (!message.trim()) return;
-
     const textToSend = message;
     const audioToSend =
       micState === "recorded" && pendingAudioUrl && message === sttText
@@ -125,7 +110,7 @@ export default function RoleplayChat({
                 userRole={conversation.aiPersona.userRole}
               />
               <MessageList
-                messages={[...messages, ...streamMessages]}
+                messages={[...streamMessages]}
                 myAI={myAI}
                 showsituation={showSituation}
                 onInfoClick={handleInfo}

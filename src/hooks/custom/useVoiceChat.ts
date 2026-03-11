@@ -8,6 +8,7 @@ export type MicState = "idle" | "recording" | "recorded";
 export function useVoiceChat(
   conversationId?: number,
   sendMessage?: (content?: string, audioUrl?: string) => Promise<void> | void,
+  onSttResult?: (text: string) => void,
 ) {
   const { startRecording, stopRecording } = useRecorder();
   const [micState, setMicState] = useState<MicState>("idle");
@@ -29,7 +30,7 @@ export function useVoiceChat(
         if (!blob || blob.size === 0) {
           throw new Error("빈 오디오 blob");
         }
-        const audioUrl = await apiMutations.files.uploadAudio(blob);
+        const audioUrl = await apiMutations.files.UploadAudio(blob);
 
         const content = await apiMutations.language.stt(audioUrl);
         if (content === "") {
@@ -40,6 +41,7 @@ export function useVoiceChat(
         setSttText(content);
         setMicState("recorded");
         setPendingAudioUrl(audioUrl);
+        onSttResult?.(content);
       } catch {
         handleResetAudio();
       }

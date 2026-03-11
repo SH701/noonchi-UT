@@ -1,124 +1,7 @@
-import { useMemo, useState } from "react";
-import { ChatMsg } from "@/types/messages";
+import { useState } from "react";
+import { AskTurn, ChatMsg } from "@/types/messages";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useChatQuery } from "@/hooks/queries/messages/useChatQuery";
 import { apiMutations } from "@/api";
-
-interface SendParams {
-  conversationId: number;
-  content?: string;
-  audioUrl?: string;
-}
-
-export function useSendMessages(
-  conversationId: number,
-  mutationFn: (params: SendParams) => Promise<ChatMsg>,
-) {
-  const [optimisticMessages, setOptimisticMessages] = useState<ChatMsg[]>([]);
-  const queryClient = useQueryClient();
-
-  const { data: serverMessages = [] } = useChatQuery(conversationId);
-
-  const { mutateAsync: sendMutation, isPending } = useMutation({
-    mutationFn,
-  });
-
-  const messages = useMemo(() => {
-    if (optimisticMessages.length === 0) return serverMessages;
-
-    const optimisticIds = new Set(optimisticMessages.map((m) => m.messageId));
-    const merged = [
-      ...serverMessages.filter((m) => !optimisticIds.has(m.messageId)),
-      ...optimisticMessages,
-    ];
-
-    return merged.sort(
-      (a, b) =>
-        new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
-    );
-  }, [serverMessages, optimisticMessages]);
-
-  const isAIResponding = useMemo(
-    () => messages.some((m) => m.isLoading && m.type === "AI"),
-    [messages],
-  );
-
-  const sendMessage = async (content?: string, audioUrl?: string) => {
-    if (!conversationId) return;
-    if (!content && !audioUrl) return;
-
-    const tempId = -Date.now();
-
-    const optimistic: ChatMsg = {
-      messageId: tempId,
-      conversationId,
-      type: "USER",
-      content: content ?? "[Voice Message]",
-      audioUrl: audioUrl ?? null,
-      createdAt: new Date().toISOString(),
-      hiddenMeaning: "",
-      visualAction: "",
-      situationDescription: "",
-    };
-
-    const loadingBubble: ChatMsg = {
-      messageId: tempId - 1,
-      conversationId,
-      type: "AI",
-      content: "",
-      audioUrl: null,
-      createdAt: new Date().toISOString(),
-      isLoading: true,
-      hiddenMeaning: "",
-      visualAction: "",
-      situationDescription: "",
-    };
-
-    setOptimisticMessages([optimistic, loadingBubble]);
-
-    try {
-      await sendMutation({ conversationId, content, audioUrl });
-
-      setOptimisticMessages([]);
-
-      queryClient.invalidateQueries({
-        queryKey: ["messages", conversationId],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ["conversationDetail"],
-      });
-    } catch (err) {
-      console.error("sendMessage error", err);
-      setOptimisticMessages([]);
-    }
-  };
-
-  return {
-    messages,
-    sendMessage,
-    isAIResponding,
-    isSending: isPending,
-  };
-}
-
-export function useAskMessages(conversationId: number) {
-  return useSendMessages(conversationId, (params) =>
-    apiMutations.messages.asksend(
-      params.conversationId,
-      params.content,
-      params.audioUrl,
-    ),
-  );
-}
-interface AskTurn {
-  userContent: string;
-  approachTip: string;
-  aiMessage: string;
-  culturalInsight: string;
-  messageId?: number;
-  translatedContent?: string;
-}
 
 export function useAskMessageStream(conversationId: number) {
   const [turns, setTurns] = useState<AskTurn[]>([]);
@@ -140,7 +23,7 @@ export function useAskMessageStream(conversationId: number) {
     setIsAIResponding(true);
 
     try {
-      const doneData = await apiMutations.messages.asksendstream(
+      const doneData = await apiMutations.messages.Asksendstream(
         conversationId,
         content,
         (chunk) => {
@@ -155,9 +38,7 @@ export function useAskMessageStream(conversationId: number) {
       if (doneData) {
         setTurns((prev) =>
           prev.map((t, i) =>
-            i === turnIndex
-              ? { ...t, messageId: doneData.ai_message_id }
-              : t,
+            i === turnIndex ? { ...t, messageId: doneData.ai_message_id } : t,
           ),
         );
       }
@@ -176,15 +57,7 @@ export function useAskMessageStream(conversationId: number) {
 
   return { turns, sendMessage, isAIResponding, updateTranslation };
 }
-export function useRoleplayMessages(conversationId: number) {
-  return useSendMessages(conversationId, (params) =>
-    apiMutations.messages.roleplaysend(
-      params.conversationId,
-      params.content,
-      params.audioUrl,
-    ),
-  );
-}
+
 export function useRoleMessageStream(conversationId: number) {
   const [streamMessages, setStreamMessages] = useState<ChatMsg[]>([]);
   const [isAIResponding, setIsAIResponding] = useState(false);
@@ -226,7 +99,7 @@ export function useRoleMessageStream(conversationId: number) {
     ]);
 
     try {
-      const doneData = await apiMutations.messages.roleplaysendStream(
+      const doneData = await apiMutations.messages.RoleplaysendStream(
         conversationId,
         content ?? "",
         (chunk, type) => {
@@ -238,18 +111,13 @@ export function useRoleMessageStream(conversationId: number) {
                 conversationId,
                 type: "SYSTEM" as const,
                 content: chunk,
-                audioUrl: null,
                 createdAt: new Date().toISOString(),
                 hiddenMeaning: "",
                 visualAction: "",
                 situationDescription: "",
               };
               if (aiIdx === -1) return [...prev, systemMsg];
-              return [
-                ...prev.slice(0, aiIdx),
-                systemMsg,
-                ...prev.slice(aiIdx),
-              ];
+              return [...prev.slice(0, aiIdx), systemMsg, ...prev.slice(aiIdx)];
             });
           } else {
             setStreamMessages((prev) =>

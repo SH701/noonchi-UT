@@ -10,7 +10,7 @@ export const useCreateContext = (
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () =>
-      apiMutations.language.createcontext(scenarioId, myRole, aiRole, detail),
+      apiMutations.language.Createcontext(scenarioId, myRole, aiRole, detail),
     onSuccess: () => queryClient.invalidateQueries(),
   });
 };

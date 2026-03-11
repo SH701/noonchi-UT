@@ -71,3 +71,12 @@ export interface HintMessages {
   translations: string[];
   wrongIndex: number;
 }
+
+export interface AskTurn {
+  userContent: string;
+  approachTip: string;
+  aiMessage: string;
+  culturalInsight: string;
+  messageId?: number;
+  translatedContent?: string;
+}

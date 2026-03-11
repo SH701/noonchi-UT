@@ -1,12 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePreviewMessages } from "@/hooks/mutations";
 import { ChatInput, ChatLoading } from "@/components/common";
 import { useRouter } from "next/navigation";
 import { PreviewModal } from "@/components/modal";
 import { InfoIcon } from "@/assets/svgr";
-import { useVoiceChat, useChatUI } from "@/hooks/custom";
+import {
+  useVoiceChat,
+  useChatUI,
+  usePreviewMessages,
+  useScrollToBottom,
+} from "@/hooks/custom";
 import { motion } from "framer-motion";
 import {
   HintMessage,
@@ -41,7 +45,7 @@ export default function PreviewChat() {
     showNotice,
     toggleNotice,
   } = useChatUI();
-
+  const bottomRef = useScrollToBottom([aiResponses]);
   const {
     micState,
     sttText,
@@ -94,8 +98,10 @@ export default function PreviewChat() {
             />
           </>
         )}
+        <div ref={bottomRef} />
       </div>
 
+      {/* 하단 고정 영역 */}
       <div className="relative flex flex-col gap-2 pb-5">
         {!isStarting && (
           <motion.div
