@@ -1,7 +1,8 @@
 "use client";
 
-import { ChevronLeftIcon } from "@/assets/svgr";
+
 import { Header } from "@/components/common";
+import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface MyInfoProps {
@@ -15,7 +16,7 @@ export default function MyInfo({ name, birth, email }: MyInfoProps) {
   return (
     <div>
       <Header
-        leftIcon={<ChevronLeftIcon onClick={() => router.back()} />}
+        leftIcon={<ChevronLeft onClick={() => router.back()} />}
         center="My Profile"
       />
       <div className="flex flex-col gap-4 rounded-2xl bg-white p-4 text-sm">

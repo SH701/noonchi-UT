@@ -5,10 +5,10 @@ import {
 } from "@/hooks/queries";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { ChevronRightIcon } from "@/assets/svgr";
 import { RoleplayHistorySkeleton } from "../../components/skeleton";
 import { useChatHistoryStore } from "@/store/useChatHistorystore";
 import { useTabStore } from "@/store/useTabStore";
+import { ChevronRight } from "lucide-react";
 
 export default function RoleplayHistoryTab() {
   const router = useRouter();
@@ -43,7 +43,7 @@ export default function RoleplayHistoryTab() {
         className="mb-3 flex items-center gap-1"
       >
         <span className="text-sm font-medium">Role Playing</span>
-        <ChevronRightIcon size={18} className="text-gray-400" />
+        <ChevronRight size={18} className="text-gray-400" />
       </button>
       {isPending ? (
         <RoleplayHistorySkeleton />

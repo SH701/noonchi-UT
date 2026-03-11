@@ -1,9 +1,10 @@
 "use client";
 
-import { ChevronRightIcon, NoteIcon } from "@/assets/svgr";
+import { NoteIcon } from "@/assets/svgr";
 import HistorySectiontSkeleton from "@/components/skeleton/HistorySectiontSkeleton";
 import { useInfiniteConversations } from "@/hooks/queries";
 import { ConversationSortBy } from "@/types/conversations";
+import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 
@@ -59,7 +60,7 @@ export default function HistorySection({ sortBy }: HistorySectionProps) {
                 </button>
               ) : (
                 <button onClick={() => handleChatroom(convo.conversationId)}>
-                  <ChevronRightIcon />
+                  <ChevronRight />
                 </button>
               )}
             </div>

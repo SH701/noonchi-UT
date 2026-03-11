@@ -7,8 +7,8 @@ import { useAskMessageStream, useAskStream } from "@/hooks/mutations";
 import { Spinner } from "../../components/ui/spinner/spinner";
 import ChatQuickActions from "./ChatQuickActions";
 import { useScrollToBottom, useVoiceChat } from "@/hooks/custom";
-import { BulbIcon, ChevronDownIcon } from "@/assets/svgr";
-import { ChevronUp } from "lucide-react";
+import { ChevronDownIcon } from "@/assets/svgr";
+import { ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
 import { CominSoonModal } from "@/components/modal";
 import AskSteps from "./AskSteps";
 import MessageItem from "@/components/chatroom/MessageItem";
@@ -128,13 +128,13 @@ export default function AskChat() {
               </div>
               <div className="flex flex-col gap-1 border-b border-gray-400 pb-2 text-sm">
                 <div className="flex gap-1 text-blue-600">
-                  <BulbIcon size={14} /> Cultural Insights
+                  <Lightbulb size={14} /> Cultural Insights
                 </div>
                 {open ? (
                   <>
                     {culturalInsight}
                     <div className="flex items-center justify-center">
-                      <ChevronDownIcon onClick={handleInsight} />
+                      <ChevronDown className="size-3" onClick={handleInsight} />
                     </div>
                   </>
                 ) : (

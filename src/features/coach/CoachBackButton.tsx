@@ -1,14 +1,15 @@
 "use client";
 
-import { ChevronLeftIcon } from "@/assets/svgr";
-import { Header } from "../common";
+
+import { Header } from "../../components/common";
 import { useRouter } from "next/navigation";
+import { ChevronLeft } from "lucide-react";
 
 export default function CoachBackButton() {
   const router = useRouter();
   return (
     <Header
-      leftIcon={<ChevronLeftIcon onClick={() => router.back()} />}
+      leftIcon={<ChevronLeft onClick={() => router.back()} />}
       center="Live 1:1 Coaching"
     />
   );

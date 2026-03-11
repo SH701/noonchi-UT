@@ -13,6 +13,7 @@ import {
   AskStreamDoneData,
   AskMessageStreamDoneData,
   RoleplayStreamDoneData,
+  ChatMsg,
 } from "@/types/messages";
 import { Preview, PreviewSendRes } from "@/types/preview/preview.type";
 import axios from "axios";
@@ -43,6 +44,16 @@ export const apiMutations = {
   },
 
   messages: {
+    asksend: async (
+      conversationId: number,
+      content?: string,
+      audioUrl?: string,
+    ): Promise<ChatMsg> => {
+      return apiFetch<ChatMsg>(`/api/messages/ask`, {
+        method: "POST",
+        body: JSON.stringify({ conversationId, content, audioUrl }),
+      });
+    },
     RoleplaysendStream: async (
       conversationId: number,
       content: string,

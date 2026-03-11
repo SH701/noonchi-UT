@@ -1,7 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { Header } from "../../components/common";
-import { ChevronLeftIcon, HomeIcon } from "@/assets/svgr";
+import { HomeIcon } from "@/assets/svgr";
+import { ChevronLeft } from "lucide-react";
 
 export default function HistoryHeader() {
   const router = useRouter();
@@ -10,7 +11,7 @@ export default function HistoryHeader() {
   };
   return (
     <Header
-      leftIcon={<ChevronLeftIcon onClick={() => router.back()} />}
+      leftIcon={<ChevronLeft onClick={() => router.back()} />}
       center="Role Playing"
       rightIcon={<HomeIcon onClick={handleNewChat} />}
     />
