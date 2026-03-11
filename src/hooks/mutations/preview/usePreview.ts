@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 
 export function usePreviewStart() {
   return useMutation({
-    mutationFn: apiMutations.preview.start,
+    mutationFn: apiMutations.preview.Start,
   });
 }
 export function usePreviewSend(onChunk?: (chunk: string) => void) {
@@ -17,7 +17,7 @@ export function usePreviewSend(onChunk?: (chunk: string) => void) {
       userMessage: string;
       inputType?: "text" | "voice";
     }) => {
-      return apiMutations.preview.send(
+      return apiMutations.preview.Send(
         sessionId,
         userMessage,
         inputType,
@@ -28,6 +28,6 @@ export function usePreviewSend(onChunk?: (chunk: string) => void) {
 }
 export function usePreviewRemove() {
   return useMutation({
-    mutationFn: (sessionId: string) => apiMutations.preview.remove(sessionId),
+    mutationFn: (sessionId: string) => apiMutations.preview.Remove(sessionId),
   });
 }

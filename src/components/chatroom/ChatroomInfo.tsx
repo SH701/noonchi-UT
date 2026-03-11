@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Eye, MessageCircle, User } from "lucide-react";
 
-type InfoProps = {
+interface InfoProps {
   isOpen: boolean;
   onClose: () => void;
   topic: string;

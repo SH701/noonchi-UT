@@ -14,6 +14,6 @@ export function useMessageFeedback(messageId?: number) {
 export function useMessageTranslate() {
   return useMutation({
     mutationFn: (messageId: number) =>
-      apiMutations.messages.translate(Number(messageId)),
+      apiMutations.messages.Translate(Number(messageId)),
   });
 }

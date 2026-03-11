@@ -19,9 +19,6 @@ export interface Preview {
   max_turns: number;
 }
 
-
-
-
 export interface PreviewSendRes {
   session_id: string;
   ai_message: string;
@@ -38,4 +35,17 @@ export interface PreviewSendRes {
   turn_count: number;
   turns_remaining: number;
   is_preview_ended: boolean;
+}
+
+export interface PreviewAiMessage {
+  content: string;
+  hiddenMeaning: string;
+  isRevealed: boolean;
+  translatedContent: string;
+  situationDescription: string;
+}
+
+export interface PreviewUserMessage {
+  content: string;
+  feedback: string;
 }

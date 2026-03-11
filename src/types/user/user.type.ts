@@ -14,9 +14,7 @@ export interface User {
   interests: string[];
 }
 
-export interface MeRes{
-  user: User;
-}
+
 export interface UpdateProfileReq {
   nickname?: string;
   birthDate?: string;

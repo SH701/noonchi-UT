@@ -8,8 +8,8 @@ import {
   useMessageTranslate,
   useMessageTTS,
 } from "@/hooks/mutations";
-import { BulbIcon, LanguageIcon, VolumeUpIcon } from "@/assets/svgr";
-import { ChevronDownIcon, ChevronUp } from "lucide-react";
+import { LanguageIcon, VolumeUpIcon } from "@/assets/svgr";
+import { ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
 import { CLOSENESS_OPTIONS, STEP_QUESTIONS } from "@/constants";
 import ChatQuickActions from "./ChatQuickActions";
 import { CominSoonModal } from "@/components/modal";
@@ -138,13 +138,13 @@ export default function AskChatRoom({
               </div>
               <div className="flex flex-col gap-1 border-b border-gray-400 pb-2 text-sm">
                 <div className="flex gap-1 text-blue-600">
-                  <BulbIcon size={14} /> Cultural Insights
+                  <Lightbulb size={14} /> Cultural Insights
                 </div>
                 {open ? (
                   <>
                     {firstAI.askCulturalInsight}
                     <div className="flex items-center justify-center">
-                      <ChevronDownIcon onClick={handleInsight} />
+                      <ChevronDown className="size-3" onClick={handleInsight} />
                     </div>
                   </>
                 ) : (
@@ -171,10 +171,10 @@ export default function AskChatRoom({
             className={`flex ${m.type === "USER" ? "justify-end" : "justify-start"} mb-4 mt-2`}
           >
             <div
-              className={` border border-gray-300 bg-white p-4 ${
+              className={`border border-gray-300 bg-white p-4 ${
                 m.type === "USER"
-                  ? "rounded-b-xl rounded-tl-xl max-w-61"
-                  : "rounded-b-xl rounded-tr-xl w-61"
+                  ? "max-w-61 rounded-b-xl rounded-tl-xl"
+                  : "w-61 rounded-b-xl rounded-tr-xl"
               }`}
             >
               {m.type === "USER" ? (

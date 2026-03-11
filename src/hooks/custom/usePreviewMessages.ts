@@ -1,19 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { usePreviewRemove, usePreviewSend, usePreviewStart } from "./usePreview";
+import { usePreviewRemove, usePreviewSend, usePreviewStart } from "../mutations/preview/usePreview";
 import { usePreviewHint } from "@/hooks/queries";
+import { PreviewAiMessage, PreviewUserMessage } from "@/types/preview";
 
-export interface PreviewAiMessage {
-  content: string;
-  hiddenMeaning: string;
-  isRevealed: boolean;
-  translatedContent: string;
-  situationDescription: string;
-}
-
-export interface PreviewUserMessage {
-  content: string;
-  feedback: string;
-}
 
 export function usePreviewMessages() {
   const { data, mutate: startChat, isPending: isStarting } = usePreviewStart();

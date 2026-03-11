@@ -1,9 +1,5 @@
 export { default as AlpabatIcon } from "./alpabat.svg";
-export { default as BulbIcon } from "./bulb.svg";
 export { default as CameraIcon } from "./camera.svg";
-export { default as ChevronDownIcon } from "./chevrondown.svg";
-export { default as ChevronLeftIcon } from "./chevronleft.svg";
-export { default as ChevronRightIcon } from "./chevronright.svg";
 export { default as ControlIcon } from "./control.svg";
 export { default as DefaultIcon } from "./default_icon.svg";
 export { default as EmptyAskIcon } from "./emptyask.svg";

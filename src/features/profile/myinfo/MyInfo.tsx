@@ -1,21 +1,28 @@
 "use client";
 
-import { ChevronLeftIcon } from "@/assets/svgr";
+
 import { Header } from "@/components/common";
+import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface MyInfoProps {
   name: string;
   birth: string;
   email: string;
+  KoreanLevel: string;
 }
 
-export default function MyInfo({ name, birth, email }: MyInfoProps) {
+export default function MyInfo({
+  name,
+  birth,
+  email,
+  KoreanLevel,
+}: MyInfoProps) {
   const router = useRouter();
   return (
     <div>
       <Header
-        leftIcon={<ChevronLeftIcon onClick={() => router.back()} />}
+        leftIcon={<ChevronLeft onClick={() => router.back()} />}
         center="My Profile"
       />
       <div className="flex flex-col gap-4 rounded-2xl bg-white p-4 text-sm">
@@ -31,6 +38,10 @@ export default function MyInfo({ name, birth, email }: MyInfoProps) {
         <div className="flex justify-between">
           <span>Email</span>
           <span>{email}</span>
+        </div>
+        <div className="flex justify-between">
+          <span>KoreanLevel</span>
+          <span>{KoreanLevel}</span>
         </div>
       </div>
     </div>

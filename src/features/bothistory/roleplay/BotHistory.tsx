@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import HistoryHeader from "./HistoryHeader";
-import HistorySection from "./HistorySection";
-import HistorySort from "./HistorySort";
-import RecentTopic from "./RecentTopics";
 import { ConversationSortBy } from "@/types/conversations";
+import RecentTopic from "./RecentTopics";
+import HistorySort from "./HistorySort";
+import HistorySection from "./HistorySection";
 
 export default function BotHistory() {
-  const [sortBy, setSortBy] = useState<ConversationSortBy>("LAST_ACTIVITY_DESC");
+  const [sortBy, setSortBy] =
+    useState<ConversationSortBy>("LAST_ACTIVITY_DESC");
   return (
     <div className="space-y-6">
       <HistoryHeader />

@@ -7,29 +7,22 @@ import {
   RoleplayReq,
   ConversationRes,
   AskReq,
-  AskRes,
   PresignedUrlRes,
 } from "@/types/conversations";
 import {
   AskStreamDoneData,
   AskMessageStreamDoneData,
-  ChatMsg,
   RoleplayStreamDoneData,
+  ChatMsg,
 } from "@/types/messages";
 import { Preview, PreviewSendRes } from "@/types/preview/preview.type";
 import axios from "axios";
 import { TopicScenario } from "@/types/topics";
-import { AuthRes, LoginReq, SignupReq } from "@/types/auth";
+import { AuthRes, SignupReq } from "@/types/auth";
 
 export const apiMutations = {
   auth: {
-    login: async (payload: LoginReq): Promise<AuthRes> => {
-      return apiFetch<AuthRes>("/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify({ payload }),
-      });
-    },
-    signup: async (payload: SignupReq): Promise<AuthRes> => {
+    Signup: async (payload: SignupReq): Promise<AuthRes> => {
       const response = await apiFetch<AuthRes>("/api/auth/signup", {
         method: "POST",
         body: JSON.stringify(payload),
@@ -37,25 +30,24 @@ export const apiMutations = {
       return response;
     },
 
-    logout: async (): Promise<void> => {
+    Logout: async (): Promise<void> => {
       return apiFetch<void>("/api/auth/logout", {
         method: "POST",
       });
     },
   },
-
   messages: {
-    roleplaysend: async (
+    asksend: async (
       conversationId: number,
       content?: string,
       audioUrl?: string,
     ): Promise<ChatMsg> => {
-      return apiFetch<ChatMsg>(`/api/messages/roleplay`, {
+      return apiFetch<ChatMsg>(`/api/messages/ask`, {
         method: "POST",
         body: JSON.stringify({ conversationId, content, audioUrl }),
       });
     },
-    roleplaysendStream: async (
+    RoleplaysendStream: async (
       conversationId: number,
       content: string,
       onChunk: (chunk: string, type: string) => void,
@@ -107,17 +99,7 @@ export const apiMutations = {
       }
       return doneData!;
     },
-    asksend: async (
-      conversationId: number,
-      content?: string,
-      audioUrl?: string,
-    ): Promise<ChatMsg> => {
-      return apiFetch<ChatMsg>(`/api/messages/ask`, {
-        method: "POST",
-        body: JSON.stringify({ conversationId, content, audioUrl }),
-      });
-    },
-    asksendstream: async (
+    Asksendstream: async (
       conversationId: number,
       content: string,
       onChunk: (chunk: string) => void,
@@ -176,15 +158,14 @@ export const apiMutations = {
       }
       return doneData!;
     },
-    translate: async (messageId: number): Promise<string> => {
+    Translate: async (messageId: number): Promise<string> => {
       return apiFetch<string>(`/api/messages/${messageId}/translate`, {
         method: "PUT",
       });
     },
   },
-
   conversations: {
-    createInterview: async (
+    CreateInterview: async (
       data: InterviewFormData,
     ): Promise<ConversationRes> => {
       return apiFetch<ConversationRes>("/api/conversations/interview", {
@@ -193,19 +174,13 @@ export const apiMutations = {
       });
     },
 
-    createRoleplay: async (data: RoleplayReq): Promise<ConversationRes> => {
+    CreateRoleplay: async (data: RoleplayReq): Promise<ConversationRes> => {
       return apiFetch<ConversationRes>("/api/conversations/role-playing", {
         method: "POST",
         body: JSON.stringify(data),
       });
     },
-    createAsk: async (data: AskReq): Promise<AskRes> => {
-      return apiFetch<AskRes>("/api/conversations/ask", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-    },
-    createAskStream: async (
+    CreateAskStream: async (
       data: AskReq,
       onChunk: (
         type: "approach_tip" | "chunk" | "cultural_insight",
@@ -273,35 +248,19 @@ export const apiMutations = {
       return doneData!;
     },
 
-    deleteConversation: async (conversationId: number): Promise<void> => {
+    DeleteConversation: async (conversationId: number): Promise<void> => {
       return apiFetch<void>(`/api/conversations/${conversationId}`, {
         method: "DELETE",
       });
     },
-    endConversation: async (conversationId: number): Promise<number> => {
+    EndConversation: async (conversationId: number): Promise<number> => {
       return apiFetch<number>(`/api/conversations/${conversationId}/end`, {
         method: "PUT",
       });
     },
   },
-
-  users: {
-    deductCredit: async (amount: number): Promise<void> => {
-      return apiFetch<void>("/api/users/credit/deduct", {
-        method: "POST",
-        body: JSON.stringify({ amount }),
-      });
-    },
-    chargeCredit: async (amount: number): Promise<void> => {
-      return apiFetch<void>("api/users/credit/charge", {
-        method: "POST",
-        body: JSON.stringify({ amount }),
-      });
-    },
-  },
-
   files: {
-    uploadFiles: async (files: File[]): Promise<UploadedFile[]> => {
+    UploadFiles: async (files: File[]): Promise<UploadedFile[]> => {
       return Promise.all(
         files.map(async (file) => {
           const presignedData = await apiFetch<PresignedUrlRes>(
@@ -330,17 +289,20 @@ export const apiMutations = {
         }),
       );
     },
-    uploadAudio: async (blob: Blob): Promise<string> => {
+    UploadAudio: async (blob: Blob): Promise<string> => {
       const blobType = blob.type || "audio/webm";
       const fileExtension = blobType.includes("webm") ? "webm" : "wav";
-      const res = await fetch("/api/files/presigned-url", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fileExtension: fileExtension,
-          fileType: blobType,
-        }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/files/presigned-url`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fileExtension: fileExtension,
+            fileType: blobType,
+          }),
+        },
+      );
       const { url: presignedUrl } = await res.json();
       await fetch(presignedUrl, {
         method: "PUT",
@@ -352,7 +314,7 @@ export const apiMutations = {
     },
   },
   preview: {
-    start: async (): Promise<Preview> => {
+    Start: async (): Promise<Preview> => {
       const { data } = await axios.post<Preview>(
         `${process.env.NEXT_PUBLIC_PREVIEW_BASE_URL}/preview/roleplay/start`,
         null,
@@ -364,7 +326,7 @@ export const apiMutations = {
       );
       return data;
     },
-    send: async (
+    Send: async (
       sessionId: string,
       userMessage: string,
       inputType: "text" | "voice" = "text",
@@ -416,7 +378,7 @@ export const apiMutations = {
       }
       return doneData!;
     },
-    remove: async (sessionId: string): Promise<void> => {
+    Remove: async (sessionId: string): Promise<void> => {
       await axios.delete(
         `${process.env.NEXT_PUBLIC_PREVIEW_BASE_URL}/preview/roleplay/${sessionId}`,
         {
@@ -428,19 +390,19 @@ export const apiMutations = {
     },
   },
   topic: {
-    addfavorite: async (topicId: number): Promise<void> => {
+    Addfavorite: async (topicId: number): Promise<void> => {
       return apiFetch<void>(`/api/topics/${topicId}/favorite`, {
         method: "POST",
       });
     },
-    removefavorite: async (topicId: number): Promise<void> => {
+    Removefavorite: async (topicId: number): Promise<void> => {
       return apiFetch<void>(`/api/topics/${topicId}/favorite`, {
         method: "DELETE",
       });
     },
   },
   language: {
-    createcontext: async (
+    Createcontext: async (
       scenarioId: number,
       myRole?: string,
       aiRole?: string,
@@ -466,6 +428,22 @@ export const apiMutations = {
       return apiFetch<string>(`/api/language/tts`, {
         method: "POST",
         body: JSON.stringify({ text }),
+      });
+    },
+  },
+  user: {
+    UpadateProfile: async (
+      koreanLevel?: string,
+
+      interests?: string[],
+    ) => {
+      return apiFetch("/api/users/me/profile", {
+        method: "PUT",
+        body: JSON.stringify({
+          koreanLevel,
+
+          interests,
+        }),
       });
     },
   },

@@ -1,16 +1,15 @@
 "use client";
 
-import { ChevronLeftIcon } from "@/assets/svgr";
 import { Header } from "@/components/common";
 
-
 import { useRouter } from "next/navigation";
+import { ChevronLeft } from "lucide-react";
 
 export default function ProfileHeader() {
   const router = useRouter();
   return (
     <Header
-      leftIcon={<ChevronLeftIcon onClick={() => router.back()} />}
+      leftIcon={<ChevronLeft onClick={() => router.back()} />}
       center="My Page"
     />
   );

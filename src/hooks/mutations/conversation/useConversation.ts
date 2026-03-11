@@ -3,13 +3,7 @@ import { AskReq, InterviewFormData, RoleplayReq } from "@/types/conversations";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
-export const useAsk = () => {
-  return useMutation({
-    mutationFn: async (data: AskReq) => {
-      return apiMutations.conversations.createAsk(data);
-    },
-  });
-};
+
 
 export const useAskStream = () => {
   const [approachTip, setApproachTip] = useState("");
@@ -24,7 +18,7 @@ export const useAskStream = () => {
     setAiMessage("");
     setCulturalInsight("");
     try {
-      const result = await apiMutations.conversations.createAskStream(
+      const result = await apiMutations.conversations.CreateAskStream(
         data,
         (type, content) => {
           if (type === "approach_tip") setApproachTip((prev) => prev + content);
@@ -39,12 +33,19 @@ export const useAskStream = () => {
     }
   };
 
-  return { mutate, isPending, approachTip, aiMessage, culturalInsight, conversationId };
+  return {
+    mutate,
+    isPending,
+    approachTip,
+    aiMessage,
+    culturalInsight,
+    conversationId,
+  };
 };
 export const useConversationEnd = (conversationId: number) => {
   return useMutation({
     mutationFn: () =>
-      apiMutations.conversations.endConversation(conversationId),
+      apiMutations.conversations.EndConversation(conversationId),
   });
 };
 
@@ -52,7 +53,7 @@ export function useDeleteConversation() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (conversationId: number) =>
-      apiMutations.conversations.deleteConversation(conversationId),
+      apiMutations.conversations.DeleteConversation(conversationId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["conversations"],
@@ -65,14 +66,14 @@ export function useDeleteConversation() {
 
 export const useUploadFiles = () => {
   return useMutation({
-    mutationFn: apiMutations.files.uploadFiles,
+    mutationFn: apiMutations.files.UploadFiles,
   });
 };
 
 export const useCreateInterview = () => {
   return useMutation({
     mutationFn: async (data: InterviewFormData) => {
-      return apiMutations.conversations.createInterview(data);
+      return apiMutations.conversations.CreateInterview(data);
     },
   });
 };
@@ -80,7 +81,7 @@ export const useCreateInterview = () => {
 export const useCreateRoleplay = () => {
   return useMutation({
     mutationFn: async (data: RoleplayReq) => {
-      return apiMutations.conversations.createRoleplay(data);
+      return apiMutations.conversations.CreateRoleplay(data);
     },
   });
 };

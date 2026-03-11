@@ -1,8 +1,8 @@
 "use client";
 
+import { ResultPage } from "@/features/result";
 import { use } from "react";
 
-import { RoleplayEnd } from "@/features/roleplay";
 
 export default function Result({
   params,
@@ -11,5 +11,5 @@ export default function Result({
 }) {
   const { id } = use(params);
 
-  return <RoleplayEnd conversationId={id} />;
+  return <ResultPage conversationId={id} />;
 }

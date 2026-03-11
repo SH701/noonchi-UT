@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export const useAddFavorite = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (topicId: number) => apiMutations.topic.addfavorite(topicId),
+    mutationFn: (topicId: number) => apiMutations.topic.Addfavorite(topicId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["topics"] });
       toast.favorite();
@@ -18,7 +18,7 @@ export const useAddFavorite = () => {
 export const useRemoveFavorite = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (topicId: number) => apiMutations.topic.removefavorite(topicId),
+    mutationFn: (topicId: number) => apiMutations.topic.Removefavorite(topicId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["topics"] });
       toast.success("Removed from favorites!");

@@ -13,6 +13,9 @@ import StepIndicator from "./StepIndicator";
 import { useModalActions } from "@/store/useModalStore";
 import { Spinner } from "@/components/ui/spinner/spinner";
 import { X } from "lucide-react";
+import { usePreferenceStore } from "@/store/usePreferenceStore";
+import { useUpdateProfile } from "@/hooks/mutations/user/useProfile";
+import { useSession } from "next-auth/react";
 
 type Step2FormData = z.infer<typeof signup2Schema>;
 
@@ -33,6 +36,9 @@ export default function SignupDetail({
 }: SignupDetailProps) {
   const router = useRouter();
   const { closeModal } = useModalActions();
+  const { update } = useSession();
+  const { koreanLevel, interests, resetPreferences } = usePreferenceStore();
+  const { mutateAsync: updateProfile } = useUpdateProfile();
   const {
     control,
     handleSubmit,
@@ -49,7 +55,7 @@ export default function SignupDetail({
 
   const onSubmit = async (data: Step2FormData) => {
     try {
-      await apiMutations.auth.signup({
+      await apiMutations.auth.Signup({
         email,
         password,
         nickname: data.name,
@@ -62,6 +68,16 @@ export default function SignupDetail({
         password,
         redirect: false,
       });
+
+      // if (koreanLevel || interests.length > 0) {
+      //   await updateProfile({
+      //     koreanLevel: koreanLevel ?? undefined,
+      //     interests,
+      //   });
+      //   await update();
+      //   resetPreferences();
+      // }
+
       closeModal();
       router.push("/main");
     } catch (err) {
