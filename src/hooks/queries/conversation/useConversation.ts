@@ -1,4 +1,9 @@
-import { useQuery, useInfiniteQuery, UseQueryOptions } from "@tanstack/react-query";
+import {
+  useQuery,
+  useInfiniteQuery,
+  keepPreviousData,
+  UseQueryOptions,
+} from "@tanstack/react-query";
 import {
   Conversation,
   ConversationDetail,
@@ -24,6 +29,7 @@ export const useConversations = (
       ),
       totalPages: data.totalPages,
     }),
+    placeholderData: keepPreviousData,
   });
 };
 
@@ -35,7 +41,12 @@ export const useInfiniteConversations = (
   return useInfiniteQuery({
     queryKey: ["conversations", "infinite", filter, sortBy, size],
     queryFn: ({ pageParam = 1 }) =>
-      apiClient.conversations.getConversations(filter, sortBy, pageParam as number, size),
+      apiClient.conversations.getConversations(
+        filter,
+        sortBy,
+        pageParam as number,
+        size,
+      ),
     initialPageParam: 1,
     getNextPageParam: (lastPage) =>
       lastPage.last ? undefined : lastPage.pageNumber + 2,
@@ -65,7 +76,9 @@ export const useConversationSearch = (
     select: (data) => ({
       conversations: (data?.content ?? [])
         .filter((c): c is Conversation => !!c?.aiPersona)
-        .filter((c) => !conversationType || c.conversationType === conversationType),
+        .filter(
+          (c) => !conversationType || c.conversationType === conversationType,
+        ),
     }),
   });
 };

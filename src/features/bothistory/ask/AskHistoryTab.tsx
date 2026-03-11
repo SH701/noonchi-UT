@@ -1,3 +1,5 @@
+"use client";
+
 import { useConversations, useConversationSearch } from "@/hooks/queries";
 import { AskHistorySkeleton } from "../../../components/skeleton";
 import { useChatHistoryStore } from "@/store/useChatHistorystore";
