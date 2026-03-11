@@ -301,14 +301,17 @@ export const apiMutations = {
     UploadAudio: async (blob: Blob): Promise<string> => {
       const blobType = blob.type || "audio/webm";
       const fileExtension = blobType.includes("webm") ? "webm" : "wav";
-      const res = await fetch("/api/files/presigned-url", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fileExtension: fileExtension,
-          fileType: blobType,
-        }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/files/presigned-url`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fileExtension: fileExtension,
+            fileType: blobType,
+          }),
+        },
+      );
       const { url: presignedUrl } = await res.json();
       await fetch(presignedUrl, {
         method: "PUT",

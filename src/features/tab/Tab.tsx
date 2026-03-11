@@ -6,11 +6,12 @@ import { useSession } from "next-auth/react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { useTabStore } from "@/store/useTabStore";
-;
-import RoleplayHistoryTab from "./RoleplayHistoryTab";
-import AskHistoryTab from "./AskHistoryTab";
+
+
+
 import { DefaultIcon, PeopleIcon } from "@/assets/svgr";
 import SearchBar from "./SearchBar";
+import { AskHistoryTab, RoleplayHistoryTab } from "../bothistory";
 
 const slideVariants = {
   hidden: { scaleX: 0 },

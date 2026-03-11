@@ -7,7 +7,6 @@ import { useAskMessageStream, useAskStream } from "@/hooks/mutations";
 import { Spinner } from "../../components/ui/spinner/spinner";
 import ChatQuickActions from "./ChatQuickActions";
 import { useScrollToBottom, useVoiceChat } from "@/hooks/custom";
-import { ChevronDownIcon } from "@/assets/svgr";
 import { ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
 import { CominSoonModal } from "@/components/modal";
 import AskSteps from "./AskSteps";

@@ -9,7 +9,7 @@ import {
   useMessageTTS,
 } from "@/hooks/mutations";
 import { LanguageIcon, VolumeUpIcon } from "@/assets/svgr";
-import { ChevronDownIcon, ChevronUp, Lightbulb } from "lucide-react";
+import { ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
 import { CLOSENESS_OPTIONS, STEP_QUESTIONS } from "@/constants";
 import ChatQuickActions from "./ChatQuickActions";
 import { CominSoonModal } from "@/components/modal";

@@ -1,7 +1,7 @@
 "use client";
 
-import { ChevronDownIcon } from "@/assets/svgr";
 import { ConversationSortBy } from "@/types/conversations";
+import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 interface HistorySortProps {
@@ -22,7 +22,7 @@ export default function HistorySort({
         className="flex cursor-pointer items-center gap-1 rounded text-xs"
       >
         {sortBy === "CREATED_AT_DESC" ? "Oldest activity" : "Latest activity"}
-        <ChevronDownIcon
+        <ChevronDown
           className={`size-3 shrink-0 transform pt-0.5 transition-transform ${
             openSortDropdown ? "rotate-180" : ""
           }`}

@@ -5,10 +5,10 @@ import {
 } from "@/hooks/queries";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { RoleplayHistorySkeleton } from "../../components/skeleton";
 import { useChatHistoryStore } from "@/store/useChatHistorystore";
 import { useTabStore } from "@/store/useTabStore";
 import { ChevronRight } from "lucide-react";
+import { RoleplayHistorySkeleton } from "@/components/skeleton";
 
 export default function RoleplayHistoryTab() {
   const router = useRouter();

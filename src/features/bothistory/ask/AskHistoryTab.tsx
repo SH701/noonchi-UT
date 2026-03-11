@@ -1,5 +1,5 @@
 import { useConversations, useConversationSearch } from "@/hooks/queries";
-import { AskHistorySkeleton } from "../../components/skeleton";
+import { AskHistorySkeleton } from "../../../components/skeleton";
 import { useChatHistoryStore } from "@/store/useChatHistorystore";
 import { EmptyAskIcon, SearchIcon } from "@/assets/svgr";
 import { useRouter } from "next/navigation";
