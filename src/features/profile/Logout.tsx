@@ -5,27 +5,36 @@ import { apiMutations } from "@/api/mutations";
 import { toast } from "@/components/ui/toast/toast";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button/button";
+import { useState } from "react";
+import { Spinner } from "@/components/ui/spinner/spinner";
+import { CominSoonModal } from "@/components/modal";
 
 export default function Logout() {
+  const [loading, setLoading] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const router = useRouter();
+
   const handleLogout = async () => {
     try {
+      setLoading(true);
       await apiMutations.auth.Logout();
       await signOut({ redirect: false });
+      gtag("event", "logout");
       router.push("/");
-      toast.success("You are logged out");
+      setLoading(false);
     } catch {
       toast.error("Logout failed");
     }
   };
   return (
     <div className="flex flex-col items-center gap-2">
-      <Button onClick={handleLogout} size="lg">
-        Log out
+      <Button onClick={handleLogout} size="lg" disabled={loading}>
+        {loading ? <Spinner /> : <p>Log out</p>}
       </Button>
       <Button size="lg" variant="secondary">
         Delete Account
       </Button>
+      <CominSoonModal isOpen={modalOpen} onClose={() => setModalOpen(true)} />
     </div>
   );
 }
