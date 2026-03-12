@@ -48,12 +48,15 @@ export const useConversations = (
 
 export const useConversationSearch = (keyword: string) => {
   return useQuery({
-    queryKey: ["conversations", "search", keyword],
+    queryKey: ["search", keyword],
     queryFn: () => apiClient.conversations.getConversationSearch(keyword),
     enabled: keyword.trim().length > 0,
     select: (data) => ({
       conversations: (data?.content ?? []).filter(
-        (c): c is Conversation => !!c?.aiPersona,
+        (c): c is Conversation =>
+          !!c?.aiPersona.aiRole ||
+          !!c?.aiPersona.userRole ||
+          !!c?.conversationTopic,
       ),
     }),
   });

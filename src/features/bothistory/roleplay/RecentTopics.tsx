@@ -1,5 +1,6 @@
 "use client";
 
+import { EmptyAskIcon } from "@/assets/svgr";
 import RecentTopicsSkeleton from "@/components/skeleton/RecentTopicsSkeleton";
 import { useRecentTopics } from "@/hooks/queries/topic/useTopics";
 import Image from "next/image";
@@ -13,36 +14,45 @@ export default function RecentTopic() {
   return (
     <div>
       <p className="pb-3 text-sm font-medium">Recent Role Playing</p>
-      <div className="flex gap-3 overflow-x-auto">
-        {recent?.map((topic) => (
-          <div
-            key={topic.topicId}
-            className="relative shrink-0"
-            onClick={() =>
-              router.push(
-                `/main/roleplay/create?category=${topic.category}&topicId=${topic.topicId}`,
-              )
-            }
-          >
-            <Image
-              src={topic.imageUrl}
-              alt="topic image"
-              width={162}
-              height={162}
-              className="rounded-xl"
-              loading="eager"
-            />
-            <div className="absolute inset-0 flex flex-col justify-end p-3">
-              <span className="text-xs uppercase tracking-wider text-gray-100">
-                {topic.category}
-              </span>
-              <h4 className="line-clamp-2 text-sm font-medium leading-tight text-white">
-                {topic.name}
-              </h4>
+      {recent?.length === 0 ? (
+        <div className="mt-20 flex gap-2">
+          <EmptyAskIcon className="text-gray-500" />
+          <span className="font-medium text-gray-500">
+            No conversations yet
+          </span>
+        </div>
+      ) : (
+        <div className="flex gap-3 overflow-x-auto">
+          {recent?.map((topic) => (
+            <div
+              key={topic.topicId}
+              className="relative shrink-0"
+              onClick={() =>
+                router.push(
+                  `/main/roleplay/create?category=${topic.category}&topicId=${topic.topicId}`,
+                )
+              }
+            >
+              <Image
+                src={topic.imageUrl}
+                alt="topic image"
+                width={162}
+                height={162}
+                className="rounded-xl"
+                loading="eager"
+              />
+              <div className="absolute inset-0 flex flex-col justify-end p-3">
+                <span className="text-xs uppercase tracking-wider text-gray-100">
+                  {topic.category}
+                </span>
+                <h4 className="line-clamp-2 text-sm font-medium leading-tight text-white">
+                  {topic.name}
+                </h4>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

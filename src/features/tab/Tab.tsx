@@ -4,24 +4,12 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { AnimatePresence, motion } from "framer-motion";
-
 import { useTabStore } from "@/store/useTabStore";
-
-
-
 import { DefaultIcon, PeopleIcon } from "@/assets/svgr";
 import SearchBar from "./SearchBar";
 import { AskHistoryTab, RoleplayHistoryTab } from "../bothistory";
+import { fadeVariants, slideVariants } from "@/constants";
 
-const slideVariants = {
-  hidden: { scaleX: 0 },
-  visible: { scaleX: 1 },
-};
-
-const fadeVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-};
 
 export default function Tab() {
   const router = useRouter();

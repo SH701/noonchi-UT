@@ -15,7 +15,13 @@ interface HistorySectionProps {
 export default function HistorySection({ sortBy }: HistorySectionProps) {
   const router = useRouter();
   const [page, setPage] = useState(1);
-  const { data, isFetching } = useConversations(null, sortBy, page, 6,"ROLE_PLAYING");
+  const { data, isFetching } = useConversations(
+    null,
+    sortBy,
+    page,
+    5,
+    "ROLE_PLAYING",
+  );
   const conversations = data?.conversations ?? [];
   const totalPages = data?.totalPages ?? 1;
 
@@ -27,31 +33,46 @@ export default function HistorySection({ sortBy }: HistorySectionProps) {
   };
 
   return (
-    <div className="mt-6 flex flex-col gap-4">
+    <div className="mt-4 flex flex-col gap-6">
       {isFetching ? (
         <HistorySectiontSkeleton />
       ) : (
         conversations.map((convo) => (
-          <div key={convo.conversationId} className="flex gap-2">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-300">
+          <div key={convo.conversationId} className="flex w-full gap-3">
+            <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-gray-300">
               <span>{convo.aiPersona.name[0].toUpperCase()}</span>
             </div>
-            <div className="flex min-w-0 flex-col gap-0.5">
+            <div className="flex w-full min-w-0 flex-col">
               <div className="flex justify-between">
-                <span className="font-semibold">{convo.conversationTopic}</span>
+                <span className="font-semibold">{convo.aiPersona.aiRole}</span>
+                <span className="text-xs text-gray-500">
+                  {new Date(convo.createdAt).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "2-digit",
+                  })}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <p className="flex-1 truncate pt-1 text-xs text-gray-600">
+                  {convo.aiPersona.description.toLowerCase()}
+                </p>{" "}
                 {convo.canGetReport ? (
-                  <button onClick={() => handleReport(convo.conversationId)}>
+                  <button
+                    className="shrink-0"
+                    onClick={() => handleReport(convo.conversationId)}
+                  >
                     <NoteIcon />
                   </button>
                 ) : (
-                  <button onClick={() => handleChatroom(convo.conversationId)}>
+                  <button
+                    className="shrink-0"
+                    onClick={() => handleChatroom(convo.conversationId)}
+                  >
                     <ChevronRight />
                   </button>
-                )}
+                )}{" "}
               </div>
-              <span className="truncate text-xs text-gray-600">
-                {convo.situation}
-              </span>
             </div>
           </div>
         ))
