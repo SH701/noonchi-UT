@@ -9,7 +9,7 @@ import { useState } from "react";
 import { Spinner } from "@/components/ui/spinner/spinner";
 import { CominSoonModal } from "@/components/modal";
 
-export default function Logout() {
+export default function ProfileActions() {
   const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const router = useRouter();
@@ -27,14 +27,14 @@ export default function Logout() {
     }
   };
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className="flex  flex-col items-center gap-2 mt-auto pb-5">
       <Button onClick={handleLogout} size="lg" disabled={loading}>
         {loading ? <Spinner /> : <p>Log out</p>}
       </Button>
-      <Button size="lg" variant="secondary">
+      <Button size="lg" variant="secondary" onClick={()=>setModalOpen(true)}>
         Delete Account
       </Button>
-      <CominSoonModal isOpen={modalOpen} onClose={() => setModalOpen(true)} />
+      {modalOpen && <CominSoonModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />}
     </div>
   );
 }

@@ -90,7 +90,25 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     strategy: "jwt",
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
+      if (trigger === "update" && token.accessToken) {
+        try {
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/users/me`,
+            {
+              headers: {
+                Authorization: `Bearer ${token.accessToken}`,
+              },
+            },
+          );
+          if (res.ok) {
+            token.user = await res.json();
+          }
+        } catch (e) {
+          console.error("Failed to refresh user info on update:", e);
+        }
+        return token;
+      }
       // 최초 로그인 시 토큰 저장
       if (user) {
         token.accessToken = user.accessToken;

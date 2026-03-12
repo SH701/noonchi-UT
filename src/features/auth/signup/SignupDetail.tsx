@@ -69,14 +69,14 @@ export default function SignupDetail({
         redirect: false,
       });
 
-      // if (koreanLevel || interests.length > 0) {
-      //   await updateProfile({
-      //     koreanLevel: koreanLevel ?? undefined,
-      //     interests,
-      //   });
-      //   await update();
-      //   resetPreferences();
-      // }
+      if (koreanLevel || interests.length > 0) {
+        await updateProfile({
+          koreanLevel: koreanLevel ?? undefined,
+          interests,
+        });
+        await update();
+        resetPreferences();
+      }
       gtag("event", "sign_up", { method: "email" });
       closeModal(); 
       router.push("/main");

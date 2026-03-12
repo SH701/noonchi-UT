@@ -4,10 +4,11 @@ import { useState } from "react";
 import { AlpabatIcon, ControlIcon, SettingIcon } from "@/assets/svgr";
 import ProfileMenuList from "./ProfileMenuList";
 import { CominSoonModal } from "@/components/modal";
+import { useRouter } from "next/navigation";
 
 export default function ProfileMenuSection() {
   const [showModal, setShowModal] = useState(false);
-
+  const router = useRouter();
   return (
     <>
       <div>
@@ -16,7 +17,7 @@ export default function ProfileMenuSection() {
           items={[
             {
               label: "Topics of Interest",
-              onClick: () => setShowModal(true),
+              onClick: () => router.push("/profile/interests"),
               icon: <ControlIcon />,
             },
             {
