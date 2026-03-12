@@ -20,7 +20,7 @@ import { useVoiceChat, useScrollToBottom } from "@/hooks/custom";
 import { useChatUI } from "@/hooks/custom/useChatUI";
 import RoleplayHeader from "./ChatroomHeader";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { useRouter, redirect } from "next/navigation";
 
 import { SqurepenIcon } from "@/assets/svgr";
 import FeedbackLoading from "./FeedbackLoading";
@@ -103,7 +103,7 @@ export default function RoleplayChat({
 
   useEffect(() => {
     if (conversation?.status === "ENDED") {
-      router.push(`/main/roleplay/chatroom/${conversationId}/result`);
+      redirect(`/main/roleplay/chatroom/${conversationId}/result`);
     }
   }, [conversation?.status]);
   if (!conversation) {
