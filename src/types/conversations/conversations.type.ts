@@ -21,7 +21,7 @@ export interface Conversation {
   conversationType: "ASK" | "ROLE_PLAYING";
   conversationTrack: string;
   conversationTopic: string;
-  status: "ACTIVE" | "DONE";
+  status: "ACTIVE" | "ENDED";
   situation: string;
   chatModelId: string;
   createdAt: string;

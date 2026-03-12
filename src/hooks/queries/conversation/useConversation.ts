@@ -80,5 +80,6 @@ export function useConversationFeedback(conversationId: number) {
     queryKey: ["feedback", conversationId],
     queryFn: () =>
       apiClient.conversations.getConversationFeedback(conversationId),
+    staleTime: Infinity,
   });
 }

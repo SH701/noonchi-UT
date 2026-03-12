@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MessageList,
   HintMessage,
@@ -89,6 +89,9 @@ export default function RoleplayChat({
         : undefined;
     if (micState === "recorded") handleResetAudio();
     setMessage("");
+    if (showSituation) {
+      toggleSituation();
+    }
     conversationDeatil();
     await sendStreamMessage(textToSend, audioToSend);
     refetchHint();
@@ -97,6 +100,12 @@ export default function RoleplayChat({
   const handleInfo = () => {
     setOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (conversation?.status === "ENDED") {
+      router.push(`/main/roleplay/chatroom/${conversationId}/result`);
+    }
+  }, [conversation?.status]);
   if (!conversation) {
     return;
   }
