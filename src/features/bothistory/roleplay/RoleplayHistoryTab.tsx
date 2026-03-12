@@ -18,9 +18,15 @@ export default function RoleplayHistoryTab() {
   const { closeTab } = useTabStore();
   const isSearching = searchKeyword.trim().length > 0;
 
-  const { data: listData, isPending: isListPending } = useConversations();
+  const { data: listData, isPending: isListPending } = useConversations(
+    null,
+    "LAST_ACTIVITY_DESC",
+    1,
+    20,
+    "ROLE_PLAYING",
+  );
   const { data: searchData, isPending: isSearchPending } =
-    useConversationSearch(searchKeyword, "ROLE_PLAYING");
+    useConversationSearch(searchKeyword);
   const { data: topics = [], isPending: isTopicsPending } = useTopics(
     "",
     false,
@@ -30,9 +36,7 @@ export default function RoleplayHistoryTab() {
     isTopicsPending || (isSearching ? isSearchPending : isListPending);
   const conversations = isSearching
     ? (searchData?.conversations ?? [])
-    : (listData?.conversations ?? []).filter(
-        (c) => c.conversationType === "ROLE_PLAYING",
-      );
+    : (listData?.conversations ?? []);
 
   const handleHistoryPage = () => {
     router.push("/bothistory/roleplay");

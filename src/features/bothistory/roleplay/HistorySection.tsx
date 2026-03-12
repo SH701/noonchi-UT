@@ -15,7 +15,7 @@ interface HistorySectionProps {
 export default function HistorySection({ sortBy }: HistorySectionProps) {
   const router = useRouter();
   const [page, setPage] = useState(1);
-  const { data, isFetching } = useConversations(null, sortBy, page, 6);
+  const { data, isFetching } = useConversations(null, sortBy, page, 6,"ROLE_PLAYING");
   const conversations = data?.conversations ?? [];
   const totalPages = data?.totalPages ?? 1;
 

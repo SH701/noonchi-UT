@@ -1,6 +1,5 @@
 import {
   useQuery,
-  useInfiniteQuery,
   keepPreviousData,
   UseQueryOptions,
 } from "@tanstack/react-query";
@@ -17,11 +16,26 @@ export const useConversations = (
   sortBy: ConversationSortBy = "LAST_ACTIVITY_DESC",
   page: number = 1,
   size: number = 20,
+  conversationType?: "ROLE_PLAYING" | "ASK",
 ) => {
   return useQuery({
-    queryKey: ["conversations", "history", filter, sortBy, page, size],
+    queryKey: [
+      "conversations",
+      "history",
+      filter,
+      sortBy,
+      page,
+      size,
+      conversationType,
+    ],
     queryFn: () =>
-      apiClient.conversations.getConversations(filter, sortBy, page, size),
+      apiClient.conversations.getConversations(
+        filter,
+        sortBy,
+        page,
+        size,
+        conversationType,
+      ),
     select: (data) => ({
       conversations: (data?.content ?? []).filter(
         (c): c is Conversation => !!c?.aiPersona,
@@ -32,52 +46,15 @@ export const useConversations = (
   });
 };
 
-export const useInfiniteConversations = (
-  filter: FilterState = null,
-  sortBy: ConversationSortBy = "LAST_ACTIVITY_DESC",
-  size: number = 20,
-) => {
-  return useInfiniteQuery({
-    queryKey: ["conversations", "infinite", filter, sortBy, size],
-    queryFn: ({ pageParam = 1 }) =>
-      apiClient.conversations.getConversations(
-        filter,
-        sortBy,
-        pageParam as number,
-        size,
-      ),
-    initialPageParam: 1,
-    getNextPageParam: (lastPage) =>
-      lastPage.last ? undefined : lastPage.pageNumber + 2,
-    select: (data) => {
-      const seen = new Set<number>();
-      const conversations = data.pages
-        .flatMap((page) => page.content)
-        .filter((c): c is Conversation => !!c?.aiPersona)
-        .filter((c) => {
-          if (seen.has(c.conversationId)) return false;
-          seen.add(c.conversationId);
-          return true;
-        });
-      return { pages: data.pages, conversations };
-    },
-  });
-};
-
-export const useConversationSearch = (
-  keyword: string,
-  conversationType?: "ROLE_PLAYING" | "ASK",
-) => {
+export const useConversationSearch = (keyword: string) => {
   return useQuery({
-    queryKey: ["conversations", "search", keyword, conversationType],
+    queryKey: ["conversations", "search", keyword],
     queryFn: () => apiClient.conversations.getConversationSearch(keyword),
     enabled: keyword.trim().length > 0,
     select: (data) => ({
-      conversations: (data?.content ?? [])
-        .filter((c): c is Conversation => !!c?.aiPersona)
-        .filter(
-          (c) => !conversationType || c.conversationType === conversationType,
-        ),
+      conversations: (data?.content ?? []).filter(
+        (c): c is Conversation => !!c?.aiPersona,
+      ),
     }),
   });
 };

@@ -13,16 +13,20 @@ export default function AskHistoryTab() {
   const { closeTab } = useTabStore();
   const isSearching = searchKeyword.trim().length > 0;
 
-  const { data: listData, isPending: isListPending } = useConversations();
+  const { data: listData, isPending: isListPending } = useConversations(
+    undefined,
+    "LAST_ACTIVITY_DESC",
+    1,
+    20,
+    "ASK",
+  );
   const { data: searchData, isPending: isSearchPending } =
-    useConversationSearch(searchKeyword, "ASK");
+    useConversationSearch(searchKeyword);
 
   const isPending = isSearching ? isSearchPending : isListPending;
   const conversations = isSearching
     ? (searchData?.conversations ?? [])
-    : (listData?.conversations ?? []).filter(
-        (c) => c.conversationType === "ASK",
-      );
+    : (listData?.conversations ?? []);
 
   return (
     <div className="flex h-full flex-col overflow-hidden">
