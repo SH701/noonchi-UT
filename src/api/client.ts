@@ -1,7 +1,7 @@
 import { apiFetch } from "./api";
 
 import { normalizeChatMessage } from "@/lib/normalizeChatMessage";
-import { ChatMsg, Feedback } from "@/types/messages";
+import { ChatMsg } from "@/types/messages";
 import {
   Conversation,
   ConversationFeedback,
@@ -93,9 +93,6 @@ export const apiClient = {
         (a, b) =>
           new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
       );
-    },
-    getFeedback: async (messageId: number): Promise<Feedback> => {
-      return apiFetch<Feedback>(`/api/messages/${messageId}/feedback`);
     },
   },
   preview: {

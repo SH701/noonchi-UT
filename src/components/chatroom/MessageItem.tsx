@@ -3,11 +3,7 @@
 import { useState } from "react";
 import clsx from "clsx";
 
-import {
-  useMessageFeedback,
-  useMessageTTS,
-  useMessageTranslate,
-} from "@/hooks/mutations";
+import { useMessageTTS } from "@/hooks/mutations";
 import { Spinner } from "../ui/spinner/spinner";
 import { ChatLoading } from "../common";
 import {
@@ -26,6 +22,7 @@ interface MessageItemProps {
     isLoading?: boolean;
     messageId?: number;
     hiddenMeaning?: string;
+    feedback?: { nuanceFeedback: string };
   };
   myAI?: MyAI | null;
   isMine?: boolean;
@@ -49,7 +46,6 @@ export default function MessageItem({
   myAI,
   isMine,
   isAI,
-  isPending,
   aiName,
   userName,
   hiddenMeaning,
@@ -65,11 +61,7 @@ export default function MessageItem({
     onToggleReveal !== undefined ? (isRevealed ?? false) : meanOpen;
   const [feedbackOpen, setFeedbackOpen] = useState(false);
 
-  const { data: translateText, mutate: translate } = useMessageTranslate();
   const { mutate: tts, isPending: loadingTTS } = useMessageTTS();
-  const { data: feedbackData } = useMessageFeedback(
-    feedbackOpen && !isPending ? messages.messageId : undefined,
-  );
 
   const handleFeedback = () => {
     setFeedbackOpen((prev) => !prev);
@@ -80,9 +72,7 @@ export default function MessageItem({
 
   const handleTranslateClick = (messageId: number | undefined) => {
     if (!messageId && !translatedContent) return;
-    if (!translateOpen && messageId) {
-      translate(messageId);
-    }
+
     setTranslateOpen((prev) => !prev);
   };
   const handleHiddenMean = () => {
@@ -146,7 +136,7 @@ export default function MessageItem({
                 {feedbackOpen ? (
                   <div>
                     <span>
-                      {previewFeedback ?? feedbackData?.nuanceFeedback}
+                      {previewFeedback ?? messages.feedback?.nuanceFeedback}
                     </span>
                     <button
                       className="mt-2.5 flex cursor-pointer gap-1 rounded-full border border-blue-500 px-2 py-1"
@@ -219,9 +209,7 @@ export default function MessageItem({
                     </span>
                   </button>
                 </div>
-                {translateOpen && (
-                  <span>{translatedContent ?? translateText}</span>
-                )}
+                {translateOpen && <span>{translatedContent}</span>}
               </div>
             </>
           )}

@@ -62,7 +62,9 @@ export default function PreviewMessageList({
             isPreview={true}
             previewFeedback={userMsg.feedback}
           />
-          {isSending && idx === userMessages.length - 1 ? (
+          {isSending &&
+          idx === userMessages.length - 1 &&
+          !aiResponses[idx]?.content ? (
             <ChatLoading />
           ) : (
             // AI 답변

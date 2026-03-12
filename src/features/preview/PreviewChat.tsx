@@ -106,7 +106,7 @@ export default function PreviewChat() {
       </div>
 
       {/* 하단 고정 영역 */}
-      <div className="relative flex flex-col gap-2 pb-5">
+      <div className="sticky bottom-0 z-10 flex flex-col pb-5 backdrop-blur-md">
         {!isStarting && (
           <motion.div
             key={aiResponses.length}

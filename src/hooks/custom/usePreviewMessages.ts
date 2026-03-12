@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { usePreviewRemove, usePreviewSend, usePreviewStart } from "../mutations/preview/usePreview";
 import { usePreviewHint } from "@/hooks/queries";
 import { PreviewAiMessage, PreviewUserMessage } from "@/types/preview";
-
+import { flushSync } from "react-dom";
 
 export function usePreviewMessages() {
   const { data, mutate: startChat, isPending: isStarting } = usePreviewStart();
@@ -13,32 +13,36 @@ export function usePreviewMessages() {
 
   const started = useRef(false);
   const ended = useRef(false);
-
+  useEffect(() => {
+    if (started.current) return;
+    started.current = true;
+    startChat();
+  }, [startChat]);
   const {
     data: hintData,
     refetch: refetchHint,
     isFetching: isHintFetching,
   } = usePreviewHint(data?.session_id);
 
+  // EventStrem에서 type:chunk인 content를 누적
   const handleChunk = useCallback((chunk: string) => {
-    setAiResponses((prev) => {
-      const next = [...prev];
-      if (next.length > 0) {
-        next[next.length - 1] = { ...next[next.length - 1], content: chunk };
-      }
-      return next;
+    flushSync(() => {
+      setAiResponses((prev) => {
+        const next = [...prev];
+        if (next.length > 0) {
+          next[next.length - 1] = {
+            ...next[next.length - 1],
+            content: (next[next.length - 1].content ?? "") + chunk,
+          };
+        }
+        return next;
+      });
     });
   }, []);
 
   const { mutate: sendMutation, isPending: isSending } =
     usePreviewSend(handleChunk);
   const { mutate: removePreview } = usePreviewRemove();
-
-  useEffect(() => {
-    if (started.current) return;
-    started.current = true;
-    startChat();
-  }, [startChat]);
 
   useEffect(() => {
     if (

@@ -1,5 +1,4 @@
 import { apiMutations } from "@/api";
-import { toast } from "@/components/ui/toast/toast";
 import { useMutation } from "@tanstack/react-query";
 
 export const useUpdateProfile = () => {
@@ -14,11 +13,5 @@ export const useUpdateProfile = () => {
       profileImageUrl?: string;
       interests?: string[];
     }) => apiMutations.user.UpadateProfile(koreanLevel, interests),
-    onSuccess: () => {
-      toast.success("Profile updated successfully.");
-    },
-    onError: () => {
-      toast.error("Failed to update profile.");
-    },
   });
 };

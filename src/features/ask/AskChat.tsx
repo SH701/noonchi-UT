@@ -65,7 +65,7 @@ export default function AskChat() {
         gtag("event", "ask_first_question");
         setStep("closeness");
         setMessage("");
-  
+
         return;
       }
       if (step === "situation") {
@@ -77,7 +77,6 @@ export default function AskChat() {
       }
       return;
     }
-
     if (micState === "recorded" && pendingAudioUrl && message === sttText) {
       sendMessage(message, pendingAudioUrl);
       handleResetAudio();
@@ -186,7 +185,7 @@ export default function AskChat() {
       </div>
 
       {/* 하단 고정 ChatInput */}
-      <div className="sticky bottom-0 flex flex-col pb-5 backdrop-blur-md">
+      <div className="sticky bottom-0 z-10 flex flex-col pb-5 backdrop-blur-md">
         {aiMessage && (
           <ChatQuickActions onOpenModal={() => setModalOpen(true)} />
         )}

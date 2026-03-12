@@ -53,6 +53,7 @@ export default function RoleplayForm({
   };
 
   const handleMeHint = () => {
+    setDisplayMe("");
     setPendingMe(true);
     createContext(undefined, {
       onSuccess: (data) => setDisplayMe(data.myRole),
@@ -60,6 +61,7 @@ export default function RoleplayForm({
     });
   };
   const handleAIHint = () => {
+    setDisplayAI("");
     setPendingAI(true);
     createContext(undefined, {
       onSuccess: (data) => setDisplayAI(data.aiRole),
@@ -67,6 +69,7 @@ export default function RoleplayForm({
     });
   };
   const handleDetailHint = () => {
+    setDetails("");
     setPendingDetail(true);
     createContext(undefined, {
       onSuccess: (data) => setDetails(data.detail),

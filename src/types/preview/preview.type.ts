@@ -14,7 +14,7 @@ export interface Preview {
   ai_hidden_meaning: string;
   visual_action: string;
   user_visual_action: string;
-  situation_description: string | null;
+  situation_description: string;
   situation_context: string;
   max_turns: number;
 }
@@ -26,7 +26,7 @@ export interface PreviewSendRes {
   ai_hidden_meaning: string;
   visual_action: string;
   user_visual_action: string;
-  situation_description: string | null;
+  situation_description: string;
   feedback: {
     feedback_text: string;
     is_appropriate: boolean;

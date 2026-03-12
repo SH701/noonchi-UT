@@ -351,7 +351,7 @@ export const apiMutations = {
 
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
-      let fullText = "";
+      
       let doneData: PreviewSendRes | null = null;
       let buffer = "";
 
@@ -368,8 +368,7 @@ export const apiMutations = {
             if (!line.startsWith("data: ")) continue;
             const json = JSON.parse(line.slice(6));
             if (json.type === "chunk") {
-              fullText += json.content;
-              onChunk?.(fullText);
+              onChunk?.(json.content);
             } else if (json.type === "done") {
               doneData = json.data as PreviewSendRes;
             }

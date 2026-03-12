@@ -4,6 +4,7 @@ import { Header } from "@/components/common";
 import { Button } from "@/components/ui/button/button";
 import { INTEREST_OPTIONS } from "@/data";
 import { useUpdateProfile } from "@/hooks/mutations";
+import { toast } from "@/components/ui/toast/toast";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -27,9 +28,14 @@ export default function MyInterests({ interests }: MyinterestsProps) {
   };
 
   const handleUpdate = async () => {
-    await updateProfile({ interests: selected });
-    await update({});
-    router.refresh();
+    try {
+      await updateProfile({ interests: selected });
+      await update({});
+      router.refresh();
+      toast.success("Profile updated successfully.");
+    } catch {
+      toast.error("Failed to update profile.");
+    }
   };
 
   return (
