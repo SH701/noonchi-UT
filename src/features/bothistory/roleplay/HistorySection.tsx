@@ -3,6 +3,7 @@
 import { NoteIcon } from "@/assets/svgr";
 import HistorySectiontSkeleton from "@/components/skeleton/HistorySectiontSkeleton";
 import { useConversations } from "@/hooks/queries";
+import { getTime } from "@/lib/time-format";
 import { ConversationSortBy } from "@/types/conversations";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -46,11 +47,7 @@ export default function HistorySection({ sortBy }: HistorySectionProps) {
               <div className="flex justify-between">
                 <span className="font-semibold">{convo.aiPersona.aiRole}</span>
                 <span className="text-xs text-gray-500">
-                  {new Date(convo.createdAt).toLocaleDateString("en-GB", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "2-digit",
-                  })}
+                  {getTime(convo.createdAt)}
                 </span>
               </div>
               <div className="flex justify-between">

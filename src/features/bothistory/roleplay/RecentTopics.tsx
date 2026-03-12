@@ -1,10 +1,10 @@
 "use client";
 
-import { EmptyAskIcon } from "@/assets/svgr";
 import RecentTopicsSkeleton from "@/components/skeleton/RecentTopicsSkeleton";
 import { useRecentTopics } from "@/hooks/queries/topic/useTopics";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import EmptyState from "../EmptyState";
 
 export default function RecentTopic() {
   const { data: recent, isPending } = useRecentTopics();
@@ -15,12 +15,7 @@ export default function RecentTopic() {
     <div>
       <p className="pb-3 text-sm font-medium">Recent Role Playing</p>
       {recent?.length === 0 ? (
-        <div className="mt-20 flex gap-2">
-          <EmptyAskIcon className="text-gray-500" />
-          <span className="font-medium text-gray-500">
-            No conversations yet
-          </span>
-        </div>
+        <EmptyState />
       ) : (
         <div className="flex gap-3 overflow-x-auto">
           {recent?.map((topic) => (
