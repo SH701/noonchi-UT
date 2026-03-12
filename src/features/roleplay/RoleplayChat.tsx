@@ -9,7 +9,11 @@ import {
   ChatroomInfo,
 } from "@/components/chatroom";
 
-import { useConversationDetail, useRoleplayHint } from "@/hooks/queries";
+import {
+  useChatQuery,
+  useConversationDetail,
+  useRoleplayHint,
+} from "@/hooks/queries";
 import { ChatInput } from "@/components/common";
 import { useConversationEnd, useRoleMessageStream } from "@/hooks/mutations";
 import { useVoiceChat, useScrollToBottom } from "@/hooks/custom";
@@ -33,11 +37,14 @@ export default function RoleplayChat({
   const [open, setOpen] = useState(false);
   const { data: conversation, refetch: conversationDeatil } =
     useConversationDetail(conversationId);
-
+  const { data: messages = [] } = useChatQuery(conversationId);
   const { streamMessages, sendStreamMessage } =
     useRoleMessageStream(conversationId);
-  const { data: hintData, refetch: refetchHint } =
-    useRoleplayHint(conversationId);
+  const {
+    data: hintData,
+    refetch: refetchHint,
+    isFetching: isHintFetching,
+  } = useRoleplayHint(conversationId);
   const {
     micState,
     sttText,
@@ -115,7 +122,7 @@ export default function RoleplayChat({
                 userRole={conversation.aiPersona.userRole}
               />
               <MessageList
-                messages={[...streamMessages]}
+                messages={[...messages, ...streamMessages]}
                 myAI={myAI}
                 showsituation={showSituation}
                 onInfoClick={handleInfo}
@@ -157,6 +164,7 @@ export default function RoleplayChat({
                 isHintActive={showHintPanel}
                 isSituationActive={showSituation}
                 micState={micState}
+                isHintLoading={isHintFetching}
               />
             </div>
             {open && (
