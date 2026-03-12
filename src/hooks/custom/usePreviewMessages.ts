@@ -14,9 +14,11 @@ export function usePreviewMessages() {
   const started = useRef(false);
   const ended = useRef(false);
 
-  const { data: hintData, refetch: RehintData } = usePreviewHint(
-    data?.session_id,
-  );
+  const {
+    data: hintData,
+    refetch: refetchHint,
+    isFetching: isHintFetching,
+  } = usePreviewHint(data?.session_id);
 
   const handleChunk = useCallback((chunk: string) => {
     setAiResponses((prev) => {
@@ -92,7 +94,7 @@ export function usePreviewMessages() {
             };
             return next;
           });
-          RehintData();
+          refetchHint();
         },
         onError: () => {
           setShowPreviewModal(true);
@@ -116,6 +118,7 @@ export function usePreviewMessages() {
     hintData,
     isStarting,
     isSending,
+    isHintFetching,
     userMessages,
     aiResponses,
     firstHiddenMessage,

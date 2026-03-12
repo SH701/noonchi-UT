@@ -21,7 +21,7 @@ interface ChatInputProps {
   isHintActive?: boolean;
   isSituationActive?: boolean;
   micState?: MicState;
-  isHintLoading: boolean;
+  isHintLoading?: boolean;
 }
 
 export default function ChatInput({
