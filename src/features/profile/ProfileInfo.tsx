@@ -12,7 +12,7 @@ interface ProfileInfoProps {
 export default function ProfileInfo({ img, name }: ProfileInfoProps) {
   const router = useRouter();
   const handleProfile = () => {
-    router.push("/profile/myprofile");
+    router.push("/profile/info");
   };
   return (
     <div className="flex items-center justify-between rounded-2xl border border-gray-500 p-4">

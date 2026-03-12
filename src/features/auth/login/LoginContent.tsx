@@ -53,14 +53,14 @@ export default function LoginContent() {
         setLoading(false);
         return;
       }
-      // if (koreanLevel || interests.length > 0) {
-      //   await updateProfile({
-      //     koreanLevel: koreanLevel ?? undefined,
-      //     interests,
-      //   });
-      //   await update();
-      //   resetPreferences();
-      // }
+      if (koreanLevel || interests.length > 0) {
+        await updateProfile({
+          koreanLevel: koreanLevel ?? undefined,
+          interests,
+        });
+        await update();
+        resetPreferences();
+      }
       gtag("event", "login", { method: "email" });
       closeModal();
       router.replace("/main");
