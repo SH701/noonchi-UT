@@ -58,6 +58,7 @@ export default function RoleplayHistoryTab() {
                   <Image
                     src={matchedTopic.imageUrl}
                     alt={convo.conversationTopic}
+                    fill
                     className="object-cover"
                     sizes="(max-width: 430px) 100vw, 80vw"
                     loading="eager"

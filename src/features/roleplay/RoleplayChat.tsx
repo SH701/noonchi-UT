@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MessageList,
   HintMessage,
@@ -9,14 +9,18 @@ import {
   ChatroomInfo,
 } from "@/components/chatroom";
 
-import { useConversationDetail, useRoleplayHint } from "@/hooks/queries";
+import {
+  useChatQuery,
+  useConversationDetail,
+  useRoleplayHint,
+} from "@/hooks/queries";
 import { ChatInput } from "@/components/common";
 import { useConversationEnd, useRoleMessageStream } from "@/hooks/mutations";
 import { useVoiceChat, useScrollToBottom } from "@/hooks/custom";
 import { useChatUI } from "@/hooks/custom/useChatUI";
 import RoleplayHeader from "./ChatroomHeader";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { useRouter, redirect } from "next/navigation";
 
 import { SqurepenIcon } from "@/assets/svgr";
 import FeedbackLoading from "./FeedbackLoading";
@@ -33,11 +37,14 @@ export default function RoleplayChat({
   const [open, setOpen] = useState(false);
   const { data: conversation, refetch: conversationDeatil } =
     useConversationDetail(conversationId);
-
+  const { data: messages = [] } = useChatQuery(conversationId);
   const { streamMessages, sendStreamMessage } =
     useRoleMessageStream(conversationId);
-  const { data: hintData, refetch: refetchHint } =
-    useRoleplayHint(conversationId);
+  const {
+    data: hintData,
+    refetch: refetchHint,
+    isFetching: isHintFetching,
+  } = useRoleplayHint(conversationId);
   const {
     micState,
     sttText,
@@ -82,6 +89,9 @@ export default function RoleplayChat({
         : undefined;
     if (micState === "recorded") handleResetAudio();
     setMessage("");
+    if (showSituation) {
+      toggleSituation();
+    }
     conversationDeatil();
     await sendStreamMessage(textToSend, audioToSend);
     refetchHint();
@@ -90,6 +100,12 @@ export default function RoleplayChat({
   const handleInfo = () => {
     setOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (conversation?.status === "ENDED") {
+      redirect(`/main/roleplay/chatroom/${conversationId}/result`);
+    }
+  }, [conversation?.status]);
   if (!conversation) {
     return;
   }
@@ -115,7 +131,7 @@ export default function RoleplayChat({
                 userRole={conversation.aiPersona.userRole}
               />
               <MessageList
-                messages={[...streamMessages]}
+                messages={[...messages, ...streamMessages]}
                 myAI={myAI}
                 showsituation={showSituation}
                 onInfoClick={handleInfo}
@@ -157,6 +173,7 @@ export default function RoleplayChat({
                 isHintActive={showHintPanel}
                 isSituationActive={showSituation}
                 micState={micState}
+                isHintLoading={isHintFetching}
               />
             </div>
             {open && (

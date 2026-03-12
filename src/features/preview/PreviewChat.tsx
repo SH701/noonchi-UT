@@ -25,6 +25,7 @@ export default function PreviewChat() {
     hintData,
     isStarting,
     isSending,
+    isHintFetching,
     userMessages,
     aiResponses,
     firstHiddenMessage,
@@ -62,6 +63,9 @@ export default function PreviewChat() {
 
   const handleSend = () => {
     if (!message.trim() || isSending) return;
+    if (showSituation) {
+      toggleSituation();
+    }
     sendMessage(message, pendingAudioUrl ?? undefined);
     setMessage("");
     handleSendAudio();
@@ -142,6 +146,7 @@ export default function PreviewChat() {
           isHintActive={showHintPanel}
           isSituationActive={showSituation}
           micState={micState}
+          isHintLoading={isHintFetching}
         />
       </div>
       <PreviewModal

@@ -5,6 +5,7 @@ import { renderWithAction } from "@/lib/renderWithAction";
 import { MicIcon, SendIcon } from "@/assets/svgr";
 import { Asterisk, Lightbulb } from "lucide-react";
 import { MicState } from "@/hooks/custom/useVoiceChat";
+import { Spinner } from "../ui/spinner/spinner";
 
 interface ChatInputProps {
   message: string;
@@ -20,6 +21,7 @@ interface ChatInputProps {
   isHintActive?: boolean;
   isSituationActive?: boolean;
   micState?: MicState;
+  isHintLoading?: boolean;
 }
 
 export default function ChatInput({
@@ -36,6 +38,7 @@ export default function ChatInput({
   isHintActive = false,
   isSituationActive = false,
   micState = "idle",
+  isHintLoading = false,
 }: ChatInputProps) {
   const textRef = useRef<HTMLTextAreaElement>(null);
   const [isFocused, setIsFocused] = useState(false);
@@ -111,11 +114,13 @@ export default function ChatInput({
               <button
                 onClick={onHintClick}
                 className={`h-6.5 flex cursor-pointer rounded-full border px-2 ${isHintActive ? "border-indigo-500 text-indigo-500" : ""}`}
+                disabled={isHintLoading}
               >
-                <Lightbulb
+                {isHintLoading ? <Spinner/>: <> <Lightbulb
                   className={`py-0.5 ${isHintActive ? "text-indigo-500" : ""}`}
                 />
-                <p>needhelp</p>
+                <p>needhelp</p> </>}
+               
               </button>
             )}
           </div>
