@@ -41,12 +41,14 @@ export const apiClient = {
       sortBy: ConversationSortBy = "LAST_ACTIVITY_DESC",
       page: number = 1,
       size: number = 20,
+      conversationType = "",
     ): Promise<ConversationPaged> => {
       const status = filter ? filterMap[filter] : null;
       const queryString = new URLSearchParams({
         sortBy,
         page: String(page),
         size: String(size),
+        conversationType: conversationType,
         ...(status && { status }),
       }).toString();
       return apiFetch<ConversationPaged>(`/api/conversations?${queryString}`, {

@@ -1,28 +1,18 @@
 "use client";
 
-import { useConversations, useConversationSearch } from "@/hooks/queries";
 import { AskHistorySkeleton } from "../../../components/skeleton";
-import { useChatHistoryStore } from "@/store/useChatHistorystore";
-import { EmptyAskIcon, SearchIcon } from "@/assets/svgr";
+import { SearchIcon } from "@/assets/svgr";
 import { useRouter } from "next/navigation";
 import { useTabStore } from "@/store/useTabStore";
+import EmptyState from "../EmptyState";
+import { getTime } from "@/lib/time-format";
+import { useHistorySearch } from "@/hooks/custom";
 
 export default function AskHistoryTab() {
-  const { searchKeyword } = useChatHistoryStore();
   const router = useRouter();
   const { closeTab } = useTabStore();
-  const isSearching = searchKeyword.trim().length > 0;
-
-  const { data: listData, isPending: isListPending } = useConversations();
-  const { data: searchData, isPending: isSearchPending } =
-    useConversationSearch(searchKeyword, "ASK");
-
-  const isPending = isSearching ? isSearchPending : isListPending;
-  const conversations = isSearching
-    ? (searchData?.conversations ?? [])
-    : (listData?.conversations ?? []).filter(
-        (c) => c.conversationType === "ASK",
-      );
+  const { conversations, isPending, isSearching, searchKeyword } =
+    useHistorySearch("ASK");
 
   return (
     <div className="flex h-full flex-col overflow-hidden">
@@ -44,12 +34,7 @@ export default function AskHistoryTab() {
                 </span>
               </div>
             ) : (
-              <div className="mt-20 flex gap-2">
-                <EmptyAskIcon className="text-gray-500" />
-                <span className="font-medium text-gray-500">
-                  No conversations yet
-                </span>
-              </div>
+              <EmptyState />
             )}
           </div>
         ) : (
@@ -72,11 +57,7 @@ export default function AskHistoryTab() {
                   {convo.askTarget.toUpperCase()}
                 </span>
                 <span className="text-xs text-gray-500">
-                  {new Date(convo.createdAt).toLocaleDateString("en-GB", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "2-digit",
-                  })}
+                  {getTime(convo.createdAt)}
                 </span>
               </div>
             </div>

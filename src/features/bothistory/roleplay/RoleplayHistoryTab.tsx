@@ -1,38 +1,24 @@
 "use client";
 
-import {
-  useConversations,
-  useConversationSearch,
-  useTopics,
-} from "@/hooks/queries";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useChatHistoryStore } from "@/store/useChatHistorystore";
+import { useTopics } from "@/hooks/queries";
+import { useRouter } from "next/navigation";
 import { useTabStore } from "@/store/useTabStore";
 import { ChevronRight } from "lucide-react";
 import { RoleplayHistorySkeleton } from "@/components/skeleton";
+import { useHistorySearch } from "@/hooks/custom";
 
 export default function RoleplayHistoryTab() {
   const router = useRouter();
-  const { searchKeyword } = useChatHistoryStore();
   const { closeTab } = useTabStore();
-  const isSearching = searchKeyword.trim().length > 0;
 
-  const { data: listData, isPending: isListPending } = useConversations();
-  const { data: searchData, isPending: isSearchPending } =
-    useConversationSearch(searchKeyword, "ROLE_PLAYING");
+  const { conversations, isPending: isHistoryPending } =
+    useHistorySearch("ROLE_PLAYING");
   const { data: topics = [], isPending: isTopicsPending } = useTopics(
     "",
     false,
   );
-
-  const isPending =
-    isTopicsPending || (isSearching ? isSearchPending : isListPending);
-  const conversations = isSearching
-    ? (searchData?.conversations ?? [])
-    : (listData?.conversations ?? []).filter(
-        (c) => c.conversationType === "ROLE_PLAYING",
-      );
+  const isPending = isHistoryPending || isTopicsPending;
 
   const handleHistoryPage = () => {
     router.push("/bothistory/roleplay");
@@ -61,7 +47,7 @@ export default function RoleplayHistoryTab() {
                 className="relative size-32 shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-white/10 shadow-lg"
                 onClick={() => {
                   router.push(
-                    convo.status === "DONE"
+                    convo.canGetReport
                       ? `/main/roleplay/chatroom/${convo.conversationId}/result`
                       : `/main/roleplay/chatroom/${convo.conversationId}`,
                   );
@@ -72,7 +58,6 @@ export default function RoleplayHistoryTab() {
                   <Image
                     src={matchedTopic.imageUrl}
                     alt={convo.conversationTopic}
-                    fill
                     className="object-cover"
                     sizes="(max-width: 430px) 100vw, 80vw"
                     loading="eager"
