@@ -67,7 +67,7 @@ export default function ChatInput({
         <div className="relative mb-3 w-full">
           <div
             aria-hidden
-            className="max-h-30 wrap-break-word pointer-events-none w-full min-w-0 overflow-y-auto whitespace-pre-wrap text-sm text-gray-800"
+            className="max-h-30 wrap-break-word pointer-events-none w-full min-w-0 overflow-y-auto whitespace-pre-wrap text-base text-gray-800"
           >
             {renderWithAction(message)}
             {/* 높이 유지용 */}
@@ -79,7 +79,7 @@ export default function ChatInput({
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             placeholder={placeholder}
-            className="max-h-30 absolute inset-0 w-full min-w-0 resize-none overflow-y-auto border-none bg-transparent text-sm text-transparent placeholder-gray-400 caret-gray-800 outline-none disabled:bg-transparent"
+            className="max-h-30 absolute inset-0 w-full min-w-0 resize-none overflow-y-auto border-none bg-transparent text-base text-transparent placeholder-gray-400 caret-gray-800 outline-none disabled:bg-transparent"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={(e) => {
