@@ -14,7 +14,7 @@ export default function PreviewEnd() {
     openModal(<SignupContent />);
   };
   return (
-    <div className="bg-gradient-primary min-h-dvh flex flex-col items-center justify-center">
+    <div className="bg-gradient-primary flex min-h-dvh flex-col items-center justify-center">
       <div className="mt-auto flex flex-col items-center">
         <Image
           src="/etc/logo.png"
@@ -27,13 +27,13 @@ export default function PreviewEnd() {
         <p className="py-4 text-2xl font-medium text-gray-800">
           Preview Roleplay Ended
         </p>
-        <div className="flex flex-col items-center justify-center text-sm text-gray-600 font-medium">
+        <div className="flex flex-col items-center justify-center text-sm font-medium text-gray-600">
           <span>The Preview roleplay has ended.</span>
           <span>To continue the conversation,</span>
           <span>please log in or sign up</span>
         </div>
       </div>
-      <div className="flex flex-col gap-4 mt-auto pb-13">
+      <div className="pb-13 mt-auto flex flex-col gap-4">
         <Button size="lg" onClick={signupOpen}>
           Create Account
         </Button>

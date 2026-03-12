@@ -28,23 +28,23 @@ export default function MyInterests({ interests }: MyinterestsProps) {
 
   const handleUpdate = async () => {
     await updateProfile({ interests: selected });
-    update();
+    await update({});
     router.refresh();
   };
 
   return (
-    <div>
+    <div className="flex flex-1 flex-col">
       <Header
         leftIcon={<ChevronLeft onClick={() => router.back()} />}
         center="Topic of Interests"
       />
-      <p className="pb-1 text-xl font-semibold leading-7">
+      <p className="pb-1 pt-5 text-xl font-semibold leading-7">
         Select Your Interest
       </p>
-      <p className="text-sm text-gray-500">
+      <p className="pb-6 text-sm text-gray-500">
         Select at least 3 interests to help us refine your experience.
       </p>
-      <div className="flex h-full flex-col pt-4">
+      <div className="flex flex-1 flex-col pb-10 pt-4">
         <div className="flex flex-wrap gap-3">
           {INTEREST_OPTIONS.map((opt) => (
             <button
@@ -60,18 +60,15 @@ export default function MyInterests({ interests }: MyinterestsProps) {
             </button>
           ))}
         </div>
-        {isPending ? (
-          <Spinner />
-        ) : (
-          <Button
-            size="lg"
-            className="mt-auto"
-            onClick={handleUpdate}
-            disabled={isPending || selected.length < 3}
-          >
-            Save
-          </Button>
-        )}
+
+        <Button
+          size="lg"
+          className="mt-auto"
+          onClick={handleUpdate}
+          disabled={isPending || selected.length < 3}
+        >
+          {isPending ? <Spinner /> : <p>Save Interests</p>}
+        </Button>
       </div>
     </div>
   );

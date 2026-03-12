@@ -9,7 +9,7 @@ export default function Taste() {
 
   return (
     <div className="flex h-full flex-col pt-4">
-      <h1 className="mb-11 text-2xl font-semibold">
+      <h1 className="pb-11 text-2xl font-semibold">
         Please select your <br /> interests
       </h1>
       <div className="flex flex-wrap gap-3">

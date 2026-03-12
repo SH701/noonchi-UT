@@ -101,8 +101,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
               },
             },
           );
+          console.log("[jwt] /api/users/me status:", res.status);
           if (res.ok) {
-            token.user = await res.json();
+            const user = await res.json();
+            console.log("[jwt] fetched user:", user);
+            token.user = user;
           }
         } catch (e) {
           console.error("Failed to refresh user info on update:", e);
