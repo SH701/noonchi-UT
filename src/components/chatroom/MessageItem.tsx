@@ -6,12 +6,7 @@ import clsx from "clsx";
 import { useMessageTranslate, useMessageTTS } from "@/hooks/mutations";
 import { Spinner } from "../ui/spinner/spinner";
 import { ChatLoading } from "../common";
-import {
-  InfoIcon,
-  LanguageIcon,
-  RefreshIcon,
-  VolumeUpIcon,
-} from "@/assets/svgr";
+import { InfoIcon, LanguageIcon, VolumeUpIcon } from "@/assets/svgr";
 import { Asterisk } from "lucide-react";
 import { renderWithAction } from "@/lib/renderWithAction";
 import { MyAI } from "@/types/conversations";
@@ -165,7 +160,6 @@ export default function MessageItem({
                         View feedback
                       </span>
                     </button>
-                    <RefreshIcon size={20} />
                   </div>
                 )}
               </div>

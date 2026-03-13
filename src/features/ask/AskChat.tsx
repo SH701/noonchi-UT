@@ -11,6 +11,7 @@ import { ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
 import { CominSoonModal } from "@/components/modal";
 import AskSteps from "./AskSteps";
 import MessageItem from "@/components/chatroom/MessageItem";
+import { CLOSENESS_OPTIONS, STEP_QUESTIONS } from "@/constants";
 
 export default function AskChat() {
   const [message, setMessage] = useState("");
@@ -119,6 +120,35 @@ export default function AskChat() {
         {/* 스트리밍 결과 */}
         {aiMessage && (
           <div className="mb-1 flex flex-col gap-2">
+            <span className="text-xl font-semibold">
+              {STEP_QUESTIONS.askTarget}
+            </span>
+            <span className="text-gray-600">
+              This can be something you`re <br /> about to say or do
+            </span>
+            {askTarget && (
+              <div className="flex justify-end">
+                <div className="w-61 mt-5 flex flex-col gap-2 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
+                  <p className="text-sm">{askTarget}</p>
+                </div>
+              </div>
+            )}
+            <div className="flex flex-col">
+              <span className="text-xl font-semibold">
+                {STEP_QUESTIONS.closeness}
+              </span>
+              <span className="text-gray-600">
+                This helps me understand the right tone
+              </span>
+              <div className="flex justify-end">
+                <div className="mt-5 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
+                  <p className="text-sm">
+                    {CLOSENESS_OPTIONS.find((o) => o.value === closeness)
+                      ?.label ?? closeness}
+                  </p>
+                </div>
+              </div>
+            </div>
             <div className="flex flex-col">
               <span className="text-xl font-semibold">
                 Here is the best way to say it

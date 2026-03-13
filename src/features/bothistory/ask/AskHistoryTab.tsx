@@ -63,12 +63,7 @@ export default function AskHistoryTab() {
               key={convo.conversationId}
               className="mb-2 rounded-lg bg-white/10 p-3"
               onClick={() => {
-                const query = new URLSearchParams({
-                  askTarget: convo.askTarget,
-                  closeness: convo.closeness,
-                  situation: convo.situation,
-                }).toString();
-                router.push(`/main/ask/${convo.conversationId}?${query}`);
+                router.push(`/main/ask/${convo.conversationId}}`);
                 closeTab();
               }}
             >
