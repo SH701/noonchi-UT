@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ChatInput, ChatLoading } from "../../components/common";
 
 import { useAskMessageStream, useAskStream } from "@/hooks/mutations";
@@ -12,7 +12,8 @@ import { CominSoonModal } from "@/components/modal";
 import AskSteps from "./AskSteps";
 import MessageItem from "@/components/chatroom/MessageItem";
 import { CLOSENESS_OPTIONS, STEP_QUESTIONS } from "@/constants";
-import { useConversationDetail } from "@/hooks/queries";
+import { useChatQuery, useConversationDetail } from "@/hooks/queries";
+import { AskTurn } from "@/types/messages";
 
 interface AskChatProps {
   roomId?: number;
@@ -20,33 +21,67 @@ interface AskChatProps {
 
 export default function AskChat({ roomId }: AskChatProps) {
   const [message, setMessage] = useState("");
-  const [open, setOpen] = useState(true);
+  const [insightopen, setInsightOpen] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [started, setStarted] = useState(!!roomId);
 
   const [step, setStep] = useState<"askTarget" | "closeness" | "situation">(
     "askTarget",
   );
-  const [localAskTarget, setLocalAskTarget] = useState("");
-  const [localCloseness, setLocalCloseness] = useState("");
+  const [roomAskTarget, setRoomAskTarget] = useState("");
+  const [roomCloseness, setRoomCloseness] = useState("");
   const [, setSituation] = useState("");
 
   const { data: conversation } = useConversationDetail(roomId);
-  const askTarget = roomId ? (conversation?.askTarget ?? "") : localAskTarget;
-  const closeness = roomId ? (conversation?.closeness ?? "") : localCloseness;
+  const askTarget = roomId ? (conversation?.askTarget ?? "") : roomAskTarget;
+  const closeness = roomId ? (conversation?.closeness ?? "") : roomCloseness;
+  const { data: messages = [] } = useChatQuery(roomId);
+  const firstAI = messages.find((m) => m.type === "AI");
 
   const {
     mutate: createAsk,
     isPending,
-    approachTip,
-    aiMessage,
-    culturalInsight,
+    approachTip: streamApproachTip,
+    aiMessage: streamAiMessage,
+    culturalInsight: streamCulturalInsight,
     conversationId,
   } = useAskStream();
 
-  const { turns, sendMessage, isAIResponding } = useAskMessageStream(
-    roomId ?? Number(conversationId),
-  );
+  const {
+    turns: streamTurns,
+    sendMessage,
+    isAIResponding,
+  } = useAskMessageStream(roomId ?? Number(conversationId));
+  const aiMessage = roomId ? (firstAI?.content ?? "") : streamAiMessage;
+  const approachTip = roomId
+    ? (firstAI?.askApproachTip ?? "")
+    : streamApproachTip;
+  const culturalInsight = roomId
+    ? (firstAI?.askCulturalInsight ?? "")
+    : streamCulturalInsight;
+  const roomTurns: AskTurn[] = useMemo(() => {
+    if (!roomId) return [];
+    const afterFirst = messages.slice(messages.indexOf(firstAI!) + 1);
+    const result: AskTurn[] = [];
+    for (let i = 0; i < afterFirst.length; i++) {
+      const msg = afterFirst[i];
+      if (msg.type !== "USER") continue;
+      const ai =
+        afterFirst[i + 1]?.type === "AI" ? afterFirst[i + 1] : undefined;
+      result.push({
+        userContent: msg.content,
+        approachTip: ai?.askApproachTip ?? "",
+        aiMessage: ai?.content ?? "",
+        culturalInsight: ai?.askCulturalInsight ?? "",
+        messageId: ai?.messageId,
+        translatedContent: ai?.translatedContent ?? undefined,
+      });
+      if (ai) i++;
+    }
+    return result;
+  }, [roomId, messages, firstAI]);
+
+  const turns = roomId ? [...roomTurns, ...streamTurns] : streamTurns;
   const {
     micState,
     sttText,
@@ -71,7 +106,7 @@ export default function AskChat({ roomId }: AskChatProps) {
     if (!message.trim()) return;
     if (!started) {
       if (step === "askTarget") {
-        setLocalAskTarget(message);
+        setRoomAskTarget(message);
         gtag("event", "ask_first_question");
         setStep("closeness");
         setMessage("");
@@ -98,7 +133,7 @@ export default function AskChat({ roomId }: AskChatProps) {
   };
 
   const handleInsight = () => {
-    setOpen((prev) => !prev);
+    setInsightOpen((prev) => !prev);
   };
 
   return (
@@ -111,7 +146,7 @@ export default function AskChat({ roomId }: AskChatProps) {
             askTarget={askTarget}
             closeness={closeness}
             onSelectCloseness={(value) => {
-              setLocalCloseness(value);
+              setRoomCloseness(value);
               gtag("event", "ask_second_question");
               setStep("situation");
             }}
@@ -172,7 +207,7 @@ export default function AskChat({ roomId }: AskChatProps) {
                 <div className="flex gap-1 text-blue-600">
                   <Lightbulb size={14} /> Cultural Insights
                 </div>
-                {open ? (
+                {insightopen ? (
                   <>
                     {culturalInsight}
                     <div className="flex items-center justify-center">
@@ -210,11 +245,6 @@ export default function AskChat({ roomId }: AskChatProps) {
                   isAI
                   translatedContent={turn.translatedContent}
                 />
-                {turn.culturalInsight && (
-                  <p className="text-sm text-gray-500">
-                    {turn.culturalInsight}
-                  </p>
-                )}
               </>
             )}
           </div>
@@ -224,7 +254,7 @@ export default function AskChat({ roomId }: AskChatProps) {
       </div>
 
       {/* 하단 고정 ChatInput */}
-      <div className="sticky bottom-0 z-10 flex flex-col pb-5 backdrop-blur-md">
+      <div className="sticky bottom-0 -mx-5 flex flex-col px-5 pb-5 backdrop-blur-md">
         {aiMessage && (
           <ChatQuickActions onOpenModal={() => setModalOpen(true)} />
         )}

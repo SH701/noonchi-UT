@@ -63,7 +63,7 @@ export default function AskHistoryTab() {
               key={convo.conversationId}
               className="mb-2 rounded-lg bg-white/10 p-3"
               onClick={() => {
-                router.push(`/main/ask/${convo.conversationId}}`);
+                router.push(`/main/ask/${convo.conversationId}`);
                 closeTab();
               }}
             >
