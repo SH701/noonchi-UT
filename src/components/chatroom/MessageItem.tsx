@@ -3,7 +3,7 @@
 import { useState } from "react";
 import clsx from "clsx";
 
-import { useMessageTTS } from "@/hooks/mutations";
+import { useMessageTranslate, useMessageTTS } from "@/hooks/mutations";
 import { Spinner } from "../ui/spinner/spinner";
 import { ChatLoading } from "../common";
 import {
@@ -27,8 +27,6 @@ interface MessageItemProps {
   myAI?: MyAI | null;
   isMine?: boolean;
   isAI?: boolean;
-  isFirstAIMessage?: boolean;
-  isPending?: boolean;
   showsituation?: boolean;
   isPreview?: boolean;
   aiName?: string;
@@ -51,18 +49,19 @@ export default function MessageItem({
   hiddenMeaning,
   isRevealed,
   onToggleReveal,
-  translatedContent,
   previewFeedback,
   onInfoClick,
 }: MessageItemProps) {
   const [translateOpen, setTranslateOpen] = useState(false);
+  const [translateMsg, setTranslateMsg] = useState<string | undefined>("");
   const [meanOpen, setMeanOpen] = useState(false);
   const isMeanOpen =
     onToggleReveal !== undefined ? (isRevealed ?? false) : meanOpen;
   const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   const { mutate: tts, isPending: loadingTTS } = useMessageTTS();
-
+  const { mutateAsync: translate, isPending: loadingTranslate } =
+    useMessageTranslate();
   const handleFeedback = () => {
     setFeedbackOpen((prev) => !prev);
   };
@@ -70,10 +69,15 @@ export default function MessageItem({
     tts(text);
   };
 
-  const handleTranslateClick = (messageId: number | undefined) => {
-    if (!messageId && !translatedContent) return;
-
-    setTranslateOpen((prev) => !prev);
+  const handleTranslateClick = async (messageId: number | undefined) => {
+    if (!messageId) return;
+    if (translateOpen) {
+      setTranslateOpen(false);
+      return;
+    }
+    const result = await translate(messageId);
+    setTranslateMsg(result);
+    setTranslateOpen(true);
   };
   const handleHiddenMean = () => {
     if (onToggleReveal) {
@@ -195,21 +199,27 @@ export default function MessageItem({
                       onClick={() => handleTranslateClick(messages.messageId)}
                       className="cursor-pointer"
                     >
-                      <LanguageIcon />
+                      {loadingTranslate ? (
+                        <Spinner />
+                      ) : (
+                        <LanguageIcon size={20} />
+                      )}
                     </button>
                   </div>
 
-                  <button
-                    className="border-gradient-primary cursor-pointer rounded-full border px-2 py-1"
-                    onClick={handleHiddenMean}
-                  >
-                    👀{" "}
-                    <span className="text-gradient-primary text-xs font-semibold">
-                      Really mean
-                    </span>
-                  </button>
+                  {(hiddenMeaning ?? messages.hiddenMeaning) && (
+                    <button
+                      className="border-gradient-primary cursor-pointer rounded-full border px-2 py-1"
+                      onClick={handleHiddenMean}
+                    >
+                      👀{" "}
+                      <span className="text-gradient-primary text-xs font-semibold">
+                        Really mean
+                      </span>
+                    </button>
+                  )}
                 </div>
-                {translateOpen && <span>{translatedContent}</span>}
+                {translateOpen && <span>{translateMsg}</span>}
               </div>
             </>
           )}

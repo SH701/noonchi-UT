@@ -126,7 +126,7 @@ export const apiMutations = {
       const decoder = new TextDecoder();
       let buffer = "";
       let doneData: AskMessageStreamDoneData | null = null;
-      let isDoneEvent = false;
+      let currentEvent = "";
       if (reader) {
         while (true) {
           const { done, value } = await reader.read();
@@ -137,22 +137,22 @@ export const apiMutations = {
           buffer = lines.pop() || "";
 
           for (const line of lines) {
-            if (line === "event:done") {
-              isDoneEvent = true;
-              continue;
-            }
-            if (!line.startsWith("data:")) continue;
-            const raw = line.slice(5).trim();
-            if (!raw) continue;
-            if (isDoneEvent) {
-              try {
-                doneData = JSON.parse(raw);
-              } catch {
-                // ignore
+            if (line.startsWith("event:")) {
+              currentEvent = line.slice(6).trim();
+            } else if (line.startsWith("data:")) {
+              const raw = line.slice(5).trim();
+              if (!raw) continue;
+              if (currentEvent === "done") {
+                try {
+                  doneData = JSON.parse(raw);
+                } catch {
+                  // ignore
+                }
+                return doneData!;
+              } else {
+                onChunk(raw);
               }
-              return doneData!;
             }
-            onChunk(raw);
           }
         }
       }
