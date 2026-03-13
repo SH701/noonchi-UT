@@ -1,7 +1,8 @@
 "use client";
 
 import { use } from "react";
-import AskChatRoom from "@/features/ask/AskChatRoom";
+
+import AskChat from "@/features/ask/AskChat";
 
 export default function Askroom({
   params,
@@ -10,5 +11,5 @@ export default function Askroom({
 }) {
   const { id } = use(params);
 
-  return <AskChatRoom conversationId={id} />;
+  return <AskChat roomId={id} />;
 }

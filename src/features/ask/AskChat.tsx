@@ -12,19 +12,28 @@ import { CominSoonModal } from "@/components/modal";
 import AskSteps from "./AskSteps";
 import MessageItem from "@/components/chatroom/MessageItem";
 import { CLOSENESS_OPTIONS, STEP_QUESTIONS } from "@/constants";
+import { useConversationDetail } from "@/hooks/queries";
 
-export default function AskChat() {
+interface AskChatProps {
+  roomId?: number;
+}
+
+export default function AskChat({ roomId }: AskChatProps) {
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(!!roomId);
 
   const [step, setStep] = useState<"askTarget" | "closeness" | "situation">(
     "askTarget",
   );
-  const [askTarget, setAskTarget] = useState("");
-  const [closeness, setCloseness] = useState("");
+  const [localAskTarget, setLocalAskTarget] = useState("");
+  const [localCloseness, setLocalCloseness] = useState("");
   const [, setSituation] = useState("");
+
+  const { data: conversation } = useConversationDetail(roomId);
+  const askTarget = roomId ? (conversation?.askTarget ?? "") : localAskTarget;
+  const closeness = roomId ? (conversation?.closeness ?? "") : localCloseness;
 
   const {
     mutate: createAsk,
@@ -36,7 +45,7 @@ export default function AskChat() {
   } = useAskStream();
 
   const { turns, sendMessage, isAIResponding } = useAskMessageStream(
-    Number(conversationId),
+    roomId ?? Number(conversationId),
   );
   const {
     micState,
@@ -62,7 +71,7 @@ export default function AskChat() {
     if (!message.trim()) return;
     if (!started) {
       if (step === "askTarget") {
-        setAskTarget(message);
+        setLocalAskTarget(message);
         gtag("event", "ask_first_question");
         setStep("closeness");
         setMessage("");
@@ -102,7 +111,7 @@ export default function AskChat() {
             askTarget={askTarget}
             closeness={closeness}
             onSelectCloseness={(value) => {
-              setCloseness(value);
+              setLocalCloseness(value);
               gtag("event", "ask_second_question");
               setStep("situation");
             }}
