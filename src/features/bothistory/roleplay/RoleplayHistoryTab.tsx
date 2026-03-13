@@ -7,11 +7,14 @@ import { useTabStore } from "@/store/useTabStore";
 import { ChevronRight } from "lucide-react";
 import { RoleplayHistorySkeleton } from "@/components/skeleton";
 import { useHistorySearch } from "@/hooks/custom";
+import { useDeleteConversation } from "@/hooks/mutations";
+import DeleteModal from "@/components/modal/DeleteModal";
+import { useState } from "react";
 
 export default function RoleplayHistoryTab() {
   const router = useRouter();
   const { closeTab } = useTabStore();
-
+  const [confirmId, setConfirmId] = useState<number | null>(null);
   const { conversations, isPending: isHistoryPending } =
     useHistorySearch("ROLE_PLAYING");
   const { data: topics = [], isPending: isTopicsPending } = useTopics(
@@ -19,7 +22,7 @@ export default function RoleplayHistoryTab() {
     false,
   );
   const isPending = isHistoryPending || isTopicsPending;
-
+  const { mutate: deleteChat } = useDeleteConversation();
   const handleHistoryPage = () => {
     router.push("/bothistory/roleplay");
     closeTab();
@@ -66,9 +69,15 @@ export default function RoleplayHistoryTab() {
                 ) : (
                   <div className="h-full w-full bg-gray-600" />
                 )}
-
-                <div className="bg-linear-to-t absolute inset-0 from-black/80 via-black/20 to-transparent" />
-
+                <button
+                  className="absolute right-2 text-white/70"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setConfirmId(convo.conversationId);
+                  }}
+                >
+                  x
+                </button>
                 <div className="absolute inset-0 flex flex-col justify-end p-3 text-white">
                   <span className="text-[10px] uppercase tracking-wider text-gray-300">
                     {convo.conversationTrack}
@@ -82,6 +91,13 @@ export default function RoleplayHistoryTab() {
           })}
         </div>
       )}
+      <DeleteModal
+        isOpen={confirmId !== null}
+        onClose={() => setConfirmId(null)}
+        onConfirm={() => {
+          if (confirmId !== null) deleteChat(confirmId);
+        }}
+      />
     </div>
   );
 }

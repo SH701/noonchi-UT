@@ -247,7 +247,6 @@ export const apiMutations = {
       }
       return doneData!;
     },
-
     DeleteConversation: async (conversationId: number): Promise<void> => {
       return apiFetch<void>(`/api/conversations/${conversationId}`, {
         method: "DELETE",
@@ -351,7 +350,7 @@ export const apiMutations = {
 
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
-      
+
       let doneData: PreviewSendRes | null = null;
       let buffer = "";
 

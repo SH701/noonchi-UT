@@ -4,7 +4,7 @@ export default function Main() {
   return (
     <>
       <div>
-        <div className="flex flex-col gap-3 pb-10">
+        <div className="flex flex-col gap-3 pb-7">
           <span className="text-3xl font-medium">
             Do you want to sound more natural in Korean?
           </span>

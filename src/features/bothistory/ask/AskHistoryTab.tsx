@@ -7,18 +7,38 @@ import { useTabStore } from "@/store/useTabStore";
 import EmptyState from "../EmptyState";
 import { getTime } from "@/lib/time-format";
 import { useHistorySearch } from "@/hooks/custom";
+import { useState } from "react";
+import { useDeleteConversation } from "@/hooks/mutations";
+import DeleteModal from "@/components/modal/DeleteModal";
 
 export default function AskHistoryTab() {
   const router = useRouter();
+  const [edit, setEdit] = useState(false);
+  const [confirmId, setConfirmId] = useState<number | null>(null);
   const { closeTab } = useTabStore();
   const { conversations, isPending, isSearching, searchKeyword } =
     useHistorySearch("ASK");
-
+  const { mutate: deleteChat } = useDeleteConversation();
+  const handleEdit = () => {
+    setEdit((prev) => !prev);
+  };
   return (
     <div className="flex h-full flex-col overflow-hidden">
-      <div className="mt-5 flex shrink-0 justify-between">
+      <DeleteModal
+        isOpen={confirmId !== null}
+        onClose={() => setConfirmId(null)}
+        onConfirm={() => {
+          if (confirmId !== null) deleteChat(confirmId);
+        }}
+      />
+      <div className="mt-5 flex shrink-0 items-start justify-between">
         <span className="mb-2 text-sm font-medium">Ask</span>
-        <span className="cursor-pointer text-xs text-gray-600">Edit</span>
+        <button
+          className="cursor-pointer text-xs text-gray-600"
+          onClick={handleEdit}
+        >
+          Edit
+        </button>
       </div>
 
       <div className="custom-scrollbar mb-23 min-h-0 flex-1 overflow-y-auto pr-2">
@@ -53,9 +73,21 @@ export default function AskHistoryTab() {
               }}
             >
               <div className="flex flex-col">
-                <span className="text-sm font-bold text-black">
-                  {convo.askTarget.toUpperCase()}
-                </span>
+                <div className="flex justify-between text-sm">
+                  <span className="font-bold text-black">
+                    {convo.askTarget.toUpperCase()}
+                  </span>
+                  {edit && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setConfirmId(convo.conversationId);
+                      }}
+                    >
+                      ❌
+                    </button>
+                  )}
+                </div>
                 <span className="text-xs text-gray-500">
                   {getTime(convo.createdAt)}
                 </span>
