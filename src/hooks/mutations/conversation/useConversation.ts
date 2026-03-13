@@ -1,9 +1,14 @@
 import { apiMutations } from "@/api/mutations";
-import { AskReq, InterviewFormData, RoleplayReq } from "@/types/conversations";
+import { toast } from "@/components/ui/toast/toast";
+import {
+  AskReq,
+  ConversationPaged,
+  InterviewFormData,
+  RoleplayReq,
+} from "@/types/conversations";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-
-
 
 export const useAskStream = () => {
   const [approachTip, setApproachTip] = useState("");
@@ -51,19 +56,47 @@ export const useConversationEnd = (conversationId: number) => {
 
 export function useDeleteConversation() {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (conversationId: number) =>
       apiMutations.conversations.DeleteConversation(conversationId),
+    onMutate: async (conversationId: number) => {
+      await queryClient.cancelQueries({ queryKey: ["conversations"] });
+      await queryClient.cancelQueries({ queryKey: ["search"] });
+      const updater = (old: ConversationPaged | undefined) => {
+        if (!old) return old;
+        return {
+          ...old,
+          content: old.content?.filter(
+            (c) => c.conversationId !== conversationId,
+          ),
+        };
+      };
+      queryClient.setQueriesData<ConversationPaged>(
+        { queryKey: ["conversations"], exact: false },
+        updater,
+      );
+      queryClient.setQueriesData<ConversationPaged>(
+        { queryKey: ["search"], exact: false },
+        updater,
+      );
+      return;
+    },
+    onError: () => {
+      toast.error("Failed to delete the room. Please try again.");
+    },
     onSuccess: () => {
+      toast.success("Room deleted successfully.");
+    },
+    onSettled: () => {
       queryClient.invalidateQueries({
         queryKey: ["conversations"],
         exact: false,
-        refetchType: "all",
       });
+      queryClient.invalidateQueries({ queryKey: ["search"], exact: false });
     },
   });
 }
-
 export const useUploadFiles = () => {
   return useMutation({
     mutationFn: apiMutations.files.UploadFiles,

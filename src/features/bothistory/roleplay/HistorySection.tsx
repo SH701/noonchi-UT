@@ -45,7 +45,9 @@ export default function HistorySection({ sortBy }: HistorySectionProps) {
             </div>
             <div className="flex w-full min-w-0 flex-col">
               <div className="flex justify-between">
-                <span className="font-semibold">{convo.aiPersona.aiRole}</span>
+                <span className="truncate font-semibold">
+                  {convo.aiPersona.aiRole}
+                </span>
                 <span className="text-xs text-gray-500">
                   {getTime(convo.createdAt)}
                 </span>
@@ -75,7 +77,7 @@ export default function HistorySection({ sortBy }: HistorySectionProps) {
         ))
       )}
       {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 pt-2">
+        <div className="flex items-center justify-center gap-2 pb-2">
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
