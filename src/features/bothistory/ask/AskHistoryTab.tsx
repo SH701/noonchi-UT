@@ -7,37 +7,36 @@ import { useTabStore } from "@/store/useTabStore";
 import EmptyState from "../EmptyState";
 import { getTime } from "@/lib/time-format";
 import { useHistorySearch } from "@/hooks/custom";
-import { useState } from "react";
-import { useDeleteConversation } from "@/hooks/mutations";
-import DeleteModal from "@/components/modal/DeleteModal";
+import { Check } from "lucide-react";
 
-export default function AskHistoryTab() {
+interface AskHistoryTabProps {
+  edit: boolean;
+  setEdit: () => void;
+  selectedIds: number[];
+  onToggleSelect: (id: number) => void;
+}
+
+export default function AskHistoryTab({
+  edit,
+  setEdit,
+  selectedIds,
+  onToggleSelect,
+}: AskHistoryTabProps) {
   const router = useRouter();
-  const [edit, setEdit] = useState(false);
-  const [confirmId, setConfirmId] = useState<number | null>(null);
   const { closeTab } = useTabStore();
   const { conversations, isPending, isSearching, searchKeyword } =
     useHistorySearch("ASK");
-  const { mutate: deleteChat } = useDeleteConversation();
-  const handleEdit = () => {
-    setEdit((prev) => !prev);
-  };
+
   return (
     <div className="flex h-full flex-col overflow-hidden">
-      <DeleteModal
-        isOpen={confirmId !== null}
-        onClose={() => setConfirmId(null)}
-        onConfirm={() => {
-          if (confirmId !== null) deleteChat(confirmId);
-        }}
-      />
       <div className="mt-5 flex shrink-0 items-start justify-between">
         <span className="mb-2 text-sm font-medium">Ask</span>
-        <button
-          className="cursor-pointer text-xs text-gray-600"
-          onClick={handleEdit}
-        >
-          Edit
+        <button className="cursor-pointer text-xs" onClick={setEdit}>
+          {edit ? (
+            <span className="text-red-500">Cancel</span>
+          ) : (
+            <span className="text-gray-600">Edit</span>
+          )}
         </button>
       </div>
 
@@ -63,29 +62,40 @@ export default function AskHistoryTab() {
               key={convo.conversationId}
               className="mb-2 rounded-lg bg-white/10 p-3"
               onClick={() => {
+                if (edit) {
+                  onToggleSelect(convo.conversationId);
+                  return;
+                }
                 router.push(`/main/ask/${convo.conversationId}`);
                 closeTab();
               }}
             >
-              <div className="flex flex-col">
-                <div className="flex justify-between text-sm">
+              <div className="flex items-center gap-4">
+                {edit && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onToggleSelect(convo.conversationId);
+                    }}
+                    className={`flex size-6 shrink-0 items-center justify-center rounded-full border ${
+                      selectedIds.includes(convo.conversationId)
+                        ? "border-none bg-indigo-500"
+                        : "border-gray-500"
+                    }`}
+                  >
+                    {selectedIds.includes(convo.conversationId) && (
+                      <Check className="size-5 text-center text-white" />
+                    )}
+                  </button>
+                )}
+                <div className="flex flex-col text-sm">
                   <span className="font-bold text-black">
                     {convo.askTarget.toUpperCase()}
                   </span>
-                  {edit && (
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setConfirmId(convo.conversationId);
-                      }}
-                    >
-                      ❌
-                    </button>
-                  )}
+                  <span className="text-xs text-gray-500">
+                    {getTime(convo.createdAt)}
+                  </span>
                 </div>
-                <span className="text-xs text-gray-500">
-                  {getTime(convo.createdAt)}
-                </span>
               </div>
             </div>
           ))

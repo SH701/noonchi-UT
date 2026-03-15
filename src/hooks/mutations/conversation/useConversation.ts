@@ -58,18 +58,25 @@ export function useDeleteConversation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (conversationId: number) =>
-      apiMutations.conversations.DeleteConversation(conversationId),
-    onMutate: async (conversationId: number) => {
+    mutationFn: (conversationIds: number | number[]) => {
+      const ids = Array.isArray(conversationIds)
+        ? conversationIds
+        : [conversationIds];
+      return Promise.all(
+        ids.map((id) => apiMutations.conversations.DeleteConversation(id)),
+      );
+    },
+    onMutate: async (conversationIds: number | number[]) => {
+      const ids = Array.isArray(conversationIds)
+        ? conversationIds
+        : [conversationIds];
       await queryClient.cancelQueries({ queryKey: ["conversations"] });
       await queryClient.cancelQueries({ queryKey: ["search"] });
       const updater = (old: ConversationPaged | undefined) => {
         if (!old) return old;
         return {
           ...old,
-          content: old.content?.filter(
-            (c) => c.conversationId !== conversationId,
-          ),
+          content: old.content?.filter((c) => !ids.includes(c.conversationId)),
         };
       };
       queryClient.setQueriesData<ConversationPaged>(
@@ -87,13 +94,6 @@ export function useDeleteConversation() {
     },
     onSuccess: () => {
       toast.success("Room deleted successfully.");
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["conversations"],
-        exact: false,
-      });
-      queryClient.invalidateQueries({ queryKey: ["search"], exact: false });
     },
   });
 }

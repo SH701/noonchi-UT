@@ -9,12 +9,24 @@ import { DefaultIcon, PeopleIcon } from "@/assets/svgr";
 import SearchBar from "./SearchBar";
 import { AskHistoryTab, RoleplayHistoryTab } from "../bothistory";
 import { fadeVariants, slideVariants } from "@/constants";
-
+import { useState } from "react";
+import { useDeleteConversation } from "@/hooks/mutations";
+import { useHistorySearch } from "@/hooks/custom";
 
 export default function Tab() {
   const router = useRouter();
   const { data: session } = useSession();
-  const { isOpen, closeTab } = useTabStore();
+  const { isOpen, closeTab: _closeTab } = useTabStore();
+  const [edit, setEdit] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+
+  const closeTab = () => {
+    setEdit(false);
+    setSelectedIds([]);
+    _closeTab();
+  };
+  const { conversations } = useHistorySearch("ASK");
+  const allIds = conversations.map((c) => c.conversationId);
 
   const handleProfileClick = () => {
     router.push("/profile");
@@ -24,6 +36,24 @@ export default function Tab() {
     router.push("/coach");
     closeTab();
   };
+  const { mutate: handleDelete } = useDeleteConversation();
+
+  const handleToggleSelect = (id: number) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
+    );
+  };
+
+  const handleSelectAll = () => {
+    setSelectedIds((prev) => (prev.length === allIds.length ? [] : allIds));
+  };
+
+  const handleDeleteSelected = () => {
+    selectedIds.forEach((id) => handleDelete(id));
+    setSelectedIds([]);
+    setEdit(false);
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -64,27 +94,56 @@ export default function Tab() {
 
                 <div className="custom-scrollbar min-h-0 flex-1">
                   <RoleplayHistoryTab />
-                  <AskHistoryTab />
+                  <AskHistoryTab
+                    edit={edit}
+                    setEdit={() => {
+                      setEdit(!edit);
+                      setSelectedIds([]);
+                    }}
+                    selectedIds={selectedIds}
+                    onToggleSelect={handleToggleSelect}
+                  />
                 </div>
               </div>
-
-              <button
-                onClick={handleProfileClick}
-                className="w-70 z-9999 flex gap-4 bg-white p-4"
-              >
-                {session?.user.profileImageUrl ? (
-                  <Image
-                    src={session?.user.profileImageUrl ?? ""}
-                    alt="profile"
-                    width={48}
-                    height={48}
-                    className="shrink-0 rounded-full"
-                  />
+              <div className="w-70 z-9999 flex h-20 items-center bg-white p-4">
+                {edit ? (
+                  <div className="flex w-full justify-between text-sm">
+                    <button className="text-gray-500" onClick={handleSelectAll}>
+                      Select All
+                    </button>
+                    <button
+                      onClick={handleDeleteSelected}
+                      disabled={selectedIds.length === 0}
+                      className={
+                        selectedIds.length > 0
+                          ? "rounded-lg bg-gray-800 px-2.5 py-2 text-white"
+                          : "text-gray-400"
+                      }
+                    >
+                      Delete
+                      {selectedIds.length > 0 && ` (${selectedIds.length})`}
+                    </button>
+                  </div>
                 ) : (
-                  <DefaultIcon className="shrink-0" />
+                  <button
+                    onClick={handleProfileClick}
+                    className="flex gap-4 bg-white"
+                  >
+                    {session?.user.profileImageUrl ? (
+                      <Image
+                        src={session?.user.profileImageUrl ?? ""}
+                        alt="profile"
+                        width={48}
+                        height={48}
+                        className="shrink-0 rounded-full"
+                      />
+                    ) : (
+                      <DefaultIcon className="shrink-0" />
+                    )}
+                    <span className="pt-3">{session?.user.name}</span>
+                  </button>
                 )}
-                <span className="pt-3">{session?.user.name}</span>
-              </button>
+              </div>
             </motion.div>
           </motion.div>
         </>
