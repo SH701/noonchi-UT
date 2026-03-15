@@ -24,7 +24,6 @@ export default function MessageList({
       {messages.map((m) => {
         const isMine = m.type === "USER";
         const isAI = m.type === "AI";
-        const isPending = m.messageId < 0;
         return (
           <MessageItem
             key={m.messageId}
@@ -32,7 +31,6 @@ export default function MessageList({
             myAI={myAI}
             isMine={isMine}
             isAI={isAI}
-            isPending={isPending}
             showsituation={showsituation}
             translatedContent={m.translatedContent ?? undefined}
             previewFeedback={m.streamFeedback}

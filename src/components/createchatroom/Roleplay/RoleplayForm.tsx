@@ -8,9 +8,9 @@ import SelectButton from "@/components/ui/form/SelectButton";
 
 interface RoleplayProps {
   onSubmit: (data: {
-    myRole: string | undefined;
-    aiRole: string | undefined;
-    situation: string | undefined;
+    myRole: string;
+    aiRole: string;
+    situation: string;
     tone: string;
   }) => void;
   AiRole?: string;
@@ -25,8 +25,7 @@ export default function RoleplayForm({
   topicId,
 }: RoleplayProps) {
   const [details, setDetails] = useState<string | undefined>(undefined);
-  const [selectedTone, setSelectedTone] = useState("casual");
- 
+  const [selectedTone, setSelectedTone] = useState("");
   const [pendingMe, setPendingMe] = useState(false);
   const [pendingAI, setPendingAI] = useState(false);
   const [pendingDetail, setPendingDetail] = useState(false);
@@ -45,9 +44,9 @@ export default function RoleplayForm({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit({
-      myRole: displayMe,
-      aiRole: displayAI,
-      situation: details,
+      myRole: displayMe || "",
+      aiRole: displayAI || "",
+      situation: details || "",
       tone: selectedTone,
     });
   };
@@ -81,7 +80,6 @@ export default function RoleplayForm({
     <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
       <TextInput
         label="My role"
-        required
         value={displayMe || ""}
         onChange={setDisplayMe}
         placeholder="Write your role"
@@ -91,7 +89,6 @@ export default function RoleplayForm({
 
       <TextInput
         label="AI's role"
-        required
         value={displayAI || ""}
         onChange={setDisplayAI}
         placeholder="Write ai role"
@@ -104,7 +101,6 @@ export default function RoleplayForm({
       <Textarea
         label="Detail"
         value={details || ""}
-        required
         onChange={setDetails}
         placeholder="Include details like the reason for the interaction..."
         onClick={handleDetailHint}

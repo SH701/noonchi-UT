@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ChatInput, ChatLoading } from "../../components/common";
 
 import { useAskMessageStream, useAskStream } from "@/hooks/mutations";
@@ -11,32 +11,77 @@ import { ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
 import { CominSoonModal } from "@/components/modal";
 import AskSteps from "./AskSteps";
 import MessageItem from "@/components/chatroom/MessageItem";
+import { CLOSENESS_OPTIONS, STEP_QUESTIONS } from "@/constants";
+import { useChatQuery, useConversationDetail } from "@/hooks/queries";
+import { AskTurn } from "@/types/messages";
 
-export default function AskChat() {
+interface AskChatProps {
+  roomId?: number;
+}
+
+export default function AskChat({ roomId }: AskChatProps) {
   const [message, setMessage] = useState("");
-  const [open, setOpen] = useState(true);
+  const [insightopen, setInsightOpen] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
-  const [started, setStarted] = useState(false);
+  const [started, setStarted] = useState(!!roomId);
 
   const [step, setStep] = useState<"askTarget" | "closeness" | "situation">(
     "askTarget",
   );
-  const [askTarget, setAskTarget] = useState("");
-  const [closeness, setCloseness] = useState("");
-  const [, setSituation] = useState("");
+  const [roomAskTarget, setRoomAskTarget] = useState("");
+  const [roomCloseness, setRoomCloseness] = useState("");
+  const [situation, setSituation] = useState("");
+
+  const { data: conversation } = useConversationDetail(roomId);
+  const askTarget = roomId ? (conversation?.askTarget ?? "") : roomAskTarget;
+  const closeness = roomId ? (conversation?.closeness ?? "") : roomCloseness;
+  const { data: messages = [] } = useChatQuery(roomId);
+  const firstAI = messages.find((m) => m.type === "AI");
 
   const {
     mutate: createAsk,
     isPending,
-    approachTip,
-    aiMessage,
-    culturalInsight,
+    approachTip: streamApproachTip,
+    aiMessage: streamAiMessage,
+    culturalInsight: streamCulturalInsight,
     conversationId,
   } = useAskStream();
 
-  const { turns, sendMessage, isAIResponding } = useAskMessageStream(
-    Number(conversationId),
-  );
+  const {
+    turns: streamTurns,
+    sendMessage,
+    isAIResponding,
+  } = useAskMessageStream(roomId ?? Number(conversationId));
+  const aiMessage = roomId ? (firstAI?.content ?? "") : streamAiMessage;
+  const approachTip = roomId
+    ? (firstAI?.askApproachTip ?? "")
+    : streamApproachTip;
+  const culturalInsight = roomId
+    ? (firstAI?.askCulturalInsight ?? "")
+    : streamCulturalInsight;
+  const roomTurns: AskTurn[] = useMemo(() => {
+    if (!roomId) return [];
+    const afterFirst = messages.slice(messages.indexOf(firstAI!) + 1);
+    const result: AskTurn[] = [];
+    for (let i = 0; i < afterFirst.length; i++) {
+      const msg = afterFirst[i];
+      if (msg.type !== "USER") continue;
+      const ai =
+        afterFirst[i + 1]?.type === "AI" ? afterFirst[i + 1] : undefined;
+      result.push({
+        userContent: msg.content,
+        approachTip: ai?.askApproachTip ?? "",
+        aiMessage: ai?.content ?? "",
+        culturalInsight: ai?.askCulturalInsight ?? "",
+        messageId: ai?.messageId,
+        translatedContent: ai?.translatedContent ?? undefined,
+      });
+      if (ai) i++;
+    }
+    return result;
+  }, [roomId, messages, firstAI]);
+
+  const turns = roomId ? [...roomTurns, ...streamTurns] : streamTurns;
   const {
     micState,
     sttText,
@@ -61,7 +106,7 @@ export default function AskChat() {
     if (!message.trim()) return;
     if (!started) {
       if (step === "askTarget") {
-        setAskTarget(message);
+        setRoomAskTarget(message);
         gtag("event", "ask_first_question");
         setStep("closeness");
         setMessage("");
@@ -88,7 +133,7 @@ export default function AskChat() {
   };
 
   const handleInsight = () => {
-    setOpen((prev) => !prev);
+    setInsightOpen((prev) => !prev);
   };
 
   return (
@@ -101,7 +146,7 @@ export default function AskChat() {
             askTarget={askTarget}
             closeness={closeness}
             onSelectCloseness={(value) => {
-              setCloseness(value);
+              setRoomCloseness(value);
               gtag("event", "ask_second_question");
               setStep("situation");
             }}
@@ -119,6 +164,46 @@ export default function AskChat() {
         {/* 스트리밍 결과 */}
         {aiMessage && (
           <div className="mb-1 flex flex-col gap-2">
+            <span className="text-xl font-semibold">
+              {STEP_QUESTIONS.askTarget}
+            </span>
+            <span className="text-gray-600">
+              This can be something you`re <br /> about to say or do
+            </span>
+            {askTarget && (
+              <div className="flex justify-end">
+                <div className="my-5 flex flex-col gap-2 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
+                  <p className="text-sm">{askTarget}</p>
+                </div>
+              </div>
+            )}
+            <div className="flex flex-col">
+              <span className="text-xl font-semibold">
+                {STEP_QUESTIONS.closeness}
+              </span>
+              <span className="text-gray-600">
+                This helps me understand the right tone
+              </span>
+              <div className="flex justify-end">
+                <div className="my-5 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
+                  <p className="text-sm">
+                    {CLOSENESS_OPTIONS.find((o) => o.value === closeness)
+                      ?.label ?? closeness}
+                  </p>
+                </div>
+              </div>
+              <span className="text-xl font-semibold">
+                {STEP_QUESTIONS.situation}
+              </span>
+              <span className="text-gray-600">
+                Describe the situation or what you want to express
+              </span>
+              <div className="flex justify-end">
+                <div className="my-5 flex flex-col gap-2 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
+                  <p className="text-sm">{situation}</p>
+                </div>
+              </div>
+            </div>
             <div className="flex flex-col">
               <span className="text-xl font-semibold">
                 Here is the best way to say it
@@ -133,7 +218,7 @@ export default function AskChat() {
                 <div className="flex gap-1 text-blue-600">
                   <Lightbulb size={14} /> Cultural Insights
                 </div>
-                {open ? (
+                {insightopen ? (
                   <>
                     {culturalInsight}
                     <div className="flex items-center justify-center">
@@ -171,11 +256,6 @@ export default function AskChat() {
                   isAI
                   translatedContent={turn.translatedContent}
                 />
-                {turn.culturalInsight && (
-                  <p className="text-sm text-gray-500">
-                    {turn.culturalInsight}
-                  </p>
-                )}
               </>
             )}
           </div>
@@ -185,7 +265,7 @@ export default function AskChat() {
       </div>
 
       {/* 하단 고정 ChatInput */}
-      <div className="sticky bottom-0 z-10 flex flex-col pb-5 backdrop-blur-md">
+      <div className="sticky bottom-0 -mx-5 flex flex-col px-5 pb-5 backdrop-blur-md">
         {aiMessage && (
           <ChatQuickActions onOpenModal={() => setModalOpen(true)} />
         )}

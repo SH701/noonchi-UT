@@ -10,9 +10,9 @@ import RoleplayForm from "./RoleplayForm";
 import { RoleplayLoading } from "@/features/roleplay";
 
 interface SubmitProps {
-  myRole: string | undefined;
-  aiRole: string | undefined;
-  situation: string | undefined;
+  myRole: string;
+  aiRole: string;
+  situation: string;
   tone: string;
 }
 
@@ -25,7 +25,7 @@ export default function RolePlay() {
   const { data: topics = [], isLoading } = useTopics(category, false);
   const topic = topics.find((t) => t.topicId === topicId);
 
- const { mutateAsync: createRoleplay, isPending } = useCreateRoleplay();
+  const { mutateAsync: createRoleplay, isPending } = useCreateRoleplay();
 
   if (isLoading || !topic) {
     return <div>loading...</div>;
@@ -41,13 +41,16 @@ export default function RolePlay() {
     situation,
     tone,
   }: SubmitProps) => {
-    if (!myRole || !aiRole || !situation) return;
+    if (!myRole || !aiRole || !situation || !tone) {
+      toast.error("Please fill in all fields.");
+      return;
+    }
     try {
       const requestData = {
         conversationTopicId: topicId,
         userRole: myRole,
         aiRole,
-        closeness: tone || "casual",
+        closeness: tone,
         situation,
       };
       const convo = await createRoleplay(requestData);
@@ -63,29 +66,29 @@ export default function RolePlay() {
   };
 
   return (
-    <div className="flex flex-col relative w-full overflow-x-hidden">
-      <div className="w-full flex justify-center">
-        <div className="w-full max-w-93.75 ">
-          <div className="relative w-full aspect-square max-w-83.75 mx-auto">
+    <div className="relative flex w-full flex-col overflow-x-hidden">
+      <div className="flex w-full justify-center">
+        <div className="max-w-93.75 w-full">
+          <div className="max-w-83.75 relative mx-auto aspect-square w-full">
             <Image
               src={topic.imageUrl}
               alt="topic's photo"
               fill
-              className="object-cover rounded-3xl"
+              className="rounded-3xl object-cover"
             />
             <div className="" />
-            <div className="absolute top-4 left-4">
-              <span className="text-gray-600 px-3 py-2 bg-white/50 text-sm  rounded-3xl border border-gray-200">
+            <div className="absolute left-4 top-4">
+              <span className="rounded-3xl border border-gray-200 bg-white/50 px-3 py-2 text-sm text-gray-600">
                 {topic?.category}
               </span>
             </div>
-            <div className="absolute inset-x-0 bottom-0 h-auto bg-gray backdrop-blur-sm rounded-b-3xl flex flex-col p-4 text-white">
+            <div className="bg-gray absolute inset-x-0 bottom-0 flex h-auto flex-col rounded-b-3xl p-4 text-white backdrop-blur-sm">
               <span className="text-3xl font-semibold">{topic?.name}</span>
               <span className="text-sm font-medium">{topic?.description}</span>
             </div>
           </div>
           <div>
-            <p className="font-semibold pb-5 pt-8">Conversation Context</p>
+            <p className="pb-5 pt-8 font-semibold">Conversation Context</p>
             <RoleplayForm onSubmit={handleSubmit} topicId={topicId} />
           </div>
         </div>
