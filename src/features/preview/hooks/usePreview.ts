@@ -6,11 +6,13 @@ export function usePreviewStart() {
     mutationFn: apiMutations.preview.Start,
   });
 }
+
 export function usePreviewRemove() {
   return useMutation({
     mutationFn: (sessionId: string) => apiMutations.preview.Remove(sessionId),
   });
 }
+
 export function usePreviewSend(onChunk?: (chunk: string) => void) {
   return useMutation({
     mutationFn: async ({
@@ -31,4 +33,3 @@ export function usePreviewSend(onChunk?: (chunk: string) => void) {
     },
   });
 }
-

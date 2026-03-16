@@ -12,10 +12,10 @@ import {
 import {
   useChatQuery,
   useConversationDetail,
-  useRoleplayHint,
 } from "@/hooks/queries";
+import { useRoleplayHint } from "@/features/roleplay/hooks";
 import { ChatInput } from "@/components/common";
-import { useConversationEnd, useRoleMessageStream } from "@/hooks/mutations";
+import { useConversationEnd, useRoleMessageStream } from "@/features/roleplay/hooks";
 import { useVoiceChat, useScrollToBottom } from "@/hooks/custom";
 import { useChatUI } from "@/hooks/custom/useChatUI";
 import RoleplayHeader from "./ChatroomHeader";

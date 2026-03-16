@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { ChatInput, ChatLoading } from "../../components/common";
 
-import { useAskMessageStream, useAskStream } from "@/hooks/mutations";
+import { useAskMessageStream, useAskStream } from "@/features/ask/hooks";
 import { Spinner } from "../../components/ui/spinner/spinner";
 import ChatQuickActions from "./ChatQuickActions";
 import { useScrollToBottom, useVoiceChat } from "@/hooks/custom";

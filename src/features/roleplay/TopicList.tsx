@@ -5,7 +5,7 @@ import { CategoryType } from "@/types/topics";
 import { useRouter } from "next/navigation";
 import { Heart, Lock, Plus } from "lucide-react";
 import Image from "next/image";
-import { useAddFavorite, useRemoveFavorite } from "@/hooks/mutations";
+import { useAddFavorite, useRemoveFavorite } from "@/features/roleplay/hooks";
 import { useTopics } from "@/hooks/queries";
 import { TopicListSkeleton } from "../../components/skeleton";
 import { useState } from "react";

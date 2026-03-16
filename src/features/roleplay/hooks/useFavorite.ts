@@ -15,6 +15,7 @@ export const useAddFavorite = () => {
     },
   });
 };
+
 export const useRemoveFavorite = () => {
   const queryClient = useQueryClient();
   return useMutation({

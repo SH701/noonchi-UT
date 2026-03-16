@@ -8,9 +8,9 @@ import { InfoIcon } from "@/assets/svgr";
 import {
   useVoiceChat,
   useChatUI,
-  usePreviewMessages,
   useScrollToBottom,
 } from "@/hooks/custom";
+import { usePreviewMessages } from "@/features/preview/hooks";
 import { motion } from "framer-motion";
 import {
   HintMessage,

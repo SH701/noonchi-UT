@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { usePreviewRemove, usePreviewSend, usePreviewStart } from "../mutations/preview/usePreview";
-import { usePreviewHint } from "@/hooks/queries";
+import { usePreviewRemove, usePreviewSend, usePreviewStart } from "./usePreview";
+import { usePreviewHint } from "./usePreviewHint";
 import { PreviewAiMessage, PreviewUserMessage } from "@/types/preview";
 import { flushSync } from "react-dom";
 
@@ -18,13 +18,13 @@ export function usePreviewMessages() {
     started.current = true;
     startChat();
   }, [startChat]);
+
   const {
     data: hintData,
     refetch: refetchHint,
     isFetching: isHintFetching,
   } = usePreviewHint(data?.session_id);
 
-  // EventStrem에서 type:chunk인 content를 누적
   const handleChunk = useCallback((chunk: string) => {
     flushSync(() => {
       setAiResponses((prev) => {
