@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { apiMutations } from "@/api/mutations";
+import { apiMutations } from "@/api";
 import { toast } from "@/components/ui/toast/toast";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button/button";

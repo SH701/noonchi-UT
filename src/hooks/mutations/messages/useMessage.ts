@@ -1,4 +1,4 @@
-import { apiMutations } from "@/api/mutations";
+import { apiMutations } from "@/api";
 
 import { useMutation } from "@tanstack/react-query";
 

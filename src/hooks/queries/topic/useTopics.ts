@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { apiClient } from "@/api/client";
+import { apiClient } from "@/api";
 export const useTopics = (category: string, favoritesOnly: boolean) => {
   return useQuery({
     queryKey: ["topics", category, favoritesOnly],

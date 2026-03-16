@@ -1,4 +1,4 @@
-import { apiMutations } from "@/api/mutations";
+import { apiMutations } from "@/api";
 import { toast } from "@/components/ui/toast/toast";
 import {
   AskReq,

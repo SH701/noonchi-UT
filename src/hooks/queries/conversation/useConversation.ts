@@ -9,7 +9,7 @@ import {
   ConversationSortBy,
   FilterState,
 } from "@/types/conversations";
-import { apiClient } from "@/api/client";
+import { apiClient } from "@/api";
 
 export const useConversations = (
   filter: FilterState = null,

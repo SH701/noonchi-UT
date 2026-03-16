@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRecorder } from "@/hooks/custom/useRecorder";
-import { apiMutations } from "@/api/mutations";
+import { apiMutations } from "@/api";
 import { toast } from "@/components/ui/toast/toast";
 
 export type MicState = "idle" | "recording" | "recorded";

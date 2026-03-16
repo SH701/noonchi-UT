@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button/button";
-import { apiMutations } from "@/api/mutations";
+import { apiMutations } from "@/api";
 import { SignupHeader, SignupTemplate, SignupForm2 } from "@/features/auth";
 import { signup2Schema } from "@/types/auth";
 import { signIn } from "next-auth/react";
