@@ -5,7 +5,7 @@ import {
   Preview,
   PreviewAiMessage,
   PreviewUserMessage,
-} from "@/types/preview/preview.type";
+} from "@/features/preview/types/preview.type";
 
 import MessageItem from "./MessageItem";
 import RoleInfo from "./RoleInfo";

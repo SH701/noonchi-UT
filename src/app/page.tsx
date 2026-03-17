@@ -1,5 +1,4 @@
-import { Onboarding } from "@/components/onboard";
-
+import { Onboarding } from "@/features/onboard";
 
 export default function Home() {
   return (

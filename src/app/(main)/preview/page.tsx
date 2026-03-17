@@ -1,4 +1,4 @@
-import PreviewChat from "@/features/preview/PreviewChat";
+import PreviewChat from "@/features/preview/components/PreviewChat";
 
 export default function Preview() {
   return <PreviewChat />;

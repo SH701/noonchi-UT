@@ -1,6 +1,6 @@
-export { default as FeedbackPart } from "./FeedbackPart";
-export { default as Part } from "./Part";
-export { default as Point } from "./Point";
-export { default as ResultHeader } from "./ResultHeader";
-export { default as ResultTab } from "./ResultTab";
-export { default as ResultPage } from "./ResultPage";
+export { default as FeedbackPart } from "./components/FeedbackPart";
+export { default as Part } from "./components/Part";
+export { default as Point } from "./components/Point";
+export { default as ResultHeader } from "./components/ResultHeader";
+export { default as ResultTab } from "./components/ResultTab";
+export { default as ResultPage } from "./components/ResultPage";

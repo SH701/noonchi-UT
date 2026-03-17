@@ -1,4 +1,4 @@
-import MyInfo from "@/features/profile/myinfo/MyInfo";
+import MyInfo from "@/features/profile/components/myinfo/MyInfo";
 import { auth } from "@/lib/next-auth/auth";
 
 export default async function MyProfile() {

@@ -1,7 +1,7 @@
-export { default as ProfileActions } from "./ProfileActions";
-export { default as ProfileMenuList } from "./ProfileMenuList";
-export { default as ProfileMenuSection } from "./ProfileMenuSection";
-export { default as ProfileInfo } from "./ProfileInfo";
-export { default as ProfileHeader } from "./ProfileHeader";
-export { default as MyInfo } from "./myinfo/MyInfo";
-export { default as MyInterests } from "./myinterests/MyInterests";
+export { default as ProfileActions } from "./components/ProfileActions";
+export { default as ProfileMenuList } from "./components/ProfileMenuList";
+export { default as ProfileMenuSection } from "./components/ProfileMenuSection";
+export { default as ProfileInfo } from "./components/ProfileInfo";
+export { default as ProfileHeader } from "./components/ProfileHeader";
+export { default as MyInfo } from "./components/myinfo/MyInfo";
+export { default as MyInterests } from "./components/myinterests/MyInterests";

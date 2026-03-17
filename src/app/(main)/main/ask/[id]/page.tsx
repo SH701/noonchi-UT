@@ -1,8 +1,9 @@
 "use client";
 
+import AskChat from "@/features/ask/components/AskChat";
 import { use } from "react";
 
-import AskChat from "@/features/ask/AskChat";
+
 
 export default function Askroom({
   params,
