@@ -5,8 +5,9 @@ import {
   RoleplayReq,
   ConversationRes,
   AskReq,
+  AskStreamDoneData,
 } from "@/types/conversations";
-import { AskStreamDoneData } from "@/types/messages";
+
 
 export const conversationsMutations = {
   CreateInterview: async (
