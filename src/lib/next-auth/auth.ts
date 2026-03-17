@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import z from "zod";
-import { AuthRes } from "@/types/auth";
+import { AuthRes } from "@/features/auth/types/auth";
 import { User as AppUser } from "@/types/user";
 
 async function refreshAccessToken(refreshToken: string) {
