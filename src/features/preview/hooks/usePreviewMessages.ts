@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePreviewRemove, usePreviewSend, usePreviewStart } from "./usePreview";
 import { usePreviewHint } from "./usePreviewHint";
-import { PreviewAiMessage, PreviewUserMessage } from "@/types/preview";
+
 import { flushSync } from "react-dom";
+import { PreviewAiMessage, PreviewUserMessage } from "../types/preview.type";
 
 export function usePreviewMessages() {
   const { data, mutate: startChat, isPending: isStarting } = usePreviewStart();

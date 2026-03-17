@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { AskTurn } from "@/types/messages";
+
 import { apiMutations } from "@/api";
+import { AskTurn } from "../types/ask.type";
 
 export function useAskMessageStream(conversationId: number) {
   const [turns, setTurns] = useState<AskTurn[]>([]);
