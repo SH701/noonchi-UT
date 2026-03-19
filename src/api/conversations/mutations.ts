@@ -5,8 +5,8 @@ import {
   RoleplayReq,
   ConversationRes,
   AskReq,
+  AskStreamDoneData,
 } from "@/types/conversations";
-import { AskStreamDoneData } from "@/types/messages";
 
 export const conversationsMutations = {
   CreateInterview: async (
@@ -17,7 +17,6 @@ export const conversationsMutations = {
       body: JSON.stringify(data),
     });
   },
-
   CreateRoleplay: async (data: RoleplayReq): Promise<ConversationRes> => {
     return apiFetch<ConversationRes>("/api/conversations/role-playing", {
       method: "POST",
@@ -45,14 +44,12 @@ export const conversationsMutations = {
         body: JSON.stringify(data),
       },
     );
-
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const reader = response.body?.getReader();
     const decoder = new TextDecoder();
     let buffer = "";
     let doneData: AskStreamDoneData | null = null;
-
     if (reader) {
       while (true) {
         const { done, value } = await reader.read();

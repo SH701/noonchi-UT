@@ -1,5 +1,5 @@
+import { Preview, PreviewSendRes } from "@/features/preview/types/preview.type";
 import axios from "axios";
-import { Preview, PreviewSendRes } from "@/types/preview/preview.type";
 
 export const previewMutations = {
   Start: async (): Promise<Preview> => {

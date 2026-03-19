@@ -15,13 +15,11 @@ export const filesMutations = {
             }),
           },
         );
-
         await fetch(presignedData.url, {
           method: "PUT",
           headers: { "Content-Type": file.type },
           body: file,
         });
-
         return {
           fileUrl: presignedData.url.split("?")[0],
           fileName: file.name,
@@ -51,7 +49,6 @@ export const filesMutations = {
       headers: { "Content-Type": blobType },
       body: blob,
     });
-
     return presignedUrl.split("?")[0];
   },
 };

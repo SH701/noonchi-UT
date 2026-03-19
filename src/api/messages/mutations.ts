@@ -1,10 +1,7 @@
 import { apiFetch } from "@/api/api";
 import { getSession } from "next-auth/react";
-import {
-  AskMessageStreamDoneData,
-  RoleplayStreamDoneData,
-  ChatMsg,
-} from "@/types/messages";
+import { RoleplayStreamDoneData, ChatMsg } from "@/types/messages";
+import { AskMessageStreamDoneData } from "@/types/conversations";
 
 export const messagesMutations = {
   asksend: async (
@@ -89,7 +86,6 @@ export const messagesMutations = {
         body: JSON.stringify({ conversationId, content, audioUrl }),
       },
     );
-
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const reader = response.body?.getReader();

@@ -1,8 +1,13 @@
-import { useConversations, useConversationSearch } from "@/hooks/queries";
 import { useChatHistoryStore } from "@/store/useChatHistorystore";
+import { Conversation } from "@/types/conversations";
+import {
+  useConversations,
+  useConversationSearch,
+} from "../queries/useConversation";
 
-
-export function useHistorySearch(conversationType: "ROLE_PLAYING" | "ASK" | undefined) {
+export function useHistorySearch(
+  conversationType: "ROLE_PLAYING" | "ASK" | undefined,
+) {
   const { searchKeyword } = useChatHistoryStore();
   const isSearching = searchKeyword.trim().length > 0;
 
@@ -17,7 +22,7 @@ export function useHistorySearch(conversationType: "ROLE_PLAYING" | "ASK" | unde
     useConversationSearch(searchKeyword);
 
   const isPending = isSearching ? isSearchPending : isListPending;
-  const conversations = isSearching
+  const conversations: Conversation[] = isSearching
     ? (searchData?.conversations ?? [])
     : (listData?.conversations ?? []);
 
