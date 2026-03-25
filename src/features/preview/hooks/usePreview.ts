@@ -1,15 +1,15 @@
-import { apiMutations } from "@/api";
+import { previewMutations } from "@/features/preview/api";
 import { useMutation } from "@tanstack/react-query";
 
 export function usePreviewStart() {
   return useMutation({
-    mutationFn: apiMutations.preview.Start,
+    mutationFn: previewMutations.Start,
   });
 }
 
 export function usePreviewRemove() {
   return useMutation({
-    mutationFn: (sessionId: string) => apiMutations.preview.Remove(sessionId),
+    mutationFn: (sessionId: string) => previewMutations.Remove(sessionId),
   });
 }
 
@@ -24,7 +24,7 @@ export function usePreviewSend(onChunk?: (chunk: string) => void) {
       userMessage: string;
       inputType?: "text" | "voice";
     }) => {
-      return apiMutations.preview.Send(
+      return previewMutations.Send(
         sessionId,
         userMessage,
         inputType,
