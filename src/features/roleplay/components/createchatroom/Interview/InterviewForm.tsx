@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { FileUpload, TextInput, Textarea } from "../../ui/form";
+import { FileUpload, TextInput, Textarea } from "@/components/ui/form";
 import { InterviewFormData } from "@/types/conversations";
 import { Button } from "@/components/ui/button/button";
 

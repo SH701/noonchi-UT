@@ -5,3 +5,4 @@ export { default as ProfileInfo } from "./components/ProfileInfo";
 export { default as ProfileHeader } from "./components/ProfileHeader";
 export { default as MyInfo } from "./components/myinfo/MyInfo";
 export { default as MyInterests } from "./components/myinterests/MyInterests";
+export { useUpdateProfile } from "./hooks/useProfile";

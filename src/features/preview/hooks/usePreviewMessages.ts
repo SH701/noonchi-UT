@@ -17,6 +17,7 @@ export function usePreviewMessages() {
   useEffect(() => {
     if (started.current) return;
     started.current = true;
+    gtag("event", "preview_start");
     startChat();
   }, [startChat]);
 
@@ -53,6 +54,7 @@ export function usePreviewMessages() {
       !ended.current
     ) {
       ended.current = true;
+      gtag("event", "preview_complete");
       setTimeout(() => {
         removePreview(data.session_id);
         setShowPreviewModal(true);

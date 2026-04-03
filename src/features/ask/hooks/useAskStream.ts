@@ -1,6 +1,7 @@
 import { apiMutations } from "@/api";
 import { useState } from "react";
-import { AskReq } from "@/types/conversations";
+import { AskReq } from "../types/ask.type";
+
 
 export const useAskStream = () => {
   const [approachTip, setApproachTip] = useState("");

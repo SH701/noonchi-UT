@@ -1,7 +1,7 @@
 import { apiFetch } from "@/api/api";
 import { getSession } from "next-auth/react";
 import { RoleplayStreamDoneData, ChatMsg } from "@/types/messages";
-import { AskMessageStreamDoneData } from "@/types/conversations";
+import { AskMessageStreamDoneData } from "@/features/ask/types/ask.type";
 
 export const messagesMutations = {
   asksend: async (
