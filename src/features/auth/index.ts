@@ -8,3 +8,4 @@ export { default as SignupDetail } from "./components/signup/SignupDetail";
 export { default as LoginAction } from "./components/login/LoginActoion";
 export { default as LoginForm } from "./components/login/LoginForm";
 export { default as LoginContent } from "./components/login/LoginContent";
+export * from "./types";

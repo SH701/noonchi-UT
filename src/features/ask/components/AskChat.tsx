@@ -1,10 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-
-
-import { useAskMessageStream, useAskStream } from "@/features/ask/hooks";
-
 import ChatQuickActions from "./ChatQuickActions";
 import { useScrollToBottom, useVoiceChat } from "@/hooks/custom";
 import { ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
@@ -18,6 +14,8 @@ import { Spinner } from "@/components/ui/spinner/spinner";
 import { ChatInput, ChatLoading } from "@/components/common";
 import { useConversationDetail } from "@/hooks/queries/useConversation";
 import { AskTurn } from "../types/ask.type";
+import { useAskStream } from "../hooks/useAskStream";
+import { useAskMessageStream } from "../hooks/useAskMessageStream";
 
 interface AskChatProps {
   roomId?: number;

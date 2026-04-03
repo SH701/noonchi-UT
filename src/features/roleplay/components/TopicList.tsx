@@ -67,6 +67,11 @@ export default function TopicList() {
                   toast.warning("This content will be available soon");
                   return;
                 }
+                gtag("event", "select_topic", {
+                  category: isLove ? topic.category : category,
+                  topic_name: topic.name,
+                  topic_id: topic.topicId,
+                });
                 router.push(
                   `/main/roleplay/create?category=${isLove ? topic.category : category}&topicId=${topic.topicId}`,
                 );

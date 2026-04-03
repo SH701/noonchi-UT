@@ -34,6 +34,7 @@ export default function Onboarding() {
 
   const handleNext = async () => {
     if (currentSlide === lastIndex) {
+      gtag("event", "onboarding_complete");
       router.push("/preview");
     } else {
       sliderRef.current?.slickNext();

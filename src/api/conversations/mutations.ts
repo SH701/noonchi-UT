@@ -1,12 +1,8 @@
 import { apiFetch } from "@/api/api";
 import { getSession } from "next-auth/react";
-import {
-  InterviewFormData,
-  RoleplayReq,
-  ConversationRes,
-  AskReq,
-  AskStreamDoneData,
-} from "@/types/conversations";
+import { InterviewFormData, ConversationRes } from "@/types/conversations";
+import { RoleplayReq } from "@/features/roleplay/types/roleplay/roleplay.type";
+import { AskReq, AskStreamDoneData } from "@/features/ask/types/ask.type";
 
 export const conversationsMutations = {
   CreateInterview: async (
