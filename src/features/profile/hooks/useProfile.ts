@@ -1,5 +1,5 @@
-import { apiMutations } from "@/api";
 import { useMutation } from "@tanstack/react-query";
+import { userMutations } from "../api/mutations";
 
 export const useUpdateProfile = () => {
   return useMutation({
@@ -12,6 +12,6 @@ export const useUpdateProfile = () => {
       koreanLevel?: string;
       profileImageUrl?: string;
       interests?: string[];
-    }) => apiMutations.user.UpadateProfile(koreanLevel, interests),
+    }) => userMutations.UpadateProfile(koreanLevel, interests),
   });
 };

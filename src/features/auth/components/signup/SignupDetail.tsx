@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button/button";
-import { apiMutations } from "@/api";
 import { SignupHeader, SignupTemplate, SignupForm2 } from "@/features/auth";
 
 import { signIn } from "next-auth/react";
@@ -18,6 +17,7 @@ import { usePreferenceStore } from "@/store/usePreferenceStore";
 import { useSession } from "next-auth/react";
 import { signup2Schema } from "../../types/schema";
 import { useUpdateProfile } from "@/features/profile/hooks/useProfile";
+import { authMutations } from "../../api/mutations";
 
 type Step2FormData = z.infer<typeof signup2Schema>;
 
@@ -57,7 +57,7 @@ export default function SignupDetail({
 
   const onSubmit = async (data: Step2FormData) => {
     try {
-      await apiMutations.auth.Signup({
+      await authMutations.Signup({
         email,
         password,
         nickname: data.name,
@@ -80,7 +80,7 @@ export default function SignupDetail({
         resetPreferences();
       }
       gtag("event", "sign_up", { method: "email" });
-      closeModal(); 
+      closeModal();
       router.push("/main");
     } catch (err) {
       if (err instanceof Error) {
