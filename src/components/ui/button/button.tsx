@@ -17,8 +17,8 @@ const buttonVariants = cva(
       },
 
       size: {
-        lg: "w-[334px] h-13 text-base",
-        md: "w-[236px] h-12 text-sm",
+        lg: "w-full h-13 text-base",
+        md: "w-full h-12 text-sm",
         sm: "px-3 py-1 text-sm",
         fluid: "flex-1 py-3 text-sm",
       },

@@ -26,7 +26,7 @@ export default function PreAsk() {
               </span>
             </div>
           </div>
-          <div className="pb-13 mx-auto mt-auto">
+          <div className="pb-13 mt-auto w-full px-4">
             <Button variant="primary" size="lg" onClick={handleStart}>
               Check how it sounds
             </Button>

@@ -22,7 +22,7 @@ export default function PreviewEnd() {
           width={217}
           height={50}
           priority
-          style={{ width: 217, height: 60 }}
+          style={{ width: "clamp(217px, 40vw, 320px)", height: "auto" }}
         />
         <p className="py-4 text-2xl font-medium text-gray-800">
           Preview Roleplay Ended
@@ -33,7 +33,7 @@ export default function PreviewEnd() {
           <span>please log in or sign up</span>
         </div>
       </div>
-      <div className="pb-13 mt-auto flex flex-col gap-4">
+      <div className="pb-13 mt-auto flex w-full flex-col gap-4 px-4">
         <Button size="lg" onClick={signupOpen}>
           Create Account
         </Button>

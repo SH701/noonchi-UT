@@ -10,7 +10,7 @@ export default async function ProfilePage() {
   const session = await auth();
 
   return (
-    <div className="max-w-93.75 flex flex-1 flex-col">
+    <div className="flex flex-1 flex-col">
       <ProfileHeader />
       <div className="flex flex-1 flex-col space-y-5">
         <ProfileInfo

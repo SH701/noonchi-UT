@@ -3,7 +3,7 @@ import { useRecorder } from "@/hooks/custom/useRecorder";
 import { apiMutations } from "@/api";
 import { toast } from "@/components/ui/toast/toast";
 
-export type MicState = "idle" | "recording" | "recorded";
+export type MicState = "idle" | "recording" | "recorded" | undefined;
 
 export function useVoiceChat(
   conversationId?: number,

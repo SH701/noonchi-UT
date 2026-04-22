@@ -17,7 +17,7 @@ export default function Modal({
   if (!isOpen) return null;
 
   const defaultClassName =
-    "w-[320px] bg-white rounded-xl flex flex-col justify-center items-center px-4 py-12 gap-2";
+    "w-[85%] bg-white rounded-xl flex flex-col justify-center items-center px-4 py-12 gap-2";
 
   const finalClassName = className || defaultClassName;
 

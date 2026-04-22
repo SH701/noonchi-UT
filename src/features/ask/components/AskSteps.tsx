@@ -20,7 +20,7 @@ export default function AskSteps({
 
   return (
     <>
-      <span className="text-xl font-semibold">{STEP_QUESTIONS.askTarget}</span>
+      <span className="text-2xl font-semibold">{STEP_QUESTIONS.askTarget}</span>
       <span className="text-gray-600">
         This can be something you`re <br /> about to say or do
       </span>
@@ -34,7 +34,7 @@ export default function AskSteps({
 
       {currentStepIdx >= 1 && (
         <div className="mt-5 flex flex-col">
-          <span className="text-xl font-semibold">
+          <span className="text-2xl font-semibold">
             {STEP_QUESTIONS.closeness}
           </span>
           <span className="text-gray-600">
@@ -68,7 +68,7 @@ export default function AskSteps({
 
       {currentStepIdx >= 2 && (
         <div className="mt-5 flex flex-col">
-          <span className="text-xl font-semibold">
+          <span className="text-2xl font-semibold">
             {STEP_QUESTIONS.situation}
           </span>
           <span className="text-gray-600">

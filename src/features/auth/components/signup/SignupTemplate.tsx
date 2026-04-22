@@ -14,7 +14,7 @@ export default function SignupTemplate({
       {header}
       <div className="flex-1 px-6 py-8 space-y-4 ">{children}</div>
       {footer && (
-        <div className="flex justify-center items-center">{footer}</div>
+        <div className="flex justify-center items-center w-full px-6">{footer}</div>
       )}
     </div>
   );

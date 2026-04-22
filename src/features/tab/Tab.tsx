@@ -64,7 +64,7 @@ export default function Tab() {
           />
           <motion.div
             key="tab"
-            className="z-9999 w-70 bg-gradient-primary fixed left-0 top-0 h-full origin-left pt-10 md:left-1/2 md:-translate-x-2/3"
+            className="z-9999 bg-gradient-primary fixed left-0 top-0 h-full max-w-[74%] origin-left pt-10 md:left-[calc(50%-300px)]"
             variants={slideVariants}
             initial="hidden"
             animate="visible"
@@ -105,7 +105,7 @@ export default function Tab() {
                   />
                 </div>
               </div>
-              <div className="w-70 z-9999 flex h-20 items-center bg-white p-4">
+              <div className="z-9999 flex h-20 w-full items-center bg-white p-4">
                 {edit ? (
                   <div className="flex w-full justify-between text-sm">
                     <button className="text-gray-500" onClick={handleSelectAll}>

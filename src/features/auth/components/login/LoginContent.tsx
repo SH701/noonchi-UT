@@ -73,9 +73,9 @@ export default function LoginContent() {
   };
 
   return (
-    <div className="flex flex-col px-4 pb-10">
+    <div className="flex flex-col px-6 pb-10">
       <div className="flex flex-1 items-center justify-center">
-        <div className="w-full max-w-sm space-y-6">
+        <div className="w-full space-y-6">
           <div className="my-10 mt-14 flex justify-between">
             <p></p>
             <p className="text-center text-2xl font-semibold">Welcome back</p>
