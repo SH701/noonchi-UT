@@ -6,7 +6,8 @@ export default function RoleplayHistorySkeleton() {
         {skeletonCards.map((_, index) => (
           <div
             key={index}
-            className="aspect-square w-[clamp(128px,30vw,162px)] shrink-0 rounded-2xl bg-gray-200"
+            className="aspect-square shrink-0 rounded-2xl bg-gray-200"
+            style={{ width: "clamp(112px, 28vw, 140px)" }}
           ></div>
         ))}
       </div>

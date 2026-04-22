@@ -20,6 +20,7 @@ export default function RecentTopic() {
           <div
             key={topic.topicId}
             className="relative shrink-0"
+            style={{ width: "clamp(128px, 30vw, 162px)" }}
             onClick={() =>
               router.push(
                 `/main/roleplay/create?category=${topic.category}&topicId=${topic.topicId}`,
@@ -31,7 +32,7 @@ export default function RecentTopic() {
               alt="topic image"
               width={162}
               height={162}
-              className="rounded-xl"
+              className="h-auto w-full rounded-xl"
               loading="eager"
             />
             <div className="absolute inset-0 flex flex-col justify-end p-3">
