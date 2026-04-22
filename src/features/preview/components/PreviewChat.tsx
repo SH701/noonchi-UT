@@ -5,11 +5,7 @@ import { ChatInput, ChatLoading } from "@/components/common";
 import { useRouter } from "next/navigation";
 import { PreviewModal } from "@/components/modal";
 import { InfoIcon } from "@/assets/svgr";
-import {
-  useVoiceChat,
-  useChatUI,
-  useScrollToBottom,
-} from "@/hooks/custom";
+import { useChatUI, useScrollToBottom } from "@/hooks/custom";
 import { usePreviewMessages } from "@/features/preview/hooks";
 import { motion } from "framer-motion";
 import {
@@ -18,6 +14,7 @@ import {
   PreviewMessageList,
 } from "@/components/chatroom";
 import PreviewHeader from "./PreviewHeader";
+import { useWebVoice } from "@/hooks/custom/useWebVoice";
 
 export default function PreviewChat() {
   const {
@@ -47,16 +44,10 @@ export default function PreviewChat() {
     toggleNotice,
   } = useChatUI();
   const bottomRef = useScrollToBottom([aiResponses]);
-  const {
-    micState,
-    sttText,
-    handleMicClick,
-    pendingAudioUrl,
-    handleSendAudio,
-  } = useVoiceChat();
+  const { micState, sttText, handleMicClick, handleSendAudio } = useWebVoice();
 
   useEffect(() => {
-    if (micState === "recorded" && sttText) {
+    if ((micState === "recording" || micState === "recorded") && sttText) {
       setMessage(sttText);
     }
   }, [sttText, micState]);
@@ -66,7 +57,7 @@ export default function PreviewChat() {
     if (showSituation) {
       toggleSituation();
     }
-    sendMessage(message, pendingAudioUrl ?? undefined);
+    sendMessage(message ?? undefined);
     setMessage("");
     handleSendAudio();
   };

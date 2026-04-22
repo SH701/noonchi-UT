@@ -53,7 +53,7 @@ export default function RootLayout({
           <QueryProvider>
             <ClientProvider>
               <div className="h-full min-h-dvh w-full md:flex md:justify-center">
-                <div className="md:max-w-93.75 bg-gradient-primary w-full md:shadow-xl">
+                <div className="md:max-w-150 bg-gradient-primary w-full md:shadow-xl">
                   {children}
                 </div>
               </div>
