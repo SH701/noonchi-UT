@@ -4,8 +4,10 @@ interface ISpeechRecognition extends EventTarget {
   lang: string;
   interimResults: boolean;
   continuous: boolean;
-  onresult: ((e: SpeechRecognitionEvent) => void) | null;
-  onerror: ((e: SpeechRecognitionErrorEvent) => void) | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onresult: ((e: any) => void) | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onerror: ((e: any) => void) | null;
   onend: (() => void) | null;
   start(): void;
   stop(): void;
@@ -18,9 +20,6 @@ declare global {
   }
 }
 
-const SpeechRecognitionAPI =
-  window.SpeechRecognition ?? window.webkitSpeechRecognition;
-
 export function useWebSpeech() {
   const [isRecording, setIsRecording] = useState(false);
   const recognitionRef = useRef<ISpeechRecognition | null>(null);
@@ -30,6 +29,11 @@ export function useWebSpeech() {
     onFinal: (text: string) => void,
     onError: (error: string) => void,
   ) => {
+    const SpeechRecognitionAPI =
+      typeof window !== "undefined"
+        ? window.SpeechRecognition ?? window.webkitSpeechRecognition
+        : null;
+
     if (!SpeechRecognitionAPI) {
       onError("Speech Recognition Not Available");
       return;
@@ -40,7 +44,8 @@ export function useWebSpeech() {
     recognition.interimResults = true;
     recognition.continuous = true;
 
-    recognition.onresult = (e: SpeechRecognitionEvent) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    recognition.onresult = (e: any) => {
       let interim = "";
       let final = "";
       for (let i = e.resultIndex; i < e.results.length; i++) {
@@ -55,7 +60,8 @@ export function useWebSpeech() {
       if (final) onFinal(final);
     };
 
-    recognition.onerror = (e: SpeechRecognitionErrorEvent) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    recognition.onerror = (e: any) => {
       onError(e.error);
     };
 
