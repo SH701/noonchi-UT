@@ -37,8 +37,14 @@ export default function ProfileMenuSection() {
         <ProfileMenuList
           title="Legal"
           items={[
-            { label: "Terms of Use", onClick: () => setShowModal(true) },
-            { label: "Privacy policy", onClick: () => setShowModal(true) },
+            {
+              label: "Terms of Use",
+              onClick: () => router.push("/profile/terms"),
+            },
+            {
+              label: "Privacy policy",
+              onClick: () => router.push("/profile/privacy"),
+            },
             { label: "Help & Support", onClick: () => setShowModal(true) },
           ]}
         />
