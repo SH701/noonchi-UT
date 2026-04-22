@@ -47,7 +47,8 @@ export default function RoleplayHistoryTab() {
             return (
               <div
                 key={convo.conversationId}
-                className="relative size-32 shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-white/10 shadow-lg"
+                className="relative shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-white/10 shadow-lg aspect-square"
+                style={{ width: "clamp(112px, 28vw, 140px)" }}
                 onClick={() => {
                   router.push(
                     convo.canGetReport

@@ -109,7 +109,7 @@ export default function MessageItem({
           ))}
 
         {/* 메시지 박스 */}
-        <div className="max-w-[65%]">
+        <div className="max-w-[75%]">
           {/* 유저 말풍선 박스 */}
           {isMine && (
             <div className="flex flex-col gap-1">
@@ -219,7 +219,7 @@ export default function MessageItem({
           )}
         </div>
         {isMeanOpen && (
-          <div className="w-61 rounded-xl border border-white bg-white/50 p-4">
+          <div className="w-[65%] rounded-xl border border-white bg-white/50 p-4">
             <span className="text-sm text-gray-800">
               👀 {hiddenMeaning ?? messages.hiddenMeaning}
             </span>

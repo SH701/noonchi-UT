@@ -13,9 +13,10 @@ export default function CustomSection() {
               <CameraIcon className="text-gray-500 " />
             </div>
             <div className="px-3 py-2 bg-white/50 border border-gray-200 rounded-full absolute top-4 left-4">
-              <span className="text-gray-600 text-[13px] font-medium">
+              <span className="text-gray-600 text-xs font-medium">
                 Custom
               </span>
+
             </div>
             <div className="flex flex-col gap-2 absolute left-4 bottom-4">
               <span className="text-2xl font-semibold text-gray-900">

@@ -48,7 +48,7 @@ export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
       <Tab />
       <div className="flex flex-1 justify-center overflow-y-auto">
         <div>
-          <div className="max-w-125 w-full">
+          <div className="w-full px-4">
             <div className="mb-4 rounded-2xl bg-white p-4">
               <p className="font-pretendard mb-4 text-base font-medium leading-[130%] text-gray-900">
                 {feedback.overallEvaluation ||

@@ -213,7 +213,7 @@ export default function AskChat({ roomId }: AskChatProps) {
               <span className="text-gray-600">{approachTip}</span>
             </div>
             <div className="flex flex-col gap-2">
-              <div className="max-w-61 mb-5 flex flex-col gap-2 rounded-b-xl rounded-tr-xl border border-gray-300 bg-white p-4">
+              <div className="mb-5 flex max-w-[75%] flex-col gap-2 rounded-b-xl rounded-tr-xl border border-gray-300 bg-white p-4">
                 <p className="my-1 text-sm">{aiMessage}</p>
               </div>
               <div className="flex flex-col gap-1 border-b border-gray-400 pb-2 text-sm">

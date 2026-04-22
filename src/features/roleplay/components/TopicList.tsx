@@ -85,7 +85,7 @@ export default function TopicList() {
                     fill
                     className="object-cover blur-sm"
                     loading="eager"
-                    sizes="(max-width: 430px) 100vw, 80vw"
+                    sizes="(max-width: 600px) 50vw, 300px"
                   />
                   <Lock className="size-15 absolute inset-0 z-50 mx-auto mt-8 text-white" />
                 </>
@@ -96,7 +96,7 @@ export default function TopicList() {
                   fill
                   className="object-cover"
                   loading="eager"
-                  sizes="(max-width: 430px) 100vw, 80vw"
+                  sizes="(max-width: 600px) 50vw, 300px"
                 />
               )}
 

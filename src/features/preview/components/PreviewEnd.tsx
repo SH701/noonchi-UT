@@ -33,7 +33,7 @@ export default function PreviewEnd() {
           <span>please log in or sign up</span>
         </div>
       </div>
-      <div className="pb-13 mt-auto flex w-full flex-col gap-4 px-4">
+      <div className="mt-auto flex w-full flex-col gap-4 px-4" style={{ paddingBottom: "clamp(40px, 10vw, 52px)" }}>
         <Button size="lg" onClick={signupOpen}>
           Create Account
         </Button>

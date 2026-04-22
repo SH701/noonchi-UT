@@ -24,7 +24,7 @@ export default function PreviewModal({ isOpen, onClose }: ModalProps) {
         description={`The roleplay preview has ended.\nSign up to continue the dialogue \nand master every situation.`}
         image={{ src: "/etc/eyes.png", alt: "eyes", width: 100, height: 100 }}
       >
-        <div className="flex flex-col gap-3">
+        <div className="flex w-full flex-col gap-3">
           <Button onClick={signupOpen}>Create Account</Button>
           <Button onClick={loginOpen} variant="secondary">
             Login

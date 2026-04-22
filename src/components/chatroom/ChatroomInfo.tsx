@@ -33,7 +33,7 @@ export default function ChatRoomInfo({
           />
 
           <motion.div
-            className="max-w-125 fixed bottom-0 left-0 right-0 z-50 mx-auto rounded-t-[50px] bg-gray-800 p-6 shadow-xl"
+            className="fixed bottom-0 left-0 right-0 z-50 mx-auto w-[90%] max-w-150 rounded-t-[50px] bg-gray-800 p-6 shadow-xl"
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}

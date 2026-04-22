@@ -26,7 +26,7 @@ export default function PreAsk() {
               </span>
             </div>
           </div>
-          <div className="pb-13 mt-auto w-full px-4">
+          <div className="mt-auto w-full px-4" style={{ paddingBottom: "clamp(40px, 10vw, 52px)" }}>
             <Button variant="primary" size="lg" onClick={handleStart}>
               Check how it sounds
             </Button>
