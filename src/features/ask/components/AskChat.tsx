@@ -166,7 +166,7 @@ export default function AskChat({ roomId }: AskChatProps) {
         {/* 스트리밍 결과 */}
         {aiMessage && (
           <div className="mb-1 flex flex-col gap-2">
-            <span className="text-xl font-semibold">
+            <span className="text-2xl font-semibold">
               {STEP_QUESTIONS.askTarget}
             </span>
             <span className="text-gray-600">
@@ -180,7 +180,7 @@ export default function AskChat({ roomId }: AskChatProps) {
               </div>
             )}
             <div className="flex flex-col">
-              <span className="text-xl font-semibold">
+              <span className="text-2xl font-semibold">
                 {STEP_QUESTIONS.closeness}
               </span>
               <span className="text-gray-600">
@@ -194,7 +194,7 @@ export default function AskChat({ roomId }: AskChatProps) {
                   </p>
                 </div>
               </div>
-              <span className="text-xl font-semibold">
+              <span className="text-2xl font-semibold">
                 {STEP_QUESTIONS.situation}
               </span>
               <span className="text-gray-600">
@@ -207,7 +207,7 @@ export default function AskChat({ roomId }: AskChatProps) {
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-semibold">
+              <span className="text-2xl font-semibold">
                 Here is the best way to say it
               </span>
               <span className="text-gray-600">{approachTip}</span>

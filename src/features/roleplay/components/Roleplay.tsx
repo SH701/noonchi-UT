@@ -8,6 +8,7 @@ import { toast } from "@/components/ui/toast/toast";
 import { useTopics } from "@/hooks/queries";
 
 import { RoleplayLoading } from "@/features/roleplay";
+import SpinnerLoading from "@/components/common/SpinnerLoading";
 import { useCreateRoleplay } from "../hooks/useCreateRoleplay";
 import RoleplayForm from "./RoleplayForm";
 
@@ -30,7 +31,7 @@ export default function RolePlay() {
   const { mutateAsync: createRoleplay, isPending } = useCreateRoleplay();
 
   if (isLoading || !topic) {
-    return <div>loading...</div>;
+    return <SpinnerLoading title="Loading..." />;
   }
 
   if (isPending) {
@@ -58,7 +59,7 @@ export default function RolePlay() {
       const convo = await createRoleplay(requestData);
       gtag("event", "roleplay_start", {
         category: category,
-        topic_name: topic.name,
+        topic_name: topic?.name,
         topic_id: topicId,
       });
       router.push(`/main/roleplay/chatroom/${convo.conversationId}`);
@@ -73,7 +74,7 @@ export default function RolePlay() {
         <div className="w-full">
           <div className="max-w-83.75 relative mx-auto aspect-square w-full">
             <Image
-              src={topic.imageUrl}
+              src={topic?.imageUrl}
               alt="topic's photo"
               fill
               className="rounded-3xl object-cover"
