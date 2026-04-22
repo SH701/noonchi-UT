@@ -17,40 +17,38 @@ export default function Modal({
   if (!isOpen) return null;
 
   const defaultClassName =
-    "w-[85%] bg-white rounded-xl flex flex-col justify-center items-center px-4 py-12 gap-2";
+    "w-[85%] max-w-125 bg-white rounded-xl flex flex-col justify-center items-center px-4 py-12 gap-2";
 
   const finalClassName = className || defaultClassName;
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 z-9999 flex items-center justify-center"
+      className="z-9999 fixed inset-0 flex items-center justify-center bg-black/60"
       onClick={onClose}
     >
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div onClick={(e) => e.stopPropagation()} className={finalClassName}>
-          {image && (
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={image.width}
-              height={image.height}
-            />
-          )}
+      <div onClick={(e) => e.stopPropagation()} className={finalClassName}>
+        {image && (
+          <Image
+            src={image.src}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+          />
+        )}
 
-          {title && (
-            <h3 className="text-xl font-semibold text-gray-900 text-center whitespace-pre-line ">
-              {title}
-            </h3>
-          )}
+        {title && (
+          <h3 className="whitespace-pre-line text-center text-xl font-semibold text-gray-900">
+            {title}
+          </h3>
+        )}
 
-          {description && (
-            <p className="text-sm text-gray-700 text-center pb-8 whitespace-pre-line">
-              {description}
-            </p>
-          )}
+        {description && (
+          <p className="whitespace-pre-line pb-8 text-center text-sm text-gray-700">
+            {description}
+          </p>
+        )}
 
-          {children}
-        </div>
+        {children}
       </div>
     </div>
   );

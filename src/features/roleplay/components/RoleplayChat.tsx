@@ -119,7 +119,7 @@ export default function RoleplayChat({
         <>
           <RoleplayHeader roomId={conversationId} onEnd={handleEnd} />
           <div className="sticky top-0 flex min-h-screen w-full flex-col">
-            <div className="top-23 sticky z-10">
+            <div className="sticky z-10" style={{ top: "clamp(80px, 20vw, 92px)" }}>
               <ChatNotice
                 description={conversation.situation}
                 showNotice={showNotice}
@@ -152,7 +152,8 @@ export default function RoleplayChat({
               )}
               {conversation.canGetReport && (
                 <motion.div
-                  className="absolute -top-12 left-5 right-5 flex items-center justify-center gap-2.5 rounded-xl bg-gray-800/50 px-5 py-2.5 text-sm text-white"
+                  className="absolute left-5 right-5 flex items-center justify-center gap-2.5 rounded-xl bg-gray-800/50 px-5 py-2.5 text-sm text-white"
+                  style={{ top: "clamp(-48px, -10vw, -40px)" }}
                   initial={{ opacity: 1 }}
                   animate={{ opacity: 0 }}
                   transition={{ duration: 4 }}
