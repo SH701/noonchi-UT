@@ -29,7 +29,7 @@ export default function ModalRender() {
               damping: 30,
               stiffness: 300,
             }}
-            className="absolute bottom-0 w-full md:max-w-93.75 bg-white rounded-t-[50px] "
+            className="absolute bottom-0 w-full max-w-150 bg-white rounded-t-[50px] left-1/2 -translate-x-1/2"
           >
             {content}
           </motion.div>

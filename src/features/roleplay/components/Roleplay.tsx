@@ -70,7 +70,7 @@ export default function RolePlay() {
   return (
     <div className="relative flex w-full flex-col overflow-x-hidden">
       <div className="flex w-full justify-center">
-        <div className="max-w-93.75 w-full">
+        <div className="w-full">
           <div className="max-w-83.75 relative mx-auto aspect-square w-full">
             <Image
               src={topic.imageUrl}

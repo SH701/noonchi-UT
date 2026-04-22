@@ -103,7 +103,7 @@ export default function Onboarding() {
           </Slider>
         </div>
 
-        <div className="px-4 pb-10">
+        <div className="flex items-center justify-center px-4 pb-10">
           {currentSlide !== 3 && (
             <Button variant="primary" size="lg" onClick={handleNext}>
               Next

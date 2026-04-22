@@ -109,7 +109,7 @@ export default function MessageItem({
           ))}
 
         {/* 메시지 박스 */}
-        <div className={clsx(!isMine && !isAI ? "w-full" : "w-61")}>
+        <div className="max-w-[65%]">
           {/* 유저 말풍선 박스 */}
           {isMine && (
             <div className="flex flex-col gap-1">
