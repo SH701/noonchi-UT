@@ -68,12 +68,12 @@ export default function TopicList() {
                   return;
                 }
                 gtag("event", "select_topic", {
-                  category: isLove ? topic.category : category,
+                  category: isLove ? topic.track : category,
                   topic_name: topic.name,
                   topic_id: topic.topicId,
                 });
                 router.push(
-                  `/main/roleplay/create?category=${isLove ? topic.category : category}&topicId=${topic.topicId}`,
+                  `/main/roleplay/create?category=${isLove ? topic.track : category}&topicId=${topic.topicId}`,
                 );
               }}
             >
@@ -101,7 +101,7 @@ export default function TopicList() {
               )}
 
               <div className="bg-gray absolute inset-x-0 bottom-0 flex h-auto flex-col justify-end gap-1 rounded-b-xl px-4 py-2 text-white backdrop-blur-sm">
-                <span className="text-xs">{topic.category}</span>
+                <span className="text-xs">{topic.track}</span>
                 <h4 className="text-sm font-semibold">{topic.name}</h4>
               </div>
               <button

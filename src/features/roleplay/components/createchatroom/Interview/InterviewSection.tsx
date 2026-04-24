@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function InterviewSection({
   imageUrl,
   name,
-  category,
+  track,
   description,
 }: TopicRes) {
   return (
@@ -22,7 +22,7 @@ export default function InterviewSection({
         </span>
       </div>
       <div className="bg-gray absolute inset-x-0 bottom-0 flex h-auto flex-col rounded-b-3xl p-4 text-white backdrop-blur-sm">
-        <span className="text-3xl font-semibold">{category}</span>
+        <span className="text-3xl font-semibold">{track}</span>
         <span className="text-sm font-medium">{description}</span>
       </div>
     </div>

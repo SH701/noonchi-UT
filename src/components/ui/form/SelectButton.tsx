@@ -20,7 +20,7 @@ export default function SelectButton({
             key={tone.value}
             type="button"
             onClick={() => onSelect(tone.value)}
-            className={`cursor-pointer rounded-lg px-4 py-3 text-left transition-all ${selectedTone === tone.value ? "bg-white" : "bg-white/50"} `}
+            className={`cursor-pointer rounded-lg px-4 py-3 text-left transition-all ${selectedTone === tone.value ? "border bg-white" : "bg-white/50"} `}
           >
             <div className="text-sm font-semibold">{tone.label}</div>
             <div className="text-xs text-gray-500">{tone.description}</div>

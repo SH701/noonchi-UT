@@ -11,7 +11,7 @@ export default function ExitChatting({ isOpen, onClose }: ModalProps) {
       description="A little more conversation will help"
       image={{ src: "/etc/eyes.png", alt: "eyes", width: 100, height: 100 }}
     >
-      <div className="flex flex-col gap-3 items-center justify-center">
+      <div className="flex w-full flex-col items-center justify-center gap-3">
         <Button variant="primary" size="md" onClick={onClose}>
           Close
         </Button>
