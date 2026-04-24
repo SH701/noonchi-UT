@@ -64,7 +64,7 @@ export default function RoleplayHistoryTab() {
                     alt={convo.conversationTopic}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 430px) 100vw, 80vw"
+                    sizes="(max-width: 600px) 100vw, 480px"
                     loading="eager"
                   />
                 ) : (

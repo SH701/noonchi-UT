@@ -85,7 +85,7 @@ export default function Onboarding() {
                   </div>
                   {!isFormSlide && (
                     <>
-                      <div className="max-w-76 mx-auto mt-10 flex w-full flex-col items-center justify-center text-center">
+                      <div className="mx-auto mt-10 flex w-[81%] flex-col items-center justify-center text-center">
                         <h2 className="text-icon-primary text-center text-2xl font-semibold leading-tight">
                           {slide?.title}
                         </h2>

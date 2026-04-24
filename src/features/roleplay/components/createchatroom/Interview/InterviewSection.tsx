@@ -8,7 +8,7 @@ export default function InterviewSection({
   description,
 }: TopicRes) {
   return (
-    <div className="max-w-83.75 relative mx-auto aspect-square w-full">
+    <div className="relative mx-auto aspect-square w-[89%]">
       <Image
         src={imageUrl || "/default-image.jpg"}
         alt="topic's photo"

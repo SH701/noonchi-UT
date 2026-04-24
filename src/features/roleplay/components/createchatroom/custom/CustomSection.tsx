@@ -8,7 +8,7 @@ export default function CustomSection() {
     <div className="flex flex-col relative w-full overflow-x-hidden">
       <div className="w-full flex justify-center">
         <div className="w-full">
-          <div className="relative w-full aspect-square max-w-83.75 mx-auto flex items-center justify-center bg-white/30 rounded-3xl border border-white mb-8">
+          <div className="relative w-[89%] aspect-square mx-auto flex items-center justify-center bg-white/30 rounded-3xl border border-white mb-8">
             <div className="rounded-full bg-white/50 p-6 border border-white">
               <CameraIcon className="text-gray-500 " />
             </div>
