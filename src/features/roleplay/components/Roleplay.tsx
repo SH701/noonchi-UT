@@ -63,8 +63,12 @@ export default function RolePlay() {
         topic_id: topicId,
       });
       router.push(`/main/roleplay/chatroom/${convo.conversationId}`);
-    } catch {
-      toast.error("Failed to create chat room");
+    } catch (e) {
+      if (e instanceof Error && e.message === "timeout") {
+        toast.error("Request timed out. Please try again.");
+      } else {
+        toast.error("Failed to create chat room");
+      }
     }
   };
 
@@ -82,7 +86,7 @@ export default function RolePlay() {
             <div className="" />
             <div className="absolute left-4 top-4">
               <span className="rounded-3xl border border-gray-200 bg-white/50 px-3 py-2 text-sm text-gray-600">
-                {topic?.category}
+                {topic?.track}
               </span>
             </div>
             <div className="bg-gray absolute inset-x-0 bottom-0 flex h-auto flex-col rounded-b-3xl p-4 text-white backdrop-blur-sm">

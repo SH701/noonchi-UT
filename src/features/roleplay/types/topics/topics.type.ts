@@ -11,9 +11,9 @@ export interface Topic {
 }
 
 export interface TopicRes {
-  topicId: 0;
+  topicId: number;
   name: string;
-  category: string;
+  track: string;
   description: string;
   imageUrl: string;
   isFavorite: boolean;

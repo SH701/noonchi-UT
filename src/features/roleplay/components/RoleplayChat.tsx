@@ -14,8 +14,11 @@ import {
 
 } from "@/hooks/queries";
 import { useRoleplayHint } from "@/features/roleplay/hooks";
-import { ChatInput } from "@/components/common";
-import { useConversationEnd, useRoleMessageStream } from "@/features/roleplay/hooks";
+import { ChatInput, SpinnerLoading } from "@/components/common";
+import {
+  useConversationEnd,
+  useRoleMessageStream,
+} from "@/features/roleplay/hooks";
 import { useVoiceChat, useScrollToBottom } from "@/hooks/custom";
 import { useChatUI } from "@/hooks/custom/useChatUI";
 import RoleplayHeader from "./ChatroomHeader";
@@ -39,7 +42,7 @@ export default function RoleplayChat({
   const { data: conversation, refetch: conversationDeatil } =
     useConversationDetail(conversationId);
   const { data: messages = [] } = useChatList(conversationId);
-  const { streamMessages, sendStreamMessage } =
+  const { streamMessages, sendStreamMessage, isAIResponding } =
     useRoleMessageStream(conversationId);
   const {
     data: hintData,
@@ -107,8 +110,9 @@ export default function RoleplayChat({
       redirect(`/main/roleplay/chatroom/${conversationId}/result`);
     }
   }, [conversation?.status]);
+
   if (!conversation) {
-    return;
+    return <SpinnerLoading title="Loading chat..." />;
   }
 
   return (
@@ -119,7 +123,10 @@ export default function RoleplayChat({
         <>
           <RoleplayHeader roomId={conversationId} onEnd={handleEnd} />
           <div className="sticky top-0 flex min-h-screen w-full flex-col">
-            <div className="sticky z-10" style={{ top: "clamp(80px, 20vw, 92px)" }}>
+            <div
+              className="sticky z-10"
+              style={{ top: "clamp(80px, 20vw, 92px)" }}
+            >
               <ChatNotice
                 description={conversation.situation}
                 showNotice={showNotice}
@@ -176,6 +183,7 @@ export default function RoleplayChat({
                 isSituationActive={showSituation}
                 micState={micState}
                 isHintLoading={isHintFetching}
+                disabled={isAIResponding}
               />
             </div>
             {open && (

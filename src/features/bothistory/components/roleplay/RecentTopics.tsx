@@ -23,7 +23,7 @@ export default function RecentTopic() {
             style={{ width: "clamp(128px, 30vw, 162px)" }}
             onClick={() =>
               router.push(
-                `/main/roleplay/create?category=${topic.category}&topicId=${topic.topicId}`,
+                `/main/roleplay/create?category=${topic.track}&topicId=${topic.topicId}`,
               )
             }
           >
@@ -37,7 +37,7 @@ export default function RecentTopic() {
             />
             <div className="absolute inset-0 flex flex-col justify-end p-3">
               <span className="text-xs uppercase tracking-wider text-gray-100">
-                {topic.category}
+                {topic.track}
               </span>
               <h4 className="line-clamp-2 text-sm font-medium leading-tight text-white">
                 {topic.name}

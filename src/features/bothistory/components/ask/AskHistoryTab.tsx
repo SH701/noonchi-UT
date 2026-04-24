@@ -91,7 +91,7 @@ export default function AskHistoryTab({
                 )}
                 <div className="flex flex-col text-sm">
                   <span className="font-bold text-black">
-                    {convo.askTarget.toUpperCase()}
+                    {convo.askTarget?.toUpperCase()}
                   </span>
                   <span className="text-xs text-gray-500">
                     {getTime(convo.createdAt)}
