@@ -16,13 +16,14 @@ import { usePreferenceStore } from "@/store/usePreferenceStore";
 import { useSession } from "next-auth/react";
 import { loginSchema } from "../../types/schema";
 import { useUpdateProfile } from "@/features/profile/hooks/useProfile";
+import OAtuth from "./OAuth";
 type LoginData = z.infer<typeof loginSchema>;
 
 export default function LoginContent() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
-  const { closeModal } = useModalActions();
+  const { openModal, closeModal } = useModalActions();
   const { update } = useSession();
   const { koreanLevel, interests, resetPreferences } = usePreferenceStore();
   const { mutateAsync: updateProfile } = useUpdateProfile();
@@ -72,6 +73,18 @@ export default function LoginContent() {
     }
   };
 
+  const GoogleLogin = async () => {
+    const result = await signIn("google", {
+      redirect: false,
+      callbackUrl: "/main",
+    });
+
+    if (result?.ok && !result.error) {
+      gtag("event", "login", { method: "google" });
+      closeModal();
+      router.replace(result.url ?? "/main");
+    }
+  };
   return (
     <div className="flex flex-col px-6 pb-10">
       <div className="flex flex-1 items-center justify-center">
@@ -102,6 +115,7 @@ export default function LoginContent() {
               {serverErrors.general}
             </p>
           )}
+          {/* <OAtuth GoogleLogin={GoogleLogin} openModal={openModal} /> */}
         </div>
       </div>
     </div>
