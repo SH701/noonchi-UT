@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import Google from "next-auth/providers/google";
 import z from "zod";
 
 import { User as AppUser } from "@/types/user";
@@ -36,6 +37,10 @@ const ACCESS_TOKEN_EXPIRES = 60 * 1000 * 60;
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
     Credentials({
       credentials: {
         email: { label: "Email", type: "text" },
@@ -91,6 +96,31 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     strategy: "jwt",
   },
   callbacks: {
+    async signIn({ account, user }) {
+      if (account?.provider === "google" && account.id_token) {
+        try {
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/auth/google`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ idToken: account.id_token }),
+            },
+          );
+          if (!res.ok) return false;
+          const data: AuthRes = await res.json();
+          // Credentials 흐름과 동일한 구조로 user에 주입 → jwt 콜백이 token에 저장
+          user.accessToken = data.accessToken;
+          user.refreshToken = data.refreshToken;
+          user.user = data.user;
+          return true;
+        } catch (e) {
+          console.error("Google login error:", e);
+          return false;
+        }
+      }
+      return true;
+    },
     async jwt({ token, user, trigger }) {
       if (trigger === "update" && token.accessToken) {
         try {

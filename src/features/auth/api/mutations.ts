@@ -15,4 +15,11 @@ export const authMutations = {
       method: "POST",
     });
   },
+  Google: async (idToken: string): Promise<AuthRes> => {
+    const response = await apiFetch<AuthRes>("/api/auth/google", {
+      method: "POST",
+      body: JSON.stringify({ idToken }),
+    });
+    return response;
+  },
 };
