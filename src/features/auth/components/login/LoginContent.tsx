@@ -115,6 +115,7 @@ export default function LoginContent() {
               {serverErrors.general}
             </p>
           )}
+          {/* 백엔드 검토 후 주석 해제 */}
           {/* <OAtuth GoogleLogin={GoogleLogin} openModal={openModal} /> */}
         </div>
       </div>
