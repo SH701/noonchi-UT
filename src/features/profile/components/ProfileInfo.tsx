@@ -18,7 +18,15 @@ export default function ProfileInfo({ img, name }: ProfileInfoProps) {
     <div className="flex items-center justify-between rounded-2xl border border-gray-500 p-4">
       <div className="flex gap-4">
         {img ? (
-          <Image src={img} alt="profile-image" width={105} height={68} />
+          <div className="relative size-12 overflow-hidden rounded-full">
+            <Image
+              src={img}
+              alt="profile-image"
+              fill
+              className="object-cover"
+              sizes="48px"
+            />
+          </div>
         ) : (
           <DefaultIcon />
         )}

@@ -9,7 +9,7 @@ import { useTopics } from "@/hooks/queries";
 
 import { RoleplayLoading } from "@/features/roleplay";
 import SpinnerLoading from "@/components/common/SpinnerLoading";
-import { useCreateRoleplay } from "../hooks/useCreateRoleplay";
+import { useCreateRoleplay } from "../../../hooks/useCreateRoleplay";
 import RoleplayForm from "./RoleplayForm";
 
 interface SubmitProps {
@@ -19,7 +19,7 @@ interface SubmitProps {
   tone: string;
 }
 
-export default function RolePlay() {
+export default function RoleplaySection() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const category = searchParams.get("category") ?? "";
