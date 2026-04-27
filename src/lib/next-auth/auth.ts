@@ -2,10 +2,37 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import Apple from "next-auth/providers/apple";
+import jwt from "jsonwebtoken";
 import z from "zod";
 
 import { User as AppUser } from "@/types/user";
 import { AuthRes } from "@/features/auth/types/auth.type";
+
+function getAppleClientSecret(): string {
+  const teamId = process.env.AUTH_APPLE_TEAM_ID;
+  const clientId = process.env.AUTH_APPLE_ID;
+  const keyId = process.env.AUTH_APPLE_KEY_ID;
+  const rawKey = process.env.AUTH_APPLE_PRIVATE_KEY;
+
+  if (!teamId || !clientId || !keyId || !rawKey) {
+    return "";
+  }
+
+  const privateKey = rawKey.replace(/\\n/g, "\n").trim();
+
+  try {
+    return jwt.sign({}, privateKey, {
+      algorithm: "ES256",
+      expiresIn: "180d",
+      audience: "https://appleid.apple.com",
+      issuer: teamId,
+      subject: clientId,
+      keyid: keyId,
+    });
+  } catch {
+    return "";
+  }
+}
 
 async function refreshAccessToken(refreshToken: string) {
   try {
@@ -42,7 +69,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
-    Apple,
+    Apple({
+      clientId: process.env.AUTH_APPLE_ID!,
+      clientSecret: getAppleClientSecret(),
+    }),
     Credentials({
       credentials: {
         email: { label: "Email", type: "text" },
