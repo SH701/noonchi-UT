@@ -3,9 +3,25 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import Apple from "next-auth/providers/apple";
 import z from "zod";
-
+import jwt from "jsonwebtoken";
 import { User as AppUser } from "@/types/user";
 import { AuthRes } from "@/features/auth/types/auth.type";
+
+function getAppleClientSecret() {
+  const teamId = process.env.APPLE_TEAM_ID!;
+  const clientId = process.env.APPLE_CLIENT_ID!;
+  const keyId = process.env.APPLE_KEY_ID!;
+  const privateKey = process.env.APPLE_PRIVATE_KEY!.replace(/\\n/g, "\n");
+
+  return jwt.sign({}, privateKey, {
+    algorithm: "ES256",
+    expiresIn: "180d",
+    audience: "https://appleid.apple.com",
+    issuer: teamId,
+    subject: clientId,
+    keyid: keyId,
+  });
+}
 
 async function refreshAccessToken(refreshToken: string) {
   try {
@@ -44,7 +60,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
     Apple({
       clientId: process.env.APPLE_CLIENT_ID!,
-      clientSecret: process.env.APPLE_CLIENT_SECRET!,
+      clientSecret: getAppleClientSecret(),
     }),
     Credentials({
       credentials: {
@@ -102,10 +118,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async signIn({ account, user }) {
-      console.log("[signIn] provider:", account?.provider);
-      console.log("[signIn] has id_token:", !!account?.id_token);
-      console.log("[signIn] API URL:", process.env.NEXT_PUBLIC_API_URL);
-
       const oauthEndpoint: Record<string, string> = {
         google: "/api/auth/google",
         apple: "/api/auth/apple",
@@ -115,16 +127,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (account && endpoint && account.id_token) {
         try {
           const url = `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`;
-          console.log("[signIn] calling backend:", url);
           const res = await fetch(url, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ idToken: account.id_token }),
           });
-          console.log("[signIn] backend status:", res.status);
           if (!res.ok) {
-            const errText = await res.text().catch(() => "");
-            console.error("[signIn] backend error body:", errText);
             return false;
           }
           const data: AuthRes = await res.json();
@@ -133,8 +141,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           user.refreshToken = data.refreshToken;
           user.user = data.user;
           return true;
-        } catch (e) {
-          console.error(`${account.provider} login error:`, e);
+        } catch {
           return false;
         }
       }
