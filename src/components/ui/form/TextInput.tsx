@@ -49,7 +49,7 @@ export default function TextInput({
         onChange={(e) => onChange(e.target.value)}
         className={`outline-none" w-full rounded-xl border border-gray-400 bg-white py-2.5 pl-2.5 pr-10 text-base text-gray-800 placeholder-gray-400 transition-colors placeholder:text-base focus:shadow-[0_0_8px_0_rgba(133,162,255,0.50)] focus:outline-none focus:ring-1 focus:ring-inset focus:ring-blue-500 ${className} `}
       />
-      {pathname.startsWith("/main/roleplay/create") &&
+      {pathname.startsWith("/hub/roleplay/create") &&
         (disabled ? (
           <Spinner className="absolute right-3 top-10" />
         ) : (

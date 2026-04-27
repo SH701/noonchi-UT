@@ -73,7 +73,7 @@ export default function TopicList() {
                   topic_id: topic.topicId,
                 });
                 router.push(
-                  `/main/roleplay/create?category=${isLove ? topic.track : category}&topicId=${topic.topicId}`,
+                  `/hub/roleplay/create?category=${isLove ? topic.track : category}&topicId=${topic.topicId}`,
                 );
               }}
             >

@@ -10,7 +10,7 @@ export default function SearchBar() {
   const { closeTab } = useTabStore();
   const router = useRouter();
   const handleNewChat = () => {
-    router.push("/main");
+    router.push("/hub");
     closeTab();
   };
 

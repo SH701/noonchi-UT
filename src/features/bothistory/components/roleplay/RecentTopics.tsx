@@ -23,7 +23,7 @@ export default function RecentTopic() {
             style={{ width: "clamp(128px, 30vw, 162px)" }}
             onClick={() =>
               router.push(
-                `/main/roleplay/create?category=${topic.track}&topicId=${topic.topicId}`,
+                `/hub/roleplay/create?category=${topic.track}&topicId=${topic.topicId}`,
               )
             }
           >

@@ -20,7 +20,7 @@ export default function Header({
   className,
 }: HeaderProps) {
   return (
-    <div className="sticky top-0 z-20 -mx-5 flex items-center justify-between px-5 py-8 backdrop-blur-md">
+    <div className="sticky top-0 z-20 -mx-5 flex items-center justify-between p-6 backdrop-blur-md">
       <div className="w-6 cursor-pointer" onClick={onLeftClick}>
         {leftIcon}
       </div>

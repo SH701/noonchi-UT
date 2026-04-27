@@ -20,23 +20,24 @@ export default function DeleteModal({
       isOpen={isOpen}
       onClose={onClose}
       title={title}
-      description={"Are you sure you want to delete this room?\nThis action cannot be undone."}
+      description={
+        "Are you sure you want to delete this room?\nThis action cannot be undone."
+      }
     >
-      <div className="flex w-full gap-3 mt-2">
+      <div className="mt-2 flex w-full gap-3">
         <button
           onClick={onClose}
-          className="flex-1 py-3 rounded-xl bg-gray-100 text-gray-600 font-medium active:bg-gray-200 transition-colors"
+          className="flex-1 rounded-xl bg-gray-100 py-3 font-medium text-gray-600 transition-colors active:bg-gray-200"
         >
           Cancel
         </button>
-        
-      
+
         <button
           onClick={() => {
             onConfirm();
             onClose();
           }}
-          className="flex-1 py-3 rounded-xl bg-rose-500 text-white font-medium active:bg-rose-600 transition-colors"
+          className="w-full flex-1 rounded-xl bg-rose-500 py-3 font-medium text-white transition-colors active:bg-rose-600"
         >
           Delete
         </button>

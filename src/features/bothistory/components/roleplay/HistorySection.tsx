@@ -28,10 +28,10 @@ export default function HistorySection({ sortBy }: HistorySectionProps) {
   const totalPages = data?.totalPages ?? 1;
 
   const handleReport = (conversationId: number) => {
-    router.push(`/main/roleplay/chatroom/${conversationId}/result`);
+    router.push(`/hub/roleplay/chatroom/${conversationId}/result`);
   };
   const handleChatroom = (conversationId: number) => {
-    router.push(`/main/roleplay/chatroom/${conversationId}`);
+    router.push(`/hub/roleplay/chatroom/${conversationId}`);
   };
 
   return (

@@ -52,8 +52,8 @@ export default function RoleplayHistoryTab() {
                 onClick={() => {
                   router.push(
                     convo.canGetReport
-                      ? `/main/roleplay/chatroom/${convo.conversationId}/result`
-                      : `/main/roleplay/chatroom/${convo.conversationId}`,
+                      ? `/hub/roleplay/chatroom/${convo.conversationId}/result`
+                      : `/hub/roleplay/chatroom/${convo.conversationId}`,
                   );
                   closeTab();
                 }}

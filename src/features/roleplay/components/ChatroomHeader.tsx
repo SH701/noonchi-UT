@@ -28,7 +28,7 @@ export default function ChatroomHeader({ roomId, onEnd }: ChatroomHeaderProps) {
   const toggleBtnRef = useRef<HTMLDivElement>(null);
   const { openTab } = useTabStore();
   const pathname = usePathname();
-  const isChat = pathname.startsWith("/main/roleplay/chatroom");
+  const isChat = pathname.startsWith("/hub/roleplay/chatroom");
 
   const { data: detailData } = useConversationDetail(roomId);
 
@@ -56,7 +56,7 @@ export default function ChatroomHeader({ roomId, onEnd }: ChatroomHeaderProps) {
   }, [open]);
 
   const handleNewChat = () => {
-    router.push("/main");
+    router.push("/hub");
     setOpen(false);
   };
 

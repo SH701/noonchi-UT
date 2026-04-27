@@ -81,7 +81,7 @@ export default function SignupDetail({
       }
       gtag("event", "sign_up", { method: "email" });
       closeModal();
-      router.push("/main");
+      router.push("/hub");
     } catch (err) {
       if (err instanceof Error) {
         serverErrors(err.message);

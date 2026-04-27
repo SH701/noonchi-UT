@@ -7,7 +7,7 @@ import { ChevronLeft } from "lucide-react";
 export default function HistoryHeader() {
   const router = useRouter();
   const handleNewChat = () => {
-    router.push("/main");
+    router.push("/hub");
   };
   return (
     <Header

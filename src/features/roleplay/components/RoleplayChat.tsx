@@ -110,10 +110,7 @@ export default function RoleplayChat({
         <>
           <RoleplayHeader roomId={conversationId} onEnd={handleEnd} />
           <div className="sticky top-0 flex min-h-screen w-full flex-col">
-            <div
-              className="sticky z-10"
-              style={{ top: "clamp(80px, 20vw, 92px)" }}
-            >
+            <div className="top-19 sticky z-10">
               <ChatNotice
                 description={conversation.situation}
                 showNotice={showNotice}

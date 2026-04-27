@@ -74,7 +74,7 @@ export default function PreviewChat() {
           <ChatLoading />
         ) : (
           <>
-            <div className="sticky" style={{ top: "clamp(80px, 20vw, 92px)" }}>
+            <div className="top-19 sticky">
               <ChatNotice
                 description={data?.scenario.description}
                 showNotice={showNotice}
@@ -102,7 +102,7 @@ export default function PreviewChat() {
           <motion.div
             key={aiResponses.length}
             className="absolute left-5 right-5 flex items-center justify-center gap-2.5 rounded-xl bg-gray-800/50 px-5 py-2.5 text-white"
-            style={{ top: "clamp(-48px, -10vw, -40px)" }}
+            style={{ top: "clamp(-64px, -10vw, -56px)" }}
             initial={{ opacity: 1 }}
             animate={{ opacity: 0 }}
             transition={{ duration: 4 }}

@@ -53,7 +53,7 @@ export default function IntreviewContent() {
 //         interviewStyle: "friendly",
 //         files: uploadedFiles,
 //       });
-//       router.push(`/main/roleplay/chatroom/${convo.conversationId}`);
+//       router.push(`/hub/roleplay/chatroom/${convo.conversationId}`);
 //     } catch (e) {
 //       console.error("인터뷰 생성 실패:", e);
 //       alert("인터뷰 생성 실패 🤯");

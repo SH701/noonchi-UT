@@ -67,7 +67,7 @@ export default function AskHistoryTab({
                   onToggleSelect(convo.conversationId);
                   return;
                 }
-                router.push(`/main/ask/${convo.conversationId}`);
+                router.push(`/hub/ask/${convo.conversationId}`);
                 closeTab();
               }}
             >

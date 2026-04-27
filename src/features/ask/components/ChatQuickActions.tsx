@@ -10,7 +10,7 @@ interface ChatQuickActionsProps {
 export default function ChatQuickActions({ onOpenModal }: ChatQuickActionsProps) {
   const router = useRouter();
   const handleRoleplay = () => {
-    router.push("/main");
+    router.push("/hub");
   };
   return (
     <div className="mb-4 flex gap-2 overflow-x-auto">

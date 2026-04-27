@@ -64,7 +64,7 @@ export default function RoleplaySection() {
         topic_id: topicId,
       });
       setIsNavigating(true);
-      router.push(`/main/roleplay/chatroom/${convo.conversationId}`);
+      router.push(`/hub/roleplay/chatroom/${convo.conversationId}`);
     } catch (e) {
       if (e instanceof Error && e.message === "timeout") {
         toast.error("Request timed out. Please try again.");
