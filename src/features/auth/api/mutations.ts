@@ -22,10 +22,10 @@ export const authMutations = {
     });
     return response;
   },
-  Apple: async (idToken: string): Promise<AuthRes> => {
+  Apple: async (idToken: string, fullName: string): Promise<AuthRes> => {
     const response = await apiFetch<AuthRes>("/api/auth/apple", {
       method: "POST",
-      body: JSON.stringify({ idToken }),
+      body: JSON.stringify({ idToken, fullName }),
     });
     return response;
   },
