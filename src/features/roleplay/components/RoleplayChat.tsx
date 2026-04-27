@@ -23,7 +23,6 @@ import { useScrollToBottom } from "@/hooks/custom";
 import { useChatUI } from "@/hooks/custom/useChatUI";
 import RoleplayHeader from "./ChatroomHeader";
 import { motion } from "framer-motion";
-import { useRouter, redirect } from "next/navigation";
 
 import { SqurepenIcon } from "@/assets/svgr";
 import FeedbackLoading from "./FeedbackLoading";
@@ -38,7 +37,6 @@ export default function RoleplayChat({
   conversationId,
 }: RoleplayChatRoomProps) {
   const [message, setMessage] = useState("");
-  const router = useRouter();
   const [open, setOpen] = useState(false);
   const { data: conversation, refetch: conversationDeatil } =
     useConversationDetail(conversationId);
@@ -79,11 +77,7 @@ export default function RoleplayChat({
       topic: conversation?.aiPersona.description,
       situation: conversation?.situation,
     });
-    conversationEnd(undefined, {
-      onSuccess: () => {
-        router.push(`/main/roleplay/chatroom/${conversationId}/result`);
-      },
-    });
+    conversationEnd();
   };
 
   const handleSendText = async () => {
@@ -103,12 +97,6 @@ export default function RoleplayChat({
   const handleInfo = () => {
     setOpen((prev) => !prev);
   };
-
-  useEffect(() => {
-    if (conversation?.status === "ENDED") {
-      redirect(`/main/roleplay/chatroom/${conversationId}/result`);
-    }
-  }, [conversation?.status]);
 
   if (!conversation) {
     return <SpinnerLoading title="Loading chat..." />;
