@@ -42,7 +42,7 @@ export default function HistorySection({ sortBy }: HistorySectionProps) {
         conversations.map((convo) => (
           <div key={convo.conversationId} className="flex w-full gap-3">
             <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-gray-300">
-              <span>{convo.aiPersona.name[0].toUpperCase()}</span>
+              <span>{convo.aiPersona.name?.[0]?.toUpperCase() ?? "?"}</span>
             </div>
             <div className="flex w-full min-w-0 flex-col">
               <div className="flex justify-between">
@@ -55,7 +55,7 @@ export default function HistorySection({ sortBy }: HistorySectionProps) {
               </div>
               <div className="flex justify-between">
                 <p className="flex-1 truncate pt-1 text-xs text-gray-600">
-                  {convo.aiPersona.description.toLowerCase()}
+                  {convo.aiPersona.description?.toLowerCase() ?? ""}
                 </p>{" "}
                 {convo.canGetReport ? (
                   <button
