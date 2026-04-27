@@ -138,12 +138,23 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (account && endpoint && account.id_token) {
         try {
           const url = `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`;
+          console.log("[signIn] provider:", account.provider, "url:", url);
+          const body =
+            account.provider === "apple"
+              ? {
+                  identityToken: account.id_token,
+                  fullName: user.name ?? "",
+                }
+              : { idToken: account.id_token };
           const res = await fetch(url, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ idToken: account.id_token }),
+            body: JSON.stringify(body),
           });
+          console.log("[signIn] backend status:", res.status);
           if (!res.ok) {
+            const errText = await res.text().catch(() => "");
+            console.error("[signIn] backend error body:", errText);
             return false;
           }
           const data: AuthRes = await res.json();
@@ -152,7 +163,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           user.refreshToken = data.refreshToken;
           user.user = data.user;
           return true;
-        } catch {
+        } catch (e) {
+          console.error("[signIn] fetch error:", e);
           return false;
         }
       }
