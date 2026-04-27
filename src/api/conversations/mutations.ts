@@ -89,8 +89,8 @@ export const conversationsMutations = {
       method: "DELETE",
     });
   },
-  EndConversation: async (conversationId: number): Promise<number> => {
-    return apiFetch<number>(`/api/conversations/${conversationId}/end`, {
+  EndConversation: async (conversationId: number): Promise<void> => {
+    return apiFetch<void>(`/api/conversations/${conversationId}/end`, {
       method: "PUT",
     });
   },

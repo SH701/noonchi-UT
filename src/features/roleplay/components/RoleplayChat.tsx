@@ -19,15 +19,15 @@ import {
   useConversationEnd,
   useRoleMessageStream,
 } from "@/features/roleplay/hooks";
-import { useVoiceChat, useScrollToBottom } from "@/hooks/custom";
+import { useScrollToBottom } from "@/hooks/custom";
 import { useChatUI } from "@/hooks/custom/useChatUI";
 import RoleplayHeader from "./ChatroomHeader";
 import { motion } from "framer-motion";
-import { useRouter, redirect } from "next/navigation";
 
 import { SqurepenIcon } from "@/assets/svgr";
 import FeedbackLoading from "./FeedbackLoading";
 import { useConversationDetail } from "@/hooks/queries/useConversation";
+import { useWebVoice } from "@/hooks/custom/useWebVoice";
 
 interface RoleplayChatRoomProps {
   conversationId: number;
@@ -37,7 +37,6 @@ export default function RoleplayChat({
   conversationId,
 }: RoleplayChatRoomProps) {
   const [message, setMessage] = useState("");
-  const router = useRouter();
   const [open, setOpen] = useState(false);
   const { data: conversation, refetch: conversationDeatil } =
     useConversationDetail(conversationId);
@@ -49,13 +48,14 @@ export default function RoleplayChat({
     refetch: refetchHint,
     isFetching: isHintFetching,
   } = useRoleplayHint(conversationId);
-  const {
-    micState,
-    sttText,
-    pendingAudioUrl,
-    handleMicClick,
-    handleResetAudio,
-  } = useVoiceChat(conversationId, sendStreamMessage, setMessage);
+  const { micState, sttText, handleMicClick, handleSendAudio } = useWebVoice();
+
+  useEffect(() => {
+    if (micState === "recording" || micState === "recorded") {
+      setMessage(sttText);
+    }
+  }, [sttText, micState]);
+
   const {
     showHintPanel,
     toggleHint,
@@ -77,39 +77,26 @@ export default function RoleplayChat({
       topic: conversation?.aiPersona.description,
       situation: conversation?.situation,
     });
-    conversationEnd(undefined, {
-      onSuccess: () => {
-        router.push(`/main/roleplay/chatroom/${conversationId}/result`);
-      },
-    });
+    conversationEnd();
   };
 
   const handleSendText = async () => {
     if (!message.trim()) return;
     const textToSend = message;
-    const audioToSend =
-      micState === "recorded" && pendingAudioUrl && message === sttText
-        ? pendingAudioUrl
-        : undefined;
-    if (micState === "recorded") handleResetAudio();
+
+    if (micState === "recorded") handleSendAudio();
     setMessage("");
     if (showSituation) {
       toggleSituation();
     }
     conversationDeatil();
-    await sendStreamMessage(textToSend, audioToSend);
+    await sendStreamMessage(textToSend);
     refetchHint();
   };
 
   const handleInfo = () => {
     setOpen((prev) => !prev);
   };
-
-  useEffect(() => {
-    if (conversation?.status === "ENDED") {
-      redirect(`/main/roleplay/chatroom/${conversationId}/result`);
-    }
-  }, [conversation?.status]);
 
   if (!conversation) {
     return <SpinnerLoading title="Loading chat..." />;

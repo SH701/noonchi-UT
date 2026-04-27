@@ -64,7 +64,7 @@ export default function Tab() {
           />
           <motion.div
             key="tab"
-            className="z-9999 bg-gradient-primary fixed left-0 top-0 h-full w-[75vw] max-w-[91%] origin-left pt-10 md:left-[calc(50%-300px)] md:max-w-[549px]"
+            className="z-9999 bg-gradient-primary md:max-w-137.25 fixed left-0 top-0 h-full w-[75vw] max-w-[85%] origin-left pt-10 md:left-[calc(50%-300px)]"
             variants={slideVariants}
             initial="hidden"
             animate="visible"

@@ -1,4 +1,5 @@
 export { default as AlpabatIcon } from "./alpabat.svg";
+export { default as Apple } from "./apple.svg";
 export { default as CameraIcon } from "./camera.svg";
 export { default as ControlIcon } from "./control.svg";
 export { default as DefaultIcon } from "./default_icon.svg";

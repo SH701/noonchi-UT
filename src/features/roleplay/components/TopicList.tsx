@@ -87,7 +87,7 @@ export default function TopicList() {
                     loading="eager"
                     sizes="(max-width: 600px) 50vw, 300px"
                   />
-                  <Lock className="size-15 absolute inset-0 z-50 mx-auto mt-8 text-white" />
+                  <Lock className="size-15 absolute inset-0 z-50 mx-auto mt-8 text-white md:m-auto" />
                 </>
               ) : (
                 <Image

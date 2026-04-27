@@ -1,16 +1,17 @@
-
 import SignupContent from "../signup/SignupContent";
-import { Google } from "@/assets/svgr";
+import { Apple, Google } from "@/assets/svgr";
 
 interface OAuthProps {
   GoogleLogin: () => void;
+  AppleLogin: () => void;
   openModal: (content: React.ReactNode) => void;
 }
 
-
-export default function OAuth({GoogleLogin,openModal}:OAuthProps) {
-  
-  
+export default function OAuth({
+  GoogleLogin,
+  AppleLogin,
+  openModal,
+}: OAuthProps) {
   return (
     <div>
       <div className="my-6 flex w-full items-center">
@@ -18,7 +19,7 @@ export default function OAuth({GoogleLogin,openModal}:OAuthProps) {
         <span className="px-4 text-sm text-gray-400">Sign in with</span>
         <div className="h-px flex-1 bg-gray-300" />
       </div>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center gap-4">
         <button
           type="button"
           onClick={GoogleLogin}
@@ -26,6 +27,14 @@ export default function OAuth({GoogleLogin,openModal}:OAuthProps) {
           aria-label="Sign in with Google"
         >
           <Google />
+        </button>
+        <button
+          type="button"
+          onClick={AppleLogin}
+          className="cursor-pointer"
+          aria-label="Sign in with Apple"
+        >
+          <Apple />
         </button>
       </div>
       <div className="pt-6 text-center text-sm text-gray-500">

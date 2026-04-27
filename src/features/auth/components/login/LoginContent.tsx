@@ -85,6 +85,19 @@ export default function LoginContent() {
       router.replace(result.url ?? "/main");
     }
   };
+
+  const AppleLogin = async () => {
+    const result = await signIn("apple", {
+      redirect: false,
+      callbackUrl: "/main",
+    });
+
+    if (result?.ok && !result.error) {
+      gtag("event", "login", { method: "apple" });
+      closeModal();
+      router.replace(result.url ?? "/main");
+    }
+  };
   return (
     <div className="flex flex-col px-6 pb-10">
       <div className="flex flex-1 items-center justify-center">
@@ -116,7 +129,11 @@ export default function LoginContent() {
             </p>
           )}
           {/* 백엔드 검토 후 주석 해제 */}
-          {/* <OAtuth GoogleLogin={GoogleLogin} openModal={openModal} /> */}
+          <OAtuth
+            GoogleLogin={GoogleLogin}
+            AppleLogin={AppleLogin}
+            openModal={openModal}
+          />
         </div>
       </div>
     </div>

@@ -2,14 +2,14 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-
+import { useState } from "react";
 
 import { toast } from "@/components/ui/toast/toast";
 import { useTopics } from "@/hooks/queries";
 
 import { RoleplayLoading } from "@/features/roleplay";
 import SpinnerLoading from "@/components/common/SpinnerLoading";
-import { useCreateRoleplay } from "../hooks/useCreateRoleplay";
+import { useCreateRoleplay } from "../../../hooks/useCreateRoleplay";
 import RoleplayForm from "./RoleplayForm";
 
 interface SubmitProps {
@@ -19,7 +19,7 @@ interface SubmitProps {
   tone: string;
 }
 
-export default function RolePlay() {
+export default function RoleplaySection() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const category = searchParams.get("category") ?? "";
@@ -29,12 +29,13 @@ export default function RolePlay() {
   const topic = topics.find((t) => t.topicId === topicId);
 
   const { mutateAsync: createRoleplay, isPending } = useCreateRoleplay();
+  const [isNavigating, setIsNavigating] = useState(false);
 
   if (isLoading || !topic) {
     return <SpinnerLoading title="Loading..." />;
   }
 
-  if (isPending) {
+  if (isPending || isNavigating) {
     return <RoleplayLoading />;
   }
 
@@ -62,6 +63,7 @@ export default function RolePlay() {
         topic_name: topic?.name,
         topic_id: topicId,
       });
+      setIsNavigating(true);
       router.push(`/main/roleplay/chatroom/${convo.conversationId}`);
     } catch (e) {
       if (e instanceof Error && e.message === "timeout") {
@@ -76,7 +78,7 @@ export default function RolePlay() {
     <div className="relative flex w-full flex-col overflow-x-hidden">
       <div className="flex w-full justify-center">
         <div className="w-full">
-          <div className="relative mx-auto aspect-square w-[89%]">
+          <div className="relative mx-auto aspect-square">
             <Image
               src={topic?.imageUrl}
               alt="topic's photo"

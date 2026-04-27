@@ -37,7 +37,9 @@ export const useConversations = (
       ),
     select: (data) => ({
       conversations: (data?.content ?? []).filter(
-        (c): c is Conversation => !!c,
+        (c): c is Conversation =>
+          !!c &&
+          (!conversationType || c.conversationType === conversationType),
       ),
       totalPages: data.totalPages,
     }),

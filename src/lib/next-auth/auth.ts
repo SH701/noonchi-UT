@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
+import Apple from "next-auth/providers/apple";
 import z from "zod";
 
 import { User as AppUser } from "@/types/user";
@@ -40,6 +41,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    Apple({
+      clientId: process.env.APPLE_CLIENT_ID!,
+      clientSecret: process.env.APPLE_CLIENT_SECRET!,
     }),
     Credentials({
       credentials: {
@@ -97,17 +102,31 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async signIn({ account, user }) {
-      if (account?.provider === "google" && account.id_token) {
+      console.log("[signIn] provider:", account?.provider);
+      console.log("[signIn] has id_token:", !!account?.id_token);
+      console.log("[signIn] API URL:", process.env.NEXT_PUBLIC_API_URL);
+
+      const oauthEndpoint: Record<string, string> = {
+        google: "/api/auth/google",
+        apple: "/api/auth/apple",
+      };
+      const endpoint = account ? oauthEndpoint[account.provider] : undefined;
+
+      if (account && endpoint && account.id_token) {
         try {
-          const res = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/auth/google`,
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ idToken: account.id_token }),
-            },
-          );
-          if (!res.ok) return false;
+          const url = `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`;
+          console.log("[signIn] calling backend:", url);
+          const res = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ idToken: account.id_token }),
+          });
+          console.log("[signIn] backend status:", res.status);
+          if (!res.ok) {
+            const errText = await res.text().catch(() => "");
+            console.error("[signIn] backend error body:", errText);
+            return false;
+          }
           const data: AuthRes = await res.json();
           // Credentials 흐름과 동일한 구조로 user에 주입 → jwt 콜백이 token에 저장
           user.accessToken = data.accessToken;
@@ -115,7 +134,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           user.user = data.user;
           return true;
         } catch (e) {
-          console.error("Google login error:", e);
+          console.error(`${account.provider} login error:`, e);
           return false;
         }
       }
