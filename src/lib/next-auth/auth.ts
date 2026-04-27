@@ -3,33 +3,9 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import Apple from "next-auth/providers/apple";
 import z from "zod";
-import jwt from "jsonwebtoken";
+
 import { User as AppUser } from "@/types/user";
 import { AuthRes } from "@/features/auth/types/auth.type";
-
-function getAppleClientSecret() {
-  const teamId = process.env.APPLE_TEAM_ID;
-  const clientId = process.env.APPLE_CLIENT_ID;
-  const keyId = process.env.APPLE_KEY_ID;
-  const rawKey = process.env.APPLE_PRIVATE_KEY;
-
-  if (!teamId || !clientId || !keyId || !rawKey) {
-    throw new Error(
-      "Apple OAuth env vars missing: APPLE_TEAM_ID / APPLE_CLIENT_ID / APPLE_KEY_ID / APPLE_PRIVATE_KEY",
-    );
-  }
-
-  const privateKey = rawKey.replace(/\\n/g, "\n");
-
-  return jwt.sign({}, privateKey, {
-    algorithm: "ES256",
-    expiresIn: "180d",
-    audience: "https://appleid.apple.com",
-    issuer: teamId,
-    subject: clientId,
-    keyid: keyId,
-  });
-}
 
 async function refreshAccessToken(refreshToken: string) {
   try {
@@ -66,10 +42,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
-    Apple({
-      clientId: process.env.APPLE_CLIENT_ID!,
-      clientSecret: getAppleClientSecret(),
-    }),
+    Apple,
     Credentials({
       credentials: {
         email: { label: "Email", type: "text" },
