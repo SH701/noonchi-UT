@@ -20,11 +20,11 @@ export default function ProfileMenuList({
   items,
 }: ProfileMenuListProps) {
   return (
-    <div>
-      <p className="text-sm text-gray-600 pb-2 pl-1">{title}</p>
-      <div className="bg-white rounded-2xl p-4 flex flex-col gap-4 text-sm cursor-pointer">
+    <nav>
+      <h2 className="text-sm text-gray-600 pb-2 pl-1">{title}</h2>
+      <ul className="bg-white rounded-2xl p-4 flex flex-col gap-4 text-sm cursor-pointer">
         {items.map((item, idx) => (
-          <div key={idx}>
+          <li key={idx}>
             {item.onClick ? (
               <button
                 onClick={item.onClick}
@@ -39,9 +39,9 @@ export default function ProfileMenuList({
                 {item.label}
               </Link>
             )}
-          </div>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </nav>
   );
 }

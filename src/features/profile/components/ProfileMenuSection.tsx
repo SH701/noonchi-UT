@@ -11,7 +11,7 @@ export default function ProfileMenuSection() {
   const router = useRouter();
   return (
     <>
-      <div>
+      <section aria-label="Personal settings">
         <ProfileMenuList
           title="Personal settings"
           items={[
@@ -32,8 +32,8 @@ export default function ProfileMenuSection() {
             },
           ]}
         />
-      </div>
-      <div>
+      </section>
+      <section aria-label="Legal">
         <ProfileMenuList
           title="Legal"
           items={[
@@ -48,7 +48,7 @@ export default function ProfileMenuSection() {
             { label: "Help & Support", onClick: () => setShowModal(true) },
           ]}
         />
-      </div>
+      </section>
       <CominSoonModal isOpen={showModal} onClose={() => setShowModal(false)} />
     </>
   );

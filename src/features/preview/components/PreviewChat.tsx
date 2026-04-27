@@ -65,8 +65,8 @@ export default function PreviewChat() {
   const handleMoveAuth = () => router.push("/preview/end");
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <div className="flex-1">
+    <main className="flex min-h-screen flex-col">
+      <section className="flex-1">
         <div className="sticky top-0">
           <PreviewHeader handleMoveAuth={handleMoveAuth} />
         </div>
@@ -74,13 +74,13 @@ export default function PreviewChat() {
           <ChatLoading />
         ) : (
           <>
-            <div className="top-19 sticky">
+            <aside className="top-19 sticky">
               <ChatNotice
                 description={data?.scenario.description}
                 showNotice={showNotice}
                 toggleNotice={toggleNotice}
               />
-            </div>
+            </aside>
             <PreviewMessageList
               data={data}
               userMessages={userMessages}
@@ -94,10 +94,10 @@ export default function PreviewChat() {
           </>
         )}
         <div ref={bottomRef} />
-      </div>
+      </section>
 
       {/* 하단 고정 영역 */}
-      <div className="sticky bottom-0 z-10 flex flex-col pb-5 backdrop-blur-md">
+      <footer className="sticky bottom-0 z-10 flex flex-col pb-5 backdrop-blur-md">
         {!isStarting && (
           <motion.div
             key={aiResponses.length}
@@ -140,11 +140,11 @@ export default function PreviewChat() {
           micState={micState}
           isHintLoading={isHintFetching}
         />
-      </div>
+      </footer>
       <PreviewModal
         isOpen={showPreviewModal}
         onClose={() => setShowPreviewModal(false)}
       />
-    </div>
+    </main>
   );
 }

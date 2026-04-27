@@ -20,30 +20,30 @@ export default function MyInfo({
 }: MyInfoProps) {
   const router = useRouter();
   return (
-    <div>
+    <>
       <Header
         leftIcon={<ChevronLeft onClick={() => router.back()} />}
         center="My Profile"
       />
-      <div className="flex flex-col gap-4 rounded-2xl bg-white p-4 text-sm">
+      <dl className="flex flex-col gap-4 rounded-2xl bg-white p-4 text-sm">
         <div className="flex justify-between">
-          <span>Name</span>
-          <span>{name}</span>
+          <dt>Name</dt>
+          <dd>{name}</dd>
         </div>
 
         <div className="flex justify-between">
-          <span>Birth</span>
-          <span>{birth}</span>
+          <dt>Birth</dt>
+          <dd>{birth}</dd>
         </div>
         <div className="flex justify-between">
-          <span>Email</span>
-          <span>{email}</span>
+          <dt>Email</dt>
+          <dd>{email}</dd>
         </div>
         <div className="flex justify-between">
-          <span>KoreanLevel</span>
-          <span>{KoreanLevel}</span>
+          <dt>KoreanLevel</dt>
+          <dd>{KoreanLevel}</dd>
         </div>
-      </div>
-    </div>
+      </dl>
+    </>
   );
 }

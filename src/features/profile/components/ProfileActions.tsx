@@ -27,7 +27,7 @@ export default function ProfileActions() {
     }
   };
   return (
-    <div className="mt-auto flex flex-col items-center gap-2 pb-5">
+    <footer className="mt-auto flex flex-col items-center gap-2 pb-5">
       <Button onClick={handleLogout} size="lg" disabled={loading}>
         {loading ? <Spinner /> : <p>Log out</p>}
       </Button>
@@ -40,6 +40,6 @@ export default function ProfileActions() {
           onClose={() => setModalOpen(false)}
         />
       )}
-    </div>
+    </footer>
   );
 }

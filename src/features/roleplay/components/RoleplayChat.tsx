@@ -109,15 +109,15 @@ export default function RoleplayChat({
       ) : (
         <>
           <RoleplayHeader roomId={conversationId} onEnd={handleEnd} />
-          <div className="sticky top-0 flex min-h-screen w-full flex-col">
-            <div className="top-19 sticky z-10">
+          <main className="sticky top-0 flex min-h-screen w-full flex-col">
+            <aside className="top-19 sticky z-10">
               <ChatNotice
                 description={conversation.situation}
                 showNotice={showNotice}
                 toggleNotice={toggleNotice}
               />
-            </div>
-            <div className="flex flex-1 flex-col">
+            </aside>
+            <section className="flex flex-1 flex-col">
               <RoleInfo
                 aiRole={conversation.aiPersona.aiRole}
                 userRole={conversation.aiPersona.userRole}
@@ -129,9 +129,9 @@ export default function RoleplayChat({
                 onInfoClick={handleInfo}
               />
               <div ref={bottomRef} />
-            </div>
+            </section>
 
-            <div className="sticky bottom-0 flex flex-col pb-5 backdrop-blur-md">
+            <footer className="sticky bottom-0 flex flex-col pb-5 backdrop-blur-md">
               {showHintPanel && hintData && (
                 <HintMessage
                   hintData={hintData}
@@ -169,7 +169,7 @@ export default function RoleplayChat({
                 isHintLoading={isHintFetching}
                 disabled={isAIResponding}
               />
-            </div>
+            </footer>
             {open && (
               <ChatroomInfo
                 isOpen={open}
@@ -180,7 +180,7 @@ export default function RoleplayChat({
                 detail={conversation.situation}
               />
             )}
-          </div>
+          </main>
         </>
       )}
     </>
