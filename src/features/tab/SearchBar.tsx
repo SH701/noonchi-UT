@@ -16,7 +16,7 @@ export default function SearchBar() {
 
   return (
     <div className="flex gap-4">
-      <div className="relative w-full">
+      <div role="search" className="relative w-full">
         <input
           key="search-input"
           value={keyword}

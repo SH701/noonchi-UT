@@ -103,8 +103,8 @@ export default function LoginContent() {
       <div className="flex flex-1 items-center justify-center">
         <div className="w-full space-y-6">
           <div className="my-10 mt-14 flex justify-between">
-            <p></p>
-            <p className="text-center text-2xl font-semibold">Welcome back</p>
+            <span></span>
+            <h2 className="text-center text-2xl font-semibold">Welcome back</h2>
             <X onClick={() => closeModal()} />
           </div>
           <LoginForm control={control} errors={errors} />

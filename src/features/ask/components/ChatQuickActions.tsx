@@ -13,7 +13,7 @@ export default function ChatQuickActions({ onOpenModal }: ChatQuickActionsProps)
     router.push("/hub");
   };
   return (
-    <div className="mb-4 flex gap-2 overflow-x-auto">
+    <nav className="mb-4 flex gap-2 overflow-x-auto">
       <Button
         variant="ghost"
         className="w-30 shrink-0 p-3 text-[#1F2937]"
@@ -42,6 +42,6 @@ export default function ChatQuickActions({ onOpenModal }: ChatQuickActionsProps)
       >
         Add an apology
       </Button>
-    </div>
+    </nav>
   );
 }

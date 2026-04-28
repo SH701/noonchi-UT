@@ -60,7 +60,7 @@ export default function TopicList() {
         </div>
       ) : (
         <ul className="grid w-full grid-cols-2 items-center justify-center gap-4">
-          {topics.map((topic) => (
+          {topics.map((topic, idx) => (
             <li
               key={topic.topicId}
               className="group relative aspect-square w-full cursor-pointer overflow-hidden rounded-xl transition-shadow hover:shadow-md"
@@ -86,8 +86,8 @@ export default function TopicList() {
                     alt={topic.name}
                     fill
                     className="object-cover blur-sm"
-                    loading="eager"
                     sizes="(max-width: 600px) 50vw, 300px"
+                    priority={idx < 2}
                   />
                   <Lock className="size-15 absolute inset-0 z-50 mx-auto mt-8 text-white md:m-auto" />
                 </>
@@ -97,8 +97,8 @@ export default function TopicList() {
                   alt={topic.name}
                   fill
                   className="object-cover"
-                  loading="eager"
                   sizes="(max-width: 600px) 50vw, 300px"
+                  priority={idx < 2}
                 />
               )}
 

@@ -136,6 +136,7 @@ export default function Tab() {
                         width={48}
                         height={48}
                         className="shrink-0 rounded-full"
+                        sizes="48px"
                       />
                     ) : (
                       <DefaultIcon className="shrink-0" />

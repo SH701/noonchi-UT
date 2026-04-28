@@ -111,7 +111,7 @@ export default function SignupDetail({
             onClick={handleSubmit(onSubmit)}
             className="mb-8"
           >
-            {isSubmitting ? <Spinner /> : <p>Get Started</p>}
+            {isSubmitting ? <Spinner /> : <span>Get Started</span>}
           </Button>
         }
       >

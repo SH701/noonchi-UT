@@ -75,15 +75,17 @@ export default function RoleplaySection() {
   };
 
   return (
-    <div className="relative flex w-full flex-col overflow-x-hidden">
+    <article className="relative flex w-full flex-col overflow-x-hidden">
       <div className="flex w-full justify-center">
         <div className="w-full">
-          <div className="relative mx-auto aspect-square">
+          <figure className="relative mx-auto aspect-square">
             <Image
               src={topic?.imageUrl}
               alt="topic's photo"
               fill
               className="rounded-3xl object-cover"
+              sizes="(max-width: 600px) 100vw, 600px"
+              priority
             />
             <div className="" />
             <div className="absolute left-4 top-4">
@@ -95,13 +97,13 @@ export default function RoleplaySection() {
               <span className="text-3xl font-semibold">{topic?.name}</span>
               <span className="text-sm font-medium">{topic?.description}</span>
             </div>
-          </div>
+          </figure>
           <div>
-            <p className="pb-5 pt-8 font-semibold">Conversation Context</p>
+            <h2 className="pb-5 pt-8 font-semibold">Conversation Context</h2>
             <RoleplayForm onSubmit={handleSubmit} topicId={topicId} />
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

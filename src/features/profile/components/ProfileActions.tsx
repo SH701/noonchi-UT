@@ -29,7 +29,7 @@ export default function ProfileActions() {
   return (
     <footer className="mt-auto flex flex-col items-center gap-2 pb-5">
       <Button onClick={handleLogout} size="lg" disabled={loading}>
-        {loading ? <Spinner /> : <p>Log out</p>}
+        {loading ? <Spinner /> : <span>Log out</span>}
       </Button>
       <Button size="lg" variant="secondary" onClick={() => setModalOpen(true)}>
         Delete Account

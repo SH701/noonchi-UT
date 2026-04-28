@@ -76,7 +76,7 @@ export default function MyInterests({ interests }: MyinterestsProps) {
           onClick={handleUpdate}
           disabled={isPending || selected.length < 3}
         >
-          {isPending ? <Spinner /> : <p>Save Interests</p>}
+          {isPending ? <Spinner /> : <span>Save Interests</span>}
         </Button>
       </section>
     </>

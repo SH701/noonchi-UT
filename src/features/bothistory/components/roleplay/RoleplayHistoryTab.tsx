@@ -28,7 +28,7 @@ export default function RoleplayHistoryTab() {
     closeTab();
   };
   return (
-    <div>
+    <section>
       <button
         onClick={handleHistoryPage}
         className="mb-3 flex items-center gap-1"
@@ -39,13 +39,13 @@ export default function RoleplayHistoryTab() {
       {isPending ? (
         <RoleplayHistorySkeleton />
       ) : conversations.length === 0 ? undefined : (
-        <div className="flex gap-3 overflow-x-auto">
+        <ul className="flex gap-3 overflow-x-auto">
           {conversations.map((convo) => {
             const matchedTopic = topics?.find(
               (topic) => topic.name === convo.conversationTopic,
             );
             return (
-              <div
+              <li
                 key={convo.conversationId}
                 className="relative shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-white/10 shadow-lg aspect-square"
                 style={{ width: "clamp(112px, 28vw, 140px)" }}
@@ -87,10 +87,10 @@ export default function RoleplayHistoryTab() {
                     {convo.conversationTopic}
                   </h4>
                 </div>
-              </div>
+              </li>
             );
           })}
-        </div>
+        </ul>
       )}
       <DeleteModal
         isOpen={confirmId !== null}
@@ -99,6 +99,6 @@ export default function RoleplayHistoryTab() {
           if (confirmId !== null) deleteChat(confirmId);
         }}
       />
-    </div>
+    </section>
   );
 }
