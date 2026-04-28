@@ -34,32 +34,34 @@ export default function TopicList() {
   };
 
   return (
-    <div>
-      <TopicSlider
-        topics={[
-          { id: 1, label: "Favorites" },
-          { id: 2, label: "Career" },
-          { id: 3, label: "Family" },
-          { id: 4, label: "Belonging" },
-          { id: 5, label: "K-POP" },
-        ]}
-        active={category}
-        onSelect={(c) => setCategory(c)}
-      />
+    <section>
+      <nav>
+        <TopicSlider
+          topics={[
+            { id: 1, label: "Favorites" },
+            { id: 2, label: "Career" },
+            { id: 3, label: "Family" },
+            { id: 4, label: "Belonging" },
+            { id: 5, label: "K-POP" },
+          ]}
+          active={category}
+          onSelect={(c) => setCategory(c)}
+        />
+      </nav>
 
       {isPending ? (
         <TopicListSkeleton />
       ) : isLove && topics.length === 0 ? (
         <div className="flex w-full flex-col items-center justify-center gap-2 py-20">
-          <span className="text-2xl font-medium">Your Favorites are empty</span>
-          <span className="text-sm text-gray-600">
+          <p className="text-2xl font-medium">Your Favorites are empty</p>
+          <p className="text-sm text-gray-600">
             Tap the heart on roles you like
-          </span>
+          </p>
         </div>
       ) : (
-        <div className="grid w-full grid-cols-2 items-center justify-center gap-4">
-          {topics.map((topic) => (
-            <div
+        <ul className="grid w-full grid-cols-2 items-center justify-center gap-4">
+          {topics.map((topic, idx) => (
+            <li
               key={topic.topicId}
               className="group relative aspect-square w-full cursor-pointer overflow-hidden rounded-xl transition-shadow hover:shadow-md"
               onClick={() => {
@@ -73,7 +75,7 @@ export default function TopicList() {
                   topic_id: topic.topicId,
                 });
                 router.push(
-                  `/main/roleplay/create?category=${isLove ? topic.track : category}&topicId=${topic.topicId}`,
+                  `/hub/roleplay/create?category=${isLove ? topic.track : category}&topicId=${topic.topicId}`,
                 );
               }}
             >
@@ -84,8 +86,8 @@ export default function TopicList() {
                     alt={topic.name}
                     fill
                     className="object-cover blur-sm"
-                    loading="eager"
                     sizes="(max-width: 600px) 50vw, 300px"
+                    priority={idx < 2}
                   />
                   <Lock className="size-15 absolute inset-0 z-50 mx-auto mt-8 text-white md:m-auto" />
                 </>
@@ -95,8 +97,8 @@ export default function TopicList() {
                   alt={topic.name}
                   fill
                   className="object-cover"
-                  loading="eager"
                   sizes="(max-width: 600px) 50vw, 300px"
+                  priority={idx < 2}
                 />
               )}
 
@@ -115,7 +117,7 @@ export default function TopicList() {
               >
                 <Heart fill={topic.isFavorite ? "currentColor" : "none"} />
               </button>
-            </div>
+            </li>
           ))}
           <button
             className="z-99 border-gradient-primary fixed bottom-8 right-4 flex size-10 items-center justify-center rounded-full border bg-white"
@@ -123,9 +125,9 @@ export default function TopicList() {
           >
             <Plus />
           </button>
-        </div>
+        </ul>
       )}
       <CominSoonModal isOpen={showModal} onClose={() => setShowModal(false)} />
-    </div>
+    </section>
   );
 }

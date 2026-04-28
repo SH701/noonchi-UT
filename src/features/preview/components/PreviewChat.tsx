@@ -65,8 +65,8 @@ export default function PreviewChat() {
   const handleMoveAuth = () => router.push("/preview/end");
 
   return (
-    <div className="flex min-h-screen flex-col">
-      <div className="flex-1">
+    <main className="flex min-h-screen flex-col">
+      <section className="flex-1">
         <div className="sticky top-0">
           <PreviewHeader handleMoveAuth={handleMoveAuth} />
         </div>
@@ -74,13 +74,13 @@ export default function PreviewChat() {
           <ChatLoading />
         ) : (
           <>
-            <div className="sticky" style={{ top: "clamp(80px, 20vw, 92px)" }}>
+            <aside className="top-19 sticky">
               <ChatNotice
                 description={data?.scenario.description}
                 showNotice={showNotice}
                 toggleNotice={toggleNotice}
               />
-            </div>
+            </aside>
             <PreviewMessageList
               data={data}
               userMessages={userMessages}
@@ -94,15 +94,15 @@ export default function PreviewChat() {
           </>
         )}
         <div ref={bottomRef} />
-      </div>
+      </section>
 
       {/* 하단 고정 영역 */}
-      <div className="sticky bottom-0 z-10 flex flex-col pb-5 backdrop-blur-md">
+      <footer className="sticky bottom-0 z-10 flex flex-col pb-5 backdrop-blur-md">
         {!isStarting && (
           <motion.div
             key={aiResponses.length}
             className="absolute left-5 right-5 flex items-center justify-center gap-2.5 rounded-xl bg-gray-800/50 px-5 py-2.5 text-white"
-            style={{ top: "clamp(-48px, -10vw, -40px)" }}
+            style={{ top: "clamp(-64px, -10vw, -56px)" }}
             initial={{ opacity: 1 }}
             animate={{ opacity: 0 }}
             transition={{ duration: 4 }}
@@ -140,11 +140,11 @@ export default function PreviewChat() {
           micState={micState}
           isHintLoading={isHintFetching}
         />
-      </div>
+      </footer>
       <PreviewModal
         isOpen={showPreviewModal}
         onClose={() => setShowPreviewModal(false)}
       />
-    </div>
+    </main>
   );
 }

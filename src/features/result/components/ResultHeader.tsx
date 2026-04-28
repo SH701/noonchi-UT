@@ -8,7 +8,7 @@ export default function ResultHeader() {
   const { openTab } = useTabStore();
   const router = useRouter();
   const handleHome = () => {
-    router.push("/main");
+    router.push("/hub");
   };
   return (
     <Header

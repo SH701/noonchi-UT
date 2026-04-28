@@ -28,19 +28,19 @@ export default function HistorySection({ sortBy }: HistorySectionProps) {
   const totalPages = data?.totalPages ?? 1;
 
   const handleReport = (conversationId: number) => {
-    router.push(`/main/roleplay/chatroom/${conversationId}/result`);
+    router.push(`/hub/roleplay/chatroom/${conversationId}/result`);
   };
   const handleChatroom = (conversationId: number) => {
-    router.push(`/main/roleplay/chatroom/${conversationId}`);
+    router.push(`/hub/roleplay/chatroom/${conversationId}`);
   };
 
   return (
-    <div className="mt-4 flex flex-col gap-6">
+    <section className="mt-4 flex flex-col gap-6">
       {isFetching ? (
         <HistorySectiontSkeleton />
       ) : (
         conversations.map((convo) => (
-          <div key={convo.conversationId} className="flex w-full gap-3">
+          <article key={convo.conversationId} className="flex w-full gap-3">
             <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-gray-300">
               <span>{convo.aiPersona.name?.[0]?.toUpperCase() ?? "?"}</span>
             </div>
@@ -49,9 +49,9 @@ export default function HistorySection({ sortBy }: HistorySectionProps) {
                 <span className="truncate font-semibold">
                   {convo.aiPersona.aiRole}
                 </span>
-                <span className="text-xs text-gray-500">
+                <time className="text-xs text-gray-500">
                   {getTime(convo.createdAt)}
-                </span>
+                </time>
               </div>
               <div className="flex justify-between">
                 <p className="flex-1 truncate pt-1 text-xs text-gray-600">
@@ -74,11 +74,11 @@ export default function HistorySection({ sortBy }: HistorySectionProps) {
                 )}{" "}
               </div>
             </div>
-          </div>
+          </article>
         ))
       )}
       {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 pb-2">
+        <nav className="flex items-center justify-center gap-2 pb-2">
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
@@ -104,8 +104,8 @@ export default function HistorySection({ sortBy }: HistorySectionProps) {
           >
             <ChevronRight size={18} />
           </button>
-        </div>
+        </nav>
       )}
-    </div>
+    </section>
   );
 }

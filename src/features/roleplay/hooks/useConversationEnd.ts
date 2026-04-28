@@ -8,7 +8,7 @@ export const useConversationEnd = (conversationId: number) => {
     mutationFn: () =>
       apiMutations.conversations.EndConversation(conversationId),
     onSuccess: () => {
-      router.push(`/main/roleplay/chatroom/${conversationId}/result`);
+      router.push(`/hub/roleplay/chatroom/${conversationId}/result`);
     },
   });
 };

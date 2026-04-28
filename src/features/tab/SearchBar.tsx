@@ -10,13 +10,13 @@ export default function SearchBar() {
   const { closeTab } = useTabStore();
   const router = useRouter();
   const handleNewChat = () => {
-    router.push("/main");
+    router.push("/hub");
     closeTab();
   };
 
   return (
     <div className="flex gap-4">
-      <div className="relative w-full">
+      <div role="search" className="relative w-full">
         <input
           key="search-input"
           value={keyword}

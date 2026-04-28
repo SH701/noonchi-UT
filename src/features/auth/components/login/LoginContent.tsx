@@ -66,7 +66,7 @@ export default function LoginContent() {
       }
       gtag("event", "login", { method: "email" });
       closeModal();
-      router.replace("/main");
+      router.replace("/hub");
     } catch {
       setServerErrors({ general: "Login Error!" });
       setLoading(false);
@@ -76,26 +76,26 @@ export default function LoginContent() {
   const GoogleLogin = async () => {
     const result = await signIn("google", {
       redirect: false,
-      callbackUrl: "/main",
+      callbackUrl: "/hub",
     });
 
     if (result?.ok && !result.error) {
       gtag("event", "login", { method: "google" });
       closeModal();
-      router.replace(result.url ?? "/main");
+      router.replace(result.url ?? "/hub");
     }
   };
 
   const AppleLogin = async () => {
     const result = await signIn("apple", {
       redirect: false,
-      callbackUrl: "/main",
+      callbackUrl: "/hub",
     });
 
     if (result?.ok && !result.error) {
       gtag("event", "login", { method: "apple" });
       closeModal();
-      router.replace(result.url ?? "/main");
+      router.replace(result.url ?? "/hub");
     }
   };
   return (
@@ -103,8 +103,8 @@ export default function LoginContent() {
       <div className="flex flex-1 items-center justify-center">
         <div className="w-full space-y-6">
           <div className="my-10 mt-14 flex justify-between">
-            <p></p>
-            <p className="text-center text-2xl font-semibold">Welcome back</p>
+            <span></span>
+            <h2 className="text-center text-2xl font-semibold">Welcome back</h2>
             <X onClick={() => closeModal()} />
           </div>
           <LoginForm control={control} errors={errors} />

@@ -12,27 +12,28 @@ export default function RecentTopic() {
   if (isPending) return <RecentTopicsSkeleton />;
 
   return (
-    <div>
-      <p className="pb-3 text-sm font-medium">Recent Role Playing</p>
+    <section>
+      <h3 className="pb-3 text-sm font-medium">Recent Role Playing</h3>
 
-      <div className="flex gap-3 overflow-x-auto">
+      <ul className="flex gap-3 overflow-x-auto">
         {recent?.map((topic) => (
-          <div
+          <li
             key={topic.topicId}
             className="relative shrink-0"
             style={{ width: "clamp(128px, 30vw, 162px)" }}
             onClick={() =>
               router.push(
-                `/main/roleplay/create?category=${topic.track}&topicId=${topic.topicId}`,
+                `/hub/roleplay/create?category=${topic.track}&topicId=${topic.topicId}`,
               )
             }
           >
             <Image
               src={topic.imageUrl}
-              alt="topic image"
+              alt={topic.name}
               width={162}
               height={162}
               className="h-auto w-full rounded-xl"
+              sizes="clamp(128px, 30vw, 162px)"
               loading="eager"
             />
             <div className="absolute inset-0 flex flex-col justify-end p-3">
@@ -43,9 +44,9 @@ export default function RecentTopic() {
                 {topic.name}
               </h4>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </section>
   );
 }

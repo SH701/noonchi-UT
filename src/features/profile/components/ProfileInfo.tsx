@@ -15,10 +15,10 @@ export default function ProfileInfo({ img, name }: ProfileInfoProps) {
     router.push("/profile/info");
   };
   return (
-    <div className="flex items-center justify-between rounded-2xl border border-gray-500 p-4">
+    <article className="flex items-center justify-between rounded-2xl border border-gray-500 p-4">
       <div className="flex gap-4">
         {img ? (
-          <div className="relative size-12 overflow-hidden rounded-full">
+          <figure className="relative size-12 overflow-hidden rounded-full">
             <Image
               src={img}
               alt="profile-image"
@@ -26,23 +26,23 @@ export default function ProfileInfo({ img, name }: ProfileInfoProps) {
               className="object-cover"
               sizes="48px"
             />
-          </div>
+          </figure>
         ) : (
           <DefaultIcon />
         )}
         <div className="flex flex-col">
-          <span className="text-xl font-semibold leading-7">
+          <p className="text-xl font-semibold leading-7">
             {name || "사용자"}
-          </span>
+          </p>
           {/* 구독 정보 */}
-          <span className="text-center text-sm font-medium text-gray-400">
+          <p className="text-center text-sm font-medium text-gray-400">
             Free Plan
-          </span>
+          </p>
         </div>
       </div>
-      <button>
-        <ChevronRight onClick={handleProfile} />
+      <button onClick={handleProfile} aria-label="Edit profile">
+        <ChevronRight />
       </button>
-    </div>
+    </article>
   );
 }

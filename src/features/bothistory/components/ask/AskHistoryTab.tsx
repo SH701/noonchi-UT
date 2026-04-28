@@ -29,7 +29,7 @@ export default function AskHistoryTab({
     useHistorySearch("ASK");
 
   return (
-    <div className="flex h-full flex-col overflow-hidden">
+    <section className="flex h-full flex-col overflow-hidden">
       <div className="mt-5 flex shrink-0 items-start justify-between">
         <span className="mb-2 text-sm font-medium">Ask</span>
         <button className="cursor-pointer text-xs" onClick={setEdit}>
@@ -59,7 +59,7 @@ export default function AskHistoryTab({
           </div>
         ) : (
           conversations.map((convo) => (
-            <div
+            <article
               key={convo.conversationId}
               className="mb-2 rounded-lg bg-white/10 p-3"
               onClick={() => {
@@ -67,7 +67,7 @@ export default function AskHistoryTab({
                   onToggleSelect(convo.conversationId);
                   return;
                 }
-                router.push(`/main/ask/${convo.conversationId}`);
+                router.push(`/hub/ask/${convo.conversationId}`);
                 closeTab();
               }}
             >
@@ -93,15 +93,15 @@ export default function AskHistoryTab({
                   <span className="font-bold text-black">
                     {convo.askTarget?.toUpperCase()}
                   </span>
-                  <span className="text-xs text-gray-500">
+                  <time className="text-xs text-gray-500">
                     {getTime(convo.createdAt)}
-                  </span>
+                  </time>
                 </div>
               </div>
-            </div>
+            </article>
           ))
         )}
       </div>
-    </div>
+    </section>
   );
 }

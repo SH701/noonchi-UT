@@ -9,7 +9,7 @@ export default function ModeToggle() {
   const roleRef = useRef<HTMLSpanElement>(null);
   const pathname = usePathname();
   const router = useRouter();
-  const isAsk = pathname.startsWith("/main/ask");
+  const isAsk = pathname.startsWith("/hub/ask");
 
   const [activeStyles, setActiveStyles] = useState<{
     width: number;
@@ -44,7 +44,7 @@ export default function ModeToggle() {
         className={`relative z-10 px-1.5 py-1 text-sm font-medium transition-colors ${
           isAsk ? "text-gray-400" : "text-gray-800"
         }`}
-        onClick={() => router.push("/main")}
+        onClick={() => router.push("/hub")}
       >
         Role playing
       </span>
@@ -53,7 +53,7 @@ export default function ModeToggle() {
         className={`relative z-10 px-1.5 py-1 text-sm font-medium transition-colors ${
           !isAsk ? "text-gray-400" : "text-gray-800"
         }`}
-        onClick={() => router.push("/main/ask")}
+        onClick={() => router.push("/hub/ask")}
       >
         Ask
       </span>

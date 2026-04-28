@@ -14,6 +14,8 @@ export default function InterviewSection({
         alt="topic's photo"
         fill
         className="rounded-3xl object-cover"
+        sizes="(max-width: 600px) 89vw, 540px"
+        priority
       />
       <div className="" />
       <div className="absolute left-4 top-4">

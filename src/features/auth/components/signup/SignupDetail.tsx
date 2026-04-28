@@ -81,7 +81,7 @@ export default function SignupDetail({
       }
       gtag("event", "sign_up", { method: "email" });
       closeModal();
-      router.push("/main");
+      router.push("/hub");
     } catch (err) {
       if (err instanceof Error) {
         serverErrors(err.message);
@@ -111,7 +111,7 @@ export default function SignupDetail({
             onClick={handleSubmit(onSubmit)}
             className="mb-8"
           >
-            {isSubmitting ? <Spinner /> : <p>Get Started</p>}
+            {isSubmitting ? <Spinner /> : <span>Get Started</span>}
           </Button>
         }
       >

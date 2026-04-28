@@ -9,7 +9,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isChat = pathname.startsWith("/main/roleplay/chatroom");
+  const isChat = pathname.startsWith("/hub/roleplay/chatroom");
   return (
     <>
       {!isChat && <RoleplayHeader />}

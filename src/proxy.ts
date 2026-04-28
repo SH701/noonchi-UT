@@ -13,7 +13,7 @@ export default auth((req) => {
   const isLoggedIn = !!req.auth?.accessToken;
 
   if (pathname === "/" && isLoggedIn) {
-    return NextResponse.redirect(new URL("/main", req.url));
+    return NextResponse.redirect(new URL("/hub", req.url));
   }
 
   if (!isPublicRoute && !isLoggedIn) {
