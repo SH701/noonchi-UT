@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import withPWA from "next-pwa";
+import withBundleAnalyzer from "@next/bundle-analyzer";
 
 const nextConfig: NextConfig = {
   turbopack: {
@@ -35,9 +36,15 @@ const nextConfig: NextConfig = {
 };
 
  
-export default withPWA({
+const analyze = withBundleAnalyzer({ enabled: process.env.ANALYZE === "true" });
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const pwaConfig = withPWA({
   dest: "public",
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === "development",
 })(nextConfig as any);
+
+export default analyze(pwaConfig as any);
+/* eslint-enable @typescript-eslint/no-explicit-any */

@@ -8,7 +8,16 @@ export default function QueryProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [client] = useState(() => new QueryClient());
+  const [client] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            retry: 1,
+          },
+        },
+      }),
+  );
 
   return <QueryClientProvider client={client}>{children}</QueryClientProvider>;
 }
