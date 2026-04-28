@@ -7,9 +7,12 @@ import nextPlugin from "@next/eslint-plugin-next";
 import tanstackQuery from "@tanstack/eslint-plugin-query";
 import prettier from "eslint-config-prettier";
 
-export default tseslint.config(eslint.configs.recommended, ...tseslint.configs.recommended, {
+export default tseslint.config(
+  {
+    ignores: ["dist/**", ".next/**", "node_modules/**", "out/**", "build/**", "public/**"],
+  },
+  eslint.configs.recommended, ...tseslint.configs.recommended, {
   files: ["**/*.{js,jsx,ts,tsx}"],
-  ignores: ["dist/**", ".next/**", "node_modules/**", "out/**", "build/**"],
   plugins: {
     "@next/next": nextPlugin,
     "@tanstack/query": tanstackQuery,

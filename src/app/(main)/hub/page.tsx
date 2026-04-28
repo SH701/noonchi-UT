@@ -1,4 +1,6 @@
 import { TopicList } from "@/features/roleplay";
+import { Suspense } from "react";
+import { TopicListSkeleton } from "@/components/skeleton";
 
 export default function Main() {
   return (
@@ -12,7 +14,9 @@ export default function Main() {
         </p>
       </header>
       <section>
-        <TopicList />
+        <Suspense fallback={<TopicListSkeleton />}>
+          <TopicList />
+        </Suspense>
       </section>
     </main>
   );
