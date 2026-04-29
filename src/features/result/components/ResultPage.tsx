@@ -32,6 +32,7 @@ export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
   const { data: messages = [] } = useChatList(roomId);
   const { data: feedback, isLoading: isFeedbackLoading } =
     useConversationFeedback(roomId);
+
   useEffect(() => {
     if (feedback) {
       gtag("event", "feedback_view");
@@ -40,7 +41,6 @@ export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
   if (isFeedbackLoading || !feedback) {
     return <FeedbackLoading />;
   }
-
 
   return (
     <div className="flex min-h-screen flex-col overflow-x-hidden">
