@@ -5,3 +5,4 @@ export { default as PostFilter } from "./components/PostFilter";
 export { default as PostDetail } from "./components/PostDetail";
 export { default as CommentItem } from "./components/CommentItem";
 export { default as CommentInput } from "./components/CommentInput";
+export * from "./types/posts.type";
