@@ -97,5 +97,7 @@ export function useRoleMessageStream(conversationId: number) {
     }
   };
 
-  return { streamMessages, sendStreamMessage, isAIResponding };
+  const clearStreamMessages = () => setStreamMessages([]);
+
+  return { streamMessages, sendStreamMessage, isAIResponding, clearStreamMessages };
 }

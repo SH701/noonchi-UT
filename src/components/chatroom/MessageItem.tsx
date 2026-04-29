@@ -219,7 +219,7 @@ export default function MessageItem({
           )}
         </div>
         {isMeanOpen && (
-          <div className="w-[65%] rounded-xl border border-white bg-white/50 p-4">
+          <div className="w-full max-w-[75%] rounded-xl border border-white bg-white/50 p-4">
             <span className="text-sm text-gray-800">
               👀 {hiddenMeaning ?? messages.hiddenMeaning}
             </span>

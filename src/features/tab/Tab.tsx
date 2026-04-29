@@ -105,7 +105,7 @@ export default function Tab() {
                   />
                 </div>
               </div>
-              <div className="z-9999 flex h-20 w-full items-center bg-white p-4">
+              <div className="z-10 flex h-20 w-full items-center bg-white p-4">
                 {edit ? (
                   <div className="flex w-full justify-between text-sm">
                     <button className="text-gray-500" onClick={handleSelectAll}>
@@ -125,10 +125,7 @@ export default function Tab() {
                     </button>
                   </div>
                 ) : (
-                  <button
-                    onClick={handleProfileClick}
-                    className="flex gap-4 bg-white"
-                  >
+                  <button onClick={handleProfileClick} className="flex gap-4">
                     {session?.user.profileImageUrl ? (
                       <Image
                         src={session?.user.profileImageUrl ?? ""}

@@ -47,7 +47,7 @@ export default function RoleplayHistoryTab() {
             return (
               <li
                 key={convo.conversationId}
-                className="relative shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-white/10 shadow-lg aspect-square"
+                className="relative aspect-square shrink-0 cursor-pointer rounded-2xl border border-white/10 shadow-lg"
                 style={{ width: "clamp(112px, 28vw, 140px)" }}
                 onClick={() => {
                   router.push(
@@ -63,7 +63,7 @@ export default function RoleplayHistoryTab() {
                     src={matchedTopic.imageUrl}
                     alt={convo.conversationTopic}
                     fill
-                    className="object-cover"
+                    className="rounded-2xl object-cover"
                     sizes="(max-width: 600px) 100vw, 480px"
                     loading="eager"
                   />
@@ -71,13 +71,13 @@ export default function RoleplayHistoryTab() {
                   <div className="h-full w-full bg-gray-600" />
                 )}
                 <button
-                  className="absolute right-2 text-white/70"
+                  className="absolute right-2 z-10 text-white/70"
                   onClick={(e) => {
                     e.stopPropagation();
                     setConfirmId(convo.conversationId);
                   }}
                 >
-                  x
+                  <span className="md:text-2xl">x</span>
                 </button>
                 <div className="absolute inset-0 flex flex-col justify-end p-3 text-white">
                   <span className="text-[10px] uppercase tracking-wider text-gray-300">

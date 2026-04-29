@@ -40,9 +40,14 @@ export default function RoleplayChat({
   const [open, setOpen] = useState(false);
   const { data: conversation, refetch: conversationDeatil } =
     useConversationDetail(conversationId);
-  const { data: messages = [] } = useChatList(conversationId);
-  const { streamMessages, sendStreamMessage, isAIResponding } =
-    useRoleMessageStream(conversationId);
+  const { data: messages = [], refetch: refetchMessages } =
+    useChatList(conversationId);
+  const {
+    streamMessages,
+    sendStreamMessage,
+    isAIResponding,
+    clearStreamMessages,
+  } = useRoleMessageStream(conversationId);
   const {
     data: hintData,
     refetch: refetchHint,
@@ -91,6 +96,8 @@ export default function RoleplayChat({
     }
     conversationDeatil();
     await sendStreamMessage(textToSend);
+    await refetchMessages();
+    clearStreamMessages();
     refetchHint();
   };
 
@@ -144,7 +151,7 @@ export default function RoleplayChat({
               {conversation.canGetReport && (
                 <motion.div
                   className="absolute left-5 right-5 flex items-center justify-center gap-2.5 rounded-xl bg-gray-800/50 px-5 py-2.5 text-sm text-white"
-                  style={{ top: "clamp(-48px, -10vw, -40px)" }}
+                  style={{ top: "clamp(-64px, -10vw, -56px)" }}
                   initial={{ opacity: 1 }}
                   animate={{ opacity: 0 }}
                   transition={{ duration: 4 }}
