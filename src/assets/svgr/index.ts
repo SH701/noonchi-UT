@@ -1,10 +1,11 @@
 export { default as AlpabatIcon } from "./alpabat.svg";
-export { default as Apple } from "./apple.svg";
+export { default as AppleIcon } from "./apple.svg";
+export { default as BoardIcon } from "./board.svg";
 export { default as CameraIcon } from "./camera.svg";
 export { default as ControlIcon } from "./control.svg";
 export { default as DefaultIcon } from "./default_icon.svg";
 export { default as EmptyAskIcon } from "./emptyask.svg";
-export { default as Google } from "./google.svg";
+export { default as GoogleIcon } from "./google.svg";
 export { default as HamburgerIcon } from "./hamburger.svg";
 export { default as HomeIcon } from "./home.svg";
 export { default as InfoIcon } from "./info.svg";

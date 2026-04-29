@@ -1,5 +1,5 @@
 import SignupContent from "../signup/SignupContent";
-import { Apple, Google } from "@/assets/svgr";
+import { AppleIcon, GoogleIcon } from "@/assets/svgr";
 
 interface OAuthProps {
   GoogleLogin: () => void;
@@ -26,7 +26,7 @@ export default function OAuth({
           className="cursor-pointer"
           aria-label="Sign in with Google"
         >
-          <Google />
+          <GoogleIcon />
         </button>
         <button
           type="button"
@@ -34,7 +34,7 @@ export default function OAuth({
           className="cursor-pointer"
           aria-label="Sign in with Apple"
         >
-          <Apple />
+          <AppleIcon />
         </button>
       </div>
       <div className="pt-6 text-center text-sm text-gray-500">
