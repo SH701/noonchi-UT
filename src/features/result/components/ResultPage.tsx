@@ -18,7 +18,10 @@ import {
 import FeedbackLoading from "../../roleplay/components/FeedbackLoading";
 import Tab from "@/features/tab/Tab";
 import { useConversationDetail } from "@/hooks/queries/useConversation";
-import { useConversationFeedback } from "../hooks/useConversationFeedback";
+import {
+  useConversationFeedback,
+  useConversationPostFeedback,
+} from "../hooks/useConversationFeedback";
 
 interface RoleplayEndProps {
   conversationId: number;
@@ -30,15 +33,19 @@ export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
   const { data: conversation } = useConversationDetail(roomId);
   const myAI = conversation?.aiPersona ?? null;
   const { data: messages = [] } = useChatList(roomId);
-  const { data: feedback, isLoading: isFeedbackLoading } =
-    useConversationFeedback(roomId);
+  const { mutate: postFeedback } = useConversationPostFeedback(roomId);
+  const { data: feedback } = useConversationFeedback(roomId, false);
+
+  useEffect(() => {
+    postFeedback();
+  }, []);
 
   useEffect(() => {
     if (feedback) {
       gtag("event", "feedback_view");
     }
   }, [feedback]);
-  if (isFeedbackLoading || !feedback) {
+  if (!feedback) {
     return <FeedbackLoading />;
   }
 

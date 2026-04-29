@@ -1,6 +1,10 @@
 import { apiFetch } from "@/api/api";
 import { getSession } from "next-auth/react";
-import { InterviewFormData, ConversationRes } from "@/types/conversations";
+import {
+  InterviewFormData,
+  ConversationRes,
+  ConversationFeedback,
+} from "@/types/conversations";
 import { RoleplayReq } from "@/features/roleplay/types/roleplay/roleplay.type";
 import { AskReq, AskStreamDoneData } from "@/features/ask/types/ask.type";
 
@@ -93,5 +97,15 @@ export const conversationsMutations = {
     return apiFetch<void>(`/api/conversations/${conversationId}/end`, {
       method: "PUT",
     });
+  },
+  PostConversationFeedack: async (
+    conversationId: number,
+  ): Promise<ConversationFeedback> => {
+    return apiFetch<ConversationFeedback>(
+      `/api/conversations/${conversationId}/feedback`,
+      {
+        method: "POST",
+      },
+    );
   },
 };

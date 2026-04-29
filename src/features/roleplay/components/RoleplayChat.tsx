@@ -14,7 +14,7 @@ import {
 
 } from "@/hooks/queries";
 import { useRoleplayHint } from "@/features/roleplay/hooks";
-import { ChatInput, SpinnerLoading } from "@/components/common";
+import { ChatInput } from "@/components/common";
 import {
   useConversationEnd,
   useRoleMessageStream,
@@ -28,6 +28,7 @@ import { SqurepenIcon } from "@/assets/svgr";
 import FeedbackLoading from "./FeedbackLoading";
 import { useConversationDetail } from "@/hooks/queries/useConversation";
 import { useWebVoice } from "@/hooks/custom/useWebVoice";
+import RoleplayLoading from "./RoleplayLoading";
 
 interface RoleplayChatRoomProps {
   conversationId: number;
@@ -72,8 +73,8 @@ export default function RoleplayChat({
 
   const bottomRef = useScrollToBottom([streamMessages]);
 
-  const { mutate: conversationEnd, isPending: isEnding } =
-    useConversationEnd(conversationId);
+  const [isEnding, setIsEnding] = useState(false);
+  const { mutate: conversationEnd } = useConversationEnd(conversationId);
 
   const myAI = conversation?.aiPersona ?? null;
 
@@ -82,6 +83,7 @@ export default function RoleplayChat({
       topic: conversation?.aiPersona.description,
       situation: conversation?.situation,
     });
+    setIsEnding(true);
     conversationEnd();
   };
 
@@ -106,7 +108,7 @@ export default function RoleplayChat({
   };
 
   if (!conversation) {
-    return <SpinnerLoading title="Loading chat..." />;
+    return <RoleplayLoading />;
   }
 
   return (
