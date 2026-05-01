@@ -20,11 +20,11 @@ export default function PostCreateHeader({
       <button
         onClick={onBack}
         className="-ml-2 flex size-9 items-center justify-center"
-        aria-label="뒤로가기"
+        aria-label="Go back"
       >
         <ChevronLeft size={24} />
       </button>
-      <h1 className="text-base font-semibold text-gray-900">새 게시글</h1>
+      <h1 className="text-base font-semibold text-gray-900">New Post</h1>
       <button
         onClick={onSubmit}
         disabled={!canSubmit}
@@ -34,7 +34,7 @@ export default function PostCreateHeader({
             : "bg-gray-100 text-gray-400"
         }`}
       >
-        {isPending ? "등록 중..." : "등록"}
+        {isPending ? "Posting..." : "Post"}
       </button>
     </header>
   );

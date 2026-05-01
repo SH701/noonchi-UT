@@ -23,7 +23,7 @@ export default function PostCreateToolbar({
         className="flex size-10 items-center justify-center rounded-full text-gray-600 hover:bg-gray-50 disabled:opacity-40"
         onClick={() => fileInputRef.current?.click()}
         disabled={uploading}
-        aria-label="이미지 추가"
+        aria-label="Add image"
       >
         <ImagePlus size={22} />
       </button>

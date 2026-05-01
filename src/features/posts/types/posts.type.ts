@@ -1,33 +1,29 @@
-export interface Post {
+export interface PostImage {
   id: number;
-  title: string;
-  body: string;
-  author: string;
-  authorImageUrl: string;
-  createdAt: string;
-  thumbnailUrl: string;
-  likeCount: number;
-  commentCount: number;
-  bookmarkCount: number;
-  isLiked: boolean;
-  isBookmarked: boolean;
-  isMe: boolean;
+  imageUrl: string;
+  displayOrder: number;
+}
+
+export interface PostAuthor {
+  userId: number;
+  nickname: string;
+  profileImageUrl: string;
 }
 
 export interface PostDetail {
-  id: number;
+  postId: number;
   title: string;
-  body: string;
-  author: string;
-  authorImageUrl: string;
+  content: string;
+  category?: string;
+  viewCount: number;
+  likesCount: number;
+  commentsCount: number;
+  author: PostAuthor;
+  images: PostImage[];
   createdAt: string;
-  imageUrls: string[];
-  likeCount: number;
-  commentCount: number;
-  bookmarkCount: number;
+  updatedAt?: string;
   isLiked: boolean;
   isBookmarked: boolean;
-  isMe: boolean;
 }
 
 export interface PostList {

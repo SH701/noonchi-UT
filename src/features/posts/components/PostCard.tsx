@@ -5,6 +5,7 @@ import { DefaultIcon } from "@/assets/svgr";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { PostSearchItem } from "../types/posts.type";
+import { getRelativeTime } from "@/lib/time-format";
 
 type PostCardProps = PostSearchItem & {
   onClick: () => void;
@@ -82,7 +83,7 @@ export default function PostCard({
                     onEdit?.();
                   }}
                 >
-                  수정
+                  Edit
                 </button>
                 <div className="w-px bg-gray-100" />
                 <button
@@ -93,7 +94,7 @@ export default function PostCard({
                     onDelete?.();
                   }}
                 >
-                  삭제
+                  Delete
                 </button>
               </div>
             )}
@@ -136,7 +137,7 @@ export default function PostCard({
             className={isBookmarked ? "text-blue-400" : ""}
           />
         </button>
-        <span className="ml-auto">{createdAt}</span>
+        <span className="ml-auto">{getRelativeTime(createdAt)}</span>
       </div>
     </li>
   );

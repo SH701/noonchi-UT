@@ -26,14 +26,14 @@ export default function PostCreateForm({
     <div className="flex flex-1 flex-col rounded-2xl bg-white p-4 shadow-sm">
       <input
         className="border-b border-gray-100 pb-3 text-lg font-bold outline-none placeholder:font-normal placeholder:text-gray-300"
-        placeholder="제목"
+        placeholder="Title"
         value={title}
         onChange={(e) => onTitleChange(e.target.value)}
         maxLength={100}
       />
       <textarea
         className="mt-4 flex-1 resize-none text-[15px] leading-relaxed text-gray-800 outline-none placeholder:text-gray-300"
-        placeholder="어떤 이야기를 나누고 싶으세요?"
+        placeholder="What's on your mind?"
         value={content}
         onChange={(e) => onContentChange(e.target.value.slice(0, MAX_CONTENT))}
         rows={12}
@@ -50,7 +50,7 @@ export default function PostCreateForm({
               <button
                 onClick={() => onRemoveImage(url)}
                 className="absolute right-1 top-1 flex size-5 items-center justify-center rounded-full bg-black/60 text-white"
-                aria-label="이미지 삭제"
+                aria-label="Remove image"
               >
                 <X size={12} />
               </button>

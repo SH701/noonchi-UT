@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postsMutations } from "../api/mutations";
+import { PostDetail } from "../types/posts.type";
 
 export const useCreatePost = () => {
   const queryClient = useQueryClient();
@@ -36,7 +37,24 @@ export const useToggleLike = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: postsMutations.createLike,
-    onSuccess: (_data, postId) => {
+    onMutate: async (postId) => {
+      await queryClient.cancelQueries({ queryKey: ["posts", postId] });
+      const prev = queryClient.getQueryData<PostDetail>(["posts", postId]);
+      if (prev) {
+        queryClient.setQueryData<PostDetail>(["posts", postId], {
+          ...prev,
+          isLiked: !prev.isLiked,
+          likesCount: prev.isLiked ? prev.likesCount - 1 : prev.likesCount + 1,
+        });
+      }
+      return { prev };
+    },
+    onError: (_err, postId, context) => {
+      if (context?.prev) {
+        queryClient.setQueryData(["posts", postId], context.prev);
+      }
+    },
+    onSettled: (_data, _err, postId) => {
       queryClient.invalidateQueries({ queryKey: ["posts", postId] });
     },
   });
@@ -46,7 +64,23 @@ export const useToggleBookmark = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: postsMutations.createBookmark,
-    onSuccess: (_data, postId) => {
+    onMutate: async (postId) => {
+      await queryClient.cancelQueries({ queryKey: ["posts", postId] });
+      const prev = queryClient.getQueryData<PostDetail>(["posts", postId]);
+      if (prev) {
+        queryClient.setQueryData<PostDetail>(["posts", postId], {
+          ...prev,
+          isBookmarked: !prev.isBookmarked,
+        });
+      }
+      return { prev };
+    },
+    onError: (_err, postId, context) => {
+      if (context?.prev) {
+        queryClient.setQueryData(["posts", postId], context.prev);
+      }
+    },
+    onSettled: (_data, _err, postId) => {
       queryClient.invalidateQueries({ queryKey: ["posts", postId] });
     },
   });
