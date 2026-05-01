@@ -31,26 +31,31 @@ export interface PostDetail {
 }
 
 export interface PostList {
-  posts: Post[];
-  totalCount: number;
-  page: number;
-  size: number;
+  content: PostSearchItem[];
+  pageNumber: number;
+  pageSize: number;
+  totalElements: number;
+  totalPages: number;
+  isFirst: boolean;
+  isLast: boolean;
 }
 
 export interface PostReq {
   title: string;
-  body: string;
-  imageUrls: string[];
+  content: string;
+  category?: string;
+  imageUrls?: string[];
 }
 
 export interface PostRes {
   id: number;
 }
-export interface PostUpdateReq{
-  title: string;
-  body: string;
-  imageUrls: string[]
-  deleteImageUrls:string[]
+
+export interface PostUpdateReq {
+  title?: string;
+  content?: string;
+  category?: string;
+  imageUrls?: string[];
 }
 
 export interface LikeRes {
