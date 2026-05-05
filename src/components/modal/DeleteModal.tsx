@@ -7,6 +7,7 @@ interface DeleteConfirmModalProps {
   onClose: () => void;
   onConfirm: () => void;
   title?: string;
+  description?: string;
 }
 
 export default function DeleteModal({
@@ -14,15 +15,14 @@ export default function DeleteModal({
   onClose,
   onConfirm,
   title = "Delete Chat",
+  description = "Are you sure you want to delete this?\nThis action cannot be undone.",
 }: DeleteConfirmModalProps) {
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
       title={title}
-      description={
-        "Are you sure you want to delete this room?\nThis action cannot be undone."
-      }
+      description={description}
     >
       <div className="mt-2 flex w-full gap-3">
         <button

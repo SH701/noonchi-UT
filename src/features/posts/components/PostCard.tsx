@@ -4,44 +4,33 @@ import { Heart, MessageCircle, Bookmark, MoreHorizontal } from "lucide-react";
 import { DefaultIcon } from "@/assets/svgr";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
+import { PostSearchItem } from "../types/posts.type";
+import { getRelativeTime } from "@/lib/time-format";
+import { useSession } from "next-auth/react";
 
-interface PostCardProps {
-  id: number;
-  title: string;
-  body: string;
-  author: string;
-  authorImageUrl?: string;
-  createdAt: string;
-  likeCount: number;
-  commentCount: number;
-  bookmarkCount: number;
-  isLiked: boolean;
-  isBookmarked: boolean;
-  isMe?: boolean;
+type PostCardProps = PostSearchItem & {
   onClick: () => void;
   onEdit?: () => void;
   onDelete?: () => void;
-}
+};
 
 export default function PostCard({
   title,
-  body,
+  content,
   author,
-  authorImageUrl,
   createdAt,
-  likeCount,
-  commentCount,
-  bookmarkCount,
+  likesCount,
+  commentsCount,
   isLiked,
   isBookmarked,
-  isMe,
   onClick,
   onEdit,
   onDelete,
 }: PostCardProps) {
-  const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { data: session } = useSession();
+  const currentUserId = Number(session?.user?.id);
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
@@ -60,10 +49,10 @@ export default function PostCard({
       {/* 작성자 */}
       <div className="flex items-center gap-3">
         <div className="size-12 shrink-0 overflow-hidden rounded-full">
-          {authorImageUrl ? (
+          {author.profileImageUrl ? (
             <Image
-              src={authorImageUrl}
-              alt={author}
+              src={author.profileImageUrl}
+              alt={author.nickname}
               width={48}
               height={48}
               className="h-full w-full object-cover"
@@ -73,9 +62,9 @@ export default function PostCard({
           )}
         </div>
         <span className="flex-1 text-sm font-medium text-gray-800">
-          {author}
+          {author.nickname}
         </span>
-               {isMe && (
+        {(onEdit || onDelete) && currentUserId === author.userId && (
           <div ref={menuRef} className="relative">
             <button
               className="transition-colors hover:text-gray-600"
@@ -96,7 +85,7 @@ export default function PostCard({
                     onEdit?.();
                   }}
                 >
-                  수정
+                  Edit
                 </button>
                 <div className="w-px bg-gray-100" />
                 <button
@@ -107,23 +96,21 @@ export default function PostCard({
                     onDelete?.();
                   }}
                 >
-                  삭제
+                  Delete
                 </button>
               </div>
             )}
           </div>
         )}
       </div>
-     
+
       {/* 본문 */}
       <div className="flex flex-col gap-1">
         <h3 className="text-sm font-bold text-gray-900">{title}</h3>
         <p className="line-clamp-2 text-sm leading-relaxed text-gray-500">
-          {body}
+          {content}
         </p>
       </div>
-
-     
 
       {/* 하단 액션 */}
       <div className="flex items-center gap-4 text-xs text-gray-400">
@@ -136,11 +123,11 @@ export default function PostCard({
             fill={isLiked ? "currentColor" : "none"}
             className={isLiked ? "text-red-400" : ""}
           />
-          {likeCount}
+          {likesCount}
         </button>
         <button className="flex items-center gap-1 transition-colors hover:text-blue-400">
           <MessageCircle size={14} />
-          {commentCount}
+          {commentsCount}
         </button>
         <button
           className="flex items-center gap-1 transition-colors hover:text-blue-400"
@@ -151,9 +138,8 @@ export default function PostCard({
             fill={isBookmarked ? "currentColor" : "none"}
             className={isBookmarked ? "text-blue-400" : ""}
           />
-          {bookmarkCount}
         </button>
-        <span className="ml-auto">{createdAt}</span>
+        <span className="ml-auto">{getRelativeTime(createdAt)}</span>
       </div>
     </li>
   );

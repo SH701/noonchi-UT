@@ -2,10 +2,16 @@
 
 import { SendIcon } from "@/assets/svgr";
 import { useRef, useEffect, useState } from "react";
+import { useCreateComment } from "../hooks/usePostsMutations";
 
-export default function CommentInput() {
+interface CommentInputProps {
+  postId: number;
+}
+
+export default function CommentInput({ postId }: CommentInputProps) {
   const [value, setValue] = useState("");
   const textRef = useRef<HTMLTextAreaElement>(null);
+  const { mutate: createComment, isPending } = useCreateComment();
 
   useEffect(() => {
     if (textRef.current) {
@@ -13,6 +19,14 @@ export default function CommentInput() {
       textRef.current.style.height = `${textRef.current.scrollHeight}px`;
     }
   }, [value]);
+
+  const handleSubmit = () => {
+    if (!value.trim() || isPending) return;
+    createComment(
+      { postId, content: value.trim() },
+      { onSuccess: () => setValue("") },
+    );
+  };
 
   return (
     <div className="max-w-150 fixed bottom-0 left-1/2 w-full -translate-x-1/2 px-4 pb-4">
@@ -28,7 +42,7 @@ export default function CommentInput() {
           <textarea
             ref={textRef}
             rows={1}
-            placeholder="댓글을 입력해주세요."
+            placeholder="Leave a comment..."
             className="max-h-30 absolute inset-0 w-full min-w-0 resize-none overflow-y-auto border-none bg-transparent text-gray-800 caret-gray-800 outline-none placeholder:text-gray-400"
             value={value}
             onChange={(e) => setValue(e.target.value)}
@@ -40,20 +54,19 @@ export default function CommentInput() {
                 value.trim()
               ) {
                 e.preventDefault();
+                handleSubmit();
               }
             }}
           />
         </div>
 
         <button
-          disabled={value.trim() === ""}
-           className="flex shrink-0 cursor-pointer items-center justify-center rounded-full p-1 transition-colors"
+          onClick={handleSubmit}
+          disabled={!value.trim() || isPending}
+          className="flex shrink-0 cursor-pointer items-center justify-center rounded-full p-1 transition-colors"
           style={
             value.trim()
-              ? {
-                  background:
-                    "linear-gradient(180deg, #86C3E8 0%, #8397FF 100%)",
-                }
+              ? { background: "linear-gradient(180deg, #86C3E8 0%, #8397FF 100%)" }
               : { background: "#ffffff", border: "1px solid #D1D5DB" }
           }
         >
