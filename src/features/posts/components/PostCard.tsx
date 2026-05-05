@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { PostSearchItem } from "../types/posts.type";
 import { getRelativeTime } from "@/lib/time-format";
+import { useSession } from "next-auth/react";
 
 type PostCardProps = PostSearchItem & {
   onClick: () => void;
@@ -26,9 +27,10 @@ export default function PostCard({
   onEdit,
   onDelete,
 }: PostCardProps) {
-  const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { data: session } = useSession();
+  const currentUserId = Number(session?.user?.id);
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
@@ -62,7 +64,7 @@ export default function PostCard({
         <span className="flex-1 text-sm font-medium text-gray-800">
           {author.nickname}
         </span>
-        {(onEdit || onDelete) && (
+        {(onEdit || onDelete) && currentUserId === author.userId && (
           <div ref={menuRef} className="relative">
             <button
               className="transition-colors hover:text-gray-600"

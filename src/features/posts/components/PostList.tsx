@@ -7,12 +7,16 @@ import PostCard from "./PostCard";
 import PostCardSkeleton from "./PostCardSkeleton";
 import PostFilter, { PostSortType } from "./PostFilter";
 import { useGetPosts } from "../hooks/usePosts";
+import { useDeletePost } from "../hooks/usePostsMutations";
+import DeleteModal from "@/components/modal/DeleteModal";
 
 export default function PostList() {
   const router = useRouter();
   const [sort, setSort] = useState<PostSortType>("latest");
   const [search, setSearch] = useState("");
+  const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
   const { data: postList, isLoading } = useGetPosts();
+  const { mutate: deletePost } = useDeletePost();
 
   const posts = postList?.content ?? [];
   const filtered = posts.filter((p) =>
@@ -38,6 +42,8 @@ export default function PostList() {
                 key={post.postId}
                 {...post}
                 onClick={() => router.push(`/posts/${post.postId}`)}
+                onEdit={() => router.push(`/posts/${post.postId}/edit`)}
+                onDelete={() => setDeleteTargetId(post.postId)}
               />
             ))}
       </ul>
@@ -47,6 +53,12 @@ export default function PostList() {
       >
         <Plus />
       </button>
+      <DeleteModal
+        isOpen={deleteTargetId !== null}
+        onClose={() => setDeleteTargetId(null)}
+        onConfirm={() => deletePost(deleteTargetId!)}
+        title="Delete Post"
+      />
     </section>
   );
 }
