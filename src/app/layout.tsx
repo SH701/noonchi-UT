@@ -1,10 +1,9 @@
-import "@/locales/i18n";
 import "./globals.css";
 import { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Toaster } from "@/components/ui/toast/toast";
 import ModalRender from "@/components/modal/ModalRender";
-import { ClientProvider, QueryProvider, AuthProvider } from "@/providers";
+import { ClientProvider, QueryProvider, AuthProvider, I18nProvider } from "@/providers";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -50,15 +49,17 @@ export default function RootLayout({
         </Script>
         <AuthProvider>
           <QueryProvider>
-            <ClientProvider>
-              <div className="flex h-full min-h-dvh w-full justify-center">
-                <div className="max-w-150 bg-gradient-primary w-full md:shadow-xl">
-                  {children}
+            <I18nProvider>
+              <ClientProvider>
+                <div className="flex h-full min-h-dvh w-full justify-center">
+                  <div className="max-w-150 bg-gradient-primary w-full md:shadow-xl">
+                    {children}
+                  </div>
                 </div>
-              </div>
-              <Toaster />
-              <ModalRender />
-            </ClientProvider>
+                <Toaster />
+                <ModalRender />
+              </ClientProvider>
+            </I18nProvider>
           </QueryProvider>
         </AuthProvider>
       </body>

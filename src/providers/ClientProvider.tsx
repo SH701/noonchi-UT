@@ -5,8 +5,6 @@ import { InternalAxiosRequestConfig } from "axios";
 import { useSession } from "next-auth/react";
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { I18nextProvider } from "react-i18next";
-import i18n from "@/locales/i18n";
 
 import { axios } from "@/api/common";
 
@@ -19,9 +17,11 @@ export default function ClientProvider({ children }: Props) {
   const queryClient = useQueryClient();
   const prevStatus = useRef<string | null>(null);
   const pathname = usePathname();
+
   useEffect(() => {
     gtag("event", "page_view", { page_path: pathname });
   }, [pathname]);
+
   useEffect(() => {
     const reqInterceptor = axios.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
@@ -33,9 +33,7 @@ export default function ClientProvider({ children }: Props) {
 
         return config;
       },
-      (error) => {
-        return Promise.reject(error);
-      },
+      (error) => Promise.reject(error),
     );
 
     return () => {
@@ -44,7 +42,6 @@ export default function ClientProvider({ children }: Props) {
   }, [session]);
 
   useEffect(() => {
-    // (새로고침 시 비인증 상태로 캐싱된 데이터 리패칭)
     if (
       prevStatus.current === "loading" &&
       status === "authenticated" &&
@@ -53,7 +50,6 @@ export default function ClientProvider({ children }: Props) {
       queryClient.invalidateQueries();
     }
 
-    // 로그아웃 시 캐시 삭제 (리패칭 불필요)
     if (
       prevStatus.current === "authenticated" &&
       status === "unauthenticated"
@@ -62,7 +58,6 @@ export default function ClientProvider({ children }: Props) {
       gtag("set", { user_id: undefined });
     }
 
-    // 로그인 시 리패칭
     if (
       prevStatus.current === "unauthenticated" &&
       status === "authenticated" &&
@@ -78,5 +73,5 @@ export default function ClientProvider({ children }: Props) {
     prevStatus.current = status;
   }, [status, queryClient, session]);
 
-  return <I18nextProvider i18n={i18n}>{children}</I18nextProvider>;
+  return <>{children}</>;
 }
