@@ -1,13 +1,16 @@
 export { default as PostHeader } from "./components/PostHeader";
 export { default as PostCardSkeleton } from "./components/PostCardSkeleton";
 export { default as PostDetailSkeleton } from "./components/PostDetailSkeleton";
-export { default as CommentItemSkeleton } from "./components/CommentItemSkeleton";
+export { default as PostCreateSection } from "./components/PostCreateSection";
+export { default as PostDetailSection } from "./components/PostDetailSection";
+export { default as PostEditSection } from "./components/PostEditSection";
 export { default as PostList } from "./components/PostList";
 export { default as PostCard } from "./components/PostCard";
 export { default as PostFilter } from "./components/PostFilter";
 export { default as PostDetail } from "./components/PostDetail";
 export { default as CommentItem } from "./components/CommentItem";
 export { default as CommentInput } from "./components/CommentInput";
+export { default as CommentItemSkeleton } from "./components/CommentItemSkeleton";
 export * from "./types/posts.type";
 export * from "./hooks/usePosts";
 export * from "./hooks/usePostsMutations";
