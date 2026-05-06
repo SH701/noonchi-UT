@@ -6,6 +6,7 @@ import { MicIcon, SendIcon } from "@/assets/svgr";
 import { Asterisk, Lightbulb } from "lucide-react";
 import { MicState } from "@/hooks/custom/useVoiceChat";
 import { Spinner } from "../ui/spinner/spinner";
+import { useTranslation } from "react-i18next";
 
 interface ChatInputProps {
   message: string;
@@ -32,7 +33,7 @@ export default function ChatInput({
   onHintClick,
   onSituationClick,
   disabled = false,
-  placeholder = "Type your answer...",
+  placeholder,
   showSituation = false,
   showHint = false,
   isHintActive = false,
@@ -40,6 +41,7 @@ export default function ChatInput({
   micState = "idle",
   isHintLoading = false,
 }: ChatInputProps) {
+  const { t } = useTranslation();
   const textRef = useRef<HTMLTextAreaElement>(null);
   const [isFocused, setIsFocused] = useState(false);
   useEffect(() => {
@@ -78,7 +80,7 @@ export default function ChatInput({
             rows={1}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            placeholder={placeholder}
+            placeholder={placeholder ?? t("chatInput.placeholder")}
             className="max-h-30 absolute inset-0 w-full min-w-0 resize-none overflow-y-auto border-none bg-transparent text-base text-transparent placeholder-gray-400 caret-gray-800 outline-none disabled:bg-transparent"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -107,7 +109,7 @@ export default function ChatInput({
                 <Asterisk
                   className={` ${isSituationActive ? "text-indigo-500" : ""}`}
                 />
-                <p>situation</p>
+                <p>{t("chatInput.situation")}</p>
               </button>
             )}
             {showHint && (
@@ -119,7 +121,7 @@ export default function ChatInput({
                 {isHintLoading ? <Spinner/>: <> <Lightbulb
                   className={`py-0.5 ${isHintActive ? "text-indigo-500" : ""}`}
                 />
-                <p>needhelp</p> </>}
+                <p>{t("chatInput.needHelp")}</p> </>}
                
               </button>
             )}

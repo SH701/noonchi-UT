@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslation } from "react-i18next";
 
 interface SpinnerLoadingProps {
@@ -12,7 +14,11 @@ export default function SpinnerLoading({ title }: SpinnerLoadingProps) {
         <svg
           className="absolute animate-spin"
           viewBox="0 0 260 260"
-          style={{ width: "clamp(132px, 36vw, 165px)", height: "clamp(132px, 36vw, 165px)", animationDuration: "2s" }}
+          style={{
+            width: "clamp(132px, 36vw, 165px)",
+            height: "clamp(132px, 36vw, 165px)",
+            animationDuration: "2s",
+          }}
         >
           <circle
             cx="130"
@@ -33,7 +39,14 @@ export default function SpinnerLoading({ title }: SpinnerLoadingProps) {
           </defs>
         </svg>
 
-        <div className="flex items-center justify-center rounded-full bg-[#dde0f5]" style={{ width: "clamp(128px, 35vw, 160px)", height: "clamp(128px, 35vw, 160px)", fontSize: "clamp(48px, 10vw, 60px)" }}>
+        <div
+          className="flex items-center justify-center rounded-full bg-[#dde0f5]"
+          style={{
+            width: "clamp(128px, 35vw, 160px)",
+            height: "clamp(128px, 35vw, 160px)",
+            fontSize: "clamp(48px, 10vw, 60px)",
+          }}
+        >
           👀
         </div>
       </div>

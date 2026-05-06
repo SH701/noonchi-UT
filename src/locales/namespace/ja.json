@@ -294,6 +294,11 @@
     "beauty": "💄 美容",
     "gathering": "👁️‍🗨️ 集まり"
   },
+  "chatInput": {
+    "placeholder": "答えを入力してください...",
+    "situation": "状況",
+    "needHelp": "ヒントが必要"
+  },
   "spinnerLoading": {
     "subtitle1": "すぐに終わります！",
     "subtitle2": "少々お待ちください。"

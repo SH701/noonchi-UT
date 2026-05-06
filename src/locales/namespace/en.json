@@ -294,6 +294,11 @@
     "beauty": "💄 Beauty",
     "gathering": "👁️‍🗨️ Gathering"
   },
+  "chatInput": {
+    "placeholder": "Type your answer...",
+    "situation": "situation",
+    "needHelp": "need help"
+  },
   "spinnerLoading": {
     "subtitle1": "It won't take long!",
     "subtitle2": "Please wait a moment."

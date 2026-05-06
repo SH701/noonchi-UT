@@ -294,6 +294,11 @@
     "beauty": "💄 Красота",
     "gathering": "👁️‍🗨️ Встречи"
   },
+  "chatInput": {
+    "placeholder": "Введите ваш ответ...",
+    "situation": "ситуация",
+    "needHelp": "нужна помощь"
+  },
   "spinnerLoading": {
     "subtitle1": "Это займёт немного времени!",
     "subtitle2": "Пожалуйста, подождите."
