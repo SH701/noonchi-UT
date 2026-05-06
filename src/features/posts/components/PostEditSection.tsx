@@ -17,6 +17,7 @@ export default function PostEditSection({ postId }: { postId: number }) {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [category, setCategory] = useState("Free");
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
 
@@ -24,6 +25,7 @@ export default function PostEditSection({ postId }: { postId: number }) {
     if (!post) return;
     setTitle(post.title);
     setContent(post.content);
+    setCategory(post.category ?? "Free");
     setImageUrls(post.images.map((img) => img.imageUrl));
   }, [post]);
 
@@ -43,7 +45,7 @@ export default function PostEditSection({ postId }: { postId: number }) {
   const handleSubmit = () => {
     if (!content.trim() || isPending || uploading) return;
     updatePost(
-      { postId, data: { title, content, imageUrls } },
+      { postId, data: { title, content, category, imageUrls } },
       { onSuccess: () => router.back() },
     );
   };
@@ -62,9 +64,11 @@ export default function PostEditSection({ postId }: { postId: number }) {
         <PostCreateForm
           title={title}
           content={content}
+          category={category}
           imageUrls={imageUrls}
           onTitleChange={setTitle}
           onContentChange={setContent}
+          onCategoryChange={setCategory}
           onRemoveImage={(url) =>
             setImageUrls((prev) => prev.filter((u) => u !== url))
           }
