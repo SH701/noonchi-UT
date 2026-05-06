@@ -14,7 +14,7 @@ export default function PostCreateSection() {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [category, setCategory] = useState("자유");
+  const [category, setCategory] = useState("Free");
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
 

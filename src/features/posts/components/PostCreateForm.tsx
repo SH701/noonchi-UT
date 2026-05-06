@@ -2,9 +2,7 @@
 
 import Image from "next/image";
 import { X } from "lucide-react";
-
-const MAX_CONTENT = 2000;
-const CATEGORIES = ["자유", "질문", "정보", "후기", "기타"];
+import { CATEGORIES, MAX_CONTENT } from "@/constants/category";
 
 interface PostCreateFormProps {
   title: string;
@@ -32,16 +30,16 @@ export default function PostCreateForm({
       <div className="mb-3 flex gap-2">
         {CATEGORIES.map((c) => (
           <button
-            key={c}
+            key={c.value}
             type="button"
-            onClick={() => onCategoryChange(c)}
+            onClick={() => onCategoryChange(c.value)}
             className={`rounded-full px-3 py-1 text-xs font-medium transition ${
-              category === c
+              category === c.value
                 ? "bg-indigo-400 text-white"
                 : "bg-gray-100 text-gray-500"
             }`}
           >
-            {c}
+            {c.label}
           </button>
         ))}
       </div>
