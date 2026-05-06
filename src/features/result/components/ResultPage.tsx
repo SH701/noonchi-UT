@@ -22,12 +22,14 @@ import {
   useConversationFeedback,
   useConversationPostFeedback,
 } from "../hooks/useConversationFeedback";
+import { useTranslation } from "react-i18next";
 
 interface RoleplayEndProps {
   conversationId: number;
 }
 
 export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
+  const { t } = useTranslation();
   const [tab, setTab] = useState<"Feedback" | "Detailed Metrics">("Feedback");
   const roomId = conversationId;
   const { data: conversation } = useConversationDetail(roomId);
@@ -63,8 +65,8 @@ export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
               </p>
             </div>
             <div className="space-y-3">
-              <Point label="Politeness" value={feedback.politenessScore} />
-              <Point label="Naturalness" value={feedback.naturalnessScore} />
+              <Point label={t("result.scores.politeness")} value={feedback.politenessScore} />
+              <Point label={t("result.scores.naturalness")} value={feedback.naturalnessScore} />
             </div>
           </div>
 

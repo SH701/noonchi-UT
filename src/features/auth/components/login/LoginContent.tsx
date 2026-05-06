@@ -17,9 +17,11 @@ import { useSession } from "next-auth/react";
 import { loginSchema } from "../../types/schema";
 import { useUpdateProfile } from "@/features/profile/hooks/useProfile";
 import OAtuth from "./OAuth";
+import { useTranslation } from "react-i18next";
 type LoginData = z.infer<typeof loginSchema>;
 
 export default function LoginContent() {
+  const { t } = useTranslation();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
@@ -51,7 +53,7 @@ export default function LoginContent() {
       });
       if (result?.error) {
         setServerErrors({
-          general: "Email or password incorrect!",
+          general: t("login.errorMessage"),
         });
         setLoading(false);
         return;
@@ -104,7 +106,9 @@ export default function LoginContent() {
         <div className="w-full space-y-6">
           <div className="my-10 mt-14 flex justify-between">
             <span></span>
-            <h2 className="text-center text-2xl font-semibold">Welcome back</h2>
+            <h2 className="text-center text-2xl font-semibold">
+              {t("login.title")}
+            </h2>
             <X onClick={() => closeModal()} />
           </div>
           <LoginForm control={control} errors={errors} />
@@ -128,7 +132,7 @@ export default function LoginContent() {
               {serverErrors.general}
             </p>
           )}
-          {/* 백엔드 검토 후 주석 해제 */}
+
           <OAtuth
             GoogleLogin={GoogleLogin}
             AppleLogin={AppleLogin}

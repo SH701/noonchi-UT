@@ -3,9 +3,11 @@ import Modal from "./Modal";
 import { Button } from "../ui/button/button";
 import { useModalActions } from "@/store/useModalStore";
 import { LoginContent, SignupContent } from "@/features/auth";
+import { useTranslation } from "react-i18next";
 
 
 export default function PreviewModal({ isOpen, onClose }: ModalProps) {
+  const { t } = useTranslation();
   const { openModal } = useModalActions();
   const loginOpen = () => {
     onClose();
@@ -20,14 +22,14 @@ export default function PreviewModal({ isOpen, onClose }: ModalProps) {
       <Modal
         isOpen={isOpen}
         onClose={onClose}
-        title={`You're doing great!\nReady for the next level?`}
-        description={`The roleplay preview has ended.\nSign up to continue the dialogue \nand master every situation.`}
+        title={t("previewModal.title")}
+        description={t("previewModal.description")}
         image={{ src: "/etc/eyes.png", alt: "eyes", width: 100, height: 100 }}
       >
         <div className="flex w-full flex-col gap-3">
-          <Button onClick={signupOpen}>Create Account</Button>
+          <Button onClick={signupOpen}>{t("previewModal.signupButton")}</Button>
           <Button onClick={loginOpen} variant="secondary">
-            Login
+            {t("previewModal.loginButton")}
           </Button>
         </div>
       </Modal>

@@ -1,15 +1,10 @@
-export const TONE_OPTIONS = [
-  { value: "casual", label: "Casual", description: "(Friends, Siblings)" },
-  { value: "friendly", label: "Friendly", description: "(Close colleagues)" },
-  {
-    value: "professional",
-    label: "Professional",
-    description: "(Clients, Professors)",
-  },
-  {
-    value: "formal",
-    label: "Formal",
-    description: "(High-level executives, Public)",
-  },
+import type { TFunction } from "i18next";
+
+export const getToneOptions = (t: TFunction) => [
+  { value: "casual", label: t("closeness.casual"), description: t("toneDescription.casual") },
+  { value: "friendly", label: t("closeness.friendly"), description: t("toneDescription.friendly") },
+  { value: "professional", label: t("closeness.professional"), description: t("toneDescription.professional") },
+  { value: "formal", label: t("closeness.formal"), description: t("toneDescription.formal") },
 ];
-export type InterviewStyle = (typeof TONE_OPTIONS)[number]["value"];
+
+export type InterviewStyle = "casual" | "friendly" | "professional" | "formal";

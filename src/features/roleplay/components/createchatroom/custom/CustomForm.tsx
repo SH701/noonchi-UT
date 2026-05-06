@@ -4,6 +4,7 @@ import { Textarea, TextInput } from "@/components/ui/form";
 import SelectButton from "@/components/ui/form/SelectButton";
 import { toast } from "@/components/ui/toast/toast";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface CustomProps {
   onSubmit: (data: {
@@ -17,6 +18,7 @@ interface CustomProps {
 }
 
 export default function CustomForm({ onSubmit }: CustomProps) {
+  const { t } = useTranslation();
   const [isMe, setIsMe] = useState("");
   const [isAI, setIsAI] = useState("");
   const [selectedTone,setSelectedTone] = useState("")
@@ -38,26 +40,26 @@ export default function CustomForm({ onSubmit }: CustomProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <TextInput
-        label="My Role"
+        label={t("customForm.myRoleLabel")}
         value={isMe}
         onChange={setIsMe}
-        placeholder="ex) A team member"
+        placeholder={t("customForm.myRolePlaceholder")}
       />
       <TextInput
-        label="AI Role"
+        label={t("customForm.aiRoleLabel")}
         value={isAI}
         onChange={setIsAI}
-        placeholder="ex) A colleague"
+        placeholder={t("customForm.aiRolePlaceholder")}
       />
       <SelectButton selectedTone={selectedTone} onSelect={setSelectedTone} />
       <Textarea
-        label="Detail"
+        label={t("customForm.detailLabel")}
         value={details}
         required
         onChange={setDeatils}
         disabled={isPending}
         onClick={()=>{}}
-        placeholder="Please provide a detailed description"
+        placeholder={t("customForm.detailPlaceholder")}
       />
     </form>
   );

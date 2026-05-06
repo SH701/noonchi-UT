@@ -1,11 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button/button";
-
 import { useState } from "react";
 import AskChat from "./AskChat";
+import { useTranslation } from "react-i18next";
 
 export default function PreAsk() {
+  const { t } = useTranslation();
   const [step, setStep] = useState<"chat" | "info">("chat");
   const handleStart = () => {
     setStep("info");
@@ -18,17 +19,16 @@ export default function PreAsk() {
           <div className="pt-6">
             <div className="flex flex-col gap-3">
               <span className="text-3xl font-medium">
-                Not sure how <br /> this might sound?
+                {t("ask.title")}
               </span>
               <span className="text-gray-600">
-                I'll help you understand how it sounds <br />
-                in Korean
+                {t("ask.subtitle")}
               </span>
             </div>
           </div>
           <div className="mt-auto w-full px-4" style={{ paddingBottom: "clamp(40px, 10vw, 52px)" }}>
             <Button variant="primary" size="lg" onClick={handleStart}>
-              Check how it sounds
+              {t("ask.startButton")}
             </Button>
           </div>
         </div>

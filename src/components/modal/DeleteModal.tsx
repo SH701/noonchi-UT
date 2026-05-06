@@ -1,6 +1,7 @@
 "use client";
 
-import Modal from "./Modal"; 
+import Modal from "./Modal";
+import { useTranslation } from "react-i18next";
 
 interface DeleteConfirmModalProps {
   isOpen: boolean;
@@ -14,22 +15,23 @@ export default function DeleteModal({
   isOpen,
   onClose,
   onConfirm,
-  title = "Delete Chat",
-  description = "Are you sure you want to delete this?\nThis action cannot be undone.",
+  title,
+  description,
 }: DeleteConfirmModalProps) {
+  const { t } = useTranslation();
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title={title}
-      description={description}
+      title={title ?? t("deleteModal.title")}
+      description={description ?? t("deleteModal.description")}
     >
       <div className="mt-2 flex w-full gap-3">
         <button
           onClick={onClose}
           className="flex-1 rounded-xl bg-gray-100 py-3 font-medium text-gray-600 transition-colors active:bg-gray-200"
         >
-          Cancel
+          {t("deleteModal.cancelButton")}
         </button>
 
         <button
@@ -39,7 +41,7 @@ export default function DeleteModal({
           }}
           className="w-full flex-1 rounded-xl bg-rose-500 py-3 font-medium text-white transition-colors active:bg-rose-600"
         >
-          Delete
+          {t("deleteModal.deleteButton")}
         </button>
       </div>
     </Modal>

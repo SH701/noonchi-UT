@@ -1,26 +1,13 @@
-
 import Level from "@/features/onboard/Level";
 import Taste from "@/features/onboard/Taste";
 import type { ComponentType } from "react";
 
 type Slide = {
   id: number;
-  title: string;
-  desc: string;
   content: ComponentType;
 };
 
 export const slides: Slide[] = [
-  {
-    id: 1,
-    title: "Please select your interests",
-    desc: "",
-    content: Taste,
-  },
-  {
-    id: 2,
-    title: "Please select your Korean level",
-    desc: "Tell us how comfortable you are chatting in Korean!",
-    content: Level,
-  },
+  { id: 1, content: Taste },
+  { id: 2, content: Level },
 ];

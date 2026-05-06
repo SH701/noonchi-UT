@@ -1,0 +1,351 @@
+{
+  "onboarding": {
+    "nextButton": "Далее",
+    "slide1": {
+      "title": "Выберите ваши интересы"
+    },
+    "slide2": {
+      "title": "Пожалуйста, выберите ваш уровень корейского",
+      "description": "Расскажите нам, насколько комфортно вам общаться на корейском!"
+    }
+  },
+  "level": {
+    "title": "Пожалуйста, выберите ваш уровень корейского",
+    "description": "Расскажите нам, насколько комфортно вам общаться на корейском!"
+  },
+  "taste": {
+    "title": "Выберите ваши интересы"
+  },
+  "notFound": {
+    "title": "Страница не найдена",
+    "descriptionLine1": "Страница, которую вы ищете, не существует",
+    "descriptionLine2": "или была перемещена.",
+    "homeButton": "На главную"
+  },
+  "hub": {
+    "title": "Хотите звучать более естественно на корейском?",
+    "subtitle": "Давайте потренируемся в ролевых играх вместе."
+  },
+  "login": {
+    "title": "С возвращением",
+    "emailLabel": "Эл. почта",
+    "emailPlaceholder": "example@naver.com",
+    "passwordLabel": "Пароль",
+    "loginButton": "Войти",
+    "errorMessage": "Неверный email или пароль!",
+    "socialDivider": "Войти через",
+    "signupPrompt": "Впервые здесь?",
+    "signupLink": "Создать аккаунт"
+  },
+  "signupStep1": {
+    "title": "Создать аккаунт",
+    "emailLabel": "Эл. почта",
+    "emailPlaceholder": "example@gmail.com",
+    "passwordLabel": "Пароль",
+    "passwordConfirmPlaceholder": "Повторите пароль",
+    "passwordHint": "8–16 символов, включая буквы и цифры",
+    "termsAgreement": "Согласен с условиями использования и политикой конфиденциальности",
+    "nextButton": "Далее",
+    "loginPrompt": "Уже есть аккаунт?",
+    "loginLink": "Войти"
+  },
+  "signupStep2": {
+    "nameLabel": "Введите ваше имя",
+    "namePlaceholder": "Введите ваше имя",
+    "birthLabel": "Дата рождения",
+    "birthPlaceholder": "ГГГГ-ММ-ДД",
+    "submitButton": "Начать"
+  },
+  "previewHeader": {
+    "title": "Ролевая игра: предпросмотр",
+    "skip": "Пропустить",
+    "skipHint": "Пропустить и перейти к входу или регистрации"
+  },
+  "preview": {
+    "progress1": "Они ждут вашего ответа! ({{current}}/{{total}})",
+    "progress2": "Остался один шанс! Завершим уверенно! ({{current}}/{{total}})"
+  },
+  "previewEnd": {
+    "title": "Предварительный просмотр ролевой игры завершён",
+    "description1": "Предварительный просмотр ролевой игры завершён.",
+    "description2": "Чтобы продолжить разговор, войдите или зарегистрируйтесь",
+    "signupButton": "Создать аккаунт",
+    "loginButton": "Войти"
+  },
+  "previewModal": {
+    "title": "Вы отлично справляетесь! Готовы к следующему уровню?",
+    "description": "Предварительный просмотр ролевой игры завершён. Зарегистрируйтесь, чтобы продолжить диалог и освоить все ситуации.",
+    "signupButton": "Создать аккаунт",
+    "loginButton": "Войти"
+  },
+  "myInterests": {
+    "header": "Темы интересов",
+    "title": "Выберите ваши интересы",
+    "description": "Выберите не менее 3 интересов, чтобы помочь нам улучшить ваш опыт.",
+    "saveButton": "Сохранить интересы"
+  },
+  "result": {
+    "header": "Отчёт",
+    "tabs": {
+      "transcript": "Стенограмма",
+      "mistakes": "Типичные ошибки"
+    },
+    "scores": {
+      "politeness": "Вежливость",
+      "naturalness": "Естественность"
+    },
+    "feedback": {
+      "summary": "Краткое содержание разговора",
+      "wellDone": "Что вы сделали хорошо",
+      "improve": "Что можно улучшить"
+    }
+  },
+  "botHistory": {
+    "all": "Все",
+    "latestActivity": "Последняя активность",
+    "oldestActivity": "Самые старые",
+    "empty": "Разговоров пока нет"
+  },
+  "coach": {
+    "sectionTitle": "Коучинг по управлению рисками",
+    "sectionDescription": "Раскройте скрытый контекст. Свяжитесь с ведущими экспертами, чтобы предотвратить критические проблемы в отношениях в Корее.",
+    "listTitle": "Доступные коучи",
+    "liveTitle": "Живой коучинг 1:1"
+  },
+  "profile": {
+    "personalSection": "Личные настройки",
+    "legalSection": "Юридическая информация",
+    "menu": {
+      "interests": "Темы интересов",
+      "language": "Язык",
+      "subscription": "Управление подпиской",
+      "terms": "Условия использования",
+      "privacy": "Политика конфиденциальности",
+      "help": "Помощь и поддержка"
+    },
+    "logoutButton": "Выйти",
+    "deleteAccountButton": "Удалить аккаунт"
+  },
+  "myInfo": {
+    "header": "Мой профиль",
+    "name": "Имя",
+    "birth": "Дата рождения",
+    "email": "Эл. почта",
+    "koreanLevel": "Уровень корейского"
+  },
+  "ask": {
+    "title": "Не уверены, как это прозвучит?",
+    "subtitle": "Я помогу вам понять, как это звучит по-корейски",
+    "startButton": "Узнать, как это звучит",
+    "bestWay": "Вот лучший способ это сказать",
+    "culturalInsights": "Культурный контекст",
+    "quickActions": {
+      "startRoleplay": "Начать ролевую игру",
+      "softer": "Сделать мягче",
+      "formal": "Более официально",
+      "apology": "Добавить извинение"
+    },
+    "hints": {
+      "hint1": "Это может быть что-то, что вы собираетесь сказать или сделать",
+      "hint2": "Это помогает мне понять правильный тон",
+      "hint3": "Опишите ситуацию или то, что хотите выразить"
+    }
+  },
+  "roleplayForm": {
+    "myRoleLabel": "Моя роль",
+    "myRolePlaceholder": "Введите вашу роль",
+    "aiRoleLabel": "Роль ИИ",
+    "aiRolePlaceholder": "Введите роль ИИ",
+    "detailLabel": "Подробности",
+    "detailPlaceholder": "Включите детали, например причину взаимодействия...",
+    "startButton": "Начать"
+  },
+  "customForm": {
+    "myRoleLabel": "Моя роль",
+    "myRolePlaceholder": "Напр.) Член команды",
+    "aiRoleLabel": "Роль ИИ",
+    "aiRolePlaceholder": "Напр.) Коллега",
+    "detailLabel": "Подробности",
+    "detailPlaceholder": "Пожалуйста, предоставьте подробное описание"
+  },
+  "interviewForm": {
+    "companyLabel": "Компания",
+    "companyPlaceholder": "Введите название компании",
+    "positionLabel": "Должность, на которую претендуете",
+    "positionPlaceholder": "Введите название должности",
+    "jobPostingLabel": "Объявление о вакансии",
+    "jobPostingPlaceholder": "Вы можете вставить описание вакансии для создания более целевых вопросов к интервью.",
+    "startButton": "Начать чат"
+  },
+  "postCreate": {
+    "headerTitle": "Новая публикация",
+    "titlePlaceholder": "Заголовок",
+    "contentPlaceholder": "О чём вы думаете?",
+    "postButton": "Опубликовать",
+    "postingButton": "Публикация..."
+  },
+  "postList": {
+    "filterLatest": "Последние",
+    "filterPopular": "Популярные",
+    "searchPlaceholder": "Поиск публикаций..."
+  },
+  "postCard": {
+    "edit": "Редактировать",
+    "delete": "Удалить"
+  },
+  "comment": {
+    "saveButton": "Сохранить",
+    "savingButton": "Сохранение...",
+    "cancelButton": "Отмена",
+    "placeholder": "Оставить комментарий..."
+  },
+  "exitChattingModal": {
+    "title": "Недостаточно разговора для создания отчёта",
+    "description": "Немного больше разговора поможет",
+    "closeButton": "Закрыть",
+    "continueButton": "Продолжить"
+  },
+  "deleteModal": {
+    "title": "Удалить",
+    "description": "Вы уверены, что хотите удалить это? Это действие нельзя отменить.",
+    "cancelButton": "Отмена",
+    "deleteButton": "Удалить"
+  },
+  "comingSoonModal": {
+    "title": "Скоро!",
+    "description": "Эта функция будет доступна в будущем обновлении.",
+    "closeButton": "Закрыть"
+  },
+  "myLanguage": {
+    "header": "Язык",
+    "saveButton": "Сохранить",
+    "savedToast": "Сохранено успешно"
+  },
+  "toastMessage": {
+    "logoutFailed": "Ошибка выхода",
+    "profileUpdated": "Профиль успешно обновлён.",
+    "profileUpdateFailed": "Не удалось обновить профиль.",
+    "fillAllFields": "Пожалуйста, заполните все поля.",
+    "requestTimeout": "Время ожидания истекло. Попробуйте снова.",
+    "createChatroomFailed": "Не удалось создать чат"
+  },
+  "roleplaySection": {
+    "conversationContext": "Контекст разговора"
+  },
+  "tab": {
+    "coaching": "Живой коучинг 1:1",
+    "selectAll": "Выбрать все",
+    "delete": "Удалить",
+    "searchPlaceholder": "Поиск чатов"
+  },
+  "askTab": {
+    "title": "Ask",
+    "edit": "Изменить",
+    "cancel": "Отмена",
+    "noResults": "Нет результатов для «{{keyword}}»"
+  },
+  "roleplayTab": {
+    "title": "Ролевая игра"
+  },
+  "historyHeader": {
+    "title": "Ролевая игра"
+  },
+  "postHeader": {
+    "title": "Сообщество"
+  },
+  "profileHeader": {
+    "title": "Моя страница"
+  },
+  "chatroomHeader": {
+    "newChat": "Новый чат",
+    "getReports": "Получить отчёт"
+  },
+  "roleplayChat": {
+    "reportUnlocked": "Отчёт разблокирован! Нажмите",
+    "toView": "для просмотра"
+  },
+  "feedbackLoading": {
+    "title": "Загрузка вашего отчёта"
+  },
+  "topicList": {
+    "favoritesEmpty": "Ваши избранные пусты",
+    "favoritesEmptyHint": "Нажмите на сердечко у понравившейся роли",
+    "removedFromFavorites": "Удалено из избранного!",
+    "addedToFavorites": "Добавлено в избранное!",
+    "comingSoon": "Этот контент скоро будет доступен"
+  },
+  "topicCategories": {
+    "Favorites": "Избранное",
+    "Career": "Карьера",
+    "Family": "Семья",
+    "Belonging": "Принадлежность",
+    "K-POP": "K-POP"
+  },
+  "interests": {
+    "dailyConversation": "💬 Повседневный разговор",
+    "business": "💼 Бизнес",
+    "travel": "✈️ Путешествия",
+    "kDrama": "🎬 K-Дорама",
+    "kPop": "🎵 K-Pop",
+    "etiquette": "🙇‍♂️ Этикет",
+    "internetSlang": "🔥 Интернет-сленг",
+    "food": "🥘 Еда",
+    "ordering": "🍜 Заказ",
+    "beauty": "💄 Красота",
+    "gathering": "👁️‍🗨️ Встречи"
+  },
+  "chatInput": {
+    "placeholder": "Введите ваш ответ...",
+    "situation": "ситуация",
+    "needHelp": "нужна помощь"
+  },
+  "spinnerLoading": {
+    "subtitle1": "Это займёт немного времени!",
+    "subtitle2": "Пожалуйста, подождите."
+  },
+  "roleplayLoading": {
+    "title": "Загрузка разговора..."
+  },
+  "closeness": {
+    "casual": "Непринуждённый",
+    "friendly": "Дружелюбный",
+    "professional": "Профессиональный",
+    "formal": "Официальный"
+  },
+  "toneDescription": {
+    "casual": "(Друзья, братья и сёстры)",
+    "friendly": "(Близкие коллеги)",
+    "professional": "(Клиенты, профессора)",
+    "formal": "(Руководители, публичные выступления)"
+  },
+  "stepQuestions": {
+    "askTarget": "Для кого это?",
+    "closeness": "Насколько вы близки с ними?",
+    "situation": "Что вы хотите сказать?"
+  },
+  "askChat": {
+    "placeholderAskTarget": "С кем вы разговариваете?",
+    "placeholderSituation": "Опишите ситуацию...",
+    "placeholderDefault": "Введите ваш ответ...",
+    "processingAI": "Обработка ИИ..."
+  },
+  "selectButton": {
+    "label": "Уровень близости"
+  },
+  "category": {
+    "free": "Свободно",
+    "question": "Вопрос",
+    "information": "Информация",
+    "review": "Отзыв",
+    "etc": "Прочее"
+  },
+  "modeToggle": {
+    "roleplaying": "Ролевая игра",
+    "ask": "Спросить"
+  },
+  "levelDescription": {
+    "BEGINNER": "Я знаю базовые вежливые слова, но не уверен, когда и как использовать формы вежливости.",
+    "INTERMEDIATE": "Я могу использовать окончания -요, но не уверен в правильном использовании формального языка.",
+    "ADVANCED": "Я понимаю и использую формы вежливости естественно в зависимости от контекста."
+  }
+}

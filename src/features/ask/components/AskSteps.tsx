@@ -1,7 +1,8 @@
 "use client";
 
-import { CLOSENESS_OPTIONS, Step, STEP_QUESTIONS, STEPS } from "@/constants";
+import { getClosenessOptions, Step, STEPS } from "@/constants";
 import { Button } from "@/components/ui/button/button";
+import { useTranslation } from "react-i18next";
 
 interface AskStepsProps {
   step: Step;
@@ -16,14 +17,14 @@ export default function AskSteps({
   closeness,
   onSelectCloseness,
 }: AskStepsProps) {
+  const { t } = useTranslation();
+  const CLOSENESS_OPTIONS = getClosenessOptions(t);
   const currentStepIdx = STEPS.indexOf(step);
 
   return (
     <>
-      <span className="text-2xl font-semibold">{STEP_QUESTIONS.askTarget}</span>
-      <span className="text-gray-600">
-        This can be something you`re <br /> about to say or do
-      </span>
+      <span className="text-2xl font-semibold">{t("ask.title")}</span>
+      <span className="text-gray-600">{t("ask.hints.hint1")}</span>
       {askTarget && (
         <div className="flex justify-end">
           <div className="mt-5 flex flex-col gap-2 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
@@ -34,12 +35,8 @@ export default function AskSteps({
 
       {currentStepIdx >= 1 && (
         <div className="mt-5 flex flex-col">
-          <span className="text-2xl font-semibold">
-            {STEP_QUESTIONS.closeness}
-          </span>
-          <span className="text-gray-600">
-            This helps me understand the right tone
-          </span>
+          <span className="text-2xl font-semibold">{t("ask.subtitle")}</span>
+          <span className="text-gray-600">{t("ask.hints.hint2")}</span>
           {closeness ? (
             <div className="flex justify-end">
               <div className="mt-5 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
@@ -68,12 +65,8 @@ export default function AskSteps({
 
       {currentStepIdx >= 2 && (
         <div className="mt-5 flex flex-col">
-          <span className="text-2xl font-semibold">
-            {STEP_QUESTIONS.situation}
-          </span>
-          <span className="text-gray-600">
-            Describe the situation or what you want to express
-          </span>
+          <span className="text-2xl font-semibold">{t("ask.startButton")}</span>
+          <span className="text-gray-600">{t("ask.hints.hint3")}</span>
         </div>
       )}
     </>

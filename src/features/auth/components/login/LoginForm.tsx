@@ -2,6 +2,7 @@
 
 import { TextInput } from "@/components/ui/form";
 import { Controller, FieldErrors, Control } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface LoginData {
   email: string;
@@ -15,6 +16,7 @@ export default function LoginForm({
   control: Control<LoginData>;
   errors: FieldErrors<LoginData>;
 }) {
+  const { t } = useTranslation();
   return (
     <>
       <div>
@@ -23,12 +25,12 @@ export default function LoginForm({
           control={control}
           render={({ field }) => (
             <TextInput
-              label="Email"
+              label={t("login.emailLabel")}
               type="email"
               value={field.value}
               onChange={field.onChange}
               onBlur={field.onBlur}
-              placeholder="example@naver.com"
+              placeholder={t("login.emailPlaceholder")}
             />
           )}
         />
@@ -43,7 +45,7 @@ export default function LoginForm({
           control={control}
           render={({ field }) => (
             <TextInput
-              label="Password"
+              label={t("login.passwordLabel")}
               type="password"
               value={field.value}
               onChange={field.onChange}

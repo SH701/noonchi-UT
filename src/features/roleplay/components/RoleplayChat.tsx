@@ -26,6 +26,7 @@ import { motion } from "framer-motion";
 
 import { SqurepenIcon } from "@/assets/svgr";
 import FeedbackLoading from "./FeedbackLoading";
+import { useTranslation } from "react-i18next";
 import { useConversationDetail } from "@/hooks/queries/useConversation";
 import { useWebVoice } from "@/hooks/custom/useWebVoice";
 import RoleplayLoading from "./RoleplayLoading";
@@ -37,6 +38,7 @@ interface RoleplayChatRoomProps {
 export default function RoleplayChat({
   conversationId,
 }: RoleplayChatRoomProps) {
+  const { t } = useTranslation();
   const [message, setMessage] = useState("");
   const [open, setOpen] = useState(false);
   const { data: conversation, refetch: conversationDeatil } =
@@ -158,9 +160,9 @@ export default function RoleplayChat({
                   animate={{ opacity: 0 }}
                   transition={{ duration: 4 }}
                 >
-                  <span>Report unlocked! Tap</span>
+                  <span>{t("roleplayChat.reportUnlocked")}</span>
                   <SqurepenIcon />
-                  <span>to view</span>
+                  <span>{t("roleplayChat.toView")}</span>
                 </motion.div>
               )}
               <ChatInput

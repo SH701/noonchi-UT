@@ -1,0 +1,351 @@
+{
+  "onboarding": {
+    "nextButton": "次へ",
+    "slide1": {
+      "title": "興味のある分野を選択してください"
+    },
+    "slide2": {
+      "title": "韓国語のレベルを選択してください",
+      "description": "韓国語でどのくらい気軽にチャットできるか教えてください！"
+    }
+  },
+  "level": {
+    "title": "韓国語のレベルを選択してください",
+    "description": "韓国語でどのくらい気軽にチャットできるか教えてください！"
+  },
+  "taste": {
+    "title": "興味のある分野を選択してください"
+  },
+  "notFound": {
+    "title": "ページが見つかりません",
+    "descriptionLine1": "お探しのページは存在しません",
+    "descriptionLine2": "または移動した可能性があります。",
+    "homeButton": "ホームへ戻る"
+  },
+  "hub": {
+    "title": "韓国語をもっと自然に話したいですか？",
+    "subtitle": "一緒にロールプレイの練習をしましょう。"
+  },
+  "login": {
+    "title": "おかえりなさい",
+    "emailLabel": "メール",
+    "emailPlaceholder": "example@naver.com",
+    "passwordLabel": "パスワード",
+    "loginButton": "ログイン",
+    "errorMessage": "メールアドレスまたはパスワードが正しくありません！",
+    "socialDivider": "次の方法でログイン",
+    "signupPrompt": "初めてですか？",
+    "signupLink": "アカウントを作成する"
+  },
+  "signupStep1": {
+    "title": "アカウントを作成",
+    "emailLabel": "メール",
+    "emailPlaceholder": "example@gmail.com",
+    "passwordLabel": "パスワード",
+    "passwordConfirmPlaceholder": "パスワード（再入力）",
+    "passwordHint": "8〜16文字（英字と数字を含む）",
+    "termsAgreement": "利用規約およびプライバシーポリシーに同意する",
+    "nextButton": "次へ",
+    "loginPrompt": "アカウントをお持ちですか？",
+    "loginLink": "ログイン"
+  },
+  "signupStep2": {
+    "nameLabel": "お名前を入力してください",
+    "namePlaceholder": "お名前を入力してください",
+    "birthLabel": "生年月日",
+    "birthPlaceholder": "YYYY-MM-DD",
+    "submitButton": "はじめる"
+  },
+  "previewHeader": {
+    "title": "ロールプレイプレビュー",
+    "skip": "スキップ",
+    "skipHint": "スキップしてログインまたは登録へ"
+  },
+  "preview": {
+    "progress1": "返信を待っています！（{{current}}/{{total}}）",
+    "progress2": "あと1回です！最後まで頑張りましょう！（{{current}}/{{total}}）"
+  },
+  "previewEnd": {
+    "title": "ロールプレイのプレビューが終了しました",
+    "description1": "プレビューのロールプレイは終了しました。",
+    "description2": "続きを楽しむにはログインまたは登録してください",
+    "signupButton": "アカウントを作成",
+    "loginButton": "ログイン"
+  },
+  "previewModal": {
+    "title": "いい調子です！次のレベルに進む準備はできていますか？",
+    "description": "ロールプレイのプレビューは終了しました。登録して会話を続け、あらゆる状況をマスターしましょう。",
+    "signupButton": "アカウントを作成",
+    "loginButton": "ログイン"
+  },
+  "myInterests": {
+    "header": "興味のあるトピック",
+    "title": "興味を選択してください",
+    "description": "体験を向上させるために、少なくとも3つの興味を選択してください。",
+    "saveButton": "興味を保存"
+  },
+  "result": {
+    "header": "レポート",
+    "tabs": {
+      "transcript": "スクリプト",
+      "mistakes": "よくある間違い"
+    },
+    "scores": {
+      "politeness": "丁寧さ",
+      "naturalness": "自然さ"
+    },
+    "feedback": {
+      "summary": "会話のまとめ",
+      "wellDone": "うまくできたこと",
+      "improve": "改善できること"
+    }
+  },
+  "botHistory": {
+    "all": "すべて",
+    "latestActivity": "最新のアクティビティ",
+    "oldestActivity": "最も古いアクティビティ",
+    "empty": "まだ会話がありません"
+  },
+  "coach": {
+    "sectionTitle": "リスクマネジメントコーチング",
+    "sectionDescription": "隠れた文脈を読み解き、韓国での重要な人間関係の失敗を防ぐために専門家とつながりましょう。",
+    "listTitle": "利用可能なコーチ",
+    "liveTitle": "ライブ1対1コーチング"
+  },
+  "profile": {
+    "personalSection": "個人設定",
+    "legalSection": "法的情報",
+    "menu": {
+      "interests": "興味のあるトピック",
+      "language": "言語",
+      "subscription": "サブスクリプション管理",
+      "terms": "利用規約",
+      "privacy": "プライバシーポリシー",
+      "help": "ヘルプ・サポート"
+    },
+    "logoutButton": "ログアウト",
+    "deleteAccountButton": "アカウント削除"
+  },
+  "myInfo": {
+    "header": "マイプロフィール",
+    "name": "名前",
+    "birth": "生年月日",
+    "email": "メール",
+    "koreanLevel": "韓国語レベル"
+  },
+  "ask": {
+    "title": "どう聞こえるか分からないですか？",
+    "subtitle": "韓国語でどう聞こえるかお手伝いします",
+    "startButton": "自然さを確認する",
+    "bestWay": "これが一番良い言い方です",
+    "culturalInsights": "文化的な洞察",
+    "quickActions": {
+      "startRoleplay": "ロールプレイを開始",
+      "softer": "もっと柔らかくする",
+      "formal": "より丁寧にする",
+      "apology": "謝罪を追加する"
+    },
+    "hints": {
+      "hint1": "これから話す内容や行動を入力してください",
+      "hint2": "適切なトーンを判断するために使います",
+      "hint3": "状況や伝えたい内容を入力してください"
+    }
+  },
+  "roleplayForm": {
+    "myRoleLabel": "自分の役割",
+    "myRolePlaceholder": "自分の役割を入力",
+    "aiRoleLabel": "AIの役割",
+    "aiRolePlaceholder": "AIの役割を入力",
+    "detailLabel": "詳細",
+    "detailPlaceholder": "やり取りの理由などの詳細を入力してください",
+    "startButton": "開始"
+  },
+  "customForm": {
+    "myRoleLabel": "自分の役割",
+    "myRolePlaceholder": "例）チームのメンバー",
+    "aiRoleLabel": "AIの役割",
+    "aiRolePlaceholder": "例）同僚",
+    "detailLabel": "詳細",
+    "detailPlaceholder": "詳細な説明を入力してください"
+  },
+  "interviewForm": {
+    "companyLabel": "会社名",
+    "companyPlaceholder": "会社名を入力",
+    "positionLabel": "応募職種",
+    "positionPlaceholder": "職種を入力",
+    "jobPostingLabel": "採用情報",
+    "jobPostingPlaceholder": "採用情報を貼り付けると、より適切な面接質問を生成できます。",
+    "startButton": "チャットを開始"
+  },
+  "postCreate": {
+    "headerTitle": "新しい投稿",
+    "titlePlaceholder": "タイトル",
+    "contentPlaceholder": "今どんなことを考えていますか？",
+    "postButton": "投稿",
+    "postingButton": "投稿中..."
+  },
+  "postList": {
+    "filterLatest": "最新",
+    "filterPopular": "人気",
+    "searchPlaceholder": "投稿を検索..."
+  },
+  "postCard": {
+    "edit": "編集",
+    "delete": "削除"
+  },
+  "comment": {
+    "saveButton": "保存",
+    "savingButton": "保存中...",
+    "cancelButton": "キャンセル",
+    "placeholder": "コメントを入力..."
+  },
+  "exitChattingModal": {
+    "title": "レポートを生成するには会話が足りません",
+    "description": "もう少し会話を続けてください",
+    "closeButton": "閉じる",
+    "continueButton": "続ける"
+  },
+  "deleteModal": {
+    "title": "削除",
+    "description": "本当に削除しますか？この操作は元に戻せません。",
+    "cancelButton": "キャンセル",
+    "deleteButton": "削除"
+  },
+  "comingSoonModal": {
+    "title": "近日公開！",
+    "description": "この機能は今後のアップデートで利用可能になります。",
+    "closeButton": "閉じる"
+  },
+  "myLanguage": {
+    "header": "言語",
+    "saveButton": "保存",
+    "savedToast": "保存しました"
+  },
+  "toastMessage": {
+    "logoutFailed": "ログアウトに失敗しました",
+    "profileUpdated": "プロフィールを更新しました。",
+    "profileUpdateFailed": "プロフィールの更新に失敗しました。",
+    "fillAllFields": "すべての項目を入力してください。",
+    "requestTimeout": "リクエストがタイムアウトしました。もう一度お試しください。",
+    "createChatroomFailed": "チャットルームの作成に失敗しました"
+  },
+  "roleplaySection": {
+    "conversationContext": "会話のコンテキスト"
+  },
+  "tab": {
+    "coaching": "ライブ1対1コーチング",
+    "selectAll": "すべて選択",
+    "delete": "削除",
+    "searchPlaceholder": "チャットを検索"
+  },
+  "askTab": {
+    "title": "Ask",
+    "edit": "編集",
+    "cancel": "キャンセル",
+    "noResults": "「{{keyword}}」の結果はありません"
+  },
+  "roleplayTab": {
+    "title": "ロールプレイ"
+  },
+  "historyHeader": {
+    "title": "ロールプレイ"
+  },
+  "postHeader": {
+    "title": "コミュニティ"
+  },
+  "profileHeader": {
+    "title": "マイページ"
+  },
+  "chatroomHeader": {
+    "newChat": "新しいチャット",
+    "getReports": "レポートを見る"
+  },
+  "roleplayChat": {
+    "reportUnlocked": "レポートが解放されました！タップして",
+    "toView": "確認する"
+  },
+  "feedbackLoading": {
+    "title": "レポートを準備中"
+  },
+  "topicList": {
+    "favoritesEmpty": "お気に入りが空です",
+    "favoritesEmptyHint": "好きなロールのハートをタップしてください",
+    "removedFromFavorites": "お気に入りから削除しました！",
+    "addedToFavorites": "お気に入りに追加しました！",
+    "comingSoon": "このコンテンツはまもなく利用可能になります"
+  },
+  "topicCategories": {
+    "Favorites": "お気に入り",
+    "Career": "キャリア",
+    "Family": "家族",
+    "Belonging": "所属",
+    "K-POP": "K-POP"
+  },
+  "interests": {
+    "dailyConversation": "💬 日常会話",
+    "business": "💼 ビジネス",
+    "travel": "✈️ 旅行",
+    "kDrama": "🎬 韓国ドラマ",
+    "kPop": "🎵 K-POP",
+    "etiquette": "🙇‍♂️ マナー",
+    "internetSlang": "🔥 ネットスラング",
+    "food": "🥘 料理",
+    "ordering": "🍜 注文",
+    "beauty": "💄 美容",
+    "gathering": "👁️‍🗨️ 集まり"
+  },
+  "chatInput": {
+    "placeholder": "答えを入力してください...",
+    "situation": "状況",
+    "needHelp": "ヒントが必要"
+  },
+  "spinnerLoading": {
+    "subtitle1": "すぐに終わります！",
+    "subtitle2": "少々お待ちください。"
+  },
+  "roleplayLoading": {
+    "title": "会話の準備中..."
+  },
+  "closeness": {
+    "casual": "カジュアル",
+    "friendly": "フレンドリー",
+    "professional": "プロフェッショナル",
+    "formal": "フォーマル"
+  },
+  "toneDescription": {
+    "casual": "(友達、兄弟姉妹)",
+    "friendly": "(仲の良い同僚)",
+    "professional": "(クライアント、教授)",
+    "formal": "(上級幹部、公の場)"
+  },
+  "stepQuestions": {
+    "askTarget": "誰に向けたものですか？",
+    "closeness": "その人とどのくらい親しいですか？",
+    "situation": "何を伝えたいですか？"
+  },
+  "askChat": {
+    "placeholderAskTarget": "誰と話していますか？",
+    "placeholderSituation": "状況を説明してください...",
+    "placeholderDefault": "答えを入力してください...",
+    "processingAI": "AIが処理中..."
+  },
+  "selectButton": {
+    "label": "親しさのレベル"
+  },
+  "category": {
+    "free": "自由",
+    "question": "質問",
+    "information": "情報",
+    "review": "レビュー",
+    "etc": "その他"
+  },
+  "modeToggle": {
+    "roleplaying": "ロールプレイ",
+    "ask": "質問"
+  },
+  "levelDescription": {
+    "BEGINNER": "基本的な丁寧語は知っていますが、敬語をいつどう使うか自信がありません。",
+    "INTERMEDIATE": "-요体は使えますが、フォーマルな敬語を正しく使う自信がありません。",
+    "ADVANCED": "文脈や関係性に応じて敬語を自然に理解・使用できます。"
+  }
+}

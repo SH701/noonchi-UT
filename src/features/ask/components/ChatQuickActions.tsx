@@ -2,12 +2,14 @@
 
 import { Button } from "@/components/ui/button/button";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 interface ChatQuickActionsProps {
   onOpenModal: () => void;
 }
 
 export default function ChatQuickActions({ onOpenModal }: ChatQuickActionsProps) {
+  const { t } = useTranslation();
   const router = useRouter();
   const handleRoleplay = () => {
     router.push("/hub");
@@ -19,28 +21,28 @@ export default function ChatQuickActions({ onOpenModal }: ChatQuickActionsProps)
         className="w-30 shrink-0 p-3 text-[#1F2937]"
         onClick={handleRoleplay}
       >
-        Start Role-play
+        {t("ask.quickActions.startRoleplay")}
       </Button>
       <Button
         variant="ghost"
         className="w-30 shrink-0 p-3 text-[#1F2937]"
         onClick={onOpenModal}
       >
-        Make it softer
+        {t("ask.quickActions.softer")}
       </Button>
       <Button
         variant="ghost"
         className="w-30 shrink-0 p-3 text-[#1F2937]"
         onClick={onOpenModal}
       >
-        More formal
+        {t("ask.quickActions.formal")}
       </Button>
       <Button
         variant="ghost"
         className="w-30 shrink-0 p-3 text-[#1F2937]"
         onClick={onOpenModal}
       >
-        Add an apology
+        {t("ask.quickActions.apology")}
       </Button>
     </nav>
   );

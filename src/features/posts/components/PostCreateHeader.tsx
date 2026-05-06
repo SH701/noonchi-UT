@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronLeft } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface PostCreateHeaderProps {
   canSubmit: boolean;
@@ -15,6 +16,7 @@ export default function PostCreateHeader({
   onBack,
   onSubmit,
 }: PostCreateHeaderProps) {
+  const { t } = useTranslation();
   return (
     <header className="sticky top-0 z-20 flex h-14 items-center justify-between backdrop-blur-md">
       <button
@@ -24,7 +26,7 @@ export default function PostCreateHeader({
       >
         <ChevronLeft size={24} />
       </button>
-      <h1 className="text-base font-semibold text-gray-900">New Post</h1>
+      <h1 className="text-base font-semibold text-gray-900">{t("postCreate.headerTitle")}</h1>
       <button
         onClick={onSubmit}
         disabled={!canSubmit}
@@ -32,7 +34,7 @@ export default function PostCreateHeader({
           canSubmit ? "text-white" : "text-gray-400"
         }`}
       >
-        {isPending ? "Posting..." : "Post"}
+        {isPending ? t("postCreate.postingButton") : t("postCreate.postButton")}
       </button>
     </header>
   );

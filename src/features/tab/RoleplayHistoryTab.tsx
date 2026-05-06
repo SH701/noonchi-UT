@@ -10,8 +10,10 @@ import { useHistorySearch } from "@/hooks/custom";
 import { useDeleteConversation } from "@/hooks/mutations";
 import DeleteModal from "@/components/modal/DeleteModal";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function RoleplayHistoryTab() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { closeTab } = useTabStore();
   const [confirmId, setConfirmId] = useState<number | null>(null);
@@ -33,7 +35,7 @@ export default function RoleplayHistoryTab() {
         onClick={handleHistoryPage}
         className="mb-3 flex items-center gap-1"
       >
-        <span className="text-sm font-medium">Role Playing</span>
+        <span className="text-sm font-medium">{t("roleplayTab.title")}</span>
         <ChevronRight size={18} className="text-gray-400" />
       </button>
       {isPending ? (

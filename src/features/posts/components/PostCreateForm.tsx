@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { X } from "lucide-react";
-import { CATEGORIES, MAX_CONTENT } from "@/constants/category";
+import { getCategories, MAX_CONTENT } from "@/constants/category";
+import { useTranslation } from "react-i18next";
 
 interface PostCreateFormProps {
   title: string;
@@ -25,18 +26,20 @@ export default function PostCreateForm({
   onCategoryChange,
   onRemoveImage,
 }: PostCreateFormProps) {
+  const { t } = useTranslation();
+  const CATEGORIES = getCategories(t);
   return (
     <div className="flex flex-1 flex-col rounded-2xl bg-white p-4 shadow-sm">
       <input
         className="border-b border-gray-400 pb-3 text-lg font-bold outline-none placeholder:font-normal placeholder:text-gray-300"
-        placeholder="Title"
+        placeholder={t("postCreate.titlePlaceholder")}
         value={title}
         onChange={(e) => onTitleChange(e.target.value)}
         maxLength={100}
       />
       <textarea
         className="mt-4 flex-1 resize-none text-[15px] leading-relaxed text-gray-800 outline-none placeholder:text-gray-300"
-        placeholder="What's on your mind?"
+        placeholder={t("postCreate.contentPlaceholder")}
         value={content}
         onChange={(e) => onContentChange(e.target.value.slice(0, MAX_CONTENT))}
         rows={12}

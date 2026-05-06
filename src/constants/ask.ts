@@ -1,16 +1,18 @@
+import type { TFunction } from "i18next";
+
 export type Step = "askTarget" | "closeness" | "situation" | "chat";
 
 export const STEPS: Step[] = ["askTarget", "closeness", "situation", "chat"];
 
-export const CLOSENESS_OPTIONS = [
-  { label: "Casual", value: "casual" },
-  { label: "Friendly", value: "friendly" },
-  { label: "Professional", value: "professional" },
-  { label: "Formal", value: "formal" },
+export const getClosenessOptions = (t: TFunction) => [
+  { label: t("closeness.casual"), value: "casual" },
+  { label: t("closeness.friendly"), value: "friendly" },
+  { label: t("closeness.professional"), value: "professional" },
+  { label: t("closeness.formal"), value: "formal" },
 ] as const;
 
-export const STEP_QUESTIONS: Record<string, string> = {
-  askTarget: "Who is this for?",
-  closeness: "How close are you with them?",
-  situation: "What do you want to say?",
-};
+export const getStepQuestions = (t: TFunction): Record<string, string> => ({
+  askTarget: t("stepQuestions.askTarget"),
+  closeness: t("stepQuestions.closeness"),
+  situation: t("stepQuestions.situation"),
+});

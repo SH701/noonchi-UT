@@ -1,22 +1,19 @@
-export const INTEREST_OPTIONS = [
-  "💬 Daily Conversation",
-  "💼 Business",
-  "✈️ Travel",
-  "🎬 K-Drama",
-  "🎵 K-Pop",
-  "🙇‍♂️ Etiquette",
-  "🔥 Internet Slang",
-  "🥘 Food",
-  "🍜 Ordering",
-  "💄 Beauty",
-  "👁️‍🗨️ Gathering",
+export const INTEREST_KEYS = [
+  "dailyConversation",
+  "business",
+  "travel",
+  "kDrama",
+  "kPop",
+  "etiquette",
+  "internetSlang",
+  "food",
+  "ordering",
+  "beauty",
+  "gathering",
 ] as const;
 
-export const levelDescription = {
-  BEGINNER:
-    "I know basic polite words, but I'm not sure when or how to use honorifics.",
-  INTERMEDIATE:
-    "I can use -요 endings, but I’m not confident in using formal or respectful language correctly.",
-  ADVANCED:
-    "I understand and use honorifics naturally depending on context or relationship.",
-} as const;
+export type InterestKey = (typeof INTEREST_KEYS)[number];
+
+export const LEVEL_KEYS = ["BEGINNER", "INTERMEDIATE", "ADVANCED"] as const;
+
+export type LevelKey = (typeof LEVEL_KEYS)[number];

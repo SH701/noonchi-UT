@@ -2,7 +2,7 @@
 
 import { Header } from "@/components/common";
 import { Button } from "@/components/ui/button/button";
-import { INTEREST_OPTIONS } from "@/data";
+import { INTEREST_KEYS } from "@/data";
 
 import { toast } from "@/components/ui/toast/toast";
 import { ChevronLeft } from "lucide-react";
@@ -11,12 +11,13 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { Spinner } from "@/components/ui/spinner/spinner";
 import { useUpdateProfile } from "../../hooks/useProfile";
-
+import { useTranslation } from "react-i18next";
 
 interface MyinterestsProps {
   interests: string[];
 }
 export default function MyInterests({ interests }: MyinterestsProps) {
+  const { t } = useTranslation();
   const router = useRouter();
   const { update } = useSession();
   const { mutateAsync: updateProfile, isPending } = useUpdateProfile();
@@ -33,9 +34,9 @@ export default function MyInterests({ interests }: MyinterestsProps) {
       await updateProfile({ interests: selected });
       await update({});
       router.refresh();
-      toast.success("Profile updated successfully.");
+      toast.success(t("toastMessage.profileUpdated"));
     } catch {
-      toast.error("Failed to update profile.");
+      toast.error(t("toastMessage.profileUpdateFailed"));
     }
   };
 
@@ -43,17 +44,17 @@ export default function MyInterests({ interests }: MyinterestsProps) {
     <>
       <Header
         leftIcon={<ChevronLeft onClick={() => router.back()} />}
-        center="Topic of Interests"
+        center={t("myInterests.header")}
       />
       <h2 className="pb-1 pt-5 text-xl font-semibold leading-7">
-        Select Your Interest
+        {t("myInterests.title")}
       </h2>
       <p className="pb-6 text-sm text-gray-500">
-        Select at least 3 interests to help us refine your experience.
+        {t("myInterests.description")}
       </p>
       <section className="flex flex-1 flex-col pb-10 pt-4">
         <ul className="flex flex-wrap gap-3">
-          {INTEREST_OPTIONS.map((opt) => (
+          {INTEREST_KEYS.map((opt) => (
             <li key={opt}>
               <button
                 onClick={() => toggle(opt)}
@@ -64,7 +65,7 @@ export default function MyInterests({ interests }: MyinterestsProps) {
                 }}
                 aria-pressed={selected.includes(opt)}
               >
-                {opt}
+                {t(`interests.${opt}`)}
               </button>
             </li>
           ))}
@@ -76,7 +77,7 @@ export default function MyInterests({ interests }: MyinterestsProps) {
           onClick={handleUpdate}
           disabled={isPending || selected.length < 3}
         >
-          {isPending ? <Spinner /> : <span>Save Interests</span>}
+          {isPending ? <Spinner /> : <span>{t("myInterests.saveButton")}</span>}
         </Button>
       </section>
     </>

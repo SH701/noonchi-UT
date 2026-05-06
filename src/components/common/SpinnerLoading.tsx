@@ -1,15 +1,24 @@
+"use client";
+
+import { useTranslation } from "react-i18next";
+
 interface SpinnerLoadingProps {
   title: string;
 }
 
 export default function SpinnerLoading({ title }: SpinnerLoadingProps) {
+  const { t } = useTranslation();
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-8">
       <div className="relative flex items-center justify-center">
         <svg
           className="absolute animate-spin"
           viewBox="0 0 260 260"
-          style={{ width: "clamp(132px, 36vw, 165px)", height: "clamp(132px, 36vw, 165px)", animationDuration: "2s" }}
+          style={{
+            width: "clamp(132px, 36vw, 165px)",
+            height: "clamp(132px, 36vw, 165px)",
+            animationDuration: "2s",
+          }}
         >
           <circle
             cx="130"
@@ -30,7 +39,14 @@ export default function SpinnerLoading({ title }: SpinnerLoadingProps) {
           </defs>
         </svg>
 
-        <div className="flex items-center justify-center rounded-full bg-[#dde0f5]" style={{ width: "clamp(128px, 35vw, 160px)", height: "clamp(128px, 35vw, 160px)", fontSize: "clamp(48px, 10vw, 60px)" }}>
+        <div
+          className="flex items-center justify-center rounded-full bg-[#dde0f5]"
+          style={{
+            width: "clamp(128px, 35vw, 160px)",
+            height: "clamp(128px, 35vw, 160px)",
+            fontSize: "clamp(48px, 10vw, 60px)",
+          }}
+        >
           👀
         </div>
       </div>
@@ -38,9 +54,9 @@ export default function SpinnerLoading({ title }: SpinnerLoadingProps) {
       <div className="flex flex-col items-center gap-2 text-center">
         <p className="text-xl font-bold text-gray-800">{title}</p>
         <p className="text-sm text-gray-400">
-          It won&apos;t take long!
+          {t("spinnerLoading.subtitle1")}
           <br />
-          Please wait a moment.
+          {t("spinnerLoading.subtitle2")}
         </p>
       </div>
     </div>

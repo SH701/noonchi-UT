@@ -1,22 +1,24 @@
-import { levelDescription } from "@/data";
+import { LEVEL_KEYS } from "@/data";
 import { usePreferenceStore } from "@/store/usePreferenceStore";
+import { useTranslation } from "react-i18next";
 
 export default function Level() {
   const koreanLevel = usePreferenceStore((s) => s.koreanLevel);
   const setKoreanLevel = usePreferenceStore((s) => s.setKoreanLevel);
+  const { t } = useTranslation();
 
   return (
     <div className="flex h-full flex-col pt-4">
       <div className="flex flex-1 flex-col">
         <h1 className="mb-2 text-2xl font-semibold">
-          Please select your <br /> Korean level
+          {t("level.title")}
         </h1>
         <p className="mb-4.5 text-gray-400">
-          Tell us how comfortable you are <br /> chatting in Korean!
+          {t("level.description")}
         </p>
 
         <div className="space-y-2">
-          {(["BEGINNER", "INTERMEDIATE", "ADVANCED"] as const).map((lvl) => (
+          {LEVEL_KEYS.map((lvl) => (
             <div
               key={lvl}
               onClick={() => setKoreanLevel(lvl)}
@@ -31,7 +33,7 @@ export default function Level() {
                   {lvl.charAt(0) + lvl.slice(1).toLowerCase()}
                 </span>
                 <span className="text-sm leading-snug text-gray-500">
-                  {levelDescription[lvl]}
+                  {t(`levelDescription.${lvl}`)}
                 </span>
               </div>
             </div>

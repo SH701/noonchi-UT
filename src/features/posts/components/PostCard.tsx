@@ -7,7 +7,8 @@ import { useState, useRef, useEffect } from "react";
 import { PostSearchItem } from "../types/posts.type";
 import { getRelativeTime } from "@/lib/time-format";
 import { useSession } from "next-auth/react";
-import { CATEGORIES } from "@/constants/category";
+import { getCategories } from "@/constants/category";
+import { useTranslation } from "react-i18next";
 
 type PostCardProps = PostSearchItem & {
   onClick: () => void;
@@ -29,6 +30,8 @@ export default function PostCard({
   onEdit,
   onDelete,
 }: PostCardProps) {
+  const { t } = useTranslation();
+  const CATEGORIES = getCategories(t);
   const menuRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const { data: session } = useSession();
@@ -87,7 +90,7 @@ export default function PostCard({
                     onEdit?.();
                   }}
                 >
-                  Edit
+                  {t("postCard.edit")}
                 </button>
                 <div className="w-px bg-gray-100" />
                 <button
@@ -98,7 +101,7 @@ export default function PostCard({
                     onDelete?.();
                   }}
                 >
-                  Delete
+                  {t("postCard.delete")}
                 </button>
               </div>
             )}

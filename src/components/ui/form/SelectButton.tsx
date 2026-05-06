@@ -1,4 +1,5 @@
-import { TONE_OPTIONS } from "@/constants";
+import { getToneOptions } from "@/constants";
+import { useTranslation } from "react-i18next";
 
 interface SelectButtonProps {
   selectedTone: string;
@@ -9,10 +10,12 @@ export default function SelectButton({
   selectedTone,
   onSelect,
 }: SelectButtonProps) {
+  const { t } = useTranslation();
+  const TONE_OPTIONS = getToneOptions(t);
   return (
     <div>
       <p className="mb-2 text-sm font-semibold text-gray-700">
-        Level of closeness
+        {t("selectButton.label")}
       </p>
       <div className="grid grid-cols-2 gap-3">
         {TONE_OPTIONS.map((tone) => (

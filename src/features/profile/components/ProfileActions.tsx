@@ -8,8 +8,10 @@ import { useState } from "react";
 import { Spinner } from "@/components/ui/spinner/spinner";
 import { CominSoonModal } from "@/components/modal";
 import { authMutations } from "@/features/auth/api/mutations";
+import { useTranslation } from "react-i18next";
 
 export default function ProfileActions() {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const router = useRouter();
@@ -23,16 +25,16 @@ export default function ProfileActions() {
       router.push("/");
       setLoading(false);
     } catch {
-      toast.error("Logout failed");
+      toast.error(t("toastMessage.logoutFailed"));
     }
   };
   return (
     <footer className="mt-auto flex flex-col items-center gap-2 pb-5">
       <Button onClick={handleLogout} size="lg" disabled={loading}>
-        {loading ? <Spinner /> : <span>Log out</span>}
+        {loading ? <Spinner /> : <span>{t("profile.logoutButton")}</span>}
       </Button>
       <Button size="lg" variant="secondary" onClick={() => setModalOpen(true)}>
-        Delete Account
+        {t("profile.deleteAccountButton")}
       </Button>
       {modalOpen && (
         <CominSoonModal

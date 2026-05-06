@@ -2,6 +2,7 @@
 
 import { TextInput } from "@/components/ui/form";
 import { Controller, Control, FieldErrors } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface SignupForm1Props  {
   email: string;
@@ -17,6 +18,7 @@ export default function SignupForm1({
   control: Control<SignupForm1Props>;
   errors: FieldErrors<SignupForm1Props>;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="space-y-4">
       <div>
@@ -25,9 +27,9 @@ export default function SignupForm1({
           control={control}
           render={({ field }) => (
             <TextInput
-              label="Email"
+              label={t("signupStep1.emailLabel")}
               type="email"
-              placeholder="example@gmail.com"
+              placeholder={t("signupStep1.emailPlaceholder")}
               value={field.value}
               onChange={field.onChange}
               onBlur={field.onBlur}
@@ -45,7 +47,7 @@ export default function SignupForm1({
           control={control}
           render={({ field }) => (
             <TextInput
-              label="Password"
+              label={t("signupStep1.passwordLabel")}
               type="password"
               placeholder="••••••••"
               value={field.value}
@@ -66,7 +68,7 @@ export default function SignupForm1({
           render={({ field }) => (
             <TextInput
               type="password"
-              placeholder="Re-enter your password"
+              placeholder={t("signupStep1.passwordConfirmPlaceholder")}
               value={field.value}
               onChange={field.onChange}
               onBlur={field.onBlur}
@@ -81,7 +83,7 @@ export default function SignupForm1({
       </div>
 
       <p className="text-xs text-blue-500 ">
-        8–16 characters, include letters & numbers
+        {t("signupStep1.passwordHint")}
       </p>
 
       <div>
@@ -97,14 +99,7 @@ export default function SignupForm1({
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 mt-1"
               />
               <span className="text-sm text-gray-700 leading-relaxed">
-                Agree with{" "}
-                <a href="#" className="text-black underline">
-                  Terms of use
-                </a>{" "}
-                and{" "}
-                <a href="#" className="text-black underline">
-                  privacy policy
-                </a>
+                {t("signupStep1.termsAgreement")}
               </span>
             </label>
           )}

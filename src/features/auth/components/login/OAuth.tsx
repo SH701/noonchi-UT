@@ -1,5 +1,6 @@
 import SignupContent from "../signup/SignupContent";
 import { AppleIcon, GoogleIcon } from "@/assets/svgr";
+import { useTranslation } from "react-i18next";
 
 interface OAuthProps {
   GoogleLogin: () => void;
@@ -12,11 +13,12 @@ export default function OAuth({
   AppleLogin,
   openModal,
 }: OAuthProps) {
+  const { t } = useTranslation();
   return (
     <div>
       <div className="my-6 flex w-full items-center">
         <div className="h-px flex-1 bg-gray-300" />
-        <span className="px-4 text-sm text-gray-400">Sign in with</span>
+        <span className="px-4 text-sm text-gray-400">{t("login.socialDivider")}</span>
         <div className="h-px flex-1 bg-gray-300" />
       </div>
       <div className="flex items-center justify-center gap-4">
@@ -38,12 +40,12 @@ export default function OAuth({
         </button>
       </div>
       <div className="pt-6 text-center text-sm text-gray-500">
-        First time here?{" "}
+        {t("login.signupPrompt")}{" "}
         <button
           className="cursor-pointer font-medium text-blue-500 hover:underline"
           onClick={() => openModal(<SignupContent />)}
         >
-          Create an account
+          {t("login.signupLink")}
         </button>
       </div>
     </div>

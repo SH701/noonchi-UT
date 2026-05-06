@@ -12,8 +12,10 @@ import { fadeVariants, slideVariants } from "@/constants";
 import { useState } from "react";
 import { useDeleteConversation } from "@/hooks/mutations";
 import { useHistorySearch } from "@/hooks/custom";
+import { useTranslation } from "react-i18next";
 
 export default function Tab() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { data: session } = useSession();
   const { isOpen, closeTab: _closeTab } = useTabStore();
@@ -88,7 +90,7 @@ export default function Tab() {
                     onClick={handleCoach}
                   >
                     <PeopleIcon />
-                    <span className="pt-1 text-sm">Live 1:1 Coaching</span>
+                    <span className="pt-1 text-sm">{t("tab.coaching")}</span>
                   </button>
                 </div>
 
@@ -109,7 +111,7 @@ export default function Tab() {
                 {edit ? (
                   <div className="flex w-full justify-between text-sm">
                     <button className="text-gray-500" onClick={handleSelectAll}>
-                      Select All
+                      {t("tab.selectAll")}
                     </button>
                     <button
                       onClick={handleDeleteSelected}
@@ -120,7 +122,7 @@ export default function Tab() {
                           : "text-gray-400"
                       }
                     >
-                      Delete
+                      {t("tab.delete")}
                       {selectedIds.length > 0 && ` (${selectedIds.length})`}
                     </button>
                   </div>

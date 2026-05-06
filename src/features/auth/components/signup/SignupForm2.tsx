@@ -1,8 +1,8 @@
 "use client";
 
 import { TextInput } from "@/components/ui/form";
-
 import { Controller, Control, FieldErrors } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 interface SignupForm2Props {
   name: string;
@@ -17,6 +17,7 @@ export default function SignupForm2({
   control: Control<SignupForm2Props>;
   errors: FieldErrors<SignupForm2Props>;
 }) {
+  const { t } = useTranslation();
   return (
     <div className="space-y-4">
       <div>
@@ -25,8 +26,8 @@ export default function SignupForm2({
           control={control}
           render={({ field }) => (
             <TextInput
-              label="Name"
-              placeholder="Enter your name"
+              label={t("signupStep2.nameLabel")}
+              placeholder={t("signupStep2.namePlaceholder")}
               value={field.value}
               onChange={field.onChange}
             />
@@ -42,8 +43,8 @@ export default function SignupForm2({
           control={control}
           render={({ field }) => (
             <TextInput
-              label="Birth date"
-              placeholder="YYYY-MM-DD"
+              label={t("signupStep2.birthLabel")}
+              placeholder={t("signupStep2.birthPlaceholder")}
               value={field.value}
               onChange={(v) => {
                 let val = v.replace(/\D/g, "");

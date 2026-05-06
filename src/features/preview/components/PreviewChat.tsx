@@ -8,6 +8,7 @@ import { InfoIcon } from "@/assets/svgr";
 import { useChatUI, useScrollToBottom } from "@/hooks/custom";
 import { usePreviewMessages } from "@/features/preview/hooks";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   HintMessage,
   ChatNotice,
@@ -17,6 +18,7 @@ import PreviewHeader from "./PreviewHeader";
 import { useWebVoice } from "@/hooks/custom/useWebVoice";
 
 export default function PreviewChat() {
+  const { t } = useTranslation();
   const {
     data,
     hintData,
@@ -110,11 +112,11 @@ export default function PreviewChat() {
             <InfoIcon />
             {aiResponses.length <= 1 ? (
               <span className="text-sm">
-                They`re waiting for your reply! ({aiResponses.length}/2)
+                {t("preview.progress1", { current: aiResponses.length, total: 2 })}
               </span>
             ) : (
               <span className="text-sm">
-                One shot left! Finish strong! ({aiResponses.length}/2)
+                {t("preview.progress2", { current: aiResponses.length, total: 2 })}
               </span>
             )}
           </motion.div>

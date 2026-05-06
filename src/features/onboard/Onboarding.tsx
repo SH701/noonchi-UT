@@ -6,7 +6,7 @@ import Slider, { Settings } from "react-slick";
 import { slides } from "@/data/onboarding";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-
+import { useTranslation } from "react-i18next";
 import React from "react";
 
 import OnboardLoading from "./OnboardLoading";
@@ -28,7 +28,7 @@ export default function Onboarding() {
   const sliderRef = useRef<Slider>(null);
   const [initialLoading, setInitialLoading] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const { t } = useTranslation();
 
   const lastIndex = slides.length - 1;
 
@@ -87,12 +87,12 @@ export default function Onboarding() {
                     <>
                       <div className="mx-auto mt-10 flex w-[81%] flex-col items-center justify-center text-center">
                         <h2 className="text-icon-primary text-center text-2xl font-semibold leading-tight">
-                          {slide?.title}
+                          {t(`onboarding.slide${slide.id}.title`)}
                         </h2>
                       </div>
                       <div className="mx-auto flex w-full flex-col items-center text-center">
                         <p className="mb-3 mt-2 text-sm leading-snug text-[#9CA3AF]">
-                          {slide?.desc}
+                          {t(`onboarding.slide${slide.id}.description`)}
                         </p>
                       </div>
                     </>
@@ -106,7 +106,7 @@ export default function Onboarding() {
         <div className="flex items-center justify-center px-4 pb-10">
           {currentSlide !== 3 && (
             <Button variant="primary" size="lg" onClick={handleNext}>
-              Next
+              {t('onboarding.nextButton')}
             </Button>
           )}
         </div>

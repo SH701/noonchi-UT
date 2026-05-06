@@ -18,10 +18,12 @@ import StepIndicator from "./StepIndicator";
 import { useModalActions } from "@/store/useModalStore";
 import { X } from "lucide-react";
 import { signupSchema } from "../../types/schema";
+import { useTranslation } from "react-i18next";
 
 type Step1FormData = z.infer<typeof signupSchema>;
 
 export default function SignupContent() {
+  const { t } = useTranslation();
   const [step, setStep] = useState<1 | 2>(1);
   const [signupData, setSignupData] = useState({ email: "", password: "" });
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
@@ -77,7 +79,7 @@ export default function SignupContent() {
       <SignupTemplate
         header={
           <SignupHeader
-            title="Create account"
+            title={t("signupStep1.title")}
             rightIcon={<X onClick={() => closeModal()} />}
           />
         }
@@ -88,7 +90,7 @@ export default function SignupContent() {
             disabled={!isValid}
             onClick={handleSubmit(onSubmit)}
           >
-            Next
+            {t("signupStep1.nextButton")}
           </Button>
         }
       >
@@ -100,12 +102,12 @@ export default function SignupContent() {
         )}
       </SignupTemplate>
       <div className="pb-10 pt-6 text-center text-sm text-gray-500">
-        Already have an account?{" "}
+        {t("signupStep1.loginPrompt")}{" "}
         <button
           className="font-medium text-blue-500 hover:underline"
           onClick={() => openModal(<LoginContent />)}
         >
-          Login
+          {t("signupStep1.loginLink")}
         </button>
       </div>
     </div>

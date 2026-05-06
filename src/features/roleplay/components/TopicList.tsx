@@ -11,8 +11,10 @@ import { TopicListSkeleton } from "../../../components/skeleton";
 import { useState } from "react";
 import { toast } from "@/components/ui/toast/toast";
 import { CominSoonModal } from "@/components/modal";
+import { useTranslation } from "react-i18next";
 
 export default function TopicList() {
+  const { t } = useTranslation();
   const [category, setCategory] = useState<CategoryType>("Career");
   const [showModal, setShowModal] = useState(false);
   const isLove = category === "Favorites";
@@ -31,7 +33,7 @@ export default function TopicList() {
   const toggleFavorite = (topicId: number, isFavorite: boolean) => {
     setOptimisticFavorites((prev) => ({ ...prev, [topicId]: !isFavorite }));
     if (isFavorite) {
-      toast.success("Removed from favorites!");
+      toast.success(t("topicList.removedFromFavorites"));
       removeFavorite(topicId);
     } else {
       toast.favorite();
@@ -47,11 +49,11 @@ export default function TopicList() {
       <nav>
         <TopicSlider
           topics={[
-            { id: 1, label: "Favorites" },
-            { id: 2, label: "Career" },
-            { id: 3, label: "Family" },
-            { id: 4, label: "Belonging" },
-            { id: 5, label: "K-POP" },
+            { id: 1, value: "Favorites", label: t("topicCategories.Favorites") },
+            { id: 2, value: "Career", label: t("topicCategories.Career") },
+            { id: 3, value: "Family", label: t("topicCategories.Family") },
+            { id: 4, value: "Belonging", label: t("topicCategories.Belonging") },
+            { id: 5, value: "K-POP", label: t("topicCategories.K-POP") },
           ]}
           active={category}
           onSelect={(c) => setCategory(c)}
@@ -62,9 +64,9 @@ export default function TopicList() {
         <TopicListSkeleton />
       ) : isLove && topics.length === 0 ? (
         <div className="flex w-full flex-col items-center justify-center gap-2 py-20">
-          <p className="text-2xl font-medium">Your Favorites are empty</p>
+          <p className="text-2xl font-medium">{t("topicList.favoritesEmpty")}</p>
           <p className="text-sm text-gray-600">
-            Tap the heart on roles you like
+            {t("topicList.favoritesEmptyHint")}
           </p>
         </div>
       ) : (
@@ -75,7 +77,7 @@ export default function TopicList() {
               className="group relative aspect-square w-full cursor-pointer overflow-hidden rounded-xl transition-shadow hover:shadow-md md:flex md:aspect-auto md:w-full md:items-center md:gap-4 md:overflow-visible md:p-2"
               onClick={() => {
                 if (category === "Career" && topic.name === "Job Interview") {
-                  toast.warning("This content will be available soon");
+                  toast.warning(t("topicList.comingSoon"));
                   return;
                 }
                 gtag("event", "select_topic", {

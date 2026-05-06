@@ -1,19 +1,22 @@
+"use client";
+
 import { coach } from "@/data/coach";
 import Image from "next/image";
 import CoachBackButton from "./CoachBackButton";
+import { useTranslation } from "react-i18next";
 
 export default function LiveCoach() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen">
       <CoachBackButton />
       <div className="mb-5 flex flex-col gap-2 rounded-xl border border-white bg-white/50 p-4">
-        <span className="font-semibold">Risk Management Coaching</span>
+        <span className="font-semibold">{t("coach.sectionTitle")}</span>
         <span className="text-sm text-gray-700">
-          Decode the hiddden context. Connect with top experts to prevent
-          critical relationship failures in Korea.
+          {t("coach.sectionDescription")}
         </span>
       </div>
-      <span className="font-medium">Available Coach</span>
+      <span className="font-medium"> {t("coach.listTitle")}</span>
       {coach.map((c) => (
         <div key={c.id} className="border-b border-gray-400 py-5">
           <div className="flex gap-3">
