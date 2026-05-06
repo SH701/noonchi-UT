@@ -1,0 +1,197 @@
+{
+  "onboarding": {
+    "nextButton": "Next",
+    "slide1": {
+      "title": "Please select your interests"
+    },
+    "slide2": {
+      "title": "Please select your Korean level",
+      "description": "Tell us how comfortable you are chatting in Korean!"
+    }
+  },
+  "level": {
+    "title": "Please select your Korean level",
+    "description": "Tell us how comfortable you are chatting in Korean!"
+  },
+  "taste": {
+    "title": "Please select your interests"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "descriptionLine1": "The page you're looking for doesn't exist",
+    "descriptionLine2": "or may have been moved.",
+    "homeButton": "Go to Home"
+  },
+  "hub": {
+    "title": "Do you want to sound more natural in Korean?",
+    "subtitle": "Let's practice role-playing with me."
+  },
+  "login": {
+    "title": "Welcome back",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@naver.com",
+    "passwordLabel": "Password",
+    "loginButton": "Log in",
+    "errorMessage": "Email or password incorrect!",
+    "socialDivider": "Sign in with",
+    "signupPrompt": "First time here?",
+    "signupLink": "Create an account"
+  },
+  "signupStep1": {
+    "title": "Create account",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@gmail.com",
+    "passwordLabel": "Password",
+    "passwordConfirmPlaceholder": "Re-enter your password",
+    "passwordHint": "8–16 characters, include letters & numbers",
+    "termsAgreement": "Agree with Terms of use and privacy policy",
+    "nextButton": "Next",
+    "loginPrompt": "Already have an account?",
+    "loginLink": "Login"
+  },
+  "signupStep2": {
+    "nameLabel": "Name",
+    "namePlaceholder": "Enter your name",
+    "birthLabel": "Birth date",
+    "birthPlaceholder": "YYYY-MM-DD",
+    "submitButton": "Get Started"
+  },
+  "preview": {
+    "progress1": "They're waiting for your reply! ({{current}}/{{total}})",
+    "progress2": "One shot left! Finish strong! ({{current}}/{{total}})"
+  },
+  "previewEnd": {
+    "title": "Preview Roleplay Ended",
+    "description1": "The Preview roleplay has ended.",
+    "description2": "To continue the conversation, please log in or sign up",
+    "signupButton": "Create Account",
+    "loginButton": "Login"
+  },
+  "previewModal": {
+    "title": "You're doing great! Ready for the next level?",
+    "description": "The roleplay preview has ended. Sign up to continue the dialogue and master every situation.",
+    "signupButton": "Create Account",
+    "loginButton": "Login"
+  },
+  "profile": {
+    "personalSection": "Personal settings",
+    "legalSection": "Legal",
+    "menu": {
+      "interests": "Topics of Interest",
+      "language": "Language",
+      "subscription": "Manage Subscription",
+      "terms": "Terms of Use",
+      "privacy": "Privacy policy",
+      "help": "Help & Support"
+    },
+    "logoutButton": "Log out",
+    "deleteAccountButton": "Delete Account"
+  },
+  "myInfo": {
+    "header": "My Profile",
+    "name": "Name",
+    "birth": "Birth",
+    "email": "Email",
+    "koreanLevel": "KoreanLevel"
+  },
+  "coach": {
+    "sectionTitle": "Risk Management Coaching",
+    "sectionDescription": "Decode the hidden context. Connect with top experts to prevent critical relationship failures in Korea.",
+    "listTitle": "Available Coach"
+  },
+  "ask": {
+    "title": "Not sure how this might sound?",
+    "subtitle": "I'll help you understand how it sounds in Korean",
+    "startButton": "Check how it sounds",
+    "quickActions": {
+      "startRoleplay": "Start Role-play",
+      "softer": "Make it softer",
+      "formal": "More formal",
+      "apology": "Add an apology"
+    },
+    "hints": {
+      "hint1": "This can be something you're about to say or do",
+      "hint2": "This helps me understand the right tone",
+      "hint3": "Describe the situation or what you want to express"
+    }
+  },
+  "roleplayForm": {
+    "myRoleLabel": "My role",
+    "myRolePlaceholder": "Write your role",
+    "aiRoleLabel": "AI's role",
+    "aiRolePlaceholder": "Write ai role",
+    "detailLabel": "Detail",
+    "detailPlaceholder": "Include details like the reason for the interaction...",
+    "startButton": "Start"
+  },
+  "customForm": {
+    "myRoleLabel": "My Role",
+    "myRolePlaceholder": "ex) A team member",
+    "aiRoleLabel": "AI Role",
+    "aiRolePlaceholder": "ex) A colleague",
+    "detailLabel": "Detail",
+    "detailPlaceholder": "Please provide a detailed description"
+  },
+  "interviewForm": {
+    "companyLabel": "Company",
+    "companyPlaceholder": "Enter the company name",
+    "positionLabel": "Position Applied For",
+    "positionPlaceholder": "Enter the job title",
+    "jobPostingLabel": "Job Posting",
+    "jobPostingPlaceholder": "You can paste the job description to generate more tailored interview questions.",
+    "startButton": "Start Chatting"
+  },
+  "result": {
+    "tabs": {
+      "transcript": "Transcript",
+      "mistakes": "Common Mistakes"
+    },
+    "scores": {
+      "politeness": "Politeness",
+      "naturalness": "Naturalness"
+    },
+    "feedback": {
+      "summary": "Conversation Summary",
+      "wellDone": "What you did well",
+      "improve": "What you can improve"
+    }
+  },
+  "postCreate": {
+    "headerTitle": "New Post",
+    "titlePlaceholder": "Title",
+    "contentPlaceholder": "What's on your mind?",
+    "postButton": "Post",
+    "postingButton": "Posting..."
+  },
+  "postList": {
+    "filterLatest": "Latest",
+    "filterPopular": "Popular",
+    "searchPlaceholder": "Search posts..."
+  },
+  "postCard": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "comment": {
+    "saveButton": "Save",
+    "savingButton": "Saving...",
+    "cancelButton": "Cancel",
+    "placeholder": "Leave a comment..."
+  },
+  "exitChattingModal": {
+    "title": "There isn't enough conversation yet to generate a report",
+    "description": "A little more conversation will help",
+    "closeButton": "Close",
+    "continueButton": "Continue"
+  },
+  "deleteModal": {
+    "description": "Are you sure you want to delete this? This action cannot be undone.",
+    "cancelButton": "Cancel",
+    "deleteButton": "Delete"
+  },
+  "comingSoonModal": {
+    "title": "Coming Soon!",
+    "description": "This feature will be available in a future update.",
+    "closeButton": "Close"
+  }
+}

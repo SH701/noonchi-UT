@@ -1,3 +1,4 @@
+import "@/locales/i18n";
 import "./globals.css";
 import { Metadata, Viewport } from "next";
 import Script from "next/script";

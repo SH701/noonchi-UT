@@ -1,0 +1,197 @@
+{
+  "onboarding": {
+    "nextButton": "Далее",
+    "slide1": {
+      "title": "Выберите ваши интересы"
+    },
+    "slide2": {
+      "title": "Пожалуйста, выберите ваш уровень корейского",
+      "description": "Расскажите нам, насколько комфортно вам общаться на корейском!"
+    }
+  },
+  "level": {
+    "title": "Пожалуйста, выберите ваш уровень корейского",
+    "description": "Расскажите нам, насколько комфортно вам общаться на корейском!"
+  },
+  "taste": {
+    "title": "Выберите ваши интересы"
+  },
+  "notFound": {
+    "title": "Страница не найдена",
+    "descriptionLine1": "Страница, которую вы ищете, не существует",
+    "descriptionLine2": "или была перемещена.",
+    "homeButton": "На главную"
+  },
+  "hub": {
+    "title": "Хотите звучать более естественно на корейском?",
+    "subtitle": "Давайте потренируемся в ролевых играх вместе."
+  },
+  "login": {
+    "title": "С возвращением",
+    "emailLabel": "Эл. почта",
+    "emailPlaceholder": "example@naver.com",
+    "passwordLabel": "Пароль",
+    "loginButton": "Войти",
+    "errorMessage": "Неверный email или пароль!",
+    "socialDivider": "Войти через",
+    "signupPrompt": "Впервые здесь?",
+    "signupLink": "Создать аккаунт"
+  },
+  "signupStep1": {
+    "title": "Создать аккаунт",
+    "emailLabel": "Эл. почта",
+    "emailPlaceholder": "example@gmail.com",
+    "passwordLabel": "Пароль",
+    "passwordConfirmPlaceholder": "Повторите пароль",
+    "passwordHint": "8–16 символов, включая буквы и цифры",
+    "termsAgreement": "Согласен с условиями использования и политикой конфиденциальности",
+    "nextButton": "Далее",
+    "loginPrompt": "Уже есть аккаунт?",
+    "loginLink": "Войти"
+  },
+  "signupStep2": {
+    "nameLabel": "Введите ваше имя",
+    "namePlaceholder": "Введите ваше имя",
+    "birthLabel": "Дата рождения",
+    "birthPlaceholder": "ГГГГ-ММ-ДД",
+    "submitButton": "Начать"
+  },
+  "preview": {
+    "progress1": "Они ждут вашего ответа! ({{current}}/{{total}})",
+    "progress2": "Остался один шанс! Завершим уверенно! ({{current}}/{{total}})"
+  },
+  "previewEnd": {
+    "title": "Предварительный просмотр ролевой игры завершён",
+    "description1": "Предварительный просмотр ролевой игры завершён.",
+    "description2": "Чтобы продолжить разговор, войдите или зарегистрируйтесь",
+    "signupButton": "Создать аккаунт",
+    "loginButton": "Войти"
+  },
+  "previewModal": {
+    "title": "Вы отлично справляетесь! Готовы к следующему уровню?",
+    "description": "Предварительный просмотр ролевой игры завершён. Зарегистрируйтесь, чтобы продолжить диалог и освоить все ситуации.",
+    "signupButton": "Создать аккаунт",
+    "loginButton": "Войти"
+  },
+  "profile": {
+    "personalSection": "Личные настройки",
+    "legalSection": "Юридическая информация",
+    "menu": {
+      "interests": "Темы интересов",
+      "language": "Язык",
+      "subscription": "Управление подпиской",
+      "terms": "Условия использования",
+      "privacy": "Политика конфиденциальности",
+      "help": "Помощь и поддержка"
+    },
+    "logoutButton": "Выйти",
+    "deleteAccountButton": "Удалить аккаунт"
+  },
+  "myInfo": {
+    "header": "Мой профиль",
+    "name": "Имя",
+    "birth": "Дата рождения",
+    "email": "Эл. почта",
+    "koreanLevel": "Уровень корейского"
+  },
+  "coach": {
+    "sectionTitle": "Коучинг по управлению рисками",
+    "sectionDescription": "Раскройте скрытый контекст. Свяжитесь с ведущими экспертами, чтобы предотвратить критические проблемы в отношениях в Корее.",
+    "listTitle": "Доступные коучи"
+  },
+  "ask": {
+    "title": "Не уверены, как это прозвучит?",
+    "subtitle": "Я помогу вам понять, как это звучит по-корейски",
+    "startButton": "Узнать, как это звучит",
+    "quickActions": {
+      "startRoleplay": "Начать ролевую игру",
+      "softer": "Сделать мягче",
+      "formal": "Более официально",
+      "apology": "Добавить извинение"
+    },
+    "hints": {
+      "hint1": "Это может быть что-то, что вы собираетесь сказать или сделать",
+      "hint2": "Это помогает мне понять правильный тон",
+      "hint3": "Опишите ситуацию или то, что хотите выразить"
+    }
+  },
+  "roleplayForm": {
+    "myRoleLabel": "Моя роль",
+    "myRolePlaceholder": "Введите вашу роль",
+    "aiRoleLabel": "Роль ИИ",
+    "aiRolePlaceholder": "Введите роль ИИ",
+    "detailLabel": "Подробности",
+    "detailPlaceholder": "Включите детали, например причину взаимодействия...",
+    "startButton": "Начать"
+  },
+  "customForm": {
+    "myRoleLabel": "Моя роль",
+    "myRolePlaceholder": "Напр.) Член команды",
+    "aiRoleLabel": "Роль ИИ",
+    "aiRolePlaceholder": "Напр.) Коллега",
+    "detailLabel": "Подробности",
+    "detailPlaceholder": "Пожалуйста, предоставьте подробное описание"
+  },
+  "interviewForm": {
+    "companyLabel": "Компания",
+    "companyPlaceholder": "Введите название компании",
+    "positionLabel": "Должность, на которую претендуете",
+    "positionPlaceholder": "Введите название должности",
+    "jobPostingLabel": "Объявление о вакансии",
+    "jobPostingPlaceholder": "Вы можете вставить описание вакансии для создания более целевых вопросов к интервью.",
+    "startButton": "Начать чат"
+  },
+  "result": {
+    "tabs": {
+      "transcript": "Стенограмма",
+      "mistakes": "Типичные ошибки"
+    },
+    "scores": {
+      "politeness": "Вежливость",
+      "naturalness": "Естественность"
+    },
+    "feedback": {
+      "summary": "Краткое содержание разговора",
+      "wellDone": "Что вы сделали хорошо",
+      "improve": "Что можно улучшить"
+    }
+  },
+  "postCreate": {
+    "headerTitle": "Новая публикация",
+    "titlePlaceholder": "Заголовок",
+    "contentPlaceholder": "О чём вы думаете?",
+    "postButton": "Опубликовать",
+    "postingButton": "Публикация..."
+  },
+  "postList": {
+    "filterLatest": "Последние",
+    "filterPopular": "Популярные",
+    "searchPlaceholder": "Поиск публикаций..."
+  },
+  "postCard": {
+    "edit": "Редактировать",
+    "delete": "Удалить"
+  },
+  "comment": {
+    "saveButton": "Сохранить",
+    "savingButton": "Сохранение...",
+    "cancelButton": "Отмена",
+    "placeholder": "Оставить комментарий..."
+  },
+  "exitChattingModal": {
+    "title": "Недостаточно разговора для создания отчёта",
+    "description": "Немного больше разговора поможет",
+    "closeButton": "Закрыть",
+    "continueButton": "Продолжить"
+  },
+  "deleteModal": {
+    "description": "Вы уверены, что хотите удалить это? Это действие нельзя отменить.",
+    "cancelButton": "Отмена",
+    "deleteButton": "Удалить"
+  },
+  "comingSoonModal": {
+    "title": "Скоро!",
+    "description": "Эта функция будет доступна в будущем обновлении.",
+    "closeButton": "Закрыть"
+  }
+}

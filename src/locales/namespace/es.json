@@ -1,0 +1,197 @@
+{
+  "onboarding": {
+    "nextButton": "Siguiente",
+    "slide1": {
+      "title": "Por favor, selecciona tus intereses"
+    },
+    "slide2": {
+      "title": "Por favor, selecciona tu nivel de coreano",
+      "description": "¡Cuéntanos qué tan cómodo te sientes chateando en coreano!"
+    }
+  },
+  "level": {
+    "title": "Por favor, selecciona tu nivel de coreano",
+    "description": "¡Cuéntanos qué tan cómodo te sientes chateando en coreano!"
+  },
+  "taste": {
+    "title": "Por favor, selecciona tus intereses"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "descriptionLine1": "La página que buscas no existe",
+    "descriptionLine2": "o puede haber sido movida.",
+    "homeButton": "Ir al inicio"
+  },
+  "hub": {
+    "title": "¿Quieres sonar más natural en coreano?",
+    "subtitle": "Practiquemos el juego de roles juntos."
+  },
+  "login": {
+    "title": "Bienvenido de nuevo",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "example@naver.com",
+    "passwordLabel": "Contraseña",
+    "loginButton": "Iniciar sesión",
+    "errorMessage": "¡Correo electrónico o contraseña incorrectos!",
+    "socialDivider": "Iniciar sesión con",
+    "signupPrompt": "¿Es tu primera vez?",
+    "signupLink": "Crear una cuenta"
+  },
+  "signupStep1": {
+    "title": "Crear cuenta",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "example@gmail.com",
+    "passwordLabel": "Contraseña",
+    "passwordConfirmPlaceholder": "Vuelve a ingresar tu contraseña",
+    "passwordHint": "8–16 caracteres, incluye letras y números",
+    "termsAgreement": "Acepto los Términos de uso y la política de privacidad",
+    "nextButton": "Siguiente",
+    "loginPrompt": "¿Ya tienes una cuenta?",
+    "loginLink": "Iniciar sesión"
+  },
+  "signupStep2": {
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Ingresa tu nombre",
+    "birthLabel": "Fecha de nacimiento",
+    "birthPlaceholder": "AAAA-MM-DD",
+    "submitButton": "Comenzar"
+  },
+  "preview": {
+    "progress1": "¡Están esperando tu respuesta! ({{current}}/{{total}})",
+    "progress2": "¡Un intento más! ¡Termina con fuerza! ({{current}}/{{total}})"
+  },
+  "previewEnd": {
+    "title": "La vista previa del juego de roles ha finalizado",
+    "description1": "La vista previa del juego de roles ha terminado.",
+    "description2": "Para continuar la conversación, inicia sesión o regístrate",
+    "signupButton": "Crear cuenta",
+    "loginButton": "Iniciar sesión"
+  },
+  "previewModal": {
+    "title": "¡Lo estás haciendo genial! ¿Listo para el siguiente nivel?",
+    "description": "La vista previa del juego de roles ha terminado. Regístrate para continuar el diálogo y dominar cada situación.",
+    "signupButton": "Crear cuenta",
+    "loginButton": "Iniciar sesión"
+  },
+  "profile": {
+    "personalSection": "Configuración personal",
+    "legalSection": "Legal",
+    "menu": {
+      "interests": "Temas de interés",
+      "language": "Idioma",
+      "subscription": "Administrar suscripción",
+      "terms": "Términos de uso",
+      "privacy": "Política de privacidad",
+      "help": "Ayuda y soporte"
+    },
+    "logoutButton": "Cerrar sesión",
+    "deleteAccountButton": "Eliminar cuenta"
+  },
+  "myInfo": {
+    "header": "Mi perfil",
+    "name": "Nombre",
+    "birth": "Fecha de nacimiento",
+    "email": "Correo electrónico",
+    "koreanLevel": "Nivel de coreano"
+  },
+  "coach": {
+    "sectionTitle": "Coaching de gestión de riesgos",
+    "sectionDescription": "Descifra el contexto oculto. Conéctate con los mejores expertos para prevenir fallas críticas en las relaciones en Corea.",
+    "listTitle": "Coach disponible"
+  },
+  "ask": {
+    "title": "¿No estás seguro de cómo podría sonar?",
+    "subtitle": "Te ayudaré a entender cómo suena en coreano",
+    "startButton": "Verificar cómo suena",
+    "quickActions": {
+      "startRoleplay": "Iniciar juego de roles",
+      "softer": "Hacerlo más suave",
+      "formal": "Más formal",
+      "apology": "Agregar una disculpa"
+    },
+    "hints": {
+      "hint1": "Esto puede ser algo que estás a punto de decir o hacer",
+      "hint2": "Esto me ayuda a entender el tono correcto",
+      "hint3": "Describe la situación o lo que quieres expresar"
+    }
+  },
+  "roleplayForm": {
+    "myRoleLabel": "Mi rol",
+    "myRolePlaceholder": "Escribe tu rol",
+    "aiRoleLabel": "Rol del IA",
+    "aiRolePlaceholder": "Escribe el rol del IA",
+    "detailLabel": "Detalle",
+    "detailPlaceholder": "Incluye detalles como la razón de la interacción...",
+    "startButton": "Comenzar"
+  },
+  "customForm": {
+    "myRoleLabel": "Mi rol",
+    "myRolePlaceholder": "Ej.) Un miembro del equipo",
+    "aiRoleLabel": "Rol del IA",
+    "aiRolePlaceholder": "Ej.) Un colega",
+    "detailLabel": "Detalle",
+    "detailPlaceholder": "Por favor proporciona una descripción detallada"
+  },
+  "interviewForm": {
+    "companyLabel": "Empresa",
+    "companyPlaceholder": "Ingresa el nombre de la empresa",
+    "positionLabel": "Cargo al que aplica",
+    "positionPlaceholder": "Ingresa el título del puesto",
+    "jobPostingLabel": "Oferta de trabajo",
+    "jobPostingPlaceholder": "Puedes pegar la descripción del trabajo para generar preguntas de entrevista más personalizadas.",
+    "startButton": "Comenzar a chatear"
+  },
+  "result": {
+    "tabs": {
+      "transcript": "Transcripción",
+      "mistakes": "Errores comunes"
+    },
+    "scores": {
+      "politeness": "Cortesía",
+      "naturalness": "Naturalidad"
+    },
+    "feedback": {
+      "summary": "Resumen de la conversación",
+      "wellDone": "Lo que hiciste bien",
+      "improve": "Lo que puedes mejorar"
+    }
+  },
+  "postCreate": {
+    "headerTitle": "Nueva publicación",
+    "titlePlaceholder": "Título",
+    "contentPlaceholder": "¿Qué estás pensando?",
+    "postButton": "Publicar",
+    "postingButton": "Publicando..."
+  },
+  "postList": {
+    "filterLatest": "Más recientes",
+    "filterPopular": "Popular",
+    "searchPlaceholder": "Buscar publicaciones..."
+  },
+  "postCard": {
+    "edit": "Editar",
+    "delete": "Eliminar"
+  },
+  "comment": {
+    "saveButton": "Guardar",
+    "savingButton": "Guardando...",
+    "cancelButton": "Cancelar",
+    "placeholder": "Deja un comentario..."
+  },
+  "exitChattingModal": {
+    "title": "No hay suficiente conversación para generar un informe",
+    "description": "Un poco más de conversación ayudará",
+    "closeButton": "Cerrar",
+    "continueButton": "Continuar"
+  },
+  "deleteModal": {
+    "description": "¿Estás seguro de que quieres eliminar esto? Esta acción no se puede deshacer.",
+    "cancelButton": "Cancelar",
+    "deleteButton": "Eliminar"
+  },
+  "comingSoonModal": {
+    "title": "¡Próximamente!",
+    "description": "Esta función estará disponible en una próxima actualización.",
+    "closeButton": "Cerrar"
+  }
+}
