@@ -2,7 +2,7 @@
 
 import { Header } from "@/components/common";
 import { Button } from "@/components/ui/button/button";
-import { INTEREST_OPTIONS } from "@/data";
+import { INTEREST_KEYS } from "@/data";
 
 import { toast } from "@/components/ui/toast/toast";
 import { ChevronLeft } from "lucide-react";
@@ -11,7 +11,6 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { Spinner } from "@/components/ui/spinner/spinner";
 import { useUpdateProfile } from "../../hooks/useProfile";
-
 
 interface MyinterestsProps {
   interests: string[];
@@ -53,7 +52,7 @@ export default function MyInterests({ interests }: MyinterestsProps) {
       </p>
       <section className="flex flex-1 flex-col pb-10 pt-4">
         <ul className="flex flex-wrap gap-3">
-          {INTEREST_OPTIONS.map((opt) => (
+          {INTEREST_KEYS.map((opt) => (
             <li key={opt}>
               <button
                 onClick={() => toggle(opt)}

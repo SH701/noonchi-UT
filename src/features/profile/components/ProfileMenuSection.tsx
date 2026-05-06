@@ -22,7 +22,7 @@ export default function ProfileMenuSection() {
             },
             {
               label: "Language",
-              onClick: () => setShowModal(true),
+              onClick: () => router.push("/profile/language"),
               icon: <AlpabatIcon />,
             },
             {

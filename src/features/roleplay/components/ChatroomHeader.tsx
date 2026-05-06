@@ -4,16 +4,14 @@ import { MessageCircle, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
-
-
 import { HamburgerIcon, SqurepenIcon } from "@/assets/svgr";
 import { useTabStore } from "@/store/useTabStore";
-
 
 import { Header, ModeToggle } from "@/components/common";
 import { useConversationDetail } from "@/hooks/queries/useConversation";
 import Tab from "@/features/tab/Tab";
 import { ExitChatting } from "@/components/modal";
+import { useTranslation } from "react-i18next";
 
 interface ChatroomHeaderProps {
   roomId?: number;
@@ -21,6 +19,7 @@ interface ChatroomHeaderProps {
 }
 
 export default function ChatroomHeader({ roomId, onEnd }: ChatroomHeaderProps) {
+  const { t } = useTranslation();
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [showExitModal, setShowExitModal] = useState(false);
@@ -94,7 +93,7 @@ export default function ChatroomHeader({ roomId, onEnd }: ChatroomHeaderProps) {
                     onClick={handleNewChat}
                   >
                     <Sparkles className="size-5" />
-                    New Chat
+                    {t("chatroomHeader.newChat")}
                   </button>
                   {detailData?.canGetReport ? (
                     <button
@@ -102,7 +101,7 @@ export default function ChatroomHeader({ roomId, onEnd }: ChatroomHeaderProps) {
                       onClick={handleEnd}
                     >
                       <MessageCircle className="size-5" />
-                      Get Reports
+                      {t("chatroomHeader.getReports")}
                     </button>
                   ) : (
                     <button
@@ -110,7 +109,7 @@ export default function ChatroomHeader({ roomId, onEnd }: ChatroomHeaderProps) {
                       onClick={handleEnd}
                     >
                       <MessageCircle className="size-5" />
-                      Get Reports
+                      {t("chatroomHeader.getReports")}
                     </button>
                   )}
                 </div>

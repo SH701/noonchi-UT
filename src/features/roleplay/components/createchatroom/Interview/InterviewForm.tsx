@@ -5,12 +5,14 @@ import { useState } from "react";
 import { FileUpload, TextInput, Textarea } from "@/components/ui/form";
 import { InterviewFormData } from "@/types/conversations";
 import { Button } from "@/components/ui/button/button";
+import { useTranslation } from "react-i18next";
 
 export interface InterviewFormProps {
   onSubmit: (data: InterviewFormData) => void;
 }
 
 export default function InterviewForm({ onSubmit }: InterviewFormProps) {
+  const { t } = useTranslation();
   const [companyName, setCompanyName] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [jobPosting, setJobPosting] = useState("");
@@ -35,27 +37,27 @@ export default function InterviewForm({ onSubmit }: InterviewFormProps) {
   return (
     <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
       <TextInput
-        label="Company"
+        label={t("interviewForm.companyLabel")}
         required
         value={companyName}
         onChange={setCompanyName}
-        placeholder="Enter the company name"
+        placeholder={t("interviewForm.companyPlaceholder")}
       />
 
       <TextInput
-        label="Position Applied For"
+        label={t("interviewForm.positionLabel")}
         required
         value={jobTitle}
         onChange={setJobTitle}
-        placeholder="Enter the job title"
+        placeholder={t("interviewForm.positionPlaceholder")}
       />
 
       <Textarea
-        label="Job Posting"
+        label={t("interviewForm.jobPostingLabel")}
         required
         value={jobPosting}
         onChange={setJobPosting}
-        placeholder="You can paste the job description to generate more tailored interview questions."
+        placeholder={t("interviewForm.jobPostingPlaceholder")}
         onClick={() => handleSubmit}
         disabled={false}
       />
@@ -64,7 +66,7 @@ export default function InterviewForm({ onSubmit }: InterviewFormProps) {
 
       <div className="mt-auto pb-4">
         <Button variant="primary" size="lg" type="submit">
-          Start Chatting
+          {t("interviewForm.startButton")}
         </Button>
       </div>
     </form>

@@ -3,16 +3,18 @@
 import { HamburgerIcon } from "@/assets/svgr";
 import { Header } from "@/components/common";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 interface PreviewHeaderProps {
   handleMoveAuth: () => void;
 }
 export default function PreviewHeader({ handleMoveAuth }: PreviewHeaderProps) {
+  const { t } = useTranslation();
   return (
     <>
       <Header
         leftIcon={<HamburgerIcon />}
-        center="RolePlay Preview"
-        rightIcon="Skip"
+        center={t("previewHeader.title")}
+        rightIcon={t("previewHeader.skip")}
         className="font-medium"
         onRightClick={handleMoveAuth}
       />
@@ -24,7 +26,7 @@ export default function PreviewHeader({ handleMoveAuth }: PreviewHeaderProps) {
         transition={{ duration: 4 }}
       >
         <span className="text-xs text-white">
-          Skip and go directly to Login or Sign-up
+          {t("previewHeader.skipHint")}
         </span>
       </motion.div>
     </>

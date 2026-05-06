@@ -56,6 +56,11 @@
     "birthPlaceholder": "AAAA-MM-DD",
     "submitButton": "Comenzar"
   },
+  "previewHeader": {
+    "title": "Vista previa del juego de roles",
+    "skip": "Omitir",
+    "skipHint": "Omitir e ir directamente a iniciar sesión o registrarse"
+  },
   "preview": {
     "progress1": "¡Están esperando tu respuesta! ({{current}}/{{total}})",
     "progress2": "¡Un intento más! ¡Termina con fuerza! ({{current}}/{{total}})"
@@ -193,5 +198,48 @@
     "title": "¡Próximamente!",
     "description": "Esta función estará disponible en una próxima actualización.",
     "closeButton": "Cerrar"
+  },
+  "chatroomHeader": {
+    "newChat": "Nuevo chat",
+    "getReports": "Ver informe"
+  },
+  "roleplayChat": {
+    "reportUnlocked": "¡Informe desbloqueado! Toca",
+    "toView": "para ver"
+  },
+  "feedbackLoading": {
+    "title": "Cargando tu informe"
+  },
+  "topicList": {
+    "favoritesEmpty": "Tus favoritos están vacíos",
+    "favoritesEmptyHint": "Toca el corazón en los roles que te gusten",
+    "removedFromFavorites": "¡Eliminado de favoritos!",
+    "addedToFavorites": "¡Añadido a favoritos!",
+    "comingSoon": "Este contenido estará disponible pronto"
+  },
+  "topicCategories": {
+    "Favorites": "Favoritos",
+    "Career": "Carrera",
+    "Family": "Familia",
+    "Belonging": "Pertenencia",
+    "K-POP": "K-POP"
+  },
+  "interests": {
+    "dailyConversation": "💬 Conversación diaria",
+    "business": "💼 Negocios",
+    "travel": "✈️ Viajes",
+    "kDrama": "🎬 K-Drama",
+    "kPop": "🎵 K-Pop",
+    "etiquette": "🙇‍♂️ Etiqueta",
+    "internetSlang": "🔥 Jerga de internet",
+    "food": "🥘 Comida",
+    "ordering": "🍜 Pedir",
+    "beauty": "💄 Belleza",
+    "gathering": "👁️‍🗨️ Reuniones"
+  },
+  "levelDescription": {
+    "BEGINNER": "Conozco palabras básicas de cortesía, pero no sé cuándo ni cómo usar el lenguaje formal.",
+    "INTERMEDIATE": "Puedo usar las terminaciones -요, pero no tengo confianza en usar el lenguaje formal correctamente.",
+    "ADVANCED": "Entiendo y uso el lenguaje formal de forma natural según el contexto y la relación."
   }
 }

@@ -56,6 +56,11 @@
     "birthPlaceholder": "YYYY-MM-DD",
     "submitButton": "はじめる"
   },
+  "previewHeader": {
+    "title": "ロールプレイプレビュー",
+    "skip": "スキップ",
+    "skipHint": "スキップしてログインまたは登録へ"
+  },
   "preview": {
     "progress1": "返信を待っています！（{{current}}/{{total}}）",
     "progress2": "あと1回です！最後まで頑張りましょう！（{{current}}/{{total}}）"
@@ -193,5 +198,48 @@
     "title": "近日公開！",
     "description": "この機能は今後のアップデートで利用可能になります。",
     "closeButton": "閉じる"
+  },
+  "chatroomHeader": {
+    "newChat": "新しいチャット",
+    "getReports": "レポートを見る"
+  },
+  "roleplayChat": {
+    "reportUnlocked": "レポートが解放されました！タップして",
+    "toView": "確認する"
+  },
+  "feedbackLoading": {
+    "title": "レポートを準備中"
+  },
+  "topicList": {
+    "favoritesEmpty": "お気に入りが空です",
+    "favoritesEmptyHint": "好きなロールのハートをタップしてください",
+    "removedFromFavorites": "お気に入りから削除しました！",
+    "addedToFavorites": "お気に入りに追加しました！",
+    "comingSoon": "このコンテンツはまもなく利用可能になります"
+  },
+  "topicCategories": {
+    "Favorites": "お気に入り",
+    "Career": "キャリア",
+    "Family": "家族",
+    "Belonging": "所属",
+    "K-POP": "K-POP"
+  },
+  "interests": {
+    "dailyConversation": "💬 日常会話",
+    "business": "💼 ビジネス",
+    "travel": "✈️ 旅行",
+    "kDrama": "🎬 韓国ドラマ",
+    "kPop": "🎵 K-POP",
+    "etiquette": "🙇‍♂️ マナー",
+    "internetSlang": "🔥 ネットスラング",
+    "food": "🥘 料理",
+    "ordering": "🍜 注文",
+    "beauty": "💄 美容",
+    "gathering": "👁️‍🗨️ 集まり"
+  },
+  "levelDescription": {
+    "BEGINNER": "基本的な丁寧語は知っていますが、敬語をいつどう使うか自信がありません。",
+    "INTERMEDIATE": "-요体は使えますが、フォーマルな敬語を正しく使う自信がありません。",
+    "ADVANCED": "文脈や関係性に応じて敬語を自然に理解・使用できます。"
   }
 }

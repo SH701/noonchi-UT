@@ -40,11 +40,11 @@ export default function TopicSlider({ topics, active, onSelect }: TopicProps) {
         transition={{ type: "spring", bounce: 0.2 }}
       >
         {topics.map((t) => (
-          <div key={t.label} className="shrink-0 mr-1">
+          <div key={t.value} className="shrink-0 mr-1">
             <Button
-              variant={active === t.label ? "primary" : "ghost"}
+              variant={active === t.value ? "primary" : "ghost"}
               size="sm"
-              onClick={() => onSelect(t.label)}
+              onClick={() => onSelect(t.value)}
             >
               {t.label}
             </Button>

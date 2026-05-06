@@ -56,6 +56,11 @@
     "birthPlaceholder": "YYYY-MM-DD",
     "submitButton": "Get Started"
   },
+  "previewHeader": {
+    "title": "RolePlay Preview",
+    "skip": "Skip",
+    "skipHint": "Skip and go directly to Login or Sign-up"
+  },
   "preview": {
     "progress1": "They're waiting for your reply! ({{current}}/{{total}})",
     "progress2": "One shot left! Finish strong! ({{current}}/{{total}})"
@@ -193,5 +198,48 @@
     "title": "Coming Soon!",
     "description": "This feature will be available in a future update.",
     "closeButton": "Close"
+  },
+  "chatroomHeader": {
+    "newChat": "New Chat",
+    "getReports": "Get Reports"
+  },
+  "roleplayChat": {
+    "reportUnlocked": "Report unlocked! Tap",
+    "toView": "to view"
+  },
+  "feedbackLoading": {
+    "title": "Loading your Report setup"
+  },
+  "topicList": {
+    "favoritesEmpty": "Your Favorites are empty",
+    "favoritesEmptyHint": "Tap the heart on roles you like",
+    "removedFromFavorites": "Removed from favorites!",
+    "addedToFavorites": "Added to favorites!",
+    "comingSoon": "This content will be available soon"
+  },
+  "topicCategories": {
+    "Favorites": "Favorites",
+    "Career": "Career",
+    "Family": "Family",
+    "Belonging": "Belonging",
+    "K-POP": "K-POP"
+  },
+  "interests": {
+    "dailyConversation": "💬 Daily Conversation",
+    "business": "💼 Business",
+    "travel": "✈️ Travel",
+    "kDrama": "🎬 K-Drama",
+    "kPop": "🎵 K-Pop",
+    "etiquette": "🙇‍♂️ Etiquette",
+    "internetSlang": "🔥 Internet Slang",
+    "food": "🥘 Food",
+    "ordering": "🍜 Ordering",
+    "beauty": "💄 Beauty",
+    "gathering": "👁️‍🗨️ Gathering"
+  },
+  "levelDescription": {
+    "BEGINNER": "I know basic polite words, but I'm not sure when or how to use honorifics.",
+    "INTERMEDIATE": "I can use -요 endings, but I'm not confident in using formal or respectful language correctly.",
+    "ADVANCED": "I understand and use honorifics naturally depending on context or relationship."
   }
 }

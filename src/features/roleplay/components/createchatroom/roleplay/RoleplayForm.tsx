@@ -2,10 +2,9 @@ import { useState } from "react";
 import TextInput from "../../../../../components/ui/form/TextInput";
 import { Button } from "@/components/ui/button/button";
 import { Textarea } from "@/components/ui/form";
-
-
 import SelectButton from "@/components/ui/form/SelectButton";
 import { useCreateContext } from "../../../hooks/useCreateContext";
+import { useTranslation } from "react-i18next";
 
 interface RoleplayProps {
   onSubmit: (data: {
@@ -25,6 +24,7 @@ export default function RoleplayForm({
   myRole,
   topicId,
 }: RoleplayProps) {
+  const { t } = useTranslation();
   const [details, setDetails] = useState<string | undefined>(undefined);
   const [selectedTone, setSelectedTone] = useState("");
   const [pendingMe, setPendingMe] = useState(false);
@@ -80,19 +80,19 @@ export default function RoleplayForm({
   return (
     <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
       <TextInput
-        label="My role"
+        label={t("roleplayForm.myRoleLabel")}
         value={displayMe || ""}
         onChange={setDisplayMe}
-        placeholder="Write your role"
+        placeholder={t("roleplayForm.myRolePlaceholder")}
         disabled={pendingMe}
         onClick={handleMeHint}
       />
 
       <TextInput
-        label="AI's role"
+        label={t("roleplayForm.aiRoleLabel")}
         value={displayAI || ""}
         onChange={setDisplayAI}
-        placeholder="Write ai role"
+        placeholder={t("roleplayForm.aiRolePlaceholder")}
         disabled={pendingAI}
         onClick={handleAIHint}
       />
@@ -100,17 +100,17 @@ export default function RoleplayForm({
       <SelectButton selectedTone={selectedTone} onSelect={setSelectedTone} />
 
       <Textarea
-        label="Detail"
+        label={t("roleplayForm.detailLabel")}
         value={details || ""}
         onChange={setDetails}
-        placeholder="Include details like the reason for the interaction..."
+        placeholder={t("roleplayForm.detailPlaceholder")}
         onClick={handleDetailHint}
         disabled={pendingDetail}
       />
 
       <div className="mx-auto mt-auto flex w-full pb-4">
         <Button variant="primary" size="lg" type="submit">
-          Start
+          {t("roleplayForm.startButton")}
         </Button>
       </div>
     </form>

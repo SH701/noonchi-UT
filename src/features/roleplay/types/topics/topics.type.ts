@@ -7,7 +7,8 @@ export type CategoryType =
 
 export interface Topic {
   id: number | string;
-  label: CategoryType;
+  label: string;
+  value: CategoryType;
 }
 
 export interface TopicRes {

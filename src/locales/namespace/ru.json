@@ -56,6 +56,11 @@
     "birthPlaceholder": "ГГГГ-ММ-ДД",
     "submitButton": "Начать"
   },
+  "previewHeader": {
+    "title": "Ролевая игра: предпросмотр",
+    "skip": "Пропустить",
+    "skipHint": "Пропустить и перейти к входу или регистрации"
+  },
   "preview": {
     "progress1": "Они ждут вашего ответа! ({{current}}/{{total}})",
     "progress2": "Остался один шанс! Завершим уверенно! ({{current}}/{{total}})"
@@ -193,5 +198,48 @@
     "title": "Скоро!",
     "description": "Эта функция будет доступна в будущем обновлении.",
     "closeButton": "Закрыть"
+  },
+  "chatroomHeader": {
+    "newChat": "Новый чат",
+    "getReports": "Получить отчёт"
+  },
+  "roleplayChat": {
+    "reportUnlocked": "Отчёт разблокирован! Нажмите",
+    "toView": "для просмотра"
+  },
+  "feedbackLoading": {
+    "title": "Загрузка вашего отчёта"
+  },
+  "topicList": {
+    "favoritesEmpty": "Ваши избранные пусты",
+    "favoritesEmptyHint": "Нажмите на сердечко у понравившейся роли",
+    "removedFromFavorites": "Удалено из избранного!",
+    "addedToFavorites": "Добавлено в избранное!",
+    "comingSoon": "Этот контент скоро будет доступен"
+  },
+  "topicCategories": {
+    "Favorites": "Избранное",
+    "Career": "Карьера",
+    "Family": "Семья",
+    "Belonging": "Принадлежность",
+    "K-POP": "K-POP"
+  },
+  "interests": {
+    "dailyConversation": "💬 Повседневный разговор",
+    "business": "💼 Бизнес",
+    "travel": "✈️ Путешествия",
+    "kDrama": "🎬 K-Дорама",
+    "kPop": "🎵 K-Pop",
+    "etiquette": "🙇‍♂️ Этикет",
+    "internetSlang": "🔥 Интернет-сленг",
+    "food": "🥘 Еда",
+    "ordering": "🍜 Заказ",
+    "beauty": "💄 Красота",
+    "gathering": "👁️‍🗨️ Встречи"
+  },
+  "levelDescription": {
+    "BEGINNER": "Я знаю базовые вежливые слова, но не уверен, когда и как использовать формы вежливости.",
+    "INTERMEDIATE": "Я могу использовать окончания -요, но не уверен в правильном использовании формального языка.",
+    "ADVANCED": "Я понимаю и использую формы вежливости естественно в зависимости от контекста."
   }
 }
