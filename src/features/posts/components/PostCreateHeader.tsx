@@ -29,9 +29,7 @@ export default function PostCreateHeader({
         onClick={onSubmit}
         disabled={!canSubmit}
         className={`whitespace-nowrap rounded-full px-4 py-1.5 text-sm font-semibold transition ${
-          canSubmit
-            ? "bg-gradient-primary text-white shadow-sm"
-            : "bg-gray-100 text-gray-400"
+          canSubmit ? "text-white" : "text-gray-400"
         }`}
       >
         {isPending ? "Posting..." : "Post"}

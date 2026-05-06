@@ -4,7 +4,8 @@ export const getAge = (birthdate: string) => {
   return currentYear - birthYear;
 };
 export const getRelativeTime = (createdAt: string) => {
-  const date = new Date(createdAt);
+  const normalized = createdAt.endsWith("Z") ? createdAt : createdAt + "Z";
+  const date = new Date(normalized);
   const now = new Date();
   const diffMs = now.getTime() - date.getTime();
   const diffMin = Math.floor(diffMs / 1000 / 60);
@@ -23,7 +24,8 @@ export const getRelativeTime = (createdAt: string) => {
 };
 
 export const getTime = (createdAt: string) => {
-  const date = new Date(createdAt);
+  const normalized = createdAt.endsWith("Z") ? createdAt : createdAt + "Z";
+  const date = new Date(normalized);
   const dd = String(date.getDate()).padStart(2, "0");
   const mm = String(date.getMonth() + 1).padStart(2, "0");
   const yy = String(date.getFullYear()).slice(-2);

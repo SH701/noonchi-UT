@@ -7,6 +7,7 @@ import { useState, useRef, useEffect } from "react";
 import { PostSearchItem } from "../types/posts.type";
 import { getRelativeTime } from "@/lib/time-format";
 import { useSession } from "next-auth/react";
+import { CATEGORIES } from "@/constants/category";
 
 type PostCardProps = PostSearchItem & {
   onClick: () => void;
@@ -17,6 +18,7 @@ type PostCardProps = PostSearchItem & {
 export default function PostCard({
   title,
   content,
+  category,
   author,
   createdAt,
   likesCount,
@@ -110,6 +112,11 @@ export default function PostCard({
         <p className="line-clamp-2 text-sm leading-relaxed text-gray-500">
           {content}
         </p>
+        {category && (
+          <span className="mt-2 w-fit rounded-full bg-indigo-100 px-2.5 py-0.5 text-xs font-medium text-indigo-400">
+            {CATEGORIES.find((c) => c.value === category)?.label ?? category}
+          </span>
+        )}
       </div>
 
       {/* 하단 액션 */}

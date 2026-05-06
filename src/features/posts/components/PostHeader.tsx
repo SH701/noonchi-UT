@@ -23,7 +23,7 @@ export default function PostHeader() {
             <HamburgerIcon onClick={toggleTab} />
           )
         }
-        center={"Posts"}
+        center={"Community"}
       />
       {!isDetail && <Tab />}
     </>
