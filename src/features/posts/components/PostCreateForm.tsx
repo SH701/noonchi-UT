@@ -27,7 +27,21 @@ export default function PostCreateForm({
 }: PostCreateFormProps) {
   return (
     <div className="flex flex-1 flex-col rounded-2xl bg-white p-4 shadow-sm">
-      <div className="mb-3 flex gap-2">
+      <input
+        className="border-b border-gray-400 pb-3 text-lg font-bold outline-none placeholder:font-normal placeholder:text-gray-300"
+        placeholder="Title"
+        value={title}
+        onChange={(e) => onTitleChange(e.target.value)}
+        maxLength={100}
+      />
+      <textarea
+        className="mt-4 flex-1 resize-none text-[15px] leading-relaxed text-gray-800 outline-none placeholder:text-gray-300"
+        placeholder="What's on your mind?"
+        value={content}
+        onChange={(e) => onContentChange(e.target.value.slice(0, MAX_CONTENT))}
+        rows={12}
+      />
+      <div className="mb-3 flex flex-wrap gap-2">
         {CATEGORIES.map((c) => (
           <button
             key={c.value}
@@ -43,21 +57,6 @@ export default function PostCreateForm({
           </button>
         ))}
       </div>
-      <input
-        className="border-b border-gray-400 pb-3 text-lg font-bold outline-none placeholder:font-normal placeholder:text-gray-300"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => onTitleChange(e.target.value)}
-        maxLength={100}
-      />
-      <textarea
-        className="mt-4 flex-1 resize-none text-[15px] leading-relaxed text-gray-800 outline-none placeholder:text-gray-300"
-        placeholder="What's on your mind?"
-        value={content}
-        onChange={(e) => onContentChange(e.target.value.slice(0, MAX_CONTENT))}
-        rows={12}
-      />
-
       {imageUrls.length > 0 && (
         <div className="scrollbar-hide mt-3 flex gap-2 overflow-x-auto">
           {imageUrls.map((url) => (
