@@ -58,7 +58,7 @@ export default function PostEditSection({ postId }: { postId: number }) {
         onBack={() => router.back()}
         onSubmit={handleSubmit}
       />
-      <main className="flex flex-1 flex-col p-4">
+      <main className="flex flex-1 flex-col pb-4">
         <PostCreateForm
           title={title}
           content={content}

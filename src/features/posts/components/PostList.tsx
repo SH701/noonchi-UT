@@ -23,7 +23,9 @@ export default function PostList() {
     p.title.toLowerCase().includes(search.toLowerCase()),
   );
   const sorted = [...filtered].sort((a, b) =>
-    sort === "popular" ? b.likesCount - a.likesCount : b.postId - a.postId,
+    sort === "popular"
+      ? b.likesCount - a.likesCount
+      : b.createdAt.localeCompare(a.createdAt),
   );
 
   return (

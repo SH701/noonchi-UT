@@ -25,15 +25,15 @@ export default function PostFilter({
 }: PostFilterProps) {
   return (
     <div className="flex flex-col gap-3 pb-4">
-      <div className="flex w-full justify-between">
-        <div className="flex gap-2">
+      <div className="flex w-full justify-between gap-2">
+        <div className="flex gap-1">
           {filters.map((f) => (
             <Button
               key={f.value}
               variant={active === f.value ? "primary" : "ghost"}
               size="sm"
               onClick={() => onSelect(f.value)}
-              className="rounded-full"
+              className="h-10 w-16 rounded-full"
             >
               {f.label}
             </Button>
@@ -43,7 +43,7 @@ export default function PostFilter({
           <input
             value={search}
             onChange={(e) => onSearch(e.target.value)}
-            className="h-11 rounded-full border border-white bg-white/70 p-3 pr-10 text-sm backdrop-blur-sm"
+            className="w- max-w-50 h-10 rounded-full border border-white bg-white/70 p-3 pr-10 text-sm backdrop-blur-sm"
             placeholder="Search posts..."
           />
           <SearchIcon

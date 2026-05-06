@@ -8,7 +8,7 @@ import {
 
 export const postsClient = {
   getPosts: async (
-    category?: string,
+    category: string | undefined,
     sort_by: string = "RECENT",
     page: number = 1,
     size: number = 10,

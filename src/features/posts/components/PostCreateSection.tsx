@@ -14,6 +14,7 @@ export default function PostCreateSection() {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [category, setCategory] = useState("자유");
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
 
@@ -33,7 +34,7 @@ export default function PostCreateSection() {
   const handleSubmit = () => {
     if (!content.trim() || isPending || uploading) return;
     createPost(
-      { title, content, imageUrls },
+      { title, content, category, imageUrls },
       { onSuccess: () => router.back() },
     );
   };
@@ -48,13 +49,15 @@ export default function PostCreateSection() {
         onBack={() => router.back()}
         onSubmit={handleSubmit}
       />
-      <main className="flex flex-1 flex-col p-4">
+      <main className="flex flex-1 flex-col pb-4">
         <PostCreateForm
           title={title}
           content={content}
+          category={category}
           imageUrls={imageUrls}
           onTitleChange={setTitle}
           onContentChange={setContent}
+          onCategoryChange={setCategory}
           onRemoveImage={(url) =>
             setImageUrls((prev) => prev.filter((u) => u !== url))
           }

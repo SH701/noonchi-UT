@@ -4,28 +4,49 @@ import Image from "next/image";
 import { X } from "lucide-react";
 
 const MAX_CONTENT = 2000;
+const CATEGORIES = ["자유", "질문", "정보", "후기", "기타"];
 
 interface PostCreateFormProps {
   title: string;
   content: string;
+  category: string;
   imageUrls: string[];
   onTitleChange: (value: string) => void;
   onContentChange: (value: string) => void;
+  onCategoryChange: (value: string) => void;
   onRemoveImage: (url: string) => void;
 }
 
 export default function PostCreateForm({
   title,
   content,
+  category,
   imageUrls,
   onTitleChange,
   onContentChange,
+  onCategoryChange,
   onRemoveImage,
 }: PostCreateFormProps) {
   return (
     <div className="flex flex-1 flex-col rounded-2xl bg-white p-4 shadow-sm">
+      <div className="mb-3 flex gap-2">
+        {CATEGORIES.map((c) => (
+          <button
+            key={c}
+            type="button"
+            onClick={() => onCategoryChange(c)}
+            className={`rounded-full px-3 py-1 text-xs font-medium transition ${
+              category === c
+                ? "bg-indigo-400 text-white"
+                : "bg-gray-100 text-gray-500"
+            }`}
+          >
+            {c}
+          </button>
+        ))}
+      </div>
       <input
-        className="border-b border-gray-100 pb-3 text-lg font-bold outline-none placeholder:font-normal placeholder:text-gray-300"
+        className="border-b border-gray-400 pb-3 text-lg font-bold outline-none placeholder:font-normal placeholder:text-gray-300"
         placeholder="Title"
         value={title}
         onChange={(e) => onTitleChange(e.target.value)}
@@ -46,7 +67,13 @@ export default function PostCreateForm({
               key={url}
               className="relative size-20 shrink-0 overflow-hidden rounded-xl"
             >
-              <Image src={url} alt="" fill sizes="80px" className="object-cover" />
+              <Image
+                src={url}
+                alt=""
+                fill
+                sizes="80px"
+                className="object-cover"
+              />
               <button
                 onClick={() => onRemoveImage(url)}
                 className="absolute right-1 top-1 flex size-5 items-center justify-center rounded-full bg-black/60 text-white"

@@ -17,6 +17,7 @@ type PostCardProps = PostSearchItem & {
 export default function PostCard({
   title,
   content,
+  category,
   author,
   createdAt,
   likesCount,
@@ -106,6 +107,11 @@ export default function PostCard({
 
       {/* 본문 */}
       <div className="flex flex-col gap-1">
+        {category && (
+          <span className="w-fit rounded-full bg-indigo-50 px-2.5 py-0.5 text-xs font-medium text-indigo-400">
+            {category}
+          </span>
+        )}
         <h3 className="text-sm font-bold text-gray-900">{title}</h3>
         <p className="line-clamp-2 text-sm leading-relaxed text-gray-500">
           {content}
