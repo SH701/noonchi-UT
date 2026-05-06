@@ -3,6 +3,7 @@
 import { ConversationSortBy } from "@/types/conversations";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 interface HistorySortProps {
   sortBy: ConversationSortBy;
@@ -13,15 +14,16 @@ export default function HistorySort({
   sortBy,
   onSortChange,
 }: HistorySortProps) {
+  const { t } = useTranslation();
   const [openSortDropdown, setOpenSortDropdown] = useState(false);
   return (
     <div className="relative mb-2 flex items-center justify-between">
-      <span className="text-sm">All</span>
+      <span className="text-sm">{t("botHistory.all")}</span>
       <button
         onClick={() => setOpenSortDropdown((prev) => !prev)}
         className="flex cursor-pointer items-center gap-1 rounded text-xs"
       >
-        {sortBy === "CREATED_AT_DESC" ? "Oldest activity" : "Latest activity"}
+        {sortBy === "CREATED_AT_DESC" ? t("botHistory.oldestActivity") : t("botHistory.latestActivity")}
         <ChevronDown
           className={`size-3 shrink-0 transform pt-0.5 transition-transform ${
             openSortDropdown ? "rotate-180" : ""
@@ -42,7 +44,7 @@ export default function HistorySort({
                 : ""
             }`}
           >
-            Latest activity
+            {t("botHistory.latestActivity")}
           </button>
           <button
             onClick={() => {
@@ -55,7 +57,7 @@ export default function HistorySort({
                 : ""
             }`}
           >
-            Oldest activity
+            {t("botHistory.oldestActivity")}
           </button>
         </div>
       )}

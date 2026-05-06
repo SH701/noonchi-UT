@@ -7,6 +7,7 @@ import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "@/components/ui/toast/toast";
+import { useTranslation } from "react-i18next";
 
 const LANGUAGES = [
   { code: "en", label: "English" },
@@ -16,6 +17,7 @@ const LANGUAGES = [
 ];
 
 export default function MyLanguage() {
+  const { t } = useTranslation();
   const router = useRouter();
   const [selected, setSelected] = useState(i18n.language);
 
@@ -23,14 +25,14 @@ export default function MyLanguage() {
     localStorage.setItem("language", selected);
     i18n.changeLanguage(selected);
     router.back();
-    toast.success("Success");
+    toast.success(t("myLanguage.savedToast"));
   };
 
   return (
     <>
       <Header
         leftIcon={<ChevronLeft onClick={() => router.back()} />}
-        center="Language"
+        center={t("myLanguage.header")}
       />
       <section className="flex flex-1 flex-col pb-10 pt-4">
         <ul className="flex flex-wrap gap-3">
@@ -52,7 +54,7 @@ export default function MyLanguage() {
         </ul>
 
         <Button size="lg" className="mt-auto" onClick={handleSave}>
-          Save
+          {t("myLanguage.saveButton")}
         </Button>
       </section>
     </>

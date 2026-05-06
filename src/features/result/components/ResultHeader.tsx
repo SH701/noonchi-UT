@@ -3,8 +3,10 @@ import { HamburgerIcon, HomeIcon } from "@/assets/svgr";
 import { Header } from "@/components/common";
 import { useTabStore } from "@/store";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 export default function ResultHeader() {
+  const { t } = useTranslation();
   const { openTab } = useTabStore();
   const router = useRouter();
   const handleHome = () => {
@@ -13,7 +15,7 @@ export default function ResultHeader() {
   return (
     <Header
       leftIcon={<HamburgerIcon onClick={openTab} />}
-      center="Report"
+      center={t("result.header")}
       rightIcon={<HomeIcon onClick={handleHome} />}
     />
   );

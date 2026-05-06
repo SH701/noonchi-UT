@@ -78,6 +78,40 @@
     "signupButton": "Создать аккаунт",
     "loginButton": "Войти"
   },
+  "myInterests": {
+    "header": "Темы интересов",
+    "title": "Выберите ваши интересы",
+    "description": "Выберите не менее 3 интересов, чтобы помочь нам улучшить ваш опыт.",
+    "saveButton": "Сохранить интересы"
+  },
+  "result": {
+    "header": "Отчёт",
+    "tabs": {
+      "transcript": "Стенограмма",
+      "mistakes": "Типичные ошибки"
+    },
+    "scores": {
+      "politeness": "Вежливость",
+      "naturalness": "Естественность"
+    },
+    "feedback": {
+      "summary": "Краткое содержание разговора",
+      "wellDone": "Что вы сделали хорошо",
+      "improve": "Что можно улучшить"
+    }
+  },
+  "botHistory": {
+    "all": "Все",
+    "latestActivity": "Последняя активность",
+    "oldestActivity": "Самые старые",
+    "empty": "Разговоров пока нет"
+  },
+  "coach": {
+    "sectionTitle": "Коучинг по управлению рисками",
+    "sectionDescription": "Раскройте скрытый контекст. Свяжитесь с ведущими экспертами, чтобы предотвратить критические проблемы в отношениях в Корее.",
+    "listTitle": "Доступные коучи",
+    "liveTitle": "Живой коучинг 1:1"
+  },
   "profile": {
     "personalSection": "Личные настройки",
     "legalSection": "Юридическая информация",
@@ -98,11 +132,6 @@
     "birth": "Дата рождения",
     "email": "Эл. почта",
     "koreanLevel": "Уровень корейского"
-  },
-  "coach": {
-    "sectionTitle": "Коучинг по управлению рисками",
-    "sectionDescription": "Раскройте скрытый контекст. Свяжитесь с ведущими экспертами, чтобы предотвратить критические проблемы в отношениях в Корее.",
-    "listTitle": "Доступные коучи"
   },
   "ask": {
     "title": "Не уверены, как это прозвучит?",
@@ -148,21 +177,6 @@
     "jobPostingPlaceholder": "Вы можете вставить описание вакансии для создания более целевых вопросов к интервью.",
     "startButton": "Начать чат"
   },
-  "result": {
-    "tabs": {
-      "transcript": "Стенограмма",
-      "mistakes": "Типичные ошибки"
-    },
-    "scores": {
-      "politeness": "Вежливость",
-      "naturalness": "Естественность"
-    },
-    "feedback": {
-      "summary": "Краткое содержание разговора",
-      "wellDone": "Что вы сделали хорошо",
-      "improve": "Что можно улучшить"
-    }
-  },
   "postCreate": {
     "headerTitle": "Новая публикация",
     "titlePlaceholder": "Заголовок",
@@ -192,6 +206,7 @@
     "continueButton": "Продолжить"
   },
   "deleteModal": {
+    "title": "Удалить",
     "description": "Вы уверены, что хотите удалить это? Это действие нельзя отменить.",
     "cancelButton": "Отмена",
     "deleteButton": "Удалить"
@@ -200,6 +215,46 @@
     "title": "Скоро!",
     "description": "Эта функция будет доступна в будущем обновлении.",
     "closeButton": "Закрыть"
+  },
+  "myLanguage": {
+    "header": "Язык",
+    "saveButton": "Сохранить",
+    "savedToast": "Сохранено успешно"
+  },
+  "toastMessage": {
+    "logoutFailed": "Ошибка выхода",
+    "profileUpdated": "Профиль успешно обновлён.",
+    "profileUpdateFailed": "Не удалось обновить профиль.",
+    "fillAllFields": "Пожалуйста, заполните все поля.",
+    "requestTimeout": "Время ожидания истекло. Попробуйте снова.",
+    "createChatroomFailed": "Не удалось создать чат"
+  },
+  "roleplaySection": {
+    "conversationContext": "Контекст разговора"
+  },
+  "tab": {
+    "coaching": "Живой коучинг 1:1",
+    "selectAll": "Выбрать все",
+    "delete": "Удалить",
+    "searchPlaceholder": "Поиск чатов"
+  },
+  "askTab": {
+    "title": "Ask",
+    "edit": "Изменить",
+    "cancel": "Отмена",
+    "noResults": "Нет результатов для «{{keyword}}»"
+  },
+  "roleplayTab": {
+    "title": "Ролевая игра"
+  },
+  "historyHeader": {
+    "title": "Ролевая игра"
+  },
+  "postHeader": {
+    "title": "Сообщество"
+  },
+  "profileHeader": {
+    "title": "Моя страница"
   },
   "chatroomHeader": {
     "newChat": "Новый чат",
@@ -238,6 +293,10 @@
     "ordering": "🍜 Заказ",
     "beauty": "💄 Красота",
     "gathering": "👁️‍🗨️ Встречи"
+  },
+  "modeToggle": {
+    "roleplaying": "Ролевая игра",
+    "ask": "Спросить"
   },
   "levelDescription": {
     "BEGINNER": "Я знаю базовые вежливые слова, но не уверен, когда и как использовать формы вежливости.",

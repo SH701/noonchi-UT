@@ -97,12 +97,19 @@
     "name": "Name",
     "birth": "Birth",
     "email": "Email",
-    "koreanLevel": "KoreanLevel"
+    "koreanLevel": "Korean Level"
+  },
+  "myInterests": {
+    "header": "Topic of Interests",
+    "title": "Select Your Interest",
+    "description": "Select at least 3 interests to help us refine your experience.",
+    "saveButton": "Save Interests"
   },
   "coach": {
     "sectionTitle": "Risk Management Coaching",
     "sectionDescription": "Decode the hidden context. Connect with top experts to prevent critical relationship failures in Korea.",
-    "listTitle": "Available Coach"
+    "listTitle": "Available Coach",
+    "liveTitle": "Live 1:1 Coaching"
   },
   "ask": {
     "title": "Not sure how this might sound?",
@@ -149,6 +156,7 @@
     "startButton": "Start Chatting"
   },
   "result": {
+    "header": "Report",
     "tabs": {
       "transcript": "Transcript",
       "mistakes": "Common Mistakes"
@@ -192,6 +200,7 @@
     "continueButton": "Continue"
   },
   "deleteModal": {
+    "title": "Delete",
     "description": "Are you sure you want to delete this? This action cannot be undone.",
     "cancelButton": "Cancel",
     "deleteButton": "Delete"
@@ -200,6 +209,46 @@
     "title": "Coming Soon!",
     "description": "This feature will be available in a future update.",
     "closeButton": "Close"
+  },
+  "myLanguage": {
+    "header": "Language",
+    "saveButton": "Save",
+    "savedToast": "Saved successfully"
+  },
+  "toastMessage": {
+    "logoutFailed": "Logout failed",
+    "profileUpdated": "Profile updated successfully.",
+    "profileUpdateFailed": "Failed to update profile.",
+    "fillAllFields": "Please fill in all fields.",
+    "requestTimeout": "Request timed out. Please try again.",
+    "createChatroomFailed": "Failed to create chat room"
+  },
+  "roleplaySection": {
+    "conversationContext": "Conversation Context"
+  },
+  "tab": {
+    "coaching": "Live 1:1 Coaching",
+    "selectAll": "Select All",
+    "delete": "Delete",
+    "searchPlaceholder": "Search for chats"
+  },
+  "askTab": {
+    "title": "Ask",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "noResults": "No results for \"{{keyword}}\""
+  },
+  "roleplayTab": {
+    "title": "Role Playing"
+  },
+  "historyHeader": {
+    "title": "Role Playing"
+  },
+  "postHeader": {
+    "title": "Community"
+  },
+  "profileHeader": {
+    "title": "My Page"
   },
   "chatroomHeader": {
     "newChat": "New Chat",
@@ -226,6 +275,12 @@
     "Belonging": "Belonging",
     "K-POP": "K-POP"
   },
+  "botHistory": {
+    "all": "All",
+    "latestActivity": "Latest activity",
+    "oldestActivity": "Oldest activity",
+    "empty": "No conversations yet"
+  },
   "interests": {
     "dailyConversation": "💬 Daily Conversation",
     "business": "💼 Business",
@@ -238,6 +293,10 @@
     "ordering": "🍜 Ordering",
     "beauty": "💄 Beauty",
     "gathering": "👁️‍🗨️ Gathering"
+  },
+  "modeToggle": {
+    "roleplaying": "Role playing",
+    "ask": "Ask"
   },
   "levelDescription": {
     "BEGINNER": "I know basic polite words, but I'm not sure when or how to use honorifics.",

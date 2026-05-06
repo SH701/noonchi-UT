@@ -1,8 +1,11 @@
+import { useTranslation } from "react-i18next";
+
 interface ResultTabProps {
   tab: "Feedback" | "Detailed Metrics";
   setTab: (value: "Feedback" | "Detailed Metrics") => void;
 }
 export default function ResultTab({ tab, setTab }: ResultTabProps) {
+  const { t } = useTranslation();
   return (
     <div className="mb-4.5 py-3.5">
       <div className="flex border-b border-gray-200">
@@ -14,7 +17,7 @@ export default function ResultTab({ tab, setTab }: ResultTabProps) {
               : "border-transparent text-gray-500 hover:text-gray-700"
           }`}
         >
-          Transcript
+          {t("result.tabs.transcript")}
         </button>
 
         <button
@@ -25,7 +28,7 @@ export default function ResultTab({ tab, setTab }: ResultTabProps) {
               : "border-transparent text-gray-500 hover:text-gray-700"
           }`}
         >
-          Common Mistakes
+          {t("result.tabs.mistakes")}
         </button>
       </div>
     </div>

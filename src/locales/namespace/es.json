@@ -78,6 +78,40 @@
     "signupButton": "Crear cuenta",
     "loginButton": "Iniciar sesión"
   },
+  "myInterests": {
+    "header": "Temas de interés",
+    "title": "Selecciona tus intereses",
+    "description": "Selecciona al menos 3 intereses para ayudarnos a mejorar tu experiencia.",
+    "saveButton": "Guardar intereses"
+  },
+  "result": {
+    "header": "Informe",
+    "tabs": {
+      "transcript": "Transcripción",
+      "mistakes": "Errores comunes"
+    },
+    "scores": {
+      "politeness": "Cortesía",
+      "naturalness": "Naturalidad"
+    },
+    "feedback": {
+      "summary": "Resumen de la conversación",
+      "wellDone": "Lo que hiciste bien",
+      "improve": "Lo que puedes mejorar"
+    }
+  },
+  "botHistory": {
+    "all": "Todo",
+    "latestActivity": "Actividad más reciente",
+    "oldestActivity": "Actividad más antigua",
+    "empty": "Todavía no hay conversaciones"
+  },
+  "coach": {
+    "sectionTitle": "Coaching de gestión de riesgos",
+    "sectionDescription": "Descifra el contexto oculto. Conéctate con los mejores expertos para prevenir fallas críticas en las relaciones en Corea.",
+    "listTitle": "Coach disponible",
+    "liveTitle": "Coaching en vivo 1 a 1"
+  },
   "profile": {
     "personalSection": "Configuración personal",
     "legalSection": "Legal",
@@ -98,11 +132,6 @@
     "birth": "Fecha de nacimiento",
     "email": "Correo electrónico",
     "koreanLevel": "Nivel de coreano"
-  },
-  "coach": {
-    "sectionTitle": "Coaching de gestión de riesgos",
-    "sectionDescription": "Descifra el contexto oculto. Conéctate con los mejores expertos para prevenir fallas críticas en las relaciones en Corea.",
-    "listTitle": "Coach disponible"
   },
   "ask": {
     "title": "¿No estás seguro de cómo podría sonar?",
@@ -148,21 +177,6 @@
     "jobPostingPlaceholder": "Puedes pegar la descripción del trabajo para generar preguntas de entrevista más personalizadas.",
     "startButton": "Comenzar a chatear"
   },
-  "result": {
-    "tabs": {
-      "transcript": "Transcripción",
-      "mistakes": "Errores comunes"
-    },
-    "scores": {
-      "politeness": "Cortesía",
-      "naturalness": "Naturalidad"
-    },
-    "feedback": {
-      "summary": "Resumen de la conversación",
-      "wellDone": "Lo que hiciste bien",
-      "improve": "Lo que puedes mejorar"
-    }
-  },
   "postCreate": {
     "headerTitle": "Nueva publicación",
     "titlePlaceholder": "Título",
@@ -192,6 +206,7 @@
     "continueButton": "Continuar"
   },
   "deleteModal": {
+    "title": "Eliminar",
     "description": "¿Estás seguro de que quieres eliminar esto? Esta acción no se puede deshacer.",
     "cancelButton": "Cancelar",
     "deleteButton": "Eliminar"
@@ -200,6 +215,46 @@
     "title": "¡Próximamente!",
     "description": "Esta función estará disponible en una próxima actualización.",
     "closeButton": "Cerrar"
+  },
+  "myLanguage": {
+    "header": "Idioma",
+    "saveButton": "Guardar",
+    "savedToast": "Guardado correctamente"
+  },
+  "toastMessage": {
+    "logoutFailed": "Error al cerrar sesión",
+    "profileUpdated": "Perfil actualizado correctamente.",
+    "profileUpdateFailed": "Error al actualizar el perfil.",
+    "fillAllFields": "Por favor, completa todos los campos.",
+    "requestTimeout": "La solicitud tardó demasiado. Inténtalo de nuevo.",
+    "createChatroomFailed": "Error al crear la sala de chat"
+  },
+  "roleplaySection": {
+    "conversationContext": "Contexto de la conversación"
+  },
+  "tab": {
+    "coaching": "Coaching en vivo 1 a 1",
+    "selectAll": "Seleccionar todo",
+    "delete": "Eliminar",
+    "searchPlaceholder": "Buscar chats"
+  },
+  "askTab": {
+    "title": "Preguntar",
+    "edit": "Editar",
+    "cancel": "Cancelar",
+    "noResults": "Sin resultados para \"{{keyword}}\""
+  },
+  "roleplayTab": {
+    "title": "Juego de roles"
+  },
+  "historyHeader": {
+    "title": "Juego de roles"
+  },
+  "postHeader": {
+    "title": "Comunidad"
+  },
+  "profileHeader": {
+    "title": "Mi página"
   },
   "chatroomHeader": {
     "newChat": "Nuevo chat",
@@ -238,6 +293,10 @@
     "ordering": "🍜 Pedir",
     "beauty": "💄 Belleza",
     "gathering": "👁️‍🗨️ Reuniones"
+  },
+  "modeToggle": {
+    "roleplaying": "Juego de rol",
+    "ask": "Preguntar"
   },
   "levelDescription": {
     "BEGINNER": "Conozco palabras básicas de cortesía, pero no sé cuándo ni cómo usar el lenguaje formal.",

@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 export default function ModeToggle() {
+  const { t } = useTranslation();
   const askRef = useRef<HTMLSpanElement>(null);
   const roleRef = useRef<HTMLSpanElement>(null);
   const pathname = usePathname();
@@ -46,7 +48,7 @@ export default function ModeToggle() {
         }`}
         onClick={() => router.push("/hub")}
       >
-        Role playing
+        {t("modeToggle.roleplaying")}
       </span>
       <span
         ref={askRef}
@@ -55,7 +57,7 @@ export default function ModeToggle() {
         }`}
         onClick={() => router.push("/hub/ask")}
       >
-        Ask
+        {t("modeToggle.ask")}
       </span>
     </div>
   );

@@ -78,6 +78,40 @@
     "signupButton": "アカウントを作成",
     "loginButton": "ログイン"
   },
+  "myInterests": {
+    "header": "興味のあるトピック",
+    "title": "興味を選択してください",
+    "description": "体験を向上させるために、少なくとも3つの興味を選択してください。",
+    "saveButton": "興味を保存"
+  },
+  "result": {
+    "header": "レポート",
+    "tabs": {
+      "transcript": "スクリプト",
+      "mistakes": "よくある間違い"
+    },
+    "scores": {
+      "politeness": "丁寧さ",
+      "naturalness": "自然さ"
+    },
+    "feedback": {
+      "summary": "会話のまとめ",
+      "wellDone": "うまくできたこと",
+      "improve": "改善できること"
+    }
+  },
+  "botHistory": {
+    "all": "すべて",
+    "latestActivity": "最新のアクティビティ",
+    "oldestActivity": "最も古いアクティビティ",
+    "empty": "まだ会話がありません"
+  },
+  "coach": {
+    "sectionTitle": "リスクマネジメントコーチング",
+    "sectionDescription": "隠れた文脈を読み解き、韓国での重要な人間関係の失敗を防ぐために専門家とつながりましょう。",
+    "listTitle": "利用可能なコーチ",
+    "liveTitle": "ライブ1対1コーチング"
+  },
   "profile": {
     "personalSection": "個人設定",
     "legalSection": "法的情報",
@@ -98,11 +132,6 @@
     "birth": "生年月日",
     "email": "メール",
     "koreanLevel": "韓国語レベル"
-  },
-  "coach": {
-    "sectionTitle": "リスクマネジメントコーチング",
-    "sectionDescription": "隠れた文脈を読み解き、韓国での重要な人間関係の失敗を防ぐために専門家とつながりましょう。",
-    "listTitle": "利用可能なコーチ"
   },
   "ask": {
     "title": "どう聞こえるか分からないですか？",
@@ -148,21 +177,6 @@
     "jobPostingPlaceholder": "採用情報を貼り付けると、より適切な面接質問を生成できます。",
     "startButton": "チャットを開始"
   },
-  "result": {
-    "tabs": {
-      "transcript": "トランスクリプト",
-      "mistakes": "よくある間違い"
-    },
-    "scores": {
-      "politeness": "丁寧さ",
-      "naturalness": "自然さ"
-    },
-    "feedback": {
-      "summary": "会話のまとめ",
-      "wellDone": "うまくできたこと",
-      "improve": "改善できること"
-    }
-  },
   "postCreate": {
     "headerTitle": "新しい投稿",
     "titlePlaceholder": "タイトル",
@@ -192,6 +206,7 @@
     "continueButton": "続ける"
   },
   "deleteModal": {
+    "title": "削除",
     "description": "本当に削除しますか？この操作は元に戻せません。",
     "cancelButton": "キャンセル",
     "deleteButton": "削除"
@@ -200,6 +215,46 @@
     "title": "近日公開！",
     "description": "この機能は今後のアップデートで利用可能になります。",
     "closeButton": "閉じる"
+  },
+  "myLanguage": {
+    "header": "言語",
+    "saveButton": "保存",
+    "savedToast": "保存しました"
+  },
+  "toastMessage": {
+    "logoutFailed": "ログアウトに失敗しました",
+    "profileUpdated": "プロフィールを更新しました。",
+    "profileUpdateFailed": "プロフィールの更新に失敗しました。",
+    "fillAllFields": "すべての項目を入力してください。",
+    "requestTimeout": "リクエストがタイムアウトしました。もう一度お試しください。",
+    "createChatroomFailed": "チャットルームの作成に失敗しました"
+  },
+  "roleplaySection": {
+    "conversationContext": "会話のコンテキスト"
+  },
+  "tab": {
+    "coaching": "ライブ1対1コーチング",
+    "selectAll": "すべて選択",
+    "delete": "削除",
+    "searchPlaceholder": "チャットを検索"
+  },
+  "askTab": {
+    "title": "Ask",
+    "edit": "編集",
+    "cancel": "キャンセル",
+    "noResults": "「{{keyword}}」の結果はありません"
+  },
+  "roleplayTab": {
+    "title": "ロールプレイ"
+  },
+  "historyHeader": {
+    "title": "ロールプレイ"
+  },
+  "postHeader": {
+    "title": "コミュニティ"
+  },
+  "profileHeader": {
+    "title": "マイページ"
   },
   "chatroomHeader": {
     "newChat": "新しいチャット",
@@ -238,6 +293,10 @@
     "ordering": "🍜 注文",
     "beauty": "💄 美容",
     "gathering": "👁️‍🗨️ 集まり"
+  },
+  "modeToggle": {
+    "roleplaying": "ロールプレイ",
+    "ask": "質問"
   },
   "levelDescription": {
     "BEGINNER": "基本的な丁寧語は知っていますが、敬語をいつどう使うか自信がありません。",

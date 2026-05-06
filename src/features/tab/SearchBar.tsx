@@ -4,8 +4,10 @@ import { HomeIcon, SearchIcon } from "@/assets/svgr";
 import { useTabStore } from "@/store";
 import { useChatHistoryStore } from "@/store/useChatHistorystore";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 export default function SearchBar() {
+  const { t } = useTranslation();
   const { keyword, setKeyword, submitSearch } = useChatHistoryStore();
   const { closeTab } = useTabStore();
   const router = useRouter();
@@ -23,7 +25,7 @@ export default function SearchBar() {
           onChange={(e) => setKeyword(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && submitSearch()}
           className="h-12 w-full overflow-hidden rounded-full border border-white bg-white/70 p-3 pl-10"
-          placeholder="Search for chats"
+          placeholder={t("tab.searchPlaceholder")}
           style={{ minWidth: 0 }}
         />
         <SearchIcon

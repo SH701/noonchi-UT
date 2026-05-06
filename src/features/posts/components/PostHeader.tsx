@@ -6,8 +6,10 @@ import Tab from "@/features/tab/Tab";
 import { useTabStore } from "@/store";
 import { usePathname, useRouter } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function PostHeader() {
+  const { t } = useTranslation();
   const { toggleTab } = useTabStore();
   const router = useRouter();
   const pathname = usePathname();
@@ -23,7 +25,7 @@ export default function PostHeader() {
             <HamburgerIcon onClick={toggleTab} />
           )
         }
-        center={"Community"}
+        center={t("postHeader.title")}
       />
       {!isDetail && <Tab />}
     </>

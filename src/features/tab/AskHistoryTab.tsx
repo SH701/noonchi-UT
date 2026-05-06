@@ -9,6 +9,7 @@ import { getTime } from "@/lib/time-format";
 import { useHistorySearch } from "@/hooks/custom";
 import { Check } from "lucide-react";
 import EmptyState from "../bothistory/components/EmptyState";
+import { useTranslation } from "react-i18next";
 
 interface AskHistoryTabProps {
   edit: boolean;
@@ -23,6 +24,7 @@ export default function AskHistoryTab({
   selectedIds,
   onToggleSelect,
 }: AskHistoryTabProps) {
+  const { t } = useTranslation();
   const router = useRouter();
   const { closeTab } = useTabStore();
   const { conversations, isPending, isSearching, searchKeyword } =
@@ -31,12 +33,12 @@ export default function AskHistoryTab({
   return (
     <section className="flex h-full flex-col overflow-hidden">
       <div className="mt-5 flex shrink-0 items-start justify-between">
-        <span className="mb-2 text-sm font-medium">Ask</span>
+        <span className="mb-2 text-sm font-medium">{t("askTab.title")}</span>
         <button className="cursor-pointer text-xs" onClick={setEdit}>
           {edit ? (
-            <span className="text-red-500">Cancel</span>
+            <span className="text-red-500">{t("askTab.cancel")}</span>
           ) : (
-            <span className="text-gray-600">Edit</span>
+            <span className="text-gray-600">{t("askTab.edit")}</span>
           )}
         </button>
       </div>
@@ -50,7 +52,7 @@ export default function AskHistoryTab({
               <div className="mt-20 flex gap-2">
                 <SearchIcon className="text-gray-500" />
                 <span className="font-medium text-gray-500">
-                  No results for &quot;{searchKeyword}&quot;
+                  {t("askTab.noResults", { keyword: searchKeyword })}
                 </span>
               </div>
             ) : (

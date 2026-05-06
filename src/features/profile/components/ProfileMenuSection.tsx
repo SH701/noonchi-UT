@@ -5,28 +5,30 @@ import { AlpabatIcon, ControlIcon, SettingIcon } from "@/assets/svgr";
 import ProfileMenuList from "./ProfileMenuList";
 import { CominSoonModal } from "@/components/modal";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 export default function ProfileMenuSection() {
+  const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
   return (
     <>
       <section aria-label="Personal settings">
         <ProfileMenuList
-          title="Personal settings"
+          title={t("profile.personalSection")}
           items={[
             {
-              label: "Topics of Interest",
+              label: t("profile.menu.interests"),
               onClick: () => router.push("/profile/interests"),
               icon: <ControlIcon />,
             },
             {
-              label: "Language",
+              label: t("profile.menu.language"),
               onClick: () => router.push("/profile/language"),
               icon: <AlpabatIcon />,
             },
             {
-              label: "Manage Subscription",
+              label: t("profile.menu.subscription"),
               onClick: () => setShowModal(true),
               icon: <SettingIcon />,
             },
@@ -35,17 +37,17 @@ export default function ProfileMenuSection() {
       </section>
       <section aria-label="Legal">
         <ProfileMenuList
-          title="Legal"
+          title={t("profile.legalSection")}
           items={[
             {
-              label: "Terms of Use",
+              label: t("profile.menu.terms"),
               onClick: () => router.push("/profile/terms"),
             },
             {
-              label: "Privacy policy",
+              label: t("profile.menu.privacy"),
               onClick: () => router.push("/profile/privacy"),
             },
-            { label: "Help & Support", onClick: () => setShowModal(true) },
+            { label: t("profile.menu.help"), onClick: () => setShowModal(true) },
           ]}
         />
       </section>

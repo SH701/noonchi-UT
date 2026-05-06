@@ -3,12 +3,14 @@
 import { SendIcon } from "@/assets/svgr";
 import { useRef, useEffect, useState } from "react";
 import { useCreateComment } from "../hooks/usePostsMutations";
+import { useTranslation } from "react-i18next";
 
 interface CommentInputProps {
   postId: number;
 }
 
 export default function CommentInput({ postId }: CommentInputProps) {
+  const { t } = useTranslation();
   const [value, setValue] = useState("");
   const textRef = useRef<HTMLTextAreaElement>(null);
   const { mutate: createComment, isPending } = useCreateComment();
@@ -42,7 +44,7 @@ export default function CommentInput({ postId }: CommentInputProps) {
           <textarea
             ref={textRef}
             rows={1}
-            placeholder="Leave a comment..."
+            placeholder={t("comment.placeholder")}
             className="max-h-30 absolute inset-0 w-full min-w-0 resize-none overflow-y-auto border-none bg-transparent text-gray-800 caret-gray-800 outline-none placeholder:text-gray-400"
             value={value}
             onChange={(e) => setValue(e.target.value)}

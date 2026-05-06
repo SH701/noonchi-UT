@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { toast } from "@/components/ui/toast/toast";
 import { useTopics } from "@/hooks/queries";
+import { useTranslation } from "react-i18next";
 
 import { RoleplayLoading } from "@/features/roleplay";
 import SpinnerLoading from "@/components/common/SpinnerLoading";
@@ -20,6 +21,7 @@ interface SubmitProps {
 }
 
 export default function RoleplaySection() {
+  const { t } = useTranslation();
   const router = useRouter();
   const searchParams = useSearchParams();
   const category = searchParams.get("category") ?? "";
@@ -46,7 +48,7 @@ export default function RoleplaySection() {
     tone,
   }: SubmitProps) => {
     if (!myRole || !aiRole || !situation || !tone) {
-      toast.error("Please fill in all fields.");
+      toast.error(t("toastMessage.fillAllFields"));
       return;
     }
     try {
@@ -67,9 +69,9 @@ export default function RoleplaySection() {
       router.push(`/hub/roleplay/chatroom/${convo.conversationId}`);
     } catch (e) {
       if (e instanceof Error && e.message === "timeout") {
-        toast.error("Request timed out. Please try again.");
+        toast.error(t("toastMessage.requestTimeout"));
       } else {
-        toast.error("Failed to create chat room");
+        toast.error(t("toastMessage.createChatroomFailed"));
       }
     }
   };
@@ -99,7 +101,7 @@ export default function RoleplaySection() {
             </div>
           </figure>
           <div>
-            <h2 className="pb-5 pt-8 font-semibold">Conversation Context</h2>
+            <h2 className="pb-5 pt-8 font-semibold">{t("roleplaySection.conversationContext")}</h2>
             <RoleplayForm onSubmit={handleSubmit} topicId={topicId} />
           </div>
         </div>
