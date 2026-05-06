@@ -18,6 +18,7 @@ import { useSession } from "next-auth/react";
 import { signup2Schema } from "../../types/schema";
 import { useUpdateProfile } from "@/features/profile/hooks/useProfile";
 import { authMutations } from "../../api/mutations";
+import { useTranslation } from "react-i18next";
 
 type Step2FormData = z.infer<typeof signup2Schema>;
 
@@ -36,6 +37,7 @@ export default function SignupDetail({
   step,
   onBack,
 }: SignupDetailProps) {
+  const { t } = useTranslation();
   const router = useRouter();
   const { closeModal } = useModalActions();
   const { update } = useSession();
@@ -99,7 +101,7 @@ export default function SignupDetail({
       <SignupTemplate
         header={
           <SignupHeader
-            title="Create account"
+            title={t("signupStep1.title")}
             rightIcon={<X onClick={() => closeModal()} />}
           />
         }
@@ -111,7 +113,7 @@ export default function SignupDetail({
             onClick={handleSubmit(onSubmit)}
             className="mb-8"
           >
-            {isSubmitting ? <Spinner /> : <span>Get Started</span>}
+            {isSubmitting ? <Spinner /> : <span>{t("signupStep2.submitButton")}</span>}
           </Button>
         }
       >

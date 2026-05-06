@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button/button";
-
 import { Spinner } from "@/components/ui/spinner/spinner";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   loading: boolean;
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function LoginAction({ loading, handleLogin, isValid }: Props) {
-  
+  const { t } = useTranslation();
   return (
     <>
       <div className="flex items-center justify-center">
@@ -19,7 +19,7 @@ export default function LoginAction({ loading, handleLogin, isValid }: Props) {
           disabled={!isValid || loading}
           size="lg"
         >
-          {loading ? <Spinner /> : <p>Log in</p>}
+          {loading ? <Spinner /> : <p>{t("login.loginButton")}</p>}
         </Button>
       </div>
     </>

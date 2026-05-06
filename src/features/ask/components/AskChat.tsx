@@ -16,12 +16,14 @@ import { useConversationDetail } from "@/hooks/queries/useConversation";
 import { AskTurn } from "../types/ask.type";
 import { useAskStream } from "../hooks/useAskStream";
 import { useAskMessageStream } from "../hooks/useAskMessageStream";
+import { useTranslation } from "react-i18next";
 
 interface AskChatProps {
   roomId?: number;
 }
 
 export default function AskChat({ roomId }: AskChatProps) {
+  const { t } = useTranslation();
   const [message, setMessage] = useState("");
   const [insightopen, setInsightOpen] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
@@ -166,12 +168,8 @@ export default function AskChat({ roomId }: AskChatProps) {
         {/* 스트리밍 결과 */}
         {aiMessage && (
           <div className="mb-1 flex flex-col gap-2">
-            <span className="text-2xl font-semibold">
-              {STEP_QUESTIONS.askTarget}
-            </span>
-            <span className="text-gray-600">
-              This can be something you`re <br /> about to say or do
-            </span>
+            <span className="text-2xl font-semibold">{t("ask.title")}</span>
+            <span className="text-gray-600">{t("ask.hints.hint1")}</span>
             {askTarget && (
               <div className="flex justify-end">
                 <div className="my-5 flex flex-col gap-2 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
@@ -180,12 +178,8 @@ export default function AskChat({ roomId }: AskChatProps) {
               </div>
             )}
             <div className="flex flex-col">
-              <span className="text-2xl font-semibold">
-                {STEP_QUESTIONS.closeness}
-              </span>
-              <span className="text-gray-600">
-                This helps me understand the right tone
-              </span>
+              <span className="text-2xl font-semibold">{t("ask.subtitle")}</span>
+              <span className="text-gray-600">{t("ask.hints.hint2")}</span>
               <div className="flex justify-end">
                 <div className="my-5 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
                   <p className="text-sm">
@@ -194,12 +188,8 @@ export default function AskChat({ roomId }: AskChatProps) {
                   </p>
                 </div>
               </div>
-              <span className="text-2xl font-semibold">
-                {STEP_QUESTIONS.situation}
-              </span>
-              <span className="text-gray-600">
-                Describe the situation or what you want to express
-              </span>
+              <span className="text-2xl font-semibold">{t("ask.startButton")}</span>
+              <span className="text-gray-600">{t("ask.hints.hint3")}</span>
               <div className="flex justify-end">
                 <div className="my-5 flex flex-col gap-2 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
                   <p className="text-sm">{situation}</p>
@@ -208,7 +198,7 @@ export default function AskChat({ roomId }: AskChatProps) {
             </div>
             <div className="flex flex-col">
               <span className="text-2xl font-semibold">
-                Here is the best way to say it
+                {t("ask.bestWay")}
               </span>
               <span className="text-gray-600">{approachTip}</span>
             </div>
@@ -218,7 +208,7 @@ export default function AskChat({ roomId }: AskChatProps) {
               </div>
               <div className="flex flex-col gap-1 border-b border-gray-400 pb-2 text-sm">
                 <div className="flex gap-1 text-blue-600">
-                  <Lightbulb size={14} /> Cultural Insights
+                  <Lightbulb size={14} /> {t("ask.culturalInsights")}
                 </div>
                 {insightopen ? (
                   <>
