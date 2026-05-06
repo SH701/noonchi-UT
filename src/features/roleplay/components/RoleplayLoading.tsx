@@ -1,5 +1,7 @@
 import { SpinnerLoading } from "@/components/common";
+import { useTranslation } from "react-i18next";
 
 export default function RoleplayLoading() {
-  return <SpinnerLoading title="Loading your Conversation setup" />;
+  const { t } = useTranslation();
+  return <SpinnerLoading title={t("roleplayLoading.title")} />;
 }

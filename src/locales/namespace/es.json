@@ -294,6 +294,46 @@
     "beauty": "💄 Belleza",
     "gathering": "👁️‍🗨️ Reuniones"
   },
+  "spinnerLoading": {
+    "subtitle1": "¡No tardará mucho!",
+    "subtitle2": "Por favor, espera un momento."
+  },
+  "roleplayLoading": {
+    "title": "Cargando tu conversación..."
+  },
+  "closeness": {
+    "casual": "Casual",
+    "friendly": "Amigable",
+    "professional": "Profesional",
+    "formal": "Formal"
+  },
+  "toneDescription": {
+    "casual": "(Amigos, Hermanos)",
+    "friendly": "(Colegas cercanos)",
+    "professional": "(Clientes, Profesores)",
+    "formal": "(Altos ejecutivos, Público)"
+  },
+  "stepQuestions": {
+    "askTarget": "¿Para quién es esto?",
+    "closeness": "¿Qué tan cercano eres con ellos?",
+    "situation": "¿Qué quieres decir?"
+  },
+  "askChat": {
+    "placeholderAskTarget": "¿Con quién estás hablando?",
+    "placeholderSituation": "Describe la situación...",
+    "placeholderDefault": "Escribe tu respuesta...",
+    "processingAI": "Procesando IA..."
+  },
+  "selectButton": {
+    "label": "Nivel de cercanía"
+  },
+  "category": {
+    "free": "Libre",
+    "question": "Pregunta",
+    "information": "Información",
+    "review": "Reseña",
+    "etc": "Etc"
+  },
   "modeToggle": {
     "roleplaying": "Juego de rol",
     "ask": "Preguntar"

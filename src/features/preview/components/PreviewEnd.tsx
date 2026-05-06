@@ -26,15 +26,18 @@ export default function PreviewEnd() {
           priority
           style={{ width: "clamp(217px, 40vw, 320px)", height: "auto" }}
         />
-        <p className="py-4 text-2xl font-medium text-gray-800">
+        <p className="py-4 text-center text-2xl font-medium text-gray-800">
           {t("previewEnd.title")}
         </p>
-        <div className="flex flex-col items-center justify-center text-sm font-medium text-gray-600">
+        <div className="flex flex-col items-center justify-center text-center text-sm font-medium text-gray-600">
           <span>{t("previewEnd.description1")}</span>
           <span>{t("previewEnd.description2")}</span>
         </div>
       </div>
-      <div className="mt-auto flex w-full flex-col gap-4 px-4" style={{ paddingBottom: "clamp(40px, 10vw, 52px)" }}>
+      <div
+        className="mt-auto flex w-full flex-col gap-4 px-4"
+        style={{ paddingBottom: "clamp(40px, 10vw, 52px)" }}
+      >
         <Button size="lg" onClick={signupOpen}>
           {t("previewEnd.signupButton")}
         </Button>

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { X } from "lucide-react";
-import { CATEGORIES, MAX_CONTENT } from "@/constants/category";
+import { getCategories, MAX_CONTENT } from "@/constants/category";
 import { useTranslation } from "react-i18next";
 
 interface PostCreateFormProps {
@@ -27,6 +27,7 @@ export default function PostCreateForm({
   onRemoveImage,
 }: PostCreateFormProps) {
   const { t } = useTranslation();
+  const CATEGORIES = getCategories(t);
   return (
     <div className="flex flex-1 flex-col rounded-2xl bg-white p-4 shadow-sm">
       <input

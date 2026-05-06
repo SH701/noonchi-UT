@@ -1,6 +1,6 @@
 "use client";
 
-import { CLOSENESS_OPTIONS, Step, STEPS } from "@/constants";
+import { getClosenessOptions, Step, STEPS } from "@/constants";
 import { Button } from "@/components/ui/button/button";
 import { useTranslation } from "react-i18next";
 
@@ -18,6 +18,7 @@ export default function AskSteps({
   onSelectCloseness,
 }: AskStepsProps) {
   const { t } = useTranslation();
+  const CLOSENESS_OPTIONS = getClosenessOptions(t);
   const currentStepIdx = STEPS.indexOf(step);
 
   return (

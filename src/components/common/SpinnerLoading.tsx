@@ -1,8 +1,11 @@
+import { useTranslation } from "react-i18next";
+
 interface SpinnerLoadingProps {
   title: string;
 }
 
 export default function SpinnerLoading({ title }: SpinnerLoadingProps) {
+  const { t } = useTranslation();
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-8">
       <div className="relative flex items-center justify-center">
@@ -38,9 +41,9 @@ export default function SpinnerLoading({ title }: SpinnerLoadingProps) {
       <div className="flex flex-col items-center gap-2 text-center">
         <p className="text-xl font-bold text-gray-800">{title}</p>
         <p className="text-sm text-gray-400">
-          It won&apos;t take long!
+          {t("spinnerLoading.subtitle1")}
           <br />
-          Please wait a moment.
+          {t("spinnerLoading.subtitle2")}
         </p>
       </div>
     </div>

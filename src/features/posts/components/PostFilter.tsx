@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button/button";
 import { SearchIcon } from "@/assets/svgr";
-import { CATEGORIES } from "@/constants/category";
+import { getCategories } from "@/constants/category";
 import { useTranslation } from "react-i18next";
 
 export type PostSortType = "latest" | "popular";
@@ -25,6 +25,7 @@ export default function PostFilter({
   onCategoryChange,
 }: PostFilterProps) {
   const { t } = useTranslation();
+  const CATEGORIES = getCategories(t);
   const filters: { label: string; value: PostSortType }[] = [
     { label: t("postList.filterLatest"), value: "latest" },
     { label: t("postList.filterPopular"), value: "popular" },

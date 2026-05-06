@@ -7,7 +7,7 @@ import { ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
 import { CominSoonModal } from "@/components/modal";
 import AskSteps from "./AskSteps";
 import MessageItem from "@/components/chatroom/MessageItem";
-import { CLOSENESS_OPTIONS, STEP_QUESTIONS } from "@/constants";
+import { getClosenessOptions } from "@/constants";
 import { useChatList } from "@/hooks/queries";
 
 import { Spinner } from "@/components/ui/spinner/spinner";
@@ -24,6 +24,7 @@ interface AskChatProps {
 
 export default function AskChat({ roomId }: AskChatProps) {
   const { t } = useTranslation();
+  const CLOSENESS_OPTIONS = getClosenessOptions(t);
   const [message, setMessage] = useState("");
   const [insightopen, setInsightOpen] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
@@ -161,7 +162,7 @@ export default function AskChat({ roomId }: AskChatProps) {
         {isPending && !aiMessage && (
           <div className="flex flex-col items-center justify-center gap-2">
             <Spinner size="64px" />
-            <span>Processing AI...</span>
+            <span>{t("askChat.processingAI")}</span>
           </div>
         )}
 
@@ -271,10 +272,10 @@ export default function AskChat({ roomId }: AskChatProps) {
             micState={micState}
             placeholder={
               step === "askTarget"
-                ? "Who are you talking to?"
+                ? t("askChat.placeholderAskTarget")
                 : step === "situation"
-                  ? "Describe the situation..."
-                  : "Type your answer..."
+                  ? t("askChat.placeholderSituation")
+                  : t("askChat.placeholderDefault")
             }
           />
         )}

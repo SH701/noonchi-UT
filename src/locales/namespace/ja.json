@@ -294,6 +294,46 @@
     "beauty": "💄 美容",
     "gathering": "👁️‍🗨️ 集まり"
   },
+  "spinnerLoading": {
+    "subtitle1": "すぐに終わります！",
+    "subtitle2": "少々お待ちください。"
+  },
+  "roleplayLoading": {
+    "title": "会話の準備中..."
+  },
+  "closeness": {
+    "casual": "カジュアル",
+    "friendly": "フレンドリー",
+    "professional": "プロフェッショナル",
+    "formal": "フォーマル"
+  },
+  "toneDescription": {
+    "casual": "(友達、兄弟姉妹)",
+    "friendly": "(仲の良い同僚)",
+    "professional": "(クライアント、教授)",
+    "formal": "(上級幹部、公の場)"
+  },
+  "stepQuestions": {
+    "askTarget": "誰に向けたものですか？",
+    "closeness": "その人とどのくらい親しいですか？",
+    "situation": "何を伝えたいですか？"
+  },
+  "askChat": {
+    "placeholderAskTarget": "誰と話していますか？",
+    "placeholderSituation": "状況を説明してください...",
+    "placeholderDefault": "答えを入力してください...",
+    "processingAI": "AIが処理中..."
+  },
+  "selectButton": {
+    "label": "親しさのレベル"
+  },
+  "category": {
+    "free": "自由",
+    "question": "質問",
+    "information": "情報",
+    "review": "レビュー",
+    "etc": "その他"
+  },
   "modeToggle": {
     "roleplaying": "ロールプレイ",
     "ask": "質問"

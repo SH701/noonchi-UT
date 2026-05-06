@@ -294,6 +294,46 @@
     "beauty": "💄 Красота",
     "gathering": "👁️‍🗨️ Встречи"
   },
+  "spinnerLoading": {
+    "subtitle1": "Это займёт немного времени!",
+    "subtitle2": "Пожалуйста, подождите."
+  },
+  "roleplayLoading": {
+    "title": "Загрузка разговора..."
+  },
+  "closeness": {
+    "casual": "Непринуждённый",
+    "friendly": "Дружелюбный",
+    "professional": "Профессиональный",
+    "formal": "Официальный"
+  },
+  "toneDescription": {
+    "casual": "(Друзья, братья и сёстры)",
+    "friendly": "(Близкие коллеги)",
+    "professional": "(Клиенты, профессора)",
+    "formal": "(Руководители, публичные выступления)"
+  },
+  "stepQuestions": {
+    "askTarget": "Для кого это?",
+    "closeness": "Насколько вы близки с ними?",
+    "situation": "Что вы хотите сказать?"
+  },
+  "askChat": {
+    "placeholderAskTarget": "С кем вы разговариваете?",
+    "placeholderSituation": "Опишите ситуацию...",
+    "placeholderDefault": "Введите ваш ответ...",
+    "processingAI": "Обработка ИИ..."
+  },
+  "selectButton": {
+    "label": "Уровень близости"
+  },
+  "category": {
+    "free": "Свободно",
+    "question": "Вопрос",
+    "information": "Информация",
+    "review": "Отзыв",
+    "etc": "Прочее"
+  },
   "modeToggle": {
     "roleplaying": "Ролевая игра",
     "ask": "Спросить"

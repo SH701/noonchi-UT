@@ -87,12 +87,12 @@ export default function Onboarding() {
                     <>
                       <div className="mx-auto mt-10 flex w-[81%] flex-col items-center justify-center text-center">
                         <h2 className="text-icon-primary text-center text-2xl font-semibold leading-tight">
-                          {t(`onboarding.slide${slide.id}.title`, { defaultValue: slide?.title })}
+                          {t(`onboarding.slide${slide.id}.title`)}
                         </h2>
                       </div>
                       <div className="mx-auto flex w-full flex-col items-center text-center">
                         <p className="mb-3 mt-2 text-sm leading-snug text-[#9CA3AF]">
-                          {t(`onboarding.slide${slide.id}.description`, { defaultValue: slide?.desc })}
+                          {t(`onboarding.slide${slide.id}.description`)}
                         </p>
                       </div>
                     </>
