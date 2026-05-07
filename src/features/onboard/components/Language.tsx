@@ -1,6 +1,6 @@
 'use client'
 
-import { LANGUAGES } from "@/constants/language";
+import { LANGUAGES } from "@/constants";
 import { usePreferenceStore } from "@/store";
 import { useTranslation } from "react-i18next";
 

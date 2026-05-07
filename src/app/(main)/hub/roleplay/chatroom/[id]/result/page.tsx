@@ -4,7 +4,7 @@ import { ResultPage } from "@/features/result";
 import { use } from "react";
 
 
-export default function Result({
+export default function RoleplayResultPage({
   params,
 }: {
   params: Promise<{ id: number }>;

@@ -2,7 +2,6 @@
 
 import { Header } from "@/components/common";
 import { Button } from "@/components/ui/button/button";
-import { INTEREST_KEYS } from "@/data";
 
 import { toast } from "@/components/ui/toast/toast";
 import { ChevronLeft } from "lucide-react";
@@ -12,6 +11,7 @@ import { useSession } from "next-auth/react";
 import { Spinner } from "@/components/ui/spinner/spinner";
 import { useUpdateProfile } from "../../hooks/useProfile";
 import { useTranslation } from "react-i18next";
+import { INTEREST_KEYS } from "@/constants";
 
 interface MyinterestsProps {
   interests: string[];

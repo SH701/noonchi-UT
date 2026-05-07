@@ -1,5 +1,5 @@
 import LiveCoach from "@/features/coach/LiveCoach";
 
-export default function Coach() {
+export default function CoachPage() {
   return <LiveCoach />;
 }

@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import { useUpdateProfile } from "../../hooks/useProfile";
 import { useSession } from "next-auth/react";
 import { Spinner } from "@/components/ui/spinner/spinner";
-import { LANGUAGES } from "@/constants/language";
+import { LANGUAGES } from "@/constants";
 
 
 

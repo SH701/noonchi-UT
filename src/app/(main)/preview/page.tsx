@@ -1,5 +1,5 @@
 import PreviewChat from "@/features/preview/components/PreviewChat";
 
-export default function Preview() {
+export default function PreviewPage() {
   return <PreviewChat />;
 }

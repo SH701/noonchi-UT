@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import React from "react";
 
 import OnboardLoading from "./OnboardLoading";
-import { Button } from "../../components/ui/button/button";
+import { Button } from "../../../components/ui/button/button";
 import { usePreferenceStore } from "@/store";
 import i18n from "@/locales/i18n";
 

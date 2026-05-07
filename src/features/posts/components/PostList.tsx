@@ -7,17 +7,29 @@ import PostCard from "./PostCard";
 import PostCardSkeleton from "./PostCardSkeleton";
 import PostFilter, { PostSortType } from "./PostFilter";
 import { useGetPosts } from "../hooks/usePosts";
-import { useDeletePost } from "../hooks/usePostsMutations";
+import { useDeletePost, useToggleLike, useToggleBookmark } from "../hooks/usePostsMutations";
 import DeleteModal from "@/components/modal/DeleteModal";
+import PostWebzine from "./PostWebzine";
 
 export default function PostList() {
   const router = useRouter();
+
   const [sort, setSort] = useState<PostSortType>("latest");
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("All");
   const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
-  const { data: postList, isLoading } = useGetPosts(category || undefined);
+  const { data: postList, isLoading } = useGetPosts(
+    category === "All" ? undefined : category,
+  );
   const { mutate: deletePost } = useDeletePost();
+  const { mutate: toggleLike } = useToggleLike();
+  const { mutate: toggleBookmark } = useToggleBookmark();
+
+  const handleDelete = () => {
+    if (deleteTargetId === null) return;
+    setDeleteTargetId(null);
+    deletePost(deleteTargetId);
+  };
 
   const posts = postList?.content ?? [];
   const filtered = posts.filter((p) =>
@@ -30,18 +42,23 @@ export default function PostList() {
   );
 
   return (
-    <section className="relative">
+    <section className="relative -mx-5 bg-blue-100/30 px-5">
+      <PostWebzine />
       <PostFilter
         active={sort}
         onSelect={setSort}
         search={search}
         onSearch={setSearch}
         category={category}
-        onCategoryChange={(v) => setCategory((prev) => (prev === v ? "" : v))}
+        onCategoryChange={(v) =>
+          setCategory(v === "All" ? "All" : (prev) => (prev === v ? "All" : v))
+        }
       />
       <ul className="flex flex-col gap-3">
         {isLoading
-          ? Array.from({ length: 5 }).map((_, i) => <PostCardSkeleton key={i} />)
+          ? Array.from({ length: 5 }).map((_, i) => (
+              <PostCardSkeleton key={i} />
+            ))
           : sorted.map((post) => (
               <PostCard
                 key={post.postId}
@@ -49,6 +66,8 @@ export default function PostList() {
                 onClick={() => router.push(`/posts/${post.postId}`)}
                 onEdit={() => router.push(`/posts/${post.postId}/edit`)}
                 onDelete={() => setDeleteTargetId(post.postId)}
+                onLike={() => toggleLike(post.postId)}
+                onBookmark={() => toggleBookmark(post.postId)}
               />
             ))}
       </ul>
@@ -61,7 +80,7 @@ export default function PostList() {
       <DeleteModal
         isOpen={deleteTargetId !== null}
         onClose={() => setDeleteTargetId(null)}
-        onConfirm={() => deletePost(deleteTargetId!)}
+        onConfirm={handleDelete}
         title="Delete Post"
       />
     </section>

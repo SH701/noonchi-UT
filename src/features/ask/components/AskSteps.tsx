@@ -23,7 +23,9 @@ export default function AskSteps({
 
   return (
     <>
-      <span className="text-2xl font-semibold">{t("ask.title")}</span>
+      <span className="text-2xl font-semibold">
+        {t("stepQuestions.askTarget")}
+      </span>
       <span className="text-gray-600">{t("ask.hints.hint1")}</span>
       {askTarget && (
         <div className="flex justify-end">
@@ -35,7 +37,9 @@ export default function AskSteps({
 
       {currentStepIdx >= 1 && (
         <div className="mt-5 flex flex-col">
-          <span className="text-2xl font-semibold">{t("ask.subtitle")}</span>
+          <span className="text-2xl font-semibold">
+            {t("stepQuestions.closeness")}
+          </span>
           <span className="text-gray-600">{t("ask.hints.hint2")}</span>
           {closeness ? (
             <div className="flex justify-end">
@@ -65,7 +69,9 @@ export default function AskSteps({
 
       {currentStepIdx >= 2 && (
         <div className="mt-5 flex flex-col">
-          <span className="text-2xl font-semibold">{t("ask.startButton")}</span>
+          <span className="text-2xl font-semibold">
+            {t("stepQuestions.situation")}
+          </span>
           <span className="text-gray-600">{t("ask.hints.hint3")}</span>
         </div>
       )}

@@ -1,6 +1,6 @@
 "use client";
 
-import { coach } from "@/data/coach";
+import { coach } from "@/constants";
 import Image from "next/image";
 import CoachBackButton from "./CoachBackButton";
 import { useTranslation } from "react-i18next";

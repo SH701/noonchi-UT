@@ -1,6 +1,6 @@
 import CustomSection from "@/features/roleplay/components/createchatroom/custom/CustomSection";
 
 
-export default function Custom() {
+export default function CreateCustomPage() {
   return <CustomSection />;
 }

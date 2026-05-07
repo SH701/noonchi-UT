@@ -169,7 +169,9 @@ export default function AskChat({ roomId }: AskChatProps) {
         {/* 스트리밍 결과 */}
         {aiMessage && (
           <div className="mb-1 flex flex-col gap-2">
-            <span className="text-2xl font-semibold">{t("ask.title")}</span>
+            <span className="text-2xl font-semibold">
+              {t("ask.stepQuestions.askTarget")}
+            </span>
             <span className="text-gray-600">{t("ask.hints.hint1")}</span>
             {askTarget && (
               <div className="flex justify-end">
@@ -179,7 +181,9 @@ export default function AskChat({ roomId }: AskChatProps) {
               </div>
             )}
             <div className="flex flex-col">
-              <span className="text-2xl font-semibold">{t("ask.subtitle")}</span>
+              <span className="text-2xl font-semibold">
+                {t("ask.subtitle")}
+              </span>
               <span className="text-gray-600">{t("ask.hints.hint2")}</span>
               <div className="flex justify-end">
                 <div className="my-5 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
@@ -189,7 +193,9 @@ export default function AskChat({ roomId }: AskChatProps) {
                   </p>
                 </div>
               </div>
-              <span className="text-2xl font-semibold">{t("ask.startButton")}</span>
+              <span className="text-2xl font-semibold">
+                {t("ask.startButton")}
+              </span>
               <span className="text-gray-600">{t("ask.hints.hint3")}</span>
               <div className="flex justify-end">
                 <div className="my-5 flex flex-col gap-2 rounded-b-xl rounded-tl-xl border border-gray-300 bg-white p-4">
@@ -198,9 +204,7 @@ export default function AskChat({ roomId }: AskChatProps) {
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-semibold">
-                {t("ask.bestWay")}
-              </span>
+              <span className="text-2xl font-semibold">{t("ask.bestWay")}</span>
               <span className="text-gray-600">{approachTip}</span>
             </div>
             <div className="flex flex-col gap-2">

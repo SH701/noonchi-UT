@@ -182,15 +182,18 @@
   },
   "postCreate": {
     "headerTitle": "新しい投稿",
+    "editHeaderTitle": "投稿を編集",
     "titlePlaceholder": "タイトル",
     "contentPlaceholder": "今どんなことを考えていますか？",
     "postButton": "投稿",
-    "postingButton": "投稿中..."
+    "postingButton": "投稿中...",
+    "postingTitle": "投稿しています..."
   },
   "postList": {
     "filterLatest": "最新",
     "filterPopular": "人気",
-    "searchPlaceholder": "投稿を検索..."
+    "searchPlaceholder": "投稿を検索...",
+    "deletingTitle": "投稿を削除しています..."
   },
   "postCard": {
     "edit": "編集",
@@ -233,7 +236,8 @@
     "createChatroomFailed": "チャットルームの作成に失敗しました"
   },
   "roleplaySection": {
-    "conversationContext": "会話のコンテキスト"
+    "conversationContext": "会話のコンテキスト",
+    "recentTopics": "最近のロールプレイ"
   },
   "tab": {
     "coaching": "ライブ1対1コーチング",
@@ -336,6 +340,7 @@
     "label": "親しさのレベル"
   },
   "category": {
+    "all": "全て",
     "free": "自由",
     "question": "質問",
     "information": "情報",

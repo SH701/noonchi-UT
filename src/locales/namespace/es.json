@@ -182,15 +182,18 @@
   },
   "postCreate": {
     "headerTitle": "Nueva publicación",
+    "editHeaderTitle": "Editar publicación",
     "titlePlaceholder": "Título",
     "contentPlaceholder": "¿Qué estás pensando?",
     "postButton": "Publicar",
-    "postingButton": "Publicando..."
+    "postingButton": "Publicando...",
+    "postingTitle": "Publicando tu contenido..."
   },
   "postList": {
     "filterLatest": "Más recientes",
     "filterPopular": "Popular",
-    "searchPlaceholder": "Buscar publicaciones..."
+    "searchPlaceholder": "Buscar publicaciones...",
+    "deletingTitle": "Eliminando publicación..."
   },
   "postCard": {
     "edit": "Editar",
@@ -233,7 +236,8 @@
     "createChatroomFailed": "Error al crear la sala de chat"
   },
   "roleplaySection": {
-    "conversationContext": "Contexto de la conversación"
+    "conversationContext": "Contexto de la conversación",
+    "recentTopics": "Juego de rol reciente"
   },
   "tab": {
     "coaching": "Coaching en vivo 1 a 1",
@@ -336,6 +340,7 @@
     "label": "Nivel de cercanía"
   },
   "category": {
+    "all": "Todo",
     "free": "Libre",
     "question": "Pregunta",
     "information": "Información",

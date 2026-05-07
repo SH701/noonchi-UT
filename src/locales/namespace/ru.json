@@ -182,15 +182,18 @@
   },
   "postCreate": {
     "headerTitle": "Новая публикация",
+    "editHeaderTitle": "Редактировать публикацию",
     "titlePlaceholder": "Заголовок",
     "contentPlaceholder": "О чём вы думаете?",
     "postButton": "Опубликовать",
-    "postingButton": "Публикация..."
+    "postingButton": "Публикация...",
+    "postingTitle": "Публикация вашего контента..."
   },
   "postList": {
     "filterLatest": "Последние",
     "filterPopular": "Популярные",
-    "searchPlaceholder": "Поиск публикаций..."
+    "searchPlaceholder": "Поиск публикаций...",
+    "deletingTitle": "Удаление публикации..."
   },
   "postCard": {
     "edit": "Редактировать",
@@ -233,7 +236,8 @@
     "createChatroomFailed": "Не удалось создать чат"
   },
   "roleplaySection": {
-    "conversationContext": "Контекст разговора"
+    "conversationContext": "Контекст разговора",
+    "recentTopics": "Недавние ролевые игры"
   },
   "tab": {
     "coaching": "Живой коучинг 1:1",
@@ -336,6 +340,7 @@
     "label": "Уровень близости"
   },
   "category": {
+    "all": "Все",
     "free": "Свободно",
     "question": "Вопрос",
     "information": "Информация",

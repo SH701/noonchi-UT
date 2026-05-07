@@ -176,15 +176,18 @@
   },
   "postCreate": {
     "headerTitle": "New Post",
+    "editHeaderTitle": "Edit Post",
     "titlePlaceholder": "Title",
     "contentPlaceholder": "What's on your mind?",
     "postButton": "Post",
-    "postingButton": "Posting..."
+    "postingButton": "Posting...",
+    "postingTitle": "Posting your content..."
   },
   "postList": {
     "filterLatest": "Latest",
     "filterPopular": "Popular",
-    "searchPlaceholder": "Search posts..."
+    "searchPlaceholder": "Search posts...",
+    "deletingTitle": "Deleting post..."
   },
   "postCard": {
     "edit": "Edit",
@@ -227,7 +230,8 @@
     "createChatroomFailed": "Failed to create chat room"
   },
   "roleplaySection": {
-    "conversationContext": "Conversation Context"
+    "conversationContext": "Conversation Context",
+    "recentTopics": "Recent Role Playing"
   },
   "tab": {
     "coaching": "Live 1:1 Coaching",
@@ -336,6 +340,7 @@
     "label": "Level of closeness"
   },
   "category": {
+    "all": "All",
     "free": "Free",
     "question": "Question",
     "information": "Information",

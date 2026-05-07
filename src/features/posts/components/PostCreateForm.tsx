@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { X } from "lucide-react";
-import { getCategories, MAX_CONTENT } from "@/constants/category";
+import { getCategories, MAX_CONTENT } from "@/constants";
 import { useTranslation } from "react-i18next";
 
 interface PostCreateFormProps {
@@ -74,6 +74,7 @@ export default function PostCreateForm({
                 sizes="80px"
                 className="object-cover"
               />
+
               <button
                 onClick={() => onRemoveImage(url)}
                 className="absolute right-1 top-1 flex size-5 items-center justify-center rounded-full bg-black/60 text-white"
@@ -89,4 +90,4 @@ export default function PostCreateForm({
   );
 }
 
-export { MAX_CONTENT };
+

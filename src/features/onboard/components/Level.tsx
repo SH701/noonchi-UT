@@ -1,4 +1,4 @@
-import { LEVEL_KEYS } from "@/data";
+import { LEVEL_KEYS } from "@/constants";
 import { usePreferenceStore } from "@/store/usePreferenceStore";
 import { useTranslation } from "react-i18next";
 
@@ -10,12 +10,8 @@ export default function Level() {
   return (
     <div className="flex h-full flex-col pt-4">
       <div className="flex flex-1 flex-col">
-        <h1 className="mb-2 text-2xl font-semibold">
-          {t("level.title")}
-        </h1>
-        <p className="mb-4.5 text-gray-400">
-          {t("level.description")}
-        </p>
+        <h1 className="mb-2 text-2xl font-semibold">{t("level.title")}</h1>
+        <p className="mb-4.5 text-gray-400">{t("level.description")}</p>
 
         <div className="space-y-2">
           {LEVEL_KEYS.map((lvl) => (

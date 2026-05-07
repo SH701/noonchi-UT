@@ -1,6 +1,6 @@
-import Language from "@/features/onboard/Language";
-import Level from "@/features/onboard/Level";
-import Taste from "@/features/onboard/Taste";
+import Language from "@/features/onboard/components/Language";
+import Level from "@/features/onboard/components/Level";
+import Taste from "@/features/onboard/components/Taste";
 import type { ComponentType } from "react";
 
 type Slide = {
