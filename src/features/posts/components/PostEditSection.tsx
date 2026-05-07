@@ -2,24 +2,30 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { apiMutations } from "@/api";
 import { useGetPostDetail } from "@/features/posts/hooks/usePosts";
 import { useUpdatePost } from "@/features/posts/hooks/usePostsMutations";
+import SpinnerLoading from "@/components/common/SpinnerLoading";
 import PostCreateHeader from "./PostCreateHeader";
 import PostCreateForm from "./PostCreateForm";
 import PostCreateToolbar from "./PostCreateToolbar";
 
 export default function PostEditSection({ postId }: { postId: number }) {
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const { t } = useTranslation();
 
   const { data: post } = useGetPostDetail(postId);
-  const { mutate: updatePost, isPending } = useUpdatePost();
+  const { mutate: updatePost } = useUpdatePost();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [category, setCategory] = useState("Free");
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (!post) return;
@@ -43,20 +49,29 @@ export default function PostEditSection({ postId }: { postId: number }) {
   };
 
   const handleSubmit = () => {
-    if (!content.trim() || isPending || uploading) return;
+    if (!content.trim() || submitting || uploading) return;
+    setSubmitting(true);
     updatePost(
       { postId, data: { title, content, category, imageUrls } },
-      { onSuccess: () => router.back() },
+      {
+        onSuccess: async () => {
+          await queryClient.refetchQueries({ queryKey: ["posts"] });
+          router.back();
+        },
+        onError: () => setSubmitting(false),
+      },
     );
   };
 
-  const canSubmit = content.trim().length > 0 && !isPending && !uploading;
+  const canSubmit = content.trim().length > 0 && !submitting && !uploading;
+
+  if (submitting) return <SpinnerLoading title={t("postCreate.postingTitle")} />;
 
   return (
     <div className="flex min-h-dvh flex-col">
       <PostCreateHeader
         canSubmit={canSubmit}
-        isPending={isPending}
+        isPending={submitting}
         onBack={() => router.back()}
         onSubmit={handleSubmit}
       />

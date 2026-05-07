@@ -185,12 +185,14 @@
     "titlePlaceholder": "Заголовок",
     "contentPlaceholder": "О чём вы думаете?",
     "postButton": "Опубликовать",
-    "postingButton": "Публикация..."
+    "postingButton": "Публикация...",
+    "postingTitle": "Публикация вашего контента..."
   },
   "postList": {
     "filterLatest": "Последние",
     "filterPopular": "Популярные",
-    "searchPlaceholder": "Поиск публикаций..."
+    "searchPlaceholder": "Поиск публикаций...",
+    "deletingTitle": "Удаление публикации..."
   },
   "postCard": {
     "edit": "Редактировать",

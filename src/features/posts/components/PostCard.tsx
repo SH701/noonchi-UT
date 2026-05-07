@@ -14,6 +14,8 @@ type PostCardProps = PostSearchItem & {
   onClick: () => void;
   onEdit?: () => void;
   onDelete?: () => void;
+  onLike?: () => void;
+  onBookmark?: () => void;
 };
 
 export default function PostCard({
@@ -30,6 +32,8 @@ export default function PostCard({
   onClick,
   onEdit,
   onDelete,
+  onLike,
+  onBookmark,
 }: PostCardProps) {
   const { t } = useTranslation();
   const CATEGORIES = getCategories(t);
@@ -148,7 +152,7 @@ export default function PostCard({
         <div className="flex items-center gap-2 text-xs text-gray-400">
           <button
             className="flex items-center justify-center gap-0.5 transition-colors hover:text-red-400"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => { e.stopPropagation(); onLike?.(); }}
           >
             <Heart
               size={14}
@@ -163,7 +167,7 @@ export default function PostCard({
           </button>
           <button
             className="flex items-center gap-1 transition-colors hover:text-blue-400"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => { e.stopPropagation(); onBookmark?.(); }}
           >
             <Bookmark
               size={14}

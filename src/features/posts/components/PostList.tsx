@@ -7,12 +7,13 @@ import PostCard from "./PostCard";
 import PostCardSkeleton from "./PostCardSkeleton";
 import PostFilter, { PostSortType } from "./PostFilter";
 import { useGetPosts } from "../hooks/usePosts";
-import { useDeletePost } from "../hooks/usePostsMutations";
+import { useDeletePost, useToggleLike, useToggleBookmark } from "../hooks/usePostsMutations";
 import DeleteModal from "@/components/modal/DeleteModal";
 import PostWebzine from "./PostWebzine";
 
 export default function PostList() {
   const router = useRouter();
+
   const [sort, setSort] = useState<PostSortType>("latest");
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
@@ -21,6 +22,14 @@ export default function PostList() {
     category === "All" ? undefined : category,
   );
   const { mutate: deletePost } = useDeletePost();
+  const { mutate: toggleLike } = useToggleLike();
+  const { mutate: toggleBookmark } = useToggleBookmark();
+
+  const handleDelete = () => {
+    if (deleteTargetId === null) return;
+    setDeleteTargetId(null);
+    deletePost(deleteTargetId);
+  };
 
   const posts = postList?.content ?? [];
   const filtered = posts.filter((p) =>
@@ -57,6 +66,8 @@ export default function PostList() {
                 onClick={() => router.push(`/posts/${post.postId}`)}
                 onEdit={() => router.push(`/posts/${post.postId}/edit`)}
                 onDelete={() => setDeleteTargetId(post.postId)}
+                onLike={() => toggleLike(post.postId)}
+                onBookmark={() => toggleBookmark(post.postId)}
               />
             ))}
       </ul>
@@ -69,7 +80,7 @@ export default function PostList() {
       <DeleteModal
         isOpen={deleteTargetId !== null}
         onClose={() => setDeleteTargetId(null)}
-        onConfirm={() => deletePost(deleteTargetId!)}
+        onConfirm={handleDelete}
         title="Delete Post"
       />
     </section>

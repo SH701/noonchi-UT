@@ -1,14 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postsMutations } from "../api/mutations";
-import { PostDetail } from "../types/posts.type";
+import { PostDetail, PostList } from "../types/posts.type";
 
 export const useCreatePost = () => {
-  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: postsMutations.createPost,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-    },
   });
 };
 
@@ -27,8 +23,14 @@ export const useDeletePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: postsMutations.deletePost,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
+    onSuccess: (_data, postId) => {
+      queryClient.setQueriesData<PostList>(
+        { queryKey: ["posts"] },
+        (old) => {
+          if (!old) return old;
+          return { ...old, content: old.content.filter((p) => p.postId !== postId) };
+        },
+      );
     },
   });
 };
@@ -39,20 +41,35 @@ export const useToggleLike = () => {
     mutationFn: postsMutations.createLike,
     onMutate: async (postId) => {
       await queryClient.cancelQueries({ queryKey: ["posts", postId] });
-      const prev = queryClient.getQueryData<PostDetail>(["posts", postId]);
-      if (prev) {
+      const prevDetail = queryClient.getQueryData<PostDetail>(["posts", postId]);
+      if (prevDetail) {
         queryClient.setQueryData<PostDetail>(["posts", postId], {
-          ...prev,
-          isLiked: !prev.isLiked,
-          likesCount: prev.isLiked ? prev.likesCount - 1 : prev.likesCount + 1,
+          ...prevDetail,
+          isLiked: !prevDetail.isLiked,
+          likesCount: prevDetail.isLiked ? prevDetail.likesCount - 1 : prevDetail.likesCount + 1,
         });
       }
-      return { prev };
+      queryClient.setQueriesData<PostList>(
+        { queryKey: ["posts"] },
+        (old) => {
+          if (!old) return old;
+          return {
+            ...old,
+            content: old.content.map((p) =>
+              p.postId === postId
+                ? { ...p, isLiked: !p.isLiked, likesCount: p.isLiked ? p.likesCount - 1 : p.likesCount + 1 }
+                : p,
+            ),
+          };
+        },
+      );
+      return { prevDetail };
     },
     onError: (_err, postId, context) => {
-      if (context?.prev) {
-        queryClient.setQueryData(["posts", postId], context.prev);
+      if (context?.prevDetail) {
+        queryClient.setQueryData(["posts", postId], context.prevDetail);
       }
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
     onSettled: (_data, _err, postId) => {
       queryClient.invalidateQueries({ queryKey: ["posts", postId] });
@@ -66,19 +83,32 @@ export const useToggleBookmark = () => {
     mutationFn: postsMutations.createBookmark,
     onMutate: async (postId) => {
       await queryClient.cancelQueries({ queryKey: ["posts", postId] });
-      const prev = queryClient.getQueryData<PostDetail>(["posts", postId]);
-      if (prev) {
+      const prevDetail = queryClient.getQueryData<PostDetail>(["posts", postId]);
+      if (prevDetail) {
         queryClient.setQueryData<PostDetail>(["posts", postId], {
-          ...prev,
-          isBookmarked: !prev.isBookmarked,
+          ...prevDetail,
+          isBookmarked: !prevDetail.isBookmarked,
         });
       }
-      return { prev };
+      queryClient.setQueriesData<PostList>(
+        { queryKey: ["posts"] },
+        (old) => {
+          if (!old) return old;
+          return {
+            ...old,
+            content: old.content.map((p) =>
+              p.postId === postId ? { ...p, isBookmarked: !p.isBookmarked } : p,
+            ),
+          };
+        },
+      );
+      return { prevDetail };
     },
     onError: (_err, postId, context) => {
-      if (context?.prev) {
-        queryClient.setQueryData(["posts", postId], context.prev);
+      if (context?.prevDetail) {
+        queryClient.setQueryData(["posts", postId], context.prevDetail);
       }
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
     onSettled: (_data, _err, postId) => {
       queryClient.invalidateQueries({ queryKey: ["posts", postId] });

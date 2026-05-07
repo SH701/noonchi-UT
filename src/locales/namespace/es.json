@@ -185,12 +185,14 @@
     "titlePlaceholder": "Título",
     "contentPlaceholder": "¿Qué estás pensando?",
     "postButton": "Publicar",
-    "postingButton": "Publicando..."
+    "postingButton": "Publicando...",
+    "postingTitle": "Publicando tu contenido..."
   },
   "postList": {
     "filterLatest": "Más recientes",
     "filterPopular": "Popular",
-    "searchPlaceholder": "Buscar publicaciones..."
+    "searchPlaceholder": "Buscar publicaciones...",
+    "deletingTitle": "Eliminando publicación..."
   },
   "postCard": {
     "edit": "Editar",

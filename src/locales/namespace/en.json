@@ -179,12 +179,14 @@
     "titlePlaceholder": "Title",
     "contentPlaceholder": "What's on your mind?",
     "postButton": "Post",
-    "postingButton": "Posting..."
+    "postingButton": "Posting...",
+    "postingTitle": "Posting your content..."
   },
   "postList": {
     "filterLatest": "Latest",
     "filterPopular": "Popular",
-    "searchPlaceholder": "Search posts..."
+    "searchPlaceholder": "Search posts...",
+    "deletingTitle": "Deleting post..."
   },
   "postCard": {
     "edit": "Edit",

@@ -26,7 +26,9 @@ export default function PostCreateHeader({
       >
         <ChevronLeft size={24} />
       </button>
-      <h1 className="text-base font-semibold text-gray-900">{t("postCreate.headerTitle")}</h1>
+      <h1 className="text-base font-semibold text-gray-900">
+        {t("postCreate.headerTitle")}
+      </h1>
       <button
         onClick={onSubmit}
         disabled={!canSubmit}
@@ -34,7 +36,7 @@ export default function PostCreateHeader({
           canSubmit ? "text-white" : "text-gray-400"
         }`}
       >
-        {isPending ? t("postCreate.postingButton") : t("postCreate.postButton")}
+        {isPending ? t("postCreate.postButton") : t("postCreate.postButton")}
       </button>
     </header>
   );
