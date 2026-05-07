@@ -16,6 +16,9 @@
   "taste": {
     "title": "興味のある分野を選択してください"
   },
+  "language": {
+    "title": "言語を選択してください"
+  },
   "notFound": {
     "title": "ページが見つかりません",
     "descriptionLine1": "お探しのページは存在しません",

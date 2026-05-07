@@ -81,7 +81,7 @@ export function useRoleMessageStream(conversationId: number) {
               return {
                 ...m,
                 hiddenMeaning: doneData.ai_hidden_meaning,
-                translatedContent: doneData.ai_message_en,
+                translatedContent: doneData.ai_message_translated,
                 visualAction: doneData.visual_action,
               };
             }

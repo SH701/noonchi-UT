@@ -16,6 +16,7 @@ import { usePreferenceStore } from "@/store/usePreferenceStore";
 import { useSession } from "next-auth/react";
 import { loginSchema } from "../../types/schema";
 import { useUpdateProfile } from "@/features/profile/hooks/useProfile";
+
 import OAtuth from "./OAuth";
 import { useTranslation } from "react-i18next";
 type LoginData = z.infer<typeof loginSchema>;
@@ -27,7 +28,8 @@ export default function LoginContent() {
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
   const { openModal, closeModal } = useModalActions();
   const { update } = useSession();
-  const { koreanLevel, interests, resetPreferences } = usePreferenceStore();
+  const { koreanLevel, interests, language, resetPreferences } =
+    usePreferenceStore();
   const { mutateAsync: updateProfile } = useUpdateProfile();
   const {
     control,
@@ -58,14 +60,20 @@ export default function LoginContent() {
         setLoading(false);
         return;
       }
-      if (koreanLevel || interests.length > 0) {
+      if (koreanLevel || interests.length > 0 || language) {
         await updateProfile({
           koreanLevel: koreanLevel ?? undefined,
           interests,
+          language: language?.toUpperCase() as
+            | "EN"
+            | "JA"
+            | "RU"
+            | "ES"
+            | undefined,
         });
-        await update();
         resetPreferences();
       }
+      await update();
       gtag("event", "login", { method: "email" });
       closeModal();
       router.replace("/hub");
@@ -76,29 +84,13 @@ export default function LoginContent() {
   };
 
   const GoogleLogin = async () => {
-    const result = await signIn("google", {
-      redirect: false,
-      callbackUrl: "/hub",
-    });
-
-    if (result?.ok && !result.error) {
-      gtag("event", "login", { method: "google" });
-      closeModal();
-      router.replace(result.url ?? "/hub");
-    }
+    gtag("event", "login", { method: "google" });
+    await signIn("google", { callbackUrl: "/hub" });
   };
 
   const AppleLogin = async () => {
-    const result = await signIn("apple", {
-      redirect: false,
-      callbackUrl: "/hub",
-    });
-
-    if (result?.ok && !result.error) {
-      gtag("event", "login", { method: "apple" });
-      closeModal();
-      router.replace(result.url ?? "/hub");
-    }
+    gtag("event", "login", { method: "apple" });
+    await signIn("apple", { callbackUrl: "/hub" });
   };
   return (
     <div className="flex flex-col px-6 pb-10">

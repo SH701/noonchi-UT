@@ -11,13 +11,9 @@ import { useTranslation } from "react-i18next";
 import { useUpdateProfile } from "../../hooks/useProfile";
 import { useSession } from "next-auth/react";
 import { Spinner } from "@/components/ui/spinner/spinner";
+import { LANGUAGES } from "@/constants/language";
 
-const LANGUAGES = [
-  { code: "en", label: "English" },
-  { code: "ru", label: "Русский" },
-  { code: "ja", label: "日本語" },
-  { code: "es", label: "Español" },
-];
+
 
 export default function MyLanguage() {
   const { t } = useTranslation();
