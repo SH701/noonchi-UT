@@ -1,6 +1,7 @@
 "use client";
 
-import { INTEREST_KEYS } from "@/data";
+
+import { INTEREST_KEYS } from "@/constants";
 import { usePreferenceStore } from "@/store/usePreferenceStore";
 import { useTranslation } from "react-i18next";
 

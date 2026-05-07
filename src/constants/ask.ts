@@ -11,8 +11,3 @@ export const getClosenessOptions = (t: TFunction) => [
   { label: t("closeness.formal"), value: "formal" },
 ] as const;
 
-export const getStepQuestions = (t: TFunction): Record<string, string> => ({
-  askTarget: t("stepQuestions.askTarget"),
-  closeness: t("stepQuestions.closeness"),
-  situation: t("stepQuestions.situation"),
-});

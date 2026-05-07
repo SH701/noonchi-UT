@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button/button";
 import { SearchIcon } from "@/assets/svgr";
-import { getCategories } from "@/constants/category";
+import { getCategories } from "@/constants";
 import { useTranslation } from "react-i18next";
 
 export type PostSortType = "latest" | "popular";

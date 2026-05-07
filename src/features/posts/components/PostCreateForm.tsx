@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { X } from "lucide-react";
-import { getCategories, MAX_CONTENT } from "@/constants/category";
+import { getCategories, MAX_CONTENT } from "@/constants";
 import { useTranslation } from "react-i18next";
 
 interface PostCreateFormProps {
