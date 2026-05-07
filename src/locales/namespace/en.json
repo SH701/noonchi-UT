@@ -227,7 +227,8 @@
     "createChatroomFailed": "Failed to create chat room"
   },
   "roleplaySection": {
-    "conversationContext": "Conversation Context"
+    "conversationContext": "Conversation Context",
+    "recentTopics": "Recent Role Playing"
   },
   "tab": {
     "coaching": "Live 1:1 Coaching",

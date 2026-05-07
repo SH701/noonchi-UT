@@ -233,7 +233,8 @@
     "createChatroomFailed": "Не удалось создать чат"
   },
   "roleplaySection": {
-    "conversationContext": "Контекст разговора"
+    "conversationContext": "Контекст разговора",
+    "recentTopics": "Недавние ролевые игры"
   },
   "tab": {
     "coaching": "Живой коучинг 1:1",

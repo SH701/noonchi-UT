@@ -233,7 +233,8 @@
     "createChatroomFailed": "チャットルームの作成に失敗しました"
   },
   "roleplaySection": {
-    "conversationContext": "会話のコンテキスト"
+    "conversationContext": "会話のコンテキスト",
+    "recentTopics": "最近のロールプレイ"
   },
   "tab": {
     "coaching": "ライブ1対1コーチング",
