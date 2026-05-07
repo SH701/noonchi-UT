@@ -12,6 +12,7 @@ export interface User {
   profileImageUrl?: string;
   creditPoint: number;
   interests: string[];
+  language: "EN" | "JA" | "RU" | "ES" | null;
 }
 
 

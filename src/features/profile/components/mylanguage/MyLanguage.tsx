@@ -8,6 +8,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "@/components/ui/toast/toast";
 import { useTranslation } from "react-i18next";
+import { useUpdateProfile } from "../../hooks/useProfile";
+import { useSession } from "next-auth/react";
+import { Spinner } from "@/components/ui/spinner/spinner";
 
 const LANGUAGES = [
   { code: "en", label: "English" },
@@ -20,12 +23,19 @@ export default function MyLanguage() {
   const { t } = useTranslation();
   const router = useRouter();
   const [selected, setSelected] = useState(i18n.language);
+  const { mutateAsync: updateLanguage, isPending: loadingLanguage } =
+    useUpdateProfile();
+  const { update } = useSession();
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    await updateLanguage({
+      language: selected.toUpperCase() as "EN" | "JA" | "RU" | "ES",
+    });
     localStorage.setItem("language", selected);
-    i18n.changeLanguage(selected);
+    await i18n.changeLanguage(selected);
+    await update();
+    toast.success(i18n.t("myLanguage.savedToast"));
     router.back();
-    toast.success(t("myLanguage.savedToast"));
   };
 
   return (
@@ -53,8 +63,13 @@ export default function MyLanguage() {
           ))}
         </ul>
 
-        <Button size="lg" className="mt-auto" onClick={handleSave}>
-          {t("myLanguage.saveButton")}
+        <Button
+          size="lg"
+          className="mt-auto"
+          onClick={handleSave}
+          disabled={loadingLanguage}
+        >
+          {loadingLanguage ? <Spinner /> : t("myLanguage.saveButton")}
         </Button>
       </section>
     </>

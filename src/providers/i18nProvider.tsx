@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { I18nextProvider } from "react-i18next";
 import i18n from "@/locales/i18n";
+import { getSession } from "next-auth/react";
 
 export default function I18nProvider({
   children,
@@ -12,11 +13,19 @@ export default function I18nProvider({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const lang = localStorage.getItem("language") ?? "en";
-    if (i18n.language !== lang) {
-      i18n.changeLanguage(lang);
-    }
-    setMounted(true);
+    const init = async () => {
+      const session = await getSession();
+
+      const lang =
+        localStorage.getItem("language") ??
+        session?.user.language?.toLowerCase() ??
+        "en";
+      if (i18n.language !== lang) {
+        i18n.changeLanguage(lang);
+      }
+      setMounted(true);
+    };
+    init();
   }, []);
 
   if (!mounted) return null;
