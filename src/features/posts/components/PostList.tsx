@@ -9,14 +9,17 @@ import PostFilter, { PostSortType } from "./PostFilter";
 import { useGetPosts } from "../hooks/usePosts";
 import { useDeletePost } from "../hooks/usePostsMutations";
 import DeleteModal from "@/components/modal/DeleteModal";
+import PostWebzine from "./PostWebzine";
 
 export default function PostList() {
   const router = useRouter();
   const [sort, setSort] = useState<PostSortType>("latest");
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("All");
   const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
-  const { data: postList, isLoading } = useGetPosts(category || undefined);
+  const { data: postList, isLoading } = useGetPosts(
+    category === "All" ? undefined : category,
+  );
   const { mutate: deletePost } = useDeletePost();
 
   const posts = postList?.content ?? [];
@@ -30,18 +33,23 @@ export default function PostList() {
   );
 
   return (
-    <section className="relative">
+    <section className="relative -mx-5 bg-blue-100/30 px-5">
+      <PostWebzine />
       <PostFilter
         active={sort}
         onSelect={setSort}
         search={search}
         onSearch={setSearch}
         category={category}
-        onCategoryChange={(v) => setCategory((prev) => (prev === v ? "" : v))}
+        onCategoryChange={(v) =>
+          setCategory(v === "All" ? "All" : (prev) => (prev === v ? "All" : v))
+        }
       />
       <ul className="flex flex-col gap-3">
         {isLoading
-          ? Array.from({ length: 5 }).map((_, i) => <PostCardSkeleton key={i} />)
+          ? Array.from({ length: 5 }).map((_, i) => (
+              <PostCardSkeleton key={i} />
+            ))
           : sorted.map((post) => (
               <PostCard
                 key={post.postId}

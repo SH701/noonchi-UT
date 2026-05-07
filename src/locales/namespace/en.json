@@ -337,6 +337,7 @@
     "label": "Level of closeness"
   },
   "category": {
+    "all": "All",
     "free": "Free",
     "question": "Question",
     "information": "Information",

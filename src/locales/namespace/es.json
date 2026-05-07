@@ -337,6 +337,7 @@
     "label": "Nivel de cercanía"
   },
   "category": {
+    "all": "Todo",
     "free": "Libre",
     "question": "Pregunta",
     "information": "Información",

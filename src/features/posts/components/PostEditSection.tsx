@@ -77,6 +77,7 @@ export default function PostEditSection({ postId }: { postId: number }) {
       <PostCreateToolbar
         contentLength={content.length}
         uploading={uploading}
+        imageCount={imageUrls.length}
         onFiles={handleFiles}
       />
     </div>

@@ -66,6 +66,7 @@ export default function PostCreateSection() {
       <PostCreateToolbar
         contentLength={content.length}
         uploading={uploading}
+        imageCount={imageUrls.length}
         onFiles={handleFiles}
       />
     </div>

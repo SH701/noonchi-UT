@@ -337,6 +337,7 @@
     "label": "親しさのレベル"
   },
   "category": {
+    "all": "全て",
     "free": "自由",
     "question": "質問",
     "information": "情報",

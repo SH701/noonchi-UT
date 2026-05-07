@@ -72,6 +72,7 @@ export interface PostSearchItem {
     nickname: string;
     profileImageUrl: string;
   };
+  images: PostImage[];
   createdAt: string;
   isLiked: boolean;
   isBookmarked: boolean;
