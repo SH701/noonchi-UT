@@ -37,7 +37,7 @@ export interface Feedback {
 export interface RoleplayStreamDoneData {
   conversation_id: number;
   ai_message: string;
-  ai_message_en: string;
+  ai_message_translated: string;
   ai_hidden_meaning: string;
   visual_action: string;
   user_visual_action: string;

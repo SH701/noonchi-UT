@@ -16,6 +16,9 @@
   "taste": {
     "title": "Por favor, selecciona tus intereses"
   },
+  "language": {
+    "title": "Por favor, selecciona tu idioma"
+  },
   "notFound": {
     "title": "Página no encontrada",
     "descriptionLine1": "La página que buscas no existe",

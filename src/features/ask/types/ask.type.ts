@@ -15,7 +15,7 @@ export interface AskStreamDoneData {
   conversation_id: number;
   coaching: string;
   ai_message: string;
-  ai_message_en: string;
+  ai_message_translated: string;
   approach_tip: string;
   cultural_insight: string;
 }

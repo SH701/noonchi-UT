@@ -11,6 +11,8 @@ import React from "react";
 
 import OnboardLoading from "./OnboardLoading";
 import { Button } from "../../components/ui/button/button";
+import { usePreferenceStore } from "@/store";
+import i18n from "@/locales/i18n";
 
 export const settings: Settings = {
   dots: true,
@@ -18,9 +20,9 @@ export const settings: Settings = {
   speed: 400,
   slidesToShow: 1,
   slidesToScroll: 1,
-  arrows: false,
-  draggable: false,
-  swipe: false,
+  arrows: true,
+  draggable: true,
+  swipe: true,
   dotsClass: "slick-dots custom-dots",
 };
 export default function Onboarding() {
@@ -31,9 +33,14 @@ export default function Onboarding() {
   const { t } = useTranslation();
 
   const lastIndex = slides.length - 1;
+  const language = usePreferenceStore((s) => s.language);
 
   const handleNext = async () => {
     if (currentSlide === lastIndex) {
+      if (language) {
+        localStorage.setItem("language", language);
+        await i18n.changeLanguage(language);
+      }
       gtag("event", "onboarding_complete");
       router.push("/preview");
     } else {
@@ -60,7 +67,7 @@ export default function Onboarding() {
             className="dots-top"
             appendDots={(dots) => {
               const dotsArray = React.Children.toArray(dots);
-              const filtered = dotsArray.slice(0, 2);
+              const filtered = dotsArray.slice(0, 3);
               return (
                 <div className="dots-wrapper">
                   <ul className="slick-dots custom-dots">{filtered}</ul>
@@ -70,7 +77,8 @@ export default function Onboarding() {
           >
             {slides.map((slide) => {
               const Content = slide.content;
-              const isFormSlide = slide.id === 1 || slide.id === 2;
+              const isFormSlide =
+                slide.id === 1 || slide.id === 2 || slide.id === 3;
 
               return (
                 <div key={slide.id} className="flex h-full flex-col">
@@ -83,20 +91,6 @@ export default function Onboarding() {
                   >
                     <Content />
                   </div>
-                  {!isFormSlide && (
-                    <>
-                      <div className="mx-auto mt-10 flex w-[81%] flex-col items-center justify-center text-center">
-                        <h2 className="text-icon-primary text-center text-2xl font-semibold leading-tight">
-                          {t(`onboarding.slide${slide.id}.title`)}
-                        </h2>
-                      </div>
-                      <div className="mx-auto flex w-full flex-col items-center text-center">
-                        <p className="mb-3 mt-2 text-sm leading-snug text-[#9CA3AF]">
-                          {t(`onboarding.slide${slide.id}.description`)}
-                        </p>
-                      </div>
-                    </>
-                  )}
                 </div>
               );
             })}
@@ -104,9 +98,9 @@ export default function Onboarding() {
         </div>
 
         <div className="flex items-center justify-center px-4 pb-10">
-          {currentSlide !== 3 && (
+          {currentSlide !== 4 && (
             <Button variant="primary" size="lg" onClick={handleNext}>
-              {t('onboarding.nextButton')}
+              {t("onboarding.nextButton")}
             </Button>
           )}
         </div>

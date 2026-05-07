@@ -50,7 +50,7 @@ export default function PreviewMessageList({
         isRevealed={firstHiddenMessage}
         onToggleReveal={onToggleFirstHidden}
         showsituation={showSituation}
-        translatedContent={data?.ai_message_en}
+        translatedContent={data?.ai_message_translated}
       />
       {/* 대화 목록 */}
       {userMessages.map((userMsg, idx) => (

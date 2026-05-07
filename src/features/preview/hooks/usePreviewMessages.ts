@@ -88,7 +88,7 @@ export function usePreviewMessages() {
             next[next.length - 1] = {
               ...next[next.length - 1],
               hiddenMeaning: res.ai_hidden_meaning,
-              translatedContent: res.ai_message_en,
+              translatedContent: res.ai_message_translated,
               situationDescription: res.situation_description ?? "",
             };
             return next;

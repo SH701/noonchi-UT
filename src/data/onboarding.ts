@@ -1,3 +1,4 @@
+import Language from "@/features/onboard/Language";
 import Level from "@/features/onboard/Level";
 import Taste from "@/features/onboard/Taste";
 import type { ComponentType } from "react";
@@ -10,4 +11,5 @@ type Slide = {
 export const slides: Slide[] = [
   { id: 1, content: Taste },
   { id: 2, content: Level },
+  { id: 3, content: Language },
 ];
