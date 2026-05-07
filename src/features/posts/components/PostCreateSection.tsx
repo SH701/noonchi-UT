@@ -16,10 +16,9 @@ export default function PostCreateSection() {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const { mutate: createPost } = useCreatePost();
-
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [category, setCategory] = useState("Free");
+  const [category, setCategory] = useState("All");
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -54,13 +53,13 @@ export default function PostCreateSection() {
 
   const canSubmit = content.trim().length > 0 && !submitting && !uploading;
 
-  if (submitting) return <SpinnerLoading title={t("postCreate.postingTitle")} />;
+  if (submitting)
+    return <SpinnerLoading title={t("postCreate.postingTitle")} />;
 
   return (
     <div className="flex min-h-dvh flex-col">
       <PostCreateHeader
         canSubmit={canSubmit}
-        isPending={submitting}
         onBack={() => router.back()}
         onSubmit={handleSubmit}
       />

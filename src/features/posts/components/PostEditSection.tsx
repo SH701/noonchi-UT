@@ -71,7 +71,7 @@ export default function PostEditSection({ postId }: { postId: number }) {
     <div className="flex min-h-dvh flex-col">
       <PostCreateHeader
         canSubmit={canSubmit}
-        isPending={submitting}
+        isEdit
         onBack={() => router.back()}
         onSubmit={handleSubmit}
       />

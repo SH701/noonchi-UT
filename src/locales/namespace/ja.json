@@ -182,6 +182,7 @@
   },
   "postCreate": {
     "headerTitle": "新しい投稿",
+    "editHeaderTitle": "投稿を編集",
     "titlePlaceholder": "タイトル",
     "contentPlaceholder": "今どんなことを考えていますか？",
     "postButton": "投稿",

@@ -182,6 +182,7 @@
   },
   "postCreate": {
     "headerTitle": "Новая публикация",
+    "editHeaderTitle": "Редактировать публикацию",
     "titlePlaceholder": "Заголовок",
     "contentPlaceholder": "О чём вы думаете?",
     "postButton": "Опубликовать",

@@ -182,6 +182,7 @@
   },
   "postCreate": {
     "headerTitle": "Nueva publicación",
+    "editHeaderTitle": "Editar publicación",
     "titlePlaceholder": "Título",
     "contentPlaceholder": "¿Qué estás pensando?",
     "postButton": "Publicar",

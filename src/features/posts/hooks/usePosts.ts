@@ -10,6 +10,7 @@ export const useGetPosts = (
   return useQuery({
     queryKey: ["posts", { category, sort_by, page, size }],
     queryFn: () => postsClient.getPosts(category, sort_by, page, size),
+    staleTime: 1000 * 60 * 5,
   });
 };
 

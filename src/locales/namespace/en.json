@@ -176,6 +176,7 @@
   },
   "postCreate": {
     "headerTitle": "New Post",
+    "editHeaderTitle": "Edit Post",
     "titlePlaceholder": "Title",
     "contentPlaceholder": "What's on your mind?",
     "postButton": "Post",
