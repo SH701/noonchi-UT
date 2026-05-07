@@ -5,7 +5,7 @@ import { use } from "react";
 
 
 
-export default function Askroom({
+export default function AskroomPage({
   params,
 }: {
   params: Promise<{ id: number }>;

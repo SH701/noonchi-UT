@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button/button";
 
-export default function NotFound() {
+export default function NotFoundPage() {
   return (
     <main className="bg-gradient-primary flex min-h-dvh w-full flex-col items-center justify-center px-5">
       <div className="flex w-full max-w-sm flex-col items-center text-center">
@@ -24,7 +24,7 @@ export default function NotFound() {
 
         <div className="mt-10 flex w-full flex-col gap-3">
           <Link href="/hub" className="w-full">
-            <Button variant='primary' size="lg">
+            <Button variant="primary" size="lg">
               Go to Home
             </Button>
           </Link>
