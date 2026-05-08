@@ -371,5 +371,17 @@
     "BEGINNER": "Conozco palabras básicas de cortesía, pero no sé cuándo ni cómo usar el lenguaje formal.",
     "INTERMEDIATE": "Puedo usar las terminaciones -요, pero no tengo confianza en usar el lenguaje formal correctamente.",
     "ADVANCED": "Entiendo y uso el lenguaje formal de forma natural según el contexto y la relación."
+  },
+  "webzine": {
+    "landing": {
+      "tag": "SOBRE NOONCHI",
+      "title": "Aprende coreano de forma natural con IA — practica conversaciones reales y recibe retroalimentación al instante.",
+      "cta": "Saber más"
+    },
+    "taekwondo": {
+      "tag": "COMUNIDAD TAEKWONDO",
+      "title": "Conecta con practicantes de Taekwondo que aprenden coreano en todo el mundo.",
+      "cta": "Unirse"
+    }
   }
 }
