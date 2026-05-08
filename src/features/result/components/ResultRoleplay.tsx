@@ -28,7 +28,7 @@ interface RoleplayEndProps {
   conversationId: number;
 }
 
-export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
+export default function ResultRoleplay({ conversationId }: RoleplayEndProps) {
   const { t } = useTranslation();
   const [tab, setTab] = useState<"Feedback" | "Detailed Metrics">("Feedback");
   const roomId = conversationId;
@@ -65,8 +65,14 @@ export default function RoleplayEnd({ conversationId }: RoleplayEndProps) {
               </p>
             </div>
             <div className="space-y-3">
-              <Point label={t("result.scores.politeness")} value={feedback.politenessScore} />
-              <Point label={t("result.scores.naturalness")} value={feedback.naturalnessScore} />
+              <Point
+                label={t("result.scores.politeness")}
+                value={feedback.politenessScore}
+              />
+              <Point
+                label={t("result.scores.naturalness")}
+                value={feedback.naturalnessScore}
+              />
             </div>
           </div>
 

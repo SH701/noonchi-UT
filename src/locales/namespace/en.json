@@ -199,6 +199,12 @@
     "cancelButton": "Cancel",
     "placeholder": "Leave a comment..."
   },
+  "endChattingModal": {
+    "title": "View your report?",
+    "description": "Once you view the report, you can no longer continue this conversation.",
+    "confirmButton": "View Report",
+    "cancelButton": "Cancel"
+  },
   "exitChattingModal": {
     "title": "There isn't enough conversation yet to generate a report",
     "description": "A little more conversation will help",
@@ -286,7 +292,17 @@
     "all": "All",
     "latestActivity": "Latest activity",
     "oldestActivity": "Oldest activity",
-    "empty": "No conversations yet"
+    "empty": "No conversations yet",
+    "tabs": {
+      "recent": "Recent",
+      "oldest": "Oldest",
+      "active": "Active"
+    },
+    "count": "{{count}} chats",
+    "status": {
+      "active": "In progress",
+      "endedReport": "Done · Report"
+    }
   },
   "interests": {
     "dailyConversation": "💬 Daily Conversation",
@@ -355,5 +371,17 @@
     "BEGINNER": "I know basic polite words, but I'm not sure when or how to use honorifics.",
     "INTERMEDIATE": "I can use -요 endings, but I'm not confident in using formal or respectful language correctly.",
     "ADVANCED": "I understand and use honorifics naturally depending on context or relationship."
+  },
+  "webzine": {
+    "landing": {
+      "tag": "ABOUT NOONCHI",
+      "title": "Learn Korean naturally with AI — practice real conversations, get instant feedback.",
+      "cta": "Learn More"
+    },
+    "taekwondo": {
+      "tag": "TAEKWONDO COMMUNITY",
+      "title": "Connect with Taekwondo practitioners learning Korean worldwide.",
+      "cta": "Join Now"
+    }
   }
 }

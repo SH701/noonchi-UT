@@ -54,7 +54,7 @@ export default function PostCard({
   console.log("images:", images);
   return (
     <li
-      className={`relative flex cursor-pointer flex-col gap-4 rounded-2xl bg-slate-100/80 p-4 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-md ${menuOpen ? "z-10" : "z-0"}`}
+      className={`relative flex cursor-pointer flex-col gap-4 rounded-2xl bg-white p-4 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-md ${menuOpen ? "z-10" : "z-0"}`}
       onClick={onClick}
     >
       {/* 작성자 */}
@@ -152,7 +152,10 @@ export default function PostCard({
         <div className="flex items-center gap-2 text-xs text-gray-400">
           <button
             className="flex items-center justify-center gap-0.5 transition-colors hover:text-red-400"
-            onClick={(e) => { e.stopPropagation(); onLike?.(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onLike?.();
+            }}
           >
             <Heart
               size={14}
@@ -167,7 +170,10 @@ export default function PostCard({
           </button>
           <button
             className="flex items-center gap-1 transition-colors hover:text-blue-400"
-            onClick={(e) => { e.stopPropagation(); onBookmark?.(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onBookmark?.();
+            }}
           >
             <Bookmark
               size={14}

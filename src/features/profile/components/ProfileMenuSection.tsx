@@ -47,7 +47,11 @@ export default function ProfileMenuSection() {
               label: t("profile.menu.privacy"),
               onClick: () => router.push("/profile/privacy"),
             },
-            { label: t("profile.menu.help"), onClick: () => setShowModal(true) },
+            {
+              label: t("profile.menu.help"),
+              onClick: () => setShowModal(true),
+            },
+            { label: "About us", onClick: () => router.push("/profile/about") },
           ]}
         />
       </section>

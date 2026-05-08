@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useDeleteConversation } from "@/hooks/mutations";
 import { useHistorySearch } from "@/hooks/custom";
 import { useTranslation } from "react-i18next";
+import { Settings } from "lucide-react";
 
 export default function Tab() {
   const { t } = useTranslation();
@@ -127,20 +128,26 @@ export default function Tab() {
                     </button>
                   </div>
                 ) : (
-                  <button onClick={handleProfileClick} className="flex gap-4">
-                    {session?.user.profileImageUrl ? (
-                      <Image
-                        src={session?.user.profileImageUrl ?? ""}
-                        alt="profile"
-                        width={48}
-                        height={48}
-                        className="shrink-0 rounded-full"
-                        sizes="48px"
-                      />
-                    ) : (
-                      <DefaultIcon className="shrink-0" />
-                    )}
-                    <span className="pt-3">{session?.user.name}</span>
+                  <button
+                    onClick={handleProfileClick}
+                    className="flex w-full items-center justify-between"
+                  >
+                    <div className="flex items-center gap-4">
+                      {session?.user.profileImageUrl ? (
+                        <Image
+                          src={session?.user.profileImageUrl ?? ""}
+                          alt="profile"
+                          width={48}
+                          height={48}
+                          className="shrink-0 rounded-full"
+                          sizes="48px"
+                        />
+                      ) : (
+                        <DefaultIcon className="shrink-0" />
+                      )}
+                      <span>{session?.user.name}</span>
+                    </div>
+                    <Settings />
                   </button>
                 )}
               </div>

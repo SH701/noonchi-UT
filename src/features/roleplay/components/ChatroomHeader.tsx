@@ -10,7 +10,7 @@ import { useTabStore } from "@/store/useTabStore";
 import { Header, ModeToggle } from "@/components/common";
 import { useConversationDetail } from "@/hooks/queries/useConversation";
 import Tab from "@/features/tab/Tab";
-import { ExitChatting } from "@/components/modal";
+import { ExitChatting, EndChatting } from "@/components/modal";
 import { useTranslation } from "react-i18next";
 
 interface ChatroomHeaderProps {
@@ -23,6 +23,7 @@ export default function ChatroomHeader({ roomId, onEnd }: ChatroomHeaderProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [showExitModal, setShowExitModal] = useState(false);
+  const [showEndModal, setShowEndModal] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const toggleBtnRef = useRef<HTMLDivElement>(null);
   const { openTab } = useTabStore();
@@ -61,7 +62,7 @@ export default function ChatroomHeader({ roomId, onEnd }: ChatroomHeaderProps) {
 
   const handleEnd = () => {
     if (detailData?.canGetReport) {
-      onEnd?.();
+      setShowEndModal(true);
     } else {
       setShowExitModal(true);
     }
@@ -123,6 +124,16 @@ export default function ChatroomHeader({ roomId, onEnd }: ChatroomHeaderProps) {
         <ExitChatting
           onClose={() => setShowExitModal(false)}
           isOpen={showExitModal}
+        />
+      )}
+      {showEndModal && (
+        <EndChatting
+          isOpen={showEndModal}
+          onClose={() => setShowEndModal(false)}
+          onConfirm={() => {
+            setShowEndModal(false);
+            onEnd?.();
+          }}
         />
       )}
     </>

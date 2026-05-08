@@ -107,7 +107,17 @@
     "all": "すべて",
     "latestActivity": "最新のアクティビティ",
     "oldestActivity": "最も古いアクティビティ",
-    "empty": "まだ会話がありません"
+    "empty": "まだ会話がありません",
+    "tabs": {
+      "recent": "新しい順",
+      "oldest": "古い順",
+      "active": "進行中"
+    },
+    "count": "{{count}} 件",
+    "status": {
+      "active": "進行中",
+      "endedReport": "完了・レポート"
+    }
   },
   "coach": {
     "sectionTitle": "リスクマネジメントコーチング",
@@ -204,6 +214,12 @@
     "savingButton": "保存中...",
     "cancelButton": "キャンセル",
     "placeholder": "コメントを入力..."
+  },
+  "endChattingModal": {
+    "title": "レポートを確認しますか？",
+    "description": "レポートを確認すると、この会話を続けることができなくなります。",
+    "confirmButton": "レポートを見る",
+    "cancelButton": "キャンセル"
   },
   "exitChattingModal": {
     "title": "レポートを生成するには会話が足りません",
@@ -355,5 +371,17 @@
     "BEGINNER": "基本的な丁寧語は知っていますが、敬語をいつどう使うか自信がありません。",
     "INTERMEDIATE": "-요体は使えますが、フォーマルな敬語を正しく使う自信がありません。",
     "ADVANCED": "文脈や関係性に応じて敬語を自然に理解・使用できます。"
+  },
+  "webzine": {
+    "landing": {
+      "tag": "NOONCHIとは",
+      "title": "AIとの自然な会話で韓国語を学ぼう — リアルな練習と即時フィードバック。",
+      "cta": "詳しく見る"
+    },
+    "taekwondo": {
+      "tag": "テコンドーコミュニティ",
+      "title": "世界中の韓国語を学ぶテコンドー仲間とつながろう。",
+      "cta": "参加する"
+    }
   }
 }

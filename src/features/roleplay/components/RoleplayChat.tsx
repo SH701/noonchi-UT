@@ -75,6 +75,7 @@ export default function RoleplayChat({
 
   const bottomRef = useScrollToBottom([streamMessages]);
 
+  const [feedbackMap, setFeedbackMap] = useState<Record<string, string>>({});
   const [isEnding, setIsEnding] = useState(false);
   const { mutate: conversationEnd } = useConversationEnd(conversationId);
 
@@ -99,7 +100,10 @@ export default function RoleplayChat({
       toggleSituation();
     }
     conversationDeatil();
-    await sendStreamMessage(textToSend);
+    const result = await sendStreamMessage(textToSend);
+    if (result) {
+      setFeedbackMap((prev) => ({ ...prev, [result.userContent]: result.feedbackText }));
+    }
     await refetchMessages();
     clearStreamMessages();
     refetchHint();
@@ -138,6 +142,7 @@ export default function RoleplayChat({
                 myAI={myAI}
                 showsituation={showSituation}
                 onInfoClick={handleInfo}
+                feedbackMap={feedbackMap}
               />
               <div ref={bottomRef} />
             </section>

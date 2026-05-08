@@ -13,8 +13,8 @@ export default function CominSoonModal({ isOpen, onClose }: ModalProps) {
       description={t("comingSoonModal.description")}
       image={{ src: "/etc/eyes.png", alt: "eyes", width: 100, height: 100 }}
     >
-      <div className="flex w-full flex-col items-center justify-center gap-3">
-        <Button variant="primary" size="md" onClick={onClose}>
+      <div className="flex w-full gap-3">
+        <Button variant="primary" size="fluid" onClick={onClose}>
           {t("comingSoonModal.closeButton")}
         </Button>
       </div>

@@ -17,8 +17,8 @@ const SECTIONS: Section[] = [
     titleEn: "Article 1 (Purpose)",
     paragraphs: [
       {
-        ko: '본 약관은 Junghun Lee(이하 "회사")는(추후 법인 전환 시 해당 법인명으로 승계, 이하 "회사")가 제공하는 AI 기반 실시간 맥락 코칭 서비스 \'NOONCHI\'(이하 "서비스")의 이용과 관련하여, 회사와 이용자 간의 권리, 의무, 책임 사항 및 기타 필요한 사항을 규정함을 목적으로 합니다.',
-        en: 'These Terms of Service (the "Terms") define the rights, obligations, and responsibilities between the developer, Junghun Lee (including any successor corporate entity, hereinafter the "Company"), and the user regarding the use of \'NOONCHI\' (the "Service"), an AI-powered real-time social context coaching platform.',
+        ko: '본 약관은 Jinsung Kim(이하 "회사")는(추후 법인 전환 시 해당 법인명으로 승계, 이하 "회사")가 제공하는 AI 기반 실시간 맥락 코칭 서비스 \'NOONCHI\'(이하 "서비스")의 이용과 관련하여, 회사와 이용자 간의 권리, 의무, 책임 사항 및 기타 필요한 사항을 규정함을 목적으로 합니다.',
+        en: 'These Terms of Service (the "Terms") define the rights, obligations, and responsibilities between the developer, Jinsung Kim (including any successor corporate entity, hereinafter the "Company"), and the user regarding the use of \'NOONCHI\' (the "Service"), an AI-powered real-time social context coaching platform.',
       },
     ],
   },
@@ -84,7 +84,8 @@ const SECTIONS: Section[] = [
   },
   {
     title: "제 5 조 (인앱 결제 및 구독형 서비스) - 추후 결제 도입 시 적용",
-    titleEn: "Article 5 (Payments & Subscriptions) - Applies upon launch of paid plans",
+    titleEn:
+      "Article 5 (Payments & Subscriptions) - Applies upon launch of paid plans",
     items: [
       {
         ko: "현재 서비스의 기본 기능은 무료로 제공되나, 회사는 추후 프리미엄 기능(예: Live 1:1 코칭, 무제한 롤플레잉 등)을 유료 구독 형태(Standard Plan 등)로 전환하거나 추가할 수 있습니다.",

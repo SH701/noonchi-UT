@@ -107,7 +107,17 @@
     "all": "Todo",
     "latestActivity": "Actividad más reciente",
     "oldestActivity": "Actividad más antigua",
-    "empty": "Todavía no hay conversaciones"
+    "empty": "Todavía no hay conversaciones",
+    "tabs": {
+      "recent": "Recientes",
+      "oldest": "Antiguos",
+      "active": "Activos"
+    },
+    "count": "{{count}} chats",
+    "status": {
+      "active": "En curso",
+      "endedReport": "Hecho · Informe"
+    }
   },
   "coach": {
     "sectionTitle": "Coaching de gestión de riesgos",
@@ -204,6 +214,12 @@
     "savingButton": "Guardando...",
     "cancelButton": "Cancelar",
     "placeholder": "Deja un comentario..."
+  },
+  "endChattingModal": {
+    "title": "¿Ver tu informe?",
+    "description": "Una vez que veas el informe, ya no podrás continuar esta conversación.",
+    "confirmButton": "Ver informe",
+    "cancelButton": "Cancelar"
   },
   "exitChattingModal": {
     "title": "No hay suficiente conversación para generar un informe",
@@ -355,5 +371,17 @@
     "BEGINNER": "Conozco palabras básicas de cortesía, pero no sé cuándo ni cómo usar el lenguaje formal.",
     "INTERMEDIATE": "Puedo usar las terminaciones -요, pero no tengo confianza en usar el lenguaje formal correctamente.",
     "ADVANCED": "Entiendo y uso el lenguaje formal de forma natural según el contexto y la relación."
+  },
+  "webzine": {
+    "landing": {
+      "tag": "SOBRE NOONCHI",
+      "title": "Aprende coreano de forma natural con IA — practica conversaciones reales y recibe retroalimentación al instante.",
+      "cta": "Saber más"
+    },
+    "taekwondo": {
+      "tag": "COMUNIDAD TAEKWONDO",
+      "title": "Conecta con practicantes de Taekwondo que aprenden coreano en todo el mundo.",
+      "cta": "Unirse"
+    }
   }
 }

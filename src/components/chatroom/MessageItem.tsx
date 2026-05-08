@@ -116,52 +116,63 @@ export default function MessageItem({
               <p className="pt text-end text-sm font-medium">
                 {userName ?? myAI?.userRole}
               </p>
-              <div className="rounded-b-xl rounded-tl-xl bg-white p-4">
-                <p className="whitespace-pre-wrap pb-2 pt-1 text-sm">
+              <div className="flex flex-col gap-2 rounded-b-xl rounded-tl-xl bg-white p-4">
+                <p className="my-1 whitespace-pre-wrap text-sm">
                   {renderWithAction(messages.content)}
                 </p>
-                {messages.visualAction && (
-                  <div className="flex min-w-0 pb-2 text-sm text-gray-500">
-                    <div className="pt-[2.5px]">
-                      <Asterisk className="size-3.5 shrink-0" />{" "}
-                    </div>
-                    {messages.visualAction}
-                    <div className="pt-[2.5px]">
-                      <Asterisk className="size-3.5 shrink-0" />{" "}
-                    </div>
-                  </div>
-                )}
                 <div className="border-t border-gray-200 pt-2.5" />
-                {feedbackOpen ? (
-                  <div>
-                    <span>
-                      {previewFeedback ?? messages.feedback?.nuanceFeedback}
-                    </span>
+                <div className="flex justify-between">
+                  <div className="flex gap-2">
                     <button
-                      className="mt-2.5 flex cursor-pointer gap-1 rounded-full border border-blue-500 px-2 py-1"
-                      onClick={handleFeedback}
+                      onClick={() => handleTTsClick(messages.content)}
+                      disabled={loadingTTS}
+                      className="cursor-pointer"
                     >
-                      <div className="flex gap-1">
+                      {loadingTTS ? <Spinner /> : <VolumeUpIcon size={20} />}
+                    </button>
+
+                    <button
+                      onClick={() => handleTranslateClick(messages.messageId)}
+                      className="cursor-pointer"
+                    >
+                      {loadingTranslate ? (
+                        <Spinner />
+                      ) : (
+                        <AlpabatIcon size={20} />
+                      )}
+                    </button>
+                  </div>
+                  {(previewFeedback ?? messages.feedback?.nuanceFeedback) && (
+                    feedbackOpen ? (
+                      <button
+                        className="flex cursor-pointer gap-1 rounded-full border border-blue-500 px-2 py-1"
+                        onClick={handleFeedback}
+                      >
                         <InfoIcon className="text-blue-500" />
                         <span className="text-sm text-blue-500">
                           Hide feedback
                         </span>
-                      </div>
-                    </button>
-                  </div>
-                ) : (
-                  <div className="flex justify-between">
-                    <button
-                      className="flex cursor-pointer gap-1 rounded-full border border-blue-500 px-2 py-1"
-                      onClick={handleFeedback}
-                    >
-                      <InfoIcon className="text-blue-500" />
-                      <span className="text-sm text-blue-500">
-                        View feedback
-                      </span>
-                    </button>
-                  </div>
+                      </button>
+                    ) : (
+                      <button
+                        className="flex cursor-pointer gap-1 rounded-full border border-blue-500 px-2 py-1"
+                        onClick={handleFeedback}
+                      >
+                        <InfoIcon className="text-blue-500" />
+                        <span className="text-sm text-blue-500">
+                          View feedback
+                        </span>
+                      </button>
+                    )
+                  )}
+                </div>
+
+                {feedbackOpen && (
+                  <span>
+                    {previewFeedback ?? messages.feedback?.nuanceFeedback}
+                  </span>
                 )}
+                {translateOpen && <span>{translateMsg}</span>}
               </div>
             </div>
           )}
