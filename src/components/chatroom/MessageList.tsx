@@ -11,6 +11,7 @@ interface MessageListProps {
   myAI: MyAI | null;
   showsituation?: boolean;
   onInfoClick?: () => void;
+  feedbackMap?: Record<string, string>;
 }
 
 export default function MessageList({
@@ -18,12 +19,14 @@ export default function MessageList({
   myAI,
   showsituation,
   onInfoClick,
+  feedbackMap,
 }: MessageListProps) {
   return (
     <>
       {messages.map((m) => {
         const isMine = m.type === "USER";
         const isAI = m.type === "AI";
+        const feedback = m.streamFeedback ?? (isMine ? feedbackMap?.[m.content] : undefined);
         return (
           <MessageItem
             key={m.messageId}
@@ -33,7 +36,7 @@ export default function MessageList({
             isAI={isAI}
             showsituation={showsituation}
             translatedContent={m.translatedContent ?? undefined}
-            previewFeedback={m.streamFeedback}
+            previewFeedback={feedback}
             onInfoClick={isAI ? onInfoClick : undefined}
           />
         );

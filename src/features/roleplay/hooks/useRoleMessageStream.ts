@@ -91,7 +91,9 @@ export function useRoleMessageStream(conversationId: number) {
             return m;
           }),
         );
+        return { userContent: content ?? "", feedbackText: doneData.feedback.feedback_text };
       }
+      return null;
     } finally {
       setIsAIResponding(false);
     }

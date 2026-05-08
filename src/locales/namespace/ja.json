@@ -107,7 +107,17 @@
     "all": "すべて",
     "latestActivity": "最新のアクティビティ",
     "oldestActivity": "最も古いアクティビティ",
-    "empty": "まだ会話がありません"
+    "empty": "まだ会話がありません",
+    "tabs": {
+      "recent": "新しい順",
+      "oldest": "古い順",
+      "active": "進行中"
+    },
+    "count": "{{count}} 件",
+    "status": {
+      "active": "進行中",
+      "endedReport": "完了・レポート"
+    }
   },
   "coach": {
     "sectionTitle": "リスクマネジメントコーチング",

@@ -107,7 +107,17 @@
     "all": "Все",
     "latestActivity": "Последняя активность",
     "oldestActivity": "Самые старые",
-    "empty": "Разговоров пока нет"
+    "empty": "Разговоров пока нет",
+    "tabs": {
+      "recent": "Недавние",
+      "oldest": "Старые",
+      "active": "Активные"
+    },
+    "count": "{{count}} чатов",
+    "status": {
+      "active": "В процессе",
+      "endedReport": "Готово · Отчёт"
+    }
   },
   "coach": {
     "sectionTitle": "Коучинг по управлению рисками",

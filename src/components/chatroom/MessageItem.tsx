@@ -142,25 +142,18 @@ export default function MessageItem({
                       )}
                     </button>
                   </div>
-                  {feedbackOpen ? (
-                    <div>
-                      <span>
-                        {previewFeedback ?? messages.feedback?.nuanceFeedback}
-                      </span>
+                  {(previewFeedback ?? messages.feedback?.nuanceFeedback) && (
+                    feedbackOpen ? (
                       <button
-                        className="mt-2.5 flex cursor-pointer gap-1 rounded-full border border-blue-500 px-2 py-1"
+                        className="flex cursor-pointer gap-1 rounded-full border border-blue-500 px-2 py-1"
                         onClick={handleFeedback}
                       >
-                        <div className="flex gap-1">
-                          <InfoIcon className="text-blue-500" />
-                          <span className="text-sm text-blue-500">
-                            Hide feedback
-                          </span>
-                        </div>
+                        <InfoIcon className="text-blue-500" />
+                        <span className="text-sm text-blue-500">
+                          Hide feedback
+                        </span>
                       </button>
-                    </div>
-                  ) : (
-                    <div className="flex justify-between">
+                    ) : (
                       <button
                         className="flex cursor-pointer gap-1 rounded-full border border-blue-500 px-2 py-1"
                         onClick={handleFeedback}
@@ -170,9 +163,15 @@ export default function MessageItem({
                           View feedback
                         </span>
                       </button>
-                    </div>
+                    )
                   )}
                 </div>
+
+                {feedbackOpen && (
+                  <span>
+                    {previewFeedback ?? messages.feedback?.nuanceFeedback}
+                  </span>
+                )}
                 {translateOpen && <span>{translateMsg}</span>}
               </div>
             </div>

@@ -15,7 +15,7 @@ export default function RecentTopic() {
 
   return (
     <section>
-      <h3 className="pb-3 text-sm font-medium">
+      <h3 className="text pb-3 font-bold">
         {t("roleplaySection.recentTopics")}
       </h3>
       <ul className="flex gap-3 overflow-x-auto">

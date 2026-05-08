@@ -107,7 +107,17 @@
     "all": "Todo",
     "latestActivity": "Actividad más reciente",
     "oldestActivity": "Actividad más antigua",
-    "empty": "Todavía no hay conversaciones"
+    "empty": "Todavía no hay conversaciones",
+    "tabs": {
+      "recent": "Recientes",
+      "oldest": "Antiguos",
+      "active": "Activos"
+    },
+    "count": "{{count}} chats",
+    "status": {
+      "active": "En curso",
+      "endedReport": "Hecho · Informe"
+    }
   },
   "coach": {
     "sectionTitle": "Coaching de gestión de riesgos",

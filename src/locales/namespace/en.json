@@ -292,7 +292,17 @@
     "all": "All",
     "latestActivity": "Latest activity",
     "oldestActivity": "Oldest activity",
-    "empty": "No conversations yet"
+    "empty": "No conversations yet",
+    "tabs": {
+      "recent": "Recent",
+      "oldest": "Oldest",
+      "active": "Active"
+    },
+    "count": "{{count}} chats",
+    "status": {
+      "active": "In progress",
+      "endedReport": "Done · Report"
+    }
   },
   "interests": {
     "dailyConversation": "💬 Daily Conversation",
