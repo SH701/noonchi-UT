@@ -199,6 +199,12 @@
     "cancelButton": "Cancel",
     "placeholder": "Leave a comment..."
   },
+  "endChattingModal": {
+    "title": "View your report?",
+    "description": "Once you view the report, you can no longer continue this conversation.",
+    "confirmButton": "View Report",
+    "cancelButton": "Cancel"
+  },
   "exitChattingModal": {
     "title": "There isn't enough conversation yet to generate a report",
     "description": "A little more conversation will help",

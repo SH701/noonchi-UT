@@ -205,6 +205,12 @@
     "cancelButton": "キャンセル",
     "placeholder": "コメントを入力..."
   },
+  "endChattingModal": {
+    "title": "レポートを確認しますか？",
+    "description": "レポートを確認すると、この会話を続けることができなくなります。",
+    "confirmButton": "レポートを見る",
+    "cancelButton": "キャンセル"
+  },
   "exitChattingModal": {
     "title": "レポートを生成するには会話が足りません",
     "description": "もう少し会話を続けてください",

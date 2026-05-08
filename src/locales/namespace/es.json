@@ -205,6 +205,12 @@
     "cancelButton": "Cancelar",
     "placeholder": "Deja un comentario..."
   },
+  "endChattingModal": {
+    "title": "¿Ver tu informe?",
+    "description": "Una vez que veas el informe, ya no podrás continuar esta conversación.",
+    "confirmButton": "Ver informe",
+    "cancelButton": "Cancelar"
+  },
   "exitChattingModal": {
     "title": "No hay suficiente conversación para generar un informe",
     "description": "Un poco más de conversación ayudará",
