@@ -7,4 +7,5 @@ export { default as ProfileHeader } from "./components/ProfileHeader";
 export { default as MyInfo } from "./components/myinfo/MyInfo";
 export { default as MyInterests } from "./components/myinterests/MyInterests";
 export { default as TermsOfUse } from "./components/TermsOfUse";
+export { default as AboutUs } from "./components/AboutUs";
 export { useUpdateProfile } from "./hooks/useProfile";

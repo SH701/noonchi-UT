@@ -125,8 +125,8 @@ const SECTIONS: Section[] = [
     ],
     items: [
       {
-        ko: "책임자: Junghun Lee",
-        en: "Officer: Junghun Lee",
+        ko: "책임자: Jinsung Kim",
+        en: "Officer: Jinsung Kim",
       },
       {
         ko: "이메일: noonchi.ai@gmail.com",
@@ -166,12 +166,12 @@ export default function PrivacyPolicy() {
         </div>
         <div className="flex flex-col gap-1">
           <p className="text-sm leading-relaxed text-gray-600">
-            Junghun Lee(이하 &quot;회사&quot;)는 &apos;NOONCHI&apos; 서비스
+            Jinsung Kim(이하 &quot;회사&quot;)는 &apos;NOONCHI&apos; 서비스
             이용자의 개인정보를 소중하게 생각하며, 개인정보 보호법 등 관련
             법령을 철저히 준수합니다.
           </p>
           <p className="text-xs leading-relaxed text-gray-400">
-            Junghun Lee (the &quot;Company&quot;) values the personal data of
+            Jinsung Kim(the &quot;Company&quot;) values the personal data of
             NOONCHI users and strictly complies with the Personal Information
             Protection Act and other relevant laws.
           </p>
