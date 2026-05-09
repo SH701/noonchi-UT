@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 import { useMessageTranslate, useMessageTTS } from "@/hooks/mutations";
 import { Spinner } from "../ui/spinner/spinner";
 import { ChatLoading } from "../common";
 import { AlpabatIcon, InfoIcon, VolumeUpIcon } from "@/assets/svgr";
-import { Asterisk } from "lucide-react";
+import { Asterisk, Lightbulb } from "lucide-react";
 import { renderWithAction } from "@/lib/renderWithAction";
 import { MyAI } from "@/types/conversations";
 interface MessageItemProps {
@@ -32,6 +33,7 @@ interface MessageItemProps {
   translatedContent?: string;
   previewFeedback?: string;
   onInfoClick?: () => void;
+  coaching?: string;
 }
 
 export default function MessageItem({
@@ -46,13 +48,16 @@ export default function MessageItem({
   onToggleReveal,
   previewFeedback,
   onInfoClick,
+  coaching,
 }: MessageItemProps) {
+  const { t } = useTranslation();
   const [translateOpen, setTranslateOpen] = useState(false);
   const [translateMsg, setTranslateMsg] = useState<string | undefined>("");
   const [meanOpen, setMeanOpen] = useState(false);
   const isMeanOpen =
     onToggleReveal !== undefined ? (isRevealed ?? false) : meanOpen;
   const [feedbackOpen, setFeedbackOpen] = useState(false);
+  const [coachingOpen, setCoachingOpen] = useState(false);
 
   const { mutate: tts, isPending: loadingTTS } = useMessageTTS();
   const { mutateAsync: translate, isPending: loadingTranslate } =
@@ -121,7 +126,7 @@ export default function MessageItem({
                   {renderWithAction(messages.content)}
                 </p>
                 <div className="border-t border-gray-200 pt-2.5" />
-                <div className="flex justify-between">
+                <div className="flex justify-between gap-4">
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleTTsClick(messages.content)}
@@ -142,31 +147,48 @@ export default function MessageItem({
                       )}
                     </button>
                   </div>
-                  {(previewFeedback ?? messages.feedback?.nuanceFeedback) && (
-                    feedbackOpen ? (
+                  <div className="flex gap-2">
+                    {coaching && (
                       <button
-                        className="flex cursor-pointer gap-1 rounded-full border border-blue-500 px-2 py-1"
-                        onClick={handleFeedback}
+                        className="flex cursor-pointer items-center gap-1 rounded-full border border-blue-500 px-2 py-1"
+                        onClick={() => setCoachingOpen((v) => !v)}
                       >
-                        <InfoIcon className="text-blue-500" />
-                        <span className="text-sm text-blue-500">
-                          Hide feedback
+                        <Lightbulb size={14} className="text-blue-500" />
+                        <span className="text-xs text-blue-500">
+                          {coachingOpen
+                            ? t("ask.hideCoaching")
+                            : t("ask.viewCoaching")}
                         </span>
                       </button>
-                    ) : (
-                      <button
-                        className="flex cursor-pointer gap-1 rounded-full border border-blue-500 px-2 py-1"
-                        onClick={handleFeedback}
-                      >
-                        <InfoIcon className="text-blue-500" />
-                        <span className="text-sm text-blue-500">
-                          View feedback
-                        </span>
-                      </button>
-                    )
-                  )}
+                    )}
+                    {(previewFeedback ?? messages.feedback?.nuanceFeedback) &&
+                      (feedbackOpen ? (
+                        <button
+                          className="flex cursor-pointer gap-1 rounded-full border border-blue-500 px-2 py-1"
+                          onClick={handleFeedback}
+                        >
+                          <InfoIcon className="text-blue-500" />
+                          <span className="text-sm text-blue-500">
+                            Hide feedback
+                          </span>
+                        </button>
+                      ) : (
+                        <button
+                          className="flex cursor-pointer gap-1 rounded-full border border-blue-500 px-2 py-1"
+                          onClick={handleFeedback}
+                        >
+                          <InfoIcon className="text-blue-500" />
+                          <span className="text-sm text-blue-500">
+                            View feedback
+                          </span>
+                        </button>
+                      ))}
+                  </div>
                 </div>
 
+                {coachingOpen && coaching && (
+                  <span className="text-sm">{coaching}</span>
+                )}
                 {feedbackOpen && (
                   <span>
                     {previewFeedback ?? messages.feedback?.nuanceFeedback}

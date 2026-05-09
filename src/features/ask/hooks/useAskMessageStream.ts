@@ -26,20 +26,37 @@ export function useAskMessageStream(conversationId: number) {
       const doneData = await apiMutations.messages.Asksendstream(
         conversationId,
         content,
-        (chunk) => {
+        (type, chunk) => {
+          if (type === "chunk") setIsAIResponding(false);
           setTurns((prev) =>
-            prev.map((t, i) =>
-              i === turnIndex ? { ...t, aiMessage: t.aiMessage + chunk } : t,
-            ),
+            prev.map((t, i) => {
+              if (i !== turnIndex) return t;
+              if (type === "chunk") return { ...t, aiMessage: t.aiMessage + chunk };
+              if (type === "approach_tip")
+                return { ...t, approachTip: t.approachTip + chunk };
+              if (type === "cultural_insight")
+                return { ...t, culturalInsight: t.culturalInsight + chunk };
+              return t;
+            }),
           );
         },
         audioUrl,
       );
       if (doneData) {
         setTurns((prev) =>
-          prev.map((t, i) =>
-            i === turnIndex ? { ...t, messageId: doneData.ai_message_id } : t,
-          ),
+          prev.map((t, i) => {
+            if (i !== turnIndex) return t;
+            return {
+              ...t,
+              messageId: doneData.ai_message_id,
+              aiMessage: doneData.ai_message ?? t.aiMessage,
+              approachTip: doneData.approach_tip ?? t.approachTip,
+              culturalInsight: doneData.cultural_insight ?? t.culturalInsight,
+              coaching: doneData.coaching ?? t.coaching,
+              translatedContent:
+                doneData.ai_message_translated ?? t.translatedContent,
+            };
+          }),
         );
       }
     } finally {

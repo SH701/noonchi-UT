@@ -69,7 +69,10 @@ export const messagesMutations = {
   Asksendstream: async (
     conversationId: number,
     content: string,
-    onChunk: (chunk: string) => void,
+    onChunk: (
+      type: "approach_tip" | "chunk" | "cultural_insight",
+      content: string,
+    ) => void,
     audioUrl?: string,
   ): Promise<AskMessageStreamDoneData> => {
     const session = await getSession();
@@ -92,34 +95,80 @@ export const messagesMutations = {
     const decoder = new TextDecoder();
     let buffer = "";
     let doneData: AskMessageStreamDoneData | null = null;
-    let currentEvent = "";
+
+    const handleJson = (raw: string) => {
+      let json: {
+        type: string;
+        content?: string;
+        data?: AskMessageStreamDoneData;
+      };
+      try {
+        json = JSON.parse(raw);
+      } catch {
+        return;
+      }
+      if (
+        json.type === "approach_tip" ||
+        json.type === "chunk" ||
+        json.type === "cultural_insight"
+      ) {
+        onChunk(json.type, json.content ?? "");
+      } else if (json.type === "done") {
+        doneData =
+          (json.data as AskMessageStreamDoneData | undefined) ??
+          (json as unknown as AskMessageStreamDoneData) ??
+          null;
+      }
+    };
+
+    const drainBuffer = () => {
+      while (true) {
+        const start = buffer.indexOf("{");
+        if (start < 0) {
+          buffer = "";
+          return;
+        }
+        let depth = 0;
+        let end = -1;
+        let inStr = false;
+        let escape = false;
+        for (let i = start; i < buffer.length; i++) {
+          const ch = buffer[i];
+          if (inStr) {
+            if (escape) escape = false;
+            else if (ch === "\\") escape = true;
+            else if (ch === '"') inStr = false;
+            continue;
+          }
+          if (ch === '"') inStr = true;
+          else if (ch === "{") depth++;
+          else if (ch === "}") {
+            depth--;
+            if (depth === 0) {
+              end = i;
+              break;
+            }
+          }
+        }
+        if (end < 0) {
+          buffer = buffer.slice(start);
+          return;
+        }
+        const objStr = buffer.slice(start, end + 1);
+        buffer = buffer.slice(end + 1);
+        const cleaned = objStr.replace(/^data:\s*/, "");
+        handleJson(cleaned);
+      }
+    };
+
     if (reader) {
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-
-        const lines = buffer.split("\n");
-        buffer = lines.pop() || "";
-
-        for (const line of lines) {
-          if (line.startsWith("event:")) {
-            currentEvent = line.slice(6).trim();
-          } else if (line.startsWith("data:")) {
-            const raw = line.slice(5).trim();
-            if (!raw) continue;
-            if (currentEvent === "done") {
-              try {
-                doneData = JSON.parse(raw);
-              } catch {
-                // ignore
-              }
-              return doneData!;
-            } else {
-              onChunk(raw);
-            }
-          }
-        }
+        const decoded = decoder.decode(value, { stream: true });
+        buffer += decoded;
+        drainBuffer();
+        if (doneData) return doneData;
       }
     }
     return doneData!;

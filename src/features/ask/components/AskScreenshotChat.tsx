@@ -9,6 +9,7 @@ import { Spinner } from "@/components/ui/spinner/spinner";
 import { useScrollToBottom, useVoiceChat } from "@/hooks/custom";
 import { useAskScreenshotStore } from "@/store/useAskScreenshotStore";
 import { useAskMessageStream } from "../hooks/useAskMessageStream";
+import Image from "next/image";
 
 interface AskScreenshotChatProps {
   roomId: number;
@@ -19,9 +20,22 @@ export default function AskScreenshotChat({ roomId }: AskScreenshotChatProps) {
   const [message, setMessage] = useState("");
   const [reportOpen, setReportOpen] = useState(true);
   const [insightOpen, setInsightOpen] = useState(true);
+  const [closedTurnInsights, setClosedTurnInsights] = useState<Set<number>>(
+    new Set(),
+  );
+
+  const toggleTurnInsight = (idx: number) => {
+    setClosedTurnInsights((prev) => {
+      const next = new Set(prev);
+      if (next.has(idx)) next.delete(idx);
+      else next.add(idx);
+      return next;
+    });
+  };
 
   const {
     previewUrl,
+    imageUrl,
     analysis,
     opponentAnalysis,
     toneAnalysis,
@@ -31,6 +45,8 @@ export default function AskScreenshotChat({ roomId }: AskScreenshotChatProps) {
     doneData,
     isStreaming,
   } = useAskScreenshotStore();
+
+  const displayImageUrl = previewUrl ?? imageUrl;
 
   const { turns, sendMessage, isAIResponding } = useAskMessageStream(roomId);
 
@@ -60,11 +76,9 @@ export default function AskScreenshotChat({ roomId }: AskScreenshotChatProps) {
 
   return (
     <div className="flex w-full flex-1 flex-col">
-      <div className="sticky top-0 z-10 -mx-5 border-b border-gray-200 bg-white/95 px-5 pb-3 pt-2 backdrop-blur-md">
+      <div className="-mx-5 border-b border-gray-200 px-5 pb-3 pt-2 backdrop-blur-md">
         <div className="flex items-center justify-between">
-          <h2 className="text-sm font-semibold text-gray-700">
-            {t("askScreenshot.title")}
-          </h2>
+          <h2 className="text-sm font-semibold">{t("askScreenshot.title")}</h2>
           <button
             type="button"
             onClick={() => setReportOpen((v) => !v)}
@@ -76,11 +90,10 @@ export default function AskScreenshotChat({ roomId }: AskScreenshotChatProps) {
 
         {reportOpen && (
           <div className="mt-3 flex flex-col gap-3">
-            {previewUrl && (
+            {displayImageUrl && (
               <div className="flex justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={previewUrl}
+                <Image
+                  src={displayImageUrl}
                   alt="screenshot"
                   className="max-h-40 rounded-lg border border-gray-200 object-contain"
                 />
@@ -123,7 +136,7 @@ export default function AskScreenshotChat({ roomId }: AskScreenshotChatProps) {
 
             {approachTip && (
               <section className="flex flex-col gap-1 rounded-lg border border-gray-200 bg-gray-50 p-3">
-                <h3 className="text-sm font-semibold">{t("ask.bestWay")}</h3>
+                <h3 className="text-sm font-semibold">Approach_tip</h3>
                 <p className="text-xs text-gray-700">{approachTip}</p>
               </section>
             )}
@@ -191,22 +204,58 @@ export default function AskScreenshotChat({ roomId }: AskScreenshotChatProps) {
         )}
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 pt-4 pb-2">
-        {turns.map((turn, i) => (
-          <div key={i} className="flex flex-col gap-2">
-            <MessageItem messages={{ content: turn.userContent }} isMine />
-            {turn.aiMessage && (
+      <div className="flex flex-1 flex-col gap-3 pb-2 pt-4">
+        {turns.map((turn, i) => {
+          const turnInsightOpen = !closedTurnInsights.has(i);
+          return (
+            <div key={i} className="mt-5 flex flex-col gap-3">
               <MessageItem
-                messages={{
-                  content: turn.aiMessage,
-                  messageId: turn.messageId,
-                }}
-                isAI
-                translatedContent={turn.translatedContent}
+                messages={{ content: turn.userContent }}
+                isMine
+                coaching={turn.coaching}
               />
-            )}
-          </div>
-        ))}
+              {turn.aiMessage && (
+                <MessageItem
+                  messages={{
+                    content: turn.aiMessage,
+                    messageId: turn.messageId,
+                  }}
+                  isAI
+                  translatedContent={turn.translatedContent}
+                />
+              )}
+              {turn.culturalInsight && (
+                <div className="flex flex-col gap-1 border-b border-gray-400 pb-2 text-sm">
+                  <div className="flex gap-1 text-blue-600">
+                    <Lightbulb size={14} /> {t("ask.culturalInsights")}
+                  </div>
+                  {turnInsightOpen ? (
+                    <>
+                      {turn.culturalInsight}
+                      <div className="flex items-center justify-center">
+                        <ChevronDown
+                          className="size-3"
+                          onClick={() => toggleTurnInsight(i)}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="w-full min-w-0">
+                        <p className="flex-1 truncate">
+                          {turn.culturalInsight}
+                        </p>
+                        <div className="flex items-center justify-center">
+                          <ChevronUp onClick={() => toggleTurnInsight(i)} />
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
         {isAIResponding && <ChatLoading />}
         <div ref={bottomRef} />
       </div>

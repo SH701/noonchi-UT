@@ -8,6 +8,7 @@ export interface AskTurn {
   approachTip: string;
   aiMessage: string;
   culturalInsight: string;
+  coaching?: string;
   messageId?: number;
   translatedContent?: string;
 }
@@ -21,8 +22,15 @@ export interface AskStreamDoneData {
 }
 
 export interface AskMessageStreamDoneData {
-  status: string;
-  ai_message_id: number;
+  status?: string;
+  ai_message_id?: number;
+  coaching?: string;
+  ai_message?: string;
+  ai_message_translated?: string;
+  ai_message_en?: string;
+  approach_tip?: string;
+  cultural_insight?: string;
+  conversation_id?: number;
 }
 
 export interface ScreenshotAnalysis {

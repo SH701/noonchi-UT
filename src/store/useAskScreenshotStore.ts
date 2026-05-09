@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 import {
   ScreenshotAnalysis,
   ScreenshotStreamDoneData,
@@ -48,23 +49,46 @@ const initial = {
   isStreaming: false,
 };
 
-export const useAskScreenshotStore = create<AskScreenshotState>((set) => ({
-  ...initial,
-  setConversationId: (id) => set({ conversationId: id }),
-  setImageUrl: (url) => set({ imageUrl: url }),
-  setPreviewUrl: (url) => set({ previewUrl: url }),
-  setAnalysis: (a) => set({ analysis: a }),
-  appendOpponent: (chunk) =>
-    set((s) => ({ opponentAnalysis: s.opponentAnalysis + chunk })),
-  appendTone: (chunk) =>
-    set((s) => ({ toneAnalysis: s.toneAnalysis + chunk })),
-  appendApproachTip: (chunk) =>
-    set((s) => ({ approachTip: s.approachTip + chunk })),
-  appendCulturalInsight: (chunk) =>
-    set((s) => ({ culturalInsight: s.culturalInsight + chunk })),
-  appendAiMessage: (chunk) => set((s) => ({ aiMessage: s.aiMessage + chunk })),
-  setDoneData: (d) => set({ doneData: d }),
-  setNotChatMessage: (m) => set({ notChatMessage: m }),
-  setIsStreaming: (b) => set({ isStreaming: b }),
-  reset: () => set(initial),
-}));
+export const useAskScreenshotStore = create<AskScreenshotState>()(
+  persist(
+    (set) => ({
+      ...initial,
+      setConversationId: (id) => set({ conversationId: id }),
+      setImageUrl: (url) => set({ imageUrl: url }),
+      setPreviewUrl: (url) => set({ previewUrl: url }),
+      setAnalysis: (a) => set({ analysis: a }),
+      appendOpponent: (chunk) =>
+        set((s) => ({ opponentAnalysis: s.opponentAnalysis + chunk })),
+      appendTone: (chunk) =>
+        set((s) => ({ toneAnalysis: s.toneAnalysis + chunk })),
+      appendApproachTip: (chunk) =>
+        set((s) => ({ approachTip: s.approachTip + chunk })),
+      appendCulturalInsight: (chunk) =>
+        set((s) => ({ culturalInsight: s.culturalInsight + chunk })),
+      appendAiMessage: (chunk) =>
+        set((s) => ({ aiMessage: s.aiMessage + chunk })),
+      setDoneData: (d) => set({ doneData: d }),
+      setNotChatMessage: (m) => set({ notChatMessage: m }),
+      setIsStreaming: (b) => set({ isStreaming: b }),
+      reset: () => set(initial),
+    }),
+    {
+      name: "ask-screenshot-store",
+      storage: createJSONStorage(() =>
+        typeof window !== "undefined" ? sessionStorage : (undefined as unknown as Storage),
+      ),
+      partialize: (state) => ({
+        conversationId: state.conversationId,
+        imageUrl: state.imageUrl,
+        previewUrl: state.previewUrl,
+        analysis: state.analysis,
+        opponentAnalysis: state.opponentAnalysis,
+        toneAnalysis: state.toneAnalysis,
+        approachTip: state.approachTip,
+        culturalInsight: state.culturalInsight,
+        aiMessage: state.aiMessage,
+        doneData: state.doneData,
+      }),
+    },
+  ),
+);

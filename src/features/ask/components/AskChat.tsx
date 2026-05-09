@@ -239,7 +239,11 @@ export default function AskChat({ roomId }: AskChatProps) {
         {/* 이후 스트리밍 메세지 */}
         {turns.map((turn, i) => (
           <div key={i} className="mt-5 flex flex-col gap-3">
-            <MessageItem messages={{ content: turn.userContent }} isMine />
+            <MessageItem
+              messages={{ content: turn.userContent }}
+              isMine
+              coaching={turn.coaching}
+            />
             {turn.aiMessage && (
               <>
                 {turn.approachTip && (
