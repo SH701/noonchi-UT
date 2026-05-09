@@ -10,6 +10,9 @@ import { useScrollToBottom, useVoiceChat } from "@/hooks/custom";
 import { useAskScreenshotStore } from "@/store/useAskScreenshotStore";
 import { useAskMessageStream } from "../hooks/useAskMessageStream";
 import Image from "next/image";
+import { Button } from "@/components/ui/button/button";
+import { useCreateRoleplay } from "@/features/roleplay/hooks/useCreateRoleplay";
+import { useRouter } from "next/navigation";
 
 interface AskScreenshotChatProps {
   roomId: number;
@@ -23,6 +26,10 @@ export default function AskScreenshotChat({ roomId }: AskScreenshotChatProps) {
   const [closedTurnInsights, setClosedTurnInsights] = useState<Set<number>>(
     new Set(),
   );
+  const router = useRouter();
+  const { mutateAsync: createRoleplay, isPending: isCreatingRoleplay } =
+    useCreateRoleplay();
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const toggleTurnInsight = (idx: number) => {
     setClosedTurnInsights((prev) => {
@@ -33,6 +40,18 @@ export default function AskScreenshotChat({ roomId }: AskScreenshotChatProps) {
     });
   };
 
+  const handleRolePlay = async () => {
+    try {
+      const convo = await createRoleplay({
+        conversationTopicId: 1,
+        fromAskConversationId: roomId,
+      });
+      setIsNavigating(true);
+      router.push(`/hub/roleplay/chatroom/${convo.conversationId}`);
+    } catch {
+      // ignore
+    }
+  };
   const {
     previewUrl,
     imageUrl,
@@ -73,6 +92,10 @@ export default function AskScreenshotChat({ roomId }: AskScreenshotChatProps) {
   };
 
   const suggestions = doneData?.suggestions ?? [];
+
+  if (isCreatingRoleplay || isNavigating) {
+    return <ChatLoading />;
+  }
 
   return (
     <div className="flex w-full flex-1 flex-col">
@@ -261,6 +284,13 @@ export default function AskScreenshotChat({ roomId }: AskScreenshotChatProps) {
       </div>
 
       <div className="sticky bottom-0 -mx-5 flex flex-col px-5 pb-5 backdrop-blur-md">
+        <Button
+          variant="ghost"
+          className="mb-3 text-base"
+          onClick={handleRolePlay}
+        >
+          Start Role-play
+        </Button>
         <ChatInput
           message={message}
           setMessage={setMessage}
