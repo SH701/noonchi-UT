@@ -372,6 +372,38 @@
     "INTERMEDIATE": "Puedo usar las terminaciones -요, pero no tengo confianza en usar el lenguaje formal correctamente.",
     "ADVANCED": "Entiendo y uso el lenguaje formal de forma natural según el contexto y la relación."
   },
+  "askScreenshot": {
+    "title": "Sube una captura de pantalla",
+    "subtitle": "Sube una captura de KakaoTalk o iMessage y analizaré la conversación por ti",
+    "analyzeCard": "Analizar captura de pantalla",
+    "analyzeCardDesc": "Sube una captura de chat y recibe coaching al instante",
+    "uploadButton": "Subir captura de pantalla",
+    "uploadGuide": "Por favor sube capturas de KakaoTalk, iMessage, etc., donde la conversación sea claramente visible.",
+    "typeManually": "Escribir manualmente",
+    "uploading": "Subiendo...",
+    "analyzing": "Analizando tu conversación...",
+    "changeImage": "Cambiar imagen",
+    "tryAnother": "Probar con otra imagen",
+    "confirmTitle": "¿Es esto correcto?",
+    "confirmQuestion": "¿Es esta una conversación con tu {{target}}?",
+    "confirmButton": "Sí, analizar esto",
+    "targetLabel": "¿Con quién estás hablando?",
+    "closenessLabel": "¿Qué tan cercanos son?",
+    "regenerate": "Regenerar con correcciones",
+    "opponentTitle": "Sobre la otra persona",
+    "toneTitle": "Sobre tu tono",
+    "suggestionsTitle": "Respuestas sugeridas",
+    "startRoleplay": "Practicar con juego de roles",
+    "targets": {
+      "boss": "Jefe",
+      "coworker": "Compañero",
+      "friend": "Amigo",
+      "family": "Familia",
+      "partner": "Pareja",
+      "stranger": "Desconocido",
+      "unknown": "Desconocido"
+    }
+  },
   "webzine": {
     "landing": {
       "tag": "SOBRE NOONCHI",

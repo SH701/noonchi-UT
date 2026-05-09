@@ -372,6 +372,38 @@
     "INTERMEDIATE": "I can use -요 endings, but I'm not confident in using formal or respectful language correctly.",
     "ADVANCED": "I understand and use honorifics naturally depending on context or relationship."
   },
+  "askScreenshot": {
+    "title": "Upload a screenshot",
+    "subtitle": "Upload a KakaoTalk or iMessage screenshot and I'll analyze the conversation for you",
+    "analyzeCard": "Analyze Screenshot",
+    "analyzeCardDesc": "Upload a chat screenshot and get coaching instantly",
+    "uploadButton": "Upload Screenshot",
+    "uploadGuide": "Please upload screenshots from KakaoTalk, iMessage, etc., where the conversation is clearly visible.",
+    "typeManually": "Type Manually",
+    "uploading": "Uploading...",
+    "analyzing": "Analyzing your conversation...",
+    "changeImage": "Change image",
+    "tryAnother": "Try another image",
+    "confirmTitle": "Is this correct?",
+    "confirmQuestion": "Is this a conversation with your {{target}}?",
+    "confirmButton": "Yes, analyze this",
+    "targetLabel": "Who are you talking to?",
+    "closenessLabel": "How close are you?",
+    "regenerate": "Regenerate with corrections",
+    "opponentTitle": "About the other person",
+    "toneTitle": "About your tone",
+    "suggestionsTitle": "Suggested replies",
+    "startRoleplay": "Practice with Role-play",
+    "targets": {
+      "boss": "Boss",
+      "coworker": "Coworker",
+      "friend": "Friend",
+      "family": "Family",
+      "partner": "Partner",
+      "stranger": "Stranger",
+      "unknown": "Unknown"
+    }
+  },
   "webzine": {
     "landing": {
       "tag": "ABOUT NOONCHI",

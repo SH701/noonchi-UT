@@ -372,6 +372,38 @@
     "INTERMEDIATE": "-요体は使えますが、フォーマルな敬語を正しく使う自信がありません。",
     "ADVANCED": "文脈や関係性に応じて敬語を自然に理解・使用できます。"
   },
+  "askScreenshot": {
+    "title": "スクリーンショットをアップロード",
+    "subtitle": "カカオトークやiMessageのスクリーンショットをアップロードすると、会話を分析します",
+    "analyzeCard": "スクリーンショットを分析",
+    "analyzeCardDesc": "チャットのスクリーンショットをアップロードして、すぐにコーチングを受けましょう",
+    "uploadButton": "スクリーンショットをアップロード",
+    "uploadGuide": "カカオトーク、iMessageなどの会話が明確に見えるスクリーンショットをアップロードしてください。",
+    "typeManually": "テキストで入力する",
+    "uploading": "アップロード中...",
+    "analyzing": "会話を分析中...",
+    "changeImage": "画像を変更",
+    "tryAnother": "別の画像を試す",
+    "confirmTitle": "内容は合っていますか？",
+    "confirmQuestion": "これは{{target}}との会話ですか？",
+    "confirmButton": "はい、分析してください",
+    "targetLabel": "誰と話していますか？",
+    "closenessLabel": "どのくらい親しいですか？",
+    "regenerate": "修正して再生成",
+    "opponentTitle": "相手について",
+    "toneTitle": "あなたのトーンについて",
+    "suggestionsTitle": "おすすめの返信",
+    "startRoleplay": "ロールプレイで練習する",
+    "targets": {
+      "boss": "上司",
+      "coworker": "同僚",
+      "friend": "友達",
+      "family": "家族",
+      "partner": "パートナー",
+      "stranger": "見知らぬ人",
+      "unknown": "不明"
+    }
+  },
   "webzine": {
     "landing": {
       "tag": "NOONCHIとは",
