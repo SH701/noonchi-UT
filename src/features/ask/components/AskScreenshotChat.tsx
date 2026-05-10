@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button/button";
 import { useCreateRoleplay } from "@/features/roleplay/hooks/useCreateRoleplay";
 import { useRouter } from "next/navigation";
 import { RoleplayLoading } from "@/features/roleplay";
+import { toast } from "@/components/ui/toast/toast";
 
 interface AskScreenshotChatProps {
   roomId: number;
@@ -41,10 +42,19 @@ export default function AskScreenshotChat({ roomId }: AskScreenshotChatProps) {
       const convo = await createRoleplay({
         fromAskConversationId: roomId,
       });
+      if (!convo?.conversationId) {
+        toast.error(t("toastMessage.createChatroomFailed"));
+        return;
+      }
       setIsNavigating(true);
       router.push(`/hub/roleplay/chatroom/${convo.conversationId}`);
-    } catch {
-      // ignore
+    } catch (e) {
+      console.error("[handleRolePlay] failed", e);
+      if (e instanceof Error && e.message === "timeout") {
+        toast.error(t("toastMessage.requestTimeout"));
+      } else {
+        toast.error(t("toastMessage.createChatroomFailed"));
+      }
     }
   };
   const {
