@@ -29,6 +29,24 @@ export const filesMutations = {
       }),
     );
   },
+  UploadScreenshot: async (file: File): Promise<string> => {
+    const presignedData = await apiFetch<PresignedUrlRes>(
+      "/api/files/presigned-url",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          fileExtension: file.name.split(".").pop(),
+          fileType: file.type,
+        }),
+      },
+    );
+    await fetch(presignedData.url, {
+      method: "PUT",
+      headers: { "Content-Type": file.type },
+      body: file,
+    });
+    return presignedData.url.split("?")[0];
+  },
   UploadAudio: async (blob: Blob): Promise<string> => {
     const blobType = blob.type || "audio/webm";
     const fileExtension = blobType.includes("webm") ? "webm" : "wav";

@@ -38,12 +38,12 @@ export const useConversations = (
     select: (data) => ({
       conversations: (data?.content ?? []).filter(
         (c): c is Conversation =>
-          !!c &&
-          (!conversationType || c.conversationType === conversationType),
+          !!c && (!conversationType || c.conversationType === conversationType),
       ),
       totalPages: data.totalPages,
     }),
     placeholderData: keepPreviousData,
+    staleTime: 1000 * 60 * 10,
   });
 };
 

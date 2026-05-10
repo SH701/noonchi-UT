@@ -29,20 +29,29 @@ export default function HistorySection({
     sortBy === "CREATED_AT_DESC" ? "oldest" : "recent",
   );
 
+  const PAGE_SIZE = 3;
   const { data, isFetching } = useConversations(
     null,
-    sortBy,
-    page,
-    3,
+    "LAST_ACTIVITY_DESC",
+    1,
+    100,
     "ROLE_PLAYING",
   );
   const allConversations = data?.conversations ?? [];
-  const totalPages = data?.totalPages ?? 1;
-
-  const conversations =
-    activeTab === "active"
-      ? allConversations.filter((c) => c.status === "ACTIVE")
-      : allConversations;
+  const sortedConversations =
+    activeTab === "oldest"
+      ? [...allConversations].reverse()
+      : activeTab === "active"
+        ? allConversations.filter((c) => c.status === "ACTIVE")
+        : allConversations;
+  const totalPages = Math.max(
+    1,
+    Math.ceil(sortedConversations.length / PAGE_SIZE),
+  );
+  const conversations = sortedConversations.slice(
+    (page - 1) * PAGE_SIZE,
+    page * PAGE_SIZE,
+  );
 
   const handleTabChange = (tab: TabKey) => {
     setActiveTab(tab);
@@ -92,7 +101,7 @@ export default function HistorySection({
           ))}
         </div>
         <span className="text-sm text-gray-900">
-          {t("botHistory.count", { count: conversations.length })}
+          {t("botHistory.count", { count: allConversations.length })}
         </span>
       </div>
 

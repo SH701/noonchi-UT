@@ -6,7 +6,13 @@ import {
   ConversationFeedback,
 } from "@/types/conversations";
 import { RoleplayReq } from "@/features/roleplay/types/roleplay/roleplay.type";
-import { AskReq, AskStreamDoneData } from "@/features/ask/types/ask.type";
+import {
+  AskReq,
+  AskStreamDoneData,
+  ScreenshotStreamDoneData,
+  ScreenshotStreamEventType,
+  ScreenshotAnalysis,
+} from "@/features/ask/types/ask.type";
 
 export const conversationsMutations = {
   CreateInterview: async (
@@ -81,6 +87,92 @@ export const conversationsMutations = {
             onChunk(json.type, json.content ?? "");
           } else if (json.type === "done") {
             doneData = json.data ?? null;
+            return doneData!;
+          }
+        }
+      }
+    }
+    return doneData!;
+  },
+  CreateAskScreenshotStream: async (
+    imageUrl: string,
+    onChunk: (type: ScreenshotStreamEventType, content: string) => void,
+    onAnalysis: (analysis: ScreenshotAnalysis) => void,
+    onErrorNotChat: (message: string) => void,
+    onSession: (conversationId: number) => void,
+    onDone?: (data: ScreenshotStreamDoneData) => void,
+    confirmedTarget?: string | null,
+    confirmedCloseness?: string | null,
+  ): Promise<ScreenshotStreamDoneData> => {
+    const session = await getSession();
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/conversations/ask/screenshot/stream`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(session?.accessToken && {
+            Authorization: `Bearer ${session.accessToken}`,
+          }),
+        },
+        body: JSON.stringify({
+          imageUrl,
+          confirmedTarget: confirmedTarget ?? null,
+          confirmedCloseness: confirmedCloseness ?? null,
+        }),
+      },
+    );
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    const reader = response.body?.getReader();
+    const decoder = new TextDecoder();
+    let buffer = "";
+    let doneData: ScreenshotStreamDoneData | null = null;
+    if (reader) {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+
+        const lines = buffer.split("\n");
+        buffer = lines.pop() || "";
+
+        for (const line of lines) {
+          if (!line.startsWith("data:")) continue;
+          const raw = line.slice(5).trim();
+          if (!raw) continue;
+          let json: {
+            type: string;
+            content?: string;
+            data?: unknown;
+            message?: string;
+          };
+          try {
+            json = JSON.parse(raw);
+          } catch {
+            continue;
+          }
+          if (json.type === "session") {
+            const conversationId =
+              (json.data as { conversation_id: number } | undefined)?.conversation_id ??
+              (json as unknown as { conversation_id: number }).conversation_id;
+            onSession(conversationId);
+          } else if (json.type === "analysis" && json.data) {
+            onAnalysis(json.data as ScreenshotAnalysis);
+          } else if (json.type === "error_not_chat") {
+            onErrorNotChat(json.message ?? "");
+            return doneData!;
+          } else if (
+            json.type === "opponent_analysis" ||
+            json.type === "tone_analysis" ||
+            json.type === "approach_tip" ||
+            json.type === "cultural_insight" ||
+            json.type === "chunk"
+          ) {
+            onChunk(json.type, json.content ?? "");
+          } else if (json.type === "done") {
+            doneData = (json.data as ScreenshotStreamDoneData) ?? null;
+            if (doneData) onDone?.(doneData);
             return doneData!;
           }
         }
