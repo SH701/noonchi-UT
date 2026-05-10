@@ -12,7 +12,8 @@ export default function PreAsk() {
   const { t } = useTranslation();
   const [mode, setMode] = useState<Mode>("intro");
 
-  if (mode === "manual") return <AskChat />;
+  if (mode === "manual")
+    return <AskChat onSwitchToScreenshot={() => setMode("screenshot")} />;
   if (mode === "screenshot")
     return <AskScreenshot onSwitchToManual={() => setMode("manual")} />;
 
