@@ -274,7 +274,7 @@ export default function AskScreenshotChat({ roomId }: AskScreenshotChatProps) {
           className="mb-3 text-base"
           onClick={handleRolePlay}
         >
-          Start Role-play
+          {t("askScreenshot.startRoleplay")}
         </Button>
         <ChatInput
           message={message}
