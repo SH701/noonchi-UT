@@ -69,7 +69,13 @@ export default function AskHistoryTab({
                   onToggleSelect(convo.conversationId);
                   return;
                 }
-                router.push(`/hub/ask/${convo.conversationId}`);
+                if (convo.situation?.includes("[screenshot]")) {
+                  router.push(
+                    `/hub/ask/${convo.conversationId}?from=screenshot`,
+                  );
+                } else {
+                  router.push(`/hub/ask/${convo.conversationId}`);
+                }
                 closeTab();
               }}
             >

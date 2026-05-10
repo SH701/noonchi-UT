@@ -49,6 +49,7 @@ export default function MessageItem({
   previewFeedback,
   onInfoClick,
   coaching,
+  translatedContent,
 }: MessageItemProps) {
   const { t } = useTranslation();
   const [translateOpen, setTranslateOpen] = useState(false);
@@ -70,11 +71,16 @@ export default function MessageItem({
   };
 
   const handleTranslateClick = async (messageId: number | undefined) => {
-    if (!messageId) return;
     if (translateOpen) {
       setTranslateOpen(false);
       return;
     }
+    if (translatedContent) {
+      setTranslateMsg(translatedContent);
+      setTranslateOpen(true);
+      return;
+    }
+    if (!messageId) return;
     const result = await translate(messageId);
     setTranslateMsg(result);
     setTranslateOpen(true);
@@ -114,7 +120,7 @@ export default function MessageItem({
           ))}
 
         {/* 메시지 박스 */}
-        <div className="max-w-[75%]">
+        <div className="w-[75%]">
           {/* 유저 말풍선 박스 */}
           {isMine && (
             <div className="flex flex-col gap-1">
@@ -136,16 +142,18 @@ export default function MessageItem({
                       {loadingTTS ? <Spinner /> : <VolumeUpIcon size={20} />}
                     </button>
 
-                    <button
-                      onClick={() => handleTranslateClick(messages.messageId)}
-                      className="cursor-pointer"
-                    >
-                      {loadingTranslate ? (
-                        <Spinner />
-                      ) : (
-                        <AlpabatIcon size={20} />
-                      )}
-                    </button>
+                    {(messages.messageId || translatedContent) && (
+                      <button
+                        onClick={() => handleTranslateClick(messages.messageId)}
+                        className="cursor-pointer"
+                      >
+                        {loadingTranslate ? (
+                          <Spinner />
+                        ) : (
+                          <AlpabatIcon size={20} />
+                        )}
+                      </button>
+                    )}
                   </div>
                   <div className="flex gap-2">
                     {coaching && (

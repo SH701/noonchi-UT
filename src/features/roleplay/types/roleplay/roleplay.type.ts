@@ -1,5 +1,5 @@
 export interface RoleplayReq {
-  conversationTopicId: number;
+  conversationTopicId?: number;
   userRole?: string;
   aiRole?: string;
   closeness?: string;

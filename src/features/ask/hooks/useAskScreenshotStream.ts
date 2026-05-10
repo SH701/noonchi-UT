@@ -30,13 +30,15 @@ export const useAskScreenshotStream = () => {
           store.setConversationId(id);
           onSession?.(id);
         },
+        (doneData) => {
+          useAskScreenshotStore.getState().setDoneData(doneData);
+        },
         confirmedTarget,
         confirmedCloseness,
       );
-      if (result) store.setDoneData(result);
       return result;
     } finally {
-      store.setIsStreaming(false);
+      useAskScreenshotStore.getState().setIsStreaming(false);
     }
   };
 

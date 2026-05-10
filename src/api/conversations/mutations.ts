@@ -100,6 +100,7 @@ export const conversationsMutations = {
     onAnalysis: (analysis: ScreenshotAnalysis) => void,
     onErrorNotChat: (message: string) => void,
     onSession: (conversationId: number) => void,
+    onDone?: (data: ScreenshotStreamDoneData) => void,
     confirmedTarget?: string | null,
     confirmedCloseness?: string | null,
   ): Promise<ScreenshotStreamDoneData> => {
@@ -171,6 +172,7 @@ export const conversationsMutations = {
             onChunk(json.type, json.content ?? "");
           } else if (json.type === "done") {
             doneData = (json.data as ScreenshotStreamDoneData) ?? null;
+            if (doneData) onDone?.(doneData);
             return doneData!;
           }
         }
