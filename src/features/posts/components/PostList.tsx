@@ -10,6 +10,7 @@ import { useGetPosts } from "../hooks/usePosts";
 import { useDeletePost, useToggleLike, useToggleBookmark } from "../hooks/usePostsMutations";
 import DeleteModal from "@/components/modal/DeleteModal";
 import PostWebzine from "./PostWebzine";
+import EmptyItem from "./EmptyItem";
 
 export default function PostList() {
   const router = useRouter();
@@ -55,21 +56,23 @@ export default function PostList() {
         }
       />
       <ul className="flex flex-col gap-3">
-        {isLoading
-          ? Array.from({ length: 5 }).map((_, i) => (
-              <PostCardSkeleton key={i} />
-            ))
-          : sorted.map((post) => (
-              <PostCard
-                key={post.postId}
-                {...post}
-                onClick={() => router.push(`/posts/${post.postId}`)}
-                onEdit={() => router.push(`/posts/${post.postId}/edit`)}
-                onDelete={() => setDeleteTargetId(post.postId)}
-                onLike={() => toggleLike(post.postId)}
-                onBookmark={() => toggleBookmark(post.postId)}
-              />
-            ))}
+        {isLoading ? (
+          Array.from({ length: 5 }).map((_, i) => <PostCardSkeleton key={i} />)
+        ) : sorted.length === 0 ? (
+          <EmptyItem />
+        ) : (
+          sorted.map((post) => (
+            <PostCard
+              key={post.postId}
+              {...post}
+              onClick={() => router.push(`/posts/${post.postId}`)}
+              onEdit={() => router.push(`/posts/${post.postId}/edit`)}
+              onDelete={() => setDeleteTargetId(post.postId)}
+              onLike={() => toggleLike(post.postId)}
+              onBookmark={() => toggleBookmark(post.postId)}
+            />
+          ))
+        )}
       </ul>
       <button
         className="border-gradient-primary fixed bottom-8 right-4 flex size-10 items-center justify-center rounded-full border bg-white"
