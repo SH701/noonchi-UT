@@ -20,9 +20,10 @@ import { useTranslation } from "react-i18next";
 
 interface AskChatProps {
   roomId?: number;
+  onSwitchToScreenshot?: () => void;
 }
 
-export default function AskChat({ roomId }: AskChatProps) {
+export default function AskChat({ roomId, onSwitchToScreenshot }: AskChatProps) {
   const { t } = useTranslation();
   const CLOSENESS_OPTIONS = getClosenessOptions(t);
   const [message, setMessage] = useState("");
@@ -155,6 +156,7 @@ export default function AskChat({ roomId }: AskChatProps) {
               gtag("event", "ask_second_question");
               setStep("situation");
             }}
+            onSwitchToScreenshot={onSwitchToScreenshot}
           />
         )}
 

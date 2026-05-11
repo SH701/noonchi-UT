@@ -108,6 +108,7 @@
     "latestActivity": "Actividad más reciente",
     "oldestActivity": "Actividad más antigua",
     "empty": "Todavía no hay conversaciones",
+    "emptyDescription": "Inicia una nueva conversación para verla aquí.",
     "tabs": {
       "recent": "Recientes",
       "oldest": "Antiguos",
@@ -154,6 +155,7 @@
     "culturalInsights": "Perspectivas culturales",
     "viewCoaching": "Ver consejos",
     "hideCoaching": "Ocultar consejos",
+    "switchToScreenshot": "Usar captura de pantalla",
     "quickActions": {
       "startRoleplay": "Iniciar juego de roles",
       "softer": "Hacerlo más suave",
@@ -205,7 +207,9 @@
     "filterLatest": "Más recientes",
     "filterPopular": "Popular",
     "searchPlaceholder": "Buscar publicaciones...",
-    "deletingTitle": "Eliminando publicación..."
+    "deletingTitle": "Eliminando publicación...",
+    "empty": "Aún no hay publicaciones",
+    "emptyDescription": "Sé el primero en iniciar la conversación."
   },
   "postCard": {
     "edit": "Editar",

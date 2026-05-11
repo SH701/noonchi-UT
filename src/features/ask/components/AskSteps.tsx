@@ -3,12 +3,14 @@
 import { getClosenessOptions, Step, STEPS } from "@/constants";
 import { Button } from "@/components/ui/button/button";
 import { useTranslation } from "react-i18next";
+import { ImageIcon } from "lucide-react";
 
 interface AskStepsProps {
   step: Step;
   askTarget: string;
   closeness: string;
   onSelectCloseness: (value: string) => void;
+  onSwitchToScreenshot?: () => void;
 }
 
 export default function AskSteps({
@@ -16,6 +18,7 @@ export default function AskSteps({
   askTarget,
   closeness,
   onSelectCloseness,
+  onSwitchToScreenshot,
 }: AskStepsProps) {
   const { t } = useTranslation();
   const CLOSENESS_OPTIONS = getClosenessOptions(t);
@@ -23,6 +26,16 @@ export default function AskSteps({
 
   return (
     <>
+      {onSwitchToScreenshot && (
+        <button
+          type="button"
+          onClick={onSwitchToScreenshot}
+          className="mb-4 flex items-center gap-2 self-start rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-700 transition hover:bg-blue-100"
+        >
+          <ImageIcon size={14} />
+          {t("ask.switchToScreenshot")}
+        </button>
+      )}
       <span className="text-2xl font-semibold">
         {t("stepQuestions.askTarget")}
       </span>

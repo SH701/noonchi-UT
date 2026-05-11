@@ -122,6 +122,7 @@
     "culturalInsights": "Cultural Insights",
     "viewCoaching": "View coaching",
     "hideCoaching": "Hide coaching",
+    "switchToScreenshot": "Use screenshot instead",
     "quickActions": {
       "startRoleplay": "Start Role-play",
       "softer": "Make it softer",
@@ -189,7 +190,9 @@
     "filterLatest": "Latest",
     "filterPopular": "Popular",
     "searchPlaceholder": "Search posts...",
-    "deletingTitle": "Deleting post..."
+    "deletingTitle": "Deleting post...",
+    "empty": "No posts yet",
+    "emptyDescription": "Be the first to start the conversation."
   },
   "postCard": {
     "edit": "Edit",
@@ -295,6 +298,7 @@
     "latestActivity": "Latest activity",
     "oldestActivity": "Oldest activity",
     "empty": "No conversations yet",
+    "emptyDescription": "Start a new chat to see it appear here.",
     "tabs": {
       "recent": "Recent",
       "oldest": "Oldest",
