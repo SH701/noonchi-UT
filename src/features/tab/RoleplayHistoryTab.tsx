@@ -70,16 +70,16 @@ export default function RoleplayHistoryTab() {
                     loading="eager"
                   />
                 ) : (
-                  <div className="h-full w-full bg-gray-600" />
+                  <div className="h-full w-full rounded-2xl bg-black/30" />
                 )}
                 <button
-                  className="absolute right-2 z-10 text-white/70"
+                  className="absolute right-2 top-2 z-10 flex size-6 items-center justify-center rounded-full bg-black/50 text-sm font-bold text-white"
                   onClick={(e) => {
                     e.stopPropagation();
                     setConfirmId(convo.conversationId);
                   }}
                 >
-                  <span className="md:text-2xl">x</span>
+                  ×
                 </button>
                 <div className="absolute inset-0 flex flex-col justify-end p-3 text-white">
                   <span className="text-[10px] uppercase tracking-wider text-gray-300">
