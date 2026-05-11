@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 import { useConversationDetail } from "@/hooks/queries/useConversation";
 import { useWebVoice } from "@/hooks/custom/useWebVoice";
 import RoleplayLoading from "./RoleplayLoading";
+import { useRoleplayFeedbackStore } from "@/store/useRoleplayFeedbackStore";
 
 interface RoleplayChatRoomProps {
   conversationId: number;
@@ -102,7 +103,13 @@ export default function RoleplayChat({
     conversationDeatil();
     const result = await sendStreamMessage(textToSend);
     if (result) {
-      setFeedbackMap((prev) => ({ ...prev, [result.userContent]: result.feedbackText }));
+      setFeedbackMap((prev) => ({
+        ...prev,
+        [result.userContent]: result.feedbackText,
+      }));
+      useRoleplayFeedbackStore
+        .getState()
+        .setFeedback(conversationId, result.userContent, result.feedbackText);
     }
     await refetchMessages();
     clearStreamMessages();

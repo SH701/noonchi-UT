@@ -23,6 +23,7 @@ import {
   useConversationPostFeedback,
 } from "../hooks/useConversationFeedback";
 import { useTranslation } from "react-i18next";
+import { useRoleplayFeedbackStore } from "@/store/useRoleplayFeedbackStore";
 
 interface RoleplayEndProps {
   conversationId: number;
@@ -37,6 +38,9 @@ export default function ResultRoleplay({ conversationId }: RoleplayEndProps) {
   const { data: messages = [] } = useChatList(roomId);
   const { mutate: postFeedback } = useConversationPostFeedback(roomId);
   const { data: feedback } = useConversationFeedback(roomId, false);
+  const feedbackMap = useRoleplayFeedbackStore((s) =>
+    s.byConversation[roomId] ?? {},
+  );
 
   useEffect(() => {
     postFeedback();
@@ -79,7 +83,11 @@ export default function ResultRoleplay({ conversationId }: RoleplayEndProps) {
           <div className="pb-6">
             <ResultTab tab={tab} setTab={setTab} />
             {tab === "Feedback" ? (
-              <MessageList messages={messages} myAI={myAI} />
+              <MessageList
+                messages={messages}
+                myAI={myAI}
+                feedbackMap={feedbackMap}
+              />
             ) : (
               <FeedbackPart
                 summary={feedback.summary}
