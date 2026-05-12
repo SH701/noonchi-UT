@@ -37,7 +37,7 @@ export default function PostWebzine() {
 
   return (
     <div
-      className="my-4 overflow-hidden rounded-2xl bg-blue-50 p-4"
+      className="my-4 overflow-hidden rounded-2xl bg-blue-50 p-4 h-38"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
