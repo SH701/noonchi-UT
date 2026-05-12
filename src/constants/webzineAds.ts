@@ -5,6 +5,6 @@ export const WEBZINE_ADS = [
   },
   {
     i18nKey: "webzine.taekwondo",
-    url: "",
+    url: "https://warrior-diplomat.vercel.app/",
   },
 ] as const;
