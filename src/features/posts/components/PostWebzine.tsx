@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button/button";
 import { WEBZINE_ADS } from "@/constants";
+import { useRouter } from "next/navigation";
 
 export default function PostWebzine() {
   const { t } = useTranslation();
@@ -11,6 +12,7 @@ export default function PostWebzine() {
   const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(true);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (paused) return;
@@ -29,12 +31,13 @@ export default function PostWebzine() {
   const ad = WEBZINE_ADS[current];
 
   const handleCta = () => {
-    if (ad.url) window.open(ad.url, "_blank");
+    if (!ad.url) return;
+    if (ad.url.startsWith("/")) router.push(ad.url);
   };
 
   return (
     <div
-      className="my-4 overflow-hidden rounded-2xl bg-blue-50 p-4"
+      className="h-38 my-4 overflow-hidden rounded-2xl bg-blue-50 p-4"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >

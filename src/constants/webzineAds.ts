@@ -1,10 +1,10 @@
 export const WEBZINE_ADS = [
   {
     i18nKey: "webzine.landing",
-    url: "https://noonchiapp.vercel.app/",
+    url: "/landing",
   },
   {
     i18nKey: "webzine.taekwondo",
-    url: "",
+    url: "/lab",
   },
 ] as const;
