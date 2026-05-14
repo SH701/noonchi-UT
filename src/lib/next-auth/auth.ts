@@ -138,7 +138,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (account && endpoint && account.id_token) {
         try {
           const url = `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`;
-          console.log("[signIn] provider:", account.provider, "url:", url);
+
           const body =
             account.provider === "apple"
               ? {
@@ -151,7 +151,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body),
           });
-          console.log("[signIn] backend status:", res.status);
+
           if (!res.ok) {
             const errText = await res.text().catch(() => "");
             console.error("[signIn] backend error body:", errText);
