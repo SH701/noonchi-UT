@@ -51,7 +51,6 @@ export default function PostCard({
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
-  console.log("images:", images);
   return (
     <li
       className={`relative flex cursor-pointer flex-col gap-4 rounded-2xl bg-white p-4 shadow-sm backdrop-blur-sm transition-shadow hover:shadow-md ${menuOpen ? "z-10" : "z-0"}`}
