@@ -25,7 +25,7 @@ export default function MyLanguage() {
 
   const handleSave = async () => {
     await updateLanguage({
-      language: selected.toUpperCase() as "EN" | "JA" | "RU" | "ES",
+      language: selected.toUpperCase() as "EN" | "JA" | "RU" | "ES" | "ZH",
     });
     localStorage.setItem("language", selected);
     await i18n.changeLanguage(selected);

@@ -13,7 +13,7 @@ export const useUpdateProfile = () => {
       koreanLevel?: string;
       profileImageUrl?: string;
       interests?: string[];
-      language?: "EN" | "JA" | "RU" | "ES" | null;
+      language?: "EN" | "JA" | "RU" | "ES" | "ZH" | null;
     }) => userMutations.UpadateProfile(koreanLevel, interests, language),
   });
 };

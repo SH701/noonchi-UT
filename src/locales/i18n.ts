@@ -5,12 +5,14 @@ import en from "./namespace/en.json";
 import es from "./namespace/es.json";
 import ja from "./namespace/ja.json";
 import ru from "./namespace/ru.json";
+import zh from "./namespace/zh.json";
 
 export const i18nResources = {
   en: { translation: en },
   ru: { translation: ru },
   ja: { translation: ja },
   es: { translation: es },
+  zh: { translation: zh },
 };
 
 // 브라우저 환경에서 초기 언어 설정 

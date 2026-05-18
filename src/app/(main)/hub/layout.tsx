@@ -25,7 +25,7 @@ export default function MainLayout({
       await updateProfile({
         koreanLevel: koreanLevel ?? undefined,
         interests,
-        language: language?.toUpperCase() as "EN" | "JA" | "RU" | "ES" | undefined,
+        language: language?.toUpperCase() as "EN" | "JA" | "RU" | "ES" | "ZH" | undefined,
       });
       await update();
       resetPreferences();

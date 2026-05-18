@@ -1,0 +1,425 @@
+{
+  "onboarding": {
+    "nextButton": "下一步",
+    "slide1": {
+      "title": "请选择您的兴趣"
+    },
+    "slide2": {
+      "title": "请选择您的韩语水平",
+      "description": "告诉我们您对用韩语聊天的熟练程度！"
+    }
+  },
+  "level": {
+    "title": "请选择您的韩语水平",
+    "description": "告诉我们您对用韩语聊天的熟练程度！"
+  },
+  "taste": {
+    "title": "请选择您的兴趣"
+  },
+  "language": {
+    "title": "请选择您的语言"
+  },
+  "notFound": {
+    "title": "页面未找到",
+    "descriptionLine1": "您正在寻找的页面不存在",
+    "descriptionLine2": "或者可能已被移动。",
+    "homeButton": "返回首页"
+  },
+  "hub": {
+    "title": "想让您的韩语听起来更自然吗？",
+    "subtitle": "让我们一起练习角色扮演吧。"
+  },
+  "login": {
+    "title": "欢迎回来",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "example@naver.com",
+    "passwordLabel": "密码",
+    "loginButton": "登录",
+    "errorMessage": "邮箱或密码不正确！",
+    "socialDivider": "通过以下方式登录",
+    "signupPrompt": "第一次来这里？",
+    "signupLink": "创建账号"
+  },
+  "signupStep1": {
+    "title": "创建账号",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "example@gmail.com",
+    "passwordLabel": "密码",
+    "passwordConfirmPlaceholder": "重新输入密码",
+    "passwordHint": "8–16个字符，包含字母和数字",
+    "termsAgreement": "同意使用条款和隐私政策",
+    "nextButton": "下一步",
+    "loginPrompt": "已有账号？",
+    "loginLink": "登录"
+  },
+  "signupStep2": {
+    "nameLabel": "姓名",
+    "namePlaceholder": "输入您的姓名",
+    "birthLabel": "出生日期",
+    "birthPlaceholder": "YYYY-MM-DD",
+    "submitButton": "开始使用"
+  },
+  "previewHeader": {
+    "title": "角色扮演预览",
+    "skip": "跳过",
+    "skipHint": "跳过并直接前往登录或注册"
+  },
+  "preview": {
+    "progress1": "他们在等您的回复！({{current}}/{{total}})",
+    "progress2": "只剩最后一次！加油完成！({{current}}/{{total}})"
+  },
+  "previewEnd": {
+    "title": "预览角色扮演已结束",
+    "description1": "预览角色扮演已结束。",
+    "description2": "若要继续对话，请登录或注册",
+    "signupButton": "创建账号",
+    "loginButton": "登录"
+  },
+  "previewModal": {
+    "title": "做得很好！准备好迎接下一个挑战了吗？",
+    "description": "角色扮演预览已结束。注册后即可继续对话，掌握各种场景。",
+    "signupButton": "创建账号",
+    "loginButton": "登录"
+  },
+  "profile": {
+    "personalSection": "个人设置",
+    "legalSection": "法律",
+    "menu": {
+      "interests": "感兴趣的话题",
+      "language": "语言",
+      "subscription": "管理订阅",
+      "terms": "使用条款",
+      "privacy": "隐私政策",
+      "help": "帮助与支持"
+    },
+    "logoutButton": "退出登录",
+    "deleteAccountButton": "删除账号"
+  },
+  "myInfo": {
+    "header": "我的资料",
+    "name": "姓名",
+    "birth": "出生日期",
+    "email": "邮箱",
+    "koreanLevel": "韩语水平"
+  },
+  "myInterests": {
+    "header": "感兴趣的话题",
+    "title": "选择您的兴趣",
+    "description": "至少选择3个兴趣，帮助我们优化您的体验。",
+    "saveButton": "保存兴趣"
+  },
+  "coach": {
+    "sectionTitle": "风险管理辅导",
+    "sectionDescription": "解读隐藏的背景。与顶级专家联系，防止在韩国出现关键的人际关系失败。",
+    "listTitle": "可用教练",
+    "liveTitle": "1对1直播辅导"
+  },
+  "ask": {
+    "title": "不确定这样说听起来如何？",
+    "subtitle": "我来帮您理解用韩语说这句话的效果",
+    "startButton": "检查效果",
+    "bestWay": "这是最好的表达方式",
+    "culturalInsights": "文化洞察",
+    "viewCoaching": "查看辅导",
+    "hideCoaching": "隐藏辅导",
+    "switchToScreenshot": "改用截图",
+    "quickActions": {
+      "startRoleplay": "开始角色扮演",
+      "softer": "语气更柔和",
+      "formal": "更正式",
+      "apology": "添加道歉"
+    },
+    "hints": {
+      "hint1": "这可以是您即将说或做的事情",
+      "hint2": "这有助于我理解正确的语气",
+      "hint3": "描述情况或您想表达的内容"
+    }
+  },
+  "roleplayForm": {
+    "myRoleLabel": "我的角色",
+    "myRolePlaceholder": "写下您的角色",
+    "aiRoleLabel": "AI的角色",
+    "aiRolePlaceholder": "写下AI的角色",
+    "detailLabel": "详细说明",
+    "detailPlaceholder": "包括互动原因等详细信息...",
+    "startButton": "开始"
+  },
+  "customForm": {
+    "myRoleLabel": "我的角色",
+    "myRolePlaceholder": "例）团队成员",
+    "aiRoleLabel": "AI角色",
+    "aiRolePlaceholder": "例）同事",
+    "detailLabel": "详细说明",
+    "detailPlaceholder": "请提供详细描述"
+  },
+  "interviewForm": {
+    "companyLabel": "公司",
+    "companyPlaceholder": "输入公司名称",
+    "positionLabel": "应聘职位",
+    "positionPlaceholder": "输入职位名称",
+    "jobPostingLabel": "职位描述",
+    "jobPostingPlaceholder": "您可以粘贴职位描述，以生成更有针对性的面试问题。",
+    "startButton": "开始聊天"
+  },
+  "result": {
+    "header": "报告",
+    "tabs": {
+      "transcript": "对话记录",
+      "mistakes": "常见错误"
+    },
+    "scores": {
+      "politeness": "礼貌程度",
+      "naturalness": "自然程度"
+    },
+    "feedback": {
+      "summary": "对话摘要",
+      "wellDone": "做得好的地方",
+      "improve": "可以改进的地方"
+    }
+  },
+  "postCreate": {
+    "headerTitle": "新帖子",
+    "editHeaderTitle": "编辑帖子",
+    "titlePlaceholder": "标题",
+    "contentPlaceholder": "您在想什么？",
+    "postButton": "发布",
+    "postingButton": "发布中...",
+    "postingTitle": "正在发布您的内容..."
+  },
+  "postList": {
+    "filterLatest": "最新",
+    "filterPopular": "热门",
+    "searchPlaceholder": "搜索帖子...",
+    "deletingTitle": "正在删除帖子...",
+    "empty": "暂无帖子",
+    "emptyDescription": "成为第一个发起对话的人。"
+  },
+  "postCard": {
+    "edit": "编辑",
+    "delete": "删除"
+  },
+  "comment": {
+    "saveButton": "保存",
+    "savingButton": "保存中...",
+    "cancelButton": "取消",
+    "placeholder": "留下评论..."
+  },
+  "endChattingModal": {
+    "title": "查看您的报告？",
+    "description": "查看报告后，您将无法继续本次对话。",
+    "confirmButton": "查看报告",
+    "cancelButton": "取消"
+  },
+  "exitChattingModal": {
+    "title": "当前对话内容还不够生成报告",
+    "description": "再多聊一会儿会更有帮助",
+    "closeButton": "关闭",
+    "continueButton": "继续"
+  },
+  "deleteModal": {
+    "title": "删除",
+    "description": "您确定要删除此内容吗？此操作无法撤销。",
+    "cancelButton": "取消",
+    "deleteButton": "删除"
+  },
+  "comingSoonModal": {
+    "title": "即将推出！",
+    "description": "此功能将在未来的更新中提供。",
+    "closeButton": "关闭"
+  },
+  "myLanguage": {
+    "header": "语言",
+    "saveButton": "保存",
+    "savedToast": "保存成功"
+  },
+  "toastMessage": {
+    "logoutFailed": "退出登录失败",
+    "profileUpdated": "个人资料更新成功。",
+    "profileUpdateFailed": "个人资料更新失败。",
+    "fillAllFields": "请填写所有字段。",
+    "requestTimeout": "请求超时，请重试。",
+    "createChatroomFailed": "创建聊天室失败"
+  },
+  "roleplaySection": {
+    "conversationContext": "对话背景",
+    "recentTopics": "最近的角色扮演"
+  },
+  "tab": {
+    "coaching": "1对1直播辅导",
+    "selectAll": "全选",
+    "delete": "删除",
+    "searchPlaceholder": "搜索聊天记录"
+  },
+  "askTab": {
+    "title": "提问",
+    "edit": "编辑",
+    "cancel": "取消",
+    "noResults": "\"{{keyword}}\"没有结果"
+  },
+  "roleplayTab": {
+    "title": "角色扮演"
+  },
+  "historyHeader": {
+    "title": "角色扮演"
+  },
+  "postHeader": {
+    "title": "社区"
+  },
+  "profileHeader": {
+    "title": "我的页面"
+  },
+  "chatroomHeader": {
+    "newChat": "新聊天",
+    "getReports": "获取报告"
+  },
+  "roleplayChat": {
+    "reportUnlocked": "报告已解锁！点击",
+    "toView": "查看"
+  },
+  "feedbackLoading": {
+    "title": "正在加载您的报告设置"
+  },
+  "topicList": {
+    "favoritesEmpty": "您的收藏夹为空",
+    "favoritesEmptyHint": "点击您喜欢的角色上的心形图标",
+    "removedFromFavorites": "已从收藏夹中移除！",
+    "addedToFavorites": "已添加到收藏夹！",
+    "comingSoon": "此内容即将推出"
+  },
+  "topicCategories": {
+    "Favorites": "收藏夹",
+    "Career": "职场",
+    "Family": "家庭",
+    "Belonging": "归属感",
+    "K-POP": "K-POP"
+  },
+  "botHistory": {
+    "all": "全部",
+    "latestActivity": "最新活动",
+    "oldestActivity": "最早活动",
+    "empty": "暂无对话",
+    "emptyDescription": "开始新聊天，它将显示在这里。",
+    "tabs": {
+      "recent": "最新",
+      "oldest": "最早",
+      "active": "进行中"
+    },
+    "count": "{{count}}个聊天",
+    "status": {
+      "active": "进行中",
+      "endedReport": "已完成 · 报告"
+    }
+  },
+  "interests": {
+    "dailyConversation": "💬 日常对话",
+    "business": "💼 商务",
+    "travel": "✈️ 旅行",
+    "kDrama": "🎬 韩剧",
+    "kPop": "🎵 K-Pop",
+    "etiquette": "🙇‍♂️ 礼仪",
+    "internetSlang": "🔥 网络用语",
+    "food": "🥘 美食",
+    "ordering": "🍜 点餐",
+    "beauty": "💄 美妆",
+    "gathering": "👁️‍🗨️ 聚会"
+  },
+  "chatInput": {
+    "placeholder": "输入您的回答...",
+    "situation": "情况",
+    "needHelp": "需要帮助"
+  },
+  "spinnerLoading": {
+    "subtitle1": "不会太久！",
+    "subtitle2": "请稍候。"
+  },
+  "roleplayLoading": {
+    "title": "正在加载您的对话设置"
+  },
+  "closeness": {
+    "casual": "随意",
+    "friendly": "友好",
+    "professional": "专业",
+    "formal": "正式"
+  },
+  "toneDescription": {
+    "casual": "（朋友、兄弟姐妹）",
+    "friendly": "（亲近的同事）",
+    "professional": "（客户、教授）",
+    "formal": "（高层管理人员、公众）"
+  },
+  "stepQuestions": {
+    "askTarget": "这是为谁准备的？",
+    "closeness": "您与他们有多亲近？",
+    "situation": "您想说什么？"
+  },
+  "askChat": {
+    "placeholderAskTarget": "您在和谁说话？",
+    "placeholderSituation": "描述情况...",
+    "placeholderDefault": "输入您的回答...",
+    "processingAI": "AI处理中..."
+  },
+  "selectButton": {
+    "label": "亲密程度"
+  },
+  "category": {
+    "all": "全部",
+    "free": "自由",
+    "question": "问题",
+    "information": "信息",
+    "review": "评价",
+    "etc": "其他"
+  },
+  "modeToggle": {
+    "roleplaying": "角色扮演",
+    "ask": "提问"
+  },
+  "levelDescription": {
+    "BEGINNER": "我知道基本的礼貌用语，但不确定何时或如何使用敬语。",
+    "INTERMEDIATE": "我可以使用-요结尾，但对于正确使用正式或尊重语言不太自信。",
+    "ADVANCED": "我能根据情境或关系自然地理解和使用敬语。"
+  },
+  "askScreenshot": {
+    "title": "上传截图",
+    "subtitle": "上传KakaoTalk或iMessage截图，我将为您分析对话",
+    "analyzeCard": "分析截图",
+    "analyzeCardDesc": "上传聊天截图，即时获得辅导",
+    "uploadButton": "上传截图",
+    "uploadGuide": "请上传KakaoTalk、iMessage等聊天截图，确保对话内容清晰可见。",
+    "typeManually": "手动输入",
+    "uploading": "上传中...",
+    "analyzing": "正在分析您的对话...",
+    "changeImage": "更换图片",
+    "tryAnother": "尝试另一张图片",
+    "confirmTitle": "这正确吗？",
+    "confirmQuestion": "这是您与{{target}}的对话吗？",
+    "confirmButton": "是的，分析这个",
+    "targetLabel": "您在和谁说话？",
+    "closenessLabel": "您们有多亲近？",
+    "regenerate": "根据修正重新生成",
+    "opponentTitle": "对方分析",
+    "toneTitle": "关于您的语气",
+    "suggestionsTitle": "建议回复",
+    "startRoleplay": "通过角色扮演练习",
+    "targets": {
+      "boss": "上司",
+      "coworker": "同事",
+      "friend": "朋友",
+      "family": "家人",
+      "partner": "伴侣",
+      "stranger": "陌生人",
+      "unknown": "未知"
+    }
+  },
+  "webzine": {
+    "landing": {
+      "tag": "关于NOONCHI",
+      "title": "通过AI自然学习韩语 — 练习真实对话，获得即时反馈。",
+      "cta": "了解更多"
+    },
+    "taekwondo": {
+      "tag": "跆拳道社区",
+      "title": "与全球学习韩语的跆拳道爱好者建立联系。",
+      "cta": "立即加入"
+    }
+  }
+}
