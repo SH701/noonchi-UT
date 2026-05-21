@@ -4,3 +4,4 @@ export { default as Modal } from "./Modal";
 export { default as ModalRender } from "./ModalRender";
 export { default as PreviewModal } from "./PreviewModal";
 export { default as CominSoonModal } from "./CominSoonModal";
+export { default as DeleteAccountModal } from "./DeleteAccountModal";

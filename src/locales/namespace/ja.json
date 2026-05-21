@@ -239,6 +239,12 @@
     "cancelButton": "キャンセル",
     "deleteButton": "削除"
   },
+  "deleteAccountModal": {
+    "title": "アカウント削除",
+    "description": "アカウントと会話データが削除され、個人情報は匿名化されます。この操作は元に戻せません。",
+    "cancelButton": "キャンセル",
+    "deleteButton": "アカウント削除"
+  },
   "comingSoonModal": {
     "title": "近日公開！",
     "description": "この機能は今後のアップデートで利用可能になります。",
@@ -251,6 +257,7 @@
   },
   "toastMessage": {
     "logoutFailed": "ログアウトに失敗しました",
+    "deleteAccountFailed": "アカウントの削除に失敗しました。もう一度お試しください。",
     "profileUpdated": "プロフィールを更新しました。",
     "profileUpdateFailed": "プロフィールの更新に失敗しました。",
     "fillAllFields": "すべての項目を入力してください。",

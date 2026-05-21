@@ -29,4 +29,9 @@ export const authMutations = {
     });
     return response;
   },
+  DeleteAccount: async (): Promise<void> => {
+    return apiFetch<void>(`/api/users/me`, {
+      method: "DELETE",
+    });
+  },
 };
