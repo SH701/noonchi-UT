@@ -239,6 +239,12 @@
     "cancelButton": "Отмена",
     "deleteButton": "Удалить"
   },
+  "deleteAccountModal": {
+    "title": "Удалить аккаунт",
+    "description": "Ваш аккаунт и данные переписки будут удалены, а персональные данные обезличены. Это действие нельзя отменить.",
+    "cancelButton": "Отмена",
+    "deleteButton": "Удалить аккаунт"
+  },
   "comingSoonModal": {
     "title": "Скоро!",
     "description": "Эта функция будет доступна в будущем обновлении.",
@@ -251,6 +257,7 @@
   },
   "toastMessage": {
     "logoutFailed": "Ошибка выхода",
+    "deleteAccountFailed": "Не удалось удалить аккаунт. Попробуйте снова.",
     "profileUpdated": "Профиль успешно обновлён.",
     "profileUpdateFailed": "Не удалось обновить профиль.",
     "fillAllFields": "Пожалуйста, заполните все поля.",

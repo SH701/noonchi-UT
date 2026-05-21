@@ -222,6 +222,12 @@
     "cancelButton": "Cancel",
     "deleteButton": "Delete"
   },
+  "deleteAccountModal": {
+    "title": "Delete Account",
+    "description": "Your account and conversation data will be deleted, and personal information will be anonymized. This action cannot be undone.",
+    "cancelButton": "Cancel",
+    "deleteButton": "Delete Account"
+  },
   "comingSoonModal": {
     "title": "Coming Soon!",
     "description": "This feature will be available in a future update.",
@@ -234,6 +240,7 @@
   },
   "toastMessage": {
     "logoutFailed": "Logout failed",
+    "deleteAccountFailed": "Failed to delete account. Please try again.",
     "profileUpdated": "Profile updated successfully.",
     "profileUpdateFailed": "Failed to update profile.",
     "fillAllFields": "Please fill in all fields.",

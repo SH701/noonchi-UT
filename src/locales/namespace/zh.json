@@ -222,6 +222,12 @@
     "cancelButton": "取消",
     "deleteButton": "删除"
   },
+  "deleteAccountModal": {
+    "title": "删除账号",
+    "description": "您的账号和对话数据将被删除，个人信息将被匿名化处理。此操作无法撤销。",
+    "cancelButton": "取消",
+    "deleteButton": "删除账号"
+  },
   "comingSoonModal": {
     "title": "即将推出！",
     "description": "此功能将在未来的更新中提供。",
@@ -234,6 +240,7 @@
   },
   "toastMessage": {
     "logoutFailed": "退出登录失败",
+    "deleteAccountFailed": "删除账号失败，请重试。",
     "profileUpdated": "个人资料更新成功。",
     "profileUpdateFailed": "个人资料更新失败。",
     "fillAllFields": "请填写所有字段。",
