@@ -8,7 +8,8 @@ import {
   AuthProvider,
   I18nProvider,
 } from "@/providers";
-import { BannerModal, ModalRender } from "@/components/modal";
+import ModalRender from "@/components/modal/ModalRender";
+import BannerModal from "@/components/modal/BannerModal";
 
 export const viewport: Viewport = {
   width: "device-width",
