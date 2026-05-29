@@ -10,7 +10,7 @@ import {
 } from "@/providers";
 import ModalRender from "@/components/modal/ModalRender";
 import BannerModal from "@/components/modal/BannerModal";
-import { SITE_DESCROPTION } from "@/constants/description";
+import { SITE_DESCRIPTION } from "@/constants/description";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -19,8 +19,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://noonchi.ai.kr"),
-  title: "Noonchi.ai",
-  description: SITE_DESCROPTION,
+  title: {
+    default: "Noonchi — Master Korean with AI",
+    template: "%s | Noonchi",
+  },
+  description: SITE_DESCRIPTION,
   manifest: "/manifest.json",
   verification: {
     google: "_IjXLJhIbgErRuIUCVKImK7sfJ04b0gXDnZBMjWQazk",
@@ -35,7 +38,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Noonchi.ai",
-    description: SITE_DESCROPTION,
+    description: SITE_DESCRIPTION,
     url: "https://noonchi.ai.kr",
     siteName: "Noonchi",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
@@ -45,7 +48,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Noonchi.ai",
-    description: SITE_DESCROPTION,
+    description: SITE_DESCRIPTION,
     images: ["/og-image.png"],
   },
   robots: {

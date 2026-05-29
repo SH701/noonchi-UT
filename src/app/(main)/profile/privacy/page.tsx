@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import { PrivacyPolicy } from "@/features/profile";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "Noonchi's privacy policy and how we handle your data.",
+  robots: { index: true, follow: true },
+};
 
 export default function PrivacyPolicyPage() {
   return (
