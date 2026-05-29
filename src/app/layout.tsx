@@ -2,8 +2,13 @@ import "./globals.css";
 import { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Toaster } from "@/components/ui/toast/toast";
-import ModalRender from "@/components/modal/ModalRender";
-import { ClientProvider, QueryProvider, AuthProvider, I18nProvider } from "@/providers";
+import {
+  ClientProvider,
+  QueryProvider,
+  AuthProvider,
+  I18nProvider,
+} from "@/providers";
+import { BannerModal, ModalRender } from "@/components/modal";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -61,6 +66,7 @@ export default function RootLayout({
                 </div>
                 <Toaster />
                 <ModalRender />
+                <BannerModal />
               </ClientProvider>
             </I18nProvider>
           </QueryProvider>
