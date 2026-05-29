@@ -1,7 +1,7 @@
 {
   "name": "Noonchi.ai",
   "short_name": "Noonchi",
-  "description": "Noonchi.ai",
+  "description": "Master Korean with Noonchi — practice real-life conversations with AI roleplay. Get instant feedback on honorifics, tone, and cultural nuance. Built for learners who want to sound natural.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#acbcff",

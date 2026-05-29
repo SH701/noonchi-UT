@@ -24,6 +24,24 @@ export const metadata: Metadata = {
     template: "%s | Noonchi",
   },
   description: SITE_DESCRIPTION,
+  keywords: [
+    "Korean",
+    "Korean learning",
+    "learn Korean",
+    "Korean conversation",
+    "Korean AI tutor",
+    "Korean roleplay",
+    "Korean honorifics",
+    "Korean for foreigners",
+    "한국어 학습",
+  ],
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-US": "/",
+      "x-default": "/",
+    },
+  },
   manifest: "/manifest.json",
   verification: {
     google: "_IjXLJhIbgErRuIUCVKImK7sfJ04b0gXDnZBMjWQazk",
@@ -41,7 +59,7 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     url: "https://noonchi.ai.kr",
     siteName: "Noonchi",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "/og_image.png", width: 1200, height: 630 }],
     locale: "en_US",
     type: "website",
   },
@@ -49,7 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Noonchi.ai",
     description: SITE_DESCRIPTION,
-    images: ["/og-image.png"],
+    images: ["/og_image.png"],
   },
   robots: {
     index: true,
