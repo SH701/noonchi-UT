@@ -5,7 +5,6 @@ export const metadata: Metadata = {
   title: "About Us",
   description:
     "Learn about Noonchi — our mission to help Korean learners speak naturally and understand cultural context.",
-  robots: { index: true, follow: true },
 };
 
 export default function AboutPage(){
