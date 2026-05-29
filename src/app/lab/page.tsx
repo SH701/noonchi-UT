@@ -1,3 +1,10 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Lab",
+  description: "Experimental Korean learning features by Noonchi.",
+};
+
 export default function LabPage() {
   return (
     <iframe

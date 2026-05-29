@@ -1,0 +1,1 @@
+export const SITE_DESCRIPTION = "Master Korean with Noonchi — practice real-life conversations with AI roleplay. Get instant feedback on honorifics, tone, and cultural nuance. Built for learners who want to sound natural."

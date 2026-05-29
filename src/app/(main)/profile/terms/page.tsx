@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import { TermsOfUse } from "@/features/profile";
+
+export const metadata: Metadata = {
+  title: "Terms of Use",
+  description: "Terms of use for Noonchi.",
+};
 
 export default function TermsOfUsePage() {
   return (
