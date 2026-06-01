@@ -69,14 +69,14 @@ export default function PreviewChat() {
   return (
     <main className="flex min-h-screen flex-col">
       <section className="flex-1">
-        <div className="sticky top-0">
+        <div className="sticky top-0 z-50">
           <PreviewHeader handleMoveAuth={handleMoveAuth} />
         </div>
         {isStarting ? (
           <ChatLoading />
         ) : (
           <>
-            <aside className="top-19 sticky">
+            <aside className="top-19 sticky z-10">
               <ChatNotice
                 description={data?.scenario.description}
                 showNotice={showNotice}
