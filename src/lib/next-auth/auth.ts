@@ -14,16 +14,6 @@ function getAppleClientSecret(): string {
   const keyId = process.env.AUTH_APPLE_KEY_ID;
   const rawKey = process.env.AUTH_APPLE_PRIVATE_KEY;
 
-  console.log("[Apple OAuth] env check:", {
-    hasTeamId: !!teamId,
-    hasClientId: !!clientId,
-    hasKeyId: !!keyId,
-    hasPrivateKey: !!rawKey,
-    clientId,
-    teamId,
-    keyId,
-    privateKeyStartsWith: rawKey?.slice(0, 30),
-  });
 
   if (!teamId || !clientId || !keyId || !rawKey) {
     console.error("[Apple OAuth] missing env var");
@@ -41,7 +31,6 @@ function getAppleClientSecret(): string {
       subject: clientId,
       keyid: keyId,
     });
-    console.log("[Apple OAuth] client secret generated OK, length:", secret.length);
     return secret;
   } catch (e) {
     console.error("[Apple OAuth] failed to sign client secret:", e);
