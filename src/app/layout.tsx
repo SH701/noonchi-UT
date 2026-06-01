@@ -15,6 +15,7 @@ import { SITE_DESCRIPTION } from "@/constants/description";
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  interactiveWidget: "resizes-content",
 };
 
 export const metadata: Metadata = {
