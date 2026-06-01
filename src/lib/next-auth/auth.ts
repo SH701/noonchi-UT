@@ -127,6 +127,41 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
       },
     }),
+    Credentials({
+      id: "native",
+      credentials: {
+        accessToken: {},
+        refreshToken: {},
+      },
+      async authorize(credentials) {
+        const accessToken = credentials?.accessToken as string | undefined;
+        const refreshToken = credentials?.refreshToken as string | undefined;
+
+        if (!accessToken || !refreshToken) return null;
+
+        try {
+          const res = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/users/me`,
+            { headers: { Authorization: `Bearer ${accessToken}` } },
+          );
+          if (!res.ok) return null;
+          const verifiedUser: AppUser = await res.json();
+
+          return {
+            id: verifiedUser.id,
+            email: verifiedUser.email,
+            name: verifiedUser.nickname,
+            image: verifiedUser.profileImageUrl,
+            accessToken,
+            refreshToken,
+            user: verifiedUser,
+          };
+        } catch (e) {
+          console.error("[native authorize] verify error:", e);
+          return null;
+        }
+      },
+    }),
   ],
   session: {
     strategy: "jwt",
