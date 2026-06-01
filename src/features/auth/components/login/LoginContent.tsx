@@ -19,6 +19,7 @@ import { useUpdateProfile } from "@/features/profile/hooks/useProfile";
 
 import OAtuth from "./OAuth";
 import { useTranslation } from "react-i18next";
+import { isNoonchiApp } from "@/lib/isNoonchiApp";
 type LoginData = z.infer<typeof loginSchema>;
 
 export default function LoginContent() {
@@ -85,11 +86,19 @@ export default function LoginContent() {
 
   const GoogleLogin = async () => {
     gtag("event", "login", { method: "google" });
+    if (isNoonchiApp() && typeof window.NoonchiNative?.loginGoogle === "function") {
+      window.NoonchiNative.loginGoogle();
+      return;
+    }
     await signIn("google", { callbackUrl: "/hub" });
   };
 
   const AppleLogin = async () => {
     gtag("event", "login", { method: "apple" });
+    if (isNoonchiApp() && typeof window.NoonchiNative?.loginApple === "function") {
+      window.NoonchiNative.loginApple();
+      return;
+    }
     await signIn("apple", { callbackUrl: "/hub" });
   };
   return (
