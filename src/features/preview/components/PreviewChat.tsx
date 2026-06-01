@@ -67,7 +67,7 @@ export default function PreviewChat() {
   const handleMoveAuth = () => router.push("/preview/end");
 
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="flex min-h-dvh flex-col">
       <section className="flex-1">
         <div className="sticky top-0 z-50">
           <PreviewHeader handleMoveAuth={handleMoveAuth} />

@@ -131,7 +131,7 @@ export default function RoleplayChat({
       ) : (
         <>
           <RoleplayHeader roomId={conversationId} onEnd={handleEnd} />
-          <main className="sticky top-0 flex min-h-screen w-full flex-col">
+          <main className="sticky top-0 flex min-h-dvh w-full flex-col">
             <aside className="top-19 sticky z-10">
               <ChatNotice
                 description={conversation.situation}
