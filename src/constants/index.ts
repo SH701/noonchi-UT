@@ -5,5 +5,6 @@ export * from "./filter";
 export * from "./language";
 export * from "./onboard";
 export * from "./tab";
+export * from "./time";
 export * from "./tone";
 export * from "./webzineAds";
