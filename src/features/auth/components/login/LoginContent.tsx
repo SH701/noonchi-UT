@@ -20,6 +20,7 @@ import { useUpdateProfile } from "@/features/profile/hooks/useProfile";
 import OAtuth from "./OAuth";
 import { useTranslation } from "react-i18next";
 import { isNoonchiApp } from "@/lib/isNoonchiApp";
+import { toast } from "@/components/ui/toast/toast";
 type LoginData = z.infer<typeof loginSchema>;
 
 export default function LoginContent() {
@@ -100,7 +101,8 @@ export default function LoginContent() {
         return;
       }
       await signIn("google", { callbackUrl: "/hub" });
-    } finally {
+    } catch {
+      toast.error(t("toastMessage.oauthLoginFailed"));
       setOauthLoading(null);
     }
   };
@@ -118,7 +120,8 @@ export default function LoginContent() {
         return;
       }
       await signIn("apple", { callbackUrl: "/hub" });
-    } finally {
+    } catch {
+      toast.error(t("toastMessage.oauthLoginFailed"));
       setOauthLoading(null);
     }
   };

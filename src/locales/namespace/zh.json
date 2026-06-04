@@ -246,7 +246,8 @@
     "profileUpdateFailed": "个人资料更新失败。",
     "fillAllFields": "请填写所有字段。",
     "requestTimeout": "请求超时，请重试。",
-    "createChatroomFailed": "创建聊天室失败"
+    "createChatroomFailed": "创建聊天室失败",
+    "oauthLoginFailed": "登录失败，请重试。"
   },
   "roleplaySection": {
     "conversationContext": "对话背景",

@@ -246,7 +246,8 @@
     "profileUpdateFailed": "Failed to update profile.",
     "fillAllFields": "Please fill in all fields.",
     "requestTimeout": "Request timed out. Please try again.",
-    "createChatroomFailed": "Failed to create chat room"
+    "createChatroomFailed": "Failed to create chat room",
+    "oauthLoginFailed": "Login failed. Please try again."
   },
   "roleplaySection": {
     "conversationContext": "Conversation Context",

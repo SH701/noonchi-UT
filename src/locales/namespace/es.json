@@ -263,7 +263,8 @@
     "profileUpdateFailed": "Error al actualizar el perfil.",
     "fillAllFields": "Por favor, completa todos los campos.",
     "requestTimeout": "La solicitud tardó demasiado. Inténtalo de nuevo.",
-    "createChatroomFailed": "Error al crear la sala de chat"
+    "createChatroomFailed": "Error al crear la sala de chat",
+    "oauthLoginFailed": "Error al iniciar sesión. Inténtalo de nuevo."
   },
   "roleplaySection": {
     "conversationContext": "Contexto de la conversación",
