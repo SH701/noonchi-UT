@@ -25,8 +25,8 @@ export default function ProfileActions() {
       await signOut({ redirect: false });
       gtag("event", "logout");
       router.push("/");
-      setLoading(false);
     } catch {
+      setLoading(false);
       toast.error(t("toastMessage.logoutFailed"));
     }
   };
