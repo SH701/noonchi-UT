@@ -1,6 +1,7 @@
 {
   "onboarding": {
     "nextButton": "Next",
+    "prevButton": "Previous",
     "slide1": {
       "title": "Please select your interests"
     },

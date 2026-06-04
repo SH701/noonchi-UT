@@ -1,6 +1,7 @@
 {
   "onboarding": {
     "nextButton": "Далее",
+    "prevButton": "Назад",
     "slide1": {
       "title": "Выберите ваши интересы"
     },

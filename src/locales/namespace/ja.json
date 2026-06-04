@@ -1,6 +1,7 @@
 {
   "onboarding": {
     "nextButton": "次へ",
+    "prevButton": "戻る",
     "slide1": {
       "title": "興味のある分野を選択してください"
     },

@@ -1,6 +1,7 @@
 {
   "onboarding": {
     "nextButton": "下一步",
+    "prevButton": "上一步",
     "slide1": {
       "title": "请选择您的兴趣"
     },
