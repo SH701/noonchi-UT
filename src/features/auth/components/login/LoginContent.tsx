@@ -20,12 +20,16 @@ import { useUpdateProfile } from "@/features/profile/hooks/useProfile";
 import OAtuth from "./OAuth";
 import { useTranslation } from "react-i18next";
 import { isNoonchiApp } from "@/lib/isNoonchiApp";
+import { toast } from "@/components/ui/toast/toast";
 type LoginData = z.infer<typeof loginSchema>;
 
 export default function LoginContent() {
   const { t } = useTranslation();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [oauthLoading, setOauthLoading] = useState<"google" | "apple" | null>(
+    null,
+  );
   const [serverErrors, setServerErrors] = useState<Record<string, string>>({});
   const { openModal, closeModal } = useModalActions();
   const { update } = useSession();
@@ -85,21 +89,41 @@ export default function LoginContent() {
   };
 
   const GoogleLogin = async () => {
+    if (oauthLoading) return;
+    setOauthLoading("google");
     gtag("event", "login", { method: "google" });
-    if (isNoonchiApp() && typeof window.NoonchiNative?.loginGoogle === "function") {
-      window.NoonchiNative.loginGoogle();
-      return;
+    try {
+      if (
+        isNoonchiApp() &&
+        typeof window.NoonchiNative?.loginGoogle === "function"
+      ) {
+        window.NoonchiNative.loginGoogle();
+        return;
+      }
+      await signIn("google", { callbackUrl: "/hub" });
+    } catch {
+      toast.error(t("toastMessage.oauthLoginFailed"));
+      setOauthLoading(null);
     }
-    await signIn("google", { callbackUrl: "/hub" });
   };
 
   const AppleLogin = async () => {
+    if (oauthLoading) return;
+    setOauthLoading("apple");
     gtag("event", "login", { method: "apple" });
-    if (isNoonchiApp() && typeof window.NoonchiNative?.loginApple === "function") {
-      window.NoonchiNative.loginApple();
-      return;
+    try {
+      if (
+        isNoonchiApp() &&
+        typeof window.NoonchiNative?.loginApple === "function"
+      ) {
+        window.NoonchiNative.loginApple();
+        return;
+      }
+      await signIn("apple", { callbackUrl: "/hub" });
+    } catch {
+      toast.error(t("toastMessage.oauthLoginFailed"));
+      setOauthLoading(null);
     }
-    await signIn("apple", { callbackUrl: "/hub" });
   };
   return (
     <div className="flex flex-col px-6 pb-10">
@@ -138,6 +162,7 @@ export default function LoginContent() {
             GoogleLogin={GoogleLogin}
             AppleLogin={AppleLogin}
             openModal={openModal}
+            loadingProvider={oauthLoading}
           />
         </div>
       </div>

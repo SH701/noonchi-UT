@@ -1,6 +1,7 @@
 {
   "onboarding": {
     "nextButton": "Далее",
+    "prevButton": "Назад",
     "slide1": {
       "title": "Выберите ваши интересы"
     },
@@ -262,7 +263,8 @@
     "profileUpdateFailed": "Не удалось обновить профиль.",
     "fillAllFields": "Пожалуйста, заполните все поля.",
     "requestTimeout": "Время ожидания истекло. Попробуйте снова.",
-    "createChatroomFailed": "Не удалось создать чат"
+    "createChatroomFailed": "Не удалось создать чат",
+    "oauthLoginFailed": "Не удалось войти. Попробуйте снова."
   },
   "roleplaySection": {
     "conversationContext": "Контекст разговора",

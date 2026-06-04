@@ -1,6 +1,7 @@
 {
   "onboarding": {
     "nextButton": "次へ",
+    "prevButton": "戻る",
     "slide1": {
       "title": "興味のある分野を選択してください"
     },
@@ -262,7 +263,8 @@
     "profileUpdateFailed": "プロフィールの更新に失敗しました。",
     "fillAllFields": "すべての項目を入力してください。",
     "requestTimeout": "リクエストがタイムアウトしました。もう一度お試しください。",
-    "createChatroomFailed": "チャットルームの作成に失敗しました"
+    "createChatroomFailed": "チャットルームの作成に失敗しました",
+    "oauthLoginFailed": "ログインに失敗しました。もう一度お試しください。"
   },
   "roleplaySection": {
     "conversationContext": "会話のコンテキスト",

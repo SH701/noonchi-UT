@@ -1,7 +1,5 @@
 import type { User } from "./user";
 
-declare module "*.css";
-
 export interface NoonchiAuthPayload {
   provider: "google" | "apple";
   accessToken: string;
