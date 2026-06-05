@@ -15,11 +15,21 @@ export default function RoleplayHeader() {
   return (
     <>
       <Header
-        leftIcon={<HamburgerIcon onClick={toggleTab} />}
-        center={<ModeToggle />}
+        leftIcon={
+          <div id="hub-menu">
+            <HamburgerIcon onClick={toggleTab} />
+          </div>
+        }
+        center={
+          <div id="hub-mode-toggle">
+            <ModeToggle />
+          </div>
+        }
         rightIcon={
           pathname.includes("/chatroom") ? null : (
-            <BoardIcon onClick={() => router.push("/posts")} />
+            <div id="hub-community">
+              <BoardIcon onClick={() => router.push("/posts")} />
+            </div>
           )
         }
       />

@@ -114,15 +114,21 @@ export default function ChatInput({
             )}
             {showHint && (
               <button
+                id="chat-needhelp"
                 onClick={onHintClick}
-                className={`h-6.5 flex cursor-pointer rounded-full border px-2 ${isHintActive ? "border-indigo-500 text-indigo-500" : ""}`}
+                className={`h-6.5 min-w-24 flex cursor-pointer items-center justify-center gap-1 rounded-full border px-2 ${isHintActive ? "border-indigo-500 text-indigo-500" : ""}`}
                 disabled={isHintLoading}
               >
-                {isHintLoading ? <Spinner/>: <> <Lightbulb
-                  className={`py-0.5 ${isHintActive ? "text-indigo-500" : ""}`}
-                />
-                <p>{t("chatInput.needHelp")}</p> </>}
-               
+                {isHintLoading ? (
+                  <Spinner />
+                ) : (
+                  <>
+                    <Lightbulb
+                      className={`py-0.5 ${isHintActive ? "text-indigo-500" : ""}`}
+                    />
+                    <p>{t("chatInput.needHelp")}</p>
+                  </>
+                )}
               </button>
             )}
           </div>

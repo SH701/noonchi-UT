@@ -2,12 +2,12 @@
 
 import { useEffect } from "react";
 import { driver, type Config } from "driver.js";
-import "driver.js/dist/driver.css";
 import { ONE_DAY_MS } from "@/constants";
 
-export function useCoachmark(key: string, config: Config) {
+export function useCoachmark(key: string, config: Config, ready: boolean = true) {
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (!ready) return;
     if (localStorage.getItem(key)) return;
 
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -22,19 +22,60 @@ export function useCoachmark(key: string, config: Config) {
       (!bannerDismissedAt ||
         Date.now() - Number(bannerDismissedAt) >= ONE_DAY_MS);
 
-    if (bannerWillShow) return; // 배너 닫고 다음 진입에 코치마크 뜸
-    const d = driver({
-      ...config,
-      onDestroyed: (element, step, options) => {
-        localStorage.setItem(key, "1");
-        config.onDestroyed?.(element, step, options);
-      },
-    });
+    let d: ReturnType<typeof driver> | null = null;
+    let rafId = 0;
+    let pollId: ReturnType<typeof setTimeout> | null = null;
+    let attempts = 0;
 
-    d.drive();
+    const firstSelector =
+      typeof config.steps?.[0]?.element === "string"
+        ? (config.steps[0].element as string)
+        : null;
 
-    return () => {
-      d.destroy();
+    const launch = () => {
+      d = driver({
+        ...config,
+        onDestroyed: (element, step, options) => {
+          localStorage.setItem(key, "1");
+          config.onDestroyed?.(element, step, options);
+        },
+      });
+      d.drive();
     };
-  }, [key]);
+
+    const start = () => {
+      const tryLaunch = () => {
+        if (firstSelector && !document.querySelector(firstSelector)) {
+          if (attempts++ < 50) {
+            pollId = setTimeout(tryLaunch, 100);
+            return;
+          }
+        }
+        rafId = requestAnimationFrame(() => {
+          rafId = requestAnimationFrame(launch);
+        });
+      };
+      tryLaunch();
+    };
+
+    if (bannerWillShow) {
+      const handler = () => start();
+      window.addEventListener("install-banner-dismissed", handler, {
+        once: true,
+      });
+      return () => {
+        window.removeEventListener("install-banner-dismissed", handler);
+        if (pollId) clearTimeout(pollId);
+        if (rafId) cancelAnimationFrame(rafId);
+        d?.destroy();
+      };
+    }
+
+    start();
+    return () => {
+      if (pollId) clearTimeout(pollId);
+      if (rafId) cancelAnimationFrame(rafId);
+      d?.destroy();
+    };
+  }, [key, ready]);
 }

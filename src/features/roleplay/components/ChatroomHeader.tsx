@@ -81,7 +81,7 @@ export default function ChatroomHeader({ roomId, onEnd }: ChatroomHeaderProps) {
         center={<ModeToggle />}
         rightIcon={
           isChat ? (
-            <div ref={toggleBtnRef} className="relative">
+            <div ref={toggleBtnRef} id="chat-pen" className="relative">
               {detailData?.canGetReport && (
                 <div className="z-9999 absolute left-4 size-2 rounded-full bg-red-500" />
               )}

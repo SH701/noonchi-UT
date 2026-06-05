@@ -29,6 +29,7 @@ import { useRoleplayFeedbackStore } from "@/store/useRoleplayFeedbackStore";
 import { useRoleplayHint } from "../hooks/useRoleplayHint";
 import { useRoleMessageStream } from "../hooks/useRoleMessageStream";
 import { useConversationEnd } from "../hooks/useConversationEnd";
+import { useChatCoachMark } from "../hooks/useChatCoachmark";
 
 interface RoleplayChatRoomProps {
   conversationId: number;
@@ -56,6 +57,7 @@ export default function RoleplayChat({
     isFetching: isHintFetching,
   } = useRoleplayHint(conversationId);
   const { micState, sttText, handleMicClick, handleSendAudio } = useWebVoice();
+  useChatCoachMark(!!conversation && messages.length > 0);
 
   useEffect(() => {
     if (micState === "recording" || micState === "recorded") {

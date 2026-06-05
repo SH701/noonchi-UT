@@ -71,7 +71,10 @@ export default function TopicList() {
           </p>
         </div>
       ) : (
-        <ul className="grid w-full grid-cols-2 items-center justify-center gap-4 md:flex md:flex-col">
+        <ul
+          id="hub-scenario-list"
+          className="grid w-full grid-cols-2 items-center justify-center gap-4 md:flex md:flex-col"
+        >
           {topics.map((topic, idx) => (
             <li
               key={topic.topicId}

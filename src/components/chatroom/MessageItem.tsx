@@ -223,6 +223,7 @@ export default function MessageItem({
                 <div className="mt-2 flex justify-between border-t border-gray-200 pt-2">
                   <div className="flex gap-2">
                     <button
+                      id="chat-tts"
                       onClick={() => handleTTsClick(messages.content)}
                       disabled={loadingTTS}
                       className="cursor-pointer"
@@ -244,6 +245,7 @@ export default function MessageItem({
 
                   {(hiddenMeaning ?? messages.hiddenMeaning) && (
                     <button
+                      id="chat-really-mean"
                       className="border-gradient-primary cursor-pointer rounded-full border px-2 py-1"
                       onClick={handleHiddenMean}
                     >

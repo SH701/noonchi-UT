@@ -34,6 +34,7 @@ export default function BannerModal({forceOpen}:Props) {
   const handleClose = () => {
     localStorage.setItem(STORAGE_KEY, String(Date.now()));
     setIsOpen(false);
+    window.dispatchEvent(new Event("install-banner-dismissed"));
   };
   return (
   <Modal
