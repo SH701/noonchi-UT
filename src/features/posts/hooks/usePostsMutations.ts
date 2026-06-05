@@ -1,6 +1,8 @@
+'use client'
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postsMutations } from "../api/mutations";
-import { PostDetail, PostList } from "../types/posts.type";
+import { PostDetailType, PostListType } from "../types/posts.type";
 
 export const useCreatePost = () => {
   return useMutation({
@@ -24,7 +26,7 @@ export const useDeletePost = () => {
   return useMutation({
     mutationFn: postsMutations.deletePost,
     onSuccess: (_data, postId) => {
-      queryClient.setQueriesData<PostList>(
+      queryClient.setQueriesData<PostListType>(
         { queryKey: ["posts"] },
         (old) => {
           if (!old) return old;
@@ -41,15 +43,15 @@ export const useToggleLike = () => {
     mutationFn: postsMutations.createLike,
     onMutate: async (postId) => {
       await queryClient.cancelQueries({ queryKey: ["posts", postId] });
-      const prevDetail = queryClient.getQueryData<PostDetail>(["posts", postId]);
+      const prevDetail = queryClient.getQueryData<PostDetailType>(["posts", postId]);
       if (prevDetail) {
-        queryClient.setQueryData<PostDetail>(["posts", postId], {
+        queryClient.setQueryData<PostDetailType>(["posts", postId], {
           ...prevDetail,
           isLiked: !prevDetail.isLiked,
           likesCount: prevDetail.isLiked ? prevDetail.likesCount - 1 : prevDetail.likesCount + 1,
         });
       }
-      queryClient.setQueriesData<PostList>(
+      queryClient.setQueriesData<PostListType>(
         { queryKey: ["posts"] },
         (old) => {
           if (!old) return old;
@@ -83,14 +85,14 @@ export const useToggleBookmark = () => {
     mutationFn: postsMutations.createBookmark,
     onMutate: async (postId) => {
       await queryClient.cancelQueries({ queryKey: ["posts", postId] });
-      const prevDetail = queryClient.getQueryData<PostDetail>(["posts", postId]);
+      const prevDetail = queryClient.getQueryData<PostDetailType>(["posts", postId]);
       if (prevDetail) {
-        queryClient.setQueryData<PostDetail>(["posts", postId], {
+        queryClient.setQueryData<PostDetailType>(["posts", postId], {
           ...prevDetail,
           isBookmarked: !prevDetail.isBookmarked,
         });
       }
-      queryClient.setQueriesData<PostList>(
+      queryClient.setQueriesData<PostListType>(
         { queryKey: ["posts"] },
         (old) => {
           if (!old) return old;

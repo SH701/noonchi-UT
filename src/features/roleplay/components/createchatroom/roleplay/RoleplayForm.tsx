@@ -1,7 +1,9 @@
+"use client";
+
 import { useState } from "react";
 import TextInput from "../../../../../components/ui/form/TextInput";
 import { Button } from "@/components/ui/button/button";
-import { Textarea } from "@/components/ui/form";
+import Textarea from "@/components/ui/form/Textarea";
 import SelectButton from "@/components/ui/form/SelectButton";
 import { useCreateContext } from "../../../hooks/useCreateContext";
 import { useTranslation } from "react-i18next";

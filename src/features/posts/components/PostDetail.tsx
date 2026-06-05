@@ -4,7 +4,7 @@ import { Heart, MessageCircle, Bookmark, MoreHorizontal } from "lucide-react";
 import { DefaultIcon } from "@/assets/svgr";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
-import { PostDetail as PostDetailType } from "../types/posts.type";
+import { PostDetailType } from "../types/posts.type";
 import { getRelativeTime } from "@/lib/time-format";
 
 

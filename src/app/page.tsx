@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Onboarding } from "@/features/onboard";
+import Onboarding from "@/features/onboard/components/Onboarding";
 
 export const metadata: Metadata = {
   title: "Get Started",

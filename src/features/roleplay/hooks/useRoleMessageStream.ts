@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { ChatMsg } from "@/types/messages";
 import { apiMutations } from "@/api";

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { apiMutations } from "@/api";
-import { useCreatePost } from "@/features/posts";
+import { useCreatePost } from "../hooks/usePostsMutations";
 import SpinnerLoading from "@/components/common/SpinnerLoading";
 import PostCreateHeader from "./PostCreateHeader";
 import PostCreateForm from "./PostCreateForm";

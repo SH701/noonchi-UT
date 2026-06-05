@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { TermsOfUse } from "@/features/profile";
+import TermsOfUse from "@/features/profile/components/TermsOfUse";
 
 export const metadata: Metadata = {
   title: "Terms of Use",

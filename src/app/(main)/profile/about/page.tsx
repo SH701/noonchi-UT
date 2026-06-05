@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AboutUs } from "@/features/profile";
+import AboutUs from "@/features/profile/components/AboutUs";
 
 export const metadata: Metadata = {
   title: "About Us",

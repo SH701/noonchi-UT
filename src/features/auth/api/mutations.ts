@@ -1,5 +1,5 @@
 import { apiFetch } from "@/api/api";
-import { AuthRes, SignupReq } from "@/features/auth/types/auth.type";
+import { AuthRes, SignupReq } from "../types/auth.type";
 
 export const authMutations = {
   Signup: async (payload: SignupReq): Promise<AuthRes> => {

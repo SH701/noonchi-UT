@@ -1,9 +1,6 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import {
-  ScreenshotAnalysis,
-  ScreenshotStreamDoneData,
-} from "@/features/ask/types/ask.type";
+import { ScreenshotAnalysis, ScreenshotStreamDoneData } from "@/features/ask/types/ask.type";
 
 interface AskScreenshotState {
   conversationId: number | null;

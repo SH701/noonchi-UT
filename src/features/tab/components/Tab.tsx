@@ -7,13 +7,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useTabStore } from "@/store/useTabStore";
 import { DefaultIcon, PeopleIcon } from "@/assets/svgr";
 import SearchBar from "./SearchBar";
-import { AskHistoryTab, RoleplayHistoryTab } from "../bothistory";
+
 import { fadeVariants, slideVariants } from "@/constants";
 import { useState } from "react";
 import { useDeleteConversation } from "@/hooks/mutations";
 import { useHistorySearch } from "@/hooks/custom";
 import { useTranslation } from "react-i18next";
 import { Settings } from "lucide-react";
+import AskHistoryTab from "@/features/bothistory/components/AskHistoryTab";
+import RoleplayHistoryTab from "@/features/bothistory/components/RoleplayHistoryTab";
 
 export default function Tab() {
   const { t } = useTranslation();

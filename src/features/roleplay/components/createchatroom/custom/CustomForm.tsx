@@ -1,6 +1,7 @@
 "use client";
 
-import { Textarea, TextInput } from "@/components/ui/form";
+import Textarea from "@/components/ui/form/Textarea";
+import TextInput from "@/components/ui/form/TextInput";
 import SelectButton from "@/components/ui/form/SelectButton";
 import { toast } from "@/components/ui/toast/toast";
 import { useState } from "react";

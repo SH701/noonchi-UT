@@ -1,4 +1,4 @@
-import { TopicRes } from "@/features/roleplay/types/topics";
+import { TopicRes } from "@/features/hub/types/topics.type";
 import Image from "next/image";
 
 export default function InterviewSection({

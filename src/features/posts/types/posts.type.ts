@@ -10,7 +10,7 @@ export interface PostAuthor {
   profileImageUrl: string;
 }
 
-export interface PostDetail {
+export interface PostDetailType {
   postId: number;
   title: string;
   content: string;
@@ -26,7 +26,7 @@ export interface PostDetail {
   isBookmarked: boolean;
 }
 
-export interface PostList {
+export interface PostListType {
   content: PostSearchItem[];
   pageNumber: number;
   pageSize: number;

@@ -2,7 +2,8 @@ import { ModalProps } from "@/types/etc";
 import Modal from "./Modal";
 import { Button } from "../ui/button/button";
 import { useModalActions } from "@/store/useModalStore";
-import { LoginContent, SignupContent } from "@/features/auth";
+import LoginContent from "@/features/auth/components/login/LoginContent";
+import SignupContent from "@/features/auth/components/signup/SignupContent";
 import { useTranslation } from "react-i18next";
 
 

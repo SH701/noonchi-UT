@@ -1,6 +1,6 @@
 "use client";
 import { HamburgerIcon, HomeIcon } from "@/assets/svgr";
-import { Header } from "@/components/common";
+import Header from "@/components/common/Header";
 import { useTabStore } from "@/store";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";

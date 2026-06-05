@@ -5,7 +5,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button/button";
-import { SignupHeader, SignupTemplate, SignupForm2 } from "@/features/auth";
+import SignupHeader from "./SignupHeader";
+import SignupTemplate from "./SignupTemplate";
+import SignupForm2 from "./SignupForm2";
+import { authMutations } from "../../api/mutations";
 
 import { signIn } from "next-auth/react";
 import StepIndicator from "./StepIndicator";
@@ -17,7 +20,7 @@ import { usePreferenceStore } from "@/store/usePreferenceStore";
 import { useSession } from "next-auth/react";
 import { signup2Schema } from "../../types/schema";
 import { useUpdateProfile } from "@/features/profile/hooks/useProfile";
-import { authMutations } from "../../api/mutations";
+
 import { useTranslation } from "react-i18next";
 
 type Step2FormData = z.infer<typeof signup2Schema>;

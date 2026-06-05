@@ -1,4 +1,4 @@
-import { MyInterests } from "@/features/profile";
+import MyInterests from "@/features/profile/components/myinterests/MyInterests";
 import { auth } from "@/lib/next-auth/auth";
 
 export default async function MyInterestsPage() {

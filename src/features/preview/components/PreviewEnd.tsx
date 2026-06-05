@@ -3,7 +3,8 @@
 import { useModalActions } from "@/store/useModalStore";
 import Image from "next/image";
 import { Button } from "../../../components/ui/button/button";
-import { LoginContent, SignupContent } from "../../auth";
+import LoginContent from "../../auth/components/login/LoginContent";
+import SignupContent from "../../auth/components/signup/SignupContent";
 import { useTranslation } from "react-i18next";
 
 export default function PreviewEnd() {

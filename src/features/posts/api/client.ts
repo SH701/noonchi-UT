@@ -1,8 +1,8 @@
 import { apiFetch } from "@/api";
 import {
   CommentListRes,
-  PostDetail,
-  PostList,
+  PostDetailType,
+  PostListType,
   PostSearchRes,
 } from "../types/posts.type";
 
@@ -12,14 +12,14 @@ export const postsClient = {
     sort_by: string = "RECENT",
     page: number = 1,
     size: number = 10,
-  ): Promise<PostList> => {
+  ): Promise<PostListType> => {
     const params = new URLSearchParams({
       sort_by,
       page: String(page),
       size: String(size),
     });
     if (category) params.set("category", category);
-    return apiFetch<PostList>(`/api/posts?${params}`, { cache: "no-cache" });
+    return apiFetch<PostListType>(`/api/posts?${params}`, { cache: "no-cache" });
   },
   getPostsSearch: async (
     keyword: string,
@@ -30,8 +30,8 @@ export const postsClient = {
       `/api/posts/search?keyword=${encodeURIComponent(keyword)}&page=${page}&size=${size}`,
     );
   },
-  getPostDetail: async (postId: number): Promise<PostDetail> => {
-    return apiFetch<PostDetail>(`/api/posts/${postId}`);
+  getPostDetail: async (postId: number): Promise<PostDetailType> => {
+    return apiFetch<PostDetailType>(`/api/posts/${postId}`);
   },
   getComments: async (
     postId: number,

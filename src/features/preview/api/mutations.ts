@@ -1,4 +1,4 @@
-import { Preview, PreviewSendRes } from "@/features/preview/types/preview.type";
+import { Preview, PreviewSendRes } from "../types/preview.type";
 import axios from "axios";
 
 export const previewMutations = {

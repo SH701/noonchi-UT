@@ -1,11 +1,12 @@
 "use client";
 
 import { useTabStore } from "@/store/useTabStore";
-import Tab from "../../tab/Tab";
+
 import Header from "../../../components/common/Header";
 import ModeToggle from "../../../components/common/ModeToggle";
 import { BoardIcon, HamburgerIcon } from "@/assets/svgr";
 import { usePathname, useRouter } from "next/navigation";
+import Tab from "@/features/tab/components/Tab";
 
 export default function RoleplayHeader() {
   const { toggleTab } = useTabStore();
@@ -14,11 +15,21 @@ export default function RoleplayHeader() {
   return (
     <>
       <Header
-        leftIcon={<HamburgerIcon onClick={toggleTab} />}
-        center={<ModeToggle />}
+        leftIcon={
+          <div id="hub-menu">
+            <HamburgerIcon onClick={toggleTab} />
+          </div>
+        }
+        center={
+          <div id="hub-mode-toggle">
+            <ModeToggle />
+          </div>
+        }
         rightIcon={
           pathname.includes("/chatroom") ? null : (
-            <BoardIcon onClick={() => router.push("/posts")} />
+            <div id="hub-community">
+              <BoardIcon onClick={() => router.push("/posts")} />
+            </div>
           )
         }
       />

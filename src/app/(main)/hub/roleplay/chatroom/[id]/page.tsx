@@ -1,6 +1,6 @@
 "use client";
 
-import { RoleplayChat } from "@/features/roleplay";
+import RoleplayChat from "@/features/roleplay/components/RoleplayChat";
 import { use } from "react";
 
 export default function RolePlayChatroomPage({

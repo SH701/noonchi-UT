@@ -1,11 +1,7 @@
 "use client";
 
-import { ChatLoading } from "@/components/common";
-import {
-  Preview,
-  PreviewAiMessage,
-  PreviewUserMessage,
-} from "@/features/preview/types/preview.type";
+import ChatLoading from "@/components/common/ChatLoading";
+import { Preview, PreviewAiMessage, PreviewUserMessage } from "@/features/preview/types/preview.type";
 
 import MessageItem from "./MessageItem";
 import RoleInfo from "./RoleInfo";

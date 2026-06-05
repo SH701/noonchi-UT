@@ -1,4 +1,4 @@
-import { previewMutations } from "@/features/preview/api";
+import { previewMutations } from "../api/mutations";
 import { useMutation } from "@tanstack/react-query";
 
 export function usePreviewStart() {

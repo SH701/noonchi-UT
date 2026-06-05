@@ -1,3 +1,5 @@
+"use client";
+
 import { apiMutations } from "@/api";
 import { useState } from "react";
 import { AskReq } from "../types/ask.type";

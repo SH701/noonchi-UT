@@ -1,6 +1,6 @@
 "use client";
 
-import { RoleplayHeader } from "@/features/roleplay";
+import RoleplayHeader from "@/features/roleplay/components/RoleplayHeader";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";

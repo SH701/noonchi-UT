@@ -1,4 +1,4 @@
-import { PostEditSection } from "@/features/posts";
+import PostEditSection from "@/features/posts/components/PostEditSection";
 import { use } from "react";
 
 export default function PostEditPage({

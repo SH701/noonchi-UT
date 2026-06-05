@@ -1,3 +1,5 @@
+"use client";
+
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePreviewRemove, usePreviewSend, usePreviewStart } from "./usePreview";
 import { usePreviewHint } from "./usePreviewHint";

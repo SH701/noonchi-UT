@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Modal from "./Modal";
+import { ONE_DAY_MS } from "@/constants";
 
 const STORAGE_KEY = "install_modal_dismissed_at";
-const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 
 
 interface Props {
@@ -34,6 +34,7 @@ export default function BannerModal({forceOpen}:Props) {
   const handleClose = () => {
     localStorage.setItem(STORAGE_KEY, String(Date.now()));
     setIsOpen(false);
+    window.dispatchEvent(new Event("install-banner-dismissed"));
   };
   return (
   <Modal

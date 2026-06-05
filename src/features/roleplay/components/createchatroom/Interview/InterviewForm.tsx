@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 
-import { FileUpload, TextInput, Textarea } from "@/components/ui/form";
+import FileUpload from "@/components/ui/form/FileUpload";
+import TextInput from "@/components/ui/form/TextInput";
+import Textarea from "@/components/ui/form/Textarea";
 import { InterviewFormData } from "@/types/conversations";
 import { Button } from "@/components/ui/button/button";
 import { useTranslation } from "react-i18next";

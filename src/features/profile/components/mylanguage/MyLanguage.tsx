@@ -1,7 +1,7 @@
 "use client";
 
 import i18n from "@/locales/i18n";
-import { Header } from "@/components/common";
+import Header from "@/components/common/Header";
 import { Button } from "@/components/ui/button/button";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";

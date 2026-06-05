@@ -1,24 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  MessageList,
-  HintMessage,
-  ChatNotice,
-  RoleInfo,
-  ChatroomInfo,
-} from "@/components/chatroom";
+import MessageList from "@/components/chatroom/MessageList";
+import HintMessage from "@/components/chatroom/HintMessage";
+import ChatNotice from "@/components/chatroom/ChatNotice";
+import RoleInfo from "@/components/chatroom/RoleInfo";
+import ChatroomInfo from "@/components/chatroom/ChatroomInfo";
 
 import {
   useChatList,
 
 } from "@/hooks/queries";
-import { useRoleplayHint } from "@/features/roleplay/hooks";
-import { ChatInput } from "@/components/common";
-import {
-  useConversationEnd,
-  useRoleMessageStream,
-} from "@/features/roleplay/hooks";
+
+import ChatInput from "@/components/common/ChatInput";
+
 import { useScrollToBottom } from "@/hooks/custom";
 import { useChatUI } from "@/hooks/custom/useChatUI";
 import RoleplayHeader from "./ChatroomHeader";
@@ -31,6 +26,10 @@ import { useConversationDetail } from "@/hooks/queries/useConversation";
 import { useWebVoice } from "@/hooks/custom/useWebVoice";
 import RoleplayLoading from "./RoleplayLoading";
 import { useRoleplayFeedbackStore } from "@/store/useRoleplayFeedbackStore";
+import { useRoleplayHint } from "../hooks/useRoleplayHint";
+import { useRoleMessageStream } from "../hooks/useRoleMessageStream";
+import { useConversationEnd } from "../hooks/useConversationEnd";
+import { useChatCoachMark } from "../hooks/useChatCoachmark";
 
 interface RoleplayChatRoomProps {
   conversationId: number;
@@ -58,6 +57,7 @@ export default function RoleplayChat({
     isFetching: isHintFetching,
   } = useRoleplayHint(conversationId);
   const { micState, sttText, handleMicClick, handleSendAudio } = useWebVoice();
+  useChatCoachMark(!!conversation && messages.length > 0);
 
   useEffect(() => {
     if (micState === "recording" || micState === "recorded") {
