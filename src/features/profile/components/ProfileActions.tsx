@@ -6,10 +6,11 @@ import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button/button";
 import { useState } from "react";
 import { Spinner } from "@/components/ui/spinner/spinner";
-import { DeleteAccountModal } from "@/components/modal";
-import { authMutations } from "@/features/auth/api/mutations";
+import DeleteAccountModal from "@/components/modal/DeleteAccountModal";
+
 import { useTranslation } from "react-i18next";
 import { useDeleteAccount } from "../hooks/useProfile";
+import { authMutations } from "@/features/auth/api/mutations";
 
 export default function ProfileActions() {
   const { t } = useTranslation();

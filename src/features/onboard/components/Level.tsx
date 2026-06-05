@@ -1,3 +1,5 @@
+'use client'
+
 import { LEVEL_KEYS } from "@/constants";
 import { usePreferenceStore } from "@/store/usePreferenceStore";
 import { useTranslation } from "react-i18next";

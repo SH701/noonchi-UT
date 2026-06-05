@@ -1,7 +1,7 @@
 "use client";
 
 
-import { Header } from "@/components/common";
+import Header from "@/components/common/Header";
 import { ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";

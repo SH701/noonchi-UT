@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import { useMessageTranslate, useMessageTTS } from "@/hooks/mutations";
 import { Spinner } from "../ui/spinner/spinner";
-import { ChatLoading } from "../common";
+import ChatLoading from "../common/ChatLoading";
 import { AlpabatIcon, InfoIcon, VolumeUpIcon } from "@/assets/svgr";
 import { Asterisk, Lightbulb } from "lucide-react";
 import { renderWithAction } from "@/lib/renderWithAction";

@@ -1,19 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ChatInput, ChatLoading } from "@/components/common";
+import ChatInput from "@/components/common/ChatInput";
+import ChatLoading from "@/components/common/ChatLoading";
 import { useRouter } from "next/navigation";
-import { PreviewModal } from "@/components/modal";
+import PreviewModal from "@/components/modal/PreviewModal";
 import { InfoIcon } from "@/assets/svgr";
 import { useChatUI, useScrollToBottom } from "@/hooks/custom";
-import { usePreviewMessages } from "@/features/preview/hooks";
+import { usePreviewMessages } from "../hooks/usePreviewMessages";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import {
-  HintMessage,
-  ChatNotice,
-  PreviewMessageList,
-} from "@/components/chatroom";
+import HintMessage from "@/components/chatroom/HintMessage";
+import ChatNotice from "@/components/chatroom/ChatNotice";
+import PreviewMessageList from "@/components/chatroom/PreviewMessageList";
 import PreviewHeader from "./PreviewHeader";
 import { useWebVoice } from "@/hooks/custom/useWebVoice";
 

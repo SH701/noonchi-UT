@@ -11,15 +11,16 @@ import {
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import MessageItem from "@/components/chatroom/MessageItem";
-import { ChatInput, ChatLoading } from "@/components/common";
+import ChatInput from "@/components/common/ChatInput";
+import ChatLoading from "@/components/common/ChatLoading";
 import { Spinner } from "@/components/ui/spinner/spinner";
 import { useScrollToBottom, useVoiceChat } from "@/hooks/custom";
 import { useAskScreenshotStore } from "@/store/useAskScreenshotStore";
 import { useAskMessageStream } from "../hooks/useAskMessageStream";
 import { Button } from "@/components/ui/button/button";
 import { useCreateRoleplay } from "@/features/roleplay/hooks/useCreateRoleplay";
+import RoleplayLoading from "@/features/roleplay/components/RoleplayLoading";
 import { useRouter } from "next/navigation";
-import { RoleplayLoading } from "@/features/roleplay";
 import { toast } from "@/components/ui/toast/toast";
 
 interface AskScreenshotChatProps {

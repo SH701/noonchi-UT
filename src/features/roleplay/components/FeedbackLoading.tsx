@@ -1,4 +1,4 @@
-import { SpinnerLoading } from "@/components/common";
+import SpinnerLoading from "@/components/common/SpinnerLoading";
 import { useTranslation } from "react-i18next";
 
 export default function FeedbackLoading() {

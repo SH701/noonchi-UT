@@ -1,11 +1,12 @@
 "use client";
 
 import { useTabStore } from "@/store/useTabStore";
-import Tab from "../../tab/Tab";
+
 import Header from "../../../components/common/Header";
 import ModeToggle from "../../../components/common/ModeToggle";
 import { BoardIcon, HamburgerIcon } from "@/assets/svgr";
 import { usePathname, useRouter } from "next/navigation";
+import Tab from "@/features/tab/components/Tab";
 
 export default function RoleplayHeader() {
   const { toggleTab } = useTabStore();

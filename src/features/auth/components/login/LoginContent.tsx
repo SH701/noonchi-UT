@@ -7,7 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { signIn } from "next-auth/react";
 
-import { LoginAction, LoginForm } from "@/features/auth";
+import LoginAction from "./LoginActoion";
+import LoginForm from "./LoginForm";
 
 import { useModalActions } from "@/store/useModalStore";
 import { X } from "lucide-react";

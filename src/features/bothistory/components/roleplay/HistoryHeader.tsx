@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { Header } from "../../../../components/common";
+import Header from "../../../../components/common/Header";
 import { HomeIcon } from "@/assets/svgr";
 import { ChevronLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";

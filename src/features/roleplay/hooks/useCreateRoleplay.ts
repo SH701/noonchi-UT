@@ -1,5 +1,5 @@
 import { apiMutations } from "@/api";
-import { RoleplayReq } from "@/features/roleplay/types/roleplay/roleplay.type";
+import { RoleplayReq } from "../types/roleplay.type";
 import { useMutation } from "@tanstack/react-query";
 
 const TIMEOUT_MS = 60000;

@@ -6,13 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button/button";
-import {
-  SignupForm1,
-  SignupHeader,
-  SignupTemplate,
-  SignupDetail,
-  LoginContent,
-} from "@/features/auth";
+import SignupForm1 from "./SignupForm1";
+import SignupHeader from "./SignupHeader";
+import SignupTemplate from "./SignupTemplate";
+import SignupDetail from "./SignupDetail";
+import LoginContent from "../login/LoginContent";
 
 import StepIndicator from "./StepIndicator";
 import { useModalActions } from "@/store/useModalStore";

@@ -1,6 +1,6 @@
 "use client";
 
-import { Header } from "@/components/common";
+import Header from "@/components/common/Header";
 import { Button } from "@/components/ui/button/button";
 
 import { toast } from "@/components/ui/toast/toast";

@@ -7,10 +7,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { HamburgerIcon, SqurepenIcon } from "@/assets/svgr";
 import { useTabStore } from "@/store/useTabStore";
 
-import { Header, ModeToggle } from "@/components/common";
+import Header from "@/components/common/Header";
+import ModeToggle from "@/components/common/ModeToggle";
 import { useConversationDetail } from "@/hooks/queries/useConversation";
-import Tab from "@/features/tab/Tab";
-import { ExitChatting, EndChatting } from "@/components/modal";
+import Tab from "@/features/tab/components/Tab";
+import ExitChatting from "@/components/modal/ExitChatting";
+import EndChatting from "@/components/modal/EndChatting";
 import { useTranslation } from "react-i18next";
 
 interface ChatroomHeaderProps {

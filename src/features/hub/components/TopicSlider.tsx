@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "../../../components/ui/button/button";
-import { CategoryType, Topic } from "@/features/roleplay/types/topics";
+import { CategoryType, Topic } from "../types/topics.type";
 
 interface TopicProps {
   topics: Topic[];

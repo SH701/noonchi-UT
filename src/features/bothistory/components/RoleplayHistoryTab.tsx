@@ -1,11 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useTopics } from "@/hooks/queries";
+import { useTopics } from "@/features/hub/hooks/useTopics";
 import { useRouter } from "next/navigation";
 import { useTabStore } from "@/store/useTabStore";
 import { ChevronRight } from "lucide-react";
-import { RoleplayHistorySkeleton } from "@/components/skeleton";
+import RoleplayHistorySkeleton from "@/components/skeleton/RoleplayHistorySkeleton";
 import { useHistorySearch } from "@/hooks/custom";
 import { useDeleteConversation } from "@/hooks/mutations";
 import DeleteModal from "@/components/modal/DeleteModal";

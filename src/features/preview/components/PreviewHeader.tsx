@@ -1,7 +1,7 @@
 "use client";
 
 import { HamburgerIcon } from "@/assets/svgr";
-import { Header } from "@/components/common";
+import Header from "@/components/common/Header";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 interface PreviewHeaderProps {

@@ -1,8 +1,8 @@
 'use client'
 
 import { HamburgerIcon } from "@/assets/svgr";
-import { Header } from "@/components/common";
-import Tab from "@/features/tab/Tab";
+import Header from "@/components/common/Header";
+import Tab from "@/features/tab/components/Tab";
 import { useTabStore } from "@/store";
 import { usePathname, useRouter } from "next/navigation";
 import { ChevronLeft } from "lucide-react";

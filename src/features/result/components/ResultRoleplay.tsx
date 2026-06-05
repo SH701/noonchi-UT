@@ -7,16 +7,14 @@ import {
   useChatList,
 } from "@/hooks/queries";
 
-import { MessageList } from "@/components/chatroom";
+import MessageList from "@/components/chatroom/MessageList";
 
-import {
-  ResultTab,
-  Point,
-  FeedbackPart,
-  ResultHeader,
-} from "@/features/result";
+import ResultTab from "./ResultTab";
+import Point from "./Point";
+import FeedbackPart from "./FeedbackPart";
+import ResultHeader from "./ResultHeader";
 import FeedbackLoading from "../../roleplay/components/FeedbackLoading";
-import Tab from "@/features/tab/Tab";
+import Tab from "@/features/tab/components/Tab";
 import { useConversationDetail } from "@/hooks/queries/useConversation";
 import {
   useConversationFeedback,

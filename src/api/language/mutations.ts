@@ -1,5 +1,5 @@
 import { apiFetch } from "@/api/api";
-import { TopicScenario } from "@/features/roleplay/types/topics";
+import { TopicScenario } from "@/features/hub/types/topics.type";
 
 export const languageMutations = {
   Createcontext: async (

@@ -1,5 +1,5 @@
 import { apiFetch } from "@/api/api";
-import { PagedTopicRes, TopicRes } from "@/features/roleplay/types/topics";
+import { PagedTopicRes, TopicRes } from "../types/topics.type";
 
 
 export const topicClient = {

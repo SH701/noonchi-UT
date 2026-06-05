@@ -1,4 +1,4 @@
-import { previewClient } from "@/features/preview/api";
+import { previewClient } from "../api/client";
 import { useQuery } from "@tanstack/react-query";
 
 export const usePreviewHint = (sessionId?: string) => {

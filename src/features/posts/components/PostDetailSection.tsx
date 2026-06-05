@@ -3,22 +3,21 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import PostDetail from "./PostDetail";
+import PostDetailSkeleton from "./PostDetailSkeleton";
+import CommentItem from "./CommentItem";
+import CommentItemSkeleton from "./CommentItemSkeleton";
+import CommentInput from "./CommentInput";
+import PostHeader from "./PostHeader";
+import { useGetPostDetail, useGetComments } from "../hooks/usePosts";
 import {
-  PostDetail,
-  PostDetailSkeleton,
-  CommentItem,
-  CommentItemSkeleton,
-  CommentInput,
-  PostHeader,
-  useGetPostDetail,
-  useGetComments,
   useToggleLike,
   useToggleBookmark,
   useDeletePost,
   useDeleteComment,
   useUpdateComment,
   useToggleCommentLike,
-} from "@/features/posts";
+} from "../hooks/usePostsMutations";
 import DeleteModal from "@/components/modal/DeleteModal";
 
 export default function PostDetailSection({ postId }: { postId: number }) {

@@ -4,14 +4,15 @@ import { useMemo, useState } from "react";
 import ChatQuickActions from "./ChatQuickActions";
 import { useScrollToBottom, useVoiceChat } from "@/hooks/custom";
 import { ChevronDown, ChevronUp, Lightbulb } from "lucide-react";
-import { CominSoonModal } from "@/components/modal";
+import CominSoonModal from "@/components/modal/CominSoonModal";
 import AskSteps from "./AskSteps";
 import MessageItem from "@/components/chatroom/MessageItem";
 import { getClosenessOptions } from "@/constants";
 import { useChatList } from "@/hooks/queries";
 
 import { Spinner } from "@/components/ui/spinner/spinner";
-import { ChatInput, ChatLoading } from "@/components/common";
+import ChatInput from "@/components/common/ChatInput";
+import ChatLoading from "@/components/common/ChatLoading";
 import { useConversationDetail } from "@/hooks/queries/useConversation";
 import { AskTurn } from "../types/ask.type";
 import { useAskStream } from "../hooks/useAskStream";

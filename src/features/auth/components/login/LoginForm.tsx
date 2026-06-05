@@ -1,6 +1,6 @@
 "use client";
 
-import { TextInput } from "@/components/ui/form";
+import TextInput from "@/components/ui/form/TextInput";
 import { Controller, FieldErrors, Control } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 

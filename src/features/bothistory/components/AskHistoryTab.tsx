@@ -1,6 +1,6 @@
 "use client";
 
-import { AskHistorySkeleton } from "../../components/skeleton";
+import AskHistorySkeleton from "../../../components/skeleton/AskHistorySkeleton";
 import { SearchIcon } from "@/assets/svgr";
 import { useRouter } from "next/navigation";
 import { useTabStore } from "@/store/useTabStore";
@@ -8,7 +8,7 @@ import { useTabStore } from "@/store/useTabStore";
 import { getTime } from "@/lib/time-format";
 import { useHistorySearch } from "@/hooks/custom";
 import { Check } from "lucide-react";
-import EmptyState from "../bothistory/components/EmptyState";
+import EmptyState from "./EmptyState";
 import { useTranslation } from "react-i18next";
 
 interface AskHistoryTabProps {

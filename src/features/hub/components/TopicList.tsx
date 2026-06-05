@@ -1,16 +1,17 @@
 "use client";
 
-import { TopicSlider } from "@/features/roleplay";
-import { CategoryType } from "@/features/roleplay/types/topics";
+import TopicSlider from "./TopicSlider";
+import { CategoryType } from "../types/topics.type";
 import { useRouter } from "next/navigation";
 import { Heart, Lock, Plus } from "lucide-react";
 import Image from "next/image";
-import { useAddFavorite, useRemoveFavorite } from "@/features/roleplay/hooks";
-import { useTopics } from "@/hooks/queries";
-import { TopicListSkeleton } from "../../../components/skeleton";
+import { useTopics } from "../hooks/useTopics";
+import { useAddFavorite } from "../hooks/useAddFavorite";
+import { useRemoveFavorite } from "../hooks/useRemoveFavorite";
+import TopicListSkeleton from "../../../components/skeleton/TopicListSkeleton";
 import { useState } from "react";
 import { toast } from "@/components/ui/toast/toast";
-import { CominSoonModal } from "@/components/modal";
+import CominSoonModal from "@/components/modal/CominSoonModal";
 import { useTranslation } from "react-i18next";
 
 export default function TopicList() {

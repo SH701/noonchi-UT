@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AlpabatIcon, ControlIcon, SettingIcon } from "@/assets/svgr";
 import ProfileMenuList from "./ProfileMenuList";
-import { CominSoonModal } from "@/components/modal";
+import CominSoonModal from "@/components/modal/CominSoonModal";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
