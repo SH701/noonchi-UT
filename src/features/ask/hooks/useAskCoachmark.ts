@@ -3,9 +3,9 @@
 import { useCoachmark } from "@/hooks/custom"
 import { useTranslation } from "react-i18next"
 
-export function useChatCoachMark(ready: boolean = true){
+export function useAskCoachMark(ready: boolean = true){
     const { t } = useTranslation();
-    useCoachmark('coachmark_chat_v1',{
+    useCoachmark('coachmark_ask_v1',{
          showProgress: false,
     showButtons: ["next", "previous", "close"],
     nextBtnText: t("coachmark.buttons.next"),
@@ -20,8 +20,8 @@ export function useChatCoachMark(ready: boolean = true){
       {
         element: "#chat-really-mean",
         popover: {
-          title: t("coachmark.chat.reallyMean.title"),
-          description: t("coachmark.chat.reallyMean.description"),
+          title: t("coachmark.ask.reallyMean.title"),
+          description: t("coachmark.ask.reallyMean.description"),
           side: "bottom",
           align: "end",
         },
@@ -29,28 +29,19 @@ export function useChatCoachMark(ready: boolean = true){
       {
         element: "#chat-tts",
         popover: {
-          title: t("coachmark.chat.tts.title"),
-          description: t("coachmark.chat.tts.description"),
+          title: t("coachmark.ask.tts.title"),
+          description: t("coachmark.ask.tts.description"),
           side: "bottom",
           align: "start",
         },
       },
       {
-        element: "#chat-needhelp",
+        element: "#ask-start-roleplay",
         popover: {
-          title: t("coachmark.chat.needHelp.title"),
-          description: t("coachmark.chat.needHelp.description"),
+          title: t("coachmark.ask.startRoleplay.title"),
+          description: t("coachmark.ask.startRoleplay.description"),
           side: "top",
-          align: "end",
-        },
-      },
-      {
-        element: "#chat-pen",
-        popover: {
-          title: t("coachmark.chat.pen.title"),
-          description: t("coachmark.chat.pen.description"),
-          side: "bottom",
-          align: "end",
+          align: "start",
         },
       },
     ],

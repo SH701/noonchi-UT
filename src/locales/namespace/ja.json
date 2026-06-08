@@ -430,5 +430,63 @@
       "title": "世界中の韓国語を学ぶテコンドー仲間とつながろう。",
       "cta": "参加する"
     }
+  },
+  "coachmark": {
+    "buttons": {
+      "next": "次へ",
+      "prev": "戻る",
+      "done": "完了",
+      "skip": "スキップ"
+    },
+    "hub": {
+      "modeToggle": {
+        "title": "2つのモード、ワンタップで切替",
+        "description": "ロールプレイに切り替えてライブ練習するか、Askでスクリーンショットのニュアンスを読み解こう。"
+      },
+      "menu": {
+        "title": "全部ここにあります",
+        "description": "チャット履歴や、本物のカルチャーコーチとの1:1セッションはこのメニューから。"
+      },
+      "community": {
+        "title": "仲間に会おう",
+        "description": "グローバルラウンジへどうぞ — コツを共有し、何でも質問して、世界とつながろう。"
+      },
+      "scenarioList": {
+        "title": "リアルな日常をプレイ",
+        "description": "カードをタップしてビジネスから日常まで、リアルな韓国語シナリオに飛び込もう。"
+      }
+    },
+    "chat": {
+      "reallyMean": {
+        "title": "行間を読む",
+        "description": "本当の意味が気になる？ Really meanをタップして隠れたメッセージを解読しよう。"
+      },
+      "tts": {
+        "title": "聞いて、読む",
+        "description": "スピーカーをタップしてネイティブのように聞こう。Aをタップで韓国語と母語を切り替えられます。"
+      },
+      "needHelp": {
+        "title": "場面を整える",
+        "description": "situationで状況を追加、行き詰まったらneed helpをタップ — 情報が多いほど精度が上がります。"
+      },
+      "pen": {
+        "title": "やり直すか、スコアを確認",
+        "description": "ペンをタップしてNew Chat、Get Reportsで現在の調子を確認しよう。"
+      }
+    },
+    "ask": {
+      "reallyMean": {
+        "title": "行間を読む",
+        "description": "本当の意味が気になる？ Really meanをタップして隠れたメッセージを解読しよう。"
+      },
+      "tts": {
+        "title": "聞いて、読む",
+        "description": "スピーカーをタップしてネイティブのように聞こう。Aをタップで韓国語と母語を切り替えられます。"
+      },
+      "startRoleplay": {
+        "title": "実際に練習してみよう",
+        "description": "この会話をライブで試したい？ Start Roleplayをタップして、同じ設定でそのままロールプレイへ。"
+      }
+    }
   }
 }

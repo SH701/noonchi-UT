@@ -17,6 +17,7 @@ export default function ChatQuickActions({ onOpenModal }: ChatQuickActionsProps)
   return (
     <nav className="mb-4 flex gap-2 overflow-x-auto">
       <Button
+        id="ask-start-roleplay"
         variant="ghost"
         className="w-30 shrink-0 p-3 text-[#1F2937]"
         onClick={handleRoleplay}

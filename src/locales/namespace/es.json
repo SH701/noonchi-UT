@@ -430,5 +430,63 @@
       "title": "Conecta con practicantes de Taekwondo que aprenden coreano en todo el mundo.",
       "cta": "Unirse"
     }
+  },
+  "coachmark": {
+    "buttons": {
+      "next": "Siguiente",
+      "prev": "Atrás",
+      "done": "Hecho",
+      "skip": "Saltar"
+    },
+    "hub": {
+      "modeToggle": {
+        "title": "Dos modos, un toque",
+        "description": "Cambia a Juego de roles para practicar en vivo, o a Preguntar para descifrar el matiz en tus capturas de pantalla."
+      },
+      "menu": {
+        "title": "Todo está aquí",
+        "description": "Tu historial de chats y las sesiones 1:1 con coaches culturales reales viven detrás de este menú."
+      },
+      "community": {
+        "title": "Conoce a tu gente",
+        "description": "Entra al lounge global — intercambia consejos, pregunta lo que sea y conéctate con el mundo."
+      },
+      "scenarioList": {
+        "title": "Pulsa play a la vida real",
+        "description": "Toca cualquier tarjeta para entrar en un escenario real en coreano, desde negocios hasta la vida diaria."
+      }
+    },
+    "chat": {
+      "reallyMean": {
+        "title": "Lee entre líneas",
+        "description": "¿No estás seguro de lo que realmente quisieron decir? Toca Really mean para descifrar el mensaje oculto."
+      },
+      "tts": {
+        "title": "Escúchalo, léelo",
+        "description": "Toca el altavoz para escuchar como un nativo, o A para alternar entre coreano y tu idioma."
+      },
+      "needHelp": {
+        "title": "Pon la escena",
+        "description": "Toca situación para añadir contexto, o need help cuando te atasques — cuanto más sepamos, mejor te leeremos."
+      },
+      "pen": {
+        "title": "Empieza de nuevo o revisa tu puntuación",
+        "description": "Toca el lápiz para un New Chat, o Get Reports para ver cómo lo estás haciendo."
+      }
+    },
+    "ask": {
+      "reallyMean": {
+        "title": "Lee entre líneas",
+        "description": "¿No estás seguro de lo que realmente quisieron decir? Toca Really mean para descifrar el mensaje oculto."
+      },
+      "tts": {
+        "title": "Escúchalo, léelo",
+        "description": "Toca el altavoz para escuchar como un nativo, o A para alternar entre coreano y tu idioma."
+      },
+      "startRoleplay": {
+        "title": "Practícalo de verdad",
+        "description": "¿Quieres probar esta conversación en vivo? Toca Start Roleplay para saltar directamente a un juego de roles con la misma configuración."
+      }
+    }
   }
 }
