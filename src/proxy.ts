@@ -1,7 +1,14 @@
 import { auth } from "@/lib/next-auth/auth";
 import { NextResponse } from "next/server";
 
-const PUBLIC_ROUTES = ["/", "/preview", "/preview/end", "/lab", "/landing"];
+const PUBLIC_ROUTES = [
+  "/",
+  "/preview",
+  "/preview/end",
+  "/lab",
+  "/landing",
+  "/service",
+];
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;
