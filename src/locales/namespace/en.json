@@ -430,5 +430,63 @@
       "title": "Connect with Taekwondo practitioners learning Korean worldwide.",
       "cta": "Join Now"
     }
+  },
+  "coachmark": {
+    "buttons": {
+      "next": "Next",
+      "prev": "Back",
+      "done": "Done",
+      "skip": "Skip"
+    },
+    "hub": {
+      "modeToggle": {
+        "title": "Two modes, one tap",
+        "description": "Switch to Role-play to practice live, or Ask to decode the nuance in your screenshots."
+      },
+      "menu": {
+        "title": "It's all in here",
+        "description": "Your chat history and 1:1 sessions with real culture coaches live behind this menu."
+      },
+      "community": {
+        "title": "Meet your people",
+        "description": "Jump into the global lounge — swap tips, ask anything, connect worldwide."
+      },
+      "scenarioList": {
+        "title": "Press play on real life",
+        "description": "Tap any card to drop into a real Korean scenario, from business to daily life."
+      }
+    },
+    "chat": {
+      "reallyMean": {
+        "title": "Read between the lines",
+        "description": "Not sure what they really meant? Tap Really mean to decode the hidden message."
+      },
+      "tts": {
+        "title": "Hear it, read it",
+        "description": "Tap the speaker to listen like a native, or A to flip between Korean and your language."
+      },
+      "needHelp": {
+        "title": "Set the scene",
+        "description": "Tap situation to add context, or need help when you're stuck — the more we know, the sharper the read."
+      },
+      "pen": {
+        "title": "Start fresh or check your score",
+        "description": "Tap the pen for a New Chat, or Get Reports to see how you're doing."
+      }
+    },
+    "ask": {
+      "reallyMean": {
+        "title": "Read between the lines",
+        "description": "Not sure what they really meant? Tap Really mean to decode the hidden message."
+      },
+      "tts": {
+        "title": "Hear it, read it",
+        "description": "Tap the speaker to listen like a native, or A to flip between Korean and your language."
+      },
+      "startRoleplay": {
+        "title": "Practice it for real",
+        "description": "Want to try this conversation live? Tap Start Roleplay to jump straight into a roleplay with the same setup."
+      }
+    }
   }
 }

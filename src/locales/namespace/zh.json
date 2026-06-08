@@ -430,5 +430,63 @@
       "title": "与全球学习韩语的跆拳道爱好者建立联系。",
       "cta": "立即加入"
     }
+  },
+  "coachmark": {
+    "buttons": {
+      "next": "下一步",
+      "prev": "上一步",
+      "done": "完成",
+      "skip": "跳过"
+    },
+    "hub": {
+      "modeToggle": {
+        "title": "两种模式，一键切换",
+        "description": "切换到角色扮演进行实时练习，或使用Ask解读截图中的细微语气。"
+      },
+      "menu": {
+        "title": "全都在这里",
+        "description": "你的聊天记录和与真人文化教练的1:1课程都在这个菜单后面。"
+      },
+      "community": {
+        "title": "遇见同道中人",
+        "description": "进入全球休息室 — 分享技巧、随时提问、与世界相连。"
+      },
+      "scenarioList": {
+        "title": "为真实生活按下播放键",
+        "description": "点击任意卡片，进入真实的韩语场景，从商务到日常生活。"
+      }
+    },
+    "chat": {
+      "reallyMean": {
+        "title": "读懂言外之意",
+        "description": "不确定对方真正的意思？点击Really mean解读隐藏的信息。"
+      },
+      "tts": {
+        "title": "听一听，读一读",
+        "description": "点击扬声器像母语者一样聆听，或点击A在韩语和你的语言之间切换。"
+      },
+      "needHelp": {
+        "title": "设定场景",
+        "description": "点击situation添加上下文，或在卡住时点击need help — 我们了解得越多，回应就越精准。"
+      },
+      "pen": {
+        "title": "重新开始或查看分数",
+        "description": "点击笔图标开始New Chat，或点击Get Reports查看你的表现。"
+      }
+    },
+    "ask": {
+      "reallyMean": {
+        "title": "读懂言外之意",
+        "description": "不确定对方真正的意思？点击Really mean解读隐藏的信息。"
+      },
+      "tts": {
+        "title": "听一听，读一读",
+        "description": "点击扬声器像母语者一样聆听，或点击A在韩语和你的语言之间切换。"
+      },
+      "startRoleplay": {
+        "title": "真实地练一练",
+        "description": "想现场试试这段对话？点击Start Roleplay，以相同的设置直接进入角色扮演。"
+      }
+    }
   }
 }

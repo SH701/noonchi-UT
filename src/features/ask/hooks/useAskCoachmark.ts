@@ -1,25 +1,27 @@
 'use client'
 
 import { useCoachmark } from "@/hooks/custom"
+import { useTranslation } from "react-i18next"
 
 export function useAskCoachMark(ready: boolean = true){
+    const { t } = useTranslation();
     useCoachmark('coachmark_ask_v1',{
          showProgress: false,
     showButtons: ["next", "previous", "close"],
-    nextBtnText: "Next",
-    prevBtnText: "Back",
-    doneBtnText: "Done",
+    nextBtnText: t("coachmark.buttons.next"),
+    prevBtnText: t("coachmark.buttons.prev"),
+    doneBtnText: t("coachmark.buttons.done"),
     progressText: "",
     onPopoverRender: (popover) => {
       const closeBtn = popover.closeButton;
-      if (closeBtn) closeBtn.textContent = "Skip";
+      if (closeBtn) closeBtn.textContent = t("coachmark.buttons.skip");
     },
      steps: [
       {
         element: "#chat-really-mean",
         popover: {
-          title: "Read between the lines",
-          description: " Not sure what they really meant? Tap Really mean to decode the hidden message.",
+          title: t("coachmark.ask.reallyMean.title"),
+          description: t("coachmark.ask.reallyMean.description"),
           side: "bottom",
           align: "end",
         },
@@ -27,8 +29,8 @@ export function useAskCoachMark(ready: boolean = true){
       {
         element: "#chat-tts",
         popover: {
-          title: "Hear it, read it",
-          description: "Tap the speaker to listen like a native, or A to flip between Korean and your language.",
+          title: t("coachmark.ask.tts.title"),
+          description: t("coachmark.ask.tts.description"),
           side: "bottom",
           align: "start",
         },
@@ -36,8 +38,8 @@ export function useAskCoachMark(ready: boolean = true){
       {
         element: "#ask-start-roleplay",
         popover: {
-          title: "Practice it for real",
-          description: "Want to try this conversation live? Tap Start Roleplay to jump straight into a roleplay with the same setup.",
+          title: t("coachmark.ask.startRoleplay.title"),
+          description: t("coachmark.ask.startRoleplay.description"),
           side: "top",
           align: "start",
         },

@@ -1,35 +1,49 @@
 'use client'
 
 import { useCoachmark } from "@/hooks/custom";
+import { useTranslation } from "react-i18next";
 
 export function useHubCoachMark() {
+  const { t } = useTranslation();
   useCoachmark("coachmark_hub_v1", {
     showProgress: false,
     showButtons: ["next", "previous", "close"],
-    nextBtnText: "Next",
-    prevBtnText: "Back",
-    doneBtnText: "Done",
+    nextBtnText: t("coachmark.buttons.next"),
+    prevBtnText: t("coachmark.buttons.prev"),
+    doneBtnText: t("coachmark.buttons.done"),
     progressText: "",
     onPopoverRender: (popover) => {
       const closeBtn = popover.closeButton;
-      if (closeBtn) closeBtn.textContent = "Skip";
+      if (closeBtn) closeBtn.textContent = t("coachmark.buttons.skip");
     },
     steps: [
       {
         element: "#hub-mode-toggle",
-        popover: { title: "Two modes, one tap", description: "Switch to Role-play to practice live, or Ask to decode the nuance in your screenshots." },
+        popover: {
+          title: t("coachmark.hub.modeToggle.title"),
+          description: t("coachmark.hub.modeToggle.description"),
+        },
       },
       {
         element: "#hub-menu",
-        popover: { title: "It's all in here", description: "Your chat history and 1:1 sessions with real culture coaches live behind this menu." },
+        popover: {
+          title: t("coachmark.hub.menu.title"),
+          description: t("coachmark.hub.menu.description"),
+        },
       },
       {
         element: "#hub-community",
-        popover: { title: "Meet your people", description: "Jump into the global lounge — swap tips, ask anything, connect worldwide." },
+        popover: {
+          title: t("coachmark.hub.community.title"),
+          description: t("coachmark.hub.community.description"),
+        },
       },
       {
         element: "#hub-scenario-list",
-        popover: { title: "Press play on real life", description: "Tap any card to drop into a real Korean scenario, from business to daily life." },
+        popover: {
+          title: t("coachmark.hub.scenarioList.title"),
+          description: t("coachmark.hub.scenarioList.description"),
+        },
       },
     ],
   });

@@ -1,25 +1,27 @@
 'use client'
 
 import { useCoachmark } from "@/hooks/custom"
+import { useTranslation } from "react-i18next"
 
 export function useChatCoachMark(ready: boolean = true){
+    const { t } = useTranslation();
     useCoachmark('coachmark_chat_v1',{
          showProgress: false,
     showButtons: ["next", "previous", "close"],
-    nextBtnText: "Next",
-    prevBtnText: "Back",
-    doneBtnText: "Done",
+    nextBtnText: t("coachmark.buttons.next"),
+    prevBtnText: t("coachmark.buttons.prev"),
+    doneBtnText: t("coachmark.buttons.done"),
     progressText: "",
     onPopoverRender: (popover) => {
       const closeBtn = popover.closeButton;
-      if (closeBtn) closeBtn.textContent = "Skip";
+      if (closeBtn) closeBtn.textContent = t("coachmark.buttons.skip");
     },
      steps: [
       {
         element: "#chat-really-mean",
         popover: {
-          title: "Read between the lines",
-          description: " Not sure what they really meant? Tap Really mean to decode the hidden message.",
+          title: t("coachmark.chat.reallyMean.title"),
+          description: t("coachmark.chat.reallyMean.description"),
           side: "bottom",
           align: "end",
         },
@@ -27,8 +29,8 @@ export function useChatCoachMark(ready: boolean = true){
       {
         element: "#chat-tts",
         popover: {
-          title: "Hear it, read it",
-          description: "Tap the speaker to listen like a native, or A to flip between Korean and your language.",
+          title: t("coachmark.chat.tts.title"),
+          description: t("coachmark.chat.tts.description"),
           side: "bottom",
           align: "start",
         },
@@ -36,8 +38,8 @@ export function useChatCoachMark(ready: boolean = true){
       {
         element: "#chat-needhelp",
         popover: {
-          title: "Set the scene",
-          description: "Tap situation to add context, or need help when you're stuck — the more we know, the sharper the read.",
+          title: t("coachmark.chat.needHelp.title"),
+          description: t("coachmark.chat.needHelp.description"),
           side: "top",
           align: "end",
         },
@@ -45,8 +47,8 @@ export function useChatCoachMark(ready: boolean = true){
       {
         element: "#chat-pen",
         popover: {
-          title: "Start fresh or check your score",
-          description: "Tap the pen for a New Chat, or Get Reports to see how you're doing.",
+          title: t("coachmark.chat.pen.title"),
+          description: t("coachmark.chat.pen.description"),
           side: "bottom",
           align: "end",
         },
