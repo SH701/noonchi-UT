@@ -17,6 +17,7 @@ import { useConversationDetail } from "@/hooks/queries/useConversation";
 import { AskTurn } from "../types/ask.type";
 import { useAskStream } from "../hooks/useAskStream";
 import { useAskMessageStream } from "../hooks/useAskMessageStream";
+import { useAskCoachMark } from "../hooks/useAskCoachmark";
 import { useTranslation } from "react-i18next";
 
 interface AskChatProps {
@@ -89,6 +90,7 @@ export default function AskChat({ roomId, onSwitchToScreenshot }: AskChatProps) 
   }, [roomId, messages, firstAI]);
 
   const turns = roomId ? [...roomTurns, ...streamTurns] : streamTurns;
+  useAskCoachMark(turns.length > 0);
   const {
     micState,
     sttText,

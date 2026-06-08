@@ -111,7 +111,9 @@ export default function MessageItem({
               onClick={onInfoClick}
             >
               <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/50">
-                <span>{(aiName ?? myAI?.aiRole ?? "A")[0].toUpperCase()}</span>
+                <span>
+                  {((aiName || myAI?.aiRole || "A")[0] ?? "A").toUpperCase()}
+                </span>
               </div>
               <p className="pt-1.5 text-sm font-medium">
                 {aiName ?? myAI?.name ?? "AI"}
