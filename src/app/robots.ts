@@ -4,7 +4,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: ["/", "/landing", "/preview", "/preview/end", "/lab"],
+      allow: ["/", "/landing", "/preview", "/preview/end", "/lab", "/service"],
       disallow: "/",
     },
     sitemap: "https://noonchi.ai.kr/sitemap.xml",
