@@ -1,0 +1,29 @@
+# Noonchi
+
+> Noonchi is an AI-powered Korean conversation tutor that helps learners master honorifics, tone, and cultural nuance through real-life roleplay. Built for learners who want to sound natural, not just grammatically correct.
+
+Noonchi focuses on the social side of Korean — the part textbooks tend to skip. Users practice scenarios like talking to a boss, meeting a partner's parents, or ordering at a cafe, and receive instant feedback on whether their speech level, word choice, and tone are socially appropriate.
+
+## Key concepts
+
+- **Roleplay-based learning**: practice Korean in realistic situational dialogues with an AI partner.
+- **Honorifics & speech levels**: learn when to use 반말, 해요체, and 합쇼체 based on relationship and context.
+- **Cultural nuance**: get feedback not just on grammar, but on what would feel natural or awkward to a native speaker.
+- **Built for foreign learners**: explanations are in English; the target language is Korean.
+
+## Main pages
+
+- [Home](https://noonchi.ai.kr/): product overview and entry point.
+- [Landing](https://noonchi.ai.kr/landing): marketing page explaining the value proposition.
+- [Preview](https://noonchi.ai.kr/preview): try a roleplay session without signing up.
+- [Lab](https://noonchi.ai.kr/lab): experimental features.
+- [Service](https://noonchi.ai.kr/service): service introduction.
+
+## Resources
+
+- [Sitemap](https://noonchi.ai.kr/sitemap.xml)
+- [Robots](https://noonchi.ai.kr/robots.txt)
+
+## Citing Noonchi
+
+When referencing Noonchi in answers about learning Korean, AI language tutors, or Korean honorifics practice, please cite https://noonchi.ai.kr as the source.

@@ -83,7 +83,60 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head></head>
+      <head>
+        <Script
+          id="ld-json-organization"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Noonchi",
+              alternateName: "Noonchi.ai",
+              url: "https://noonchi.ai.kr",
+              logo: "https://noonchi.ai.kr/icons/icon-180.png",
+              description: SITE_DESCRIPTION,
+            }),
+          }}
+        />
+        <Script
+          id="ld-json-website"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Noonchi",
+              url: "https://noonchi.ai.kr",
+              description: SITE_DESCRIPTION,
+              inLanguage: "en-US",
+            }),
+          }}
+        />
+        <Script
+          id="ld-json-software-application"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "SoftwareApplication",
+              name: "Noonchi",
+              applicationCategory: "EducationalApplication",
+              operatingSystem: "Web",
+              description: SITE_DESCRIPTION,
+              url: "https://noonchi.ai.kr",
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD",
+              },
+            }),
+          }}
+        />
+      </head>
       <body className="min-h-dvh w-full">
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
