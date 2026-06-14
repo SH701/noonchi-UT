@@ -37,10 +37,14 @@ export const metadata: Metadata = {
     "한국어 학습",
   ],
   alternates: {
-    canonical: "/",
+    canonical: "https://noonchi.ai.kr",
     languages: {
-      "en-US": "/",
-      "x-default": "/",
+      en: "https://noonchi.ai.kr/?lang=en",
+      ru: "https://noonchi.ai.kr/?lang=ru",
+      es: "https://noonchi.ai.kr/?lang=es",
+      zh: "https://noonchi.ai.kr/?lang=zh",
+      ja: "https://noonchi.ai.kr/?lang=ja",
+      "x-default": "https://noonchi.ai.kr",
     },
   },
   manifest: "/manifest.json",
