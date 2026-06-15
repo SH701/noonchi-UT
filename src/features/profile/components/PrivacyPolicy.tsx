@@ -60,21 +60,33 @@ const SECTIONS: Section[] = [
   },
   {
     title: "3. 개인정보의 처리위탁 및 국외 이전",
-    titleEn: "3. Third-party Processing",
+    titleEn: "3. Third-party Processing & International Transfer",
     paragraphs: [
       {
-        ko: "회사는 원활한 AI 서비스 제공을 위해 아래와 같이 외부 전문 클라우드 및 인공지능 플랫폼에 데이터 처리를 위탁하고 있습니다.",
-        en: "To ensure reliable AI service, we entrust data processing to external cloud and AI platforms as follows.",
+        ko: "회사는 원활한 AI 서비스 제공을 위해 아래와 같이 외부 클라우드 및 인공지능(AI) 플랫폼에 데이터 처리를 위탁하며, 일부 데이터는 국외로 이전됩니다. 위탁받는 제3자는 회사와 동등한 수준의 개인정보 보호 의무를 부담합니다.",
+        en: "To provide AI services smoothly, we entrust data processing to the external cloud and AI platforms listed below. Some data is transferred internationally. Third-party processors are bound by an equivalent level of personal data protection obligations as the Company.",
       },
     ],
     items: [
       {
-        ko: "위탁 대상: Amazon Web Services (AWS), Google Cloud Platform / 위탁 업무: 서버 운영 및 데이터 보관",
-        en: "Entrustees: Amazon Web Services (AWS), Google Cloud Platform / Tasks: server operation and data storage.",
+        ko: "위탁 대상: Amazon Web Services(AWS), Google Cloud Platform / 위탁 업무: 서버 운영 및 데이터 보관 / 이전 국가: 미국 등",
+        en: "Entrustees: Amazon Web Services (AWS), Google Cloud Platform / Tasks: server operation and data storage / Country of transfer: USA, etc.",
       },
       {
-        ko: "위탁 대상: Google / 위탁 업무: 텍스트 및 상황 맥락 데이터의 AI 분석 (개인 식별 정보 제외)",
-        en: "Entrustee: Google / Tasks: AI analysis of text and contextual data (excluding personally identifiable information).",
+        ko: "위탁 대상: Google(Gemini) / 위탁 업무: 사용자가 입력한 텍스트·상황 맥락 및 업로드한 이미지(스크린샷)에 대한 AI 분석 및 응답 생성 / 이전 국가: 미국 등",
+        en: "Entrustee: Google (Gemini) / Tasks: AI analysis of user-submitted text, contextual data, and uploaded images (screenshots) for response generation / Country of transfer: USA, etc.",
+      },
+      {
+        ko: "위탁 대상: Google(Cloud Text-to-Speech) / 위탁 업무: 텍스트의 음성 합성(TTS) / 이전 국가: 미국 등",
+        en: "Entrustee: Google (Cloud Text-to-Speech) / Tasks: text-to-speech synthesis (TTS) / Country of transfer: USA, etc.",
+      },
+      {
+        ko: "위탁 대상: Naver(CLOVA Speech) / 위탁 업무: 사용자 음성의 텍스트 변환(STT) / 이전 국가: 대한민국",
+        en: "Entrustee: Naver (CLOVA Speech) / Tasks: speech-to-text conversion (STT) of user voice input / Country of transfer: Republic of Korea.",
+      },
+      {
+        ko: "위탁 대상: Naver(Papago) / 위탁 업무: 메시지 번역 / 이전 국가: 대한민국",
+        en: "Entrustee: Naver (Papago) / Tasks: message translation / Country of transfer: Republic of Korea.",
       },
     ],
   },
@@ -99,14 +111,42 @@ const SECTIONS: Section[] = [
     titleEn: "5. Voice Data Protection",
     paragraphs: [
       {
-        ko: "NOONCHI는 사용자의 자연스러운 발화 연습을 위해 마이크 접근 권한을 요청합니다. 수집된 음성 데이터는 실시간 인식 및 텍스트 변환(STT), 피드백 제공 목적으로만 사용되며, 사용자의 명시적 동의 없이 다른 용도로 판매되거나 무단으로 공유되지 않습니다.",
-        en: "NOONCHI requests microphone access to support natural speaking practice. Collected voice data is used solely for real-time recognition, speech-to-text (STT), and feedback. We never sell or share voice data with third parties without the user's explicit consent.",
+        ko: "NOONCHI는 자연스러운 발화 연습을 위해 마이크 접근 권한을 요청합니다. 수집된 음성 데이터는 텍스트 변환(STT)을 위해 외부 인공지능 서비스(Naver CLOVA Speech)로 전송되며, 음성 인식 및 피드백 제공 목적으로만 사용됩니다. 음성 데이터는 사용자의 명시적 동의 없이 다른 용도로 판매되거나 무단으로 공유되지 않습니다.",
+        en: "NOONCHI requests microphone access for natural speaking practice. Collected voice data is transmitted to an external AI service (Naver CLOVA Speech) for speech-to-text (STT) conversion and is used solely for voice recognition and feedback. We never sell or share voice data with third parties without the user's explicit consent.",
       },
     ],
   },
   {
-    title: "6. 이용자의 권리와 행사 방법",
-    titleEn: "6. User Rights",
+    title: "6. 인공지능(AI) 서비스로의 데이터 전송 및 동의",
+    titleEn: "6. Data Transfer to AI Services & User Consent",
+    paragraphs: [
+      {
+        ko: "본 서비스의 핵심 기능(Ask, Role playing, 발음·뉘앙스 분석 등)은 외부 인공지능 서비스를 이용하여 제공됩니다. 이를 위해 다음 데이터가 외부 AI로 전송될 수 있습니다.",
+        en: "Core features of the service (Ask, Role-playing, pronunciation and nuance analysis, etc.) are powered by external AI services. The following data may be transmitted to external AI providers for these features.",
+      },
+    ],
+    items: [
+      {
+        ko: "사용자가 입력한 텍스트(질문, 대화 내용, 상황 맥락) → Google",
+        en: "User-submitted text (questions, conversation content, contextual data) → Google.",
+      },
+      {
+        ko: "사용자가 업로드한 이미지(스크린샷) → Google",
+        en: "User-uploaded images (screenshots) → Google.",
+      },
+      {
+        ko: "사용자의 음성 → Naver",
+        en: "User voice input → Naver.",
+      },
+      {
+        ko: "회사는 위 데이터를 외부 AI로 전송하기 전에 사용자에게 그 내용을 고지하고 동의를 받습니다. 사용자는 동의를 거부할 수 있으며, 이 경우 해당 AI 기능의 이용이 제한될 수 있습니다. 동의는 앱 내 설정 또는 회원 탈퇴를 통해 언제든지 철회할 수 있습니다.",
+        en: "The Company notifies users and obtains their consent before transmitting the above data to external AI services. Users may decline consent, in which case the related AI features may be restricted. Consent can be withdrawn at any time through in-app settings or account deletion.",
+      },
+    ],
+  },
+  {
+    title: "7. 이용자의 권리와 행사 방법",
+    titleEn: "7. User Rights",
     paragraphs: [
       {
         ko: "이용자는 언제든지 앱 내 설정(My Page 등)을 통해 자신의 정보를 조회하거나 수정할 수 있으며, '계정 탈퇴(회원 탈퇴)'를 통해 개인정보 이용에 대한 동의를 철회할 수 있습니다.",
@@ -115,8 +155,8 @@ const SECTIONS: Section[] = [
     ],
   },
   {
-    title: "7. 개인정보 보호책임자 및 문의처",
-    titleEn: "7. Contact",
+    title: "8. 개인정보 보호책임자 및 문의처",
+    titleEn: "8. Contact",
     paragraphs: [
       {
         ko: "개인정보와 관련된 모든 문의, 불만 처리 등은 아래의 연락처로 부탁드립니다.",
@@ -139,8 +179,8 @@ const SECTIONS: Section[] = [
     ],
   },
   {
-    title: "8. 부칙",
-    titleEn: "8. Supplementary Provisions",
+    title: "9. 부칙",
+    titleEn: "9. Supplementary Provisions",
     paragraphs: [
       {
         ko: "본 방침은 앱스토어 서비스 출시일로부터 적용되며, 추후 회사의 법인 전환 시 모든 개인정보 관리 책임은 신설 법인으로 안전하게 이관 및 승계됩니다.",
