@@ -93,14 +93,16 @@ export default function Onboarding() {
         <div className="flex flex-col items-center justify-center gap-2 px-4 pb-10">
           {currentSlide !== 4 && (
             <>
-              {currentSlide > 0 && (
-                <Button variant="secondary" size="lg" onClick={handlePrev}>
-                  {t("onboarding.prevButton")}
-                </Button>
-              )}
               <Button variant="primary" size="lg" onClick={handleNext}>
                 {t("onboarding.nextButton")}
               </Button>
+              {currentSlide > 0 ? (
+                <Button variant="secondary" size="lg" onClick={handlePrev}>
+                  {t("onboarding.prevButton")}
+                </Button>
+              ) : (
+                <div className="h-13 w-full" aria-hidden />
+              )}
             </>
           )}
         </div>

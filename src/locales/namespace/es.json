@@ -431,6 +431,16 @@
       "cta": "Unirse"
     }
   },
+  "aiConsent": {
+    "title": "Consentimiento de procesamiento de datos por IA",
+    "description": "Para ofrecer un mejor coaching, NOONCHI envía el texto, las imágenes (capturas de pantalla) y la voz que introduces a servicios de IA externos (Google, Naver) para su análisis. Los datos transmitidos se utilizan únicamente para generar respuestas y retroalimentación. Consulta nuestra [Política de Privacidad] para más detalles.",
+    "privacyLink": "Política de Privacidad",
+    "agree": "Aceptar y Continuar",
+    "decline": "No Acepto",
+    "blockedTitle": "Se requiere consentimiento de IA",
+    "blockedDescription": "Necesitas aceptar el procesamiento de datos por IA para usar esta función.",
+    "goBack": "Volver"
+  },
   "coachmark": {
     "buttons": {
       "next": "Siguiente",

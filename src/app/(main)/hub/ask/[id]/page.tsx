@@ -2,6 +2,7 @@
 
 import AskChat from "@/features/ask/components/AskChat";
 import AskScreenshotChat from "@/features/ask/components/AskScreenshotChat";
+import AiConsentGuard from "@/components/common/AiConsentGuard";
 import { use } from "react";
 import { useSearchParams } from "next/navigation";
 
@@ -14,9 +15,13 @@ export default function AskroomPage({
   const searchParams = useSearchParams();
   const from = searchParams.get("from");
 
-  if (from === "screenshot") {
-    return <AskScreenshotChat roomId={Number(id)} />;
-  }
-
-  return <AskChat roomId={id} />;
+  return (
+    <AiConsentGuard>
+      {from === "screenshot" ? (
+        <AskScreenshotChat roomId={Number(id)} />
+      ) : (
+        <AskChat roomId={id} />
+      )}
+    </AiConsentGuard>
+  );
 }

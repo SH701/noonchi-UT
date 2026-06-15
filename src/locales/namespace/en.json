@@ -431,6 +431,16 @@
       "cta": "Join Now"
     }
   },
+  "aiConsent": {
+    "title": "AI Data Processing Consent",
+    "description": "To provide better coaching, NOONCHI sends the text, images (screenshots), and voice you input to external AI services (Google, Naver) for analysis. The transmitted data is used only to generate responses and feedback. See our [Privacy Policy] for details.",
+    "privacyLink": "Privacy Policy",
+    "agree": "Agree and Continue",
+    "decline": "Don't Agree",
+    "blockedTitle": "AI Consent Required",
+    "blockedDescription": "You need to agree to AI data processing to use this feature.",
+    "goBack": "Go Back"
+  },
   "coachmark": {
     "buttons": {
       "next": "Next",

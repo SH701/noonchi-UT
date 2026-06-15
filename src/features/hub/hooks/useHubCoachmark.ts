@@ -1,10 +1,12 @@
 'use client'
 
 import { useCoachmark } from "@/hooks/custom";
+import { useAiConsent } from "@/features/profile/hooks/useAiConsent";
 import { useTranslation } from "react-i18next";
 
 export function useHubCoachMark() {
   const { t } = useTranslation();
+  const { data: consent } = useAiConsent();
   useCoachmark("coachmark_hub_v1", {
     showProgress: false,
     showButtons: ["next", "previous", "close"],
@@ -46,5 +48,5 @@ export function useHubCoachMark() {
         },
       },
     ],
-  });
+  }, consent?.consented === true);
 }
