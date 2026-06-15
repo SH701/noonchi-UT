@@ -431,6 +431,16 @@
       "cta": "立即加入"
     }
   },
+  "aiConsent": {
+    "title": "AI数据处理同意",
+    "description": "为了提供更好的辅导，NOONCHI会将您输入的文本、图像(截图)和语音发送至外部人工智能服务(Google、Naver)进行分析。传输的数据仅用于生成响应和反馈，详细内容可在[隐私政策]中查看。",
+    "privacyLink": "隐私政策",
+    "agree": "同意并开始",
+    "decline": "不同意",
+    "blockedTitle": "需要AI同意",
+    "blockedDescription": "需要同意AI数据处理才能使用此功能。",
+    "goBack": "返回"
+  },
   "coachmark": {
     "buttons": {
       "next": "下一步",
