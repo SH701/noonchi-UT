@@ -14,9 +14,8 @@ export const useAiConsent = () => {
 
 export const useUpdateAiConsent = () => {
   const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (policyVersion: string = AI_CONSENT_POLICY_VERSION) =>
-      userMutations.AiConsent(policyVersion),
+  return useMutation<AiConsent, Error, void>({
+    mutationFn: () => userMutations.AiConsent(AI_CONSENT_POLICY_VERSION),
     onSuccess: (data) => {
       queryClient.setQueryData(["ai-consent"], data);
     },
