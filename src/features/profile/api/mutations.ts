@@ -1,4 +1,5 @@
 import { apiFetch } from "@/api/api";
+import { AiConsent } from "./client";
 
 export const userMutations = {
   UpadateProfile: async (
@@ -13,6 +14,12 @@ export const userMutations = {
         interests,
         language,
       }),
+    });
+  },
+  AiConsent: async (policyVersion: string): Promise<AiConsent> => {
+    return apiFetch<AiConsent>("/api/users/me/ai-consent", {
+      method: "POST",
+      body: JSON.stringify({ policyVersion }),
     });
   },
 };
