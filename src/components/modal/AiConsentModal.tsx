@@ -47,7 +47,7 @@ export default function AiConsentModal({ forceOpen, disableClose }: Props) {
       isOpen={true}
       onClose={disableClose ? () => {} : handleDecline}
       title={t("aiConsent.title")}
-      className="w-[85%] max-w-125 flex flex-col gap-4 rounded-xl bg-white px-6 py-8"
+      className="max-w-125 flex w-[85%] flex-col gap-4 rounded-xl bg-white px-6 py-8"
     >
       <p className="whitespace-pre-line text-sm leading-relaxed text-gray-700">
         {beforeLink}
@@ -65,8 +65,11 @@ export default function AiConsentModal({ forceOpen, disableClose }: Props) {
           disabled={isPending}
           className="gap-2"
         >
-          {isPending && <Spinner size="20px" color="#ffffff" />}
-          {t("aiConsent.agree")}
+          {isPending ? (
+            <Spinner size="20px" color="#ffffff" />
+          ) : (
+            <span>{t("aiConsent.agree")}</span>
+          )}
         </Button>
         <Button
           variant="secondary"
