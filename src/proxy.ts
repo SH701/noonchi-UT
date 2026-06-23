@@ -8,14 +8,18 @@ const PUBLIC_ROUTES = [
   "/lab",
   "/landing",
   "/service",
+  "/profile/*",
 ];
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;
 
-  const isPublicRoute = PUBLIC_ROUTES.some(
-    (route) => pathname === route || pathname.startsWith("/preview"),
-  );
+  const isPublicRoute = PUBLIC_ROUTES.some((route) => {
+    if (route.endsWith("/*")) {
+      return pathname.startsWith(route.slice(0, -2));
+    }
+    return pathname === route;
+  });
 
   const isLoggedIn = !!req.auth?.accessToken;
 
