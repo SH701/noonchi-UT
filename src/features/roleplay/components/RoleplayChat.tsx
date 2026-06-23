@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MessageList from "@/components/chatroom/MessageList";
 import HintMessage from "@/components/chatroom/HintMessage";
 import ChatNotice from "@/components/chatroom/ChatNotice";
@@ -23,7 +23,7 @@ import { SqurepenIcon } from "@/assets/svgr";
 import FeedbackLoading from "./FeedbackLoading";
 import { useTranslation } from "react-i18next";
 import { useConversationDetail } from "@/hooks/queries/useConversation";
-import { useWebVoice } from "@/hooks/custom/useWebVoice";
+import { useChatVoice } from "@/hooks/custom/useChatVoice";
 import RoleplayLoading from "./RoleplayLoading";
 import { useRoleplayFeedbackStore } from "@/store/useRoleplayFeedbackStore";
 import { useRoleplayHint } from "../hooks/useRoleplayHint";
@@ -56,14 +56,8 @@ export default function RoleplayChat({
     refetch: refetchHint,
     isFetching: isHintFetching,
   } = useRoleplayHint(conversationId);
-  const { micState, sttText, handleMicClick, handleSendAudio } = useWebVoice();
+  const { micState, handleMicClick, handleSendAudio } = useChatVoice(setMessage);
   useChatCoachMark(!!conversation && messages.length > 0);
-
-  useEffect(() => {
-    if (micState === "recording" || micState === "recorded") {
-      setMessage(sttText);
-    }
-  }, [sttText, micState]);
 
   const {
     showHintPanel,

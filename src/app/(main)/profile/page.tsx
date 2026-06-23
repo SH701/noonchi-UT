@@ -15,7 +15,6 @@ export default async function ProfilePage() {
           img={session?.user.profileImageUrl}
           name={session?.user.name ?? "User"}
         />
-
         <ProfileMenuSection />
         <ProfileActions isLoggedIn={isLoggedIn} />
       </section>

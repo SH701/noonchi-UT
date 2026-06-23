@@ -8,20 +8,19 @@ import { flushSync } from "react-dom";
 import { PreviewAiMessage, PreviewUserMessage } from "../types/preview.type";
 
 export function usePreviewMessages() {
-  const { data, mutate: startChat, isPending: isStarting } = usePreviewStart();
+  const { data, isLoading: isStarting } = usePreviewStart();
   const [userMessages, setUserMessages] = useState<PreviewUserMessage[]>([]);
   const [aiResponses, setAiResponses] = useState<PreviewAiMessage[]>([]);
   const [firstHiddenMessage, setFirstHiddenMessage] = useState(false);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
 
-  const started = useRef(false);
+  const tracked = useRef(false);
   const ended = useRef(false);
   useEffect(() => {
-    if (started.current) return;
-    started.current = true;
+    if (tracked.current || !data) return;
+    tracked.current = true;
     gtag("event", "preview_start");
-    startChat();
-  }, [startChat]);
+  }, [data]);
 
   const {
     data: hintData,

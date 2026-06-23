@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ChatInput from "@/components/common/ChatInput";
 import ChatLoading from "@/components/common/ChatLoading";
 import { useRouter } from "next/navigation";
@@ -14,7 +14,7 @@ import HintMessage from "@/components/chatroom/HintMessage";
 import ChatNotice from "@/components/chatroom/ChatNotice";
 import PreviewMessageList from "@/components/chatroom/PreviewMessageList";
 import PreviewHeader from "./PreviewHeader";
-import { useWebVoice } from "@/hooks/custom/useWebVoice";
+import { useChatVoice } from "@/hooks/custom/useChatVoice";
 
 export default function PreviewChat() {
   const { t } = useTranslation();
@@ -45,13 +45,7 @@ export default function PreviewChat() {
     toggleNotice,
   } = useChatUI();
   const bottomRef = useScrollToBottom([aiResponses]);
-  const { micState, sttText, handleMicClick, handleSendAudio } = useWebVoice();
-
-  useEffect(() => {
-    if ((micState === "recording" || micState === "recorded") && sttText) {
-      setMessage(sttText);
-    }
-  }, [sttText, micState]);
+  const { micState, handleMicClick, handleSendAudio } = useChatVoice(setMessage);
 
   const handleSend = () => {
     if (!message.trim() || isSending) return;
