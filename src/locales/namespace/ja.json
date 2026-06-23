@@ -26,6 +26,11 @@
     "descriptionLine2": "または移動した可能性があります。",
     "homeButton": "ホームへ戻る"
   },
+  "loginRequired": {
+    "title": "ログインが必要です",
+    "description": "このページを表示するにはログインしてください。",
+    "loginButton": "ログイン"
+  },
   "hub": {
     "title": "韓国語をもっと自然に話したいですか？",
     "subtitle": "一緒にロールプレイの練習をしましょう。"
@@ -139,7 +144,8 @@
       "help": "ヘルプ・サポート"
     },
     "logoutButton": "ログアウト",
-    "deleteAccountButton": "アカウント削除"
+    "deleteAccountButton": "アカウント削除",
+    "goToLoginButton": "ログインへ"
   },
   "myInfo": {
     "header": "マイプロフィール",

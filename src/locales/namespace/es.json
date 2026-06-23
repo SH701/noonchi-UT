@@ -26,6 +26,11 @@
     "descriptionLine2": "o puede haber sido movida.",
     "homeButton": "Ir al inicio"
   },
+  "loginRequired": {
+    "title": "Inicio de sesión requerido",
+    "description": "Inicia sesión para ver esta página.",
+    "loginButton": "Iniciar sesión"
+  },
   "hub": {
     "title": "¿Quieres sonar más natural en coreano?",
     "subtitle": "Practiquemos el juego de roles juntos."
@@ -139,7 +144,8 @@
       "help": "Ayuda y soporte"
     },
     "logoutButton": "Cerrar sesión",
-    "deleteAccountButton": "Eliminar cuenta"
+    "deleteAccountButton": "Eliminar cuenta",
+    "goToLoginButton": "Ir a iniciar sesión"
   },
   "myInfo": {
     "header": "Mi perfil",

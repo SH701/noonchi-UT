@@ -1,9 +1,14 @@
 import { previewMutations } from "../api/mutations";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function usePreviewStart() {
-  return useMutation({
-    mutationFn: previewMutations.Start,
+  return useQuery({
+    queryKey: ["previewStart"],
+    queryFn: previewMutations.Start,
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    gcTime: Infinity,
   });
 }
 
