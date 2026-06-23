@@ -26,6 +26,11 @@
     "descriptionLine2": "or may have been moved.",
     "homeButton": "Go to Home"
   },
+  "loginRequired": {
+    "title": "Login required",
+    "description": "Please log in to view this page.",
+    "loginButton": "Log in"
+  },
   "hub": {
     "title": "Do you want to sound more natural in Korean?",
     "subtitle": "Let's practice role-playing with me."

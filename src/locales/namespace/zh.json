@@ -26,6 +26,11 @@
     "descriptionLine2": "或者可能已被移动。",
     "homeButton": "返回首页"
   },
+  "loginRequired": {
+    "title": "需要登录",
+    "description": "请登录以查看此页面。",
+    "loginButton": "登录"
+  },
   "hub": {
     "title": "想让您的韩语听起来更自然吗？",
     "subtitle": "让我们一起练习角色扮演吧。"
