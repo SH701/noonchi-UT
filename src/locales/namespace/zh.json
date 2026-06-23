@@ -99,7 +99,8 @@
       "help": "帮助与支持"
     },
     "logoutButton": "退出登录",
-    "deleteAccountButton": "删除账号"
+    "deleteAccountButton": "删除账号",
+    "goToLoginButton": "前往登录"
   },
   "myInfo": {
     "header": "我的资料",

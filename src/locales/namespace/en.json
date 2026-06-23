@@ -99,7 +99,8 @@
       "help": "Help & Support"
     },
     "logoutButton": "Log out",
-    "deleteAccountButton": "Delete Account"
+    "deleteAccountButton": "Delete Account",
+    "goToLoginButton": "Go to login"
   },
   "myInfo": {
     "header": "My Profile",

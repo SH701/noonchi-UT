@@ -144,7 +144,8 @@
       "help": "Ayuda y soporte"
     },
     "logoutButton": "Cerrar sesión",
-    "deleteAccountButton": "Eliminar cuenta"
+    "deleteAccountButton": "Eliminar cuenta",
+    "goToLoginButton": "Ir a iniciar sesión"
   },
   "myInfo": {
     "header": "Mi perfil",

@@ -144,7 +144,8 @@
       "help": "Помощь и поддержка"
     },
     "logoutButton": "Выйти",
-    "deleteAccountButton": "Удалить аккаунт"
+    "deleteAccountButton": "Удалить аккаунт",
+    "goToLoginButton": "Перейти ко входу"
   },
   "myInfo": {
     "header": "Мой профиль",

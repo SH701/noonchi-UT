@@ -6,7 +6,7 @@ import { auth } from "@/lib/next-auth/auth";
 
 export default async function ProfilePage() {
   const session = await auth();
-
+  const isLoggedIn = !!session?.accessToken;
   return (
     <main className="flex flex-1 flex-col">
       <ProfileHeader />
@@ -15,8 +15,9 @@ export default async function ProfilePage() {
           img={session?.user.profileImageUrl}
           name={session?.user.name ?? "User"}
         />
+
         <ProfileMenuSection />
-        <ProfileActions />
+        <ProfileActions isLoggedIn={isLoggedIn} />
       </section>
     </main>
   );

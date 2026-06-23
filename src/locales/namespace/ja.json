@@ -144,7 +144,8 @@
       "help": "ヘルプ・サポート"
     },
     "logoutButton": "ログアウト",
-    "deleteAccountButton": "アカウント削除"
+    "deleteAccountButton": "アカウント削除",
+    "goToLoginButton": "ログインへ"
   },
   "myInfo": {
     "header": "マイプロフィール",
