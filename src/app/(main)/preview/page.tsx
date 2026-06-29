@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PreviewChat from "@/features/preview/components/PreviewChat";
+import AiConsentGuard from "@/components/common/AiConsentGuard";
 
 export const metadata: Metadata = {
   title: "Try Korean Conversation",
@@ -9,5 +10,9 @@ export const metadata: Metadata = {
 };
 
 export default function PreviewPage() {
-  return <PreviewChat />;
+  return (
+    <AiConsentGuard>
+      <PreviewChat />
+    </AiConsentGuard>
+  );
 }

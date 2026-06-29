@@ -9,7 +9,7 @@ interface SpinnerLoadingProps {
 export default function SpinnerLoading({ title }: SpinnerLoadingProps) {
   const { t } = useTranslation();
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-8">
+    <div className="flex min-h-dvh flex-col items-center justify-center gap-8">
       <div className="relative flex items-center justify-center">
         <svg
           className="absolute animate-spin"

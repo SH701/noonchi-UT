@@ -279,7 +279,7 @@ export default function AskScreenshotChat({ roomId }: AskScreenshotChatProps) {
         <div ref={bottomRef} />
       </div>
 
-      <div className="sticky bottom-0 -mx-5 flex flex-col px-5 pb-5 backdrop-blur-md">
+      <div className="pb-safe-sm sticky bottom-0 -mx-5 flex flex-col px-5 backdrop-blur-md">
         <Button
           variant="ghost"
           className="mb-3 text-base"

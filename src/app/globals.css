@@ -29,6 +29,21 @@
   --breakpoint-lg: 1280px;
 }
 
+/* ───────── Safe Area (노치/홈 인디케이터) 유틸 ───────── */
+/* 기존 패딩 값에 safe-area-inset을 "더해서" 적용. 노치 없는 기기에선 0이라 영향 없음. */
+.pb-safe {
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 1.25rem);
+}
+.pb-safe-sm {
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+}
+.pb-safe-lg {
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 2.5rem);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
 /* Slick Carousel 커스텀 */
 .slick-slide > div {
   display: flex !important;

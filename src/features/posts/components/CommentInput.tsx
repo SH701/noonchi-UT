@@ -31,7 +31,7 @@ export default function CommentInput({ postId }: CommentInputProps) {
   };
 
   return (
-    <div className="max-w-150 fixed bottom-0 left-1/2 w-full -translate-x-1/2 px-4 pb-4">
+    <div className="pb-safe-sm max-w-150 fixed bottom-0 left-1/2 w-full -translate-x-1/2 px-4">
       <div className="flex w-full rounded-[20px] bg-white px-4 py-3 shadow-[0_-3px_8px_0_rgba(80,41,138,0.08)]">
         <div className="relative mb-2 w-full">
           <div

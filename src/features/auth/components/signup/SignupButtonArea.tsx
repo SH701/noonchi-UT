@@ -12,7 +12,10 @@ export default function SignupButtonArea({
   label?: string;
 }) {
   return (
-    <div className="fixed bottom-24 w-full flex justify-center items-center">
+    <div
+      className="fixed bottom-24 w-full flex justify-center items-center"
+      style={{ marginBottom: "env(safe-area-inset-bottom, 0px)" }}
+    >
       <Button variant="primary" size="lg" disabled={disabled} onClick={onClick}>
         {label}
       </Button>

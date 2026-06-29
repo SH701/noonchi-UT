@@ -43,7 +43,13 @@ export default function AskHistoryTab({
         </button>
       </div>
 
-      <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto pr-2" style={{ marginBottom: "clamp(72px, 18vw, 92px)" }}>
+      <div
+        className="custom-scrollbar min-h-0 flex-1 overflow-y-auto pr-2"
+        style={{
+          marginBottom:
+            "calc(env(safe-area-inset-bottom, 0px) + clamp(72px, 18vw, 92px))",
+        }}
+      >
         {isPending ? (
           <AskHistorySkeleton />
         ) : conversations.length === 0 ? (

@@ -11,7 +11,7 @@ export default function Language() {
 
   
   return (
-    <div className="flex h-117.5 flex-col pt-4">
+    <div className="min-h-117.5 flex flex-col pt-4">
       <h1 className="pb-11 text-2xl font-semibold">{t("language.title")}</h1>
       <ul className="flex flex-wrap gap-3">
         {LANGUAGES.map((lang) => (

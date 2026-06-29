@@ -92,7 +92,7 @@ export default function PreviewChat() {
       </section>
 
       {/* 하단 고정 영역 */}
-      <footer className="sticky bottom-0 z-10 flex flex-col pb-5 backdrop-blur-md">
+      <footer className="pb-safe-sm sticky bottom-0 z-10 flex flex-col backdrop-blur-md">
         {!isStarting && (
           <motion.div
             key={aiResponses.length}

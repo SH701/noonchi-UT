@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 export default function LiveCoach() {
   const { t } = useTranslation();
   return (
-    <div className="min-h-screen">
+    <div className="min-h-dvh">
       <CoachBackButton />
       <div className="mb-5 flex flex-col gap-2 rounded-xl border border-white bg-white/50 p-4">
         <span className="font-semibold">{t("coach.sectionTitle")}</span>

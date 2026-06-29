@@ -105,8 +105,10 @@ export default function PostDetail({
 
       {/* 제목 + 본문 */}
       <div className="flex flex-col gap-2">
-        <h2 className="text-base font-bold text-gray-900">{title}</h2>
-        <p className="whitespace-pre-wrap text-sm leading-relaxed text-gray-600">
+        <h2 className="wrap-break-word text-base font-bold text-gray-900">
+          {title}
+        </h2>
+        <p className="wrap-break-word whitespace-pre-wrap text-sm leading-relaxed text-gray-600">
           {content}
         </p>
       </div>

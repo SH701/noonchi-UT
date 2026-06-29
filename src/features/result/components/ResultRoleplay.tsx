@@ -54,7 +54,7 @@ export default function ResultRoleplay({ conversationId }: RoleplayEndProps) {
   }
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden">
+    <div className="flex min-h-dvh flex-col overflow-x-hidden">
       <ResultHeader />
       <Tab />
       <div className="flex flex-1 justify-center overflow-y-auto">
@@ -78,7 +78,7 @@ export default function ResultRoleplay({ conversationId }: RoleplayEndProps) {
             </div>
           </div>
 
-          <div className="pb-6">
+          <div className="pb-safe-sm">
             <ResultTab tab={tab} setTab={setTab} />
             {tab === "Feedback" ? (
               <MessageList

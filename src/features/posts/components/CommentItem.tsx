@@ -95,7 +95,9 @@ export default function CommentItem({
             </div>
           )}
         </div>
-        <p className="text-sm leading-relaxed text-gray-700">{content}</p>
+        <p className="wrap-break-word text-sm leading-relaxed text-gray-700">
+          {content}
+        </p>
         <div className="flex items-center gap-3 text-xs text-gray-400">
           <button className="flex items-center gap-1" onClick={onLike}>
             <Heart

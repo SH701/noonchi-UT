@@ -34,6 +34,9 @@ export default function ChatRoomInfo({
 
           <motion.div
             className="fixed bottom-0 left-0 right-0 z-50 mx-auto w-[90%] max-w-150 rounded-t-[50px] bg-gray-800 p-6 shadow-xl"
+            style={{
+              paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 1.5rem)",
+            }}
             initial={{ y: "100%" }}
             animate={{ y: 0 }}
             exit={{ y: "100%" }}

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="flex h-screen w-full items-center justify-center overflow-hidden">
+    <main className="flex h-dvh w-full items-center justify-center overflow-hidden">
       <section className="sr-only">
         <h1>Learn Korean Honorifics and Natural Conversation with AI</h1>
         <p>
