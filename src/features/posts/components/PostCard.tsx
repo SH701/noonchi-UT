@@ -92,8 +92,10 @@ export default function PostCard({
 
       {/* 본문 */}
       <div className="flex flex-col gap-1">
-        <h3 className="text-sm font-bold text-gray-900">{title}</h3>
-        <p className="line-clamp-2 text-sm leading-relaxed text-gray-500">
+        <h3 className="wrap-break-word text-sm font-bold text-gray-900">
+          {title}
+        </h3>
+        <p className="wrap-break-word line-clamp-2 text-sm leading-relaxed text-gray-500">
           {content}
         </p>
         {images.length > 0 && (

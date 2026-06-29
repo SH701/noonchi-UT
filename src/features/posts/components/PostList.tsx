@@ -75,7 +75,8 @@ export default function PostList() {
         )}
       </ul>
       <button
-        className="border-gradient-primary fixed bottom-8 right-4 flex size-10 items-center justify-center rounded-full border bg-white"
+        className="border-gradient-primary fixed right-4 flex size-10 items-center justify-center rounded-full border bg-white"
+        style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 2rem)" }}
         onClick={() => router.push("/posts/create")}
       >
         <Plus />

@@ -50,7 +50,7 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="flex h-screen w-full items-center justify-center overflow-hidden">
+    <div className="flex h-dvh w-full items-center justify-center overflow-hidden">
       <div className="relative mx-auto flex h-full w-full flex-col">
         <div className="grow">
           <Slider
@@ -90,7 +90,7 @@ export default function Onboarding() {
           </Slider>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-2 px-4 pb-10">
+        <div className="pb-safe-lg flex flex-col items-center justify-center gap-2 px-4">
           {currentSlide !== 4 && (
             <>
               <Button variant="primary" size="lg" onClick={handleNext}>

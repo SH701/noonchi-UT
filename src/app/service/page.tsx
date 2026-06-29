@@ -10,7 +10,7 @@ export default function ServicePage() {
   return (
     <iframe
       src="https://hanbyul737.github.io/GPTs"
-      className="h-screen w-full border-0"
+      className="h-dvh w-full border-0"
     ></iframe>
   );
 }

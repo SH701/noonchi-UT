@@ -20,7 +20,10 @@ export default function Header({
   className,
 }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-20 -mx-5 flex items-center justify-between p-6 backdrop-blur-md">
+    <header
+      className="sticky top-0 z-20 -mx-5 flex items-center justify-between p-6 backdrop-blur-md"
+      style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 1.5rem)" }}
+    >
       <div className="w-6 cursor-pointer" onClick={onLeftClick}>
         {leftIcon}
       </div>

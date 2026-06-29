@@ -26,7 +26,10 @@ export default function Modal({
       className="z-9999 fixed inset-0 flex items-center justify-center bg-black/60"
       onClick={onClose}
     >
-      <div onClick={(e) => e.stopPropagation()} className={finalClassName}>
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className={`max-h-[90dvh] overflow-y-auto ${finalClassName}`}
+      >
         {image && (
           <Image
             src={image.src}

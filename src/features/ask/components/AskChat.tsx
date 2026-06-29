@@ -271,7 +271,7 @@ export default function AskChat({ roomId, onSwitchToScreenshot }: AskChatProps) 
       </div>
 
       {/* 하단 고정 ChatInput */}
-      <div className="sticky bottom-0 -mx-5 flex flex-col px-5 pb-5 backdrop-blur-md">
+      <div className="pb-safe-sm sticky bottom-0 -mx-5 flex flex-col px-5 backdrop-blur-md">
         {aiMessage && (
           <ChatQuickActions onOpenModal={() => setModalOpen(true)} />
         )}

@@ -51,7 +51,7 @@ export default function ProfileActions({ isLoggedIn }: ProfileActionsProps) {
   };
 
   return (
-    <footer className="mt-auto flex flex-col items-center gap-2 pb-5">
+    <footer className="pb-safe-sm mt-auto flex flex-col items-center gap-2">
       {isLoggedIn ? (
         <>
           <Button onClick={handleLogout} size="lg" disabled={loading}>

@@ -11,7 +11,7 @@ export default function Taste() {
   const { t } = useTranslation();
 
   return (
-    <div className="h-117.5 flex flex-col pt-4">
+    <div className="min-h-117.5 flex flex-col pt-4">
       <h1 className="pb-11 text-2xl font-semibold">{t("taste.title")}</h1>
       <div className="flex flex-wrap gap-3">
         {INTEREST_KEYS.map((key) => (

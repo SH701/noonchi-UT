@@ -130,7 +130,7 @@ export default function MessageItem({
                 {userName ?? myAI?.userRole}
               </p>
               <div className="flex flex-col gap-2 rounded-b-xl rounded-tl-xl bg-white p-4">
-                <p className="my-1 whitespace-pre-wrap text-sm">
+                <p className="wrap-break-word my-1 whitespace-pre-wrap text-sm">
                   {renderWithAction(messages.content)}
                 </p>
                 <div className="border-t border-gray-200 pt-2.5" />
@@ -219,7 +219,7 @@ export default function MessageItem({
           {isAI && (
             <>
               <div className="flex flex-col gap-2 rounded-b-xl rounded-tr-xl border border-gray-300 bg-white p-4">
-                <p className="my-1 whitespace-pre-wrap text-sm leading-[130%]">
+                <p className="wrap-break-word my-1 whitespace-pre-wrap text-sm leading-[130%]">
                   {messages.content}
                 </p>
                 <div className="mt-2 flex justify-between border-t border-gray-200 pt-2">

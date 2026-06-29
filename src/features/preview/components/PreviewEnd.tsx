@@ -17,7 +17,7 @@ export default function PreviewEnd() {
     openModal(<SignupContent />);
   };
   return (
-    <div className="bg-gradient-primary flex min-h-dvh flex-col items-center justify-center">
+    <div className="bg-gradient-primary pt-safe flex min-h-dvh flex-col items-center justify-center">
       <div className="mt-auto flex flex-col items-center">
         <Image
           src="/etc/logo.png"
@@ -37,7 +37,10 @@ export default function PreviewEnd() {
       </div>
       <div
         className="mt-auto flex w-full flex-col gap-4 px-4"
-        style={{ paddingBottom: "clamp(40px, 10vw, 52px)" }}
+        style={{
+          paddingBottom:
+            "calc(env(safe-area-inset-bottom, 0px) + clamp(40px, 10vw, 52px))",
+        }}
       >
         <Button size="lg" onClick={signupOpen}>
           {t("previewEnd.signupButton")}

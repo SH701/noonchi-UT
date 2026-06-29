@@ -148,7 +148,7 @@ export default function RoleplayChat({
               <div ref={bottomRef} />
             </section>
 
-            <footer className="sticky bottom-0 flex flex-col pb-5 backdrop-blur-md">
+            <footer className="pb-safe-sm sticky bottom-0 flex flex-col backdrop-blur-md">
               {showHintPanel && hintData && (
                 <HintMessage
                   hintData={hintData}
