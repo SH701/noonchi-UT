@@ -5,6 +5,8 @@ export interface AuthRes {
   refreshToken: string;
   user: User;
   level: number;
+  // true only on the request that created the account (signup / first OAuth).
+  isNewUser?: boolean;
 }
 export interface SignupReq {
   email: string;

@@ -230,6 +230,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           user.accessToken = data.accessToken;
           user.refreshToken = data.refreshToken;
           user.user = data.user;
+          user.isNewUser = data.isNewUser ?? false;
           return true;
         } catch (e) {
           console.error("[signIn] fetch error:", e);
@@ -264,6 +265,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.refreshToken = user.refreshToken;
         token.user = user.user;
         token.accessTokenExpires = Date.now() + ACCESS_TOKEN_EXPIRES;
+        // 신규 가입 여부(OAuth). 클라이언트는 sessionStorage 1회성 플래그로
+        // 발화를 게이트하므로 토큰에 남아 있어도 중복 발화되지 않는다.
+        token.isNewUser = user.isNewUser ?? false;
       }
 
       // 토큰이 아직 유효하면 그대로 반환
@@ -307,6 +311,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async session({ session, token }) {
       session.accessToken = token.accessToken as string;
       session.refreshToken = token.refreshToken as string;
+      session.isNewUser = token.isNewUser === true;
       if (token.user) {
         const appUser = token.user as AppUser;
 

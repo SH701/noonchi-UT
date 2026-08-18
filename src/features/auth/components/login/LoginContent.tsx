@@ -21,6 +21,7 @@ import { useUpdateProfile } from "@/features/profile/hooks/useProfile";
 import OAtuth from "./OAuth";
 import { useTranslation } from "react-i18next";
 import { isNoonchiApp } from "@/lib/isNoonchiApp";
+import { markPendingOAuth } from "@/lib/oauthAnalytics";
 import { toast } from "@/components/ui/toast/toast";
 type LoginData = z.infer<typeof loginSchema>;
 
@@ -92,19 +93,18 @@ export default function LoginContent() {
   const GoogleLogin = async () => {
     if (oauthLoading) return;
     setOauthLoading("google");
-    // Web OAuth redirects away, so this fires before the session exists and
-    // always reports "login". New-vs-returning split for web OAuth needs a
-    // post-redirect session read of isNewUser (native flow handles it in
-    // AuthProvider). TODO(backend __ASK_JINSUNG__): expose session.isNewUser.
-    gtag("event", "login", { method: "google" });
     try {
       if (
         isNoonchiApp() &&
         typeof window.NoonchiNative?.loginGoogle === "function"
       ) {
+        // Native handles its own sign_up/login event in AuthProvider.
         window.NoonchiNative.loginGoogle();
         return;
       }
+      // Web OAuth redirects away; defer the event to the post-redirect session
+      // read (ClientProvider) so we can emit sign_up vs login from isNewUser.
+      markPendingOAuth("google");
       await signIn("google", { callbackUrl: "/hub" });
     } catch {
       toast.error(t("toastMessage.oauthLoginFailed"));
@@ -115,7 +115,6 @@ export default function LoginContent() {
   const AppleLogin = async () => {
     if (oauthLoading) return;
     setOauthLoading("apple");
-    gtag("event", "login", { method: "apple" });
     try {
       if (
         isNoonchiApp() &&
@@ -124,6 +123,7 @@ export default function LoginContent() {
         window.NoonchiNative.loginApple();
         return;
       }
+      markPendingOAuth("apple");
       await signIn("apple", { callbackUrl: "/hub" });
     } catch {
       toast.error(t("toastMessage.oauthLoginFailed"));
