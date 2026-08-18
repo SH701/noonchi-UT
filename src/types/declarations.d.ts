@@ -5,6 +5,8 @@ export interface NoonchiAuthPayload {
   accessToken: string;
   refreshToken: string;
   user: User;
+  // true on the first login after account creation (from the native app bridge).
+  isNewUser?: boolean;
 }
 
 export interface NoonchiAuthError {

@@ -22,6 +22,7 @@ function NativeAuthBridge() {
       provider: "google" | "apple";
       accessToken: string;
       refreshToken: string;
+      isNewUser?: boolean;
     }) => {
       try {
         const result = await signIn("native", {
@@ -33,11 +34,11 @@ function NativeAuthBridge() {
           console.error("[native signIn] error:", result.error);
           return;
         }
-        const updated = await update();
-        // A brand-new account should count as sign_up, a returning user as login.
-        // Falls back to "login" until the backend exposes isNewUser on the
-        // session. TODO(backend __ASK_JINSUNG__): set session.isNewUser.
-        const isNewUser = updated?.isNewUser === true;
+        await update();
+        // A brand-new account counts as sign_up, a returning user as login.
+        // The native bridge (app) carries isNewUser in the payload since the
+        // native provider verifies via /api/users/me (no isNewUser on session).
+        const isNewUser = payload.isNewUser === true;
         gtag("event", isNewUser ? "sign_up" : "login", {
           method: payload.provider,
         });
