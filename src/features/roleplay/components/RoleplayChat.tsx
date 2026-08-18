@@ -77,7 +77,18 @@ export default function RoleplayChat({
   const myAI = conversation?.aiPersona ?? null;
 
   const handleEnd = () => {
+    const durationSec = conversation?.createdAt
+      ? Math.max(
+          0,
+          Math.round(
+            (Date.now() - new Date(conversation.createdAt).getTime()) / 1000,
+          ),
+        )
+      : undefined;
     gtag("event", "roleplay_complete", {
+      conversation_id: conversationId,
+      scenario_id: conversation?.conversationTopic,
+      duration_sec: durationSec,
       topic: conversation?.aiPersona.description,
       situation: conversation?.situation,
     });

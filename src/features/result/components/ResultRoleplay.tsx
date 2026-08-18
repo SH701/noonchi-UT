@@ -46,9 +46,49 @@ export default function ResultRoleplay({ conversationId }: RoleplayEndProps) {
 
   useEffect(() => {
     if (feedback) {
-      gtag("event", "feedback_view");
+      // report_view (weekly report KPI). Named feedback_view to keep the
+      // existing GA4 event; params align with the measurement spec.
+      gtag("event", "feedback_view", {
+        report_id: feedback.feedbackId,
+        conversation_id: conversationId,
+        source: "roleplay_end",
+      });
+
+      // report_score_improved — fires per metric that beat the user's previous
+      // score for the same scenario. Inert until the backend adds prev*Score to
+      // ConversationFeedback (see src/types/conversations/conversations.type.ts).
+      // TODO(backend __ASK_JINSUNG__): populate prevPolitenessScore /
+      // prevNaturalnessScore / prevPronunciationScore on the feedback payload.
+      const scoreMetrics = [
+        {
+          metric: "politeness",
+          prev: feedback.prevPolitenessScore,
+          next: feedback.politenessScore,
+        },
+        {
+          metric: "naturalness",
+          prev: feedback.prevNaturalnessScore,
+          next: feedback.naturalnessScore,
+        },
+        {
+          metric: "pronunciation",
+          prev: feedback.prevPronunciationScore,
+          next: feedback.pronunciationScore,
+        },
+      ];
+      for (const { metric, prev, next } of scoreMetrics) {
+        if (typeof prev === "number" && typeof next === "number" && next > prev) {
+          gtag("event", "report_score_improved", {
+            metric,
+            prev_score: prev,
+            new_score: next,
+            delta: next - prev,
+            report_id: feedback.feedbackId,
+          });
+        }
+      }
     }
-  }, [feedback]);
+  }, [feedback, conversationId]);
   if (!feedback) {
     return <FeedbackLoading />;
   }

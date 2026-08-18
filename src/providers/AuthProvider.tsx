@@ -22,6 +22,7 @@ function NativeAuthBridge() {
       provider: "google" | "apple";
       accessToken: string;
       refreshToken: string;
+      isNewUser?: boolean;
     }) => {
       try {
         const result = await signIn("native", {
@@ -34,7 +35,13 @@ function NativeAuthBridge() {
           return;
         }
         await update();
-        gtag("event", "login", { method: payload.provider });
+        // A brand-new account counts as sign_up, a returning user as login.
+        // The native bridge (app) carries isNewUser in the payload since the
+        // native provider verifies via /api/users/me (no isNewUser on session).
+        const isNewUser = payload.isNewUser === true;
+        gtag("event", isNewUser ? "sign_up" : "login", {
+          method: payload.provider,
+        });
         closeModal();
         router.replace("/hub");
       } catch (e) {

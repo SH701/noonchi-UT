@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
 import { axios } from "@/api/common";
+import { consumePendingOAuth } from "@/lib/oauthAnalytics";
 
 interface Props {
   children: React.ReactNode;
@@ -16,11 +17,23 @@ export default function ClientProvider({ children }: Props) {
   const { data: session, status } = useSession();
   const queryClient = useQueryClient();
   const prevStatus = useRef<string | null>(null);
+  const oauthTracked = useRef(false);
   const pathname = usePathname();
 
   useEffect(() => {
     gtag("event", "page_view", { page_path: pathname });
   }, [pathname]);
+
+  // Web OAuth event: fired once after the post-redirect session is available,
+  // so we can distinguish a new signup (sign_up) from a returning login. The
+  // pending method is set at button click in LoginContent and consumed here.
+  useEffect(() => {
+    if (status !== "authenticated" || oauthTracked.current) return;
+    const method = consumePendingOAuth();
+    if (!method) return;
+    oauthTracked.current = true;
+    gtag("event", session?.isNewUser ? "sign_up" : "login", { method });
+  }, [status, session]);
 
   useEffect(() => {
     const reqInterceptor = axios.interceptors.request.use(
