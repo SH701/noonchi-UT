@@ -61,6 +61,8 @@ export default function RoleplaySection() {
       };
       const convo = await createRoleplay(requestData);
       gtag("event", "roleplay_start", {
+        entry_point: "home",
+        scenario_id: topicId,
         category: category,
         topic_name: topic?.name,
         topic_id: topicId,

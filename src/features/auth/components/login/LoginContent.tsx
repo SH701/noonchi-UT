@@ -92,6 +92,10 @@ export default function LoginContent() {
   const GoogleLogin = async () => {
     if (oauthLoading) return;
     setOauthLoading("google");
+    // Web OAuth redirects away, so this fires before the session exists and
+    // always reports "login". New-vs-returning split for web OAuth needs a
+    // post-redirect session read of isNewUser (native flow handles it in
+    // AuthProvider). TODO(backend __ASK_JINSUNG__): expose session.isNewUser.
     gtag("event", "login", { method: "google" });
     try {
       if (

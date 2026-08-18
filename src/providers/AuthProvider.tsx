@@ -33,8 +33,14 @@ function NativeAuthBridge() {
           console.error("[native signIn] error:", result.error);
           return;
         }
-        await update();
-        gtag("event", "login", { method: payload.provider });
+        const updated = await update();
+        // A brand-new account should count as sign_up, a returning user as login.
+        // Falls back to "login" until the backend exposes isNewUser on the
+        // session. TODO(backend __ASK_JINSUNG__): set session.isNewUser.
+        const isNewUser = updated?.isNewUser === true;
+        gtag("event", isNewUser ? "sign_up" : "login", {
+          method: payload.provider,
+        });
         closeModal();
         router.replace("/hub");
       } catch (e) {

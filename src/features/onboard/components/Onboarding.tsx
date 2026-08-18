@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider, { Settings } from "react-slick";
 import { slides } from "@/data/onboarding";
 import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import React from "react";
 import { Button } from "../../../components/ui/button/button";
@@ -31,6 +31,10 @@ export default function Onboarding() {
 
   const lastIndex = slides.length - 1;
   const language = usePreferenceStore((s) => s.language);
+
+  useEffect(() => {
+    gtag("event", "onboarding_start");
+  }, []);
 
   const handleNext = async () => {
     if (currentSlide === lastIndex) {

@@ -48,6 +48,12 @@ export interface ConversationFeedback {
   goodPoints: string;
   improvementPoints: ImprovementPoint[];
   overallEvaluation: string;
+  // Optional, backend-provided: the user's previous scores for the same
+  // scenario. Populated for the report_score_improved GA4 event. Absent today.
+  // TODO(backend __ASK_JINSUNG__): add these to the feedback response.
+  prevPolitenessScore?: number;
+  prevNaturalnessScore?: number;
+  prevPronunciationScore?: number;
 }
 export interface ConversationPaged {
   content: Conversation[];
